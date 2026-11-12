@@ -1,6 +1,6 @@
-# Module directions / v0.13
+# Module directions / v0.14
 
-The library now contains 54 implemented modules. The utility/memory roles, basic waveform/noise sources and six additional frequency/effect roles are implemented. Existing compact chip dimensions and larger reactive displays remain in place.
+The library now contains 57 implemented modules. The utility/memory roles, basic waveform/noise sources and six additional frequency/effect roles are implemented. Existing compact chip dimensions and larger reactive displays remain in place.
 
 | New chip | Implemented role | Starting patch |
 | --- | --- | --- |
@@ -91,3 +91,8 @@ The library now groups types by role rather than adding search/favourites. The u
 ## v0.13 scope
 
 ALLOY, RESON, PARTIAL, CAUSTIC and DRONE are refined; LPG and OPERATOR are the only additions. Graph feedback rules, preset content, snapshots, recording and interaction methods remain unchanged. iPhone module deletion is a reported open issue explicitly deferred from this audio-only scope.
+
+
+## v0.14 scope
+
+The iPhone removal issue is addressed with a sticky-header trash button and a small named Cancel/Remove confirmation. No long-press or swipe deletion is added. EDGE, MESH and ORBIT are the only new modules, providing audio onsets, cross-spectral band gain interaction and smooth stereo movement. Existing voices/effects, preset data and engine rules are unchanged. Native iPhone appearance, touch feel and listening still need a device check.

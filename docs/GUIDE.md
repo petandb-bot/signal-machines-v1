@@ -1,6 +1,6 @@
-# SIGNAL MACHINES / v0.13
+# SIGNAL MACHINES / v0.14
 
-A small modular sound instrument built with TypeScript, Vite, p5.js **2.3.4** and the Web Audio API. Fifty-four independent modules run in a single AudioWorklet. Compact chips replace the large rack panels; editing and adding modules use temporary panels. The interface intentionally has no large title or permanent sidebar.
+A small modular sound instrument built with TypeScript, Vite, p5.js **2.3.4** and the Web Audio API. Fifty-seven independent modules run in a single AudioWorklet. Compact chips replace the large rack panels; editing and adding modules use temporary panels. The interface intentionally has no large title or permanent sidebar.
 
 ## Start locally
 
@@ -28,7 +28,7 @@ The static `dist/` includes the application, independent worklet, p5, fonts, and
 Landscape is the intended iPhone layout. Portrait also keeps the workspace available, with a bottom editor. This is an implemented touch-oriented layout, **not a claim of real-device Safari validation**.
 
 - ▶ / ■ starts and stops sound. BPM, master volume, preset selection and recording stay in the narrow toolbar.
-- **+** opens the 54-chip library. Tap a type to add an independent module at a vacant position. Drag a chip to move it; tap it without dragging to edit.
+- **+** opens the 57-chip library. Tap a type to add an independent module at a vacant position. Drag a chip to move it; tap it without dragging to edit.
 - **Tap an output, then tap a compatible input** to connect. Green = trigger, blue = control, amber = audio. Drag connections also work. Matching destinations highlight; tap the starting jack again or × in the connection hint to cancel.
 - Small chip pins are shortcuts. For larger touch targets, tap a chip, choose a full-size input/output button in its editor, then tap the destination chip and its matching editor jack. The pending connection survives opening the other chip's editor.
 - Pinch with two fingers to zoom and pan around their midpoint. Drag the background with one finger to pan. + / − and FIT are also available. Pinching across a chip does not move it or open the editor.
@@ -42,7 +42,7 @@ Landscape is the intended iPhone layout. Portrait also keeps the workspace avail
 
 The canvas and floating controls account for safe-area insets. An open editor keeps part of the patch visible. Touch hit areas in the editor are at least 44 CSS pixels; scaled chip pins are deliberately smaller and have the larger editor alternative.
 
-## Fifty-four modules
+## Fifty-seven modules
 
 | Chip | Function | Macros |
 | --- | --- | --- |
@@ -243,7 +243,7 @@ Stop/Run retains the take in the current tab and restarts playback from its begi
 
 ## Structure and signal rules
 
-`src/graph` owns types, ports, validation and topology. `src/audio/modules` contains fifty-four separate processors. `PatchCompiler.ts`, `SignalRouter.ts`, `DSPGraph.ts` and `audio/worklets/processor.ts` compile and execute the graph on the audio thread. `AudioEngine.ts` handles browser transport/recording and correlated loop-action replies; `Wav.ts` handles PCM file transfer. `src/ui` handles chips, gestures and editors; `src/visual` renders 104 × 80 p5 displays; `src/state` owns presets, schema validation and storage.
+`src/graph` owns types, ports, validation and topology. `src/audio/modules` contains fifty-seven separate processors. `PatchCompiler.ts`, `SignalRouter.ts`, `DSPGraph.ts` and `audio/worklets/processor.ts` compile and execute the graph on the audio thread. `AudioEngine.ts` handles browser transport/recording and correlated loop-action replies; `Wav.ts` handles PCM file transfer. `src/ui` handles chips, gestures and editors; `src/visual` renders 104 × 80 p5 displays; `src/state` owns presets, schema validation and storage.
 
 AUDIO is stereo internally and permits summed inputs. CONTROL sums and clamps to −1…1, then maps macro values as `clamp(base + 0.5 × control, 0, 1)`. PITCH maps −1…1 to ±24 semitones around a source's base pitch (110 Hz for ALLOY/RESON, the selected range for DRONE, TUNE for OSC/COMB). TRIGGER is a one-sample event timestamped by the audio sample counter. Up to 48 modules and 256 cables are accepted.
 
@@ -311,3 +311,16 @@ CAUSTIC keeps asymmetry and supply starvation. First-order antiderivative averag
 **OPERATOR** is a patchable sine-phase oscillator with TUNE/DEPTH, PITCH and stereo-averaged AUDIO MOD. Unpatched MOD uses limited, internally delayed feedback; a connected MOD replaces it completely, including a silent cable. DEPTH zero is a sine. Two interpolated substeps and averaging plus a high-frequency index budget temper aliasing, without introducing any new patch-graph feedback permission. Strong/high-frequency/noise PM can still alias. WIDE follows the existing source rule. Chain multiple OPERATORs or use OSC/NOISE as MOD.
 
 These are the only two new modules. Presets, snapshots, recording, TOUCH/PENDULUM, cables and module deletion/adding interactions remain unchanged. The reported iPhone module-deletion difficulty is deferred because this release explicitly excludes interaction changes. Actual native browser listening remains necessary.
+
+
+## v0.14 interaction and mobile editing
+
+Module removal is now in the sticky editor header: tap the trash icon next to Close, then confirm **Cancel / Remove**. The prompt names the module and its instance number. Both header buttons and confirmation choices have at least 44×44 CSS-pixel targets. The bottom removal button is gone. Cancel/Escape preserves patch, selection and audio; Remove uses the existing removal path and deletes the module's cables. Direct Delete/Backspace on the workspace still works. The confirmation is dismissed on editor rerender, and a stale prompt cannot remove a different selected module. The existing portrait 49dvh editor, landscape layout, chip geometry and patching gestures remain.
+
+**EDGE** converts an audio attack into an EVENT. It compares short (6 ms) and long (150 ms) stereo energy, with a sensitivity-dependent relative threshold, noise floor, hysteretic re-arming and a 20 ms…2 s recovery interval. ACTIVITY follows short-term energy. Steady tones/noise do not become an internal clock; a new attack must rise above recent history. This complements PARASITE's sustained energy-driven controls. Patch EVENT into RESON/TRIG, LPG/STRIKE or another trigger input. Low sensitivity ignores soft attacks, and long recovery intentionally misses closely spaced attacks.
+
+**MESH** uses five broad complementary bands formed from four parallel one-pole crossovers. B's stereo band envelopes shape A's band gains; MEMORY sets their 20 ms…2 s release and TRANSFER their strength. The stereo A channels stay independent. Band gains are bounded and smoothed, with bounded energy-based compensation; no B audio is mixed into the output and there is no oscillator/resynthesis. At TRANSFER zero or with no B cable, A is passed sample-for-sample. A connected silent B tends back toward unity; the remembered profile decays rather than disappearing immediately. The displayed upper bars estimate processed A-band energy and lower bars show B's retained energy. The bands are intentionally broad, not a precise FFT or vocoder.
+
+**ORBIT** moves audio with internal 0.01…4 Hz sinusoidal motion or external POSITION CV, with DEPTH setting the range. A 15 ms position smoother avoids abrupt pan steps; POSITION output and the dot show that actual state. Its orthogonal stereo rotation preserves summed instantaneous L²+R² and retains two independent stereo components. Dual-mono input follows equal-power left/right panning; existing stereo material undergoes field/phase rotation rather than being summed to mono. DEPTH zero is centered. This is stereo motion, not a binaural/HRTF spatializer.
+
+These are the only three new modules. All 54 existing DSP classes, saved presets, snapshots, LOOP/recording/export, TOUCH/PENDULUM, master protection and graph cycle rules remain unchanged. The catalog gains one entry in Clocks & patterns (EDGE), Tone & damage (MESH) and Space & memory (ORBIT).

@@ -1,10 +1,10 @@
-# Verification / v0.13
+# Verification / v0.14
 
 ## Automated coverage
 
 Host: managed Linux, Node 24.22.1. p5.js is pinned to 2.3.4. `package-lock.json` pins dependencies.
 
-- The test inventory is **367 tests in 29 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
+- The test inventory is **387 tests in 30 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
 - New DSP checks: the original three presets produce nonzero finite audio; BRANCH repeats before mutation and emits scale-constrained seeded pitch/gate; RESON decays and responds to external excitation; FRACTURE is transparent at BREAK zero and retains audible captured audio after input ends at maximum HOLD. The original eight module types also run together at extreme macros without invalid samples or master overshoot.
 - Noise modules: seeded stereo VENOM, zero-dose silence, trigger boosts and CV; SNAP dry pass-through, forced interruption/recovery, repeatable automatic dropouts, bounded edge steps and no independent sound from silent input; CAUSTIC dry pass-through, actual waveform changes, extreme drive and decay to silence. BAD CONTACT is checked for finite master output, maximum settings and variable-block deterministic rendering.
 - Ambient/feedback modules: all three new presets validate and synthesize; continuous untriggered DRONE, spectral focus response, a stable 20-second tape tail, bounded envelope-derived controls, explicit full-intervening-quantum delay using 17/193/64-frame blocks, order-independent delayed cycle import and continued rejection of unauthorized AUDIO/mixed cycles. Actual host energy reaches SNAP FAULT and BRANCH CHANGE. Maximum feedback/macro settings remain finite.
@@ -95,11 +95,11 @@ Play BAD CONTACT at the device’s usual instrument volume. Sweep VENOM DOSE/STR
 
 ## Reactive visual checks
 
-The visual/UI files contain 87 checks. These verify the larger logical display, resting without telemetry, energy/trigger/fault/control response, bounded two-pixel displacement, quiet mode, finite and changing drawing geometry for all 54 modules, deterministic repeated frames, unchanged chip/jack anchors during activity, persisted appearance mode, snapshots and patching gestures. The drawing recorder verifies model/geometry calls; it does not render p5 in a native browser.
+The visual/UI files contain 96 checks. These verify the larger logical display, resting without telemetry, energy/trigger/fault/control response, bounded two-pixel displacement, quiet mode, finite and changing drawing geometry for all 57 modules, deterministic repeated frames, unchanged chip/jack anchors during activity, persisted appearance mode, snapshots and patching gestures. The drawing recorder verifies model/geometry calls; it does not render p5 in a native browser.
 
 The displays include actual learned/additive amplitude bars, remembered chance steps, and gain/blend, envelope stage, route crossfade, loop progress/recording mode, chorus phase, granular history, oscillator/noise waveforms, the filter response sketch, multiplication phase portrait, comb teeth and shifted traces. TypeScript, Vite and the emitted-worklet checks validate the updated audio build; this release changes the DSP as well as the module library.
 
-Manual checks remain required: inspect all 54 larger displays on a real browser, confirm reacting chips look lively without obscuring labels/jacks, compare lively/quiet and OS reduced-motion behavior, select and drag a chip while its internal display is active, and verify cables remain visually attached. Test on iPhone landscape with the larger editor beside its sliders. No real-browser screenshot, iPhone appearance/performance check or human listening session was possible with the available tools.
+Manual checks remain required: inspect all 57 larger displays on a real browser, confirm reacting chips look lively without obscuring labels/jacks, compare lively/quiet and OS reduced-motion behavior, select and drag a chip while its internal display is active, and verify cables remain visually attached. Test on iPhone landscape with the larger editor beside its sliders. No real-browser screenshot, iPhone appearance/performance check or human listening session was possible with the available tools.
 
 ## Utilities, effects and loop manual checks
 
@@ -173,7 +173,7 @@ The added checks measure CLIP transfer/harmonic changes, zero-drive transparency
 
 Timed TOUCH interpolation, wraps/speed, RESET, smoothing and phase continuity across equivalent updates are exercised. Validated gesture/bypass state roundtrips through JSON and queued routing edits; malformed times, size, coordinates and module combinations are rejected. PENDULUM is checked for bounded seeded motion, two crossing streams, coupling response, Kick/reset and transport retention versus explicit recall. Four new presets validate and render eight seconds at 24 kHz, with maximum-macro block-schedule comparisons and all six roles combined with delayed parasitic modulation across sample rates.
 
-The real DOM library exposes all 54 choices exactly once in six ordered groups. Editor mode selection, drawing commit/cancel/clear, bypass, snapshot recall and pendulum Kick use actual controller wiring. Native drawing feel, touch capture, visual appearance, CPU/heat and human listening still need iPhone/desktop checks; no native browser tool is exposed here. The production-worklet script now includes all 32 presets plus the existing master PCM and LOOP bridges.
+The real DOM library exposes all 57 choices exactly once in six ordered groups. Editor mode selection, drawing commit/cancel/clear, bypass, snapshot recall and pendulum Kick use actual controller wiring. Native drawing feel, touch capture, visual appearance, CPU/heat and human listening still need iPhone/desktop checks; no native browser tool is exposed here. The production-worklet script now includes all 32 presets plus the existing master PCM and LOOP bridges.
 
 Manual acceptance: compare CLIP/HARDNESS and FUZZ/BIAS on the same source with bypass; compare CRUSH bit depth/update speed and the three CHIP modes; draw/replay/cancel/clear a TOUCH path and recall its snapshot; watch both pendulum bodies and their crossing-triggered voices. Confirm the six catalog groups are easy to scan on iPhone landscape and that existing patching/recording still feels familiar.
 
@@ -201,3 +201,20 @@ Offline 48kHz CPU check (median of three warmed one-second direct-module runs; m
 | OPERATOR | — | 9.12 |
 
 A nine-module 48kHz graph (clock, all five revised roles, OPERATOR, LPG and OUTPUT) rendered 3 seconds in 1285.6 ms, peak 0.2400, zero faults. This is a managed Linux offline measurement, not a phone playback/deadline guarantee. RESON roughly doubles its direct processing cost; total cost is not universally lower.
+
+
+## v0.14 interaction and mobile UX
+
+387 tests in 30 files include 11 new DSP cases and six additional UI cases, plus all three drawing branches. EDGE is checked for empty silence, one onset from a sustained stereo anti-phase tone, separate short sounds, recovery suppression, soft-attack sensitivity and a sustained seeded noise bed. MESH is exactly transparent at zero TRANSFER or absent B; measured low/high spectral ratios change with B, B alone produces no output, stereo input is retained and MEMORY outlasts the source. ORBIT follows CV smoothly, preserves instantaneous stereo energy, follows equal-power dual-mono panning, rests at DEPTH zero and moves internally. New state roundtrips through JSON, EDGE events trigger RESON, direct feedback remains rejected, and macro endpoints run at 8/44.1/48/96 kHz without invalid or runaway output.
+
+Simulated phone viewports 390×844 and 844×390 use the real editor/controller and stylesheet. Tests check that the trash control is in the sticky header, 44px minimum dimensions are computed, confirmation names the module, Cancel restores focus without patch/selection/audio-sync changes, Remove deletes its cables, Escape cancels, direct Delete/Backspace works, and a stale confirmation cannot delete another selection. These are happy-dom DOM/CSS tests: they do not provide native layout geometry, screenshots, Safari scrolling or real touchscreen validation. No browser-control tool is exposed, so native portrait/landscape appearance, listening and physical iPhone interaction remain unverified.
+
+The production-worklet acceptance includes an OPERATOR/MESH/EDGE/LPG/ORBIT graph in addition to the unchanged 32 presets, existing PM/LPG acceptance and all recording bridges. Existing 54 DSP implementations, presets, snapshots, recording and patch graph files are unchanged. The new one-pole filterbank is deliberately lightweight; stereo rotation changes phase relationships and MESH has broad overlapping bands rather than FFT precision.
+
+Offline managed Linux Node medians at 48 kHz (three warmed one-second direct-processor runs, not iPhone real-time measurements):
+
+| Module | ms / audio second |
+| --- | ---: |
+| EDGE | 7.74 |
+| MESH | 12.02 |
+| ORBIT | 4.57 |

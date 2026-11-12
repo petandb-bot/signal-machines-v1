@@ -36,6 +36,12 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
       g.fill('#324c53');for(let j=Math.round(y)+5;j<70;j+=4)point(g,x,j);
       if(active){g.fill(color);const reach=3+Math.round(t.envelope*12);point(g,x-reach,y,2);point(g,x+reach,y,2);}
     }
+  }else if(type==='EDGE'){
+    g.fill('#5e5d43');for(let x=7;x<98;x+=3)point(g,x,48-clamp(t.b,0,1)*30);g.fill(color);wave(g,t,63,42,43,2);const height=clamp(t.a,0,1)*37;g.rect(78,62-height,6,height);point(g,9+clamp(t.phase,0,1)*84,73,3);
+  }else if(type==='MESH'){
+    const bands=t.bands??Array.from({length:10},(_,i)=>Math.abs(sample(t,i*6)));for(let i=0;i<5;i++){const a=Math.min(28,(bands[i]??0)*180),b=Math.min(28,(bands[i+5]??0)*180),x=12+i*18;g.fill(color);g.rect(x,34-a,6,a);g.fill('#648a80');g.rect(x+7,70-b,6,b);if(t.b>.05){g.fill(color);for(let y=38;y<43+t.a*15;y+=4)point(g,x+4,y,2);}}wave(g,t,76,10,3,2);
+  }else if(type==='ORBIT'){
+    g.fill('#635d79');for(let i=0;i<48;i++){const angle=i*Math.PI*2/48;point(g,52+Math.cos(angle)*40,39+Math.sin(angle)*20);}g.fill(color);const x=52+clamp(t.a,-1,1)*40;point(g,x-2,36,5);if(t.b>.5){point(g,x-5,31,2);point(g,x+4,31,2);}wave(g,t,73,16,4,2);
   }else if(type==='LPG'){
     const opening=clamp(t.a,0,1),gap=3+opening*29;g.fill('#64734b');for(let x=8;x<97;x+=3){point(g,x,38-gap);point(g,x,42+gap);}g.fill(color);wave(g,t,40,120,Math.max(2,gap-2),2);g.rect(9,74,Math.round(opening*84),3);
   }else if(type==='OPERATOR'){

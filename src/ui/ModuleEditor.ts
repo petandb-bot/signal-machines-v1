@@ -11,12 +11,15 @@ export class ModuleEditor {
   readonly root=element('aside','editor');
   onParameter:(module:ModuleState,id:string,value:number)=>void=()=>{};onDelete:()=>void=()=>{};onClose:()=>void=()=>{};
   private loopControls?:LoopControls;
+  private deleteConfirmation?:HTMLElement;private deleteTrigger?:HTMLButtonElement;
   onAction:(module:ModuleState,action:string)=>void=()=>{};onImport:(module:ModuleState,file:File)=>void=()=>{};
   onPort:(module:ModuleState,port:PortDefinition)=>void=()=>{};
   constructor(readonly store:StateStore){this.root.setAttribute('aria-label','Module editor');}
   render(){
-    this.root.replaceChildren();this.loopControls=undefined;const module=this.store.patch.modules.find(m=>m.id===this.store.selectedModule);
-    const heading=element('div','editor-top');heading.append(element('h2','',module?.type??'CABLE'),button('×','Close editor',()=>this.onClose()));this.root.append(heading);
+    this.root.replaceChildren();this.loopControls=undefined;this.deleteConfirmation=undefined;this.deleteTrigger=undefined;const module=this.store.patch.modules.find(m=>m.id===this.store.selectedModule);
+    const heading=element('div','editor-top'),actions=element('div','editor-actions');heading.append(element('h2','',module?.type??'CABLE'),actions);
+    if(module){const trash=button('','Delete selected module and its cables',()=>this.confirmDelete(module,heading),'module-trash');trash.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></svg>';trash.setAttribute('aria-expanded','false');this.deleteTrigger=trash;actions.append(trash);}
+    actions.append(button('×','Close editor',()=>this.onClose()));this.root.append(heading);
     if(!module){
       const cable=this.store.patch.connections.find(e=>e.id===this.store.selectedCable);
       if(cable){const from=this.store.patch.modules.find(m=>m.id===cable.from.module)!,to=this.store.patch.modules.find(m=>m.id===cable.to.module)!;const output=DEFINITIONS[from.type].outputs.find(p=>p.id===cable.from.port)!,input=DEFINITIONS[to.type].inputs.find(p=>p.id===cable.to.port)!;this.root.append(element('p','connection-detail',`${from.type} ${String(this.store.patch.modules.indexOf(from)+1).padStart(2,'0')} / ${output.label} → ${to.type} ${String(this.store.patch.modules.indexOf(to)+1).padStart(2,'0')} / ${input.label}`),button('Disconnect','Delete selected cable',()=>this.onDelete(),'delete-button'));}return;
@@ -51,8 +54,13 @@ export class ModuleEditor {
       }
       this.root.append(connections);
     }
-    this.root.append(button('Remove module','Delete selected module and its cables',()=>this.onDelete(),'delete-button'));
   }
+  private confirmDelete(module:ModuleState,heading:HTMLElement){
+    if(this.deleteConfirmation)return;const panel=element('div','module-delete-confirm'),name=`${module.type} ${String(this.store.patch.modules.indexOf(module)+1).padStart(2,'0')}`;
+    panel.setAttribute('role','dialog');panel.setAttribute('aria-label',`Remove ${name}`);panel.append(element('p','',`Remove ${name} and its cables?`));
+    const choices=element('div','delete-confirm-actions'),cancel=button('Cancel','Cancel module removal',()=>this.cancelDelete()),remove=button('Remove','Confirm module removal',()=>{if(this.store.selectedModule===module.id&&this.store.patch.modules.some(m=>m.id===module.id))this.onDelete();},'confirm-remove');choices.append(cancel,remove);panel.append(choices);heading.append(panel);this.deleteConfirmation=panel;this.deleteTrigger?.setAttribute('aria-expanded','true');cancel.focus();
+  }
+  cancelDelete(){if(!this.deleteConfirmation)return false;this.deleteConfirmation.remove();this.deleteConfirmation=undefined;this.deleteTrigger?.setAttribute('aria-expanded','false');this.deleteTrigger?.focus();return true;}
   updateTelemetry(){const controls=this.loopControls;if(controls)controls.update(this.store.telemetry?.modules[controls.id]?.loop);}
   setLoopBusy(id:string,busy:boolean){if(this.loopControls?.id===id)this.loopControls.setBusy(busy);}
   setLoopStatus(id:string,status:LoopStatus){if(this.loopControls?.id===id)this.loopControls.update(status);}

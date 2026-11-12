@@ -48,4 +48,22 @@ const pmPatch={version:1,layout:2,name:'PM LPG acceptance',seed:13,bpm:100,maste
 const pm=new Processor(),pmBefore=messages.length;pm.port.onmessage({data:{type:'patch',patch:pmPatch,reset:true}});let pmEnergy=0;
 for(let i=0;i<300;i++){const l=new Float32Array(193),r=new Float32Array(193);pm.process([],[ [l,r] ]);for(const v of [...l,...r]){assert(Number.isFinite(v)&&Math.abs(v)<=.63);pmEnergy+=v*v;}}
 assert(pmEnergy>.01);assert(!messages.slice(pmBefore).some(m=>m.type==='error'||m.type==='telemetry'&&m.data.faults>0));
+// Interaction modules are checked without changing any saved preset.
+const interaction=structuredClone(pmPatch);interaction.name='Interaction acceptance';interaction.modules.push(
+{id:'edge',type:'EDGE',x:0,y:144,seed:5,character:'METAL',params:{sense:.8,recovery:.2}},
+{id:'mesh',type:'MESH',x:144,y:144,seed:6,character:'METAL',params:{transfer:.8,memory:.4}},
+{id:'orbit',type:'ORBIT',x:288,y:144,seed:7,character:'METAL',params:{rate:.6,depth:1}});
+interaction.connections=[
+{id:'pm',from:{module:'a',port:'audio'},to:{module:'b',port:'mod'}},
+{id:'ma',from:{module:'b',port:'audio'},to:{module:'mesh',port:'a'}},
+{id:'mb',from:{module:'a',port:'audio'},to:{module:'mesh',port:'b'}},
+{id:'detect',from:{module:'mesh',port:'audio'},to:{module:'edge',port:'audio'}},
+{id:'strike',from:{module:'edge',port:'event'},to:{module:'lpg',port:'strike'}},
+{id:'gate',from:{module:'mesh',port:'audio'},to:{module:'lpg',port:'audio'}},
+{id:'move',from:{module:'lpg',port:'audio'},to:{module:'orbit',port:'audio'}},
+{id:'cv',from:{module:'edge',port:'activity'},to:{module:'orbit',port:'position'}},
+{id:'out',from:{module:'orbit',port:'audio'},to:{module:'out',port:'audio'}}];
+const interacting=new Processor(),interactionBefore=messages.length;interacting.port.onmessage({data:{type:'patch',patch:interaction,reset:true}});let interactionEnergy=0;
+for(let i=0;i<300;i++){const l=new Float32Array(193),r=new Float32Array(193);interacting.process([],[ [l,r] ]);for(const v of [...l,...r]){assert(Number.isFinite(v)&&Math.abs(v)<=.63);interactionEnergy+=v*v;}}
+assert(interactionEnergy>.0001);assert(!messages.slice(interactionBefore).some(m=>m.type==='error'||m.type==='telemetry'&&m.data.faults>0));
 console.log(JSON.stringify({result:'PASS',test:'production worklet: thirty-two presets, 3 s each / 48 kHz / stereo / variable blocks; LOOP record, overdub, import/export and restart/reset bridge; sample-identical master PCM capture',results},null,2));

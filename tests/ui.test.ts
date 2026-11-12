@@ -1,6 +1,7 @@
 // @vitest-environment happy-dom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 vi.mock('p5',()=>({default:class{}})); // Pixel rendering needs a real browser; DOM interactions are tested here.
+import {readFileSync} from 'node:fs';
 import { AppController } from '../src/app/AppController';
 import { connect } from '../src/graph/PatchGraph';
 vi.stubGlobal('ResizeObserver',class{observe(){}disconnect(){}});
@@ -16,7 +17,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add ALLOY module"]')!.click();expect(app.store.patch.modules.filter(m=>m.type==='ALLOY')).toHaveLength(2);
     document.querySelector<HTMLElement>(`.module-card[data-module="${app.store.selectedModule}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(true);
-    document.querySelector<HTMLButtonElement>('[aria-label="Delete selected module and its cables"]')!.click();expect(app.store.patch.modules.filter(m=>m.type==='ALLOY')).toHaveLength(1);
+    document.querySelector<HTMLButtonElement>('[aria-label="Delete selected module and its cables"]')!.click();document.querySelector<HTMLButtonElement>('[aria-label="Confirm module removal"]')!.click();expect(app.store.patch.modules.filter(m=>m.type==='ALLOY')).toHaveLength(1);
   });
   it('updates the DSP parameter model through a real editor slider',()=>{
     const card=document.querySelector<HTMLElement>('[data-module="alloy-1"].module-card')!;card.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
@@ -78,8 +79,8 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(false);
 
   });
-  it('exposes fifty-four grouped module choices, thirty-two presets and no large title',()=>{
-    expect(document.querySelectorAll('.library-module')).toHaveLength(54);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(33);
+  it('exposes fifty-seven grouped module choices, thirty-two presets and no large title',()=>{
+    expect(document.querySelectorAll('.library-module')).toHaveLength(57);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(33);
     const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;preset.value='1';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='BRANCH')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='FRACTURE')).toBe(true);
     preset.value='2';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='RESON')).toBe(true);
     preset.value='3';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='VENOM')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='CAUSTIC')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='SNAP')).toBe(true);
@@ -169,7 +170,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
 
   it('groups every library choice exactly once without adding search or favourites',()=>{
-    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(54);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
+    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(57);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
   });
   it('captures a TOUCH path, preserves it with bypass in a snapshot, cancels incomplete strokes and clears explicitly',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add FUZZ module"]')!.click();const fuzz=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${fuzz}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));document.querySelector<HTMLButtonElement>('[aria-label="FUZZ bypass"]')!.click();expect(app.store.patch.modules.find(m=>m.id===fuzz)!.bypass).toBe(true);
@@ -181,5 +182,18 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   it('sends the pendulum Kick button through the existing module-action bridge',async()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add PENDULUM module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));vi.spyOn(app.audio,'start').mockImplementation(async()=>{app.audio.running=true;});const action=vi.spyOn(app.audio,'moduleAction').mockResolvedValue(undefined);document.querySelector<HTMLButtonElement>('[aria-label="Kick the pendulums"]')!.click();await vi.waitFor(()=>expect(action).toHaveBeenCalledWith(id,'kick',undefined));
   });
+
+  it.each([[390,844],[844,390]])('exposes header deletion and preserves cancellation at a %s×%s phone viewport',(width,height)=>{
+    Object.defineProperty(window,'innerWidth',{value:width,configurable:true});Object.defineProperty(window,'innerHeight',{value:height,configurable:true});const style=document.createElement('style');style.textContent=readFileSync('src/styles/main.css','utf8');document.head.append(style);
+    document.querySelector<HTMLElement>('.module-card[data-module="alloy-1"]')!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));const before=structuredClone(app.store.patch),selected=app.store.selectedModule;const sync=vi.spyOn(app.audio,'sync');
+    const trash=document.querySelector<HTMLButtonElement>('[aria-label="Delete selected module and its cables"]')!;expect(trash.closest('.editor-top')).not.toBeNull();expect(getComputedStyle(trash).minWidth).toBe('44px');expect(getComputedStyle(trash).minHeight).toBe('44px');expect(getComputedStyle(trash.closest('.editor-top')!).position).toBe('sticky');app.editor.root.scrollTop=2000;trash.click();expect(document.querySelector('.module-delete-confirm')!.textContent).toContain('ALLOY');expect(document.querySelector('[aria-label="Cancel module removal"]')).toBe(document.activeElement);
+    document.querySelector<HTMLButtonElement>('[aria-label="Cancel module removal"]')!.click();expect(app.store.patch).toEqual(before);expect(app.store.selectedModule).toBe(selected);expect(sync).not.toHaveBeenCalled();expect(document.activeElement).toBe(trash);
+    trash.click();document.querySelector<HTMLButtonElement>('[aria-label="Confirm module removal"]')!.click();expect(app.store.patch.modules.some(m=>m.id==='alloy-1')).toBe(false);expect(app.store.patch.connections.every(e=>e.from.module!=='alloy-1'&&e.to.module!=='alloy-1')).toBe(true);expect(app.store.patch.modules).toHaveLength(before.modules.length-1);style.remove();
+  });
+  it('Escape cancels removal without closing the editor or changing the patch',()=>{
+    document.querySelector<HTMLElement>('.module-card[data-module="alloy-1"]')!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));const before=structuredClone(app.store.patch);document.querySelector<HTMLButtonElement>('[aria-label="Delete selected module and its cables"]')!.click();document.activeElement!.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));expect(document.querySelector('.module-delete-confirm')).toBeNull();expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(true);expect(app.store.patch).toEqual(before);
+  });
+  it.each(['Delete','Backspace'])('keeps direct %s deletion on a focused chip',key=>{const chip=document.querySelector<HTMLElement>('.module-card[data-module="alloy-1"]')!;chip.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));chip.focus();chip.dispatchEvent(new KeyboardEvent('keydown',{key,bubbles:true}));expect(app.store.patch.modules.some(m=>m.id==='alloy-1')).toBe(false);});
+  it('does not remove a newly selected module through a stale confirmation',()=>{document.querySelector<HTMLElement>('.module-card[data-module="alloy-1"]')!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));document.querySelector<HTMLButtonElement>('[aria-label="Delete selected module and its cables"]')!.click();const stale=document.querySelector<HTMLButtonElement>('[aria-label="Confirm module removal"]')!;document.querySelector<HTMLElement>('.module-card[data-module="flock-1"]')!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));stale.click();expect(app.store.patch.modules.some(m=>m.id==='alloy-1')).toBe(true);expect(app.store.patch.modules.some(m=>m.id==='flock-1')).toBe(true);});
 
 });
