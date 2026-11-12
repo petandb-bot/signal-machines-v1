@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "MARBLE ROOM",
+  "bpm": 76,
+  "master": 0.65,
+  "seed": 91603,
+  "modules": [
+    {
+      "id": "bounce-1",
+      "type": "BOUNCE",
+      "x": 16,
+      "y": 16,
+      "seed": 2501,
+      "character": "METAL",
+      "params": {
+        "tilt": 0.65,
+        "elastic": 0.82
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 192,
+      "y": 16,
+      "seed": 2502,
+      "character": "METAL",
+      "params": {
+        "material": 0.46,
+        "decay": 0.75
+      }
+    },
+    {
+      "id": "caustic-1",
+      "type": "CAUSTIC",
+      "x": 368,
+      "y": 16,
+      "seed": 2503,
+      "character": "METAL",
+      "params": {
+        "burn": 0.25,
+        "starve": 0.35
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 16,
+      "seed": 2504,
+      "character": "METAL",
+      "params": {
+        "size": 0.6,
+        "density": 0.6
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 2505,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "weft-1",
+      "type": "WEFT",
+      "x": 16,
+      "y": 184,
+      "seed": 2506,
+      "character": "METAL",
+      "params": {
+        "rate": 0.17,
+        "fill": 0.6
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 192,
+      "y": 184,
+      "seed": 2507,
+      "character": "METAL",
+      "params": {
+        "flow": 0.5,
+        "range": 0.7
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "bounce-1",
+        "port": "hit"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "bounce-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "bounce-1",
+        "port": "speed"
+      },
+      "to": {
+        "module": "caustic-1",
+        "port": "burn"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "caustic-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "caustic-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "weft-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "bounce-1",
+        "port": "kick"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "bounce-1",
+        "port": "x"
+      }
+    }
+  ]
+}

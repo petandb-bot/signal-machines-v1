@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "CHANCE GARDEN",
+  "bpm": 104,
+  "master": 0.65,
+  "seed": 81601,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 2001,
+      "character": "METAL",
+      "params": {
+        "rate": 0.66,
+        "irregular": 0.08
+      }
+    },
+    {
+      "id": "chance-1",
+      "type": "CHANCE",
+      "x": 192,
+      "y": 16,
+      "seed": 2002,
+      "character": "METAL",
+      "params": {
+        "density": 0.62,
+        "recall": 0.72
+      }
+    },
+    {
+      "id": "comb-1",
+      "type": "COMB",
+      "x": 368,
+      "y": 16,
+      "seed": 2003,
+      "character": "METAL",
+      "params": {
+        "tune": 0.66,
+        "decay": 0.58
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 16,
+      "seed": 2004,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.6
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 2005,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 368,
+      "y": 184,
+      "seed": 2006,
+      "character": "METAL",
+      "params": {
+        "body": 0.3,
+        "tension": 0.25
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 16,
+      "y": 184,
+      "seed": 2007,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.32
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "chance-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "chance-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "comb-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "chance-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "chance-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "comb-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "chance-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "comb-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "chance-1",
+        "port": "bias"
+      }
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "LOOP WEATHER",
+  "bpm": 88,
+  "master": 0.65,
+  "seed": 39051,
+  "modules": [
+    {
+      "id": "drone-1",
+      "type": "DRONE",
+      "x": 16,
+      "y": 16,
+      "seed": 1601,
+      "character": "METAL",
+      "params": {
+        "spread": 0.38,
+        "color": 0.74
+      }
+    },
+    {
+      "id": "cloud-1",
+      "type": "CLOUD",
+      "x": 192,
+      "y": 16,
+      "seed": 1602,
+      "character": "METAL",
+      "params": {
+        "grain": 0.6,
+        "spread": 0.55
+      }
+    },
+    {
+      "id": "loop-1",
+      "type": "LOOP",
+      "x": 368,
+      "y": 16,
+      "seed": 1603,
+      "character": "METAL",
+      "params": {
+        "speed": 0.75,
+        "mix": 0.8
+      }
+    },
+    {
+      "id": "chorus-1",
+      "type": "CHORUS",
+      "x": 544,
+      "y": 16,
+      "seed": 1604,
+      "character": "METAL",
+      "params": {
+        "depth": 0.6,
+        "drift": 0.3
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 1605,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 192,
+      "y": 184,
+      "seed": 1606,
+      "character": "METAL",
+      "params": {
+        "rate": 0,
+        "irregular": 0
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 16,
+      "y": 184,
+      "seed": 1607,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.32
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "drone-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "cloud-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "cloud-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "loop-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "loop-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chorus-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "chorus-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "loop-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "cloud-1",
+        "port": "spread"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "flock-1",
+        "port": "controlB"
+      },
+      "to": {
+        "module": "drone-1",
+        "port": "color"
+      }
+    }
+  ]
+}

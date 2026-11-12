@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "STORED RAIN",
+  "bpm": 116,
+  "master": 0.65,
+  "seed": 111602,
+  "modules": [
+    {
+      "id": "weft-1",
+      "type": "WEFT",
+      "x": 16,
+      "y": 16,
+      "seed": 3201,
+      "character": "METAL",
+      "params": {
+        "rate": 0.5,
+        "fill": 0.8
+      }
+    },
+    {
+      "id": "unspent-1",
+      "type": "UNSPENT",
+      "x": 192,
+      "y": 16,
+      "seed": 3202,
+      "character": "METAL",
+      "params": {
+        "hold": 0.8,
+        "release": 0.4
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 368,
+      "y": 16,
+      "seed": 3203,
+      "character": "METAL",
+      "params": {
+        "material": 0.46,
+        "decay": 0.64
+      }
+    },
+    {
+      "id": "fault-line-1",
+      "type": "FAULT LINE",
+      "x": 544,
+      "y": 16,
+      "seed": 3204,
+      "character": "METAL",
+      "params": {
+        "pressure": 0.82,
+        "heal": 0.3
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 720,
+      "y": 16,
+      "seed": 3205,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.6
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 896,
+      "y": 16,
+      "seed": 3206,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 184,
+      "seed": 3207,
+      "character": "METAL",
+      "params": {
+        "flow": 0.5,
+        "range": 0.8
+      }
+    },
+    {
+      "id": "bounce-1",
+      "type": "BOUNCE",
+      "x": 192,
+      "y": 184,
+      "seed": 3208,
+      "character": "METAL",
+      "params": {
+        "tilt": 0.5,
+        "elastic": 0.72
+      }
+    },
+    {
+      "id": "quorum-1",
+      "type": "QUORUM",
+      "x": 368,
+      "y": 184,
+      "seed": 3209,
+      "character": "METAL",
+      "params": {
+        "agreement": 0.65,
+        "stubborn": 0.2
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "weft-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "unspent-1",
+        "port": "event"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "unspent-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fault-line-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "fault-line-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "quorum-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "bounce-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "quorum-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "bounce-1",
+        "port": "y"
+      },
+      "to": {
+        "module": "quorum-1",
+        "port": "c"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "quorum-1",
+        "port": "value"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-10",
+      "from": {
+        "module": "quorum-1",
+        "port": "spread"
+      },
+      "to": {
+        "module": "unspent-1",
+        "port": "release"
+      }
+    },
+    {
+      "id": "preset-cable-11",
+      "from": {
+        "module": "weft-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "bounce-1",
+        "port": "kick"
+      }
+    }
+  ]
+}

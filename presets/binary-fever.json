@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "BINARY FEVER",
+  "bpm": 112,
+  "master": 0.5,
+  "seed": 91604,
+  "modules": [
+    {
+      "id": "count-1",
+      "type": "COUNT",
+      "x": 16,
+      "y": 16,
+      "seed": 2601,
+      "character": "METAL",
+      "params": {
+        "step": 0.2857142857142857,
+        "rate": 0.82
+      },
+      "mode": "AUDIO"
+    },
+    {
+      "id": "map-1",
+      "type": "MAP",
+      "x": 192,
+      "y": 16,
+      "seed": 2602,
+      "character": "METAL",
+      "params": {
+        "table": 0.5714285714285714,
+        "amount": 0.6
+      }
+    },
+    {
+      "id": "feral-1",
+      "type": "FERAL",
+      "x": 368,
+      "y": 16,
+      "seed": 2603,
+      "character": "METAL",
+      "params": {
+        "tune": 0.48,
+        "chaos": 0.73
+      }
+    },
+    {
+      "id": "filter-1",
+      "type": "FILTER",
+      "x": 544,
+      "y": 16,
+      "seed": 2604,
+      "character": "METAL",
+      "params": {
+        "cutoff": 0.7,
+        "resonance": 0.3
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 2605,
+      "character": "METAL",
+      "params": {
+        "level": 0.6
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 192,
+      "y": 184,
+      "seed": 2606,
+      "character": "METAL",
+      "params": {
+        "flow": 0.7,
+        "range": 0.8
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "count-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "map-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "count-1",
+        "port": "value"
+      },
+      "to": {
+        "module": "map-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "map-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "feral-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "feral-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "filter-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "map-1",
+        "port": "cv"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "cutoff"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "map-1",
+        "port": "table"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "tide-1",
+        "port": "tide"
+      },
+      "to": {
+        "module": "feral-1",
+        "port": "chaos"
+      }
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "FORKED MEMORY",
+  "bpm": 108,
+  "master": 0.65,
+  "seed": 63051,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 1501,
+      "character": "METAL",
+      "params": {
+        "rate": 0.66,
+        "irregular": 0.24
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 192,
+      "y": 16,
+      "seed": 1502,
+      "character": "METAL",
+      "params": {
+        "change": 0.38,
+        "memory": 0.72
+      }
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 368,
+      "y": 16,
+      "seed": 1503,
+      "character": "METAL",
+      "params": {
+        "body": 0.38,
+        "tension": 0.42
+      }
+    },
+    {
+      "id": "caustic-1",
+      "type": "CAUSTIC",
+      "x": 544,
+      "y": 16,
+      "seed": 1504,
+      "character": "METAL",
+      "params": {
+        "burn": 0.54,
+        "starve": 0.35
+      }
+    },
+    {
+      "id": "switch-1",
+      "type": "SWITCH",
+      "x": 720,
+      "y": 16,
+      "seed": 1505,
+      "character": "METAL",
+      "params": {
+        "chance": 0.5,
+        "fade": 0.18
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 368,
+      "y": 184,
+      "seed": 1506,
+      "character": "METAL",
+      "params": {
+        "material": 0.46,
+        "decay": 0.64
+      }
+    },
+    {
+      "id": "chorus-1",
+      "type": "CHORUS",
+      "x": 544,
+      "y": 184,
+      "seed": 1507,
+      "character": "METAL",
+      "params": {
+        "depth": 0.6,
+        "drift": 0.3
+      }
+    },
+    {
+      "id": "tape-1",
+      "type": "TAPE",
+      "x": 720,
+      "y": 184,
+      "seed": 1508,
+      "character": "METAL",
+      "params": {
+        "wear": 0.45,
+        "echo": 0.48
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 896,
+      "y": 184,
+      "seed": 1509,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "switch-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "branch-1",
+        "port": "gate"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "branch-1",
+        "port": "gate"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "caustic-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "caustic-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "switch-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chorus-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-10",
+      "from": {
+        "module": "chorus-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "switch-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "preset-cable-11",
+      "from": {
+        "module": "switch-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "tape-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-12",
+      "from": {
+        "module": "tape-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

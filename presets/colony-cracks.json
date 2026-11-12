@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "COLONY CRACKS",
+  "bpm": 86,
+  "master": 0.65,
+  "seed": 111601,
+  "modules": [
+    {
+      "id": "swarm-1",
+      "type": "SWARM",
+      "x": 16,
+      "y": 16,
+      "seed": 3101,
+      "character": "METAL",
+      "params": {
+        "energy": 0.65,
+        "sympathy": 0.65
+      }
+    },
+    {
+      "id": "fault-line-1",
+      "type": "FAULT LINE",
+      "x": 192,
+      "y": 16,
+      "seed": 3102,
+      "character": "METAL",
+      "params": {
+        "pressure": 0.87,
+        "heal": 0.25
+      }
+    },
+    {
+      "id": "tape-1",
+      "type": "TAPE",
+      "x": 368,
+      "y": 16,
+      "seed": 3103,
+      "character": "METAL",
+      "params": {
+        "wear": 0.45,
+        "echo": 0.4
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 3104,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "bounce-1",
+      "type": "BOUNCE",
+      "x": 16,
+      "y": 184,
+      "seed": 3105,
+      "character": "METAL",
+      "params": {
+        "tilt": 0.5,
+        "elastic": 0.72
+      }
+    },
+    {
+      "id": "sideways-1",
+      "type": "SIDEWAYS",
+      "x": 192,
+      "y": 184,
+      "seed": 3106,
+      "character": "METAL",
+      "params": {
+        "attraction": 0.8,
+        "inertia": 0.42
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 368,
+      "y": 184,
+      "seed": 3107,
+      "character": "METAL",
+      "params": {
+        "flow": 0.5,
+        "range": 0.8
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "swarm-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fault-line-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "fault-line-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "tape-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "tape-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "bounce-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "sideways-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "sideways-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "sideways-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "swarm-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "sideways-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "swarm-1",
+        "port": "sympathy"
+      }
+    }
+  ]
+}

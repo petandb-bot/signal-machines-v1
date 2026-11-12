@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "HARMONIC WEATHER",
+  "bpm": 76,
+  "master": 0.65,
+  "seed": 81603,
+  "modules": [
+    {
+      "id": "partial-1",
+      "type": "PARTIAL",
+      "x": 16,
+      "y": 16,
+      "seed": 2201,
+      "character": "METAL",
+      "params": {
+        "mass": 0.62,
+        "warp": 0.5
+      }
+    },
+    {
+      "id": "chorus-1",
+      "type": "CHORUS",
+      "x": 192,
+      "y": 16,
+      "seed": 2202,
+      "character": "METAL",
+      "params": {
+        "depth": 0.6,
+        "drift": 0.3
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 368,
+      "y": 16,
+      "seed": 2203,
+      "character": "METAL",
+      "params": {
+        "size": 0.72,
+        "density": 0.8
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 2204,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 16,
+      "y": 184,
+      "seed": 2205,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.32
+      }
+    },
+    {
+      "id": "parasite-1",
+      "type": "PARASITE",
+      "x": 192,
+      "y": 184,
+      "seed": 2206,
+      "character": "METAL",
+      "params": {
+        "feed": 0.62,
+        "memory": 0.6
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "partial-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chorus-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "chorus-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "parasite-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "parasite-1",
+        "port": "pressure"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "mass"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "warp"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "flock-1",
+        "port": "controlB"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "pitch"
+      }
+    }
+  ]
+}

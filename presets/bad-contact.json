@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "BAD CONTACT",
+  "bpm": 88,
+  "master": 0.65,
+  "seed": 29811,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 1001,
+      "character": "METAL",
+      "params": {
+        "rate": 0.43,
+        "irregular": 0.55
+      }
+    },
+    {
+      "id": "venom-1",
+      "type": "VENOM",
+      "x": 192,
+      "y": 16,
+      "seed": 1002,
+      "character": "METAL",
+      "params": {
+        "dose": 0.78,
+        "strain": 0.74
+      }
+    },
+    {
+      "id": "caustic-1",
+      "type": "CAUSTIC",
+      "x": 368,
+      "y": 16,
+      "seed": 1003,
+      "character": "METAL",
+      "params": {
+        "burn": 0.72,
+        "starve": 0.6
+      }
+    },
+    {
+      "id": "snap-1",
+      "type": "SNAP",
+      "x": 544,
+      "y": 16,
+      "seed": 1004,
+      "character": "METAL",
+      "params": {
+        "fault": 0.58,
+        "recover": 0.34
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 368,
+      "y": 184,
+      "seed": 1005,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.32
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 184,
+      "seed": 1006,
+      "character": "METAL",
+      "params": {
+        "size": 0.34,
+        "density": 0.28
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 184,
+      "seed": 1007,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "venom-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "venom-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "caustic-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "caustic-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "snap-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "snap-1",
+        "port": "fault"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "snap-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "CLEAR SIGNAL",
+  "bpm": 94,
+  "master": 0.65,
+  "seed": 71604,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 1701,
+      "character": "METAL",
+      "params": {
+        "rate": 0.55,
+        "irregular": 0.24
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 192,
+      "y": 16,
+      "seed": 1702,
+      "character": "METAL",
+      "params": {
+        "change": 0.38,
+        "memory": 0.72
+      }
+    },
+    {
+      "id": "osc-1",
+      "type": "OSC",
+      "x": 368,
+      "y": 16,
+      "seed": 1703,
+      "character": "METAL",
+      "params": {
+        "tune": 0.68,
+        "level": 0.7
+      },
+      "mode": "SAW"
+    },
+    {
+      "id": "caustic-1",
+      "type": "CAUSTIC",
+      "x": 544,
+      "y": 16,
+      "seed": 1704,
+      "character": "METAL",
+      "params": {
+        "burn": 0.24,
+        "starve": 0.35
+      }
+    },
+    {
+      "id": "filter-1",
+      "type": "FILTER",
+      "x": 720,
+      "y": 16,
+      "seed": 1705,
+      "character": "METAL",
+      "params": {
+        "cutoff": 0.43,
+        "resonance": 0.48
+      }
+    },
+    {
+      "id": "shape-1",
+      "type": "SHAPE",
+      "x": 192,
+      "y": 184,
+      "seed": 1706,
+      "character": "METAL",
+      "params": {
+        "rise": 0.08,
+        "fall": 0.42
+      }
+    },
+    {
+      "id": "vca-1",
+      "type": "VCA",
+      "x": 720,
+      "y": 184,
+      "seed": 1707,
+      "character": "METAL",
+      "params": {
+        "level": 0.8,
+        "blend": 0
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 896,
+      "y": 184,
+      "seed": 1708,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "osc-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "branch-1",
+        "port": "gate"
+      },
+      "to": {
+        "module": "shape-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "osc-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "caustic-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "caustic-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "filter-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "shape-1",
+        "port": "control"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "cutoff"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "shape-1",
+        "port": "control"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "level"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "vca-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

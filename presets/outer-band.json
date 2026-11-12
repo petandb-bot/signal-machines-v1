@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "OUTER BAND",
+  "bpm": 76,
+  "master": 0.45,
+  "seed": 111604,
+  "modules": [
+    {
+      "id": "low-1",
+      "type": "OSC",
+      "x": 16,
+      "y": 16,
+      "seed": 3401,
+      "character": "METAL",
+      "params": {
+        "tune": 0.36597306102215243,
+        "level": 0.7
+      },
+      "wide": true
+    },
+    {
+      "id": "high-1",
+      "type": "OSC",
+      "x": 16,
+      "y": 184,
+      "seed": 3402,
+      "character": "METAL",
+      "params": {
+        "tune": 0.9470133403799906,
+        "level": 0.35
+      },
+      "wide": true
+    },
+    {
+      "id": "fault-line-1",
+      "type": "FAULT LINE",
+      "x": 192,
+      "y": 184,
+      "seed": 3403,
+      "character": "METAL",
+      "params": {
+        "pressure": 0.8,
+        "heal": 0.55
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 16,
+      "seed": 3404,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      },
+      "wide": true
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 192,
+      "y": 16,
+      "seed": 3405,
+      "character": "METAL",
+      "params": {
+        "flow": 0.5,
+        "range": 0.8
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "low-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "high-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fault-line-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "fault-line-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "high-1",
+        "port": "pitch"
+      }
+    }
+  ]
+}

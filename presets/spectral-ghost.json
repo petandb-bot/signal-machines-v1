@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "SPECTRAL GHOST",
+  "bpm": 72,
+  "master": 0.65,
+  "seed": 81602,
+  "modules": [
+    {
+      "id": "osc-1",
+      "type": "OSC",
+      "x": 16,
+      "y": 16,
+      "seed": 2101,
+      "character": "METAL",
+      "params": {
+        "tune": 0.72,
+        "level": 0.7
+      },
+      "mode": "SAW"
+    },
+    {
+      "id": "filter-1",
+      "type": "FILTER",
+      "x": 192,
+      "y": 16,
+      "seed": 2102,
+      "character": "METAL",
+      "params": {
+        "cutoff": 0.65,
+        "resonance": 0.3
+      }
+    },
+    {
+      "id": "prism-1",
+      "type": "PRISM",
+      "x": 368,
+      "y": 16,
+      "seed": 2103,
+      "character": "METAL",
+      "params": {
+        "tune": 0.58,
+        "memory": 0.25
+      },
+      "mode": "HOLD"
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 16,
+      "seed": 2104,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.78
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 2105,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 192,
+      "y": 184,
+      "seed": 2106,
+      "character": "METAL",
+      "params": {
+        "rate": 0.17,
+        "irregular": 0
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 16,
+      "y": 184,
+      "seed": 2107,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.32
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "osc-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "filter-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "prism-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "prism-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "prism-1",
+        "port": "capture"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "cutoff"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "flock-1",
+        "port": "controlB"
+      },
+      "to": {
+        "module": "prism-1",
+        "port": "pitch"
+      }
+    }
+  ]
+}

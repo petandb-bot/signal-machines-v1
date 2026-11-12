@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "SLOW WEATHER",
+  "bpm": 76,
+  "master": 0.65,
+  "seed": 91602,
+  "modules": [
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 16,
+      "seed": 2401,
+      "character": "METAL",
+      "params": {
+        "flow": 0.5,
+        "range": 0.9
+      }
+    },
+    {
+      "id": "partial-1",
+      "type": "PARTIAL",
+      "x": 192,
+      "y": 16,
+      "seed": 2402,
+      "character": "METAL",
+      "params": {
+        "mass": 0.62,
+        "warp": 0.5
+      }
+    },
+    {
+      "id": "filter-1",
+      "type": "FILTER",
+      "x": 368,
+      "y": 16,
+      "seed": 2403,
+      "character": "METAL",
+      "params": {
+        "cutoff": 0.67,
+        "resonance": 0.36
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 16,
+      "seed": 2404,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.75
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 2405,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "warp"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "tide-1",
+        "port": "tide"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "cutoff"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "tide-1",
+        "port": "age"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "mass"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "partial-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "filter-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

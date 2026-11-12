@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "UNEVEN MEMORY",
+  "bpm": 102,
+  "master": 0.65,
+  "seed": 45017,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 801,
+      "character": "METAL",
+      "params": {
+        "rate": 0.67,
+        "irregular": 0.35
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 192,
+      "y": 16,
+      "seed": 802,
+      "character": "METAL",
+      "params": {
+        "change": 0.38,
+        "memory": 0.72
+      }
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 368,
+      "y": 16,
+      "seed": 803,
+      "character": "METAL",
+      "params": {
+        "body": 0.36,
+        "tension": 0.52
+      }
+    },
+    {
+      "id": "fracture-1",
+      "type": "FRACTURE",
+      "x": 368,
+      "y": 184,
+      "seed": 804,
+      "character": "METAL",
+      "params": {
+        "break": 0.48,
+        "hold": 0.35
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 184,
+      "seed": 805,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "branch-1",
+        "port": "gate"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fracture-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "fracture-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

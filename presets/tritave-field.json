@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "TRITAVE FIELD",
+  "bpm": 76,
+  "master": 0.65,
+  "seed": 101603,
+  "modules": [
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 16,
+      "seed": 2901,
+      "character": "METAL",
+      "params": {
+        "flow": 0.85,
+        "range": 0.95
+      }
+    },
+    {
+      "id": "quantize-1",
+      "type": "QUANTIZE",
+      "x": 192,
+      "y": 16,
+      "seed": 2902,
+      "character": "METAL",
+      "params": {
+        "span": 0.65,
+        "pull": 1
+      },
+      "mode": "13-TRIT"
+    },
+    {
+      "id": "slew-1",
+      "type": "SLEW",
+      "x": 368,
+      "y": 16,
+      "seed": 2903,
+      "character": "METAL",
+      "params": {
+        "rise": 0.32,
+        "fall": 0.58
+      },
+      "mode": "GLIDE"
+    },
+    {
+      "id": "partial-1",
+      "type": "PARTIAL",
+      "x": 544,
+      "y": 16,
+      "seed": 2904,
+      "character": "METAL",
+      "params": {
+        "mass": 0.65,
+        "warp": 0.55
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 720,
+      "y": 16,
+      "seed": 2905,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.7
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 896,
+      "y": 16,
+      "seed": 2906,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "quantize-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "quantize-1",
+        "port": "cv"
+      },
+      "to": {
+        "module": "slew-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "slew-1",
+        "port": "cv"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "tide-1",
+        "port": "tide"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "warp"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "tide-1",
+        "port": "age"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "mass"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "partial-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

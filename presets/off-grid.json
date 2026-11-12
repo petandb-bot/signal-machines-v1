@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "OFF GRID",
+  "bpm": 74,
+  "master": 0.6,
+  "seed": 101604,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 3001,
+      "character": "METAL",
+      "params": {
+        "rate": 0.33,
+        "irregular": 0
+      }
+    },
+    {
+      "id": "logic-1",
+      "type": "LOGIC",
+      "x": 192,
+      "y": 16,
+      "seed": 3002,
+      "character": "METAL",
+      "params": {
+        "ratio": 1,
+        "shift": 0.54
+      },
+      "mode": "XOR"
+    },
+    {
+      "id": "bounce-1",
+      "type": "BOUNCE",
+      "x": 368,
+      "y": 16,
+      "seed": 3003,
+      "character": "METAL",
+      "params": {
+        "tilt": 0.5,
+        "elastic": 0.72
+      }
+    },
+    {
+      "id": "slew-1",
+      "type": "SLEW",
+      "x": 544,
+      "y": 16,
+      "seed": 3004,
+      "character": "METAL",
+      "params": {
+        "rise": 0.18,
+        "fall": 0.35
+      },
+      "mode": "GLIDE"
+    },
+    {
+      "id": "feral-1",
+      "type": "FERAL",
+      "x": 720,
+      "y": 16,
+      "seed": 3005,
+      "character": "METAL",
+      "params": {
+        "tune": 0.62,
+        "chaos": 0.62
+      }
+    },
+    {
+      "id": "formant-1",
+      "type": "FORMANT",
+      "x": 368,
+      "y": 184,
+      "seed": 3006,
+      "character": "METAL",
+      "params": {
+        "tune": 0.5,
+        "vowel": 0.35
+      },
+      "mode": "WHISPER"
+    },
+    {
+      "id": "duck-1",
+      "type": "DUCK",
+      "x": 544,
+      "y": 184,
+      "seed": 3007,
+      "character": "METAL",
+      "params": {
+        "depth": 0.6,
+        "recover": 0.5
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 720,
+      "y": 184,
+      "seed": 3008,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.6
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 896,
+      "y": 184,
+      "seed": 3009,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "logic-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "logic-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "bounce-1",
+        "port": "kick"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "logic-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "feral-1",
+        "port": "kick"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "logic-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "duck-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "bounce-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "slew-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "slew-1",
+        "port": "cv"
+      },
+      "to": {
+        "module": "feral-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "bounce-1",
+        "port": "y"
+      },
+      "to": {
+        "module": "formant-1",
+        "port": "vowel"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "bounce-1",
+        "port": "speed"
+      },
+      "to": {
+        "module": "formant-1",
+        "port": "breath"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "formant-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "duck-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-10",
+      "from": {
+        "module": "duck-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-11",
+      "from": {
+        "module": "feral-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-12",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

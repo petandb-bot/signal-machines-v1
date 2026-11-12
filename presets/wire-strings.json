@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "WIRE STRINGS",
+  "bpm": 106,
+  "master": 0.65,
+  "seed": 71605,
+  "modules": [
+    {
+      "id": "noise-1",
+      "type": "NOISE",
+      "x": 16,
+      "y": 16,
+      "seed": 1801,
+      "character": "METAL",
+      "params": {
+        "level": 0.85
+      },
+      "mode": "PINK"
+    },
+    {
+      "id": "vca-1",
+      "type": "VCA",
+      "x": 192,
+      "y": 16,
+      "seed": 1802,
+      "character": "METAL",
+      "params": {
+        "level": 0.8,
+        "blend": 0
+      }
+    },
+    {
+      "id": "comb-1",
+      "type": "COMB",
+      "x": 368,
+      "y": 16,
+      "seed": 1803,
+      "character": "METAL",
+      "params": {
+        "tune": 0.65,
+        "decay": 0.72
+      }
+    },
+    {
+      "id": "tape-1",
+      "type": "TAPE",
+      "x": 544,
+      "y": 16,
+      "seed": 1804,
+      "character": "METAL",
+      "params": {
+        "wear": 0.45,
+        "echo": 0.45
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 1805,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 184,
+      "seed": 1806,
+      "character": "METAL",
+      "params": {
+        "rate": 0.52,
+        "irregular": 0.24
+      }
+    },
+    {
+      "id": "shape-1",
+      "type": "SHAPE",
+      "x": 192,
+      "y": 184,
+      "seed": 1807,
+      "character": "METAL",
+      "params": {
+        "rise": 0,
+        "fall": 0.22
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 368,
+      "y": 184,
+      "seed": 1808,
+      "character": "METAL",
+      "params": {
+        "change": 0.38,
+        "memory": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "noise-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "vca-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "comb-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "comb-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "tape-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "tape-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "shape-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "shape-1",
+        "port": "control"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "level"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "comb-1",
+        "port": "pitch"
+      }
+    }
+  ]
+}

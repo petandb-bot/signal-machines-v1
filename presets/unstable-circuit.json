@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "UNSTABLE CIRCUIT",
+  "bpm": 94,
+  "master": 0.65,
+  "seed": 99971,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 1301,
+      "character": "METAL",
+      "params": {
+        "rate": 0.65,
+        "irregular": 0.24
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 192,
+      "y": 16,
+      "seed": 1302,
+      "character": "METAL",
+      "params": {
+        "change": 0.24,
+        "memory": 0.4
+      }
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 368,
+      "y": 16,
+      "seed": 1303,
+      "character": "METAL",
+      "params": {
+        "body": 0.61,
+        "tension": 0.42
+      }
+    },
+    {
+      "id": "fracture-1",
+      "type": "FRACTURE",
+      "x": 544,
+      "y": 16,
+      "seed": 1304,
+      "character": "METAL",
+      "params": {
+        "break": 0.48,
+        "hold": 0.35
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 184,
+      "seed": 1305,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.6
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 184,
+      "seed": 1306,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "parasite-1",
+      "type": "PARASITE",
+      "x": 368,
+      "y": 184,
+      "seed": 1307,
+      "character": "METAL",
+      "params": {
+        "feed": 0.58,
+        "memory": 0.6
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 192,
+      "y": 184,
+      "seed": 1308,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.32
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "branch-1",
+        "port": "gate"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fracture-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "fracture-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "parasite-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "parasite-1",
+        "port": "pressure"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "change"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "parasite-1",
+        "port": "fever"
+      },
+      "to": {
+        "module": "fracture-1",
+        "port": "break"
+      }
+    },
+    {
+      "id": "preset-cable-10",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "tension"
+      }
+    }
+  ]
+}

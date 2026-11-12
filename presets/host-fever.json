@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "HOST FEVER",
+  "bpm": 72,
+  "master": 0.65,
+  "seed": 80551,
+  "modules": [
+    {
+      "id": "drone-1",
+      "type": "DRONE",
+      "x": 16,
+      "y": 16,
+      "seed": 1201,
+      "character": "METAL",
+      "params": {
+        "spread": 0.38,
+        "color": 0.7
+      }
+    },
+    {
+      "id": "sieve-1",
+      "type": "SIEVE",
+      "x": 192,
+      "y": 16,
+      "seed": 1202,
+      "character": "METAL",
+      "params": {
+        "focus": 0.4,
+        "width": 0.7
+      }
+    },
+    {
+      "id": "tape-1",
+      "type": "TAPE",
+      "x": 368,
+      "y": 16,
+      "seed": 1203,
+      "character": "METAL",
+      "params": {
+        "wear": 0.45,
+        "echo": 0.48
+      }
+    },
+    {
+      "id": "snap-1",
+      "type": "SNAP",
+      "x": 544,
+      "y": 16,
+      "seed": 1204,
+      "character": "METAL",
+      "params": {
+        "fault": 0.21,
+        "recover": 0.48
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 1205,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "parasite-1",
+      "type": "PARASITE",
+      "x": 368,
+      "y": 184,
+      "seed": 1206,
+      "character": "METAL",
+      "params": {
+        "feed": 0.78,
+        "memory": 0.52
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "drone-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "sieve-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "sieve-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "tape-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "tape-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "snap-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "snap-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "snap-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "parasite-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "parasite-1",
+        "port": "pressure"
+      },
+      "to": {
+        "module": "snap-1",
+        "port": "fault"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "parasite-1",
+        "port": "fever"
+      },
+      "to": {
+        "module": "drone-1",
+        "port": "spread"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "parasite-1",
+        "port": "fever"
+      },
+      "to": {
+        "module": "sieve-1",
+        "port": "focus"
+      }
+    }
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "BREATHING CIRCUIT",
+  "bpm": 76,
+  "master": 0.65,
+  "seed": 15061,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 1401,
+      "character": "METAL",
+      "params": {
+        "rate": 0.33,
+        "irregular": 0.24
+      }
+    },
+    {
+      "id": "shape-1",
+      "type": "SHAPE",
+      "x": 192,
+      "y": 16,
+      "seed": 1402,
+      "character": "METAL",
+      "params": {
+        "rise": 0.44,
+        "fall": 0.6
+      }
+    },
+    {
+      "id": "vca-1",
+      "type": "VCA",
+      "x": 368,
+      "y": 16,
+      "seed": 1403,
+      "character": "METAL",
+      "params": {
+        "level": 0.8,
+        "blend": 0
+      }
+    },
+    {
+      "id": "chorus-1",
+      "type": "CHORUS",
+      "x": 544,
+      "y": 16,
+      "seed": 1404,
+      "character": "METAL",
+      "params": {
+        "depth": 0.6,
+        "drift": 0.3
+      }
+    },
+    {
+      "id": "drone-1",
+      "type": "DRONE",
+      "x": 16,
+      "y": 184,
+      "seed": 1405,
+      "character": "METAL",
+      "params": {
+        "spread": 0.38,
+        "color": 0.7
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 192,
+      "y": 184,
+      "seed": 1406,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.32
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 184,
+      "seed": 1407,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.6
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 184,
+      "seed": 1408,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "shape-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "shape-1",
+        "port": "control"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "level"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "drone-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "vca-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chorus-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "chorus-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "drone-1",
+        "port": "spread"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "flock-1",
+        "port": "controlB"
+      },
+      "to": {
+        "module": "chorus-1",
+        "port": "drift"
+      }
+    }
+  ]
+}

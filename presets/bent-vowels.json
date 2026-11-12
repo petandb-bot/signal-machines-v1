@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "BENT VOWELS",
+  "bpm": 82,
+  "master": 0.65,
+  "seed": 101601,
+  "modules": [
+    {
+      "id": "bounce-1",
+      "type": "BOUNCE",
+      "x": 16,
+      "y": 16,
+      "seed": 2701,
+      "character": "METAL",
+      "params": {
+        "tilt": 0.5,
+        "elastic": 0.72
+      }
+    },
+    {
+      "id": "quantize-1",
+      "type": "QUANTIZE",
+      "x": 192,
+      "y": 16,
+      "seed": 2702,
+      "character": "METAL",
+      "params": {
+        "span": 0.42857142857142855,
+        "pull": 0.72
+      },
+      "mode": "19-TET"
+    },
+    {
+      "id": "slew-1",
+      "type": "SLEW",
+      "x": 368,
+      "y": 16,
+      "seed": 2703,
+      "character": "METAL",
+      "params": {
+        "rise": 0.25,
+        "fall": 0.45
+      },
+      "mode": "GLIDE"
+    },
+    {
+      "id": "formant-1",
+      "type": "FORMANT",
+      "x": 544,
+      "y": 16,
+      "seed": 2704,
+      "character": "METAL",
+      "params": {
+        "tune": 0.55,
+        "vowel": 0.35
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 720,
+      "y": 16,
+      "seed": 2705,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.6
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 896,
+      "y": 16,
+      "seed": 2706,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "weft-1",
+      "type": "WEFT",
+      "x": 16,
+      "y": 184,
+      "seed": 2707,
+      "character": "METAL",
+      "params": {
+        "rate": 0.5,
+        "fill": 0.65
+      }
+    },
+    {
+      "id": "duck-1",
+      "type": "DUCK",
+      "x": 544,
+      "y": 184,
+      "seed": 2708,
+      "character": "METAL",
+      "params": {
+        "depth": 0.38,
+        "recover": 0.23
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "bounce-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "quantize-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "quantize-1",
+        "port": "cv"
+      },
+      "to": {
+        "module": "slew-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "slew-1",
+        "port": "cv"
+      },
+      "to": {
+        "module": "formant-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "bounce-1",
+        "port": "y"
+      },
+      "to": {
+        "module": "formant-1",
+        "port": "vowel"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "bounce-1",
+        "port": "speed"
+      },
+      "to": {
+        "module": "formant-1",
+        "port": "breath"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "formant-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "duck-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "duck-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "weft-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "quantize-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "preset-cable-10",
+      "from": {
+        "module": "weft-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "bounce-1",
+        "port": "kick"
+      }
+    },
+    {
+      "id": "preset-cable-11",
+      "from": {
+        "module": "quantize-1",
+        "port": "change"
+      },
+      "to": {
+        "module": "duck-1",
+        "port": "trigger"
+      }
+    }
+  ]
+}

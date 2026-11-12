@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "DISSENTING BODIES",
+  "bpm": 78,
+  "master": 0.65,
+  "seed": 111603,
+  "modules": [
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 16,
+      "seed": 3301,
+      "character": "METAL",
+      "params": {
+        "flow": 0.7,
+        "range": 0.8
+      }
+    },
+    {
+      "id": "sideways-1",
+      "type": "SIDEWAYS",
+      "x": 192,
+      "y": 16,
+      "seed": 3302,
+      "character": "METAL",
+      "params": {
+        "attraction": 0.12,
+        "inertia": 0.7
+      }
+    },
+    {
+      "id": "quorum-1",
+      "type": "QUORUM",
+      "x": 368,
+      "y": 16,
+      "seed": 3303,
+      "character": "METAL",
+      "params": {
+        "agreement": 0.8,
+        "stubborn": 0.4
+      }
+    },
+    {
+      "id": "swarm-1",
+      "type": "SWARM",
+      "x": 544,
+      "y": 16,
+      "seed": 3304,
+      "character": "METAL",
+      "params": {
+        "energy": 0.65,
+        "sympathy": 0.65
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 720,
+      "y": 16,
+      "seed": 3305,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.6
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 896,
+      "y": 16,
+      "seed": 3306,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "bounce-1",
+      "type": "BOUNCE",
+      "x": 192,
+      "y": 184,
+      "seed": 3307,
+      "character": "METAL",
+      "params": {
+        "tilt": 0.5,
+        "elastic": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "sideways-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "bounce-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "sideways-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "sideways-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "quorum-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "sideways-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "quorum-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "tide-1",
+        "port": "tide"
+      },
+      "to": {
+        "module": "quorum-1",
+        "port": "c"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "quorum-1",
+        "port": "value"
+      },
+      "to": {
+        "module": "swarm-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "quorum-1",
+        "port": "agree"
+      },
+      "to": {
+        "module": "swarm-1",
+        "port": "kick"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "quorum-1",
+        "port": "spread"
+      },
+      "to": {
+        "module": "swarm-1",
+        "port": "energy"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "swarm-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-10",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "EMPTY CHAMBER",
+  "bpm": 54,
+  "master": 0.65,
+  "seed": 93214,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 32,
+      "seed": 901,
+      "character": "METAL",
+      "params": {
+        "rate": 0.17,
+        "irregular": 0.34
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 192,
+      "y": 32,
+      "seed": 902,
+      "character": "METAL",
+      "params": {
+        "material": 0.46,
+        "decay": 0.79
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 368,
+      "y": 32,
+      "seed": 903,
+      "character": "METAL",
+      "params": {
+        "size": 0.9,
+        "density": 0.84
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 32,
+      "seed": 904,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}
