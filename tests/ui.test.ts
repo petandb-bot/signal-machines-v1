@@ -78,8 +78,8 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(false);
 
   });
-  it('exposes forty-six real module choices, twenty-eight presets and no large title',()=>{
-    expect(document.querySelectorAll('.library-module')).toHaveLength(46);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(29);
+  it('exposes fifty-two grouped module choices, thirty-two presets and no large title',()=>{
+    expect(document.querySelectorAll('.library-module')).toHaveLength(52);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(33);
     const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;preset.value='1';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='BRANCH')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='FRACTURE')).toBe(true);
     preset.value='2';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='RESON')).toBe(true);
     preset.value='3';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='VENOM')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='CAUSTIC')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='SNAP')).toBe(true);
@@ -135,7 +135,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
   it('stops at four LOOP instances without changing existing modules',()=>{for(let i=0;i<5;i++)document.querySelector<HTMLButtonElement>('[aria-label="Add LOOP module"]')!.click();expect(app.store.patch.modules.filter(m=>m.type==='LOOP')).toHaveLength(4);expect(document.querySelector('.toast')!.textContent).toContain('at most 4');});
   it('selects waveform, noise, filter and drone modes and retains them through snapshot recall and reload',async()=>{
-    for(const [type,mode] of [['OSC','PULSE'],['NOISE','BROWN'],['FILTER','HIGH'],['DRONE','220 Hz'],['CHANCE','LOW'],['PRISM','HOLD'],['PARTIAL','440 Hz'],['CHAMBER','WEAVE'],['WEFT','8'],['COUNT','AUDIO'],['QUANTIZE','19-TET'],['SLEW','GLIDE'],['FORMANT','WHISPER'],['LOGIC','XOR']]){
+    for(const [type,mode] of [['OSC','PULSE'],['NOISE','BROWN'],['FILTER','HIGH'],['DRONE','220 Hz'],['CHANCE','LOW'],['PRISM','HOLD'],['PARTIAL','440 Hz'],['CHAMBER','WEAVE'],['WEFT','8'],['COUNT','AUDIO'],['QUANTIZE','19-TET'],['SLEW','GLIDE'],['FORMANT','WHISPER'],['LOGIC','XOR'],['CHIP','NOISE']]){
       document.querySelector<HTMLButtonElement>(`[aria-label="Add ${type} module"]`)!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
       const slider=document.querySelector('.editor input'),choice=document.querySelector<HTMLButtonElement>(`[aria-label="${type} ${mode} mode"]`)!;choice.click();expect(app.store.patch.modules.find(m=>m.id===id)!.mode).toBe(mode);expect(choice.getAttribute('aria-pressed')).toBe('true');expect(document.querySelector('.editor input')).toBe(slider);
     }
@@ -146,7 +146,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
   it('loads the source, spectral and dynamics circuits from the actual preset selector',()=>{
     const selector=document.querySelector<HTMLSelectElement>('.preset-select')!;
-    for(const [index,name,type] of [['10','CLEAR SIGNAL','FILTER'],['11','WIRE STRINGS','COMB'],['12','SIDEBAND GARDEN','SHIFT'],['13','CHANCE GARDEN','CHANCE'],['14','SPECTRAL GHOST','PRISM'],['15','HARMONIC WEATHER','PARTIAL'],['16','CLOCKWORK GARDEN','WEFT'],['17','SLOW WEATHER','TIDE'],['18','MARBLE ROOM','BOUNCE'],['19','BINARY FEVER','COUNT'],['20','BENT VOWELS','FORMANT'],['21','SPLIT ORBITS','LOGIC'],['22','TRITAVE FIELD','QUANTIZE'],['23','OFF GRID','SLEW'],['24','COLONY CRACKS','FAULT LINE'],['25','STORED RAIN','UNSPENT'],['26','DISSENTING BODIES','QUORUM'],['27','OUTER BAND','OSC']]){selector.value=index;selector.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe(name);expect(app.store.patch.modules.some(m=>m.type===type)).toBe(true);}
+    for(const [index,name,type] of [['10','CLEAR SIGNAL','FILTER'],['11','WIRE STRINGS','COMB'],['12','SIDEBAND GARDEN','SHIFT'],['13','CHANCE GARDEN','CHANCE'],['14','SPECTRAL GHOST','PRISM'],['15','HARMONIC WEATHER','PARTIAL'],['16','CLOCKWORK GARDEN','WEFT'],['17','SLOW WEATHER','TIDE'],['18','MARBLE ROOM','BOUNCE'],['19','BINARY FEVER','COUNT'],['20','BENT VOWELS','FORMANT'],['21','SPLIT ORBITS','LOGIC'],['22','TRITAVE FIELD','QUANTIZE'],['23','OFF GRID','SLEW'],['24','COLONY CRACKS','FAULT LINE'],['25','STORED RAIN','UNSPENT'],['26','DISSENTING BODIES','QUORUM'],['27','OUTER BAND','OSC'],['28','PIXEL DUST','CHIP'],['29','BIASED ORBIT','FUZZ'],['30','DRAWN METAL','TOUCH'],['31','TWIN SWINGS','PENDULUM']]){selector.value=index;selector.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe(name);expect(app.store.patch.modules.some(m=>m.type===type)).toBe(true);}
   });
   it('kicks the marble through the actual editor and module-action bridge',async()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add BOUNCE module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
@@ -166,6 +166,20 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     vi.spyOn(URL,'createObjectURL').mockReturnValue('blob:test');const click=vi.spyOn(HTMLAnchorElement.prototype,'click').mockImplementation(()=>{});
     document.querySelector<HTMLButtonElement>('[aria-label="Record master output"]')!.click();await vi.waitFor(()=>expect(format.disabled).toBe(true));expect(start).toHaveBeenCalledWith(app.store.patch,'aiff');
     document.querySelector<HTMLButtonElement>('[aria-label="Stop recording and download"]')!.click();await vi.waitFor(()=>expect(click).toHaveBeenCalled());expect(stop).toHaveBeenCalledOnce();expect((click.mock.contexts[0] as unknown as HTMLAnchorElement).download).toMatch(/\.aiff$/);expect(format.disabled).toBe(false);
+  });
+
+  it('groups every library choice exactly once without adding search or favourites',()=>{
+    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(52);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
+  });
+  it('captures a TOUCH path, preserves it with bypass in a snapshot, cancels incomplete strokes and clears explicitly',()=>{
+    document.querySelector<HTMLButtonElement>('[aria-label="Add FUZZ module"]')!.click();const fuzz=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${fuzz}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));document.querySelector<HTMLButtonElement>('[aria-label="FUZZ bypass"]')!.click();expect(app.store.patch.modules.find(m=>m.id===fuzz)!.bypass).toBe(true);
+    document.querySelector<HTMLButtonElement>('[aria-label="Add TOUCH module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));const pad=document.querySelector<HTMLElement>('[aria-label="Draw TOUCH motion path"]')!;pad.getBoundingClientRect=()=>new DOMRect(0,0,200,120);
+    const draw=(type:string,x:number,y:number,t:number)=>{const e=new PointerEvent(type,{bubbles:true,button:0,pointerType:'touch',pointerId:89,clientX:x,clientY:y});Object.defineProperty(e,'timeStamp',{value:t});pad.dispatchEvent(e);};
+    draw('pointerdown',20,20,0);draw('pointermove',150,90,500);draw('pointerup',180,100,1000);const touch=app.store.patch.modules.find(m=>m.id===id)!;expect(touch.gesture!.duration).toBe(1);expect(touch.gesture!.points).toHaveLength(3);const gesture=structuredClone(touch.gesture);draw('pointerdown',100,40,2000);draw('pointermove',120,50,2200);draw('pointercancel',120,50,2300);expect(touch.gesture).toEqual(gesture);
+    const saved=structuredClone(app.store.patch),snap=app.snapshots.storage.capture(saved,'Drawing and fuzz');document.querySelector<HTMLButtonElement>('[aria-label="Restore TOUCH circle"]')!.click();expect(touch.gesture).toBeUndefined();app.store.replace(app.snapshots.storage.recall(snap,app.store.patch));expect(app.store.patch).toEqual(saved);
+  });
+  it('sends the pendulum Kick button through the existing module-action bridge',async()=>{
+    document.querySelector<HTMLButtonElement>('[aria-label="Add PENDULUM module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));vi.spyOn(app.audio,'start').mockImplementation(async()=>{app.audio.running=true;});const action=vi.spyOn(app.audio,'moduleAction').mockResolvedValue(undefined);document.querySelector<HTMLButtonElement>('[aria-label="Kick the pendulums"]')!.click();await vi.waitFor(()=>expect(action).toHaveBeenCalledWith(id,'kick',undefined));
   });
 
 });

@@ -1,6 +1,6 @@
-# SIGNAL MACHINES / v0.11
+# SIGNAL MACHINES / v0.12
 
-A small modular sound instrument built with TypeScript, Vite, p5.js **2.3.4** and the Web Audio API. Forty-six independent modules run in a single AudioWorklet. Compact chips replace the large rack panels; editing and adding modules use temporary panels. The interface intentionally has no large title or permanent sidebar.
+A small modular sound instrument built with TypeScript, Vite, p5.js **2.3.4** and the Web Audio API. Fifty-two independent modules run in a single AudioWorklet. Compact chips replace the large rack panels; editing and adding modules use temporary panels. The interface intentionally has no large title or permanent sidebar.
 
 ## Start locally
 
@@ -28,7 +28,7 @@ The static `dist/` includes the application, independent worklet, p5, fonts, and
 Landscape is the intended iPhone layout. Portrait also keeps the workspace available, with a bottom editor. This is an implemented touch-oriented layout, **not a claim of real-device Safari validation**.
 
 - ▶ / ■ starts and stops sound. BPM, master volume, preset selection and recording stay in the narrow toolbar.
-- **+** opens the 46-chip library. Tap a type to add an independent module at a vacant position. Drag a chip to move it; tap it without dragging to edit.
+- **+** opens the 52-chip library. Tap a type to add an independent module at a vacant position. Drag a chip to move it; tap it without dragging to edit.
 - **Tap an output, then tap a compatible input** to connect. Green = trigger, blue = control, amber = audio. Drag connections also work. Matching destinations highlight; tap the starting jack again or × in the connection hint to cancel.
 - Small chip pins are shortcuts. For larger touch targets, tap a chip, choose a full-size input/output button in its editor, then tap the destination chip and its matching editor jack. The pending connection survives opening the other chip's editor.
 - Pinch with two fingers to zoom and pan around their midpoint. Drag the background with one finger to pan. + / − and FIT are also available. Pinching across a chip does not move it or open the editor.
@@ -42,7 +42,7 @@ Landscape is the intended iPhone layout. Portrait also keeps the workspace avail
 
 The canvas and floating controls account for safe-area insets. An open editor keeps part of the patch visible. Touch hit areas in the editor are at least 44 CSS pixels; scaled chip pins are deliberately smaller and have the larger editor alternative.
 
-## Forty-six modules
+## Fifty-two modules
 
 | Chip | Function | Macros |
 | --- | --- | --- |
@@ -90,12 +90,18 @@ The canvas and floating controls account for safe-area insets. An open editor ke
 | SIDEWAYS | Two damped control bodies with attraction/repulsion and inertia | ATTRACTION, INERTIA |
 | QUORUM | Closest-pair consensus or a dissenting CV, with decision holdoff and state-change events | AGREEMENT, STUBBORN |
 | FAULT LINE | Audio-derived stress opens a displaced/reversed, crushed time fragment, then heals | PRESSURE, HEAL |
+| CLIP | Gain-driven rounded saturation or hard clipping, with output compensation | DRIVE, HARDNESS |
+| FUZZ | Biased gated fuzz with rectified octave character | DRIVE, BIAS |
+| CRUSH | Signed 2–24 bit amplitude steps and 20 Hz…native-rate sample-and-hold | BITS, RATE |
+| CHIP | Original timer-stepped pulse/triangle/LFSR noise and optional fast arpeggio | TUNE, CHARACTER |
+| TOUCH | Record a timed XY drawing and replay it as controls/events | SPEED, SMOOTH |
+| PENDULUM | Two coupled driven swings, angle CVs and center-crossing events | ENERGY, COUPLING |
 | CHAMBER | Stereo four-delay network; ROOM or continuously entangled WEAVE feedback | SIZE, DENSITY |
 | OUTPUT | Input summing, gain and DC removal | LEVEL |
 
 BRANCH pitch and gate connect separately to a voice. RESON can be struck by a trigger or excited by an audio cable. FRACTURE fades its old fragment before copying a new capture one sample at a time, then fades it back; loop edges are windowed. At maximum HOLD the captured buffer remains frozen until explicitly triggered. Visuals use actual DSP waveform, phrase, phase, fragment cursor, envelope and meter data; no decorative randomness drives them.
 
-## Twenty-eight playable presets
+## Thirty-two playable presets
 
 - **METAL DRIFT**: PULSE → ALLOY → CHAMBER → OUTPUT; FLOCK → ALLOY tension.
 - **UNEVEN MEMORY**: PULSE → BRANCH; BRANCH pitch + gate → ALLOY → FRACTURE → OUTPUT.
@@ -133,6 +139,11 @@ The new noise modules use real sound generation/processing, not decorative anima
 - **STORED RAIN**: WEFT → UNSPENT → RESON → FAULT LINE → CHAMBER WEAVE; QUORUM chooses from slow/physical controls and changes pitch/release density.
 - **DISSENTING BODIES**: TIDE/BOUNCE → repelling SIDEWAYS → QUORUM → SWARM → CHAMBER WEAVE. Similarity and dissent both affect the audible colony.
 - **OUTER BAND**: a 6 Hz OSC and a nominal 12 kHz OSC with slow ±8-octave movement share a WIDE OUTPUT; FAULT LINE breaks the high branch. Parts may be inaudible on a device while still present in the recording.
+
+- **PIXEL DUST**: a TOUCH path changes CHIP pitch; PENDULUM articulates the voice and moves CRUSH rate before CLIP.
+- **BIASED ORBIT**: PENDULUM moves OSC TRIANGLE pitch and FUZZ bias before CHORUS.
+- **DRAWN METAL**: a saved six-point drawing changes ALLOY pitch and CRUSH rate, before CHAMBER WEAVE.
+- **TWIN SWINGS**: each pendulum strikes a separate COMB/RESON path, with FUZZ on one branch and a common woven tail.
 
 All are editable starting points. Only CONTROL outputs explicitly marked delayed on PARASITE may close a dependency cycle. All ordinary AUDIO/CONTROL cycles, including mixed loops that do not cross such a delayed edge, remain rejected. Self-connections remain rejected.
 
@@ -232,7 +243,7 @@ Stop/Run retains the take in the current tab and restarts playback from its begi
 
 ## Structure and signal rules
 
-`src/graph` owns types, ports, validation and topology. `src/audio/modules` contains forty-six separate processors. `PatchCompiler.ts`, `SignalRouter.ts`, `DSPGraph.ts` and `audio/worklets/processor.ts` compile and execute the graph on the audio thread. `AudioEngine.ts` handles browser transport/recording and correlated loop-action replies; `Wav.ts` handles PCM file transfer. `src/ui` handles chips, gestures and editors; `src/visual` renders 104 × 80 p5 displays; `src/state` owns presets, schema validation and storage.
+`src/graph` owns types, ports, validation and topology. `src/audio/modules` contains fifty-two separate processors. `PatchCompiler.ts`, `SignalRouter.ts`, `DSPGraph.ts` and `audio/worklets/processor.ts` compile and execute the graph on the audio thread. `AudioEngine.ts` handles browser transport/recording and correlated loop-action replies; `Wav.ts` handles PCM file transfer. `src/ui` handles chips, gestures and editors; `src/visual` renders 104 × 80 p5 displays; `src/state` owns presets, schema validation and storage.
 
 AUDIO is stereo internally and permits summed inputs. CONTROL sums and clamps to −1…1, then maps macro values as `clamp(base + 0.5 × control, 0, 1)`. PITCH maps −1…1 to ±24 semitones around a source's base pitch (110 Hz for ALLOY/RESON, the selected range for DRONE, TUNE for OSC/COMB). TRIGGER is a one-sample event timestamped by the audio sample counter. Up to 48 modules and 256 cables are accepted.
 
@@ -268,3 +279,18 @@ The chip accents now use a muted per-module palette: lavender memories, brass/pa
 The chip display now uses 104 × 80 logical pixels, about 2.7 times its former area. Different modules have their own signal-driven trace, particle/phase portrait, broken contact, phrase, spectral window or pressure view. Activity grows the border/perimeter and can displace the inner drawing by up to two pixels. The chip body, jack locations, cable endpoints and saved positions stay fixed, so patching does not chase a shaking target. The editor uses integer scaling, with a compact display beside controls in short landscape windows.
 
 See `ROADMAP.md` for the visual design, implemented module roles, official modular references and remaining directions.
+
+
+## Rough voices, drawings and the grouped library / v0.12
+
+The + library is ordered by Sources, Clocks & patterns, Motion & control, Tone & damage, Space & memory, and Routing & output. Every module appears once. There is no search or favourites system; the compact workspace and per-patch 48-module limit stay the same even though the catalog has 52 choices. Undo/Redo is deferred; named snapshots and Back remain available.
+
+CLIP blends compensated atan saturation into hard clipping. FUZZ adds asymmetric bias, envelope-controlled gating and upper-range rectification; local DC removal follows the nonlinear stage. Both are sample-transparent at zero DRIVE with no modulation. CRUSH independently reduces signed amplitude resolution (2–24 bits) and audio update rate (20 Hz…native sample rate). At 24 bits/full rate it passes the original samples; low bit depths can silence quiet signals. These are deliberately aliasing/rough digital effects, without hardware-emulation or oversampling claims. Their **Effect on / Bypassed** editor button crossfades over about 5 ms; processing continues while bypassed. The bypass choice persists in JSON and snapshots.
+
+CHIP is an original stepped source: pulse duty choices, a 32-step triangle and a 15-bit LFSR with two taps. TUNE/PITCH drive a rounded virtual timer; CHARACTER changes duty/noise cycle/note decay and introduces a four-note fast arpeggio above 60% in pitched modes. It sustains without a TRIG cable and becomes a short one-shot when patched. PULSE/TRIANGLE/NOISE choices use the familiar editor buttons. The waveform amplitude is stepped to a nominal signed 8-bit grid; it is not a console chip model. WIDE is available, but the virtual timer imposes its own lowest clock near 1.7 Hz and the engine bounds the upper oscillator frequency to 0.45 × sample rate. TUNE labels are nominal before timer rounding.
+
+TOUCH starts with a four-second circle. Draw on its dedicated editor pad to replace it with a timed path (up to 12 seconds / 256 points). Pointer-up commits it; pointer cancellation keeps the previous path. A tap records a short stationary path. Clear path restores the circle. SPEED replays timing at 0.125×…8× and SMOOTH rounds the output corners. X/Y are bipolar controls and LOOP is one event per wrap; RESET returns the playback cursor to the beginning. The path itself is validated and included in version-1 JSON/snapshots/autosave. Recalls restart playback; equal slider updates do not reset the cursor. The pad is separate from chip movement, and clearing it does not require a keyboard.
+
+PENDULUM uses two damped, driven nonlinear angular states with different natural frequencies and reciprocal coupling. ENERGY changes drive/speed, COUPLING the mutual force. ANGLE A/B expose normalized angles; CROSS A/B emit one-sample events when the bodies cross the center with meaningful velocity. The 16-sample physics step bounds angular state/velocity. The editor Kick and KICK input add a seeded impulse; RESET restores initial angles. Motion survives Stop/Run and routing edits, while explicit preset/snapshot recall restarts seeded state. Snapshots save controls and cables, not live angular momentum.
+
+The displays show actual transfer curves, held/quantized waveform samples, gate state, saved XY paths, replay positions and pendulum angles. Chip bodies, jacks and cable anchors remain fixed. The source ZIP includes the repaired GitHub Pages workflow: it builds Vite output and deploys `dist`, so a new repository does not publish raw TypeScript.

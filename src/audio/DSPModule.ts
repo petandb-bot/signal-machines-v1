@@ -15,7 +15,7 @@ export abstract class DSPModule {
   readonly parameters: Float64Array; readonly targets: Float64Array;
   readonly wave = new Float32Array(64);
   waveIndex = 0; a = 0; b = 0; phase = 0; envelope = 0; levelL = 0; levelR = 0; triggerSample = -1;
-  character: ModuleState['character'];selectedMode?:string;wide=false;
+  character: ModuleState['character'];selectedMode?:string;wide=false;bypassed=false;
   readonly random: SeededRandom;
   private readonly smoothing: number;
   constructor(readonly state: ModuleState, readonly sampleRate: number, patchSeed: number) {
@@ -24,12 +24,12 @@ export abstract class DSPModule {
     this.outputL = new Float64Array(Math.max(1, definition.outputs.length)); this.outputR = new Float64Array(this.outputL.length);
     this.delayedL=this.outputL.slice();this.delayedR=this.outputR.slice();this.stagedL=this.outputL.slice();this.stagedR=this.outputR.slice();
     this.parameters = new Float64Array(definition.parameters.map(p => state.params[p.id])); this.targets = this.parameters.slice();
-    this.character = state.character;this.selectedMode=state.mode;this.wide=!!state.wide; this.random = new SeededRandom(state.seed ^ patchSeed);
+    this.character = state.character;this.selectedMode=state.mode;this.wide=!!state.wide;this.bypassed=!!state.bypass; this.random = new SeededRandom(state.seed ^ patchSeed);
     this.smoothing = 1 - Math.exp(-1 / (sampleRate * .018));
   }
   update(state: ModuleState) {
     DEFINITIONS[state.type].parameters.forEach((p, i) => { this.targets[i] = state.params[p.id]; });
-    this.character = state.character;this.selectedMode=state.mode;this.wide=!!state.wide;
+    this.character = state.character;this.selectedMode=state.mode;this.wide=!!state.wide;this.bypassed=!!state.bypass;
   }
   smooth() { for (let i = 0; i < this.parameters.length; i++) this.parameters[i] += (this.targets[i] - this.parameters[i]) * this.smoothing; }
   control(parameter: number, port: number) { return clamp(this.parameters[parameter] + .5 * this.inputL[port], 0, 1); }

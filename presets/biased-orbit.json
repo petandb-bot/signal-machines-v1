@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "BIASED ORBIT",
+  "bpm": 78,
+  "master": 0.65,
+  "seed": 121602,
+  "modules": [
+    {
+      "id": "osc-1",
+      "type": "OSC",
+      "x": 16,
+      "y": 16,
+      "seed": 3601,
+      "character": "METAL",
+      "params": {
+        "tune": 0.5,
+        "level": 0.7
+      },
+      "mode": "TRIANGLE"
+    },
+    {
+      "id": "fuzz-1",
+      "type": "FUZZ",
+      "x": 192,
+      "y": 16,
+      "seed": 3602,
+      "character": "METAL",
+      "params": {
+        "drive": 0.7,
+        "bias": 0.65
+      }
+    },
+    {
+      "id": "chorus-1",
+      "type": "CHORUS",
+      "x": 368,
+      "y": 16,
+      "seed": 3603,
+      "character": "METAL",
+      "params": {
+        "depth": 0.6,
+        "drift": 0.3
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 3604,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "pendulum-1",
+      "type": "PENDULUM",
+      "x": 16,
+      "y": 184,
+      "seed": 3605,
+      "character": "METAL",
+      "params": {
+        "energy": 0.55,
+        "coupling": 0.4
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "osc-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fuzz-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "fuzz-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chorus-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "chorus-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "pendulum-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "osc-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "pendulum-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "fuzz-1",
+        "port": "bias"
+      }
+    }
+  ]
+}

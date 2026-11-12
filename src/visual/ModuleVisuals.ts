@@ -36,6 +36,18 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
       g.fill('#324c53');for(let j=Math.round(y)+5;j<70;j+=4)point(g,x,j);
       if(active){g.fill(color);const reach=3+Math.round(t.envelope*12);point(g,x-reach,y,2);point(g,x+reach,y,2);}
     }
+  }else if(type==='CLIP'){
+    const curve=t.curve??Array.from({length:64},(_,i)=>Math.max(-1,Math.min(1,(i/63*2-1)*(1+t.a*6))));g.fill('#755641');for(let i=0;i<64;i++)point(g,7+i*90/63,39-clamp(curve[i],-1,1)*29,2);g.fill(color);wave(g,t,40,110,27);g.rect(8,74,Math.round(clamp(t.b,0,1)*87),2);
+  }else if(type==='FUZZ'){
+    for(let i=0;i<64;i++){const x=7+i*90/63,v=clamp(sample(t,i)*120,-28,28);g.fill(i%3===0?color:'#665d3c');point(g,x,39+v,2);if(lively&&t.b>.1)point(g,x,39-v*.5+(i%3-1)*t.a*5);}g.fill(color);g.rect(8,74,Math.round(clamp(t.b,0,1)*87),3);
+  }else if(type==='CRUSH'){
+    g.fill('#46556b');for(let y=12;y<70;y+=Math.max(4,Math.round((1-t.a)*16)))for(let x=7;x<98;x+=5)point(g,x,y);g.fill(color);wave(g,t,39,150,28,Math.max(1,Math.round((1-t.b)*6)));point(g,7+clamp(t.phase,0,1)*87,74,3);
+  }else if(type==='CHIP'){
+    wave(g,t,39,150,28,2);g.fill(color);for(let i=0;i<4;i++){const hot=i===Math.min(3,Math.floor(t.a*4));g.rect(12+i*23,72,14,hot?4:1);}point(g,7+clamp(t.phase,0,1)*87,8,3);
+  }else if(type==='TOUCH'){
+    const path=t.particles??Array.from({length:32},(_,i)=>({x:Math.sin(i*.203)*.8,y:Math.cos(i*.203)*.8}));g.fill('#4b7168');for(let i=0;i<path.length-1;i++){const a=path[i],b=path[i+1],steps=Math.min(12,Math.max(1,Math.ceil(Math.hypot(b.x-a.x,b.y-a.y)*12)));for(let j=0;j<=steps;j++)point(g,52+clamp(a.x+(b.x-a.x)*j/steps,-1,1)*42,39-clamp(a.y+(b.y-a.y)*j/steps,-1,1)*28,2);}g.fill(color);point(g,50+clamp(t.a,-1,1)*42,37-clamp(t.b,-1,1)*28,5);point(g,7+clamp(t.phase,0,1)*87,74,2);
+  }else if(type==='PENDULUM'){
+    const bodies=t.particles??[{x:Math.sin(t.a*Math.PI),y:Math.cos(t.a*Math.PI),activity:1},{x:Math.sin(t.b*Math.PI),y:Math.cos(t.b*Math.PI),activity:1}];for(let i=0;i<2;i++){const p=bodies[i],anchor=31+i*40,x=anchor+clamp(p.x,-1,1)*24,y=35+clamp(p.y,-1,1)*25;g.fill('#6f6251');for(let j=0;j<16;j++)point(g,anchor+(x-anchor)*j/16,35+(y-35)*j/16);g.fill(color);point(g,anchor-2,33,4);point(g,x-2,y-2,5);if(lively&&p.activity>.2)point(g,x-5*p.x,y-3,2);}g.fill(color);g.rect(8,74,Math.round(clamp(t.envelope,0,1)*87),2);
   }else if(type==='SWARM'){
     const bodies=t.particles??Array.from({length:4},(_,i)=>({x:Math.sin(i*2+t.a*3)*.7,y:Math.cos(i*2+t.b*3)*.7,activity:t.envelope}));
     for(let i=0;i<bodies.length;i++){const a=bodies[i],b=bodies[(i+1)%bodies.length],x=52+clamp(a.x,-1,1)*39,y=39+clamp(a.y,-1,1)*28;g.fill('#5d6040');if(t.b>.4)for(let j=0;j<12;j++)point(g,x+(b.x-a.x)*39*j/12,y+(b.y-a.y)*28*j/12);g.fill(color);point(g,x-2,y-2,3+Math.round(clamp(a.activity,0,1)*4));if(lively&&a.activity>.1){point(g,x-5,y);point(g,x+5,y);}}

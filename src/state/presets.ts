@@ -178,3 +178,28 @@ export function outerBand():Patch{
   wire(p,'low-1','audio','output-1','audio');wire(p,'high-1','audio','fault-line-1','audio');wire(p,'fault-line-1','audio','output-1','audio');wire(p,'tide-1','drift','high-1','pitch');return p;
 }
 PRESETS.push({name:'COLONY CRACKS',description:'Four moving voices fracture a worn signal path',create:colonyCracks},{name:'STORED RAIN',description:'Saved events return to a cracked resonant body',create:storedRain},{name:'DISSENTING BODIES',description:'Attraction and dissent choose a colony pitch',create:dissentingBodies},{name:'OUTER BAND',description:'Six-hertz motion and a wandering high voice, with wide output',create:outerBand});
+
+export function pixelDust():Patch{
+  const p=patch('PIXEL DUST',108,121601);
+  add(p,'CHIP',16,16,3501);add(p,'CRUSH',192,16,3502);add(p,'CLIP',368,16,3503);add(p,'OUTPUT',544,16,3504);add(p,'TOUCH',16,184,3505);add(p,'PENDULUM',192,184,3506);
+  p.modules[0].params.character=.72;p.modules[1].params.bits=8/22;p.modules[1].params.rate=.77;p.modules[2].params.drive=.35;
+  wire(p,'chip-1','audio','crush-1','audio');wire(p,'crush-1','audio','clip-1','audio');wire(p,'clip-1','audio','output-1','audio');wire(p,'touch-1','x','chip-1','pitch');wire(p,'pendulum-1','aCross','chip-1','trigger');wire(p,'pendulum-1','b','crush-1','rate');return p;
+}
+export function biasedOrbit():Patch{
+  const p=patch('BIASED ORBIT',78,121602);
+  add(p,'OSC',16,16,3601);add(p,'FUZZ',192,16,3602);add(p,'CHORUS',368,16,3603);add(p,'OUTPUT',544,16,3604);add(p,'PENDULUM',16,184,3605);p.modules[0].mode='TRIANGLE';p.modules[1].params.drive=.7;p.modules[1].params.bias=.65;
+  wire(p,'osc-1','audio','fuzz-1','audio');wire(p,'fuzz-1','audio','chorus-1','audio');wire(p,'chorus-1','audio','output-1','audio');wire(p,'pendulum-1','a','osc-1','pitch');wire(p,'pendulum-1','b','fuzz-1','bias');return p;
+}
+export function drawnMetal():Patch{
+  const p=patch('DRAWN METAL',100,121603);
+  add(p,'TOUCH',16,16,3701);add(p,'PULSE',16,184,3702);add(p,'ALLOY',192,16,3703);add(p,'CLIP',368,16,3704);add(p,'CRUSH',544,16,3705);add(p,'CHAMBER',720,16,3706);add(p,'OUTPUT',896,16,3707);
+  p.modules[0].gesture={duration:3,points:[{x:-.7,y:-.5,t:0},{x:.4,y:-.5,t:.6},{x:.4,y:.7,t:1.2},{x:-.4,y:.2,t:1.8},{x:.7,y:.5,t:2.3},{x:-.7,y:-.5,t:3}]};p.modules[4].params.bits=10/22;p.modules[4].params.rate=.8;p.modules[5].mode='WEAVE';
+  wire(p,'touch-1','x','alloy-1','pitch');wire(p,'touch-1','y','crush-1','rate');wire(p,'pulse-1','trigger','alloy-1','trigger');wire(p,'alloy-1','audio','clip-1','audio');wire(p,'clip-1','audio','crush-1','audio');wire(p,'crush-1','audio','chamber-1','audio');wire(p,'chamber-1','audio','output-1','audio');return p;
+}
+export function twinSwings():Patch{
+  const p=patch('TWIN SWINGS',76,121604);
+  add(p,'PENDULUM',16,16,3801);add(p,'COMB',192,16,3802);add(p,'RESON',192,184,3803);add(p,'FUZZ',368,184,3804);add(p,'CHAMBER',544,16,3805);add(p,'OUTPUT',720,16,3806);
+  p.modules[0].params.energy=.7;p.modules[0].params.coupling=.65;p.modules[3].params.drive=.4;p.modules[4].mode='WEAVE';
+  wire(p,'pendulum-1','aCross','comb-1','trigger');wire(p,'pendulum-1','bCross','reson-1','trigger');wire(p,'pendulum-1','a','comb-1','pitch');wire(p,'pendulum-1','b','reson-1','pitch');wire(p,'reson-1','audio','fuzz-1','audio');wire(p,'fuzz-1','audio','chamber-1','audio');wire(p,'comb-1','audio','chamber-1','audio');wire(p,'chamber-1','audio','output-1','audio');return p;
+}
+PRESETS.push({name:'PIXEL DUST',description:'A stepped voice follows a gesture and two swings',create:pixelDust},{name:'BIASED ORBIT',description:'Two angles bend a gated fuzz voice',create:biasedOrbit},{name:'DRAWN METAL',description:'A saved drawing changes pitch and broken time',create:drawnMetal},{name:'TWIN SWINGS',description:'Two coupled bodies strike strings and metal',create:twinSwings});

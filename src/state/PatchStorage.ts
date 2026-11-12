@@ -1,5 +1,5 @@
 import {MAX_LOOPS} from '../audio/LoopAudio';
-import { DEFINITIONS,MODE_OPTIONS,WIDE_TYPES } from '../graph/definitions';
+import { DEFINITIONS,MODE_OPTIONS,WIDE_TYPES,BYPASS_TYPES } from '../graph/definitions';
 import { validateConnection } from '../graph/GraphValidator';
 import type { ModuleState, ModuleType, Patch } from '../graph/types';
 const KEY = 'signal-machines.patch.v1';
@@ -26,8 +26,15 @@ export function parsePatch(text: string): Patch {
     }
     if(m.mode!==undefined&&(typeof m.mode!=='string'||!MODE_OPTIONS[type]?.includes(m.mode)))throw new Error(`Invalid ${type} mode.`);
     if(m.wide!==undefined&&(typeof m.wide!=='boolean'||!WIDE_TYPES.includes(type)))throw new Error(`Invalid ${type} frequency range.`);
+    if(m.bypass!==undefined&&(typeof m.bypass!=='boolean'||!BYPASS_TYPES.includes(type)))throw new Error(`Invalid ${type} bypass.`);
+    let gesture:ModuleState['gesture'];
+    if(m.gesture!==undefined){
+      const g=m.gesture;if(type!=='TOUCH'||!g||!finite(g.duration,.05,12)||!Array.isArray(g.points)||g.points.length<2||g.points.length>256)throw new Error('Invalid TOUCH gesture.');
+      let previous=-1;const points=g.points.map(p=>{if(!p||!finite(p.x,-1,1)||!finite(p.y,-1,1)||!finite(p.t,0,g.duration)||p.t<=previous)throw new Error('Invalid TOUCH gesture point.');previous=p.t;return{x:p.x,y:p.y,t:p.t};});
+      if(points[0].t!==0||points.at(-1)!.t!==g.duration)throw new Error('TOUCH gesture timing must cover its duration.');gesture={duration:g.duration,points};
+    }
     ids.add(m.id);
-    return { id: m.id, type, x: v.layout === 2 ? m.x : Math.round(m.x / 16) * 8, y: v.layout === 2 ? m.y : Math.round(m.y / 16) * 8, seed: m.seed, character: m.character, params,...(m.mode===undefined?{}:{mode:m.mode}),...(m.wide===undefined?{}:{wide:m.wide}) };
+    return { id: m.id, type, x: v.layout === 2 ? m.x : Math.round(m.x / 16) * 8, y: v.layout === 2 ? m.y : Math.round(m.y / 16) * 8, seed: m.seed, character: m.character, params,...(m.mode===undefined?{}:{mode:m.mode}),...(m.wide===undefined?{}:{wide:m.wide}),...(m.bypass===undefined?{}:{bypass:m.bypass}),...(gesture?{gesture}:{}) };
   });
   if(modules.filter(m=>m.type==='LOOP').length>MAX_LOOPS)throw new Error('A patch can contain at most 4 LOOP modules.');
   const patch: Patch = { version: 1, layout: 2, name: v.name, bpm: v.bpm, master: v.master, seed: v.seed, modules, connections: [] };

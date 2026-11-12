@@ -1,10 +1,10 @@
-# Verification / v0.11.1
+# Verification / v0.12
 
 ## Automated coverage
 
 Host: managed Linux, Node 24.22.1. p5.js is pinned to 2.3.4. `package-lock.json` pins dependencies.
 
-- The test inventory is **310 tests in 25 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
+- The test inventory is **352 tests in 28 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
 - New DSP checks: the original three presets produce nonzero finite audio; BRANCH repeats before mutation and emits scale-constrained seeded pitch/gate; RESON decays and responds to external excitation; FRACTURE is transparent at BREAK zero and retains audible captured audio after input ends at maximum HOLD. The original eight module types also run together at extreme macros without invalid samples or master overshoot.
 - Noise modules: seeded stereo VENOM, zero-dose silence, trigger boosts and CV; SNAP dry pass-through, forced interruption/recovery, repeatable automatic dropouts, bounded edge steps and no independent sound from silent input; CAUSTIC dry pass-through, actual waveform changes, extreme drive and decay to silence. BAD CONTACT is checked for finite master output, maximum settings and variable-block deterministic rendering.
 - Ambient/feedback modules: all three new presets validate and synthesize; continuous untriggered DRONE, spectral focus response, a stable 20-second tape tail, bounded envelope-derived controls, explicit full-intervening-quantum delay using 17/193/64-frame blocks, order-independent delayed cycle import and continued rejection of unauthorized AUDIO/mixed cycles. Actual host energy reaches SNAP FAULT and BRANCH CHANGE. Maximum feedback/macro settings remain finite.
@@ -17,10 +17,10 @@ Host: managed Linux, Node 24.22.1. p5.js is pinned to 2.3.4. `package-lock.json`
 - Bodies/faults/ranges: seeded four-body sound/motion and sympathy response; zero-energy silence; event-store conservation, overflow pass-through and reset; attraction/repulsion, inertia and bounds; closest-pair agreement, dissent, clock hold and state-change events; sample-transparent zero-pressure FAULT LINE, stress-driven deterministic fracture, silence and healing. Four new presets run eight seconds and maximum-macro versions remain sample-identical across render block sizes. All five roles also run together with delayed parasitic modulation at 8/44.1/48/96 kHz. WIDE produces measured 6 Hz and 12 kHz OSC tones, preserves six-hertz output, keeps source extremes finite, and survives schema validation, queued updates, editor selection, snapshot recall and reload.
 - Master PCM: actual PCM24 WAV roundtrip, AIFF endian/sample/frame headers and extended-rate encoding at 44.1/48/96 kHz; invalid/empty input rejection, exact variable-block capture, transferable buffer recycling, consumer-stall completion and the duration/memory ceiling. Real source worklet output is sample-identical to captured data. Mocked engine checks both lossless formats without MediaRecorder, stale end IDs, one automatic delivery, interrupted partial recovery and playback stop despite an empty take. The actual DOM format selector and download extension are exercised. These do not validate native Safari file downloads or audio-device timing.
 - LOOP/WAV: real capture, playback, pause, overdub, independent export copies, 16-second auto-finish, trigger capture, transactional import rejection, four-instance cap, Stop/Run retention and explicit reset priority. Stereo PCM16 WAV roundtrip and resampling; malformed/unsupported files are rejected. Worklet action replies and engine request correlation, local action errors, interruptions and timeout cleanup are exercised.
-- Simulated DOM: adding/deleting independent modules, sliders, dragging chips/cables, invalid connections, selecting/deleting cables, all twenty-eight preset choices, tapping two jacks, connecting via larger editor jacks across separate chip taps, two-pointer pinch/pan, arrangement preserving audio state, named snapshot capture/recall/Back and persistent reload, touch Disconnect, and per-cable Unplug with disambiguated parallel CONTROL endpoints. LOOP's Record/Finish/Dub controls use the real AppController with mocked AudioEngine replies; the fifth LOOP is refused without changing the patch.
+- Simulated DOM: adding/deleting independent modules, sliders, dragging chips/cables, invalid connections, selecting/deleting cables, all thirty-two preset choices, tapping two jacks, connecting via larger editor jacks across separate chip taps, two-pointer pinch/pan, arrangement preserving audio state, named snapshot capture/recall/Back and persistent reload, touch Disconnect, and per-cable Unplug with disambiguated parallel CONTROL endpoints. LOOP's Record/Finish/Dub controls use the real AppController with mocked AudioEngine replies; the fifth LOOP is refused without changing the patch.
 - Mocked browser APIs: RUN/STOP/restart, interruption-to-play behavior, throttled parameter messages, codec choice and matching WebM/Ogg/M4A extensions. These do not exercise native encoders or an actual audio device.
 - `npm run typecheck` and `npm run build`: TypeScript and Vite production checks. The normal large-bundle warning applies to p5 (about 1.2 MB before gzip).
-- `npm run verify:build`: the actual emitted worklet is loaded in a JavaScript audio-host shim; all twenty-eight presets render for 3 seconds at 48 kHz, stereo, variable block lengths. Every sample must be finite, audible energy nonzero, peak ≤0.63 and telemetry free of errors. An additional production-bundle session records, overdubs, exports/imports actual buffers, retains them across transport restart, and clears them on explicit patch reset. A separate production-bundle capture must exactly match the protected stereo master samples, including the final partial block.
+- `npm run verify:build`: the actual emitted worklet is loaded in a JavaScript audio-host shim; all thirty-two presets render for 3 seconds at 48 kHz, stereo, variable block lengths. Every sample must be finite, audible energy nonzero, peak ≤0.63 and telemetry free of errors. An additional production-bundle session records, overdubs, exports/imports actual buffers, retains them across transport restart, and clears them on explicit patch reset. A separate production-bundle capture must exactly match the protected stereo master samples, including the final partial block.
 
 Source DSP measurements, 8 seconds at 24 kHz:
 
@@ -54,6 +54,10 @@ Source DSP measurements, 8 seconds at 24 kHz:
 | STORED RAIN | 0.157786 | 0.028547 |
 | DISSENTING BODIES | 0.084068 | 0.016641 |
 | OUTER BAND | 0.114426 | 0.039823 |
+| PIXEL DUST | 0.092311 | 0.039510 |
+| BIASED ORBIT | 0.112530 | 0.059074 |
+| DRAWN METAL | 0.114677 | 0.037420 |
+| TWIN SWINGS | 0.116317 | 0.021789 |
 
 These results establish numerical synthesis and routing. They are not a listening test or native browser playback test.
 
@@ -91,11 +95,11 @@ Play BAD CONTACT at the device’s usual instrument volume. Sweep VENOM DOSE/STR
 
 ## Reactive visual checks
 
-The visual/UI files contain 76 checks. These verify the larger logical display, resting without telemetry, energy/trigger/fault/control response, bounded two-pixel displacement, quiet mode, finite and changing drawing geometry for all 46 modules, deterministic repeated frames, unchanged chip/jack anchors during activity, persisted appearance mode, snapshots and patching gestures. The drawing recorder verifies model/geometry calls; it does not render p5 in a native browser.
+The visual/UI files contain 85 checks. These verify the larger logical display, resting without telemetry, energy/trigger/fault/control response, bounded two-pixel displacement, quiet mode, finite and changing drawing geometry for all 52 modules, deterministic repeated frames, unchanged chip/jack anchors during activity, persisted appearance mode, snapshots and patching gestures. The drawing recorder verifies model/geometry calls; it does not render p5 in a native browser.
 
 The displays include actual learned/additive amplitude bars, remembered chance steps, and gain/blend, envelope stage, route crossfade, loop progress/recording mode, chorus phase, granular history, oscillator/noise waveforms, the filter response sketch, multiplication phase portrait, comb teeth and shifted traces. TypeScript, Vite and the emitted-worklet checks validate the updated audio build; this release changes the DSP as well as the module library.
 
-Manual checks remain required: inspect all 46 larger displays on a real browser, confirm reacting chips look lively without obscuring labels/jacks, compare lively/quiet and OS reduced-motion behavior, select and drag a chip while its internal display is active, and verify cables remain visually attached. Test on iPhone landscape with the larger editor beside its sliders. No real-browser screenshot, iPhone appearance/performance check or human listening session was possible with the available tools.
+Manual checks remain required: inspect all 52 larger displays on a real browser, confirm reacting chips look lively without obscuring labels/jacks, compare lively/quiet and OS reduced-motion behavior, select and drag a chip while its internal display is active, and verify cables remain visually attached. Test on iPhone landscape with the larger editor beside its sliders. No real-browser screenshot, iPhone appearance/performance check or human listening session was possible with the available tools.
 
 ## Utilities, effects and loop manual checks
 
@@ -161,3 +165,14 @@ The application icon includes original artwork plus PNG sizes 16/32/48/180/192/5
 The public source ZIP includes the MIT license, font/p5 notices, GitHub Pages workflow, source, locked dependency metadata, tests and presets. Root files/directories are explicitly selected; Git history, `.openai` Site identity, environment files, installed dependencies and generated downloads are excluded. Packaging version and the in-app download link match 0.11.1. GitHub Pages requires the owner to enable GitHub Actions as the Pages source in their new repository. The workflow is provided and reviewed; no remote GitHub deployment is claimed.
 
 Validation for this release covers the existing 310 tests, TypeScript, production build, PNG/ICO dimensions, manifest/document links and ZIP contents/integrity. Native browser/iPhone icon installation and GitHub's remote workflow remain unverified. Audio DSP is unchanged from v0.11.
+
+
+## v0.12 rough sound, gesture and swing checks
+
+The added checks measure CLIP transfer/harmonic changes, zero-drive transparency, silent input, FUZZ bias gating, CRUSH signed bit steps/sample holding/full-rate transparency, all three bypass paths and release back to dry, seeded/articulated CHIP modes and rounded-timer pitch. Maximum settings run at 8/44.1/48/96 kHz.
+
+Timed TOUCH interpolation, wraps/speed, RESET, smoothing and phase continuity across equivalent updates are exercised. Validated gesture/bypass state roundtrips through JSON and queued routing edits; malformed times, size, coordinates and module combinations are rejected. PENDULUM is checked for bounded seeded motion, two crossing streams, coupling response, Kick/reset and transport retention versus explicit recall. Four new presets validate and render eight seconds at 24 kHz, with maximum-macro block-schedule comparisons and all six roles combined with delayed parasitic modulation across sample rates.
+
+The real DOM library exposes all 52 choices exactly once in six ordered groups. Editor mode selection, drawing commit/cancel/clear, bypass, snapshot recall and pendulum Kick use actual controller wiring. Native drawing feel, touch capture, visual appearance, CPU/heat and human listening still need iPhone/desktop checks; no native browser tool is exposed here. The production-worklet script now includes all 32 presets plus the existing master PCM and LOOP bridges.
+
+Manual acceptance: compare CLIP/HARDNESS and FUZZ/BIAS on the same source with bypass; compare CRUSH bit depth/update speed and the three CHIP modes; draw/replay/cancel/clear a TOUCH path and recall its snapshot; watch both pendulum bodies and their crossing-triggered voices. Confirm the six catalog groups are easy to scan on iPhone landscape and that existing patching/recording still feels familiar.

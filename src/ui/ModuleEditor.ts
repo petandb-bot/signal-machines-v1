@@ -1,8 +1,9 @@
+import {TouchControls} from './TouchControls';
 import {LoopControls} from './LoopControls';
 import type {LoopStatus} from '../audio/LoopAudio';
 import {VISUAL_WIDTH,VISUAL_HEIGHT} from '../visual/SignalMotion';
 import type { StateStore } from '../app/StateStore';
-import { DEFINITIONS,MODE_OPTIONS,WIDE_TYPES } from '../graph/definitions';
+import { DEFINITIONS,MODE_OPTIONS,WIDE_TYPES,BYPASS_TYPES } from '../graph/definitions';
 import type { ModuleState, PortDefinition } from '../graph/types';
 import { SIGNAL_COLORS } from '../graph/types';
 import { button, element, parameterControl, refreshParameters } from './Controls';
@@ -31,6 +32,9 @@ export class ModuleEditor {
     const choices=MODE_OPTIONS[module.type];
     if(choices){const modes=element('div','mode-options');modes.setAttribute('aria-label',`${module.type} mode`);for(const mode of choices){const option=button(mode,`${module.type} ${mode} mode`,()=>{module.mode=mode;this.store.changed('parameters');this.refresh(module);modes.querySelectorAll('button').forEach(b=>{b.classList.toggle('active',b===option);b.setAttribute('aria-pressed',String(b===option));});});option.classList.toggle('active',(module.mode??choices[0])===mode);option.setAttribute('aria-pressed',String((module.mode??choices[0])===mode));modes.append(option);}this.root.append(modes);}
     if(WIDE_TYPES.includes(module.type)){const ranges=element('div','mode-options');for(const wide of [false,true]){const option=button(wide?'WIDE':'STANDARD',`${module.type} ${wide?'WIDE':'STANDARD'} frequency range`,()=>{if(wide)module.wide=true;else delete module.wide;this.store.changed('parameters');this.refresh(module);ranges.querySelectorAll('button').forEach(b=>{b.setAttribute('aria-pressed',String(b===option));b.classList.toggle('active',b===option);});});option.classList.toggle('active',!!module.wide===wide);option.setAttribute('aria-pressed',String(!!module.wide===wide));ranges.append(option);}this.root.append(ranges);}
+    if(module.type==='TOUCH')this.root.append(new TouchControls(module,()=>this.store.changed('parameters')).root);
+    if(BYPASS_TYPES.includes(module.type)){const toggle=button(module.bypass?'Bypassed':'Effect on',`${module.type} bypass`,()=>{if(module.bypass)delete module.bypass;else module.bypass=true;this.store.changed('parameters');toggle.textContent=module.bypass?'Bypassed':'Effect on';toggle.setAttribute('aria-pressed',String(!!module.bypass));},'bypass-button');toggle.setAttribute('aria-pressed',String(!!module.bypass));this.root.append(toggle);}
+    if(module.type==='PENDULUM')this.root.append(button('Kick','Kick the pendulums',()=>this.onAction(module,'kick'),'impulse-button'));
     if(module.type==='BOUNCE')this.root.append(button('Kick','Kick the marble',()=>this.onAction(module,'kick'),'impulse-button'));
     const ports=element('div','editor-ports');
     for(const direction of ['in','out'] as const){const column=element('div','port-column');column.append(element('span','eyebrow',direction==='in'?'INPUT':'OUTPUT'));for(const port of direction==='in'?definition.inputs:definition.outputs){const jack=button('',`${module.type} ${port.label} ${direction==='in'?'input':'output'} — tap to connect`,()=>this.onPort(module,port),'editor-port');jack.style.setProperty('--signal-color',SIGNAL_COLORS[port.signal]);jack.append(element('span','port-dot'),element('span','',port.label));column.append(jack);}ports.append(column);}this.root.append(ports);

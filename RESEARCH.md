@@ -98,3 +98,10 @@ These choices widen composition beyond the pentatonic BRANCH/CHANCE defaults wit
 The five original roles here follow the user's supplied descriptions, without importing a commercial module's code or claiming a hardware/circuit simulation. SWARM uses four damped XY bodies with neighbour pitch/activity influence; UNSPENT conserves events in an explicit bounded store; SIDEWAYS applies damped mutual attraction to numeric controls; QUORUM compares CV proximity/dissent rather than trigger coincidence; FAULT LINE accumulates actual audio energy/onset stress and temporarily opens a displaced/reversed, crushed history path.
 
 The requested overlap filter omits MISPRINT (BRANCH/CHANCE/MAP), CAPILLARY (CHAMBER WEAVE) and LOST PROPERTY (LOOP/CLOUD/FRACTURE). Those existing modules cover related useful roles, without claiming identical persistent-error or context-triggered archival-recall algorithms. FAULT LINE remains a separate addition because audio-driven fracture/healing was explicitly prioritized even alongside existing fault/distortion tools. The two-macro editor and physical-state display pattern remain unchanged.
+
+
+## v0.12 rough sound and playable motion
+
+These additions implement the user-approved original roles without new manufacturer models. CLIP uses rounded/hard transfer curves, FUZZ a biased nonlinear stage with gating/rectification, and CRUSH explicit amplitude quantization plus slowed audio updates. CHIP combines generic timer-stepped waveforms, pulse duties, a small LFSR and arpeggio behavior; no console firmware, game sound or branded chip reproduction is used.
+
+TOUCH stores the user's actual XY/time samples as a replayable control path. PENDULUM uses two bounded driven angular bodies and center-crossing events, extending the physical interaction approach of BOUNCE with different timing and coupling. The library groups all module types once by role; search, favourites and Undo/Redo were not added. Existing CAUSTIC folding, MAP byte transforms and FAULT LINE temporal stress keep their distinct roles.

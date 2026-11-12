@@ -10,6 +10,8 @@ export function signalMotion(type:ModuleType,t?:ModuleTelemetry,lively=true){
   let activity=Math.max(unit(t.envelope*1.8),unit(rms*8));
   if(type==='PULSE'||type==='BRANCH'||type==='SHAPE'||type==='CHANCE'||type==='WEFT')activity=unit(t.envelope);
   else if(type==='QUANTIZE'||type==='SLEW')activity=unit(t.envelope);
+  else if(type==='TOUCH')activity=Math.max(unit(t.envelope),unit(Math.hypot(t.a,t.b)*.7));
+  else if(type==='PENDULUM')activity=Math.max(unit(t.envelope),unit(Math.max(...(t.particles??[]).map(p=>p.activity),0)));
   else if(type==='UNSPENT')activity=Math.max(unit(t.envelope),unit(t.a));
   else if(type==='SIDEWAYS')activity=Math.max(unit(t.envelope),unit(Math.abs(t.a-t.b)));
   else if(type==='QUORUM')activity=Math.max(unit(t.envelope),unit(t.phase));

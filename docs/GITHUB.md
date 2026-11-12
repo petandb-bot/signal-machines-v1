@@ -14,7 +14,7 @@ git push -u origin main
 ```
 
 4. In the repository, set **Settings → Pages → Source → GitHub Actions**.
-5. Open **Actions → GitHub Pages → Run workflow**. After it succeeds, open the URL shown by the `github-pages` deployment.
+5. Open **Actions → Build and deploy Signal Machines → Run workflow**. After it succeeds, open the URL shown by the `github-pages` deployment.
 
 Future pushes to `main` update the app. Use a public repository if you want people to browse the code and play on public GitHub Pages.
 

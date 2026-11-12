@@ -9,7 +9,7 @@ runInNewContext(readFileSync(new URL(`../dist/assets/${worklet}`,import.meta.url
   registerProcessor:(name,constructor)=>{assert.equal(name,'signal-machines');Processor=constructor;}
 },{timeout:5000});
 const results=[];
-for(const name of ['metal-drift','uneven-memory','empty-chamber','bad-contact','tape-garden','host-fever','unstable-circuit','breathing-circuit','forked-memory','loop-weather','clear-signal','wire-strings','sideband-garden','chance-garden','spectral-ghost','harmonic-weather','clockwork-garden','slow-weather','marble-room','binary-fever','bent-vowels','split-orbits','tritave-field','off-grid','colony-cracks','stored-rain','dissenting-bodies','outer-band']){
+for(const name of ['metal-drift','uneven-memory','empty-chamber','bad-contact','tape-garden','host-fever','unstable-circuit','breathing-circuit','forked-memory','loop-weather','clear-signal','wire-strings','sideband-garden','chance-garden','spectral-ghost','harmonic-weather','clockwork-garden','slow-weather','marble-room','binary-fever','bent-vowels','split-orbits','tritave-field','off-grid','colony-cracks','stored-rain','dissenting-bodies','outer-band','pixel-dust','biased-orbit','drawn-metal','twin-swings']){
   const fixture=JSON.parse(readFileSync(new URL(`../presets/${name}.json`,import.meta.url),'utf8'));
   const before=messages.length,processor=new Processor();processor.port.onmessage({data:{type:'patch',patch:fixture,reset:true}});let peak=0,energy=0;
   for(let frame=0;frame<48000*3;){const length=Math.min(frame%3===0?257:128,48000*3-frame),left=new Float32Array(length),right=new Float32Array(length);assert(processor.process([],[ [left,right] ]));for(let i=0;i<length;i++){assert(Number.isFinite(left[i])&&Number.isFinite(right[i]));peak=Math.max(peak,Math.abs(left[i]),Math.abs(right[i]));energy+=left[i]**2+right[i]**2;}frame+=length;}
@@ -36,4 +36,4 @@ for(let i=0;i<40;i++){const n=i%2?511:193,l=new Float32Array(n),r=new Float32Arr
 master.port.onmessage({data:{type:'recordStop'}});const masterMessages=messages.slice(masterBefore);let cursor=0;
 for(const message of masterMessages.filter(m=>m.type==='recordData'&&m.id===501))for(let i=0;i<message.frames;i++,cursor++){assert.equal(message.left[i],expectedL[cursor]);assert.equal(message.right[i],expectedR[cursor]);}
 assert.equal(cursor,expectedL.length);assert(expectedL.some(n=>n!==0));assert(masterMessages.some(m=>m.type==='recordEnd'&&m.id===501));
-console.log(JSON.stringify({result:'PASS',test:'production worklet: twenty-eight presets, 3 s each / 48 kHz / stereo / variable blocks; LOOP record, overdub, import/export and restart/reset bridge; sample-identical master PCM capture',results},null,2));
+console.log(JSON.stringify({result:'PASS',test:'production worklet: thirty-two presets, 3 s each / 48 kHz / stereo / variable blocks; LOOP record, overdub, import/export and restart/reset bridge; sample-identical master PCM capture',results},null,2));

@@ -1,6 +1,6 @@
 import type {LoopStatus} from '../audio/LoopAudio';
 export type SignalType = 'audio' | 'control' | 'trigger';
-export type ModuleType = 'PULSE' | 'BRANCH' | 'FLOCK' | 'ALLOY' | 'RESON' | 'FRACTURE' | 'VENOM' | 'CAUSTIC' | 'SNAP' | 'TAPE' | 'DRONE' | 'SIEVE' | 'PARASITE' | 'VCA' | 'SHAPE' | 'SWITCH' | 'LOOP' | 'CHORUS' | 'CLOUD' | 'OSC' | 'NOISE' | 'FILTER' | 'RING' | 'COMB' | 'SHIFT' | 'CHANCE' | 'PRISM' | 'PARTIAL' | 'WEFT' | 'TIDE' | 'BOUNCE' | 'FERAL' | 'COUNT' | 'MAP' | 'QUANTIZE' | 'SLEW' | 'FORMANT' | 'LOGIC' | 'DUCK' | 'SWARM' | 'UNSPENT' | 'SIDEWAYS' | 'QUORUM' | 'FAULT LINE' | 'CHAMBER' | 'OUTPUT';
+export type ModuleType = 'PULSE' | 'BRANCH' | 'FLOCK' | 'ALLOY' | 'RESON' | 'FRACTURE' | 'VENOM' | 'CAUSTIC' | 'SNAP' | 'TAPE' | 'DRONE' | 'SIEVE' | 'PARASITE' | 'VCA' | 'SHAPE' | 'SWITCH' | 'LOOP' | 'CHORUS' | 'CLOUD' | 'OSC' | 'NOISE' | 'FILTER' | 'RING' | 'COMB' | 'SHIFT' | 'CHANCE' | 'PRISM' | 'PARTIAL' | 'WEFT' | 'TIDE' | 'BOUNCE' | 'FERAL' | 'COUNT' | 'MAP' | 'QUANTIZE' | 'SLEW' | 'FORMANT' | 'LOGIC' | 'DUCK' | 'SWARM' | 'UNSPENT' | 'SIDEWAYS' | 'QUORUM' | 'FAULT LINE' | 'CLIP' | 'FUZZ' | 'CRUSH' | 'CHIP' | 'TOUCH' | 'PENDULUM' | 'CHAMBER' | 'OUTPUT';
 export interface PortDefinition {
   id: string; label: string; signal: SignalType; direction: 'in' | 'out';
   position: number; parameter?: string; delayed?: boolean;
@@ -10,9 +10,10 @@ export interface ModuleDefinition {
   type: ModuleType; subtitle: string; description: string; color: string; symbol: string;
   inputs: PortDefinition[]; outputs: PortDefinition[]; parameters: ParameterDefinition[];
 }
+export interface Gesture {duration:number;points:Array<{x:number;y:number;t:number}>}
 export interface ModuleState {
   id: string; type: ModuleType; x: number; y: number;
-  seed: number; params: Record<string, number>; character: 'SOFT' | 'METAL' | 'ROUGH'; mode?:string; wide?:boolean;
+  seed: number; params: Record<string, number>; character: 'SOFT' | 'METAL' | 'ROUGH'; mode?:string; wide?:boolean; bypass?:boolean;gesture?:Gesture;
 }
 export interface Connection { id: string; from: { module: string; port: string }; to: { module: string; port: string } }
 export interface Patch {

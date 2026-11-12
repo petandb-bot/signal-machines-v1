@@ -133,13 +133,31 @@ export const DEFINITIONS: Record<ModuleType, ModuleDefinition> = {
   'FAULT LINE': {type:'FAULT LINE',subtitle:'Stress cracks recorded time',description:'Energy and sudden changes build stress until audio splits into a displaced, reversed, crushed fragment, then heals.',color:'#cb9d7f',symbol:'ϟ',inputs:[input('audio','AUDIO','audio',0),input('pressure','PRESSURE','control',1,'pressure'),input('heal','HEAL','control',2,'heal'),input('strike','STRIKE','trigger',3)],outputs:[output('audio','AUDIO','audio',0),output('stress','STRESS','control',1),output('crack','CRACK','trigger',2)],parameters:[
     {id:'pressure',label:'PRESSURE',default:.65,description:'How easily signal energy opens a crack. Broken time is driven and coarsened; zero passes clean audio.'},
     {id:'heal',label:'HEAL',default:.55,description:'Faster healing on the right; slow stress decay and longer fractures on the left. STRIKE can force a crack.'}]},
+  CLIP: {type:'CLIP',subtitle:'Soft saturation, hard edges',description:'Push a waveform into a rounded or sharply cut boundary.',color:'#d0a183',symbol:'⊓',inputs:[input('audio','AUDIO','audio',0),input('drive','DRIVE','control',1,'drive'),input('hardness','HARDNESS','control',2,'hardness')],outputs:[output('audio','AUDIO','audio',0),output('activity','ACTIVITY','control',1)],parameters:[
+    {id:'drive',label:'DRIVE',default:.55,description:'From clean signal to gain-driven saturation, with output compensation.'},
+    {id:'hardness',label:'HARDNESS',default:.5,description:'Rounded atan saturation on the left, flat hard clipping on the right.'}]},
+  FUZZ: {type:'FUZZ',subtitle:'Hair, bias and broken edges',description:'A biased, gated fuzz with a rectified octave edge.',color:'#bdad7b',symbol:'≁',inputs:[input('audio','AUDIO','audio',0),input('drive','DRIVE','control',1,'drive'),input('bias','BIAS','control',2,'bias')],outputs:[output('audio','AUDIO','audio',0),output('activity','ACTIVITY','control',1)],parameters:[
+    {id:'drive',label:'DRIVE',default:.65,description:'Push gain into a fuzzy boundary. Zero keeps the clean input.'},
+    {id:'bias',label:'BIAS',default:.5,description:'Unbalance the clipping and starve the tail; high settings add a rectified octave character.'}]},
+  CRUSH: {type:'CRUSH',subtitle:'Stepped amplitude, held time',description:'Reduce amplitude resolution and the speed at which audio updates.',color:'#a7b9cf',symbol:'⌗',inputs:[input('audio','AUDIO','audio',0),input('bits','BITS','control',1,'bits'),input('rate','RATE','control',2,'rate')],outputs:[output('audio','AUDIO','audio',0),output('activity','ACTIVITY','control',1)],parameters:[
+    {id:'bits',label:'BITS',default:6/22,description:'Signed amplitude resolution from 2 to 24 bits. Very low bit depths can erase quiet sounds.'},
+    {id:'rate',label:'RATE',default:.7,description:'Audio update rate from 20 Hz to the engine sample rate. Slow settings hold samples and create alias tones.'}]},
+  CHIP: {type:'CHIP',subtitle:'A little stepped voice',description:'An original timer-stepped pulse, triangle and short-cycle noise voice.',color:'#a7c995',symbol:'▥',inputs:[input('pitch','PITCH','control',0),input('trigger','TRIG','trigger',1),input('character','CHARACTER','control',2,'character')],outputs:[output('audio','AUDIO','audio',0),output('activity','ACTIVITY','control',1)],parameters:[
+    {id:'tune',label:'TUNE',default:.5,description:'Nominal pitch before timer rounding. Without TRIG it sustains; a cable makes short triggered notes.'},
+    {id:'character',label:'CHARACTER',default:.35,description:'Pulse width, noise-cycle length and note decay. High settings add a fast four-step arpeggio to pitched modes.'}]},
+  TOUCH: {type:'TOUCH',subtitle:'A gesture becomes a circuit',description:'Draw an XY path in the editor, then let its motion run through the patch.',color:'#a7c7c2',symbol:'↝',inputs:[input('speed','SPEED','control',0,'speed'),input('smooth','SMOOTH','control',1,'smooth'),input('reset','RESET','trigger',2)],outputs:[output('x','X','control',0),output('y','Y','control',1),output('loop','LOOP','trigger',2)],parameters:[
+    {id:'speed',label:'SPEED',default:.5,description:'Replay the recorded timing at 0.125× to 8×. The default path is a four-second circle.'},
+    {id:'smooth',label:'SMOOTH',default:.2,description:'Soften the corners without changing the saved path. Draw a new path or clear it to restore the circle.'}]},
+  PENDULUM: {type:'PENDULUM',subtitle:'Two swings drift together',description:'Coupled driven pendulums expose angle and center-crossing events.',color:'#c7b39b',symbol:'⌒',inputs:[input('energy','ENERGY','control',0,'energy'),input('coupling','COUPLING','control',1,'coupling'),input('kick','KICK','trigger',2),input('reset','RESET','trigger',3)],outputs:[output('a','ANGLE A','control',0),output('b','ANGLE B','control',1),output('aCross','CROSS A','trigger',2),output('bCross','CROSS B','trigger',3)],parameters:[
+    {id:'energy',label:'ENERGY',default:.55,description:'Drive and speed of the swings. At zero, damping lets their stored motion settle.'},
+    {id:'coupling',label:'COUPLING',default:.4,description:'How strongly each swing pulls its neighbour. KICK adds an impulse; RESET restores seeded angles.'}]},
   CHAMBER: { type: 'CHAMBER', subtitle: 'Spatial memory', description: 'Sound leaves a trace in space. WEAVE changes separate echoes into an entangled tail.', color: '#b6aac8', symbol: '⋮⋮⋮', inputs: [input('audio', 'AUDIO', 'audio', 0), input('size', 'SIZE', 'control', 1, 'size'), input('density', 'DENSITY', 'control', 2, 'density')], outputs: [output('audio', 'AUDIO', 'audio', 0), output('activity', 'ACTIVITY', 'control', 1)], parameters: [
     { id: 'size', label: 'SIZE', default: .66, description: 'Continuously stretches the room and its reflections.' },
     { id: 'density', label: 'DENSITY', default: .6, description: 'Tail length and softness. In WEAVE, this also entangles the feedback paths from independent echoes to a dense space.' } ] },
   OUTPUT: { type: 'OUTPUT', subtitle: 'Master output', description: 'Bring the circuit into the room.', color: '#94c8a0', symbol: '▂▅▇', inputs: [input('audio', 'AUDIO', 'audio', 0)], outputs: [], parameters: [
     { id: 'level', label: 'LEVEL', default: .72, description: 'Module output gain before the protected master bus.' } ] }
 };
-export const MODE_OPTIONS:Partial<Record<ModuleType,readonly string[]>>={OSC:['SINE','TRIANGLE','SAW','PULSE'],NOISE:['WHITE','PINK','BROWN'],FILTER:['LOW','BAND','HIGH'],DRONE:['55 Hz','110 Hz','220 Hz'],CHANCE:['MID','LOW','HIGH'],PRISM:['LIVE','HOLD'],PARTIAL:['220 Hz','110 Hz','440 Hz'],CHAMBER:['ROOM','WEAVE'],WEFT:['16','8','12'],COUNT:['CLOCK','AUDIO'],QUANTIZE:['12-TET','19-TET','13-TRIT'],SLEW:['LAG','GLIDE'],FORMANT:['VOICE','WHISPER'],LOGIC:['OR','XOR','AND']};
+export const MODE_OPTIONS:Partial<Record<ModuleType,readonly string[]>>={OSC:['SINE','TRIANGLE','SAW','PULSE'],NOISE:['WHITE','PINK','BROWN'],FILTER:['LOW','BAND','HIGH'],DRONE:['55 Hz','110 Hz','220 Hz'],CHIP:['PULSE','TRIANGLE','NOISE'],CHANCE:['MID','LOW','HIGH'],PRISM:['LIVE','HOLD'],PARTIAL:['220 Hz','110 Hz','440 Hz'],CHAMBER:['ROOM','WEAVE'],WEFT:['16','8','12'],COUNT:['CLOCK','AUDIO'],QUANTIZE:['12-TET','19-TET','13-TRIT'],SLEW:['LAG','GLIDE'],FORMANT:['VOICE','WHISPER'],LOGIC:['OR','XOR','AND']};
 export const MODULE_TYPES = Object.keys(DEFINITIONS) as ModuleType[];
 export const NODE_WIDTH = 128;
 export const NODE_HEIGHT = 132;
@@ -147,4 +165,6 @@ export function portPosition(module: { x: number; y: number }, port: PortDefinit
   return { x: module.x + (port.direction === 'in' ? 0 : NODE_WIDTH), y: module.y + 42 + port.position * 24 };
 }
 
-export const WIDE_TYPES:readonly ModuleType[]=['OSC','DRONE','PARTIAL','ALLOY','RESON','PRISM','FORMANT','SWARM','OUTPUT'];
+export const WIDE_TYPES:readonly ModuleType[]=['CHIP','OSC','DRONE','PARTIAL','ALLOY','RESON','PRISM','FORMANT','SWARM','OUTPUT'];
+
+export const BYPASS_TYPES:readonly ModuleType[]=['CLIP','FUZZ','CRUSH'];

@@ -18,7 +18,7 @@ export class DSPGraph {
     else { this.pending = patch;if(reset){this.preserveLoops=this.pendingReset?this.preserveLoops&&preserveLoops:preserveLoops;this.pendingReset=true;} this.fading = true; }
   }
   private commit(patch: Patch, reset = false,preserveLoops=false) {
-    const existing=reset?(preserveLoops?new Map([...this.modules].filter(([,dsp])=>dsp.state.type==='LOOP'||dsp.state.type==='PRISM'||dsp.state.type==='TIDE'||dsp.state.type==='BOUNCE')):undefined):this.modules;
+    const existing=reset?(preserveLoops?new Map([...this.modules].filter(([,dsp])=>dsp.state.type==='LOOP'||dsp.state.type==='PRISM'||dsp.state.type==='TIDE'||dsp.state.type==='BOUNCE'||dsp.state.type==='PENDULUM')):undefined):this.modules;
     const compiled = compilePatch(patch, this.sampleRate,existing);
     if(reset&&preserveLoops)for(const dsp of compiled.modules.values())if(dsp.state.type==='LOOP')dsp.command('restart');
     this.modules = compiled.modules; this.ordered = compiled.ordered; this.outputs = compiled.outputs;
@@ -29,7 +29,7 @@ export class DSPGraph {
     this.bpm = patch.bpm; this.targetMaster = patch.master;
     for (const state of patch.modules) this.modules.get(state.id)?.update(state);
     // A newer slider change must also survive a queued routing transaction.
-    if (this.pending) for (const state of patch.modules) { const pendingState = this.pending.modules.find(m => m.id === state.id); if (pendingState) { pendingState.params = {...state.params}; pendingState.character = state.character;pendingState.mode=state.mode;pendingState.wide=state.wide; } }
+    if (this.pending) for (const state of patch.modules) { const pendingState = this.pending.modules.find(m => m.id === state.id); if (pendingState) { pendingState.params = {...state.params}; pendingState.character = state.character;pendingState.mode=state.mode;pendingState.wide=state.wide;pendingState.bypass=state.bypass;pendingState.gesture=state.gesture; } }
     if (this.pending) { this.pending.bpm = patch.bpm; this.pending.master = patch.master; }
   }
   requestAction(id:string,action:string,payload:unknown,reply:(result:unknown,error?:string)=>void){this.actions.push({id,action,payload,reply});}

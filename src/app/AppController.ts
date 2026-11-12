@@ -1,10 +1,11 @@
 import type {RecordingFormat} from '../audio/PcmRecording';
+import {MODULE_GROUPS} from '../graph/catalog';
 import {MAX_LOOPS} from '../audio/LoopAudio';
 import type {LoopAudio,LoopStatus} from '../audio/LoopAudio';
 import {encodeWav,decodeWav} from '../audio/Wav';
 import { StateStore } from './StateStore';
 import { AudioEngine } from '../audio/AudioEngine';
-import { DEFINITIONS, MODULE_TYPES } from '../graph/definitions';
+import { DEFINITIONS } from '../graph/definitions';
 import { createModule, removeModule } from '../graph/PatchGraph';
 import type { ModuleState, ModuleType } from '../graph/types';
 import { download, downloadPatch, parsePatch } from '../state/PatchStorage';
@@ -62,13 +63,14 @@ export class AppController {
     this.preset.setAttribute('aria-label','Preset');const custom=element('option','','Patch');custom.value='custom';this.preset.append(custom);
     PRESETS.forEach((preset,index)=>{const option=element('option','',preset.name.toLowerCase());option.value=String(index);option.title=preset.description;this.preset.append(option);});this.preset.addEventListener('change',()=>{const preset=PRESETS[Number(this.preset.value)];if(this.preset.value!=='custom'&&preset)this.store.replace(preset.create());});
     header.append(this.runButton,tempoLabel,master,this.preset,this.recButton,this.addButton,this.menuButton);
-    this.library.setAttribute('aria-label','Module library');const libraryTop=element('div','panel-top');libraryTop.append(element('span','','Add a module'),button('×','Close module library',()=>this.closePanels()));const grid=element('div','module-grid');
-    MODULE_TYPES.forEach(type=>{const definition=DEFINITIONS[type],add=button('',`Add ${type} module`,()=>this.addModule(type),'library-module');add.style.setProperty('--module-color',definition.color);add.append(element('span','library-icon',definition.symbol),element('strong','',type),element('span','library-subtitle',definition.subtitle));grid.append(add);});this.library.append(libraryTop,grid);
+    this.library.setAttribute('aria-label','Module library');const libraryTop=element('div','panel-top');libraryTop.append(element('span','','Add a module'),button('×','Close module library',()=>this.closePanels()));this.library.append(libraryTop);
+    for(const group of MODULE_GROUPS){const section=element('section','library-section'),title=element('h3','library-heading',group.name),grid=element('div','module-grid');section.setAttribute('aria-label',group.name);
+      for(const type of group.types){const definition=DEFINITIONS[type],add=button('',`Add ${type} module`,()=>this.addModule(type),'library-module');add.style.setProperty('--module-color',definition.color);add.append(element('span','library-icon',definition.symbol),element('strong','',type),element('span','library-subtitle',definition.subtitle));grid.append(add);}section.append(title,grid);this.library.append(section);}
     this.menu.setAttribute('aria-label','Patch menu');const menuTop=element('div','panel-top');menuTop.append(element('span','','Patch'),button('×','Close patch menu',()=>this.closePanels()));
     this.menu.append(menuTop,button('Snapshots','Open snapshots',()=>{this.closePanels();this.snapshots.render();this.root.classList.add('snapshots-visible');}),button('Save JSON','Export patch as JSON',()=>{try{downloadPatch(this.store.patch);this.closePanels();this.notify('Patch saved');}catch(error){this.notify((error as Error).message,true);}}),button('Load JSON','Import a JSON patch',()=>{this.closePanels();this.loadInput.click();}),button('New patch','Create an empty patch',()=>this.store.replace(emptyPatch())),button('Arrange chips','Arrange modules compactly',()=>{this.closePanels();this.workspace.arrange();}),button('How to play','Show touch and patching instructions',()=>{this.closePanels();this.notify('Tap a chip to edit. Drag to move. Tap an output, then an input to connect; the editor has larger jacks. Pinch to zoom, drag the background to pan. To remove a wire: tap the cable → Disconnect, or use Unplug in a chip’s Connections.',false,10000);}));
     const visuals=button(`Visuals: ${this.root.dataset.visuals}`,'Toggle visual motion',()=>{const mode=this.root.dataset.visuals==='quiet'?'lively':'quiet';this.root.dataset.visuals=mode;saveVisualMode(mode);visuals.textContent=`Visuals: ${mode}`;visuals.setAttribute('aria-pressed',String(mode==='lively'));});visuals.setAttribute('aria-pressed',String(this.root.dataset.visuals==='lively'));this.menu.append(visuals);
     this.recordingFormat.setAttribute('aria-label','Recording format');for(const [value,label] of [['wav','WAV · 24-bit'],['aiff','AIFF · 24-bit'],['browser','Browser · compressed']]){const option=element('option','',label);option.value=value;this.recordingFormat.append(option);}const recordLabel=element('label','record-format-label','Record format');recordLabel.append(this.recordingFormat,element('span','record-format-note','WAV / AIFF: up to 3 min / 48 MB'));this.menu.append(recordLabel);
-    const source=element('a','source-download','Source + guide ↗');source.href='./downloads/signal-machines-v0.11.1.zip';source.download='signal-machines-v0.11.1.zip';source.setAttribute('aria-label','Download project source, tests and guide');this.menu.append(source,this.status);
+    const source=element('a','source-download','Source + guide ↗');source.href='./downloads/signal-machines-v0.12.0.zip';source.download='signal-machines-v0.12.0.zip';source.setAttribute('aria-label','Download project source, tests and guide');this.menu.append(source,this.status);
     const main=element('main','main-layout');main.append(this.workspace.root,this.library,this.editor.root,this.menu,this.snapshots.root);
     this.loadInput.type='file';this.loadInput.accept='.json,application/json';this.loadInput.hidden=true;this.loadInput.addEventListener('change',()=>void this.loadPatch());this.toast.setAttribute('role','status');this.toast.setAttribute('aria-live','polite');this.root.append(header,main,this.loadInput,this.toast);
   }

@@ -6,13 +6,14 @@ A tiny modular playground for sound, chance and happy accidents.
 
 Connect little machines. Make strange sounds. See what happens.
 
-46 modules, 28 starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
+52 modules, 32 starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
 
 ## Play
 
 - Pick a preset and press **▶**.
-- Tap a chip to edit. **+** adds another.
+- Tap a chip to edit. **+** adds another, grouped by kind.
 - Tap an output, then an input to connect them.
+- Draw a motion path in TOUCH, or let PENDULUM swing.
 - Try a few changes. Save a snapshot. Keep wandering.
 
 Headphones are useful. Phone screens work best in landscape.

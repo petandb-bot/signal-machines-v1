@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "DRAWN METAL",
+  "bpm": 100,
+  "master": 0.65,
+  "seed": 121603,
+  "modules": [
+    {
+      "id": "touch-1",
+      "type": "TOUCH",
+      "x": 16,
+      "y": 16,
+      "seed": 3701,
+      "character": "METAL",
+      "params": {
+        "speed": 0.5,
+        "smooth": 0.2
+      },
+      "gesture": {
+        "duration": 3,
+        "points": [
+          {
+            "x": -0.7,
+            "y": -0.5,
+            "t": 0
+          },
+          {
+            "x": 0.4,
+            "y": -0.5,
+            "t": 0.6
+          },
+          {
+            "x": 0.4,
+            "y": 0.7,
+            "t": 1.2
+          },
+          {
+            "x": -0.4,
+            "y": 0.2,
+            "t": 1.8
+          },
+          {
+            "x": 0.7,
+            "y": 0.5,
+            "t": 2.3
+          },
+          {
+            "x": -0.7,
+            "y": -0.5,
+            "t": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 184,
+      "seed": 3702,
+      "character": "METAL",
+      "params": {
+        "rate": 0.43,
+        "irregular": 0.24
+      }
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 192,
+      "y": 16,
+      "seed": 3703,
+      "character": "METAL",
+      "params": {
+        "body": 0.61,
+        "tension": 0.42
+      }
+    },
+    {
+      "id": "clip-1",
+      "type": "CLIP",
+      "x": 368,
+      "y": 16,
+      "seed": 3704,
+      "character": "METAL",
+      "params": {
+        "drive": 0.55,
+        "hardness": 0.5
+      }
+    },
+    {
+      "id": "crush-1",
+      "type": "CRUSH",
+      "x": 544,
+      "y": 16,
+      "seed": 3705,
+      "character": "METAL",
+      "params": {
+        "bits": 0.45454545454545453,
+        "rate": 0.8
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 720,
+      "y": 16,
+      "seed": 3706,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.6
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 896,
+      "y": 16,
+      "seed": 3707,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "touch-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "touch-1",
+        "port": "y"
+      },
+      "to": {
+        "module": "crush-1",
+        "port": "rate"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "clip-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "clip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "crush-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "crush-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

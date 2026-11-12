@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "TWIN SWINGS",
+  "bpm": 76,
+  "master": 0.65,
+  "seed": 121604,
+  "modules": [
+    {
+      "id": "pendulum-1",
+      "type": "PENDULUM",
+      "x": 16,
+      "y": 16,
+      "seed": 3801,
+      "character": "METAL",
+      "params": {
+        "energy": 0.7,
+        "coupling": 0.65
+      }
+    },
+    {
+      "id": "comb-1",
+      "type": "COMB",
+      "x": 192,
+      "y": 16,
+      "seed": 3802,
+      "character": "METAL",
+      "params": {
+        "tune": 0.5,
+        "decay": 0.58
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 192,
+      "y": 184,
+      "seed": 3803,
+      "character": "METAL",
+      "params": {
+        "material": 0.46,
+        "decay": 0.64
+      }
+    },
+    {
+      "id": "fuzz-1",
+      "type": "FUZZ",
+      "x": 368,
+      "y": 184,
+      "seed": 3804,
+      "character": "METAL",
+      "params": {
+        "drive": 0.4,
+        "bias": 0.5
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 16,
+      "seed": 3805,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.6
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 3806,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pendulum-1",
+        "port": "aCross"
+      },
+      "to": {
+        "module": "comb-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "pendulum-1",
+        "port": "bCross"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "pendulum-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "comb-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "pendulum-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fuzz-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "fuzz-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "comb-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

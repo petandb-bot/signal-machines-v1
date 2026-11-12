@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "PIXEL DUST",
+  "bpm": 108,
+  "master": 0.65,
+  "seed": 121601,
+  "modules": [
+    {
+      "id": "chip-1",
+      "type": "CHIP",
+      "x": 16,
+      "y": 16,
+      "seed": 3501,
+      "character": "METAL",
+      "params": {
+        "tune": 0.5,
+        "character": 0.72
+      }
+    },
+    {
+      "id": "crush-1",
+      "type": "CRUSH",
+      "x": 192,
+      "y": 16,
+      "seed": 3502,
+      "character": "METAL",
+      "params": {
+        "bits": 0.36363636363636365,
+        "rate": 0.77
+      }
+    },
+    {
+      "id": "clip-1",
+      "type": "CLIP",
+      "x": 368,
+      "y": 16,
+      "seed": 3503,
+      "character": "METAL",
+      "params": {
+        "drive": 0.35,
+        "hardness": 0.5
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 3504,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "touch-1",
+      "type": "TOUCH",
+      "x": 16,
+      "y": 184,
+      "seed": 3505,
+      "character": "METAL",
+      "params": {
+        "speed": 0.5,
+        "smooth": 0.2
+      }
+    },
+    {
+      "id": "pendulum-1",
+      "type": "PENDULUM",
+      "x": 192,
+      "y": 184,
+      "seed": 3506,
+      "character": "METAL",
+      "params": {
+        "energy": 0.55,
+        "coupling": 0.4
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "chip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "crush-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "crush-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "clip-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "clip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "touch-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "pendulum-1",
+        "port": "aCross"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "pendulum-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "crush-1",
+        "port": "rate"
+      }
+    }
+  ]
+}

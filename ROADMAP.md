@@ -1,6 +1,6 @@
-# Module directions / v0.11
+# Module directions / v0.12
 
-The library now contains 46 implemented modules. The utility/memory roles, basic waveform/noise sources and six additional frequency/effect roles are implemented. Existing compact chip dimensions and larger reactive displays remain in place.
+The library now contains 52 implemented modules. The utility/memory roles, basic waveform/noise sources and six additional frequency/effect roles are implemented. Existing compact chip dimensions and larger reactive displays remain in place.
 
 | New chip | Implemented role | Starting patch |
 | --- | --- | --- |
@@ -79,3 +79,10 @@ SWARM, UNSPENT, SIDEWAYS, QUORUM and FAULT LINE are implemented with two macros 
 WIDE ranges give eight source roles ±8-octave pitch, with broad tune on OSC/FORMANT/PRISM; WIDE OUTPUT preserves low motion down toward a 0.05 Hz DC-removal corner. Existing patches retain STANDARD. Four presets demonstrate the roles and broad-band output.
 
 Master PCM24 WAV/AIFF export is shipped, alongside the existing native compressed option. It uses bounded transferred blocks and a 3-minute/48-MiB ceiling, with automatic completion and partial recovery on interruption. Long-form streaming to disk, seamless audio snapshots, TOUCH and edit undo remain separate future work.
+
+
+## v0.12 additions and organization
+
+CLIP, FUZZ, CRUSH, CHIP, TOUCH and PENDULUM are implemented with two macros and real state displays. The first three support a persisted, smoothly crossfaded bypass. TOUCH records a validated timed XY path; PENDULUM converts coupled angular motion into CV and events. Four starting patches demonstrate all six roles.
+
+The library now groups types by role rather than adding search/favourites. The user explicitly prefers this arrangement. Undo/Redo is deferred because current editing and named snapshots already support their workflow; the remaining useful direction is parameter-only movement between compatible snapshots. Exact audio-state recall, long-form recording and general edit history remain future designs.

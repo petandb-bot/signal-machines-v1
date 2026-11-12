@@ -1,3 +1,4 @@
+import {crushBits} from '../audio/modules/Crush';
 import {slewSeconds,recoverySeconds,LOGIC_RATIO_LABELS} from '../audio/ControlMath';
 import {tunedHz,shiftedHz} from '../audio/ToneMath';
 import { DEFINITIONS } from '../graph/definitions';
@@ -9,7 +10,9 @@ export function button(text: string, title: string, action: () => void, classNam
   const el = element('button', className, text); el.type = 'button'; el.title = title; el.setAttribute('aria-label',title); el.addEventListener('click',action); return el;
 }
 export function formatParameter(module: ModuleState, id: string, value: number) {
-  if((module.type==='OSC'||module.type==='COMB'||module.type==='PRISM'||module.type==='FERAL'||module.type==='FORMANT')&&id==='tune')return `${(module.wide?tunedHz(value,0,true).toFixed(tunedHz(value,0,true)<10?2:0):Math.round(tunedHz(value)))} Hz`;
+  if((module.type==='CHIP'||module.type==='OSC'||module.type==='COMB'||module.type==='PRISM'||module.type==='FERAL'||module.type==='FORMANT')&&id==='tune')return `${(module.wide?tunedHz(value,0,true).toFixed(tunedHz(value,0,true)<10?2:0):Math.round(tunedHz(value)))} Hz`;
+  if(module.type==='TOUCH'&&id==='speed')return `${(.125*Math.pow(64,value)).toFixed(2)}×`;
+  if(module.type==='CRUSH'&&id==='bits')return `${crushBits(value)} bit`;
   if(module.type==='SHIFT'&&id==='shift')return `${shiftedHz(value)>0?'+':''}${shiftedHz(value).toFixed(1)} Hz`;
   if(module.type==='RING'&&id==='rate')return `${(.5*Math.pow(10000,value)).toFixed(1)} Hz`;
   if(module.type==='TIDE'&&id==='flow')return `${Math.pow(10,value*2-1).toFixed(2)}×`;
