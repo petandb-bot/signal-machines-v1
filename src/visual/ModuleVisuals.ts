@@ -36,6 +36,10 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
       g.fill('#324c53');for(let j=Math.round(y)+5;j<70;j+=4)point(g,x,j);
       if(active){g.fill(color);const reach=3+Math.round(t.envelope*12);point(g,x-reach,y,2);point(g,x+reach,y,2);}
     }
+  }else if(type==='LPG'){
+    const opening=clamp(t.a,0,1),gap=3+opening*29;g.fill('#64734b');for(let x=8;x<97;x+=3){point(g,x,38-gap);point(g,x,42+gap);}g.fill(color);wave(g,t,40,120,Math.max(2,gap-2),2);g.rect(9,74,Math.round(opening*84),3);
+  }else if(type==='OPERATOR'){
+    g.fill('#536b83');for(let i=0;i<48;i++)point(g,7+i*90/47,39-Math.sin(i*Math.PI*2/47)*24,1);g.fill(color);wave(g,t,39,160,29);point(g,7+clamp(t.phase,0,1)*87,73,3);g.rect(8,7,Math.round(clamp(t.a,0,1)*86),2);
   }else if(type==='CLIP'){
     const curve=t.curve??Array.from({length:64},(_,i)=>Math.max(-1,Math.min(1,(i/63*2-1)*(1+t.a*6))));g.fill('#755641');for(let i=0;i<64;i++)point(g,7+i*90/63,39-clamp(curve[i],-1,1)*29,2);g.fill(color);wave(g,t,40,110,27);g.rect(8,74,Math.round(clamp(t.b,0,1)*87),2);
   }else if(type==='FUZZ'){

@@ -14,7 +14,7 @@ export const DEFINITIONS: Record<ModuleType, ModuleDefinition> = {
   ALLOY: { type: 'ALLOY', subtitle: 'Metallic FM voice', description: 'Interference becomes an instrument.', color: '#d7b77d', symbol: '≋', inputs: [input('trigger', 'TRIG', 'trigger', 0), input('pitch', 'PITCH', 'control', 1, 'pitch'), input('body', 'BODY', 'control', 2, 'body'), input('tension', 'TENSION', 'control', 3, 'tension')], outputs: [output('audio', 'AUDIO', 'audio', 0)], parameters: [
     { id: 'body', label: 'BODY', default: .61, description: 'Mass, spectral balance and the length of a note.' },
     { id: 'tension', label: 'TENSION', default: .42, description: 'Inharmonic ratios and the depth of interference.' } ] },
-  RESON: { type: 'RESON', subtitle: 'Resonant material', description: 'Strike a material. Let its modes ring and settle.', color: '#c2c296', symbol: '◌', inputs: [input('trigger', 'TRIG', 'trigger', 0), input('pitch', 'PITCH', 'control', 1, 'pitch'), input('excite', 'EXCITE', 'audio', 2)], outputs: [output('audio', 'AUDIO', 'audio', 0), output('activity', 'ACTIVITY', 'control', 1)], parameters: [
+  RESON: { type: 'RESON', subtitle: 'Resonant material', description: 'Strike a material. Let its modes ring and settle.', color: '#c2c296', symbol: '◌', inputs: [input('trigger', 'TRIG', 'trigger', 0), input('pitch', 'PITCH', 'control', 1, 'pitch'), input('excite', 'EXCITE', 'audio', 2),input('material','MATERIAL','control',3,'material')], outputs: [output('audio', 'AUDIO', 'audio', 0), output('activity', 'ACTIVITY', 'control', 1)], parameters: [
     {id:'material',label:'MATERIAL',default:.46,description:'Morph from a warm, woody body to bright, inharmonic metal.'},
     {id:'decay',label:'DECAY',default:.64,description:'How long the resonant modes store their energy.'}] },
   FRACTURE: { type: 'FRACTURE', subtitle: 'Temporal disruption', description: 'Catch a moment. Loop, reverse and rearrange its fragments.', color: '#c58c9f', symbol: '⌁', inputs: [input('audio', 'AUDIO', 'audio', 0), input('break', 'BREAK', 'control', 1, 'break'), input('trigger', 'TRIG', 'trigger', 2)], outputs: [output('audio', 'AUDIO', 'audio', 0), output('activity', 'ACTIVITY', 'control', 1)], parameters: [
@@ -151,6 +151,12 @@ export const DEFINITIONS: Record<ModuleType, ModuleDefinition> = {
   PENDULUM: {type:'PENDULUM',subtitle:'Two swings drift together',description:'Coupled driven pendulums expose angle and center-crossing events.',color:'#c7b39b',symbol:'⌒',inputs:[input('energy','ENERGY','control',0,'energy'),input('coupling','COUPLING','control',1,'coupling'),input('kick','KICK','trigger',2),input('reset','RESET','trigger',3)],outputs:[output('a','ANGLE A','control',0),output('b','ANGLE B','control',1),output('aCross','CROSS A','trigger',2),output('bCross','CROSS B','trigger',3)],parameters:[
     {id:'energy',label:'ENERGY',default:.55,description:'Drive and speed of the swings. At zero, damping lets their stored motion settle.'},
     {id:'coupling',label:'COUPLING',default:.4,description:'How strongly each swing pulls its neighbour. KICK adds an impulse; RESET restores seeded angles.'}]},
+  LPG: {type:'LPG',subtitle:'Light opens a ringing gate',description:'Gain and brightness breathe together, excited by strikes or a sustained control.',color:'#b9c594',symbol:'◉',inputs:[input('audio','AUDIO','audio',0),input('open','OPEN','control',1),input('strike','STRIKE','trigger',2)],outputs:[output('audio','AUDIO','audio',0),output('activity','ACTIVITY','control',1)],parameters:[
+    {id:'bite',label:'BITE',default:.6,description:'Brightness and presence as the opening grows.'},
+    {id:'decay',label:'DECAY',default:.5,description:'Strike decay and closing memory. OPEN holds the gate; audio alone passes through an open gate.'}]},
+  OPERATOR: {type:'OPERATOR',subtitle:'A patchable phase voice',description:'A sine responds directly to external audio phase modulation.',color:'#a8bcd2',symbol:'∿',inputs:[input('pitch','PITCH','control',0),input('mod','MOD','audio',1)],outputs:[output('audio','AUDIO','audio',0),output('activity','ACTIVITY','control',1)],parameters:[
+    {id:'tune',label:'TUNE',default:.5,description:'Base pitch; connect another OPERATOR, OSC or NOISE to MOD.'},
+    {id:'depth',label:'DEPTH',default:.35,description:'External phase depth, or limited internal feedback when MOD is unpatched. Zero is a sine.'}]},
   CHAMBER: { type: 'CHAMBER', subtitle: 'Spatial memory', description: 'Sound leaves a trace in space. WEAVE changes separate echoes into an entangled tail.', color: '#b6aac8', symbol: '⋮⋮⋮', inputs: [input('audio', 'AUDIO', 'audio', 0), input('size', 'SIZE', 'control', 1, 'size'), input('density', 'DENSITY', 'control', 2, 'density')], outputs: [output('audio', 'AUDIO', 'audio', 0), output('activity', 'ACTIVITY', 'control', 1)], parameters: [
     { id: 'size', label: 'SIZE', default: .66, description: 'Continuously stretches the room and its reflections.' },
     { id: 'density', label: 'DENSITY', default: .6, description: 'Tail length and softness. In WEAVE, this also entangles the feedback paths from independent echoes to a dense space.' } ] },
@@ -165,6 +171,6 @@ export function portPosition(module: { x: number; y: number }, port: PortDefinit
   return { x: module.x + (port.direction === 'in' ? 0 : NODE_WIDTH), y: module.y + 42 + port.position * 24 };
 }
 
-export const WIDE_TYPES:readonly ModuleType[]=['CHIP','OSC','DRONE','PARTIAL','ALLOY','RESON','PRISM','FORMANT','SWARM','OUTPUT'];
+export const WIDE_TYPES:readonly ModuleType[]=['OPERATOR','CHIP','OSC','DRONE','PARTIAL','ALLOY','RESON','PRISM','FORMANT','SWARM','OUTPUT'];
 
 export const BYPASS_TYPES:readonly ModuleType[]=['CLIP','FUZZ','CRUSH'];

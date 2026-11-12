@@ -1,6 +1,6 @@
-# Module directions / v0.12
+# Module directions / v0.13
 
-The library now contains 52 implemented modules. The utility/memory roles, basic waveform/noise sources and six additional frequency/effect roles are implemented. Existing compact chip dimensions and larger reactive displays remain in place.
+The library now contains 54 implemented modules. The utility/memory roles, basic waveform/noise sources and six additional frequency/effect roles are implemented. Existing compact chip dimensions and larger reactive displays remain in place.
 
 | New chip | Implemented role | Starting patch |
 | --- | --- | --- |
@@ -86,3 +86,8 @@ Master PCM24 WAV/AIFF export is shipped, alongside the existing native compresse
 CLIP, FUZZ, CRUSH, CHIP, TOUCH and PENDULUM are implemented with two macros and real state displays. The first three support a persisted, smoothly crossfaded bypass. TOUCH records a validated timed XY path; PENDULUM converts coupled angular motion into CV and events. Four starting patches demonstrate all six roles.
 
 The library now groups types by role rather than adding search/favourites. The user explicitly prefers this arrangement. Undo/Redo is deferred because current editing and named snapshots already support their workflow; the remaining useful direction is parameter-only movement between compatible snapshots. Exact audio-state recall, long-form recording and general edit history remain future designs.
+
+
+## v0.13 scope
+
+ALLOY, RESON, PARTIAL, CAUSTIC and DRONE are refined; LPG and OPERATOR are the only additions. Graph feedback rules, preset content, snapshots, recording and interaction methods remain unchanged. iPhone module deletion is a reported open issue explicitly deferred from this audio-only scope.

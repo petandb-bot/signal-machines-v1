@@ -55,7 +55,9 @@ import {Crush} from './modules/Crush';
 import {Chip} from './modules/Chip';
 import {Touch} from './modules/Touch';
 import {Pendulum} from './modules/Pendulum';
-const CLASSES = { PULSE: Pulse, BRANCH: Branch, FLOCK: Flock, ALLOY: Alloy, RESON: Reson, FRACTURE: Fracture, VENOM: Venom, SNAP: Snap, CAUSTIC: Caustic, TAPE:Tape, DRONE:Drone, SIEVE:Sieve, PARASITE:Parasite, VCA:Vca, SHAPE:Shape, SWITCH:Switch, LOOP:Loop, CHORUS:Chorus, CLOUD:Cloud, OSC:Osc, NOISE:Noise, FILTER:Filter, RING:Ring, COMB:Comb, SHIFT:Shift, CHANCE:Chance, PRISM:Prism, PARTIAL:Partial, WEFT:Weft, TIDE:Tide, BOUNCE:Bounce, FERAL:Feral, COUNT:Count, MAP:ByteMap, QUANTIZE:Quantize, SLEW:Slew, FORMANT:Formant, LOGIC:Logic, DUCK:Duck, SWARM:Swarm,UNSPENT:Unspent,SIDEWAYS:Sideways,QUORUM:Quorum,'FAULT LINE':FaultLine,CLIP:Clip,FUZZ:Fuzz,CRUSH:Crush,CHIP:Chip,TOUCH:Touch,PENDULUM:Pendulum,CHAMBER: Chamber, OUTPUT: Output };
+import {Lpg} from './modules/Lpg';
+import {Operator} from './modules/Operator';
+const CLASSES = { PULSE: Pulse, BRANCH: Branch, FLOCK: Flock, ALLOY: Alloy, RESON: Reson, FRACTURE: Fracture, VENOM: Venom, SNAP: Snap, CAUSTIC: Caustic, TAPE:Tape, DRONE:Drone, SIEVE:Sieve, PARASITE:Parasite, VCA:Vca, SHAPE:Shape, SWITCH:Switch, LOOP:Loop, CHORUS:Chorus, CLOUD:Cloud, OSC:Osc, NOISE:Noise, FILTER:Filter, RING:Ring, COMB:Comb, SHIFT:Shift, CHANCE:Chance, PRISM:Prism, PARTIAL:Partial, WEFT:Weft, TIDE:Tide, BOUNCE:Bounce, FERAL:Feral, COUNT:Count, MAP:ByteMap, QUANTIZE:Quantize, SLEW:Slew, FORMANT:Formant, LOGIC:Logic, DUCK:Duck, SWARM:Swarm,UNSPENT:Unspent,SIDEWAYS:Sideways,QUORUM:Quorum,'FAULT LINE':FaultLine,CLIP:Clip,FUZZ:Fuzz,CRUSH:Crush,CHIP:Chip,TOUCH:Touch,PENDULUM:Pendulum,LPG:Lpg,OPERATOR:Operator,CHAMBER: Chamber, OUTPUT: Output };
 export interface Route { source: DSPModule; output: number; input: number; signal: SignalType; delayed:boolean }
 export interface CompiledModule { dsp: DSPModule; incoming: Route[] }
 export function compilePatch(patch: Patch, sampleRate: number, existing = new Map<string, DSPModule>()) {

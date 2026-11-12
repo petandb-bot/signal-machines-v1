@@ -1,10 +1,10 @@
-# Verification / v0.12
+# Verification / v0.13
 
 ## Automated coverage
 
 Host: managed Linux, Node 24.22.1. p5.js is pinned to 2.3.4. `package-lock.json` pins dependencies.
 
-- The test inventory is **352 tests in 28 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
+- The test inventory is **367 tests in 29 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
 - New DSP checks: the original three presets produce nonzero finite audio; BRANCH repeats before mutation and emits scale-constrained seeded pitch/gate; RESON decays and responds to external excitation; FRACTURE is transparent at BREAK zero and retains audible captured audio after input ends at maximum HOLD. The original eight module types also run together at extreme macros without invalid samples or master overshoot.
 - Noise modules: seeded stereo VENOM, zero-dose silence, trigger boosts and CV; SNAP dry pass-through, forced interruption/recovery, repeatable automatic dropouts, bounded edge steps and no independent sound from silent input; CAUSTIC dry pass-through, actual waveform changes, extreme drive and decay to silence. BAD CONTACT is checked for finite master output, maximum settings and variable-block deterministic rendering.
 - Ambient/feedback modules: all three new presets validate and synthesize; continuous untriggered DRONE, spectral focus response, a stable 20-second tape tail, bounded envelope-derived controls, explicit full-intervening-quantum delay using 17/193/64-frame blocks, order-independent delayed cycle import and continued rejection of unauthorized AUDIO/mixed cycles. Actual host energy reaches SNAP FAULT and BRANCH CHANGE. Maximum feedback/macro settings remain finite.
@@ -22,7 +22,7 @@ Host: managed Linux, Node 24.22.1. p5.js is pinned to 2.3.4. `package-lock.json`
 - `npm run typecheck` and `npm run build`: TypeScript and Vite production checks. The normal large-bundle warning applies to p5 (about 1.2 MB before gzip).
 - `npm run verify:build`: the actual emitted worklet is loaded in a JavaScript audio-host shim; all thirty-two presets render for 3 seconds at 48 kHz, stereo, variable block lengths. Every sample must be finite, audible energy nonzero, peak ≤0.63 and telemetry free of errors. An additional production-bundle session records, overdubs, exports/imports actual buffers, retains them across transport restart, and clears them on explicit patch reset. A separate production-bundle capture must exactly match the protected stereo master samples, including the final partial block.
 
-Source DSP measurements, 8 seconds at 24 kHz:
+Historical v0.12 baseline DSP measurements, 8 seconds at 24 kHz (the five revised voices intentionally sound different in v0.13):
 
 | Preset | Peak | RMS |
 | --- | ---: | ---: |
@@ -95,11 +95,11 @@ Play BAD CONTACT at the device’s usual instrument volume. Sweep VENOM DOSE/STR
 
 ## Reactive visual checks
 
-The visual/UI files contain 85 checks. These verify the larger logical display, resting without telemetry, energy/trigger/fault/control response, bounded two-pixel displacement, quiet mode, finite and changing drawing geometry for all 52 modules, deterministic repeated frames, unchanged chip/jack anchors during activity, persisted appearance mode, snapshots and patching gestures. The drawing recorder verifies model/geometry calls; it does not render p5 in a native browser.
+The visual/UI files contain 87 checks. These verify the larger logical display, resting without telemetry, energy/trigger/fault/control response, bounded two-pixel displacement, quiet mode, finite and changing drawing geometry for all 54 modules, deterministic repeated frames, unchanged chip/jack anchors during activity, persisted appearance mode, snapshots and patching gestures. The drawing recorder verifies model/geometry calls; it does not render p5 in a native browser.
 
 The displays include actual learned/additive amplitude bars, remembered chance steps, and gain/blend, envelope stage, route crossfade, loop progress/recording mode, chorus phase, granular history, oscillator/noise waveforms, the filter response sketch, multiplication phase portrait, comb teeth and shifted traces. TypeScript, Vite and the emitted-worklet checks validate the updated audio build; this release changes the DSP as well as the module library.
 
-Manual checks remain required: inspect all 52 larger displays on a real browser, confirm reacting chips look lively without obscuring labels/jacks, compare lively/quiet and OS reduced-motion behavior, select and drag a chip while its internal display is active, and verify cables remain visually attached. Test on iPhone landscape with the larger editor beside its sliders. No real-browser screenshot, iPhone appearance/performance check or human listening session was possible with the available tools.
+Manual checks remain required: inspect all 54 larger displays on a real browser, confirm reacting chips look lively without obscuring labels/jacks, compare lively/quiet and OS reduced-motion behavior, select and drag a chip while its internal display is active, and verify cables remain visually attached. Test on iPhone landscape with the larger editor beside its sliders. No real-browser screenshot, iPhone appearance/performance check or human listening session was possible with the available tools.
 
 ## Utilities, effects and loop manual checks
 
@@ -173,6 +173,31 @@ The added checks measure CLIP transfer/harmonic changes, zero-drive transparency
 
 Timed TOUCH interpolation, wraps/speed, RESET, smoothing and phase continuity across equivalent updates are exercised. Validated gesture/bypass state roundtrips through JSON and queued routing edits; malformed times, size, coordinates and module combinations are rejected. PENDULUM is checked for bounded seeded motion, two crossing streams, coupling response, Kick/reset and transport retention versus explicit recall. Four new presets validate and render eight seconds at 24 kHz, with maximum-macro block-schedule comparisons and all six roles combined with delayed parasitic modulation across sample rates.
 
-The real DOM library exposes all 52 choices exactly once in six ordered groups. Editor mode selection, drawing commit/cancel/clear, bypass, snapshot recall and pendulum Kick use actual controller wiring. Native drawing feel, touch capture, visual appearance, CPU/heat and human listening still need iPhone/desktop checks; no native browser tool is exposed here. The production-worklet script now includes all 32 presets plus the existing master PCM and LOOP bridges.
+The real DOM library exposes all 54 choices exactly once in six ordered groups. Editor mode selection, drawing commit/cancel/clear, bypass, snapshot recall and pendulum Kick use actual controller wiring. Native drawing feel, touch capture, visual appearance, CPU/heat and human listening still need iPhone/desktop checks; no native browser tool is exposed here. The production-worklet script now includes all 32 presets plus the existing master PCM and LOOP bridges.
 
 Manual acceptance: compare CLIP/HARDNESS and FUZZ/BIAS on the same source with bypass; compare CRUSH bit depth/update speed and the three CHIP modes; draw/replay/cancel/clear a TOUCH path and recall its snapshot; watch both pendulum bodies and their crossing-triggered voices. Confirm the six catalog groups are easy to scan on iPhone landscape and that existing patching/recording still feels familiar.
+
+
+## v0.13 acceptance
+
+Added tests cover four retained ALLOY pitches, common between-note transposition, all three characters at macro endpoints; RESON material CV response/smoothing and three material regions; PARTIAL component count, smooth WARP and mass-energy balance; CAUSTIC low-drive response and antiderivative error against a 64-substep reference; seeded DRONE; LPG strikes/OPEN/combined/audio-only behavior and measured high-frequency response; OPERATOR sine/modulation/silent-cable behavior; serial operators with LPG, JSON roundtrip, master bounds and continued rejection of direct feedback. All seven roles run at 0/.5/1 macros and 8/44.1/48/96 kHz.
+
+The full existing suite protects legacy patch rendering, grouped catalog, snapshots, TOUCH/PENDULUM, variable-block execution and recording/WAV/AIFF bridges. The production-bundle check additionally renders a two-OPERATOR/LPG graph without adding a preset. Existing jack IDs remain; RESON MATERIAL is appended at position 3.
+
+CPU measurements are offline managed-Linux Node medians, not iPhone/Safari or hard real-time guarantees. ALLOY uses a shared sine table, DRONE also uses it for its six voices, and CAUSTIC avoids an oversampling multiplier. TPT modal motion and ADAA add work; some modules can cost more than their earlier version. A 48kHz mixed nine-module graph and per-module before/after measurements are recorded during acceptance. High-PM aliasing, intentional tone/level changes and native CPU/thermal/listening checks remain limitations.
+
+The iPhone deletion difficulty remains an open interaction issue: the user explicitly excluded module add/delete and rack UI changes from this task. No deletion interaction was changed. There is no exposed native browser tool; audible quality, clicks perceived by ear and native iPhone performance remain unverified.
+
+Offline 48kHz CPU check (median of three warmed one-second direct-module runs; ms per audio second):
+
+| Module | v0.12 | v0.13 |
+| --- | ---: | ---: |
+| ALLOY | 35.23 | 38.12 |
+| RESON | 10.40 | 20.94 |
+| PARTIAL | 53.63 | 50.61 |
+| CAUSTIC | 6.60 | 10.17 |
+| DRONE | 42.04 | 49.43 |
+| LPG | — | 7.41 |
+| OPERATOR | — | 9.12 |
+
+A nine-module 48kHz graph (clock, all five revised roles, OPERATOR, LPG and OUTPUT) rendered 3 seconds in 1285.6 ms, peak 0.2400, zero faults. This is a managed Linux offline measurement, not a phone playback/deadline guarantee. RESON roughly doubles its direct processing cost; total cost is not universally lower.

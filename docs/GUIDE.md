@@ -1,6 +1,6 @@
-# SIGNAL MACHINES / v0.12
+# SIGNAL MACHINES / v0.13
 
-A small modular sound instrument built with TypeScript, Vite, p5.js **2.3.4** and the Web Audio API. Fifty-two independent modules run in a single AudioWorklet. Compact chips replace the large rack panels; editing and adding modules use temporary panels. The interface intentionally has no large title or permanent sidebar.
+A small modular sound instrument built with TypeScript, Vite, p5.js **2.3.4** and the Web Audio API. Fifty-four independent modules run in a single AudioWorklet. Compact chips replace the large rack panels; editing and adding modules use temporary panels. The interface intentionally has no large title or permanent sidebar.
 
 ## Start locally
 
@@ -28,7 +28,7 @@ The static `dist/` includes the application, independent worklet, p5, fonts, and
 Landscape is the intended iPhone layout. Portrait also keeps the workspace available, with a bottom editor. This is an implemented touch-oriented layout, **not a claim of real-device Safari validation**.
 
 - ▶ / ■ starts and stops sound. BPM, master volume, preset selection and recording stay in the narrow toolbar.
-- **+** opens the 52-chip library. Tap a type to add an independent module at a vacant position. Drag a chip to move it; tap it without dragging to edit.
+- **+** opens the 54-chip library. Tap a type to add an independent module at a vacant position. Drag a chip to move it; tap it without dragging to edit.
 - **Tap an output, then tap a compatible input** to connect. Green = trigger, blue = control, amber = audio. Drag connections also work. Matching destinations highlight; tap the starting jack again or × in the connection hint to cancel.
 - Small chip pins are shortcuts. For larger touch targets, tap a chip, choose a full-size input/output button in its editor, then tap the destination chip and its matching editor jack. The pending connection survives opening the other chip's editor.
 - Pinch with two fingers to zoom and pan around their midpoint. Drag the background with one finger to pan. + / − and FIT are also available. Pinching across a chip does not move it or open the editor.
@@ -42,7 +42,7 @@ Landscape is the intended iPhone layout. Portrait also keeps the workspace avail
 
 The canvas and floating controls account for safe-area insets. An open editor keeps part of the patch visible. Touch hit areas in the editor are at least 44 CSS pixels; scaled chip pins are deliberately smaller and have the larger editor alternative.
 
-## Fifty-two modules
+## Fifty-four modules
 
 | Chip | Function | Macros |
 | --- | --- | --- |
@@ -243,7 +243,7 @@ Stop/Run retains the take in the current tab and restarts playback from its begi
 
 ## Structure and signal rules
 
-`src/graph` owns types, ports, validation and topology. `src/audio/modules` contains fifty-two separate processors. `PatchCompiler.ts`, `SignalRouter.ts`, `DSPGraph.ts` and `audio/worklets/processor.ts` compile and execute the graph on the audio thread. `AudioEngine.ts` handles browser transport/recording and correlated loop-action replies; `Wav.ts` handles PCM file transfer. `src/ui` handles chips, gestures and editors; `src/visual` renders 104 × 80 p5 displays; `src/state` owns presets, schema validation and storage.
+`src/graph` owns types, ports, validation and topology. `src/audio/modules` contains fifty-four separate processors. `PatchCompiler.ts`, `SignalRouter.ts`, `DSPGraph.ts` and `audio/worklets/processor.ts` compile and execute the graph on the audio thread. `AudioEngine.ts` handles browser transport/recording and correlated loop-action replies; `Wav.ts` handles PCM file transfer. `src/ui` handles chips, gestures and editors; `src/visual` renders 104 × 80 p5 displays; `src/state` owns presets, schema validation and storage.
 
 AUDIO is stereo internally and permits summed inputs. CONTROL sums and clamps to −1…1, then maps macro values as `clamp(base + 0.5 × control, 0, 1)`. PITCH maps −1…1 to ±24 semitones around a source's base pitch (110 Hz for ALLOY/RESON, the selected range for DRONE, TUNE for OSC/COMB). TRIGGER is a one-sample event timestamped by the audio sample counter. Up to 48 modules and 256 cables are accepted.
 
@@ -294,3 +294,20 @@ TOUCH starts with a four-second circle. Draw on its dedicated editor pad to repl
 PENDULUM uses two damped, driven nonlinear angular states with different natural frequencies and reciprocal coupling. ENERGY changes drive/speed, COUPLING the mutual force. ANGLE A/B expose normalized angles; CROSS A/B emit one-sample events when the bodies cross the center with meaningful velocity. The 16-sample physics step bounds angular state/velocity. The editor Kick and KICK input add a seeded impulse; RESET restores initial angles. Motion survives Stop/Run and routing edits, while explicit preset/snapshot recall restarts seeded state. Snapshots save controls and cables, not live angular momentum.
 
 The displays show actual transfer curves, held/quantized waveform samples, gate state, saved XY paths, replay positions and pendulum angles. Chip bodies, jacks and cable anchors remain fixed. The source ZIP includes the repaired GitHub Pages workflow: it builds Vite output and deploys `dist`, so a new repository does not publish raw TypeScript.
+
+
+## v0.13 voice refinement
+
+ALLOY retains four note voices. A new TRIG latches that voice's pitch without moving older notes to it; PITCH movement between attacks transposes all active voices by the same interval. Pitch glides over 8 ms. SOFT emphasizes near-harmonic FM, METAL an inharmonic ratio sweep, ROUGH stronger non-integer feedback. Envelope-dependent modulation softens the decay, a continuous subphase removes the old wrapped half-phase discontinuity, and a frequency-dependent index budget limits high-band sidebands. This is not alias-free FM.
+
+RESON keeps TRIG/PITCH/EXCITE in their original positions and appends MATERIAL CV as the fourth input. Material and pitch move over 30 ms through six TPT resonant states. Material moves wood → metal → string-like ratio families; damping and modal gains vary across the bank and output is bounded. Existing patches remain valid but their tone/level can change.
+
+PARTIAL keeps 32 components, existing seed phases and Nyquist masking/energy normalization. MASS/WARP now smooth CV; partial entry uses a smoothstep and WARP is gentler around integer harmonics. DRONE retains six oscillators and saved seeds, adding a very slow seeded nonperiodic detune target under SPREAD². At SPREAD zero its pitch is stable. Shared interpolated sine lookup and high-harmonic masking reduce trigonometric work and avoid unnecessary high-band folds.
+
+CAUSTIC keeps asymmetry and supply starvation. First-order antiderivative averaging replaces point sampling of fold crossings, without oversampling. Low BURN becomes more audible through revised drive/mix, and CV is smoothed. This reduces folding error/aliasing but also softens high frequencies and has a half-sample averaging character; it is not an alias-free analog model.
+
+**LPG** couples an opto-like opening to amplitude and a two-pole lowpass. BITE changes open brightness; DECAY changes strike release and closing memory. STRIKE excites an internal envelope, OPEN holds a continuous opening, and the greater of the two drives the gate. If neither control cable is present, AUDIO alone opens continuously. A connected silent STRIKE without OPEN closes it. ACTIVITY and the aperture show the actual opening.
+
+**OPERATOR** is a patchable sine-phase oscillator with TUNE/DEPTH, PITCH and stereo-averaged AUDIO MOD. Unpatched MOD uses limited, internally delayed feedback; a connected MOD replaces it completely, including a silent cable. DEPTH zero is a sine. Two interpolated substeps and averaging plus a high-frequency index budget temper aliasing, without introducing any new patch-graph feedback permission. Strong/high-frequency/noise PM can still alias. WIDE follows the existing source rule. Chain multiple OPERATORs or use OSC/NOISE as MOD.
+
+These are the only two new modules. Presets, snapshots, recording, TOUCH/PENDULUM, cables and module deletion/adding interactions remain unchanged. The reported iPhone module-deletion difficulty is deferred because this release explicitly excludes interaction changes. Actual native browser listening remains necessary.

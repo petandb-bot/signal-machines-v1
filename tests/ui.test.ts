@@ -78,8 +78,8 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(false);
 
   });
-  it('exposes fifty-two grouped module choices, thirty-two presets and no large title',()=>{
-    expect(document.querySelectorAll('.library-module')).toHaveLength(52);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(33);
+  it('exposes fifty-four grouped module choices, thirty-two presets and no large title',()=>{
+    expect(document.querySelectorAll('.library-module')).toHaveLength(54);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(33);
     const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;preset.value='1';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='BRANCH')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='FRACTURE')).toBe(true);
     preset.value='2';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='RESON')).toBe(true);
     preset.value='3';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='VENOM')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='CAUSTIC')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='SNAP')).toBe(true);
@@ -169,7 +169,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
 
   it('groups every library choice exactly once without adding search or favourites',()=>{
-    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(52);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
+    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(54);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
   });
   it('captures a TOUCH path, preserves it with bypass in a snapshot, cancels incomplete strokes and clears explicitly',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add FUZZ module"]')!.click();const fuzz=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${fuzz}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));document.querySelector<HTMLButtonElement>('[aria-label="FUZZ bypass"]')!.click();expect(app.store.patch.modules.find(m=>m.id===fuzz)!.bypass).toBe(true);

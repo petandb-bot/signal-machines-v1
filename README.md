@@ -6,7 +6,7 @@ A tiny modular playground for sound, chance and happy accidents.
 
 Connect little machines. Make strange sounds. See what happens.
 
-52 modules, 32 starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
+54 modules, 32 starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
 
 ## Play
 

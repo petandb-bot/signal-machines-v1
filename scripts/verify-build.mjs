@@ -36,4 +36,16 @@ for(let i=0;i<40;i++){const n=i%2?511:193,l=new Float32Array(n),r=new Float32Arr
 master.port.onmessage({data:{type:'recordStop'}});const masterMessages=messages.slice(masterBefore);let cursor=0;
 for(const message of masterMessages.filter(m=>m.type==='recordData'&&m.id===501))for(let i=0;i<message.frames;i++,cursor++){assert.equal(message.left[i],expectedL[cursor]);assert.equal(message.right[i],expectedR[cursor]);}
 assert.equal(cursor,expectedL.length);assert(expectedL.some(n=>n!==0));assert(masterMessages.some(m=>m.type==='recordEnd'&&m.id===501));
+// New registered roles also execute in the emitted bundle without a new preset.
+const pmPatch={version:1,layout:2,name:'PM LPG acceptance',seed:13,bpm:100,master:.5,modules:[
+{id:'a',type:'OPERATOR',x:0,y:0,seed:1,character:'METAL',params:{tune:.5,depth:.3}},
+{id:'b',type:'OPERATOR',x:144,y:0,seed:2,character:'METAL',params:{tune:.65,depth:.7}},
+{id:'lpg',type:'LPG',x:288,y:0,seed:3,character:'METAL',params:{bite:.7,decay:.5}},
+{id:'out',type:'OUTPUT',x:432,y:0,seed:4,character:'METAL',params:{level:.7}}],connections:[
+{id:'pm',from:{module:'a',port:'audio'},to:{module:'b',port:'mod'}},
+{id:'gate',from:{module:'b',port:'audio'},to:{module:'lpg',port:'audio'}},
+{id:'out',from:{module:'lpg',port:'audio'},to:{module:'out',port:'audio'}}]};
+const pm=new Processor(),pmBefore=messages.length;pm.port.onmessage({data:{type:'patch',patch:pmPatch,reset:true}});let pmEnergy=0;
+for(let i=0;i<300;i++){const l=new Float32Array(193),r=new Float32Array(193);pm.process([],[ [l,r] ]);for(const v of [...l,...r]){assert(Number.isFinite(v)&&Math.abs(v)<=.63);pmEnergy+=v*v;}}
+assert(pmEnergy>.01);assert(!messages.slice(pmBefore).some(m=>m.type==='error'||m.type==='telemetry'&&m.data.faults>0));
 console.log(JSON.stringify({result:'PASS',test:'production worklet: thirty-two presets, 3 s each / 48 kHz / stereo / variable blocks; LOOP record, overdub, import/export and restart/reset bridge; sample-identical master PCM capture',results},null,2));
