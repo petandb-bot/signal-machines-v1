@@ -220,7 +220,9 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     const css=readFileSync('src/styles/main.css','utf8');
     const portrait=css.split('@media (max-width:600px) and (orientation:portrait) {')[1]?.split('@media (pointer:coarse)')[0];
     expect(portrait).toBeDefined();
-    expect(portrait).toContain('padding-top: calc(env(safe-area-inset-top) + 9px)');
+    // On iPhone portrait the transport has two dotted-grid rows of extra status-bar clearance.
+    expect(portrait).toContain('padding-top: calc(env(safe-area-inset-top) + clamp(43px, 5.5dvh, 54px))');
+    expect(portrait).toContain('grid-template-rows: 44px 44px');
     expect(portrait).not.toContain('--portrait-stage-height');
     expect(portrait).toContain('.topbar .menu-button::before');
     expect(portrait).toContain('box-shadow: -10px 0 currentColor, 10px 0 currentColor');
