@@ -189,6 +189,31 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add PENDULUM module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));vi.spyOn(app.audio,'start').mockImplementation(async()=>{app.audio.running=true;});const action=vi.spyOn(app.audio,'moduleAction').mockResolvedValue(undefined);document.querySelector<HTMLButtonElement>('[aria-label="Kick the pendulums"]')!.click();await vi.waitFor(()=>expect(action).toHaveBeenCalledWith(id,'kick',undefined));
   });
 
+  it.each([390,320])('portrait FIT contains every SPLIT ORBITS chip on a %spx screen',width=>{
+    // Simulate portrait regardless of the unit test host's CSS media implementation.
+    Object.defineProperty(app.workspace,'portraitLayout',{configurable:true,value:{matches:true}});
+    const height=700;
+    app.workspace.viewport.getBoundingClientRect=()=>new DOMRect(0,0,width,height);
+    const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;
+    preset.value='21';preset.dispatchEvent(new Event('change'));
+    const original=structuredClone(app.store.patch);
+    app.workspace.fit();
+    const transform=app.workspace.world.style.transform;
+    const parts=transform.match(/-?[0-9]+(?:[.][0-9]+)?/g)?.map(Number);
+    expect(parts).toHaveLength(3);
+    const [panX,panY,zoom]=parts!;
+    const modules=app.store.patch.modules;
+    expect(zoom).toBeGreaterThan(0);
+    expect(zoom).toBeLessThan(.875); // No minimum zoom that clips wide patches.
+    for(const module of modules){
+      expect(module.x*zoom+panX).toBeGreaterThanOrEqual(4);
+      expect((module.x+128)*zoom+panX).toBeLessThanOrEqual(width-4);
+      expect(module.y*zoom+panY).toBeGreaterThanOrEqual(12);
+      expect((module.y+132)*zoom+panY).toBeLessThanOrEqual(height-56);
+    }
+    expect(app.store.patch).toEqual(original); // Only the viewport moves; patch JSON is untouched.
+  });
+
   it.each([[390,844],[844,390],[320,568],[1280,800]])('exposes header deletion and preserves cancellation at a %s×%s viewport',(width,height)=>{
     Object.defineProperty(window,'innerWidth',{value:width,configurable:true});Object.defineProperty(window,'innerHeight',{value:height,configurable:true});const style=document.createElement('style');style.textContent=readFileSync('src/styles/main.css','utf8');document.head.append(style);
     document.querySelector<HTMLElement>('.module-card[data-module="alloy-1"]')!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));const before=structuredClone(app.store.patch),selected=app.store.selectedModule;const sync=vi.spyOn(app.audio,'sync');
