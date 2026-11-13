@@ -22,7 +22,7 @@ export class Workspace {
   constructor(readonly store:StateStore){
     this.root.setAttribute('aria-label','Modular patch workspace');this.svg.classList.add('cables');this.svg.setAttribute('width','1');this.svg.setAttribute('height','1');
     this.world.append(this.svg,this.nodes);this.viewport.append(this.world);
-    const nav=element('div','workspace-nav');nav.append(button('−','Zoom out',()=>this.setZoom(this.zoom/1.2)),this.zoomLabel,button('+','Zoom in',()=>this.setZoom(this.zoom*1.2)),button('FIT','Fit patch to workspace',()=>this.fit(),'fit-button'));
+    const nav=element('div','workspace-nav');nav.setAttribute('role','group');nav.setAttribute('aria-label','Workspace zoom controls');nav.append(button('−','Zoom out',()=>this.setZoom(this.zoom/1.2)),this.zoomLabel,button('+','Zoom in',()=>this.setZoom(this.zoom*1.2)),button('FIT','Fit patch to workspace',()=>this.fit(),'fit-button'));
     this.hint.setAttribute('role','status');this.hint.setAttribute('aria-live','polite');this.root.append(this.viewport,nav,this.hint);
     this.viewport.addEventListener('pointerdown',event=>this.pointerDown(event));this.viewport.addEventListener('pointermove',event=>this.pointerMove(event));this.viewport.addEventListener('pointerup',event=>this.pointerUp(event));
     this.viewport.addEventListener('pointercancel',()=>{this.persistMove();this.pointers.clear();this.pinch=undefined;this.cancelDrag();});
