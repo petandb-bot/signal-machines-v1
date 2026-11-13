@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "FOUND / QUIET",
+  "bpm": 64,
+  "master": 0.65,
+  "seed": 171701,
+  "modules": [
+    {
+      "id": "found-1",
+      "type": "FOUND",
+      "x": 16,
+      "y": 16,
+      "seed": 5101,
+      "character": "METAL",
+      "params": {
+        "wander": 0.25,
+        "alter": 0.1
+      },
+      "sample": "builtin:room"
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 184,
+      "seed": 5102,
+      "character": "METAL",
+      "params": {
+        "flow": 0.5,
+        "range": 0.8
+      }
+    },
+    {
+      "id": "orbit-1",
+      "type": "ORBIT",
+      "x": 192,
+      "y": 16,
+      "seed": 5103,
+      "character": "METAL",
+      "params": {
+        "rate": 0.2,
+        "depth": 0.4
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 16,
+      "seed": 5104,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "found-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "orbit-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "found-1",
+        "port": "move"
+      }
+    }
+  ]
+}

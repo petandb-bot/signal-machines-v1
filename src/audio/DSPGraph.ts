@@ -1,9 +1,20 @@
+import {Found} from './modules/Found';
+import {validateFoundAudio,MAX_FOUND,validFoundRef} from '../samples/FoundData';
+import type {FoundAudio} from '../samples/FoundData';
 import type { EngineTelemetry, Patch } from '../graph/types';
 import { DSPModule, clamp } from './DSPModule';
 import { compilePatch } from './PatchCompiler';
 import type { CompiledModule } from './PatchCompiler';
 import { processModule } from './SignalRouter';
 export class DSPGraph {
+  private foundAssets=new Map<string,FoundAudio>();
+  setFoundAssets(values:FoundAudio[],retain?:string[]){
+    if(!Array.isArray(values)||values.length>MAX_FOUND||retain!==undefined&&(!Array.isArray(retain)||retain.length>MAX_FOUND||!retain.every(validFoundRef)))throw Error('Invalid FOUND assets.');
+    const updates=values.map(validateFoundAudio),next=new Map<string,FoundAudio>();
+    if(retain)for(const id of retain){const old=this.foundAssets.get(id);if(old)next.set(id,old);}
+    for(const a of updates)next.set(a.id,a);if(next.size>MAX_FOUND)throw Error('Too many FOUND assets.');this.foundAssets=next;
+    // Bind only at the subsequent muted patch commit, never in the asset message handler.
+  }
   modules = new Map<string, DSPModule>();
   private ordered: CompiledModule[] = []; private outputs: DSPModule[] = [];
   private actions:Array<{id:string;action:string;payload:unknown;reply:(result:unknown,error?:string)=>void}>=[];private preserveLoops=false;
@@ -21,6 +32,7 @@ export class DSPGraph {
     const existing=reset?(preserveLoops?new Map([...this.modules].filter(([,dsp])=>dsp.state.type==='LOOP'||dsp.state.type==='PRISM'||dsp.state.type==='TIDE'||dsp.state.type==='BOUNCE'||dsp.state.type==='PENDULUM')):undefined):this.modules;
     const compiled = compilePatch(patch, this.sampleRate,existing);
     if(reset&&preserveLoops)for(const dsp of compiled.modules.values())if(dsp.state.type==='LOOP')dsp.command('restart');
+    for(const dsp of compiled.modules.values())if(dsp instanceof Found)dsp.attach(this.foundAssets.get(dsp.reference));
     this.modules = compiled.modules; this.ordered = compiled.ordered; this.outputs = compiled.outputs;
     this.bpm = patch.bpm; this.targetMaster = patch.master;
     if (reset) { this.sample = 0; this.faults = 0; }

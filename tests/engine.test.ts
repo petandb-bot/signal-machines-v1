@@ -58,4 +58,37 @@ describe('transport, throttling and recording orchestration with mocked browser 
     const engine=new AudioEngine(),error=vi.fn();engine.onError=error;await engine.startRecording(metalDrift(),'wav');const id=(sent.at(-1) as {id:number}).id;const stopped=engine.stop();FakeNode.last.port.onmessage({data:{type:'recordEnd',id}});await vi.advanceTimersByTimeAsync(60);await stopped;expect(engine.running).toBe(false);expect(error).toHaveBeenCalledWith('No audio was recorded.');
   });
 
+  it('loads FOUND assets before its patch and retains original PCM through RUN/STOP and rewiring',async()=>{
+    const {foundQuiet}=await import('../src/state/presets');const engine=new AudioEngine(),p=foundQuiet();await engine.start(p);const messages=sent as {type:string;assets?:{left:Float32Array}[]}[];expect(messages[0].type).toBe('foundAssets');expect(messages[1].type).toBe('patch');const original=await engine.foundLibrary.get();expect(messages[0].assets![0].left).not.toBe(original!.left);expect(original!.left.length).toBe(288000);engine.sync(p,true);await vi.waitFor(()=>expect(messages.filter(m=>m.type==='patch')).toHaveLength(2));expect(messages.filter(m=>m.type==='foundAssets')).toHaveLength(1);const stopped=engine.stop();await vi.advanceTimersByTimeAsync(55);await stopped;await engine.start(p);expect(messages.filter(m=>m.type==='foundAssets')).toHaveLength(1);
+  });
+  it('preserves latest bpm, master and module control settings while FOUND prepares audio',async()=>{
+    const {foundQuiet}=await import('../src/state/presets');
+    const {builtinFound}=await import('../src/samples/FoundData');
+    const engine=new AudioEngine(),patch=foundQuiet();
+    await engine.start(patch);
+    let resume!:(audio:ReturnType<typeof builtinFound>)=>void;
+    vi.spyOn(engine.foundLibrary,'get').mockImplementation(()=>new Promise(resolve=>{resume=resolve;}));
+    engine.sync(patch,true);
+    patch.bpm=99;patch.master=.31;
+    const found=patch.modules.find(m=>m.type==='FOUND')!;
+    found.params.wander=.91;found.params.alter=.74;
+    found.character='ROUGH';found.mode=undefined;found.wide=true;found.bypass=true;
+    engine.sync(patch,false);
+    resume(builtinFound('room'));
+    await vi.waitFor(()=>expect(sent.filter(m=>(m as {type:string}).type==='patch')).toHaveLength(2));
+    const latest=(sent.filter(m=>(m as {type:string}).type==='patch').at(-1) as {patch:typeof patch}).patch;
+    const sentFound=latest.modules.find(m=>m.id===found.id)!;
+    expect(latest.bpm).toBe(99);
+    expect(latest.master).toBeCloseTo(.31);
+    expect(sentFound.params.wander).toBeCloseTo(.91);
+    expect(sentFound.params.alter).toBeCloseTo(.74);
+    expect(sentFound.character).toBe('ROUGH');
+    expect(sentFound.wide).toBe(true);
+    expect(sentFound.bypass).toBe(true);
+  });
+
+  it('ignores a late FOUND preparation after a different patch has been selected',async()=>{
+    const {foundQuiet}=await import('../src/state/presets');const {builtinFound}=await import('../src/samples/FoundData');const engine=new AudioEngine();await engine.start(metalDrift());let resolve!:(a:ReturnType<typeof builtinFound>)=>void;vi.spyOn(engine.foundLibrary,'get').mockImplementation(()=>new Promise(r=>resolve=r));engine.sync(foundQuiet(),true);engine.sync(metalDrift(),true);resolve(builtinFound('room'));await Promise.resolve();await Promise.resolve();await Promise.resolve();expect((sent.at(-1) as {patch:{name:string}}).patch.name).toBe('METAL DRIFT');
+  });
+
 });

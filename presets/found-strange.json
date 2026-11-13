@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "FOUND / STRANGE",
+  "bpm": 80,
+  "master": 0.65,
+  "seed": 171702,
+  "modules": [
+    {
+      "id": "found-1",
+      "type": "FOUND",
+      "x": 16,
+      "y": 16,
+      "seed": 5201,
+      "character": "METAL",
+      "params": {
+        "wander": 0.75,
+        "alter": 0.65
+      },
+      "sample": "builtin:machine"
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 192,
+      "y": 184,
+      "seed": 5202,
+      "character": "METAL",
+      "params": {
+        "material": 0.46,
+        "decay": 0.25
+      }
+    },
+    {
+      "id": "mesh-1",
+      "type": "MESH",
+      "x": 368,
+      "y": 16,
+      "seed": 5203,
+      "character": "METAL",
+      "params": {
+        "transfer": 0.65,
+        "memory": 0.5
+      }
+    },
+    {
+      "id": "cloud-1",
+      "type": "CLOUD",
+      "x": 192,
+      "y": 16,
+      "seed": 5204,
+      "character": "METAL",
+      "params": {
+        "grain": 0.25,
+        "spread": 0.55
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 5205,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "found-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "cloud-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "found-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "cloud-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mesh-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mesh-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "mesh-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

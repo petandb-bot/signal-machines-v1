@@ -1,10 +1,10 @@
-# Verification / v0.16
+# Verification / v0.17 (proposed)
 
 ## Automated coverage
 
 Host: managed Linux, Node 24.22.1. p5.js is pinned to 2.3.4. `package-lock.json` pins dependencies.
 
-- The test inventory is **414 tests in 31 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
+- The test inventory is **450 tests in 34 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
 - New DSP checks: the original three presets produce nonzero finite audio; BRANCH repeats before mutation and emits scale-constrained seeded pitch/gate; RESON decays and responds to external excitation; FRACTURE is transparent at BREAK zero and retains audible captured audio after input ends at maximum HOLD. The original eight module types also run together at extreme macros without invalid samples or master overshoot.
 - Noise modules: seeded stereo VENOM, zero-dose silence, trigger boosts and CV; SNAP dry pass-through, forced interruption/recovery, repeatable automatic dropouts, bounded edge steps and no independent sound from silent input; CAUSTIC dry pass-through, actual waveform changes, extreme drive and decay to silence. BAD CONTACT is checked for finite master output, maximum settings and variable-block deterministic rendering.
 - Ambient/feedback modules: all three new presets validate and synthesize; continuous untriggered DRONE, spectral focus response, a stable 20-second tape tail, bounded envelope-derived controls, explicit full-intervening-quantum delay using 17/193/64-frame blocks, order-independent delayed cycle import and continued rejection of unauthorized AUDIO/mixed cycles. Actual host energy reaches SNAP FAULT and BRANCH CHANGE. Maximum feedback/macro settings remain finite.
@@ -249,3 +249,18 @@ A CSS-only chip/library material refinement: tinted casing, layered flat bevels,
 Offline 48kHz CPU, warmed median of three one-second managed-Linux Node runs (after two warmups): SMEAR 15.4 ms/audio-second; FRICTION 17.4 ms/audio-second; five-module SLIDING GLASS graph 121.8 ms/audio-second. Direct-module figures omit graph/UI scheduling; none are iPhone real-time guarantees.
 
 Final production acceptance: `npm run build` and `npm run verify:build` PASS. All 34 presets render 3 seconds at 48kHz through the emitted AudioWorklet, with protected finite output; LOOP, exact master PCM capture and interaction bridges also pass. An A/B render against v0.15.1 compares the original 32 presets for one second each at 48kHz: all 3,072,000 stereo sample values are identical. All 57 legacy module definitions, parameter/port metadata and chip dimensions also compare exactly.
+
+
+## FOUND + LEVEL branch acceptance
+
+450 tests in 34 files pass. FOUND adds feature/quiet-anchor analysis outside Worklet; reference-only JSON; two-instance/60-second/32MB guards; 24kHz stereo playback; bounded session fallback; real transaction APIs exercised through fake-indexedDB; metadata-before-decode and codec failures through mocked browser APIs; no-RUN import/source selection; snapshots; zero-wander normal play; seeded exploration, TRIG/MOVE, crossfades, multiple sample rates and unchanged-reader asset replacement. AudioEngine tests exercise asset-before-patch ordering, transfer copies, transport/rewiring reuse and cancellation of stale asynchronous sample preparation.
+
+LEVEL tests cover exact default transparency, −12/+6/+24dB gains, uncompressed and quiet signals, stereo-linked compression, silence, recovery, smoothed boost edits, finite extreme inputs and the recovery demo. Existing recording/LOOP, snapshots, mobile deletion and patching tests remain.
+
+PCM accounting: a maximum 60-second 24kHz stereo asset uses 11.52MB; two unique assets use 23.04MB in Worklet, plus up to 23.04MB retained host PCM. Changed-asset transfer and serial decoder activity have temporary costs; session-only encoded fallback is bounded to 64MB. These byte counts are not a native iPhone memory measurement.
+
+No main merge or deployment is authorized for this task. The listening page and proposed source ZIP are build artifacts for review; current published URLs continue serving the earlier release. Native codec/storage/file-picker behavior, actual phone rendering/CPU and human listening remain unverified.
+
+Final checks on this branch: `npm ci`, `npm test` (450 / 34 files), `npm run build`, and `npm run verify:build` all pass. The emitted worklet renders all 37 presets for 3 seconds at 48kHz with finite protected output; the existing LOOP, interaction and exact master-PCM capture bridges also pass. Final UI tests exercise the zero-dB detent and loaded-file waveform.
+
+A Node ArrayBuffer measurement with two 60-second stereo assets and transferred copies observed exactly 46,080,000 additional bytes: 23,040,000 host PCM plus 23,040,000 receiving PCM. This excludes browser codec/native buffers and is not a device RSS measurement. Five new comparison/demo WAVs are generated as ignored build artifacts with no normalization and no user audio. No human listening claim is made.

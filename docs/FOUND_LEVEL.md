@@ -1,0 +1,33 @@
+# FOUND — recorded sound as a small autonomous instrument
+
+FOUND explores lightweight feature anchors (energy changes, onsets and quiet passages). Half of its candidate budget covers the whole file, so tails and silence remain eligible. Selection uses MOVE, features, a short recent-history list and the saved seed. MOVE is sampled into selection tendency; it never scrubs a read head each frame.
+
+WANDER zero / ALTER zero plays at normal rate, with short overlaps at file loops. WANDER opens shorter, more distant regions. ALTER changes speed, sometimes reverses, and shortens repetition; minimum region lengths and raised-cosine overlaps avoid deliberate hard glitch cuts. TRIG requests a new region; requests during a fade wait until the fade finishes. EVENT fires only when the actual region bounds change. The display shows the sample envelope, region bounds and current reader.
+
+ROOM, RAIN and MACHINE are original **synthetic** environmental textures, generated and analyzed outside AudioWorklet. They are not field recordings. ROOM is selected when adding FOUND. Selecting/importing does not start audio: the existing RUN gesture is still required.
+
+Local file limits: 32 MB, 60 seconds, mono/stereo, browser-supported WAV/MP3/M4A and other audio codecs. A media metadata preflight rejects overlong files before PCM decoding. OfflineAudioContext decodes/resamples to **24kHz**; analysis and sample scanning run outside the render thread. Playback bandwidth is consequently about 12kHz; the original encoded Blob is retained without this resampling. Unsupported or indeterminate durations fail with an explanation, preserving the previous reference. No streaming or trim editor.
+
+Two FOUND modules per patch. Each 60-second stereo PCM asset is 11.52 MB (decimal); two unique active assets are 23.04 MB per side of the message bridge, about 46.08 MB for host plus worklet PCM. Imports and crossfades can temporarily retain an old asset and decoder buffers. File decodes are serialized to reduce transient memory. Only changed PCM is copied/transferred; unchanged readers are retained when another sample changes. Session-only encoded fallback is capped at 64 MB. Native decoder peak memory is browser-specific and unverified.
+
+IndexedDB stores the original encoded Blob, name and a reference ID. Patch JSON and snapshots carry **only the reference**, never audio samples. Local audio does **not** follow a JSON file to another device/browser/origin. Missing references warn and remain silent; there is no silent fallback to ROOM. A failed storage write keeps the sample usable in this session where memory allows, with a warning. Clearing browser data removes persisted samples. Samples are not automatically deleted when removing a module because snapshots may still refer to them. There is no audio ZIP export.
+
+RUN/STOP, rewiring and parameter edits retain material through a graph-owned, bounded cache. Snapshot reset resolves the saved reference again. FOUND has its own data/store/player; LOOP recording and its PCM16 WAV bridge are unchanged.
+
+Demos: **FOUND / QUIET** (ROOM with a slow MOVE tendency and stereo motion), **FOUND / STRANGE** (MACHINE events excite RESON while CLOUD and MESH transform its audio).
+
+Automated tests exercise deterministic play, feature anchors, quiet passages, TRIG/MOVE, crossfades, multiple rates, reference-only validation, asset replacement, persistence with a simulated IndexedDB, quota/decoder failure, metadata preflight, transport/rewiring and UI selection. These do not constitute listening, native codec, iPhone file-picker, Safari storage/privacy or real-time memory/thermal verification.
+
+## LEVEL — bring small sounds forward
+
+BOOST is −12…+24dB, with a visible **0dB** reference at one third of the track. Default 0dB / COMP zero is sample-transparent in the normal signal range. Gain changes are smoothed; zero input stays zero.
+
+COMP provides fixed-threshold (about −14dB), 6dB soft-knee, stereo-linked downward compression, with ratio 1:1…4:1, about 5ms detector attack and 180ms release. There is no automatic makeup gain, sidechain port, multiband mode or hidden editor. Both stereo channels share the detector and gain reduction. Only the existing graph's ±8 numeric ceiling is mirrored as a common-channel safety bound before master protection; no dedicated limiter or OUTPUT/master change.
+
+**LEVEL / RECOVERY** blends an attenuated drone and restrained metal strikes through LEVEL, so quiet details are recovered while stronger events can be settled. A separate three-section WAV compares the same input at 0dB, +18dB, and +18dB with COMP .8, without loudness normalization.
+
+## Review and verification
+
+This work is on `feat/found-level`, with FOUND and LEVEL in separate commits. It is proposed by pull request; main and the published app are not updated by this task. Run `npm ci`, `npm run dev`, then select the three new demos. The local `/listening/index.html` page includes five offline FOUND/LEVEL WAVs generated by `npm run render:found` or a normal build. They are 24kHz stereo PCM16 at unit gain, with short clip-boundary fades; no user files are included.
+
+Human listening and native browser checks have not been performed. File-picker behavior, native WAV/MP3/M4A decoding, real IndexedDB storage/quota/private browsing, iPhone portrait/landscape rendering and actual device memory/thermal behavior still need review. Automated DOM, fake-indexedDB and mocked decoder tests establish application behavior, not those native guarantees.

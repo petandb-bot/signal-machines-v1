@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "LEVEL / RECOVERY",
+  "bpm": 76,
+  "master": 0.65,
+  "seed": 171703,
+  "modules": [
+    {
+      "id": "drone-1",
+      "type": "DRONE",
+      "x": 16,
+      "y": 16,
+      "seed": 5301,
+      "character": "METAL",
+      "params": {
+        "spread": 0.38,
+        "color": 0.7
+      }
+    },
+    {
+      "id": "vca-1",
+      "type": "VCA",
+      "x": 192,
+      "y": 16,
+      "seed": 5302,
+      "character": "METAL",
+      "params": {
+        "level": 0.035,
+        "blend": 0
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 544,
+      "y": 96,
+      "seed": 5303,
+      "character": "METAL",
+      "params": {
+        "boost": 0.9,
+        "comp": 0.6
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 96,
+      "seed": 5304,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 184,
+      "seed": 5305,
+      "character": "METAL",
+      "params": {
+        "rate": 0.4,
+        "irregular": 0
+      }
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 192,
+      "y": 184,
+      "seed": 5306,
+      "character": "SOFT",
+      "params": {
+        "body": 0.22,
+        "tension": 0.3
+      }
+    },
+    {
+      "id": "hit-gain",
+      "type": "VCA",
+      "x": 368,
+      "y": 184,
+      "seed": 5307,
+      "character": "METAL",
+      "params": {
+        "level": 0.25,
+        "blend": 0
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "drone-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "vca-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "hit-gain",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "hit-gain",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

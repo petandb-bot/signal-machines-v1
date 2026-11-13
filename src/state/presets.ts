@@ -217,3 +217,22 @@ export function slidingGlass():Patch{
   wire(p,'friction-1','slip','reson-1','trigger');wire(p,'friction-1','activity','reson-1','material');wire(p,'friction-1','audio','smear-1','audio');wire(p,'reson-1','audio','smear-1','audio');wire(p,'smear-1','audio','output-1','audio');wire(p,'smear-1','audio','parasite-1','audio');wire(p,'parasite-1','fever','friction-1','speed');return p;
 }
 PRESETS.push({name:'DISSOLVING METAL',description:'Irregular metal attacks loosen into separate histories',create:dissolvingMetal},{name:'SLIDING GLASS',description:'A slipping surface excites a second body and listens to its own trace',create:slidingGlass});
+
+export function foundQuiet():Patch{
+  const p=patch('FOUND / QUIET',64,171701);add(p,'FOUND',16,16,5101);add(p,'TIDE',16,184,5102);add(p,'ORBIT',192,16,5103);add(p,'OUTPUT',368,16,5104);
+  p.modules[0].sample='builtin:room';p.modules[0].params.wander=.25;p.modules[0].params.alter=.1;p.modules[2].params.rate=.2;p.modules[2].params.depth=.4;
+  wire(p,'found-1','audio','orbit-1','audio');wire(p,'orbit-1','audio','output-1','audio');wire(p,'tide-1','drift','found-1','move');return p;
+}
+export function foundStrange():Patch{
+  const p=patch('FOUND / STRANGE',80,171702);add(p,'FOUND',16,16,5201);add(p,'RESON',192,184,5202);add(p,'MESH',368,16,5203);add(p,'CLOUD',192,16,5204);add(p,'OUTPUT',544,16,5205);
+  p.modules[0].sample='builtin:machine';p.modules[0].params.wander=.75;p.modules[0].params.alter=.65;p.modules[1].params.decay=.25;p.modules[3].params.grain=.25;
+  wire(p,'found-1','audio','cloud-1','audio');wire(p,'found-1','event','reson-1','trigger');wire(p,'cloud-1','audio','mesh-1','a');wire(p,'reson-1','audio','mesh-1','b');wire(p,'mesh-1','audio','output-1','audio');return p;
+}
+PRESETS.push({name:'FOUND / QUIET',description:'Quiet synthetic room air follows a slow tide',create:foundQuiet},{name:'FOUND / STRANGE',description:'Discovered machine events excite another body',create:foundStrange});
+
+export function levelRecovery():Patch{
+  const p=patch('LEVEL / RECOVERY',76,171703);add(p,'DRONE',16,16,5301);add(p,'VCA',192,16,5302);add(p,'LEVEL',544,96,5303);add(p,'OUTPUT',720,96,5304);add(p,'PULSE',16,184,5305);add(p,'ALLOY',192,184,5306);p.modules.push(createModule('VCA',368,184,5307,'hit-gain'));
+  p.modules[0].params.color=.7;p.modules[1].params.level=.035;p.modules[2].params.boost=.9;p.modules[2].params.comp=.6;p.modules[4].params.rate=.4;p.modules[4].params.irregular=0;p.modules[5].params.body=.22;p.modules[5].params.tension=.3;p.modules[5].character='SOFT';p.modules[6].params.level=.25;
+  wire(p,'drone-1','audio','vca-1','a');wire(p,'vca-1','audio','level-1','audio');wire(p,'pulse-1','trigger','alloy-1','trigger');wire(p,'alloy-1','audio','hit-gain','a');wire(p,'hit-gain','audio','level-1','audio');wire(p,'level-1','audio','output-1','audio');return p;
+}
+PRESETS.push({name:'LEVEL / RECOVERY',description:'A small continuous source is brought forward without changing its stereo field',create:levelRecovery});
