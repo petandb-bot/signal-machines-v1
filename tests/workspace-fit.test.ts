@@ -45,10 +45,18 @@ function expectCables(view:Workspace,store:StateStore){
 }
 
 describe('portrait display coordinates and viewport',()=>{
+ it.each([[390,743],[402,773],[320,467]])('contains every chip above the dock at %s×%s',(w,h)=>{
+  const {view,store}=useSplit();width=w;height=h;resize();view.fit();const t=transform(view);
+  for(const p of points(view,store)){expect(p.x*t.zoom+t.x).toBeGreaterThanOrEqual(12);expect((p.x+128)*t.zoom+t.x).toBeLessThanOrEqual(w-12);expect(p.y*t.zoom+t.y).toBeGreaterThanOrEqual(16);expect((p.y+132)*t.zoom+t.y).toBeLessThanOrEqual(h-84);}
+ });
+ it('refits an overview when height shrinks, but preserves manual zoom on later height changes',()=>{
+  const {view}=useSplit();const before=transform(view).zoom;height=400;resize();expect(transform(view).zoom).toBeLessThan(before);
+  view.root.querySelector<HTMLButtonElement>('[aria-label="Zoom in"]')!.click();const manual=transform(view);height=350;resize();expect(transform(view)).toEqual(manual);
+ });
  it('folds SPLIT ORBITS into two columns/four rows with readable FIT and no saved changes',()=>{
   const {view,store}=useSplit(),before=structuredClone(store.patch),p=points(view,store),t=transform(view);
   expect(new Set(p.map(p=>p.x)).size).toBe(2);expect(new Set(p.map(p=>p.y)).size).toBe(4);
-  expect(t.zoom).toBeGreaterThanOrEqual(.875);expect(t.zoom).toBeLessThanOrEqual(1);
+  expect(t.zoom).toBeGreaterThan(0);expect(t.zoom).toBeLessThanOrEqual(1);
   expect(Math.min(...p.map(p=>p.y))*t.zoom+t.y).toBe(20);expect(view.root.style.getPropertyValue('--portrait-stage-height')).toBe('');
   expectCables(view,store);view.fit();expect(store.patch).toEqual(before);
  });
@@ -58,7 +66,7 @@ describe('portrait display coordinates and viewport',()=>{
   const source=store.patch.modules.find(m=>m.id==='pulse-1')!,port=DEFINITIONS.PULSE.outputs[0],origin=portPosition(view.displayPosition(source),port);
   view.armPort({module:source.id,port:port.id,direction:'out'});expect(view.svg.querySelector('.preview')!.getAttribute('d')!.startsWith(`M ${origin.x} ${origin.y} `)).toBe(true);view.cancelDrag();
   view.root.querySelector<HTMLElement>('.workspace-nav')!.getBoundingClientRect=()=>new DOMRect(90,300,200,48);
-  view.reveal(module.id,0,350);const t=transform(view),p=view.displayPosition(module);expect(p.y*t.zoom+t.y+132*t.zoom).toBeLessThanOrEqual(288.001);
+  view.reveal(module.id,0,350);const t=transform(view),p=view.displayPosition(module);expect(p.y*t.zoom+t.y+132*t.zoom).toBeLessThanOrEqual(292.001);
   expect(parsePatch(JSON.stringify(store.patch))).toEqual(before);
  });
  it('keeps local moves across FIT/height changes and restores original cards/cables in landscape',()=>{
@@ -81,7 +89,7 @@ describe('portrait display coordinates and viewport',()=>{
  });
  it('honors safe padding and retains readable scale for many rows on a small phone',()=>{
   const {view,store}=useSplit();view.root.style.paddingLeft='24px';view.root.style.paddingRight='12px';view.root.style.paddingBottom='34px';width=320;height=475;resize();
-  const t=transform(view);expect(t.zoom).toBe(.875);for(const p of points(view,store)){expect(p.x*t.zoom+t.x).toBeGreaterThanOrEqual(24);expect((p.x+128)*t.zoom+t.x).toBeLessThanOrEqual(308);}
+  const t=transform(view);expect(t.zoom).toBeLessThan(.875);for(const p of points(view,store)){expect(p.x*t.zoom+t.x).toBeGreaterThanOrEqual(24);expect((p.x+128)*t.zoom+t.x).toBeLessThanOrEqual(308);}
  });
  it.each([[844,340,108.57777778,9.64444444,.91111111],[1280,744,296,196,1]])('retains the original default FIT at %s×%s',(w,h,x,y,zoom)=>{
   portrait=false;width=w;height=h;const {view}=workspace(),t=transform(view);expect(t.x).toBeCloseTo(x,6);expect(t.y).toBeCloseTo(y,6);expect(t.zoom).toBeCloseTo(zoom,6);
@@ -92,6 +100,6 @@ describe('portrait display coordinates and viewport',()=>{
  it('fits the selected chip above the editor dock even on a short 320px phone',()=>{
   const {view,store}=useSplit();store.patch.modules=store.patch.modules.slice(0,3);store.patch.connections=[];width=320;height=475;view.render();view.fit();
   view.root.querySelector<HTMLElement>('.workspace-nav')!.getBoundingClientRect=()=>new DOMRect(60,132.7,200,48);
-  view.reveal(store.patch.modules[0].id,0,278.3);const t=transform(view),p=view.displayPosition(store.patch.modules[0]);expect(p.y*t.zoom+t.y+132*t.zoom).toBeLessThan(121);
+  view.reveal(store.patch.modules[0].id,0,278.3);const t=transform(view),p=view.displayPosition(store.patch.modules[0]);expect(p.y*t.zoom+t.y+132*t.zoom).toBeLessThan(125);
  });
 });

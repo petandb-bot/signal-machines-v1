@@ -20,7 +20,7 @@ An old-computer face for a living sound circuit: green text, small pixel windows
 
 [New sound studies](https://petandb-bot.github.io/signal-machines-v1/listening/): dissolving attacks and a slipping contact voice. [Notes](docs/STRANGE_SOUNDS.md).
 
-Headphones are useful. On phones in portrait, the rack uses a compact stage that adapts to the patch instead of stretching across the entire screen. FIT shows every chip; the zoom dock stays directly below the rack. Use + or pinch to zoom in, then drag the background to pan. Landscape has more room for patching.
+Headphones are useful. Phone portrait opens with a two-column overview of the whole patch. Use + or pinch to zoom in, and drag the background to pan. Landscape and desktop retain the saved rack layout. [Portrait overview and examples](docs/PORTRAIT_OVERVIEW.md).
 
 FOUND explores browser-local samples with two controls; LEVEL brings quiet details forward. [Sample limits, storage and review notes](docs/FOUND_LEVEL.md).
 
