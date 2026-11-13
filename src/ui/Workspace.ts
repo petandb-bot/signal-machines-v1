@@ -31,13 +31,14 @@ export class Workspace {
     let previousWidth=0,previousHeight=0,previousPortrait=this.portraitLayout.matches;
     new ResizeObserver(()=>{
       const width=this.viewport.clientWidth,height=this.viewport.clientHeight,portrait=this.portraitLayout.matches;
+      const firstMeasurement=previousWidth===0&&width>0&&height>0;
       const orientationChanged=previousWidth>0&&previousHeight>0&&portrait!==previousPortrait;
       const portraitWidthChanged=portrait&&previousWidth>0&&Math.abs(width-previousWidth)>8;
       // Safari's collapsing browser chrome changes height: keep the portrait top edge stable.
-      // Width changes, however, must re-fit the entire rack so chips do not disappear off-screen.
+      // Width changes and the first measured layout must use actual rack bounds.
       if(previousWidth&&previousHeight&&!orientationChanged){this.panX+=(width-previousWidth)/2;if(!portrait)this.panY+=(height-previousHeight)/2;}
       previousWidth=width;previousHeight=height;previousPortrait=portrait;
-      if(orientationChanged||portraitWidthChanged)this.fit();else this.transform();
+      if(firstMeasurement||orientationChanged||portraitWidthChanged)this.fit();else this.transform();
     }).observe(this.viewport);
     this.render();requestAnimationFrame(()=>this.fit());
   }
@@ -54,18 +55,30 @@ export class Workspace {
     return center;
   }
   fit(){
-    const modules=this.store.patch.modules,r=this.viewport.getBoundingClientRect(),safe=this.insets(),available=r.width-safe.left-safe.right;
-    if(!modules.length){this.zoom=1;this.panX=r.width/2-150;this.panY=r.height/2-70;this.transform();return;}
-    const portrait=this.portraitLayout.matches;
+    const modules=this.store.patch.modules,portrait=this.portraitLayout.matches,safe=this.insets();
+    // A portrait rack should occupy a compact stage sized to its content, not the
+    // entire tall phone screen. Floating editor/library panels still use the full main area.
+    const before=this.viewport.getBoundingClientRect();
+    if(!modules.length){
+      if(portrait)this.root.style.setProperty('--portrait-stage-height','300px');
+      const r=this.viewport.getBoundingClientRect();this.zoom=1;this.panX=r.width/2-150;this.panY=20;this.transform();return;
+    }
     const minX=Math.min(...modules.map(m=>m.x))-22,minY=Math.min(...modules.map(m=>m.y))-20;
     const width=Math.max(...modules.map(m=>m.x+NODE_WIDTH))+22-minX,height=Math.max(...modules.map(m=>m.y+NODE_HEIGHT))+48+safe.bottom-minY;
-    // FIT is an overview: its zoom must obey BOTH axes. The old portrait .875 floor
-    // clipped every wide rack, even though the label still read "FIT".
+    if(portrait){
+      const availableWidth=Math.max(1,before.width-safe.left-safe.right-24);
+      const widthFit=Math.min(1,availableWidth/width);
+      const mainTop=this.root.parentElement?.getBoundingClientRect().top??0;
+      const maxStage=Math.max(240,Math.min(560,window.innerHeight-mainTop-20));
+      const stage=Math.min(maxStage,Math.max(270,Math.ceil(height*widthFit+94)));
+      this.root.style.setProperty('--portrait-stage-height',`${stage}px`);
+    }
+    const r=this.viewport.getBoundingClientRect(),available=r.width-safe.left-safe.right;
+    // FIT must honor both axes, while keeping the portrait zoom dock visible.
     const usableWidth=Math.max(1,available-(portrait?24:12));
-    const usableHeight=Math.max(1,r.height-(portrait?84:12)); // Keep the bottom zoom bar clear.
+    const usableHeight=Math.max(1,r.height-(portrait?84:12));
     this.zoom=Math.min(1,usableWidth/width,usableHeight/height);
     if(portrait){
-      // Keep the first row near the header without discarding the rest of the patch.
       this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;
       this.panY=20-(minY+20)*this.zoom;
     }else{this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;this.panY=(r.height-height*this.zoom)/2-minY*this.zoom;}
