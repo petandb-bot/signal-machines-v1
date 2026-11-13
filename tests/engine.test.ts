@@ -13,15 +13,69 @@ class FakeContext {
 }
 class FakeNode {static last:FakeNode;constructor(){FakeNode.last=this;}port={postMessage:(message:unknown)=>sent.push(message),onmessage:(_event:{data:unknown})=>{}};connect(){}onprocessorerror=()=>{};}
 class FakeRecorder {
+  static last:FakeRecorder;
   static isTypeSupported(mime:string){return mime===supported;}
   mimeType:string;state='inactive';ondataavailable?:(event:{data:Blob})=>void;onstop?:()=>void;onerror?:()=>void;
-  constructor(_stream:unknown,options:{mimeType:string}){this.mimeType=options.mimeType;}
+  constructor(_stream:unknown,options:{mimeType:string}){this.mimeType=options.mimeType;FakeRecorder.last=this;}
   start(){this.state='recording';}
   stop(){this.ondataavailable?.({data:new Blob(['recording'],{type:this.mimeType})});this.state='inactive';this.onstop?.();}
 }
 beforeEach(()=>{sent=[];supported='audio/webm;codecs=opus';vi.useFakeTimers();vi.stubGlobal('isSecureContext',true);vi.stubGlobal('AudioContext',FakeContext);vi.stubGlobal('AudioWorkletNode',FakeNode);vi.stubGlobal('MediaRecorder',FakeRecorder);});
-afterEach(()=>{vi.useRealTimers();vi.unstubAllGlobals();});
+afterEach(()=>{vi.useRealTimers();vi.unstubAllGlobals();vi.restoreAllMocks();});
 describe('transport, throttling and recording orchestration with mocked browser APIs',()=>{
+  it('keeps browser takes separate until asynchronous final data has arrived',async()=>{
+    vi.spyOn(FakeRecorder.prototype,'stop').mockImplementation(function(this:FakeRecorder){this.state='inactive';});
+    const engine=new AudioEngine();await engine.startRecording(metalDrift());const first=FakeRecorder.last;
+    first.ondataavailable?.({data:new Blob(['first-'])});
+    const done=engine.stopRecording();expect(engine.stopRecording()).toBe(done);
+    await expect(engine.startRecording(metalDrift())).rejects.toThrow('finishing');
+    first.ondataavailable?.({data:new Blob(['tail'])});first.onstop?.();
+    expect(await (await done).blob.text()).toBe('first-tail');
+    await engine.startRecording(metalDrift());const second=FakeRecorder.last;
+    const next=engine.stopRecording();second.ondataavailable?.({data:new Blob(['second'])});second.onstop?.();
+    expect(await (await next).blob.text()).toBe('second');
+  });
+  it('preserves final browser chunks when the native recorder ends after an error',async()=>{
+    const engine=new AudioEngine(),ready=vi.fn(),error=vi.fn();engine.onRecordingReady=ready;engine.onError=error;
+    await engine.startRecording(metalDrift());const recorder=FakeRecorder.last;
+    recorder.ondataavailable?.({data:new Blob(['saved-'])});recorder.onerror?.();
+    await expect(engine.startRecording(metalDrift())).rejects.toThrow('finishing');
+    recorder.state='inactive';recorder.ondataavailable?.({data:new Blob(['tail'])});recorder.onstop?.();
+    await Promise.resolve();expect(ready).toHaveBeenCalledOnce();expect(await ready.mock.calls[0][0].blob.text()).toBe('saved-tail');
+    expect(error).toHaveBeenCalledWith('The browser could not record the master output.');
+    expect(engine.running).toBe(true);
+  });
+  it('cancels a start even before the worklet node has finished initializing',async()=>{
+    let release!:()=>void;
+    class PendingContext extends FakeContext{override audioWorklet={addModule:vi.fn(()=>new Promise<void>(resolve=>{release=resolve;}))};}
+    vi.stubGlobal('AudioContext',PendingContext);
+    const engine=new AudioEngine(),start=engine.start(metalDrift()),assertion=expect(start).rejects.toThrow('Patch changed');
+    await engine.stop();release();await assertion;
+    expect(engine.running).toBe(false);expect(sent.some(m=>(m as {type:string}).type==='patch')).toBe(false);
+  });
+  it('does not let an older stop timer suspend a newer FOUND start during decode',async()=>{
+    const {foundQuiet}=await import('../src/state/presets');const {builtinFound}=await import('../src/samples/FoundData');
+    const engine=new AudioEngine();await engine.start(metalDrift());
+    let resolve!:(audio:ReturnType<typeof builtinFound>)=>void;
+    vi.spyOn(engine.foundLibrary,'get').mockImplementation(()=>new Promise(done=>{resolve=done;}));
+    const stopped=engine.stop(),started=engine.start(foundQuiet());await Promise.resolve();
+    await vi.advanceTimersByTimeAsync(55);await stopped;expect(FakeContext.last.suspend).not.toHaveBeenCalled();
+    resolve(builtinFound('room'));await started;expect(engine.running).toBe(true);
+  });
+  it('still suspends on STOP if a cable is edited during the fade',async()=>{
+    const engine=new AudioEngine(),patch=metalDrift();await engine.start(patch);
+    const stopped=engine.stop();engine.sync(patch,true);await vi.advanceTimersByTimeAsync(55);await stopped;
+    expect(engine.running).toBe(false);expect(FakeContext.last.suspend).toHaveBeenCalledOnce();
+  });
+  it('resumes a context suspended while sample decoding was in progress',async()=>{
+    const {foundQuiet}=await import('../src/state/presets');const {builtinFound}=await import('../src/samples/FoundData');
+    const engine=new AudioEngine();await engine.start(metalDrift());
+    let resolve!:(audio:ReturnType<typeof builtinFound>)=>void;
+    vi.spyOn(engine.foundLibrary,'get').mockImplementation(()=>new Promise(done=>{resolve=done;}));
+    const started=engine.start(foundQuiet());await Promise.resolve();
+    FakeContext.last.resume.mockClear();FakeContext.last.state='suspended';resolve(builtinFound('room'));
+    await started;expect(FakeContext.last.resume).toHaveBeenCalledOnce();expect(engine.running).toBe(true);
+  });
   it('reflects a mobile audio interruption and resumes from a fresh play gesture',async()=>{const engine=new AudioEngine();const error=vi.fn();engine.onError=error;await engine.start(metalDrift());FakeContext.last.state='interrupted';FakeContext.last.onstatechange?.();expect(engine.running).toBe(false);expect(error).toHaveBeenCalledWith('Audio paused. Tap play to resume.');FakeContext.last.state='running';await engine.start(metalDrift());expect(engine.running).toBe(true);});
   it('starts, fades to stop and restarts a deterministic patch',async()=>{
     const engine=new AudioEngine();await engine.start(metalDrift());expect(engine.running).toBe(true);expect((sent[0] as {reset:boolean}).reset).toBe(true);

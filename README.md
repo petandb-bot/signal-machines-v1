@@ -45,6 +45,6 @@ npm run build
 npm run verify:build
 ```
 
-The build is in `dist/`. [GitHub setup](docs/GITHUB.md) · [Full guide](docs/GUIDE.md) · [Verification](VERIFICATION.md)
+Pull requests run tests, build and AudioWorklet verification without deploying. The build is in `dist/`. [GitHub setup](docs/GITHUB.md) · [Full guide](docs/GUIDE.md) · [Verification](VERIFICATION.md)
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
