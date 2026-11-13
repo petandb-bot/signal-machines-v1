@@ -101,6 +101,8 @@ input[type=range]::-moz-range-thumb {
 .workspace-nav {
   position: absolute; left: var(--safe-left); bottom: var(--safe-bottom); display: flex;
   align-items: center; height: 46px; background: var(--surface); border: 1px solid var(--line); z-index: 2;
+  /* iOS must not treat a long press on the zoom controls as text selection. */
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
 }
 .workspace-nav button { width: 44px; height: 44px; border: 0; font-size: 18px; color: var(--green); }
 .workspace-nav .fit-button { font-size: 11px; width: 44px; border-left: 1px solid var(--line); }
@@ -333,12 +335,33 @@ input[type=range]::-moz-range-thumb {
 @media (max-width:600px) and (orientation:portrait) {
   .topbar {
     display: grid; grid-template-columns: 44px 44px minmax(24px, 1fr) 44px 44px 44px;
-    grid-template-rows: 44px 44px; gap: 2px 3px; min-height: 0;
-    padding-top: calc(env(safe-area-inset-top) + 1px); padding-bottom: 1px;
+    grid-template-rows: 44px 44px; gap: 5px 3px; min-height: 0;
+    /* The status bar needs a little breathing room in standalone iPhone Safari. */
+    padding-top: calc(env(safe-area-inset-top) + 8px); padding-bottom: 5px;
     border-bottom-color: var(--dim); box-shadow: none; filter: none;
     -webkit-backdrop-filter: none; backdrop-filter: none;
   }
   .topbar button, .topbar input, .topbar select { text-shadow: none; box-shadow: none; filter: none; }
+  /* A small, centered control dock instead of loose controls in the bottom-left corner. */
+  .workspace-nav {
+    left: 50%; transform: translateX(-50%);
+    bottom: calc(var(--safe-bottom) + 10px);
+    display: grid; grid-template-columns: 44px 58px 44px 56px;
+    width: 206px; height: 48px; padding: 1px;
+    align-items: center; border-color: var(--dim); background: var(--surface);
+    box-shadow: 0 0 0 4px var(--background);
+  }
+  .workspace-nav button { width: 44px; height: 44px; min-width: 44px; min-height: 44px; font-size: 19px; touch-action: manipulation; }
+  .workspace-nav .zoom-value {
+    display: flex; align-items: center; justify-content: center; width: 58px; height: 44px;
+    border-left: 1px solid var(--dim); border-right: 1px solid var(--dim);
+    font-size: 11px; color: var(--ink);
+  }
+  .workspace-nav .fit-button {
+    width: 56px; height: 44px; font-size: 11px; border-left: 1px solid var(--dim);
+  }
+  /* Connection guidance must never cover the zoom dock. */
+  .patch-hint { bottom: calc(var(--safe-bottom) + 74px); }
   .topbar > button, .topbar .preset-select { border-color: var(--dim); }
   .run-button { grid-column: 1; grid-row: 1; }
   .tempo-control { grid-column: 2; grid-row: 1; }
