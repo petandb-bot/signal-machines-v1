@@ -281,3 +281,19 @@ Based on public main `4ac3159b9cc7871042c7790588ede0333ee11e88`, including its p
 Chromium 156 headless verification passes at 390×844, 844×390 and 1280×800. Trash targets measure 44×44px; named confirmation panels fit the viewport; Cancel keeps the module, and Remove deletes it and its cables. Screenshots were inspected. A real stereo WAV is loaded through the file input and restored from IndexedDB in a fresh library; native AudioWorklet telemetry is nonzero with zero DSP faults across rewiring and STOP/RUN. Real WAV and browser-encoded recording produce nonempty files and reject overlapping take creation. No page exceptions were observed.
 
 Human listening, physical iPhone/Safari interaction, MP3/M4A codecs, private-browsing/quota failures on devices, and actual mobile CPU/thermal/native decoder peak memory remain unverified. No master protection, LOOP DSP, recording format or patch serialization changes are intended. The maintenance branch is submitted for review without merging main or deploying.
+
+## v0.17.2 phone portrait layout
+
+Based on public main `d5eadf819d27992b6c6021238f99972d124f0d5d`. Changes are limited to Workspace view fitting/resizing, portrait CSS, a patch version increment, layout tests and documentation. AppController, module geometry/jack anchors, DSP, animations, graph/patch persistence and gesture algorithms are unchanged.
+
+- Portrait (≤600px / portrait media query) initial view and FIT retain at least 87.5% scale and position the first row 20px below the workspace top. A wide layout starts at the first top-row module; small patches remain at most 100%. Manual overview zoom remains 25–250%.
+- Header rows are exactly 44px with 2px between rows and 1px top/bottom padding plus the safe top inset. No-inset header height is 93px rather than 100px. Primary targets remain 44px, preset text is 16px, and portrait header outlines are clearer. Prior header CSS did not contain strong blur/glow; fractional row sizing is removed and portrait shadows/filters are explicitly disabled.
+- ResizeObserver refits when crossing between portrait and wide modes. Height changes within portrait retain the viewed top edge; ordinary wide-layout resize behavior is retained. No module coordinates are edited by FIT.
+
+`npm ci`, `npm test` (468 tests / 35 files), `npm run typecheck` and `npm run build` pass. Seven new tests cover readable first-row fitting, small/offset patches, horizontal safe padding, manual zoom-out, captured landscape/desktop fits and resize/orientation behavior. Existing UI deletion, snapshots, sliders, patching/pinch and audio tests remain.
+
+`npm run verify:build` also passes: all 37 presets render three seconds at 48kHz with finite protected output; LOOP record/overdub/import/export/restart, interaction modules and exact master-PCM capture bridges pass.
+
+Chromium 156 headless before/after screenshots were inspected at 320×568, 390×844, 430×932, 844×390 and 1280×800, including a larger portrait patch. The 390px-wide default patch changes from 54% scale / 286px top gap to 87.5% / 20px. Landscape and desktop screenshots are exactly pixel-identical. DOM measurements confirm 44px header controls and matching landscape/desktop geometry. Real emulated touch events verify background pan, two-finger pinch without module movement, tap-to-patch and module drag; the five-cable result is confirmed. Portrait confirmation fits within the viewport; Cancel preserves the module and Remove deletes it. See [comparison images and measurements](docs/PORTRAIT.md).
+
+The emitted AudioWorklet is byte-identical to v0.17.1: `processor-Oo_l0aMo.js`, SHA-256 `be089888b8e00c0f5c8ad48334515b8d7c2d94bc3f8c77c33178ed1a64a324ba`. Physical iPhone/Safari, real safe-area/browser-chrome transitions and device font/touch feel remain unverified; Chromium viewport emulation is not a WebKit/device test. No merge or deployment is performed for this task.
