@@ -218,7 +218,10 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     const css=readFileSync('src/styles/main.css','utf8');
     const portrait=css.split('@media (max-width:600px) and (orientation:portrait) {')[1]?.split('@media (pointer:coarse)')[0];
     expect(portrait).toBeDefined();
-    expect(portrait).toContain('padding-top: calc(env(safe-area-inset-top) + 8px)');
+    expect(portrait).toContain('padding-top: calc(env(safe-area-inset-top) + 9px)');
+    expect(portrait).toContain('height: var(--portrait-stage-height, 300px)');
+    expect(portrait).toContain('.topbar .menu-button::before');
+    expect(portrait).toContain('box-shadow: -10px 0 currentColor, 10px 0 currentColor');
     expect(portrait).toContain('left: 50%; transform: translateX(-50%)');
     expect(portrait).toContain('bottom: calc(var(--safe-bottom) + 10px)');
     expect(portrait).toContain('grid-template-columns: 44px 58px 44px 56px');
@@ -228,6 +231,19 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(nav.getAttribute('role')).toBe('group');
     expect(nav.getAttribute('aria-label')).toBe('Workspace zoom controls');
     expect([...nav.querySelectorAll('button')].map(b=>b.getAttribute('aria-label'))).toEqual(['Zoom out','Zoom in','Fit patch to workspace']);
+  });
+  it('does not pan a chip off-screen when the full-width editor is below the compact portrait stage',()=>{
+    const field=new DOMRect(0,180,390,270);
+    const editor=new DOMRect(0,530,390,320);
+    app.workspace.viewport.getBoundingClientRect=()=>field;
+    app.editor.root.getBoundingClientRect=()=>editor;
+    app.workspace.fit();
+    const id='alloy-1';
+    app.workspace.reveal(id,0,0); // Baseline normal chip reveal without occlusion.
+    const before=app.workspace.world.style.transform;
+    document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+    expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(true);
+    expect(app.workspace.world.style.transform).toBe(before);
   });
   it.each([[390,844],[844,390],[320,568],[1280,800]])('exposes header deletion and preserves cancellation at a %s×%s viewport',(width,height)=>{
     Object.defineProperty(window,'innerWidth',{value:width,configurable:true});Object.defineProperty(window,'innerHeight',{value:height,configurable:true});const style=document.createElement('style');style.textContent=readFileSync('src/styles/main.css','utf8');document.head.append(style);

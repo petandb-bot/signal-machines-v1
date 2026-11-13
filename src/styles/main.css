@@ -333,15 +333,34 @@ input[type=range]::-moz-range-thumb {
   .workspace-nav { bottom: max(7px, env(safe-area-inset-bottom)); }
 }
 @media (max-width:600px) and (orientation:portrait) {
+  /* Keep the full-height editor overlay, but limit the dotted rack to its content. */
+  .main-layout { align-items: flex-start; background: var(--background); }
+  .workspace {
+    flex: 0 0 100%; width: 100%; height: var(--portrait-stage-height, 300px);
+    border-bottom: 1px solid var(--dim);
+  }
   .topbar {
     display: grid; grid-template-columns: 44px 44px minmax(24px, 1fr) 44px 44px 44px;
     grid-template-rows: 44px 44px; gap: 5px 3px; min-height: 0;
-    /* The status bar needs a little breathing room in standalone iPhone Safari. */
-    padding-top: calc(env(safe-area-inset-top) + 8px); padding-bottom: 5px;
-    border-bottom-color: var(--dim); box-shadow: none; filter: none;
-    -webkit-backdrop-filter: none; backdrop-filter: none;
+    padding-top: calc(env(safe-area-inset-top) + 9px); padding-bottom: 7px;
+    background: var(--surface); border-bottom-color: var(--line);
+    box-shadow: none; filter: none; -webkit-backdrop-filter: none; backdrop-filter: none;
   }
-  .topbar button, .topbar input, .topbar select { text-shadow: none; box-shadow: none; filter: none; }
+  .topbar button, .topbar input, .topbar select {
+    text-shadow: none !important; box-shadow: none !important; filter: none !important;
+    -webkit-filter: none !important;
+  }
+  .topbar > button, .topbar .preset-select { border-color: var(--line); }
+  /* The old 23px three-dot text overflowed its 44px button; draw three fixed dots. */
+  .topbar .menu-button {
+    display: grid; place-items: center; padding: 0; font-size: 0 !important;
+    letter-spacing: 0; overflow: hidden; line-height: 1; color: var(--ink);
+  }
+  .topbar .menu-button::before {
+    content: ''; display: block; width: 4px; height: 4px; background: currentColor;
+    box-shadow: -10px 0 currentColor, 10px 0 currentColor;
+  }
+  .master-range::-webkit-slider-thumb { box-shadow: none; }
   /* A small, centered control dock instead of loose controls in the bottom-left corner. */
   .workspace-nav {
     left: 50%; transform: translateX(-50%);
