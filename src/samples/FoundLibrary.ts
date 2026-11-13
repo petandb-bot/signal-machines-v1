@@ -4,14 +4,37 @@ interface RecordAudio{id:string;name:string;blob:Blob}
 export interface FoundStorage{get(id:string):Promise<RecordAudio|undefined>;put(record:RecordAudio):Promise<void>}
 export class IndexedFoundStorage implements FoundStorage{
   private db?:Promise<IDBDatabase>;
-  private open(){return this.db??=new Promise<IDBDatabase>((resolve,reject)=>{if(typeof indexedDB==='undefined'){reject(Error('Sample storage is unavailable.'));return;}const request=indexedDB.open('signal-machines-found-v1',1);request.onupgradeneeded=()=>request.result.createObjectStore('audio',{keyPath:'id'});request.onerror=()=>reject(request.error);request.onblocked=()=>reject(Error('Sample storage is blocked.'));request.onsuccess=()=>resolve(request.result);});}
+  private open(){
+    if(this.db)return this.db;
+    const pending=new Promise<IDBDatabase>((resolve,reject)=>{
+      if(typeof indexedDB==='undefined'){reject(Error('Sample storage is unavailable.'));return;}
+      let failed=false;
+      const request=indexedDB.open('signal-machines-found-v1',1);
+      const fail=(error:Error|DOMException|null)=>{failed=true;reject(error??Error('Sample storage failed.'));};
+      request.onupgradeneeded=()=>request.result.createObjectStore('audio',{keyPath:'id'});
+      request.onerror=()=>fail(request.error);
+      request.onblocked=()=>fail(Error('Sample storage is blocked. Close other tabs and retry.'));
+      request.onsuccess=()=>{
+        const db=request.result;
+        // A blocked request may still succeed after its caller has fallen back to session storage.
+        if(failed){db.close();return;}
+        const forget=()=>{if(this.db===pending)this.db=undefined;};
+        db.onversionchange=()=>{db.close();forget();};db.onclose=forget;
+        resolve(db);
+      };
+    });
+    this.db=pending;
+    // Rejected/closed connections must not poison every later import in this tab.
+    void pending.catch(()=>{if(this.db===pending)this.db=undefined;});
+    return pending;
+  }
   async get(id:string){const db=await this.open();return new Promise<RecordAudio|undefined>((resolve,reject)=>{const t=db.transaction('audio','readonly'),r=t.objectStore('audio').get(id);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);t.onabort=()=>reject(t.error);});}
   async put(record:RecordAudio){const db=await this.open();return new Promise<void>((resolve,reject)=>{const t=db.transaction('audio','readwrite');t.objectStore('audio').put(record);t.oncomplete=()=>resolve();t.onabort=()=>reject(t.error??Error('Sample storage failed.'));t.onerror=()=>reject(t.error);});}
 }
 export async function decodeFound(blob:Blob,id:string,name:string):Promise<FoundAudio>{
   if(!blob.size||blob.size>FOUND_BYTES)throw Error('Use an audio file up to 32 MB and 60 seconds.');
   // Ask the media decoder for duration before allocating decoded PCM, including compressed files.
-  await new Promise<void>((resolve,reject)=>{const el=document.createElement('audio'),url=URL.createObjectURL(blob);let done=false;const finish=(error?:Error)=>{if(done)return;done=true;clearTimeout(timer);el.removeAttribute('src');el.load();URL.revokeObjectURL(url);error?reject(error):resolve();};const timer=setTimeout(()=>finish(Error('Could not read audio duration.')),15000);el.preload='metadata';el.onloadedmetadata=()=>finish(Number.isFinite(el.duration)&&el.duration>=.01&&el.duration<=FOUND_SECONDS?undefined:Error('Use audio between 0.01 and 60 seconds.'));el.onerror=()=>finish(Error('This audio format could not be read. Try WAV.'));el.src=url;});
+  await new Promise<void>((resolve,reject)=>{const el=document.createElement('audio'),url=URL.createObjectURL(blob);let done=false;const finish=(error?:Error)=>{if(done)return;done=true;clearTimeout(timer);el.onloadedmetadata=el.onerror=null;el.removeAttribute('src');el.load();URL.revokeObjectURL(url);error?reject(error):resolve();};const timer=setTimeout(()=>finish(Error('Could not read audio duration.')),15000);el.preload='metadata';el.onloadedmetadata=()=>finish(Number.isFinite(el.duration)&&el.duration>=.01&&el.duration<=FOUND_SECONDS?undefined:Error('Use audio between 0.01 and 60 seconds.'));el.onerror=()=>finish(Error('This audio format could not be read. Try WAV.'));el.src=url;});
   const Context=window.OfflineAudioContext;if(!Context)throw Error('Audio file decoding is unavailable in this browser.');
   const context=new Context(2,1,FOUND_RATE),decoded=await context.decodeAudioData(await blob.arrayBuffer());
   if(decoded.duration>FOUND_SECONDS||decoded.duration<.01||decoded.numberOfChannels<1||decoded.numberOfChannels>2)throw Error('Use mono/stereo audio up to 60 seconds.');

@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 vi.mock('p5',()=>({default:class{}})); // Pixel rendering needs a real browser; DOM interactions are tested here.
 import {readFileSync} from 'node:fs';
+import {version} from '../package.json';
 import { AppController } from '../src/app/AppController';
 import { connect } from '../src/graph/PatchGraph';
 vi.stubGlobal('ResizeObserver',class{observe(){}disconnect(){}});
@@ -11,6 +12,11 @@ let app:AppController;
 afterEach(()=>vi.restoreAllMocks());
 beforeEach(()=>{localStorage.clear();document.body.innerHTML='<div id="app"></div>';app=new AppController(document.querySelector('#app')!);});
 describe('DOM patch interactions (not browser/audio integration)',()=>{
+  it('links the source archive generated from the current package version',()=>{
+    const link=document.querySelector<HTMLAnchorElement>('.source-download')!;
+    expect(link.download).toBe(`signal-machines-v${version}.zip`);
+    expect(link.getAttribute('href')).toBe(`./downloads/${link.download}`);
+  });
   it('adds and deletes independent instances using the actual library and editor',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add a module"]')!.click();
     expect(document.querySelector('#app')!.classList.contains('library-visible')).toBe(true);

@@ -8,6 +8,19 @@ import {foundQuiet,foundStrange} from '../src/state/presets';
 const room=builtinFound('room'),machine=builtinFound('machine');
 function make(wander=0,alter=0,rate=24000){const s=createModule('FOUND',0,0,5,'f');s.params={wander,alter};const f=new Found(s,rate,17);f.attach(machine);return f;}
 describe('FOUND feature-guided sample playback',()=>{
+ it('softens large level changes without altering PCM or stereo balance',()=>{
+   const source=Float32Array.from({length:72000},(_,i)=>i<36000?.35:-.35);
+   const audio=analyzeFound('local:cut','Level-step stress test',source,Float32Array.from(source,v=>v*.5));
+   const state=createModule('FOUND',0,0,1,'f');state.params={wander:0,alter:0};
+   const original=audio.left.slice(),f=new Found(state,24000,7);f.attach(audio);f.inputL[1]=1;
+   let last=0,maxDelta=0;
+   for(let i=0;i<12000;i++){
+     f.inputL[0]=i===6000?1:0;f.process(i);
+     if(i>=6000)maxDelta=Math.max(maxDelta,Math.abs(f.outputL[0]-last));
+     expect(f.outputR[0]).toBeCloseTo(f.outputL[0]*.5,7);last=f.outputL[0];
+   }
+   expect(maxDelta).toBeLessThan(.0008);expect(audio.left).toEqual(original);
+ });
  it('extracts both quiet anchors and events and bounds storage payloads',()=>{expect(machine.regions.length).toBeLessThanOrEqual(32);expect(machine.regions.some(r=>r.energy<.01)).toBe(true);expect(machine.regions.some(r=>r.change>.01)).toBe(true);expect(machine.peaks).toHaveLength(104);expect(()=>analyzeFound('local:x','bad',Float32Array.of(NaN),Float32Array.of(0))).toThrow();expect(()=>validateFoundAudio({...machine,left:new Float32Array(FOUND_RATE*61)})).toThrow();});
  it('plays all three synthetic defaults, keeps stereo and stays silent when its reference is missing',()=>{for(const kind of ['room','rain','machine'] as const){const f=make();f.attach(builtinFound(kind));let energy=0;for(let i=0;i<24000;i++){f.process(i);energy+=f.outputL[0]**2+f.outputR[0]**2;}expect(energy).toBeGreaterThan(.001);}const f=make();f.attach(undefined);for(let i=0;i<100;i++){f.process(i);expect(f.outputL[0]).toBe(0);}});
  it('WANDER/ALTER zero maintains normal-rate original samples between loop crossfades',()=>{const f=make();for(let i=0;i<8000;i++){f.process(i);if(i>1000){expect(f.outputL[0]).toBeCloseTo(machine.left[i],7);expect(f.outputR[0]).toBeCloseTo(machine.right[i],7);}expect(f.outputL[1]).toBe(0);}});
