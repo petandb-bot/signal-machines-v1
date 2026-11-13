@@ -43,7 +43,20 @@ export class AppController {
     this.editor.onFoundChoose=(module,ref)=>{module.sample=ref;this.store.changed('routing');};
     this.editor.onFoundFile=(module,file)=>void this.importFound(module,file);
     this.editor.onParameter=(module,id,value)=>this.parameter(module,id,value);
-    this.workspace.onSelect=()=>{this.closePanels();this.editor.render();const selected=!!(this.store.selectedModule||this.store.selectedCable);this.root.classList.toggle('editor-visible',selected);if(this.store.selectedModule)requestAnimationFrame(()=>{const editor=this.editor.root.getBoundingClientRect(),field=this.workspace.viewport.getBoundingClientRect();this.workspace.reveal(this.store.selectedModule!,editor.width>field.width*.65?0:editor.width,editor.width>field.width*.65?editor.height:0);});};
+    this.workspace.onSelect=()=>{
+      this.closePanels();this.editor.render();
+      const selected=!!(this.store.selectedModule||this.store.selectedCable);
+      this.root.classList.toggle('editor-visible',selected);
+      if(this.store.selectedModule)requestAnimationFrame(()=>{
+        const editor=this.editor.root.getBoundingClientRect(),field=this.workspace.viewport.getBoundingClientRect();
+        const bottomSheet=editor.width>field.width*.65;
+        // The editor uses the full main layout, while the portrait rack is compact:
+        // only the portion that actually overlaps the rack may obscure a module.
+        const overlapX=Math.max(0,Math.min(editor.right,field.right)-Math.max(editor.left,field.left));
+        const overlapY=Math.max(0,Math.min(editor.bottom,field.bottom)-Math.max(editor.top,field.top));
+        this.workspace.reveal(this.store.selectedModule!,bottomSheet?0:overlapX,bottomSheet?overlapY:0);
+      });
+    };
     this.workspace.onError=message=>this.notify(message,true);this.workspace.onAdd=()=>this.togglePanel('library');
     this.snapshots.onRecall=patch=>{this.store.replace(patch);this.notify('Snapshot recalled. Sound restarted.');};this.snapshots.onClose=()=>this.closePanels();this.snapshots.onNotice=(message,error)=>this.notify(message,error);
     this.editor.onAction=(module,action)=>void this.performModuleAction(module,action);this.editor.onImport=(module,file)=>void this.performModuleAction(module,'import',file);
