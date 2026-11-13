@@ -50,6 +50,14 @@ describe('phone portrait initial view and FIT',()=>{
     const {store,view}=workspace();store.patch.modules=[createModule('OSC',4000,0,1,'top'),createModule('OUTPUT',-4000,400,2,'bottom')];store.patch.connections=[];view.fit();
     const t=transform(view);expect(t.zoom).toBeLessThan(.1);expectEveryChipVisible(store,view);
     expect(t.y).toBe(20);
+    view.root.querySelector<HTMLButtonElement>('[aria-label="Zoom out"]')!.click();
+    expect(transform(view).zoom).toBeLessThan(t.zoom); // Manual zoom-out must not jump to 25%.
+    view.fit();
+    view.viewport.dispatchEvent(new PointerEvent('pointerdown',{button:0,pointerId:1,pointerType:'touch',clientX:100,clientY:100}));
+    view.viewport.dispatchEvent(new PointerEvent('pointerdown',{button:0,pointerId:2,pointerType:'touch',clientX:200,clientY:100}));
+    view.viewport.dispatchEvent(new PointerEvent('pointermove',{pointerId:2,pointerType:'touch',clientX:300,clientY:100}));
+    expect(transform(view).zoom).toBeGreaterThan(t.zoom);
+    expect(transform(view).zoom).toBeLessThan(.25); // Pinch must not snap to the old minimum.
   });
   it('respects horizontal safe-area padding without changing module coordinates',()=>{
     const {view,store}=workspace();view.root.style.paddingLeft='44px';view.root.style.paddingRight='12px';view.root.style.paddingBottom='34px';const before=structuredClone(store.patch);view.fit();
