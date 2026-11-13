@@ -96,7 +96,12 @@ export class Workspace {
     if(right-left<NODE_WIDTH*this.zoom)return;
     const x=module.x*this.zoom+this.panX,y=module.y*this.zoom+this.panY;
     if(x<left)this.panX+=left-x;else if(x+NODE_WIDTH*this.zoom>right)this.panX+=right-x-NODE_WIDTH*this.zoom;
-    if(y<top)this.panY+=top-y;else if(y+NODE_HEIGHT*this.zoom>bottom)this.panY+=bottom-y-NODE_HEIGHT*this.zoom;this.transform();
+    // If a bottom sheet occupies virtually the whole stage, do not send the chip
+    // outside the viewport trying to satisfy an impossible visibility rectangle.
+    if(bottom>=top+NODE_HEIGHT*this.zoom){
+      if(y<top)this.panY+=top-y;else if(y+NODE_HEIGHT*this.zoom>bottom)this.panY+=bottom-y-NODE_HEIGHT*this.zoom;
+    }
+    this.transform();
   }
   private setZoom(value:number,x=this.viewport.clientWidth/2,y=this.viewport.clientHeight/2){value=Math.max(MIN_ZOOM,Math.min(2.5,value));const ratio=value/this.zoom;this.panX=x-(x-this.panX)*ratio;this.panY=y-(y-this.panY)*ratio;this.zoom=value;this.transform();}
   private transform(){this.world.style.transform=`translate(${this.panX}px,${this.panY}px) scale(${this.zoom})`;this.viewport.style.backgroundSize=`${24*this.zoom}px ${24*this.zoom}px`;this.viewport.style.backgroundPosition=`${this.panX}px ${this.panY}px`;this.zoomLabel.textContent=`${Math.round(this.zoom*100)}%`;}
