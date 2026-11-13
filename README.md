@@ -20,7 +20,7 @@ An old-computer face for a living sound circuit: green text, small pixel windows
 
 [New sound studies](https://petandb-bot.github.io/signal-machines-v1/listening/): dissolving attacks and a slipping contact voice. [Notes](docs/STRANGE_SOUNDS.md).
 
-Headphones are useful. On a phone in portrait, FIT shows the whole rack as an overview; use + or pinch to zoom in and drag the background to pan. Landscape offers more room for patching.
+Headphones are useful. On a phone in portrait, FIT shows the whole rack as an overview; the zoom controls are centered above the bottom safe area. Use + or pinch to zoom in and drag the background to pan. Landscape offers more room for patching.
 
 FOUND explores browser-local samples with two controls; LEVEL brings quiet details forward. [Sample limits, storage and review notes](docs/FOUND_LEVEL.md).
 

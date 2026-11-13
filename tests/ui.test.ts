@@ -214,6 +214,21 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(app.store.patch).toEqual(original); // Only the viewport moves; patch JSON is untouched.
   });
 
+  it('keeps the iPhone portrait zoom controls centered, selectable as buttons rather than text, and clear of the home indicator',()=>{
+    const css=readFileSync('src/styles/main.css','utf8');
+    const portrait=css.split('@media (max-width:600px) and (orientation:portrait) {')[1]?.split('@media (pointer:coarse)')[0];
+    expect(portrait).toBeDefined();
+    expect(portrait).toContain('padding-top: calc(env(safe-area-inset-top) + 8px)');
+    expect(portrait).toContain('left: 50%; transform: translateX(-50%)');
+    expect(portrait).toContain('bottom: calc(var(--safe-bottom) + 10px)');
+    expect(portrait).toContain('grid-template-columns: 44px 58px 44px 56px');
+    expect(portrait).toContain('.patch-hint { bottom: calc(var(--safe-bottom) + 74px); }');
+    expect(css).toContain('-webkit-user-select: none; user-select: none; -webkit-touch-callout: none;');
+    const nav=document.querySelector<HTMLElement>('.workspace-nav')!;
+    expect(nav.getAttribute('role')).toBe('group');
+    expect(nav.getAttribute('aria-label')).toBe('Workspace zoom controls');
+    expect([...nav.querySelectorAll('button')].map(b=>b.getAttribute('aria-label'))).toEqual(['Zoom out','Zoom in','Fit patch to workspace']);
+  });
   it.each([[390,844],[844,390],[320,568],[1280,800]])('exposes header deletion and preserves cancellation at a %s×%s viewport',(width,height)=>{
     Object.defineProperty(window,'innerWidth',{value:width,configurable:true});Object.defineProperty(window,'innerHeight',{value:height,configurable:true});const style=document.createElement('style');style.textContent=readFileSync('src/styles/main.css','utf8');document.head.append(style);
     document.querySelector<HTMLElement>('.module-card[data-module="alloy-1"]')!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));const before=structuredClone(app.store.patch),selected=app.store.selectedModule;const sync=vi.spyOn(app.audio,'sync');
