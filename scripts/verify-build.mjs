@@ -1,3 +1,4 @@
+import {fileURLToPath} from 'node:url';
 import {build} from 'esbuild';
 import {readFileSync,readdirSync} from 'node:fs';
 import {runInNewContext} from 'node:vm';
@@ -9,10 +10,10 @@ runInNewContext(readFileSync(new URL(`../dist/assets/${worklet}`,import.meta.url
   sampleRate:48000,AudioWorkletProcessor:class{port={postMessage:message=>messages.push(message)};},
   registerProcessor:(name,constructor)=>{assert.equal(name,'signal-machines');Processor=constructor;}
 },{timeout:5000});
-const helperBuild=await build({entryPoints:[new URL('../src/samples/FoundData.ts',import.meta.url).pathname],bundle:true,write:false,format:'esm',platform:'node'});
+const helperBuild=await build({entryPoints:[fileURLToPath(new URL('../src/samples/FoundData.ts',import.meta.url))],bundle:true,write:false,format:'esm',platform:'node'});
 const {builtinFound}=await import('data:text/javascript;base64,'+Buffer.from(helperBuild.outputFiles[0].text).toString('base64'));
 const results=[];
-for(const name of ['metal-drift','uneven-memory','empty-chamber','bad-contact','tape-garden','host-fever','unstable-circuit','breathing-circuit','forked-memory','loop-weather','clear-signal','wire-strings','sideband-garden','chance-garden','spectral-ghost','harmonic-weather','clockwork-garden','slow-weather','marble-room','binary-fever','bent-vowels','split-orbits','tritave-field','off-grid','colony-cracks','stored-rain','dissenting-bodies','outer-band','pixel-dust','biased-orbit','drawn-metal','twin-swings','dissolving-metal','sliding-glass','found-quiet','found-strange']){
+for(const name of ['metal-drift','uneven-memory','empty-chamber','bad-contact','tape-garden','host-fever','unstable-circuit','breathing-circuit','forked-memory','loop-weather','clear-signal','wire-strings','sideband-garden','chance-garden','spectral-ghost','harmonic-weather','clockwork-garden','slow-weather','marble-room','binary-fever','bent-vowels','split-orbits','tritave-field','off-grid','colony-cracks','stored-rain','dissenting-bodies','outer-band','pixel-dust','biased-orbit','drawn-metal','twin-swings','dissolving-metal','sliding-glass','found-quiet','found-strange','level-recovery']){
   const fixture=JSON.parse(readFileSync(new URL(`../presets/${name}.json`,import.meta.url),'utf8'));
   const before=messages.length,processor=new Processor();if(fixture.modules.some(m=>m.type==='FOUND'))processor.port.onmessage({data:{type:'foundAssets',assets:[builtinFound(fixture.modules.find(m=>m.type==='FOUND').sample.slice(8))]}});processor.port.onmessage({data:{type:'patch',patch:fixture,reset:true}});let peak=0,energy=0;
   for(let frame=0;frame<48000*3;){const length=Math.min(frame%3===0?257:128,48000*3-frame),left=new Float32Array(length),right=new Float32Array(length);assert(processor.process([],[ [left,right] ]));for(let i=0;i<length;i++){assert(Number.isFinite(left[i])&&Number.isFinite(right[i]));peak=Math.max(peak,Math.abs(left[i]),Math.abs(right[i]));energy+=left[i]**2+right[i]**2;}frame+=length;}
@@ -69,4 +70,4 @@ interaction.connections=[
 const interacting=new Processor(),interactionBefore=messages.length;interacting.port.onmessage({data:{type:'patch',patch:interaction,reset:true}});let interactionEnergy=0;
 for(let i=0;i<300;i++){const l=new Float32Array(193),r=new Float32Array(193);interacting.process([],[ [l,r] ]);for(const v of [...l,...r]){assert(Number.isFinite(v)&&Math.abs(v)<=.63);interactionEnergy+=v*v;}}
 assert(interactionEnergy>.0001);assert(!messages.slice(interactionBefore).some(m=>m.type==='error'||m.type==='telemetry'&&m.data.faults>0));
-console.log(JSON.stringify({result:'PASS',test:'production worklet: thirty-six presets, 3 s each / 48 kHz / stereo / variable blocks; LOOP record, overdub, import/export and restart/reset bridge; sample-identical master PCM capture',results},null,2));
+console.log(JSON.stringify({result:'PASS',test:'production worklet: thirty-seven presets, 3 s each / 48 kHz / stereo / variable blocks; LOOP record, overdub, import/export and restart/reset bridge; sample-identical master PCM capture',results},null,2));

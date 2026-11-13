@@ -229,3 +229,10 @@ export function foundStrange():Patch{
   wire(p,'found-1','audio','cloud-1','audio');wire(p,'found-1','event','reson-1','trigger');wire(p,'cloud-1','audio','mesh-1','a');wire(p,'reson-1','audio','mesh-1','b');wire(p,'mesh-1','audio','output-1','audio');return p;
 }
 PRESETS.push({name:'FOUND / QUIET',description:'Quiet synthetic room air follows a slow tide',create:foundQuiet},{name:'FOUND / STRANGE',description:'Discovered machine events excite another body',create:foundStrange});
+
+export function levelRecovery():Patch{
+  const p=patch('LEVEL / RECOVERY',76,171703);add(p,'DRONE',16,16,5301);add(p,'VCA',192,16,5302);add(p,'LEVEL',544,96,5303);add(p,'OUTPUT',720,96,5304);add(p,'PULSE',16,184,5305);add(p,'ALLOY',192,184,5306);p.modules.push(createModule('VCA',368,184,5307,'hit-gain'));
+  p.modules[0].params.color=.7;p.modules[1].params.level=.035;p.modules[2].params.boost=.9;p.modules[2].params.comp=.6;p.modules[4].params.rate=.4;p.modules[4].params.irregular=0;p.modules[5].params.body=.22;p.modules[5].params.tension=.3;p.modules[5].character='SOFT';p.modules[6].params.level=.25;
+  wire(p,'drone-1','audio','vca-1','a');wire(p,'vca-1','audio','level-1','audio');wire(p,'pulse-1','trigger','alloy-1','trigger');wire(p,'alloy-1','audio','hit-gain','a');wire(p,'hit-gain','audio','level-1','audio');wire(p,'level-1','audio','output-1','audio');return p;
+}
+PRESETS.push({name:'LEVEL / RECOVERY',description:'A small continuous source is brought forward without changing its stereo field',create:levelRecovery});

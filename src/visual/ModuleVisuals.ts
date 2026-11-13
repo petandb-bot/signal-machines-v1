@@ -18,7 +18,10 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
   g.fill(INK.frame);
   for(let x=4;x<4+Math.round((W-8)*motion.activity);x+=4){point(g,x,2);point(g,W-5-x,H-3);}
   g.push();g.translate(motion.dx,motion.dy);g.fill(color);
-  if(type==='FOUND'){
+  if(type==='LEVEL'){
+    for(let row=0;row<16;row++){g.fill(row/16<clamp(t.a,0,1)?INK.green:INK.grid);g.rect(15,66-row*3,22,2);g.fill(row/16<clamp(t.envelope,0,1)?color:INK.grid);g.rect(65,66-row*3,22,2);}
+    g.fill(PALETTE.amber);g.rect(44,12,9,Math.round(clamp(t.b,0,1)*50));g.fill(color);wave(g,t,75,15,3,2);
+  }else if(type==='FOUND'){
     const peaks=t.curve??[];g.fill(INK.cyan);for(let x=5;x<99;x++){const h=Math.min(27,(peaks[Math.floor((x-5)/94*104)]??0)*100);point(g,x,39-h);point(g,x,39+h);}
     g.fill(color);const left=5+clamp(t.a,0,1)*94,right=5+clamp(t.b,0,1)*94;for(let y=8;y<70;y+=4){point(g,left,y);point(g,right,y);}g.rect(5+clamp(t.phase,0,1)*94,9,1,61);wave(g,t,75,18,3,2);
   }else if(type==='SMEAR'){

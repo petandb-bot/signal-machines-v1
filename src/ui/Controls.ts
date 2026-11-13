@@ -10,6 +10,7 @@ export function button(text: string, title: string, action: () => void, classNam
   const el = element('button', className, text); el.type = 'button'; el.title = title; el.setAttribute('aria-label',title); el.addEventListener('click',action); return el;
 }
 export function formatParameter(module: ModuleState, id: string, value: number) {
+  if(module.type==='LEVEL'&&id==='boost'){const db=-12+36*value;return `${db>0?'+':''}${db.toFixed(1)} dB`;}
   if((module.type==='OPERATOR'||module.type==='CHIP'||module.type==='OSC'||module.type==='COMB'||module.type==='PRISM'||module.type==='FERAL'||module.type==='FORMANT')&&id==='tune')return `${(module.wide?tunedHz(value,0,true).toFixed(tunedHz(value,0,true)<10?2:0):Math.round(tunedHz(value)))} Hz`;
   if(module.type==='ORBIT'&&id==='rate')return `${(.01*Math.pow(400,value)).toFixed(2)} Hz`;
   if(module.type==='TOUCH'&&id==='speed')return `${(.125*Math.pow(64,value)).toFixed(2)}×`;
@@ -38,8 +39,8 @@ export function parameterControl(module: ModuleState, index: number, change: (id
   const range = element('input'); range.type = 'range'; range.min = '0'; range.max = '1'; range.step = '.001'; range.value = String(module.params[definition.id]); range.dataset.parameter = definition.id; range.dataset.module = module.id;
   range.setAttribute('aria-label',`${module.type} ${definition.label}`); range.title = definition.description;
   range.style.setProperty('--value',`${module.params[definition.id]*100}%`);
-  range.addEventListener('input',()=>{ const n = Number(range.value); value.value = formatParameter(module,definition.id,n); range.style.setProperty('--value',`${n*100}%`); change(definition.id,n); });
-  group.append(top,range); if (large) group.append(element('p','parameter-description',definition.description));
+  range.addEventListener('input',()=>{ let n = Number(range.value);if(module.type==='LEVEL'&&definition.id==='boost'&&Math.abs(n-1/3)<.001)n=1/3; value.value = formatParameter(module,definition.id,n); range.style.setProperty('--value',`${n*100}%`); change(definition.id,n); });
+  group.append(top,range);if(module.type==='LEVEL'&&definition.id==='boost')group.append(element('span','gain-zero','0 dB')); if (large) group.append(element('p','parameter-description',definition.description));
   return group;
 }
 export function refreshParameters(root: HTMLElement, module: ModuleState) {
