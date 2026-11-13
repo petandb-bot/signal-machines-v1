@@ -7,6 +7,8 @@ import { SIGNAL_COLORS } from '../graph/types';
 import type { StateStore } from '../app/StateStore';
 import { button, element } from './Controls';
 const NS='http://www.w3.org/2000/svg';
+// Keep manual zoom consistent with FIT even for very wide (or widely separated) patches.
+const MIN_ZOOM=.005;
 interface PortRef { module:string;port:string;direction:'in'|'out' }
 interface Drag {kind:'pan'|'module'|'cable';pointer:number;startX:number;startY:number;originalX:number;originalY:number;id?:string;pendingCable?:string;startPort?:PortRef;existingArm?:boolean;moved:boolean}
 interface Pinch {distance:number;zoom:number;worldX:number;worldY:number}
@@ -83,7 +85,7 @@ export class Workspace {
     if(x<left)this.panX+=left-x;else if(x+NODE_WIDTH*this.zoom>right)this.panX+=right-x-NODE_WIDTH*this.zoom;
     if(y<top)this.panY+=top-y;else if(y+NODE_HEIGHT*this.zoom>bottom)this.panY+=bottom-y-NODE_HEIGHT*this.zoom;this.transform();
   }
-  private setZoom(value:number,x=this.viewport.clientWidth/2,y=this.viewport.clientHeight/2){value=Math.max(.25,Math.min(2.5,value));const ratio=value/this.zoom;this.panX=x-(x-this.panX)*ratio;this.panY=y-(y-this.panY)*ratio;this.zoom=value;this.transform();}
+  private setZoom(value:number,x=this.viewport.clientWidth/2,y=this.viewport.clientHeight/2){value=Math.max(MIN_ZOOM,Math.min(2.5,value));const ratio=value/this.zoom;this.panX=x-(x-this.panX)*ratio;this.panY=y-(y-this.panY)*ratio;this.zoom=value;this.transform();}
   private transform(){this.world.style.transform=`translate(${this.panX}px,${this.panY}px) scale(${this.zoom})`;this.viewport.style.backgroundSize=`${24*this.zoom}px ${24*this.zoom}px`;this.viewport.style.backgroundPosition=`${this.panX}px ${this.panY}px`;this.zoomLabel.textContent=`${Math.round(this.zoom*100)}%`;}
   render(){
     if(this.armed&&!this.store.patch.modules.some(m=>m.id===this.armed!.module))this.armed=undefined;
@@ -139,7 +141,7 @@ export class Workspace {
   private beginPinch(){const [a,b]=this.pointers.values();const rect=this.viewport.getBoundingClientRect(),x=(a.x+b.x)/2-rect.left,y=(a.y+b.y)/2-rect.top;this.pinch={distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),zoom:this.zoom,worldX:(x-this.panX)/this.zoom,worldY:(y-this.panY)/this.zoom};this.renderCables();}
   private pointerMove(event:PointerEvent){
     if(!this.pointers.has(event.pointerId))return;this.pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
-    if(this.pinch&&this.pointers.size>=2){const [a,b]=this.pointers.values(),rect=this.viewport.getBoundingClientRect(),x=(a.x+b.x)/2-rect.left,y=(a.y+b.y)/2-rect.top;this.zoom=Math.max(.25,Math.min(2.5,this.pinch.zoom*Math.hypot(a.x-b.x,a.y-b.y)/this.pinch.distance));this.panX=x-this.pinch.worldX*this.zoom;this.panY=y-this.pinch.worldY*this.zoom;this.transform();return;}
+    if(this.pinch&&this.pointers.size>=2){const [a,b]=this.pointers.values(),rect=this.viewport.getBoundingClientRect(),x=(a.x+b.x)/2-rect.left,y=(a.y+b.y)/2-rect.top;this.zoom=Math.max(MIN_ZOOM,Math.min(2.5,this.pinch.zoom*Math.hypot(a.x-b.x,a.y-b.y)/this.pinch.distance));this.panX=x-this.pinch.worldX*this.zoom;this.panY=y-this.pinch.worldY*this.zoom;this.transform();return;}
     const drag=this.drag;if(!drag||drag.pointer!==event.pointerId)return;
     const dx=event.clientX-drag.startX,dy=event.clientY-drag.startY;if(Math.hypot(dx,dy)>(event.pointerType==='touch'?9:4))drag.moved=true;if(!drag.moved)return;
     if(drag.kind==='pan'){this.panX=drag.originalX+dx;this.panY=drag.originalY+dy;this.transform();}
