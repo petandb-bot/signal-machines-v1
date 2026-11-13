@@ -324,3 +324,16 @@ Module removal is now in the sticky editor header: tap the trash icon next to Cl
 **ORBIT** moves audio with internal 0.01…4 Hz sinusoidal motion or external POSITION CV, with DEPTH setting the range. A 15 ms position smoother avoids abrupt pan steps; POSITION output and the dot show that actual state. Its orthogonal stereo rotation preserves summed instantaneous L²+R² and retains two independent stereo components. Dual-mono input follows equal-power left/right panning; existing stereo material undergoes field/phase rotation rather than being summed to mono. DEPTH zero is centered. This is stereo motion, not a binaural/HRTF spatializer.
 
 These are the only three new modules. All 54 existing DSP classes, saved presets, snapshots, LOOP/recording/export, TOUCH/PENDULUM, master protection and graph cycle rules remain unchanged. The catalog gains one entry in Clocks & patterns (EDGE), Tone & damage (MESH) and Space & memory (ORBIT).
+
+
+## v0.15 appearance
+
+Small programs inside an old home computer: near-black fields, green text and eight restrained accent families. AUDIO remains amber, CONTROL cyan and TRIGGER green. Each module retains a warm/cool identity; a shared palette now feeds DOM controls, SVG cables and pixel displays. The existing clock-step state uses amber to mark its hot dot. Nothing flashes on a new timer.
+
+Tiny5 is used for chip names and window titles; menus, numbers and descriptions use the existing DM Mono. Both are self-hosted under the SIL Open Font License; copies and sources are listed in THIRD_PARTY_NOTICES.md. The retained Space Grotesk asset/license remains available to older source consumers but is no longer loaded by this theme.
+
+Square, opaque windows and flat buttons replace rounded panels and glow. Sliders use a ruled track and a rectangular marker with the same continuous input behavior. Signal pixels share the chip background. Selected chips have a clear double outline and a small corner marker. Cables keep their original paths, hit areas and signal colors; their visible lines are thin and unblurred.
+
+The 128×132 chip, 104×80 display and all jack anchors are unchanged. Every pixel animation keeps its original geometry and telemetry meaning. Quiet visuals and system Reduced Motion still work. Main toolbar, zoom, panel and deletion controls use 44-pixel targets; compact chip jacks retain their original hit geometry and larger editor-jack alternative. Portrait keeps the bottom editor; landscape keeps the side editor. The sticky delete/cancel confirmation and safe-area spacing remain.
+
+This release changes no DSP, module catalog, parameter, port ID, patch format, snapshot, LOOP/recording action or patching gesture.

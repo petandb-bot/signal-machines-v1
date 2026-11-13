@@ -1,3 +1,4 @@
+import {SIGNAL_INKS} from '../visual/Palette';
 import type {LoopStatus} from '../audio/LoopAudio';
 export type SignalType = 'audio' | 'control' | 'trigger';
 export type ModuleType = 'PULSE' | 'BRANCH' | 'FLOCK' | 'ALLOY' | 'RESON' | 'FRACTURE' | 'VENOM' | 'CAUSTIC' | 'SNAP' | 'TAPE' | 'DRONE' | 'SIEVE' | 'PARASITE' | 'VCA' | 'SHAPE' | 'SWITCH' | 'LOOP' | 'CHORUS' | 'CLOUD' | 'OSC' | 'NOISE' | 'FILTER' | 'RING' | 'COMB' | 'SHIFT' | 'CHANCE' | 'PRISM' | 'PARTIAL' | 'WEFT' | 'TIDE' | 'BOUNCE' | 'FERAL' | 'COUNT' | 'MAP' | 'QUANTIZE' | 'SLEW' | 'FORMANT' | 'LOGIC' | 'DUCK' | 'SWARM' | 'UNSPENT' | 'SIDEWAYS' | 'QUORUM' | 'FAULT LINE' | 'CLIP' | 'FUZZ' | 'CRUSH' | 'CHIP' | 'TOUCH' | 'PENDULUM' | 'LPG' | 'OPERATOR' | 'EDGE' | 'MESH' | 'ORBIT' | 'CHAMBER' | 'OUTPUT';
@@ -27,4 +28,4 @@ export interface ModuleTelemetry {
 export interface EngineTelemetry {
   modules: Record<string, ModuleTelemetry>; peak: number; rms: number; sample: number; faults: number;
 }
-export const SIGNAL_COLORS: Record<SignalType, string> = { audio: '#d7b77d', control: '#94b7c5', trigger: '#94c8a0' };
+export const SIGNAL_COLORS: Record<SignalType, string> = SIGNAL_INKS;

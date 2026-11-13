@@ -1,10 +1,10 @@
-# Verification / v0.14
+# Verification / v0.15
 
 ## Automated coverage
 
 Host: managed Linux, Node 24.22.1. p5.js is pinned to 2.3.4. `package-lock.json` pins dependencies.
 
-- The test inventory is **387 tests in 30 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
+- The test inventory is **391 tests in 30 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
 - New DSP checks: the original three presets produce nonzero finite audio; BRANCH repeats before mutation and emits scale-constrained seeded pitch/gate; RESON decays and responds to external excitation; FRACTURE is transparent at BREAK zero and retains audible captured audio after input ends at maximum HOLD. The original eight module types also run together at extreme macros without invalid samples or master overshoot.
 - Noise modules: seeded stereo VENOM, zero-dose silence, trigger boosts and CV; SNAP dry pass-through, forced interruption/recovery, repeatable automatic dropouts, bounded edge steps and no independent sound from silent input; CAUSTIC dry pass-through, actual waveform changes, extreme drive and decay to silence. BAD CONTACT is checked for finite master output, maximum settings and variable-block deterministic rendering.
 - Ambient/feedback modules: all three new presets validate and synthesize; continuous untriggered DRONE, spectral focus response, a stable 20-second tape tail, bounded envelope-derived controls, explicit full-intervening-quantum delay using 17/193/64-frame blocks, order-independent delayed cycle import and continued rejection of unauthorized AUDIO/mixed cycles. Actual host energy reaches SNAP FAULT and BRANCH CHANGE. Maximum feedback/macro settings remain finite.
@@ -218,3 +218,14 @@ Offline managed Linux Node medians at 48 kHz (three warmed one-second direct-pro
 | EDGE | 7.74 |
 | MESH | 12.02 |
 | ORBIT | 4.57 |
+
+
+## v0.15 visual acceptance
+
+- `npm test`: 391 tests in 30 files. Existing DSP, graph, patch/JSON, snapshot, LOOP and WAV/AIFF tests are retained.
+- The new palette is shared by CSS, module definitions, SVG signal inks and canvas drawing. Automated contrast calculations check ordinary text against background/surface/title-bar colors at ≥4.5:1, plus each module accent against the display background. Decorative grid/secondary waveform inks are intentionally dimmer.
+- A geometry fixture captured from v0.14 commit `6d5ad831d1e3f71136048a592fee1a66bb5c9c45` checks all 57 modules in four states (no telemetry, active, different telemetry, quiet): 228 rectangle-coordinate digests match. No animation trajectory, sampling algorithm, render rate, frame dimensions or Reduced Motion policy changed. The palette change adds no canvas draw passes.
+- Happy DOM/CSS checks at 390×844, 844×390, 320×568 and 1280×800 validate sticky header deletion, named Cancel/Remove, 44-pixel primary button and slider targets, unchanged 128×132 chip dimensions, cancel preserving audio/patch/selection, and removing attached cables. Existing simulated patch gestures, pinch, snapshots, controls and keyboard deletion still pass. This is DOM/CSS verification, not native layout/touch testing.
+- Tiny5 is self-hosted without font modifications; its OFL copy is included. TTF advance widths were inspected for all 57 chip names at 16px: the longest (FAULT LINE) is 86px, fitting the retained header. Cap height is 10px; its pixel grid is doubled. Window titles use 24px. The font is preloaded. DM Mono remains the body/control face.
+- `npm run build` and `npm run verify:build`: PASS. The latter renders the emitted worklet, all 32 presets and the existing LOOP/master PCM/interaction bridges. No source files in `src/audio`, patch serialization, routing, placement or gesture algorithms changed. An additional A/B render of the retained v0.14 production worklet versus this build compares all 32 presets for one second at 48kHz: all 3,072,000 stereo sample values are exactly identical.
+- Native desktop and iPhone/Safari appearance, font rasterization, safe-area geometry, touch feel and audio listening are **unverified**. Managed browser/desktop tools are not exposed in this session; the Sites preview rules forbid installing an alternate browser when the supported tool is absent. No browser screenshot or native performance claim is made.

@@ -8,6 +8,8 @@ Connect little machines. Make strange sounds. See what happens.
 
 57 modules, 32 starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
 
+An old-computer face for a living sound circuit: green text, small pixel windows and a handful of signal colors.
+
 ## Play
 
 - Pick a preset and press **▶**.

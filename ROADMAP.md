@@ -1,5 +1,9 @@
 # Module directions / v0.14
 
+## v0.15 — Home computer windows
+
+Visual-only release: shared eight-family palette, Tiny5 chip titles, readable monospace controls, flat square windows and instrument-like sliders. Chip/jack geometry, all 57 modules and signal-driven pixel motion are preserved.
+
 The library now contains 57 implemented modules. The utility/memory roles, basic waveform/noise sources and six additional frequency/effect roles are implemented. Existing compact chip dimensions and larger reactive displays remain in place.
 
 | New chip | Implemented role | Starting patch |

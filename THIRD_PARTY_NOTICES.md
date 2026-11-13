@@ -5,6 +5,7 @@ These components retain their own licenses, independently of the MIT-licensed ap
 | Component | License | Source / license copy |
 | --- | --- | --- |
 | p5.js 2.3.4 | LGPL-2.1 | [Source](https://github.com/processing/p5.js) · [License](public/licenses/p5-LGPL-2.1.txt) |
+| Tiny5 (unmodified, self-hosted) | SIL Open Font License 1.1 | [Source](https://github.com/google/fonts/tree/main/ofl/tiny5) · [License](public/fonts/Tiny5-OFL.txt) |
 | Space Grotesk | SIL Open Font License 1.1 | [License](public/fonts/Space-Grotesk-OFL.txt) |
 | DM Mono | SIL Open Font License 1.1 | [License](public/fonts/DM-Mono-OFL.txt) |
 
