@@ -333,16 +333,15 @@ input[type=range]::-moz-range-thumb {
   .workspace-nav { bottom: max(7px, env(safe-area-inset-bottom)); }
 }
 @media (max-width:600px) and (orientation:portrait) {
-  /* Keep the full-height editor overlay, but limit the dotted rack to its content. */
-  .main-layout { align-items: flex-start; background: var(--background); }
+  /* One continuous stage; portrait coordinates live in Workspace, not CSS ordering. */
+  .main-layout { align-items: stretch; background: var(--background); }
   .workspace {
-    flex: 0 0 100%; width: 100%; height: var(--portrait-stage-height, 300px);
-    border-bottom: 1px solid var(--dim);
+    flex: 1; width: 100%; height: 100%; border-bottom: 0;
   }
   .topbar {
     display: grid; grid-template-columns: 44px 44px minmax(24px, 1fr) 44px 44px 44px;
-    grid-template-rows: 44px 44px; gap: 5px 3px; min-height: 0;
-    padding-top: calc(env(safe-area-inset-top) + 9px); padding-bottom: 7px;
+    grid-template-rows: 44px 44px; gap: 2px 3px; min-height: 0;
+    padding-top: calc(env(safe-area-inset-top) + 1px); padding-bottom: 1px;
     background: var(--surface); border-bottom-color: var(--line);
     box-shadow: none; filter: none; -webkit-backdrop-filter: none; backdrop-filter: none;
   }
@@ -353,11 +352,12 @@ input[type=range]::-moz-range-thumb {
   .topbar > button, .topbar .preset-select { border-color: var(--line); }
   /* The old 23px three-dot text overflowed its 44px button; draw three fixed dots. */
   .topbar .menu-button {
-    display: grid; place-items: center; padding: 0; font-size: 0 !important;
+    position: relative; display: block; padding: 0; font-size: 0 !important;
     letter-spacing: 0; overflow: hidden; line-height: 1; color: var(--ink);
   }
   .topbar .menu-button::before {
-    content: ''; display: block; width: 4px; height: 4px; background: currentColor;
+    content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    display: block; width: 4px; height: 4px; background: currentColor;
     box-shadow: -10px 0 currentColor, 10px 0 currentColor;
   }
   .master-range::-webkit-slider-thumb { box-shadow: none; }
@@ -365,20 +365,22 @@ input[type=range]::-moz-range-thumb {
   .workspace-nav {
     left: 50%; transform: translateX(-50%);
     bottom: calc(var(--safe-bottom) + 10px);
-    display: grid; grid-template-columns: 44px 58px 44px 56px;
-    width: 206px; height: 48px; padding: 1px;
+    display: grid; grid-template-columns: 44px 64px 44px 44px;
+    width: 200px; height: 48px; padding: 1px;
     align-items: center; border-color: var(--dim); background: var(--surface);
     box-shadow: 0 0 0 4px var(--background);
   }
   .workspace-nav button { width: 44px; height: 44px; min-width: 44px; min-height: 44px; font-size: 19px; touch-action: manipulation; }
   .workspace-nav .zoom-value {
-    display: flex; align-items: center; justify-content: center; width: 58px; height: 44px;
+    display: flex; align-items: center; justify-content: center; width: 64px; height: 44px;
     border-left: 1px solid var(--dim); border-right: 1px solid var(--dim);
     font-size: 11px; color: var(--ink);
   }
   .workspace-nav .fit-button {
-    width: 56px; height: 44px; font-size: 11px; border-left: 1px solid var(--dim);
+    width: 44px; height: 44px; font-size: 11px; border-left: 1px solid var(--dim);
   }
+  .workspace-nav * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  .editor-visible .workspace-nav { bottom: calc(var(--safe-bottom) + 4px + var(--editor-overlap, 0px)); }
   /* Connection guidance must never cover the zoom dock. */
   .patch-hint { bottom: calc(var(--safe-bottom) + 74px); }
   .topbar > button, .topbar .preset-select { border-color: var(--dim); }

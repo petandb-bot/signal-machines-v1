@@ -1,0 +1,312 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "PORTRAIT / COMPLEX",
+  "bpm": 112,
+  "master": 0.65,
+  "seed": 101602,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 2801,
+      "character": "METAL",
+      "params": {
+        "rate": 0.5,
+        "irregular": 0
+      }
+    },
+    {
+      "id": "logic-1",
+      "type": "LOGIC",
+      "x": 192,
+      "y": 16,
+      "seed": 2802,
+      "character": "METAL",
+      "params": {
+        "ratio": 0.5,
+        "shift": 0.5
+      },
+      "mode": "XOR"
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 368,
+      "y": 16,
+      "seed": 2803,
+      "character": "METAL",
+      "params": {
+        "body": 0.24,
+        "tension": 0.42
+      }
+    },
+    {
+      "id": "comb-1",
+      "type": "COMB",
+      "x": 368,
+      "y": 184,
+      "seed": 2804,
+      "character": "METAL",
+      "params": {
+        "tune": 0.65,
+        "decay": 0.58
+      }
+    },
+    {
+      "id": "drone-1",
+      "type": "DRONE",
+      "x": 16,
+      "y": 184,
+      "seed": 2805,
+      "character": "METAL",
+      "params": {
+        "spread": 0.38,
+        "color": 0.66
+      },
+      "mode": "220 Hz"
+    },
+    {
+      "id": "duck-1",
+      "type": "DUCK",
+      "x": 192,
+      "y": 184,
+      "seed": 2806,
+      "character": "METAL",
+      "params": {
+        "depth": 0.6,
+        "recover": 0.18
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 16,
+      "seed": 2807,
+      "character": "METAL",
+      "params": {
+        "size": 0.66,
+        "density": 0.58
+      },
+      "mode": "WEAVE"
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 1600,
+      "y": 16,
+      "seed": 2808,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "extra-0",
+      "type": "SMEAR",
+      "x": 896,
+      "y": 16,
+      "seed": 100,
+      "character": "METAL",
+      "params": {
+        "smear": 0.65,
+        "memory": 0.6
+      }
+    },
+    {
+      "id": "extra-1",
+      "type": "FILTER",
+      "x": 1072,
+      "y": 16,
+      "seed": 101,
+      "character": "METAL",
+      "params": {
+        "cutoff": 0.68,
+        "resonance": 0.3
+      }
+    },
+    {
+      "id": "extra-2",
+      "type": "LEVEL",
+      "x": 1248,
+      "y": 16,
+      "seed": 102,
+      "character": "METAL",
+      "params": {
+        "boost": 0.3333333333333333,
+        "comp": 0
+      }
+    },
+    {
+      "id": "extra-3",
+      "type": "ORBIT",
+      "x": 1424,
+      "y": 16,
+      "seed": 103,
+      "character": "METAL",
+      "params": {
+        "rate": 0.5,
+        "depth": 0.8
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "logic-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "logic-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "logic-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "comb-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "logic-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "duck-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "drone-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "duck-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "duck-1",
+        "port": "key"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "duck-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "comb-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "extra-edge-0",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "extra-0",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "extra-edge-1",
+      "from": {
+        "module": "extra-0",
+        "port": "audio"
+      },
+      "to": {
+        "module": "extra-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "extra-edge-2",
+      "from": {
+        "module": "extra-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "extra-2",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "extra-edge-3",
+      "from": {
+        "module": "extra-2",
+        "port": "audio"
+      },
+      "to": {
+        "module": "extra-3",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "extra-out",
+      "from": {
+        "module": "extra-3",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}
