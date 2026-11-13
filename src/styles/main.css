@@ -332,18 +332,24 @@ input[type=range]::-moz-range-thumb {
 }
 @media (max-width:600px) and (orientation:portrait) {
   .topbar {
-    display: grid; grid-template-columns: 44px 52px minmax(24px, 1fr) 44px 44px 44px;
-    gap: 4px 3px; min-height: 100px; padding-bottom: 6px;
+    display: grid; grid-template-columns: 44px 44px minmax(24px, 1fr) 44px 44px 44px;
+    grid-template-rows: 44px 44px; gap: 2px 3px; min-height: 0;
+    padding-top: calc(env(safe-area-inset-top) + 1px); padding-bottom: 1px;
+    border-bottom-color: var(--dim); box-shadow: none; filter: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
   }
+  .topbar button, .topbar input, .topbar select { text-shadow: none; box-shadow: none; filter: none; }
+  .topbar > button, .topbar .preset-select { border-color: var(--dim); }
   .run-button { grid-column: 1; grid-row: 1; }
   .tempo-control { grid-column: 2; grid-row: 1; }
   .tempo-control > span { display: none; }
+  .tempo-input { width: 44px; height: 44px; padding: 0; line-height: 1; }
   .master-control { grid-column: 3; grid-row: 1; }
   .master-range { width: 100% !important; }
   .record-button { grid-column: 4; grid-row: 1; }
   .add-button { grid-column: 5; grid-row: 1; }
   .menu-button { grid-column: 6; grid-row: 1; }
-  .preset-select { grid-column: 1/-1; grid-row: 2; width: 100%; max-width: none; min-height: 44px; height: 44px; font-size: 13px; margin: 0; }
+  .preset-select { grid-column: 1/-1; grid-row: 2; width: 100%; max-width: none; min-height: 44px; height: 44px; font-size: 16px; line-height: 1.25; margin: 0; }
   .editor { top: auto; left: var(--safe-left); right: var(--safe-right); bottom: var(--safe-bottom); width: auto; max-height: 49dvh; padding-bottom: 12px; }
   .editor-controls { width: auto; float: none; gap: 10px; }
   .editor-visual { float: right; width: 106px; margin: 0 0 12px 14px; }

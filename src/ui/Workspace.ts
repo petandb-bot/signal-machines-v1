@@ -15,6 +15,7 @@ export class Workspace {
   readonly svg=document.createElementNS(NS,'svg');readonly zoomLabel=element('span','zoom-value','100%');
   private hint=element('div','patch-hint');private drag?:Drag;private armed?:PortRef;private pinch?:Pinch;
   private pointers=new Map<number,{x:number;y:number}>();private zoom=1;private panX=0;private panY=0;private cableEnd={x:0,y:0};
+  private readonly portraitLayout=window.matchMedia('(max-width:600px) and (orientation:portrait)');
   onSelect:()=>void=()=>{};onError:(message:string)=>void=()=>{};onAdd:()=>void=()=>{};
   constructor(readonly store:StateStore){
     this.root.setAttribute('aria-label','Modular patch workspace');this.svg.classList.add('cables');this.svg.setAttribute('width','1');this.svg.setAttribute('height','1');
@@ -25,12 +26,14 @@ export class Workspace {
     this.viewport.addEventListener('pointercancel',()=>{this.persistMove();this.pointers.clear();this.pinch=undefined;this.cancelDrag();});
     this.viewport.addEventListener('wheel',event=>{event.preventDefault();const r=this.viewport.getBoundingClientRect();this.setZoom(this.zoom*Math.exp(-event.deltaY*.0015),event.clientX-r.left,event.clientY-r.top);},{passive:false});
     this.viewport.addEventListener('dblclick',event=>{if(!(event.target as Element).closest('.module-card,.cable-hit'))this.onAdd();});
-    let previousWidth=0,previousHeight=0;
+    let previousWidth=0,previousHeight=0,previousPortrait=this.portraitLayout.matches;
     new ResizeObserver(()=>{
-      const width=this.viewport.clientWidth,height=this.viewport.clientHeight;
-      // Keep the viewed world point stable when browser chrome, the keyboard or orientation changes.
-      if(previousWidth&&previousHeight){this.panX+=(width-previousWidth)/2;this.panY+=(height-previousHeight)/2;}
-      previousWidth=width;previousHeight=height;this.transform();
+      const width=this.viewport.clientWidth,height=this.viewport.clientHeight,portrait=this.portraitLayout.matches;
+      const orientationChanged=previousWidth>0&&previousHeight>0&&portrait!==previousPortrait;
+      // Portrait keeps its top edge stable as browser chrome changes the available height.
+      if(previousWidth&&previousHeight&&!orientationChanged){this.panX+=(width-previousWidth)/2;if(!portrait)this.panY+=(height-previousHeight)/2;}
+      previousWidth=width;previousHeight=height;previousPortrait=portrait;
+      if(orientationChanged)this.fit();else this.transform();
     }).observe(this.viewport);
     this.render();requestAnimationFrame(()=>this.fit());
   }
@@ -52,7 +55,14 @@ export class Workspace {
     const minX=Math.min(...modules.map(m=>m.x))-22,minY=Math.min(...modules.map(m=>m.y))-20;
     const width=Math.max(...modules.map(m=>m.x+NODE_WIDTH))+22-minX,height=Math.max(...modules.map(m=>m.y+NODE_HEIGHT))+48+safe.bottom-minY;
     this.zoom=Math.max(.25,Math.min(1,(available-12)/width,(r.height-12)/height));
-    this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;this.panY=(r.height-height*this.zoom)/2-minY*this.zoom;this.transform();
+    if(this.portraitLayout.matches){
+      // FIT is a readable starting view on phones; manual zoom can still show the whole patch.
+      this.zoom=Math.max(.875,this.zoom);
+      const first=modules.reduce((a,b)=>b.y<a.y||(b.y===a.y&&b.x<a.x)?b:a);
+      this.panX=width*this.zoom>available-12?safe.left+24-first.x*this.zoom:safe.left+(available-width*this.zoom)/2-minX*this.zoom;
+      this.panY=20-(minY+20)*this.zoom;
+    }else{this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;this.panY=(r.height-height*this.zoom)/2-minY*this.zoom;}
+    this.transform();
   }
   arrange(){
     // Compact a patch without changing its signal graph or sounds.
