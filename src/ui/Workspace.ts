@@ -30,10 +30,12 @@ export class Workspace {
     new ResizeObserver(()=>{
       const width=this.viewport.clientWidth,height=this.viewport.clientHeight,portrait=this.portraitLayout.matches;
       const orientationChanged=previousWidth>0&&previousHeight>0&&portrait!==previousPortrait;
-      // Portrait keeps its top edge stable as browser chrome changes the available height.
+      const portraitWidthChanged=portrait&&previousWidth>0&&Math.abs(width-previousWidth)>8;
+      // Safari's collapsing browser chrome changes height: keep the portrait top edge stable.
+      // Width changes, however, must re-fit the entire rack so chips do not disappear off-screen.
       if(previousWidth&&previousHeight&&!orientationChanged){this.panX+=(width-previousWidth)/2;if(!portrait)this.panY+=(height-previousHeight)/2;}
       previousWidth=width;previousHeight=height;previousPortrait=portrait;
-      if(orientationChanged)this.fit();else this.transform();
+      if(orientationChanged||portraitWidthChanged)this.fit();else this.transform();
     }).observe(this.viewport);
     this.render();requestAnimationFrame(()=>this.fit());
   }
@@ -52,14 +54,17 @@ export class Workspace {
   fit(){
     const modules=this.store.patch.modules,r=this.viewport.getBoundingClientRect(),safe=this.insets(),available=r.width-safe.left-safe.right;
     if(!modules.length){this.zoom=1;this.panX=r.width/2-150;this.panY=r.height/2-70;this.transform();return;}
+    const portrait=this.portraitLayout.matches;
     const minX=Math.min(...modules.map(m=>m.x))-22,minY=Math.min(...modules.map(m=>m.y))-20;
     const width=Math.max(...modules.map(m=>m.x+NODE_WIDTH))+22-minX,height=Math.max(...modules.map(m=>m.y+NODE_HEIGHT))+48+safe.bottom-minY;
-    this.zoom=Math.max(.25,Math.min(1,(available-12)/width,(r.height-12)/height));
-    if(this.portraitLayout.matches){
-      // FIT is a readable starting view on phones; manual zoom can still show the whole patch.
-      this.zoom=Math.max(.875,this.zoom);
-      const first=modules.reduce((a,b)=>b.y<a.y||(b.y===a.y&&b.x<a.x)?b:a);
-      this.panX=width*this.zoom>available-12?safe.left+24-first.x*this.zoom:safe.left+(available-width*this.zoom)/2-minX*this.zoom;
+    // FIT is an overview: its zoom must obey BOTH axes. The old portrait .875 floor
+    // clipped every wide rack, even though the label still read "FIT".
+    const usableWidth=Math.max(1,available-(portrait?24:12));
+    const usableHeight=Math.max(1,r.height-(portrait?84:12)); // Keep the bottom zoom bar clear.
+    this.zoom=Math.min(1,usableWidth/width,usableHeight/height);
+    if(portrait){
+      // Keep the first row near the header without discarding the rest of the patch.
+      this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;
       this.panY=20-(minY+20)*this.zoom;
     }else{this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;this.panY=(r.height-height*this.zoom)/2-minY*this.zoom;}
     this.transform();
