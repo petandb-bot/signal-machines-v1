@@ -18,7 +18,10 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
   g.fill(INK.frame);
   for(let x=4;x<4+Math.round((W-8)*motion.activity);x+=4){point(g,x,2);point(g,W-5-x,H-3);}
   g.push();g.translate(motion.dx,motion.dy);g.fill(color);
-  if(type==='SMEAR'){
+  if(type==='FOUND'){
+    const peaks=t.curve??[];g.fill(INK.cyan);for(let x=5;x<99;x++){const h=Math.min(27,(peaks[Math.floor((x-5)/94*104)]??0)*100);point(g,x,39-h);point(g,x,39+h);}
+    g.fill(color);const left=5+clamp(t.a,0,1)*94,right=5+clamp(t.b,0,1)*94;for(let y=8;y<70;y+=4){point(g,left,y);point(g,right,y);}g.rect(5+clamp(t.phase,0,1)*94,9,1,61);wave(g,t,75,18,3,2);
+  }else if(type==='SMEAR'){
     const dry=t.curve??t.wave,bands=t.bands??[];
     g.fill(INK.blue);for(let x=6;x<98;x+=2){const i=Math.floor((x-6)/92*64);point(g,x,20-clamp((dry[i]??0)*95,-13,13));}
     g.fill(color);wave(g,t,57,100,16,2);

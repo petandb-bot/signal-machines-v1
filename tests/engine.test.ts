@@ -58,4 +58,11 @@ describe('transport, throttling and recording orchestration with mocked browser 
     const engine=new AudioEngine(),error=vi.fn();engine.onError=error;await engine.startRecording(metalDrift(),'wav');const id=(sent.at(-1) as {id:number}).id;const stopped=engine.stop();FakeNode.last.port.onmessage({data:{type:'recordEnd',id}});await vi.advanceTimersByTimeAsync(60);await stopped;expect(engine.running).toBe(false);expect(error).toHaveBeenCalledWith('No audio was recorded.');
   });
 
+  it('loads FOUND assets before its patch and retains original PCM through RUN/STOP and rewiring',async()=>{
+    const {foundQuiet}=await import('../src/state/presets');const engine=new AudioEngine(),p=foundQuiet();await engine.start(p);const messages=sent as {type:string;assets?:{left:Float32Array}[]}[];expect(messages[0].type).toBe('foundAssets');expect(messages[1].type).toBe('patch');const original=await engine.foundLibrary.get();expect(messages[0].assets![0].left).not.toBe(original!.left);expect(original!.left.length).toBe(288000);engine.sync(p,true);await vi.waitFor(()=>expect(messages.filter(m=>m.type==='patch')).toHaveLength(2));expect(messages.filter(m=>m.type==='foundAssets')).toHaveLength(1);const stopped=engine.stop();await vi.advanceTimersByTimeAsync(55);await stopped;await engine.start(p);expect(messages.filter(m=>m.type==='foundAssets')).toHaveLength(1);
+  });
+  it('ignores a late FOUND preparation after a different patch has been selected',async()=>{
+    const {foundQuiet}=await import('../src/state/presets');const {builtinFound}=await import('../src/samples/FoundData');const engine=new AudioEngine();await engine.start(metalDrift());let resolve!:(a:ReturnType<typeof builtinFound>)=>void;vi.spyOn(engine.foundLibrary,'get').mockImplementation(()=>new Promise(r=>resolve=r));engine.sync(foundQuiet(),true);engine.sync(metalDrift(),true);resolve(builtinFound('room'));await Promise.resolve();await Promise.resolve();await Promise.resolve();expect((sent.at(-1) as {patch:{name:string}}).patch.name).toBe('METAL DRIFT');
+  });
+
 });

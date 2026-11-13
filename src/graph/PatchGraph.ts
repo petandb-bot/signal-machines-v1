@@ -3,7 +3,7 @@ import { validateConnection } from './GraphValidator';
 import type { Connection, ModuleState, ModuleType, Patch } from './types';
 export const uniqueId = () => crypto.randomUUID();
 export function createModule(type: ModuleType, x: number, y: number, seed: number, id: string = uniqueId()): ModuleState {
-  return { id, type, x, y, seed: seed >>> 0, character: 'METAL', params: Object.fromEntries(DEFINITIONS[type].parameters.map(p => [p.id, p.default])) };
+  return { id, type, x, y, seed: seed >>> 0, character: 'METAL', params: Object.fromEntries(DEFINITIONS[type].parameters.map(p => [p.id, p.default])),...(type==='FOUND'?{sample:'builtin:room'}:{}) };
 }
 export function connect(patch: Patch, from: Connection['from'], to: Connection['to']) {
   const edge: Connection = { id: uniqueId(), from, to };

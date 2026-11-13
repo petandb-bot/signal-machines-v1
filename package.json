@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/p5": "^1.7.7",
     "esbuild": "0.28.2",
+    "fake-indexeddb": "6.2.4",
     "fflate": "^0.8.2",
     "happy-dom": "^21.0.4",
     "typescript": "~5.9.3",

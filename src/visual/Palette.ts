@@ -14,6 +14,7 @@ export const PALETTE = {
 
 // The original warm/cool identities remain, using eight small families of ink.
 export const MODULE_COLORS = {
+  FOUND: PALETTE.cyanSoft,
   SMEAR: PALETTE.blueSoft, FRICTION: PALETTE.amberBright,
   PULSE: PALETTE.green, BRANCH: PALETTE.purple, FLOCK: PALETTE.cyan,
   ALLOY: PALETTE.amber, RESON: PALETTE.limeSoft, FRACTURE: PALETTE.pink,

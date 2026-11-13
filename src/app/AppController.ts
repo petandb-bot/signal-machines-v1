@@ -1,3 +1,4 @@
+import {MAX_FOUND,foundRef} from '../samples/FoundData';
 import {installPalette} from '../visual/Palette';
 import type {RecordingFormat} from '../audio/PcmRecording';
 import {MODULE_GROUPS} from '../graph/catalog';
@@ -19,6 +20,7 @@ import { SnapshotPanel } from '../ui/SnapshotPanel';
 import { button, element } from '../ui/Controls';
 export class AppController {
   readonly store=new StateStore();readonly audio=new AudioEngine();readonly workspace=new Workspace(this.store);readonly editor=new ModuleEditor(this.store);readonly snapshots=new SnapshotPanel(()=>this.store.patch);
+  private foundImports=new Map<string,number>();private foundPending=new Set<string>();
   private runButton=button('▶','Run audio engine',()=>void this.toggleRun(),'run-button');
   private recButton=button('●','Record master output',()=>void this.toggleRecording(),'record-button');
   private addButton=button('+','Add a module',()=>this.togglePanel('library'),'add-button');
@@ -36,6 +38,9 @@ export class AppController {
       if(type==='replace'){this.workspace.cancelDrag();this.closePanels();this.refreshProject();requestAnimationFrame(()=>this.workspace.fit());}
     };
     this.store.onStorageError=message=>{if(!this.saveWarningShown){this.notify(message,true);this.saveWarningShown=true;}};
+    this.editor.onFoundInspect=module=>{if(this.foundPending.has(module.id)){this.editor.setFoundStatus(module.id,undefined,'Loading and analyzing…',true);return;}const reference=foundRef(module.sample);void this.audio.foundLibrary.get(reference,()=>this.store.patch.modules.some(m=>m.type==='FOUND'&&foundRef(m.sample)===reference)).then(audio=>{if(this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference)this.editor.setFoundStatus(module.id,audio,this.audio.foundLibrary.sessionOnly(reference)?audio?.name+' · session only':undefined);}).catch(error=>{if(this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference)this.editor.setFoundStatus(module.id,undefined,error.message);}).finally(()=>this.audio.foundLibrary.retain(this.store.patch.modules.filter(m=>m.type==='FOUND').map(m=>foundRef(m.sample))));};
+    this.editor.onFoundChoose=(module,ref)=>{module.sample=ref;this.store.changed('routing');};
+    this.editor.onFoundFile=(module,file)=>void this.importFound(module,file);
     this.editor.onParameter=(module,id,value)=>this.parameter(module,id,value);
     this.workspace.onSelect=()=>{this.closePanels();this.editor.render();const selected=!!(this.store.selectedModule||this.store.selectedCable);this.root.classList.toggle('editor-visible',selected);if(this.store.selectedModule)requestAnimationFrame(()=>{const editor=this.editor.root.getBoundingClientRect(),field=this.workspace.viewport.getBoundingClientRect();this.workspace.reveal(this.store.selectedModule!,editor.width>field.width*.65?0:editor.width,editor.width>field.width*.65?editor.height:0);});};
     this.workspace.onError=message=>this.notify(message,true);this.workspace.onAdd=()=>this.togglePanel('library');
@@ -82,9 +87,16 @@ export class AppController {
   private parameter(module:ModuleState,id:string,value:number){module.params[id]=value;this.store.changed('parameters');this.editor.refresh(module);}
   private addModule(type:ModuleType){
     if(this.store.patch.modules.length>=48){this.notify('This patch has reached the 48 module limit.',true);return;}
+    if(type==='FOUND'&&this.store.patch.modules.filter(m=>m.type==='FOUND').length>=MAX_FOUND){this.notify('A patch can contain at most 2 FOUND modules.',true);return;}
     if(type==='LOOP'&&this.store.patch.modules.filter(m=>m.type==='LOOP').length>=MAX_LOOPS){this.notify('A patch can contain at most 4 LOOP modules.',true);return;}
     const position=this.workspace.vacantPosition(),module=createModule(type,position.x,position.y,(this.store.patch.seed+this.store.patch.modules.length*7919+1)>>>0);
     this.store.patch.modules.push(module);this.store.selectedModule=module.id;this.store.selectedCable=null;this.closePanels();this.store.changed('routing');this.workspace.reveal(module.id,0);this.notify(`${type} added`);
+  }
+  private async importFound(module:ModuleState,file:File){
+    const sequence=(this.foundImports.get(module.id)??0)+1;this.foundImports.set(module.id,sequence);this.foundPending.add(module.id);const reference=foundRef(module.sample);this.editor.setFoundStatus(module.id,undefined,'Loading and analyzing…',true);
+    try{const {audio,persisted}=await this.audio.foundLibrary.import(file,()=>this.foundImports.get(module.id)===sequence&&this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference);if(this.foundImports.get(module.id)===sequence&&this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference){module.sample=audio.id;this.store.changed('routing');this.editor.setFoundStatus(module.id,audio,persisted?undefined:audio.name+' · session only; browser storage failed.');if(!persisted)this.notify('Sample is usable this session, but browser storage failed.',true);}}
+    catch(error){if(this.foundImports.get(module.id)===sequence&&this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference){this.editor.setFoundStatus(module.id,undefined,(error as Error).message);this.notify((error as Error).message,true);}}
+    finally{if(this.foundImports.get(module.id)===sequence)this.foundPending.delete(module.id);this.audio.foundLibrary.retain(this.store.patch.modules.filter(m=>m.type==='FOUND').map(m=>foundRef(m.sample)));}
   }
   private deleteSelection(){
     if(this.store.selectedCable){this.store.patch.connections=this.store.patch.connections.filter(e=>e.id!==this.store.selectedCable);this.store.selectedCable=null;this.store.changed('routing');this.notify('Cable removed');}

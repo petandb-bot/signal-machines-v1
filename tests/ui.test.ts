@@ -79,8 +79,8 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(false);
 
   });
-  it('exposes fifty-nine grouped module choices, thirty-four presets and no large title',()=>{
-    expect(document.querySelectorAll('.library-module')).toHaveLength(59);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(35);
+  it('exposes sixty grouped module choices, thirty-six presets and no large title',()=>{
+    expect(document.querySelectorAll('.library-module')).toHaveLength(60);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(37);
     const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;preset.value='1';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='BRANCH')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='FRACTURE')).toBe(true);
     preset.value='2';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='RESON')).toBe(true);
     preset.value='3';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='VENOM')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='CAUSTIC')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='SNAP')).toBe(true);
@@ -170,7 +170,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
 
   it('groups every library choice exactly once without adding search or favourites',()=>{
-    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(59);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
+    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(60);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
   });
   it('captures a TOUCH path, preserves it with bypass in a snapshot, cancels incomplete strokes and clears explicitly',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add FUZZ module"]')!.click();const fuzz=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${fuzz}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));document.querySelector<HTMLButtonElement>('[aria-label="FUZZ bypass"]')!.click();expect(app.store.patch.modules.find(m=>m.id===fuzz)!.bypass).toBe(true);
@@ -209,6 +209,10 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   it('opens both new sound studies from the browser preset selector',()=>{
     const selector=document.querySelector<HTMLSelectElement>('.preset-select')!;
     for(const [index,name,type] of [['32','DISSOLVING METAL','SMEAR'],['33','SLIDING GLASS','FRICTION']]){selector.value=index;selector.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe(name);expect(app.store.patch.modules.some(m=>m.type===type)).toBe(true);}
+  });
+
+  it('loads FOUND samples without starting audio, retains references in snapshots and caps two instances',async()=>{
+    const start=vi.spyOn(app.audio,'start');document.querySelector<HTMLButtonElement>('[aria-label="Add FOUND module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));expect(document.querySelectorAll('.editor-controls input[type=range]')).toHaveLength(2);await vi.waitFor(()=>expect(document.querySelector('.found-controls')!.textContent).toContain('ROOM'));const source=document.querySelector<HTMLSelectElement>('[aria-label="FOUND source"]')!;source.value='builtin:rain';source.dispatchEvent(new Event('change'));expect(app.store.patch.modules.find(m=>m.id===id)!.sample).toBe('builtin:rain');expect(start).not.toHaveBeenCalled();const p=structuredClone(app.store.patch),snapshot=app.snapshots.storage.capture(p,'Found rain');app.store.replace(app.snapshots.storage.recall(snapshot,app.store.patch));expect(app.store.patch).toEqual(p);for(let i=0;i<2;i++)document.querySelector<HTMLButtonElement>('[aria-label="Add FOUND module"]')!.click();expect(app.store.patch.modules.filter(m=>m.type==='FOUND')).toHaveLength(2);expect(document.querySelector('.toast')!.textContent).toContain('at most 2 FOUND');
   });
 
 });

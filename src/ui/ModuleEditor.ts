@@ -1,3 +1,6 @@
+import {FoundControls} from './FoundControls';
+import {foundRef} from '../samples/FoundData';
+import type {FoundAudio} from '../samples/FoundData';
 import {TouchControls} from './TouchControls';
 import {LoopControls} from './LoopControls';
 import type {LoopStatus} from '../audio/LoopAudio';
@@ -10,13 +13,16 @@ import { button, element, parameterControl, refreshParameters } from './Controls
 export class ModuleEditor {
   readonly root=element('aside','editor');
   onParameter:(module:ModuleState,id:string,value:number)=>void=()=>{};onDelete:()=>void=()=>{};onClose:()=>void=()=>{};
+  private foundControls?:FoundControls;
+  onFoundChoose:(module:ModuleState,ref:string)=>void=()=>{};onFoundFile:(module:ModuleState,file:File)=>void=()=>{};onFoundInspect:(module:ModuleState)=>void=()=>{};
+  setFoundStatus(id:string,audio?:FoundAudio,message?:string,busy=false){if(this.foundControls?.id===id){this.foundControls.update(audio,message);this.foundControls.busy(busy);}}
   private loopControls?:LoopControls;
   private deleteConfirmation?:HTMLElement;private deleteTrigger?:HTMLButtonElement;
   onAction:(module:ModuleState,action:string)=>void=()=>{};onImport:(module:ModuleState,file:File)=>void=()=>{};
   onPort:(module:ModuleState,port:PortDefinition)=>void=()=>{};
   constructor(readonly store:StateStore){this.root.setAttribute('aria-label','Module editor');}
   render(){
-    this.root.replaceChildren();this.loopControls=undefined;this.deleteConfirmation=undefined;this.deleteTrigger=undefined;const module=this.store.patch.modules.find(m=>m.id===this.store.selectedModule);
+    this.root.replaceChildren();this.foundControls=undefined;this.loopControls=undefined;this.deleteConfirmation=undefined;this.deleteTrigger=undefined;const module=this.store.patch.modules.find(m=>m.id===this.store.selectedModule);
     const heading=element('div','editor-top'),actions=element('div','editor-actions');heading.append(element('h2','',module?.type??'CABLE'),actions);
     if(module){const trash=button('','Delete selected module and its cables',()=>this.confirmDelete(module,heading),'module-trash');trash.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></svg>';trash.setAttribute('aria-expanded','false');this.deleteTrigger=trash;actions.append(trash);}
     actions.append(button('×','Close editor',()=>this.onClose()));this.root.append(heading);
@@ -28,6 +34,7 @@ export class ModuleEditor {
     const visual=element('div','editor-visual'),canvas=element('canvas');canvas.width=VISUAL_WIDTH;canvas.height=VISUAL_HEIGHT;canvas.dataset.visual=module.id;canvas.setAttribute('aria-label',`Expanded ${module.type} signal display`);visual.append(canvas);
     this.root.append(element('p','editor-subtitle',definition.subtitle),visual);
     const controls=element('div','editor-controls');definition.parameters.forEach((_,i)=>controls.append(parameterControl(module,i,(id,value)=>this.onParameter(module,id,value),true)));this.root.append(controls);
+    if(module.type==='FOUND'){this.foundControls=new FoundControls(module.id,foundRef(module.sample),ref=>this.onFoundChoose(module,ref),file=>this.onFoundFile(module,file));this.root.append(this.foundControls.root);this.onFoundInspect(module);}
     if(module.type==='LOOP'){this.loopControls=new LoopControls(module.id,action=>this.onAction(module,action),file=>this.onImport(module,file));this.loopControls.update(this.store.telemetry?.modules[module.id]?.loop);this.root.append(this.loopControls.root);}
     if(module.type==='ALLOY'){
       const modes=element('div','mode-options');for(const mode of ['SOFT','METAL','ROUGH'] as const){const option=button(mode,`${mode} character`,()=>{module.character=mode;this.store.changed('parameters');modes.querySelectorAll('button').forEach(b=>{b.classList.toggle('active',b===option);b.setAttribute('aria-pressed',String(b===option));});});option.classList.toggle('active',module.character===mode);option.setAttribute('aria-pressed',String(module.character===mode));modes.append(option);}this.root.append(modes);

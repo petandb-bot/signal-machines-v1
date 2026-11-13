@@ -217,3 +217,15 @@ export function slidingGlass():Patch{
   wire(p,'friction-1','slip','reson-1','trigger');wire(p,'friction-1','activity','reson-1','material');wire(p,'friction-1','audio','smear-1','audio');wire(p,'reson-1','audio','smear-1','audio');wire(p,'smear-1','audio','output-1','audio');wire(p,'smear-1','audio','parasite-1','audio');wire(p,'parasite-1','fever','friction-1','speed');return p;
 }
 PRESETS.push({name:'DISSOLVING METAL',description:'Irregular metal attacks loosen into separate histories',create:dissolvingMetal},{name:'SLIDING GLASS',description:'A slipping surface excites a second body and listens to its own trace',create:slidingGlass});
+
+export function foundQuiet():Patch{
+  const p=patch('FOUND / QUIET',64,171701);add(p,'FOUND',16,16,5101);add(p,'TIDE',16,184,5102);add(p,'ORBIT',192,16,5103);add(p,'OUTPUT',368,16,5104);
+  p.modules[0].sample='builtin:room';p.modules[0].params.wander=.25;p.modules[0].params.alter=.1;p.modules[2].params.rate=.2;p.modules[2].params.depth=.4;
+  wire(p,'found-1','audio','orbit-1','audio');wire(p,'orbit-1','audio','output-1','audio');wire(p,'tide-1','drift','found-1','move');return p;
+}
+export function foundStrange():Patch{
+  const p=patch('FOUND / STRANGE',80,171702);add(p,'FOUND',16,16,5201);add(p,'RESON',192,184,5202);add(p,'MESH',368,16,5203);add(p,'CLOUD',192,16,5204);add(p,'OUTPUT',544,16,5205);
+  p.modules[0].sample='builtin:machine';p.modules[0].params.wander=.75;p.modules[0].params.alter=.65;p.modules[1].params.decay=.25;p.modules[3].params.grain=.25;
+  wire(p,'found-1','audio','cloud-1','audio');wire(p,'found-1','event','reson-1','trigger');wire(p,'cloud-1','audio','mesh-1','a');wire(p,'reson-1','audio','mesh-1','b');wire(p,'mesh-1','audio','output-1','audio');return p;
+}
+PRESETS.push({name:'FOUND / QUIET',description:'Quiet synthetic room air follows a slow tide',create:foundQuiet},{name:'FOUND / STRANGE',description:'Discovered machine events excite another body',create:foundStrange});

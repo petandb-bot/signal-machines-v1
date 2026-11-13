@@ -14,7 +14,8 @@ class SignalMachinesProcessor extends AudioWorkletProcessor {
     this.port.onmessage = event => {
       try {
         const message = event.data;
-        if(message.type==='recordStart')this.capture.start(message.id,sampleRate);
+        if(message.type==='foundAssets')this.graph.setFoundAssets(message.assets,message.retain);
+        else if(message.type==='recordStart')this.capture.start(message.id,sampleRate);
         else if(message.type==='recordStop')this.capture.stop();
         else if(message.type==='recordRecycle')this.capture.recycle(message.id,message.left,message.right);
         else if (message.type === 'patch') { this.graph.setPatch(parsePatch(JSON.stringify(message.patch)), !!message.reset,!!message.preserveLoops); this.failed = false; }
