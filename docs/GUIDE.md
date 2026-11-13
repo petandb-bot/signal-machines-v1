@@ -337,3 +337,8 @@ Square, opaque windows and flat buttons replace rounded panels and glow. Sliders
 The 128×132 chip, 104×80 display and all jack anchors are unchanged. Every pixel animation keeps its original geometry and telemetry meaning. Quiet visuals and system Reduced Motion still work. Main toolbar, zoom, panel and deletion controls use 44-pixel targets; compact chip jacks retain their original hit geometry and larger editor-jack alternative. Portrait keeps the bottom editor; landscape keeps the side editor. The sticky delete/cancel confirmation and safe-area spacing remain.
 
 This release changes no DSP, module catalog, parameter, port ID, patch format, snapshot, LOOP/recording action or patching gesture.
+
+
+### v0.15.1 — Little enclosures
+
+Chips now have tinted shells, a stepped rim, a raised nameplate and a recessed signal window. Small lower ventilation marks and hard, unblurred edges give each machine a physical housing. Library tiles share the material. The 128×132 bodies, header/display positions, jack anchors, touch targets and signal-driven animations are unchanged. All additions are static CSS and ignore pointer events. Audio and patch data are unchanged.

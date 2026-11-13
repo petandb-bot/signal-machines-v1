@@ -229,3 +229,8 @@ Offline managed Linux Node medians at 48 kHz (three warmed one-second direct-pro
 - Tiny5 is self-hosted without font modifications; its OFL copy is included. TTF advance widths were inspected for all 57 chip names at 16px: the longest (FAULT LINE) is 86px, fitting the retained header. Cap height is 10px; its pixel grid is doubled. Window titles use 24px. The font is preloaded. DM Mono remains the body/control face.
 - `npm run build` and `npm run verify:build`: PASS. The latter renders the emitted worklet, all 32 presets and the existing LOOP/master PCM/interaction bridges. No source files in `src/audio`, patch serialization, routing, placement or gesture algorithms changed. An additional A/B render of the retained v0.14 production worklet versus this build compares all 32 presets for one second at 48kHz: all 3,072,000 stereo sample values are exactly identical.
 - Native desktop and iPhone/Safari appearance, font rasterization, safe-area geometry, touch feel and audio listening are **unverified**. Managed browser/desktop tools are not exposed in this session; the Sites preview rules forbid installing an alternate browser when the supported tool is absent. No browser screenshot or native performance claim is made.
+
+
+## v0.15.1 enclosure styling
+
+A CSS-only chip/library material refinement: tinted casing, layered flat bevels, inset display bezel and small ventilation marks. No geometry, interaction or DSP source changed. Existing UI and visual regression tests cover retained chip/jack geometry, mobile deletion, touch patching and pixel motion. Native browser appearance remains unverified because the managed browser tool is unavailable.
