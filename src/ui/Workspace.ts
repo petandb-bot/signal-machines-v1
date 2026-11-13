@@ -21,6 +21,7 @@ export class Workspace {
   private pointers=new Map<number,{x:number;y:number}>();private zoom=1;private panX=0;private panY=0;private cableEnd={x:0,y:0};
   private readonly portraitLayout=window.matchMedia('(max-width:600px) and (orientation:portrait)');
   private layoutPatch?:Patch;private displayPoints=new Map<string,DisplayPoint>();
+  private fitted=true;
   private readonly nav=element('div','workspace-nav');
   onViewportChange:()=>void=()=>{};
   onSelect:()=>void=()=>{};onError:(message:string)=>void=()=>{};onAdd:()=>void=()=>{};
@@ -39,12 +40,13 @@ export class Workspace {
       const firstMeasurement=previousWidth===0&&width>0&&height>0;
       const orientationChanged=previousWidth>0&&previousHeight>0&&portrait!==previousPortrait;
       const portraitWidthChanged=portrait&&previousWidth>0&&Math.abs(width-previousWidth)>8;
+      const fittedHeightChanged=portrait&&this.fitted&&previousHeight>0&&height!==previousHeight;
       // Safari's collapsing browser chrome changes height: keep the portrait top edge stable.
       // Width changes and the first measured layout must use actual rack bounds.
       if(previousWidth&&previousHeight&&!orientationChanged){this.panX+=(width-previousWidth)/2;if(!portrait)this.panY+=(height-previousHeight)/2;}
       previousWidth=width;previousHeight=height;previousPortrait=portrait;
       if(orientationChanged){this.persistMove();this.pointers.clear();this.pinch=undefined;this.cancelDrag();this.render();}
-      if(firstMeasurement||orientationChanged||portraitWidthChanged)this.fit();else this.transform();
+      if(firstMeasurement||orientationChanged||portraitWidthChanged||fittedHeightChanged)this.fit();else this.transform();
       this.onViewportChange();
     }).observe(this.viewport);
     this.render();requestAnimationFrame(()=>this.fit());
@@ -79,6 +81,7 @@ export class Workspace {
     return center;
   }
   fit(){
+    this.fitted=true;
     const modules=this.store.patch.modules,portrait=this.portraitLayout.matches,safe=this.insets();
     const r=this.viewport.getBoundingClientRect();
     if(!modules.length){
@@ -93,8 +96,7 @@ export class Workspace {
     const usableHeight=Math.max(1,r.height-(portrait?84:12));
     this.zoom=Math.min(1,usableWidth/width,usableHeight/height);
     if(portrait){
-      // Small phones / large patches retain readable chips; pan to reach rows beyond the dock.
-      this.zoom=Math.max(.875,this.zoom);
+      // Overview must contain every chip, including the rows on short phones.
       this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;
       this.panY=20-(minY+20)*this.zoom;
     }else{this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;this.panY=(r.height-height*this.zoom)/2-minY*this.zoom;}
@@ -108,10 +110,11 @@ export class Workspace {
     this.store.patch.layout=2;this.store.changed('layout');this.render();this.fit();
   }
   reveal(id:string,occlusion:number,bottomOcclusion=0){
+    this.fitted=false;
     const module=this.store.patch.modules.find(m=>m.id===id);if(!module)return;
     const rect=this.viewport.getBoundingClientRect(),safe=this.insets(),right=rect.width-safe.right-occlusion-24,left=safe.left+24;
     let top=18,bottom=rect.height-safe.bottom-bottomOcclusion-50;
-    const dock=this.nav.getBoundingClientRect();if(this.portraitLayout.matches&&dock.height)bottom=Math.min(bottom,dock.top-rect.top-12);
+    const dock=this.nav.getBoundingClientRect();if(this.portraitLayout.matches&&dock.height)bottom=Math.min(bottom,dock.top-rect.top-8);
     if(this.portraitLayout.matches)top=Math.max(0,Math.min(top,bottom-NODE_HEIGHT*this.zoom-1));
     if(right-left<NODE_WIDTH*this.zoom)return;
     const position=this.displayPosition(module),x=position.x*this.zoom+this.panX,y=position.y*this.zoom+this.panY;
@@ -123,7 +126,7 @@ export class Workspace {
     }
     this.transform();
   }
-  private setZoom(value:number,x=this.viewport.clientWidth/2,y=this.viewport.clientHeight/2){value=Math.max(MIN_ZOOM,Math.min(2.5,value));const ratio=value/this.zoom;this.panX=x-(x-this.panX)*ratio;this.panY=y-(y-this.panY)*ratio;this.zoom=value;this.transform();}
+  private setZoom(value:number,x=this.viewport.clientWidth/2,y=this.viewport.clientHeight/2){this.fitted=false;value=Math.max(MIN_ZOOM,Math.min(2.5,value));const ratio=value/this.zoom;this.panX=x-(x-this.panX)*ratio;this.panY=y-(y-this.panY)*ratio;this.zoom=value;this.transform();}
   private transform(){this.world.style.transform=`translate(${this.panX}px,${this.panY}px) scale(${this.zoom})`;this.viewport.style.backgroundSize=`${24*this.zoom}px ${24*this.zoom}px`;this.viewport.style.backgroundPosition=`${this.panX}px ${this.panY}px`;this.zoomLabel.textContent=`${Math.round(this.zoom*100)}%`;}
   render(){
     if(this.portraitLayout.matches)this.syncDisplayLayout();
@@ -180,9 +183,11 @@ export class Workspace {
   private beginPinch(){const [a,b]=this.pointers.values();const rect=this.viewport.getBoundingClientRect(),x=(a.x+b.x)/2-rect.left,y=(a.y+b.y)/2-rect.top;this.pinch={distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),zoom:this.zoom,worldX:(x-this.panX)/this.zoom,worldY:(y-this.panY)/this.zoom};this.renderCables();}
   private pointerMove(event:PointerEvent){
     if(!this.pointers.has(event.pointerId))return;this.pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
+    if(this.pinch)this.fitted=false;
     if(this.pinch&&this.pointers.size>=2){const [a,b]=this.pointers.values(),rect=this.viewport.getBoundingClientRect(),x=(a.x+b.x)/2-rect.left,y=(a.y+b.y)/2-rect.top;this.zoom=Math.max(MIN_ZOOM,Math.min(2.5,this.pinch.zoom*Math.hypot(a.x-b.x,a.y-b.y)/this.pinch.distance));this.panX=x-this.pinch.worldX*this.zoom;this.panY=y-this.pinch.worldY*this.zoom;this.transform();return;}
     const drag=this.drag;if(!drag||drag.pointer!==event.pointerId)return;
     const dx=event.clientX-drag.startX,dy=event.clientY-drag.startY;if(Math.hypot(dx,dy)>(event.pointerType==='touch'?9:4))drag.moved=true;if(!drag.moved)return;
+    this.fitted=false;
     if(drag.kind==='pan'){this.panX=drag.originalX+dx;this.panY=drag.originalY+dy;this.transform();}
     else if(drag.kind==='module'){
       const module=this.store.patch.modules.find(m=>m.id===drag.id)!,position={x:Math.max(-20000,Math.min(20000,Math.round((drag.originalX+dx/this.zoom)/8)*8)),y:Math.max(-20000,Math.min(20000,Math.round((drag.originalY+dy/this.zoom)/8)*8))};

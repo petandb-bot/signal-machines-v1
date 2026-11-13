@@ -318,3 +318,15 @@ Chromium 156 headless verification:
 See [comparison images, fixtures and behavior](docs/PORTRAIT.md). No new font or graphics license is required. The emitted Worklet remains exactly `processor-Oo_l0aMo.js` / SHA-256 `be089888b8e00c0f5c8ad48334515b8d7c2d94bc3f8c77c33178ed1a64a324ba`; DSP, AudioWorklet source, module parameters, recording/export, graph rules and animation algorithms are unchanged.
 
 Physical iPhone/Safari, native WebKit rasterization/browser-chrome transitions and device touch feel remain unverified. Browser viewport/touch emulation is not a physical-device test. The user authorizes merge/publication only after visual checks and tests pass; this section records the checks used for that release decision.
+
+## v0.17.7 whole-patch portrait overview
+
+This request changes the priority from a minimum readable zoom to a complete first-load overview. The portrait-only 87.5% FIT floor is removed. FIT accounts for both axes and the bottom dock. An untouched overview refits when available height shrinks; manual zoom/pan/editor navigation remains stable. The two-column display map and saved patch coordinates are retained.
+
+The header moves down 8px (safe inset +9px rather than +1px). The bottom-right dock is 176×44px, with muted text, no heavy container and 32×28px visible outlines inside 44×44px touch targets. Editor reveal retains 8px clearance from the dock on small phones.
+
+Final tests: 518 tests / 36 files pass; build passes; production Worklet verification passes all 37 presets and existing LOOP/master-PCM/interaction bridges. The emitted DSP bundle remains unchanged. No audio/graph/state source changes.
+
+Actual Chromium 156 screenshots cover SPLIT ORBITS, STORED RAIN and a three-module patch at 390×844, 402×874, 320×568, 844×390 and 1280×800. Assertions measure every initial chip inside the viewport and above the dock, with all primary targets ≥44px. Portrait screenshots were visually inspected. All six landscape/desktop screenshots are pixel-identical to the base release. Browser touch checks cover portrait pan, pinch, chip editing/dragging, cable alignment, saved coordinates and rotation. Physical iPhone Safari remains unverified.
+
+See [overview comparison images](docs/PORTRAIT_OVERVIEW.md). This change is submitted as a reviewable PR; deployment is separate.
