@@ -9,6 +9,8 @@ beforeEach(()=>{
   localStorage.clear();document.body.replaceChildren();portrait=true;width=390;height=751;
   vi.spyOn(window,'matchMedia').mockImplementation(()=>({get matches(){return portrait;}} as MediaQueryList));
   vi.stubGlobal('ResizeObserver',class{constructor(callback:()=>void){resize=callback;}observe(){}disconnect(){}});
+  HTMLElement.prototype.setPointerCapture=()=>{};
+  HTMLElement.prototype.hasPointerCapture=()=>false;
   vi.stubGlobal('requestAnimationFrame',(callback:FrameRequestCallback)=>{initialFrame=callback;return 0;});
 });
 afterEach(()=>{vi.restoreAllMocks();vi.unstubAllGlobals();});
