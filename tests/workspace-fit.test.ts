@@ -44,6 +44,22 @@ describe('phone portrait initial view and FIT',()=>{
     expect(transform(view)).toEqual(start);
     expect(store.patch).toEqual(before);
   });
+  it('sizes the portrait rack stage to the graph rather than using the entire phone height',()=>{
+    const {store,view}=workspace(),before=structuredClone(store.patch);
+    const stage=parseFloat(view.root.style.getPropertyValue('--portrait-stage-height'));
+    expect(stage).toBeGreaterThanOrEqual(270);
+    expect(stage).toBeLessThanOrEqual(560);
+    expect(stage).toBeLessThan(height);
+    expectEveryChipVisible(store,view);
+    store.patch.modules=Array.from({length:10},(_,i)=>createModule('OSC',16,i*168,i+1,`osc-${i}`));
+    store.patch.connections=[];
+    view.fit();
+    const tallStage=parseFloat(view.root.style.getPropertyValue('--portrait-stage-height'));
+    expect(tallStage).toBeGreaterThan(stage);
+    expect(tallStage).toBeLessThanOrEqual(560);
+    expect(store.patch.modules).toHaveLength(10);
+    expect(before.modules).not.toHaveLength(10);
+  });
   it('does not enlarge a small patch above its normal chip size',()=>{
     const {store,view}=workspace();store.patch.modules=[createModule('OSC',-400,-200,1,'single')];store.patch.connections=[];view.fit();
     const t=transform(view);expect(t.zoom).toBe(1);expect(-200*t.zoom+t.y).toBe(20);expect(-400+t.x).toBeGreaterThan(24);
