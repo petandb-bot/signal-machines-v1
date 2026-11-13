@@ -23,7 +23,8 @@ describe('larger signal-driven chip visuals',()=>{
   it('preserves v0.14 pixel geometry for all 57 modules, including resting and quiet frames',()=>{
     const baseline=JSON.parse(readFileSync(new URL('./fixtures/v014-visual-geometry.json',import.meta.url),'utf8')).geometry;
     const cases:[ModuleTelemetry|undefined,boolean][]=[[undefined,true],[frame(),true],[frame({a:.15,b:-.7,phase:.8,envelope:.05,levelL:.01,levelR:.03,wave:Array.from({length:64},(_,i)=>Math.cos(i*.2)*.03)}),true],[frame(),false]];
-    for(const type of MODULE_TYPES)for(const [index,[state,lively]] of cases.entries()){
+    expect(Object.keys(baseline)).toHaveLength(57);
+    for(const type of MODULE_TYPES.filter(type=>type in baseline))for(const [index,[state,lively]] of cases.entries()){
       const g=new GraphicsRecorder();drawModule(g as unknown as p5.Graphics,type,state,lively);
       expect(createHash('sha256').update(JSON.stringify(g.rects)).digest('hex'),`${type}, frame ${index}`).toBe(baseline[type][index]);
     }

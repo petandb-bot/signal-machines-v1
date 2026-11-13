@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "DISSOLVING METAL",
+  "bpm": 72,
+  "master": 0.65,
+  "seed": 161601,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 4101,
+      "character": "METAL",
+      "params": {
+        "rate": 0.34,
+        "irregular": 0.6
+      }
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 192,
+      "y": 16,
+      "seed": 4102,
+      "character": "METAL",
+      "params": {
+        "body": 0.18,
+        "tension": 0.52
+      }
+    },
+    {
+      "id": "smear-1",
+      "type": "SMEAR",
+      "x": 368,
+      "y": 16,
+      "seed": 4103,
+      "character": "METAL",
+      "params": {
+        "smear": 0.76,
+        "memory": 0.72
+      }
+    },
+    {
+      "id": "orbit-1",
+      "type": "ORBIT",
+      "x": 544,
+      "y": 16,
+      "seed": 4104,
+      "character": "METAL",
+      "params": {
+        "rate": 0.3,
+        "depth": 0.5
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 4105,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 192,
+      "y": 184,
+      "seed": 4106,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.15
+      }
+    },
+    {
+      "id": "parasite-1",
+      "type": "PARASITE",
+      "x": 368,
+      "y": 184,
+      "seed": 4107,
+      "character": "METAL",
+      "params": {
+        "feed": 0.4,
+        "memory": 0.6
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "smear-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "smear-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "orbit-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "smear-1",
+        "port": "smear"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "smear-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "parasite-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "parasite-1",
+        "port": "fever"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "tension"
+      }
+    }
+  ]
+}

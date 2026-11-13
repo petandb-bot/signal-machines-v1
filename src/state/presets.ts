@@ -203,3 +203,17 @@ export function twinSwings():Patch{
   wire(p,'pendulum-1','aCross','comb-1','trigger');wire(p,'pendulum-1','bCross','reson-1','trigger');wire(p,'pendulum-1','a','comb-1','pitch');wire(p,'pendulum-1','b','reson-1','pitch');wire(p,'reson-1','audio','fuzz-1','audio');wire(p,'fuzz-1','audio','chamber-1','audio');wire(p,'comb-1','audio','chamber-1','audio');wire(p,'chamber-1','audio','output-1','audio');return p;
 }
 PRESETS.push({name:'PIXEL DUST',description:'A stepped voice follows a gesture and two swings',create:pixelDust},{name:'BIASED ORBIT',description:'Two angles bend a gated fuzz voice',create:biasedOrbit},{name:'DRAWN METAL',description:'A saved drawing changes pitch and broken time',create:drawnMetal},{name:'TWIN SWINGS',description:'Two coupled bodies strike strings and metal',create:twinSwings});
+
+export function dissolvingMetal():Patch{
+  const p=patch('DISSOLVING METAL',72,161601);
+  add(p,'PULSE',16,16,4101);add(p,'ALLOY',192,16,4102);add(p,'SMEAR',368,16,4103);add(p,'ORBIT',544,16,4104);add(p,'OUTPUT',720,16,4105);add(p,'FLOCK',192,184,4106);add(p,'PARASITE',368,184,4107);
+  p.modules[0].params.rate=.34;p.modules[0].params.irregular=.6;p.modules[1].params.body=.18;p.modules[1].params.tension=.52;p.modules[2].params.smear=.76;p.modules[2].params.memory=.72;p.modules[3].params.rate=.3;p.modules[3].params.depth=.5;p.modules[5].params.drift=.15;p.modules[6].params.feed=.4;
+  wire(p,'pulse-1','trigger','alloy-1','trigger');wire(p,'alloy-1','audio','smear-1','audio');wire(p,'smear-1','audio','orbit-1','audio');wire(p,'orbit-1','audio','output-1','audio');wire(p,'flock-1','controlA','smear-1','smear');wire(p,'smear-1','audio','parasite-1','audio');wire(p,'parasite-1','fever','alloy-1','tension');return p;
+}
+export function slidingGlass():Patch{
+  const p=patch('SLIDING GLASS',70,161602);
+  add(p,'FRICTION',16,16,4201);add(p,'RESON',192,184,4202);add(p,'SMEAR',368,16,4203);add(p,'PARASITE',192,16,4204);add(p,'OUTPUT',544,16,4205);
+  p.modules[0].params.pressure=.64;p.modules[0].params.speed=.28;p.modules[1].params.material=.72;p.modules[1].params.decay=.38;p.modules[2].params.smear=.42;p.modules[2].params.memory=.58;p.modules[3].params.feed=.4;p.modules[3].params.memory=.6;
+  wire(p,'friction-1','slip','reson-1','trigger');wire(p,'friction-1','activity','reson-1','material');wire(p,'friction-1','audio','smear-1','audio');wire(p,'reson-1','audio','smear-1','audio');wire(p,'smear-1','audio','output-1','audio');wire(p,'smear-1','audio','parasite-1','audio');wire(p,'parasite-1','fever','friction-1','speed');return p;
+}
+PRESETS.push({name:'DISSOLVING METAL',description:'Irregular metal attacks loosen into separate histories',create:dissolvingMetal},{name:'SLIDING GLASS',description:'A slipping surface excites a second body and listens to its own trace',create:slidingGlass});

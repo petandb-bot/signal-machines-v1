@@ -3,6 +3,12 @@ import type { ModuleDefinition, ModuleType, PortDefinition } from './types';
 const input = (id: string, label: string, signal: PortDefinition['signal'], position: number, parameter?: string): PortDefinition => ({ id, label, signal, direction: 'in', position, parameter });
 const output = (id: string, label: string, signal: PortDefinition['signal'], position: number): PortDefinition => ({ id, label, signal, direction: 'out', position });
 export const DEFINITIONS: Record<ModuleType, ModuleDefinition> = {
+  SMEAR: {type:'SMEAR',subtitle:'Unequal sound histories',description:'Let the parts of a sound arrive and dissolve at different times.',color:MODULE_COLORS.SMEAR,symbol:'≋',inputs:[input('audio','AUDIO','audio',0),input('smear','SMEAR','control',1,'smear'),input('memory','MEMORY','control',2,'memory')],outputs:[output('audio','AUDIO','audio',0),output('activity','ACTIVITY','control',1)],parameters:[
+    {id:'smear',label:'SMEAR',default:.65,description:'From the exact original to a scattered, softly lingering outline.'},
+    {id:'memory',label:'MEMORY',default:.6,description:'How long the different parts of a sound take to catch up. No frozen or endless tail.'}]},
+  FRICTION: {type:'FRICTION',subtitle:'Sliding contact voice',description:'A surface pulls, catches and slips. Contact excites a small resonant body.',color:MODULE_COLORS.FRICTION,symbol:'⋈',inputs:[input('pitch','PITCH','control',0),input('pressure','PRESSURE','control',1,'pressure'),input('speed','SPEED','control',2,'speed')],outputs:[output('audio','AUDIO','audio',0),output('activity','ACTIVITY','control',1),output('slip','SLIP','trigger',2)],parameters:[
+    {id:'pressure',label:'PRESSURE',default:.55,description:'Contact force, body and ringing. Zero lifts the surface and silences the voice.'},
+    {id:'speed',label:'SPEED',default:.4,description:'From patient catches to a continuous rub. Zero stops the surface. SLIP marks each release.'}]},
   PULSE: { type: 'PULSE', subtitle: 'Temporal generator', description: 'A steady pulse. A little uncertainty.', color: MODULE_COLORS.PULSE, symbol: '┌┐_┌┐', inputs: [], outputs: [output('trigger', 'CLOCK', 'trigger', 0)], parameters: [
     { id: 'rate', label: 'RATE', default: .43, description: 'Clock division, locked to the project tempo.' },
     { id: 'irregular', label: 'IRREGULAR', default: .24, description: 'Seeded timing drift and occasional missing events.' } ] },

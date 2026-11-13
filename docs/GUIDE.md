@@ -342,3 +342,10 @@ This release changes no DSP, module catalog, parameter, port ID, patch format, s
 ### v0.15.1 — Little enclosures
 
 Chips now have tinted shells, a stepped rim, a raised nameplate and a recessed signal window. Small lower ventilation marks and hard, unblurred edges give each machine a physical housing. Library tiles share the material. The 128×132 bodies, header/display positions, jack anchors, touch targets and signal-driven animations are unchanged. All additions are static CSS and ignore pointer events. Audio and patch data are unchanged.
+
+
+## v0.16 — Dissolution and contact
+
+SMEAR loosens an attack into separate lingering histories with SMEAR/MEMORY. At zero it passes exact stereo dry; MEMORY has no freeze setting. FRICTION generates sound from catching and slipping, controlled by PRESSURE/SPEED, with PITCH CV and a SLIP event for other voices. Both keep the current two-slider housing and typed patching.
+
+Try the appended DISSOLVING METAL and SLIDING GLASS presets, then compare the [listening studies](https://petandb-bot.github.io/signal-machines-v1/listening/). See [Strange sound notes](STRANGE_SOUNDS.md) for connections, cues, overlap decisions and limits. These renders are available for human evaluation; no listening-quality verdict is claimed. All original 57 modules, 32 presets and recording/snapshot/interaction behavior are preserved.

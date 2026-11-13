@@ -7,3 +7,4 @@ coverage/
 public/downloads/
 .openai/
 release/
+public/listening/audio/

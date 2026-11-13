@@ -1,10 +1,10 @@
-# Verification / v0.15
+# Verification / v0.16
 
 ## Automated coverage
 
 Host: managed Linux, Node 24.22.1. p5.js is pinned to 2.3.4. `package-lock.json` pins dependencies.
 
-- The test inventory is **391 tests in 30 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
+- The test inventory is **414 tests in 31 files**. Existing baseline coverage: graph validation, malformed files and legacy-layout migration; stereo DSP, trigger silence, seed determinism, control summing, three ALLOY characters at extremes, live rewiring and deletion, bounded feedback and a 30-second CHAMBER tail.
 - New DSP checks: the original three presets produce nonzero finite audio; BRANCH repeats before mutation and emits scale-constrained seeded pitch/gate; RESON decays and responds to external excitation; FRACTURE is transparent at BREAK zero and retains audible captured audio after input ends at maximum HOLD. The original eight module types also run together at extreme macros without invalid samples or master overshoot.
 - Noise modules: seeded stereo VENOM, zero-dose silence, trigger boosts and CV; SNAP dry pass-through, forced interruption/recovery, repeatable automatic dropouts, bounded edge steps and no independent sound from silent input; CAUSTIC dry pass-through, actual waveform changes, extreme drive and decay to silence. BAD CONTACT is checked for finite master output, maximum settings and variable-block deterministic rendering.
 - Ambient/feedback modules: all three new presets validate and synthesize; continuous untriggered DRONE, spectral focus response, a stable 20-second tape tail, bounded envelope-derived controls, explicit full-intervening-quantum delay using 17/193/64-frame blocks, order-independent delayed cycle import and continued rejection of unauthorized AUDIO/mixed cycles. Actual host energy reaches SNAP FAULT and BRANCH CHANGE. Maximum feedback/macro settings remain finite.
@@ -234,3 +234,18 @@ Offline managed Linux Node medians at 48 kHz (three warmed one-second direct-pro
 ## v0.15.1 enclosure styling
 
 A CSS-only chip/library material refinement: tinted casing, layered flat bevels, inset display bezel and small ventilation marks. No geometry, interaction or DSP source changed. Existing UI and visual regression tests cover retained chip/jack geometry, mobile deletion, touch patching and pixel motion. Native browser appearance remains unverified because the managed browser tool is unavailable.
+
+
+## v0.16 strange sound acceptance
+
+- `npm ci` passed using a workspace-local npm cache. `npm test`: 414 tests in 31 files. No existing DSP class was edited. Existing patch, snapshot, recording, LOOP, graph-cycle, gesture, mobile deletion and legacy geometry checks remain.
+- SMEAR: exact stereo dry, no autonomous sound, independent channel histories, live input/output telemetry, late energy versus short memory, a six-second decay check, measured 220/880/3400/8500Hz response, smooth CV, all macro corners and 8/44.1/48/96kHz finite bounds.
+- FRICTION: pressure/speed-zero silence, spontaneous audio and repeated SLIP events, quiet/mid/strong response, saved-seed repetition and seed differences, sustained pitch CV, contact lifting, CV continuity, all macro corners and multiple sample rates. Multiple voices and chained SMEARs coexist; SLIP articulates RESON without relaxing cycle rules.
+- Both new demos match their canonical JSON files, roundtrip through the schema and render nonzero protected output. The same quantum schedule repeats exactly. Existing PARASITE controls are quantum-delayed: removing those edges also verifies feedforward sample identity across different block sizes.
+- Real DOM tests edit the two new modules with exactly two sliders, remove and recall them through snapshots/autosave, and select both new demos. The grouped library contains all 59 types exactly once. Original 57-module pixel geometry remains unchanged.
+- Six deterministic listening WAVs are generated from recipes at 24kHz stereo PCM16 with one shared 1.5× gain and short clip fades. The generator checks every sample for finiteness and clipping; cue times, peaks and RMS are recorded in its manifest. Generated audio is published as build output, not committed as large source blobs.
+- Human listening is **not performed**. Native iPhone/Safari playback/downloads, screen rendering, touch feel and real-time CPU/heat remain unverified: the managed browser tool is not exposed. The standalone listening page provides material for that evaluation.
+
+Offline 48kHz CPU, warmed median of three one-second managed-Linux Node runs (after two warmups): SMEAR 15.4 ms/audio-second; FRICTION 17.4 ms/audio-second; five-module SLIDING GLASS graph 121.8 ms/audio-second. Direct-module figures omit graph/UI scheduling; none are iPhone real-time guarantees.
+
+Final production acceptance: `npm run build` and `npm run verify:build` PASS. All 34 presets render 3 seconds at 48kHz through the emitted AudioWorklet, with protected finite output; LOOP, exact master PCM capture and interaction bridges also pass. An A/B render against v0.15.1 compares the original 32 presets for one second each at 48kHz: all 3,072,000 stereo sample values are identical. All 57 legacy module definitions, parameter/port metadata and chip dimensions also compare exactly.

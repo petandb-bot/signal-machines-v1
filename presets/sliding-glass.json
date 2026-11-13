@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "SLIDING GLASS",
+  "bpm": 70,
+  "master": 0.65,
+  "seed": 161602,
+  "modules": [
+    {
+      "id": "friction-1",
+      "type": "FRICTION",
+      "x": 16,
+      "y": 16,
+      "seed": 4201,
+      "character": "METAL",
+      "params": {
+        "pressure": 0.64,
+        "speed": 0.28
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 192,
+      "y": 184,
+      "seed": 4202,
+      "character": "METAL",
+      "params": {
+        "material": 0.72,
+        "decay": 0.38
+      }
+    },
+    {
+      "id": "smear-1",
+      "type": "SMEAR",
+      "x": 368,
+      "y": 16,
+      "seed": 4203,
+      "character": "METAL",
+      "params": {
+        "smear": 0.42,
+        "memory": 0.58
+      }
+    },
+    {
+      "id": "parasite-1",
+      "type": "PARASITE",
+      "x": 192,
+      "y": 16,
+      "seed": 4204,
+      "character": "METAL",
+      "params": {
+        "feed": 0.4,
+        "memory": 0.6
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 4205,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "friction-1",
+        "port": "slip"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "friction-1",
+        "port": "activity"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "material"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "friction-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "smear-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "smear-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "smear-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "smear-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "parasite-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "parasite-1",
+        "port": "fever"
+      },
+      "to": {
+        "module": "friction-1",
+        "port": "speed"
+      }
+    }
+  ]
+}

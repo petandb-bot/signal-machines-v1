@@ -1,5 +1,9 @@
 # Module directions / v0.14
 
+## v0.16 — Dissolution and contact
+
+59 modules / 34 presets. SMEAR adds unequal sound histories; FRICTION adds self-sounding physical contact and SLIP events. Two demos and reproducible comparison WAVs are included. BLOOM and LEAK remain deferred pending clearer sonic differentiation.
+
 ## v0.15 — Home computer windows
 
 Visual-only release: shared eight-family palette, Tiny5 chip titles, readable monospace controls, flat square windows and instrument-like sliders. Chip/jack geometry, all 57 modules and signal-driven pixel motion are preserved.

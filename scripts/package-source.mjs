@@ -8,7 +8,7 @@ const files={};
 function walk(directory){
   for(const entry of readdirSync(directory,{withFileTypes:true})){
     const path=join(directory,entry.name),name=relative(root,path).replaceAll('\\','/');
-    if(['node_modules','dist','.git','.openai','coverage'].includes(entry.name)||name==='public/downloads'||entry.name.startsWith('.env')||entry.name.endsWith('.log'))continue;
+    if(['node_modules','dist','.git','.openai','coverage'].includes(entry.name)||name==='public/downloads'||name==='public/listening/audio'||entry.name.startsWith('.env')||entry.name.endsWith('.log'))continue;
     if(entry.isDirectory())walk(path);else if(entry.isFile())files[`signal-machines/${name}`]=new Uint8Array(readFileSync(path));
   }
 }

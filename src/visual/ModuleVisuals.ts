@@ -18,7 +18,21 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
   g.fill(INK.frame);
   for(let x=4;x<4+Math.round((W-8)*motion.activity);x+=4){point(g,x,2);point(g,W-5-x,H-3);}
   g.push();g.translate(motion.dx,motion.dy);g.fill(color);
-  if(type==='PULSE'){
+  if(type==='SMEAR'){
+    const dry=t.curve??t.wave,bands=t.bands??[];
+    g.fill(INK.blue);for(let x=6;x<98;x+=2){const i=Math.floor((x-6)/92*64);point(g,x,20-clamp((dry[i]??0)*95,-13,13));}
+    g.fill(color);wave(g,t,57,100,16,2);
+    for(let i=0;i<4;i++){const x=16+i*23,raw=clamp((bands[i]??Math.abs(sample(t,i*12)))*25,0,1),held=clamp((bands[i+4]??Math.abs(sample(t,i*12+9)))*25,0,1);g.fill(INK.blue);point(g,x,32-raw*6,3);g.fill(color);point(g,x+clamp(t.a,0,1)*7,40+held*6,3);}
+    g.fill(color);g.rect(8,75,Math.round(clamp(t.phase,0,1)*87),2);
+  }else if(type==='FRICTION'){
+    const stretch=clamp(t.a,-1,1),pressure=clamp(t.velocity?.y??t.envelope,0,1),x=37+stretch*22,y=33+(1-pressure)*9;
+    g.fill(INK.amber);g.rect(9,20,86,8);for(let i=0;i<8;i++){g.fill(color);point(g,10+(i*12+clamp(t.phase,0,1)*12)%82,21,2);}
+    g.fill(color);g.rect(x,y,28,10);
+    g.fill(t.b>.5?color:PALETTE.cyan);for(let i=0;i<6;i++)point(g,x+2+i*4,29+(t.b>.5?0:clamp(t.envelope,0,1)*3),2);
+    g.fill(INK.amber);for(let i=0;i<16;i++)point(g,10+i*(x+14-10)/16,53+(i%2?3:-3));
+    for(let i=0;i<3;i++){g.fill(color);g.rect(12+i*30,67-Math.min(10,(t.bands?.[i]??t.envelope)*80),18,2);}
+    g.fill(color);wave(g,t,75,18,3,2);
+  }else if(type==='PULSE'){
     for(let i=0;i<16;i++){
       const x=7+i*6,d=(i/16-t.phase+1)%1,hot=d<.075;
       g.fill(hot?PALETTE.amber:INK.green);point(g,x,39,hot?3:2);

@@ -79,8 +79,8 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(false);
 
   });
-  it('exposes fifty-seven grouped module choices, thirty-two presets and no large title',()=>{
-    expect(document.querySelectorAll('.library-module')).toHaveLength(57);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(33);
+  it('exposes fifty-nine grouped module choices, thirty-four presets and no large title',()=>{
+    expect(document.querySelectorAll('.library-module')).toHaveLength(59);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(35);
     const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;preset.value='1';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='BRANCH')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='FRACTURE')).toBe(true);
     preset.value='2';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='RESON')).toBe(true);
     preset.value='3';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='VENOM')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='CAUSTIC')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='SNAP')).toBe(true);
@@ -170,7 +170,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
 
   it('groups every library choice exactly once without adding search or favourites',()=>{
-    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(57);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
+    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(59);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
   });
   it('captures a TOUCH path, preserves it with bypass in a snapshot, cancels incomplete strokes and clears explicitly',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add FUZZ module"]')!.click();const fuzz=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${fuzz}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));document.querySelector<HTMLButtonElement>('[aria-label="FUZZ bypass"]')!.click();expect(app.store.patch.modules.find(m=>m.id===fuzz)!.bypass).toBe(true);
@@ -195,5 +195,20 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
   it.each(['Delete','Backspace'])('keeps direct %s deletion on a focused chip',key=>{const chip=document.querySelector<HTMLElement>('.module-card[data-module="alloy-1"]')!;chip.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));chip.focus();chip.dispatchEvent(new KeyboardEvent('keydown',{key,bubbles:true}));expect(app.store.patch.modules.some(m=>m.id==='alloy-1')).toBe(false);});
   it('does not remove a newly selected module through a stale confirmation',()=>{document.querySelector<HTMLElement>('.module-card[data-module="alloy-1"]')!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));document.querySelector<HTMLButtonElement>('[aria-label="Delete selected module and its cables"]')!.click();const stale=document.querySelector<HTMLButtonElement>('[aria-label="Confirm module removal"]')!;document.querySelector<HTMLElement>('.module-card[data-module="flock-1"]')!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));stale.click();expect(app.store.patch.modules.some(m=>m.id==='alloy-1')).toBe(true);expect(app.store.patch.modules.some(m=>m.id==='flock-1')).toBe(true);});
+
+  it.each([['SMEAR','smear'],['FRICTION','pressure']])('edits and snapshots the two-slider %s module',async(type,parameter)=>{
+    document.querySelector<HTMLButtonElement>(`[aria-label="Add ${type} module"]`)!.click();const id=app.store.selectedModule!;
+    document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+    expect(document.querySelectorAll('.editor-controls input[type=range]')).toHaveLength(2);
+    const slider=document.querySelector<HTMLInputElement>(`.editor input[data-parameter="${parameter}"]`)!;slider.value='.73';slider.dispatchEvent(new Event('input',{bubbles:true}));
+    const saved=structuredClone(app.store.patch),snapshot=app.snapshots.storage.capture(saved,'New sound');
+    document.querySelector<HTMLButtonElement>('[aria-label="Delete selected module and its cables"]')!.click();document.querySelector<HTMLButtonElement>('[aria-label="Confirm module removal"]')!.click();
+    app.store.replace(app.snapshots.storage.recall(snapshot,app.store.patch));expect(app.store.patch).toEqual(saved);
+    await vi.waitFor(()=>expect(JSON.parse(localStorage.getItem('signal-machines.patch.v1')??'null')).toEqual(saved));
+  });
+  it('opens both new sound studies from the browser preset selector',()=>{
+    const selector=document.querySelector<HTMLSelectElement>('.preset-select')!;
+    for(const [index,name,type] of [['32','DISSOLVING METAL','SMEAR'],['33','SLIDING GLASS','FRICTION']]){selector.value=index;selector.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe(name);expect(app.store.patch.modules.some(m=>m.type===type)).toBe(true);}
+  });
 
 });
