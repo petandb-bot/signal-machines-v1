@@ -199,9 +199,9 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     const original=structuredClone(app.store.patch);
     app.workspace.fit();
     const transform=app.workspace.world.style.transform;
-    const parts=/translate\\((-?[\\d.]+)px, (-?[\\d.]+)px\\) scale\\(([\\d.]+)\\)/.exec(transform);
-    expect(parts).not.toBeNull();
-    const panX=Number(parts![1]),panY=Number(parts![2]),zoom=Number(parts![3]);
+    const parts=transform.match(/-?[0-9]+(?:[.][0-9]+)?/g)?.map(Number);
+    expect(parts).toHaveLength(3);
+    const [panX,panY,zoom]=parts!;
     const modules=app.store.patch.modules;
     expect(zoom).toBeGreaterThan(0);
     expect(zoom).toBeLessThan(.875); // No minimum zoom that clips wide patches.
