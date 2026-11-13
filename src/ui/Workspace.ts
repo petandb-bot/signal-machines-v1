@@ -1,8 +1,10 @@
 import {VISUAL_WIDTH,VISUAL_HEIGHT,signalMotion} from '../visual/SignalMotion';
+import {portraitPositions,portraitCablePath,PORTRAIT_COLUMN,PORTRAIT_ROW} from './PortraitLayout';
+import type {DisplayPoint} from './PortraitLayout';
 import { DEFINITIONS, NODE_HEIGHT, NODE_WIDTH, portPosition } from '../graph/definitions';
 import { validateConnection } from '../graph/GraphValidator';
 import { connect } from '../graph/PatchGraph';
-import type { Connection, PortDefinition } from '../graph/types';
+import type { Connection, PortDefinition, ModuleState, Patch } from '../graph/types';
 import { SIGNAL_COLORS } from '../graph/types';
 import type { StateStore } from '../app/StateStore';
 import { button, element } from './Controls';
@@ -10,7 +12,7 @@ const NS='http://www.w3.org/2000/svg';
 // Keep manual zoom consistent with FIT even for very wide (or widely separated) patches.
 const MIN_ZOOM=.005;
 interface PortRef { module:string;port:string;direction:'in'|'out' }
-interface Drag {kind:'pan'|'module'|'cable';pointer:number;startX:number;startY:number;originalX:number;originalY:number;id?:string;pendingCable?:string;startPort?:PortRef;existingArm?:boolean;moved:boolean}
+interface Drag {kind:'pan'|'module'|'cable';pointer:number;startX:number;startY:number;originalX:number;originalY:number;id?:string;pendingCable?:string;startPort?:PortRef;existingArm?:boolean;displayOnly?:boolean;moved:boolean}
 interface Pinch {distance:number;zoom:number;worldX:number;worldY:number}
 export class Workspace {
   readonly root=element('section','workspace');readonly viewport=element('div','viewport');readonly world=element('div','world');readonly nodes=element('div','nodes');
@@ -18,11 +20,14 @@ export class Workspace {
   private hint=element('div','patch-hint');private drag?:Drag;private armed?:PortRef;private pinch?:Pinch;
   private pointers=new Map<number,{x:number;y:number}>();private zoom=1;private panX=0;private panY=0;private cableEnd={x:0,y:0};
   private readonly portraitLayout=window.matchMedia('(max-width:600px) and (orientation:portrait)');
+  private layoutPatch?:Patch;private displayPoints=new Map<string,DisplayPoint>();
+  private readonly nav=element('div','workspace-nav');
+  onViewportChange:()=>void=()=>{};
   onSelect:()=>void=()=>{};onError:(message:string)=>void=()=>{};onAdd:()=>void=()=>{};
   constructor(readonly store:StateStore){
     this.root.setAttribute('aria-label','Modular patch workspace');this.svg.classList.add('cables');this.svg.setAttribute('width','1');this.svg.setAttribute('height','1');
     this.world.append(this.svg,this.nodes);this.viewport.append(this.world);
-    const nav=element('div','workspace-nav');nav.setAttribute('role','group');nav.setAttribute('aria-label','Workspace zoom controls');nav.append(button('−','Zoom out',()=>this.setZoom(this.zoom/1.2)),this.zoomLabel,button('+','Zoom in',()=>this.setZoom(this.zoom*1.2)),button('FIT','Fit patch to workspace',()=>this.fit(),'fit-button'));
+    const nav=this.nav;nav.setAttribute('role','group');nav.setAttribute('aria-label','Workspace zoom controls');nav.append(button('−','Zoom out',()=>this.setZoom(this.zoom/1.2)),this.zoomLabel,button('+','Zoom in',()=>this.setZoom(this.zoom*1.2)),button('FIT','Fit patch to workspace',()=>this.fit(),'fit-button'));
     this.hint.setAttribute('role','status');this.hint.setAttribute('aria-live','polite');this.root.append(this.viewport,nav,this.hint);
     this.viewport.addEventListener('pointerdown',event=>this.pointerDown(event));this.viewport.addEventListener('pointermove',event=>this.pointerMove(event));this.viewport.addEventListener('pointerup',event=>this.pointerUp(event));
     this.viewport.addEventListener('pointercancel',()=>{this.persistMove();this.pointers.clear();this.pinch=undefined;this.cancelDrag();});
@@ -38,11 +43,30 @@ export class Workspace {
       // Width changes and the first measured layout must use actual rack bounds.
       if(previousWidth&&previousHeight&&!orientationChanged){this.panX+=(width-previousWidth)/2;if(!portrait)this.panY+=(height-previousHeight)/2;}
       previousWidth=width;previousHeight=height;previousPortrait=portrait;
+      if(orientationChanged){this.persistMove();this.pointers.clear();this.pinch=undefined;this.cancelDrag();this.render();}
       if(firstMeasurement||orientationChanged||portraitWidthChanged)this.fit();else this.transform();
+      this.onViewportChange();
     }).observe(this.viewport);
     this.render();requestAnimationFrame(()=>this.fit());
   }
   private point(event:{clientX:number;clientY:number}){const r=this.viewport.getBoundingClientRect();return{x:(event.clientX-r.left-this.panX)/this.zoom,y:(event.clientY-r.top-this.panY)/this.zoom};}
+  private syncDisplayLayout(){
+    const patch=this.store.patch;
+    if(this.layoutPatch!==patch){this.layoutPatch=patch;this.displayPoints=portraitPositions(patch);return;}
+    // Rewiring/height changes never shuffle a live rack. Added chips occupy free cells.
+    const ids=new Set(patch.modules.map(m=>m.id));for(const id of this.displayPoints.keys())if(!ids.has(id))this.displayPoints.delete(id);
+    for(const module of patch.modules)if(!this.displayPoints.has(module.id)){
+      for(let cell=0;cell<200;cell++){
+        const point={x:cell%2*PORTRAIT_COLUMN,y:Math.floor(cell/2)*PORTRAIT_ROW};
+        if([...this.displayPoints.values()].every(p=>Math.abs(p.x-point.x)>=NODE_WIDTH+16||Math.abs(p.y-point.y)>=NODE_HEIGHT+16)){this.displayPoints.set(module.id,point);break;}
+      }
+    }
+  }
+  /** Shared display-space lookup for cards, jacks, cables, dragging and editor reveal. */
+  displayPosition(module:ModuleState):DisplayPoint{
+    if(!this.portraitLayout.matches)return module;
+    if(this.layoutPatch!==this.store.patch||!this.displayPoints.has(module.id))this.syncDisplayLayout();return this.displayPoints.get(module.id)??module;
+  }
   private insets(){const style=getComputedStyle(this.root);return{left:parseFloat(style.paddingLeft)||0,right:parseFloat(style.paddingRight)||0,bottom:parseFloat(style.paddingBottom)||0};}
   center(){const r=this.viewport.getBoundingClientRect(),safe=this.insets();return{x:((r.width+safe.left-safe.right)/2-this.panX)/this.zoom-NODE_WIDTH/2,y:((r.height-safe.bottom)/2-this.panY)/this.zoom-NODE_HEIGHT/2};}
   vacantPosition(){
@@ -56,35 +80,28 @@ export class Workspace {
   }
   fit(){
     const modules=this.store.patch.modules,portrait=this.portraitLayout.matches,safe=this.insets();
-    // A portrait rack should occupy a compact stage sized to its content, not the
-    // entire tall phone screen. Floating editor/library panels still use the full main area.
-    const before=this.viewport.getBoundingClientRect();
+    const r=this.viewport.getBoundingClientRect();
     if(!modules.length){
-      if(portrait)this.root.style.setProperty('--portrait-stage-height','300px');
-      const r=this.viewport.getBoundingClientRect();this.zoom=1;this.panX=r.width/2-150;this.panY=20;this.transform();return;
+      this.zoom=1;this.panX=r.width/2-150;this.panY=20;this.transform();return;
     }
-    const minX=Math.min(...modules.map(m=>m.x))-22,minY=Math.min(...modules.map(m=>m.y))-20;
-    const width=Math.max(...modules.map(m=>m.x+NODE_WIDTH))+22-minX,height=Math.max(...modules.map(m=>m.y+NODE_HEIGHT))+48+safe.bottom-minY;
-    if(portrait){
-      const availableWidth=Math.max(1,before.width-safe.left-safe.right-24);
-      const widthFit=Math.min(1,availableWidth/width);
-      const mainTop=this.root.parentElement?.getBoundingClientRect().top??0;
-      const maxStage=Math.max(240,Math.min(560,window.innerHeight-mainTop-20));
-      const stage=Math.min(maxStage,Math.max(270,Math.ceil(height*widthFit+94)));
-      this.root.style.setProperty('--portrait-stage-height',`${stage}px`);
-    }
-    const r=this.viewport.getBoundingClientRect(),available=r.width-safe.left-safe.right;
+    const positions=modules.map(m=>this.displayPosition(m));
+    const minX=Math.min(...positions.map(p=>p.x))-22,minY=Math.min(...positions.map(p=>p.y))-20;
+    const width=Math.max(...positions.map(p=>p.x+NODE_WIDTH))+22-minX,height=Math.max(...positions.map(p=>p.y+NODE_HEIGHT))+48+safe.bottom-minY;
+    const available=r.width-safe.left-safe.right;
     // FIT must honor both axes, while keeping the portrait zoom dock visible.
     const usableWidth=Math.max(1,available-(portrait?24:12));
     const usableHeight=Math.max(1,r.height-(portrait?84:12));
     this.zoom=Math.min(1,usableWidth/width,usableHeight/height);
     if(portrait){
+      // Small phones / large patches retain readable chips; pan to reach rows beyond the dock.
+      this.zoom=Math.max(.875,this.zoom);
       this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;
       this.panY=20-(minY+20)*this.zoom;
     }else{this.panX=safe.left+(available-width*this.zoom)/2-minX*this.zoom;this.panY=(r.height-height*this.zoom)/2-minY*this.zoom;}
     this.transform();
   }
   arrange(){
+    if(this.portraitLayout.matches){this.displayPoints=portraitPositions(this.store.patch);this.layoutPatch=this.store.patch;this.render();this.fit();return;}
     // Compact a patch without changing its signal graph or sounds.
     const modules=this.store.patch.modules,columns=Math.max(2,Math.ceil(Math.sqrt(modules.length*1.8)));
     modules.forEach((module,index)=>{module.x=24+(index%columns)*176;module.y=24+Math.floor(index/columns)*168;});
@@ -92,9 +109,12 @@ export class Workspace {
   }
   reveal(id:string,occlusion:number,bottomOcclusion=0){
     const module=this.store.patch.modules.find(m=>m.id===id);if(!module)return;
-    const rect=this.viewport.getBoundingClientRect(),safe=this.insets(),right=rect.width-safe.right-occlusion-24,left=safe.left+24,top=18,bottom=rect.height-safe.bottom-bottomOcclusion-50;
+    const rect=this.viewport.getBoundingClientRect(),safe=this.insets(),right=rect.width-safe.right-occlusion-24,left=safe.left+24;
+    let top=18,bottom=rect.height-safe.bottom-bottomOcclusion-50;
+    const dock=this.nav.getBoundingClientRect();if(this.portraitLayout.matches&&dock.height)bottom=Math.min(bottom,dock.top-rect.top-12);
+    if(this.portraitLayout.matches)top=Math.max(0,Math.min(top,bottom-NODE_HEIGHT*this.zoom-1));
     if(right-left<NODE_WIDTH*this.zoom)return;
-    const x=module.x*this.zoom+this.panX,y=module.y*this.zoom+this.panY;
+    const position=this.displayPosition(module),x=position.x*this.zoom+this.panX,y=position.y*this.zoom+this.panY;
     if(x<left)this.panX+=left-x;else if(x+NODE_WIDTH*this.zoom>right)this.panX+=right-x-NODE_WIDTH*this.zoom;
     // If a bottom sheet occupies virtually the whole stage, do not send the chip
     // outside the viewport trying to satisfy an impossible visibility rectangle.
@@ -106,10 +126,11 @@ export class Workspace {
   private setZoom(value:number,x=this.viewport.clientWidth/2,y=this.viewport.clientHeight/2){value=Math.max(MIN_ZOOM,Math.min(2.5,value));const ratio=value/this.zoom;this.panX=x-(x-this.panX)*ratio;this.panY=y-(y-this.panY)*ratio;this.zoom=value;this.transform();}
   private transform(){this.world.style.transform=`translate(${this.panX}px,${this.panY}px) scale(${this.zoom})`;this.viewport.style.backgroundSize=`${24*this.zoom}px ${24*this.zoom}px`;this.viewport.style.backgroundPosition=`${this.panX}px ${this.panY}px`;this.zoomLabel.textContent=`${Math.round(this.zoom*100)}%`;}
   render(){
+    if(this.portraitLayout.matches)this.syncDisplayLayout();
     if(this.armed&&!this.store.patch.modules.some(m=>m.id===this.armed!.module))this.armed=undefined;
     this.nodes.replaceChildren();
     this.store.patch.modules.forEach((module,index)=>{
-      const definition=DEFINITIONS[module.type],card=element('article','module-card');card.dataset.module=module.id;card.style.left=`${module.x}px`;card.style.top=`${module.y}px`;card.style.setProperty('--module-color',definition.color);
+      const definition=DEFINITIONS[module.type],position=this.displayPosition(module),card=element('article','module-card');card.dataset.module=module.id;card.style.left=`${position.x}px`;card.style.top=`${position.y}px`;card.style.setProperty('--module-color',definition.color);
       const head=element('div','module-header');head.append(element('span','chip-symbol',definition.symbol),element('h2','',module.type),element('span','module-led'));
       const canvas=element('canvas','module-visual');canvas.width=VISUAL_WIDTH;canvas.height=VISUAL_HEIGHT;canvas.dataset.visual=module.id;canvas.setAttribute('aria-label',`${module.type} live signal display`);card.append(head,canvas);
       for(const port of [...definition.inputs,...definition.outputs]){
@@ -137,7 +158,7 @@ export class Workspace {
   private samePort(a:PortRef,b:PortRef){return a.module===b.module&&a.port===b.port&&a.direction===b.direction;}
   private ref(element:HTMLElement):PortRef{return{module:element.dataset.module!,port:element.dataset.port!,direction:element.dataset.direction as 'in'|'out'};}
   private findPort(ref:PortRef){return this.nodes.querySelector<HTMLElement>(`.port[data-module="${ref.module}"][data-port="${ref.port}"][data-direction="${ref.direction}"]`);}
-  private origin(ref:PortRef){const module=this.store.patch.modules.find(m=>m.id===ref.module)!;const port=[...DEFINITIONS[module.type].inputs,...DEFINITIONS[module.type].outputs].find(p=>p.id===ref.port&&p.direction===ref.direction)!;return portPosition(module,port);}
+  private origin(ref:PortRef){const module=this.store.patch.modules.find(m=>m.id===ref.module)!;const port=[...DEFINITIONS[module.type].inputs,...DEFINITIONS[module.type].outputs].find(p=>p.id===ref.port&&p.direction===ref.direction)!;return portPosition(this.displayPosition(module),port);}
   private draftEdge(target:PortRef):Connection{const first=this.armed!,a={module:first.module,port:first.port},b={module:target.module,port:target.port};return{id:'preview',from:first.direction==='out'?a:b,to:first.direction==='out'?b:a};}
   private finishCable(target:PortRef){
     const edge=this.draftEdge(target);
@@ -153,7 +174,7 @@ export class Workspace {
     const base={pointer:event.pointerId,startX:event.clientX,startY:event.clientY,originalX:0,originalY:0,moved:false};
     if(jack){const ref=this.ref(jack),existingArm=!!this.armed;if(!this.armed)this.armed=ref;this.drag={...base,kind:'cable',startPort:ref,existingArm};this.cableEnd=this.point(event);this.highlightPorts();this.renderCables();}
     else if(cable){this.armed=undefined;this.highlightPorts();this.drag={...base,kind:'pan',originalX:this.panX,originalY:this.panY,pendingCable:cable.dataset.cable!};}
-    else if(card){const module=this.store.patch.modules.find(m=>m.id===card.dataset.module)!;this.drag={...base,kind:'module',id:module.id,originalX:module.x,originalY:module.y};}
+    else if(card){const module=this.store.patch.modules.find(m=>m.id===card.dataset.module)!,position=this.displayPosition(module);this.drag={...base,kind:'module',id:module.id,originalX:position.x,originalY:position.y,displayOnly:this.portraitLayout.matches};}
     else{this.drag={...base,kind:'pan',originalX:this.panX,originalY:this.panY};}
   }
   private beginPinch(){const [a,b]=this.pointers.values();const rect=this.viewport.getBoundingClientRect(),x=(a.x+b.x)/2-rect.left,y=(a.y+b.y)/2-rect.top;this.pinch={distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y)),zoom:this.zoom,worldX:(x-this.panX)/this.zoom,worldY:(y-this.panY)/this.zoom};this.renderCables();}
@@ -164,8 +185,9 @@ export class Workspace {
     const dx=event.clientX-drag.startX,dy=event.clientY-drag.startY;if(Math.hypot(dx,dy)>(event.pointerType==='touch'?9:4))drag.moved=true;if(!drag.moved)return;
     if(drag.kind==='pan'){this.panX=drag.originalX+dx;this.panY=drag.originalY+dy;this.transform();}
     else if(drag.kind==='module'){
-      const module=this.store.patch.modules.find(m=>m.id===drag.id)!;module.x=Math.max(-20000,Math.min(20000,Math.round((drag.originalX+dx/this.zoom)/8)*8));module.y=Math.max(-20000,Math.min(20000,Math.round((drag.originalY+dy/this.zoom)/8)*8));
-      const card=this.nodes.querySelector<HTMLElement>(`.module-card[data-module="${module.id}"]`)!;card.style.left=`${module.x}px`;card.style.top=`${module.y}px`;this.store.selectedModule=module.id;this.refreshSelection();this.renderCables();
+      const module=this.store.patch.modules.find(m=>m.id===drag.id)!,position={x:Math.max(-20000,Math.min(20000,Math.round((drag.originalX+dx/this.zoom)/8)*8)),y:Math.max(-20000,Math.min(20000,Math.round((drag.originalY+dy/this.zoom)/8)*8))};
+      if(drag.displayOnly)this.displayPoints.set(module.id,position);else{module.x=position.x;module.y=position.y;}
+      const card=this.nodes.querySelector<HTMLElement>(`.module-card[data-module="${module.id}"]`)!;card.style.left=`${position.x}px`;card.style.top=`${position.y}px`;this.store.selectedModule=module.id;this.refreshSelection();this.renderCables();
     }else{this.cableEnd=this.point(event);this.renderCables();}
   }
   private pointerUp(event:PointerEvent){
@@ -182,10 +204,10 @@ export class Workspace {
       }else if(drag.moved)this.armed=undefined;
       this.drag=undefined;this.highlightPorts();this.renderCables();
     }else if(drag.kind==='module'){
-      if(drag.moved)this.store.changed('layout');else this.select(drag.id!);this.drag=undefined;
+      if(drag.moved){if(!drag.displayOnly)this.store.changed('layout');}else this.select(drag.id!);this.drag=undefined;
     }else{if(!drag.moved){this.armed=undefined;this.highlightPorts();if(drag.pendingCable){this.store.selectedCable=drag.pendingCable;this.store.selectedModule=null;this.refreshSelection();this.renderCables();this.onSelect();}else this.select(null);}this.drag=undefined;}
   }
-  private persistMove(){if(this.drag?.kind==='module'&&this.drag.moved)this.store.changed('layout');}
+  private persistMove(){if(this.drag?.kind==='module'&&this.drag.moved&&!this.drag.displayOnly)this.store.changed('layout');}
   cancelDrag(){this.drag=undefined;this.armed=undefined;this.highlightPorts();this.renderCables();}
   private highlightPorts(){
     this.root.classList.toggle('is-patching',!!this.armed);
@@ -195,10 +217,11 @@ export class Workspace {
   private path(from:{x:number;y:number},to:{x:number;y:number}){const bend=Math.max(30,Math.abs(to.x-from.x)*.4);return`M ${from.x} ${from.y} C ${from.x+bend} ${from.y}, ${to.x-bend} ${to.y}, ${to.x} ${to.y}`;}
   renderCables(){
     this.svg.replaceChildren();
-    for(const edge of this.store.patch.connections){
+    for(const [index,edge] of this.store.patch.connections.entries()){
       const from=this.store.patch.modules.find(m=>m.id===edge.from.module)!,to=this.store.patch.modules.find(m=>m.id===edge.to.module)!;
       const out=DEFINITIONS[from.type].outputs.find(p=>p.id===edge.from.port)!,input=DEFINITIONS[to.type].inputs.find(p=>p.id===edge.to.port)!;
-      const d=this.path(portPosition(from,out),portPosition(to,input)),group=document.createElementNS(NS,'g');group.dataset.source=from.id;group.dataset.port=out.id;group.dataset.signal=out.signal;group.classList.add('cable-group');
+      const start=this.origin({...edge.from,direction:'out'}),end=this.origin({...edge.to,direction:'in'});
+      const d=this.portraitLayout.matches?portraitCablePath(start,end,this.displayPosition(from),this.displayPosition(to),index):this.path(start,end),group=document.createElementNS(NS,'g');group.dataset.source=from.id;group.dataset.port=out.id;group.dataset.signal=out.signal;group.dataset.target=to.id;group.dataset.input=input.id;group.dataset.connection=edge.id;group.classList.add('cable-group');
       const shadow=document.createElementNS(NS,'path');shadow.setAttribute('d',d);shadow.classList.add('cable-shadow');
       const line=document.createElementNS(NS,'path');line.setAttribute('d',d);line.setAttribute('stroke',SIGNAL_COLORS[out.signal]);line.classList.add('cable-line');if(this.store.selectedCable===edge.id)line.classList.add('selected');
       const hit=document.createElementNS(NS,'path');hit.setAttribute('d',d);hit.dataset.cable=edge.id;hit.classList.add('cable-hit');hit.setAttribute('aria-label',`Cable from ${from.type} ${out.label} to ${to.type} ${input.label}`);group.append(shadow,line,hit);this.svg.append(group);

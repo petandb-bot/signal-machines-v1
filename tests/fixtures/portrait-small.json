@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "PORTRAIT / SMALL",
+  "seed": 7,
+  "bpm": 90,
+  "master": 0.5,
+  "modules": [
+    {
+      "id": "small-0",
+      "type": "OSC",
+      "x": 16,
+      "y": 16,
+      "seed": 1,
+      "character": "METAL",
+      "params": {
+        "tune": 0.5,
+        "level": 0.7
+      }
+    },
+    {
+      "id": "small-1",
+      "type": "FILTER",
+      "x": 192,
+      "y": 16,
+      "seed": 2,
+      "character": "METAL",
+      "params": {
+        "cutoff": 0.68,
+        "resonance": 0.3
+      }
+    },
+    {
+      "id": "small-2",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 16,
+      "seed": 3,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "small-edge-0",
+      "from": {
+        "module": "small-0",
+        "port": "audio"
+      },
+      "to": {
+        "module": "small-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "small-edge-1",
+      "from": {
+        "module": "small-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "small-2",
+        "port": "audio"
+      }
+    }
+  ]
+}

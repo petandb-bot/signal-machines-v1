@@ -189,7 +189,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add PENDULUM module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));vi.spyOn(app.audio,'start').mockImplementation(async()=>{app.audio.running=true;});const action=vi.spyOn(app.audio,'moduleAction').mockResolvedValue(undefined);document.querySelector<HTMLButtonElement>('[aria-label="Kick the pendulums"]')!.click();await vi.waitFor(()=>expect(action).toHaveBeenCalledWith(id,'kick',undefined));
   });
 
-  it.each([390,320])('portrait FIT contains every SPLIT ORBITS chip on a %spx screen',width=>{
+  it.each([390,320])('portrait FIT folds SPLIT ORBITS without changing saved coordinates at %spx',width=>{
     // Simulate portrait regardless of the unit test host's CSS media implementation.
     Object.defineProperty(app.workspace,'portraitLayout',{configurable:true,value:{matches:true}});
     const height=700;
@@ -204,8 +204,10 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     const [panX,panY,zoom]=parts!;
     const modules=app.store.patch.modules;
     expect(zoom).toBeGreaterThan(0);
-    expect(zoom).toBeLessThan(.875); // No minimum zoom that clips wide patches.
-    for(const module of modules){
+    expect(zoom).toBeGreaterThanOrEqual(.875);
+    expect(new Set(modules.map(m=>app.workspace.displayPosition(m).x)).size).toBe(2);
+    for(const saved of modules){
+      const module=app.workspace.displayPosition(saved);
       expect(module.x*zoom+panX).toBeGreaterThanOrEqual(4);
       expect((module.x+128)*zoom+panX).toBeLessThanOrEqual(width-4);
       expect(module.y*zoom+panY).toBeGreaterThanOrEqual(12);
@@ -218,13 +220,13 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     const css=readFileSync('src/styles/main.css','utf8');
     const portrait=css.split('@media (max-width:600px) and (orientation:portrait) {')[1]?.split('@media (pointer:coarse)')[0];
     expect(portrait).toBeDefined();
-    expect(portrait).toContain('padding-top: calc(env(safe-area-inset-top) + 9px)');
-    expect(portrait).toContain('height: var(--portrait-stage-height, 300px)');
+    expect(portrait).toContain('padding-top: calc(env(safe-area-inset-top) + 1px)');
+    expect(portrait).not.toContain('--portrait-stage-height');
     expect(portrait).toContain('.topbar .menu-button::before');
     expect(portrait).toContain('box-shadow: -10px 0 currentColor, 10px 0 currentColor');
     expect(portrait).toContain('left: 50%; transform: translateX(-50%)');
     expect(portrait).toContain('bottom: calc(var(--safe-bottom) + 10px)');
-    expect(portrait).toContain('grid-template-columns: 44px 58px 44px 56px');
+    expect(portrait).toContain('grid-template-columns: 44px 64px 44px 44px');
     expect(portrait).toContain('.patch-hint { bottom: calc(var(--safe-bottom) + 74px); }');
     expect(css).toContain('-webkit-user-select: none; user-select: none; -webkit-touch-callout: none;');
     const nav=document.querySelector<HTMLElement>('.workspace-nav')!;

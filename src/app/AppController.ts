@@ -47,16 +47,9 @@ export class AppController {
       this.closePanels();this.editor.render();
       const selected=!!(this.store.selectedModule||this.store.selectedCable);
       this.root.classList.toggle('editor-visible',selected);
-      if(this.store.selectedModule)requestAnimationFrame(()=>{
-        const editor=this.editor.root.getBoundingClientRect(),field=this.workspace.viewport.getBoundingClientRect();
-        const bottomSheet=editor.width>field.width*.65;
-        // The editor uses the full main layout, while the portrait rack is compact:
-        // only the portion that actually overlaps the rack may obscure a module.
-        const overlapX=Math.max(0,Math.min(editor.right,field.right)-Math.max(editor.left,field.left));
-        const overlapY=Math.max(0,Math.min(editor.bottom,field.bottom)-Math.max(editor.top,field.top));
-        this.workspace.reveal(this.store.selectedModule!,bottomSheet?0:overlapX,bottomSheet?overlapY:0);
-      });
+      if(selected)this.revealSelection();
     };
+    this.workspace.onViewportChange=()=>{if(this.root.classList.contains('editor-visible'))this.revealSelection();};
     this.workspace.onError=message=>this.notify(message,true);this.workspace.onAdd=()=>this.togglePanel('library');
     this.snapshots.onRecall=patch=>{this.store.replace(patch);this.notify('Snapshot recalled. Sound restarted.');};this.snapshots.onClose=()=>this.closePanels();this.snapshots.onNotice=(message,error)=>this.notify(message,error);
     this.editor.onAction=(module,action)=>void this.performModuleAction(module,action);this.editor.onImport=(module,file)=>void this.performModuleAction(module,'import',file);
@@ -76,6 +69,17 @@ export class AppController {
       else if(event.key.toLowerCase()==='f')this.workspace.fit();
     });
     if(this.store.initialWarning||this.snapshots.storage.warning)this.notify(this.store.initialWarning||this.snapshots.storage.warning,true);
+  }
+  private revealSelection(){
+    requestAnimationFrame(()=>{
+      if(!this.root.classList.contains('editor-visible'))return;
+      const editor=this.editor.root.getBoundingClientRect(),field=this.workspace.viewport.getBoundingClientRect();
+      const bottomSheet=editor.width>field.width*.65;
+      const overlapX=Math.max(0,Math.min(editor.right,field.right)-Math.max(editor.left,field.left));
+      const overlapY=Math.max(0,Math.min(editor.bottom,field.bottom)-Math.max(editor.top,field.top));
+      this.workspace.root.style.setProperty('--editor-overlap',`${bottomSheet?overlapY:0}px`);
+      if(this.store.selectedModule)this.workspace.reveal(this.store.selectedModule,bottomSheet?0:overlapX,bottomSheet?overlapY:0);
+    });
   }
   private build(){
     installPalette(document.documentElement);this.root.classList.add('instrument');this.root.dataset.visuals=readVisualMode();const header=element('header','topbar');header.setAttribute('aria-label','Transport and patch tools');
