@@ -341,7 +341,8 @@ input[type=range]::-moz-range-thumb {
   .topbar {
     display: grid; grid-template-columns: 44px 44px minmax(24px, 1fr) 44px 44px 44px;
     grid-template-rows: 44px 44px; gap: 2px 3px; min-height: 0;
-    padding-top: calc(env(safe-area-inset-top) + 9px); padding-bottom: 1px;
+    /* Move both transport rows down ~2 dotted-grid steps while retaining iPhone safe-area clearance. */
+    padding-top: calc(env(safe-area-inset-top) + clamp(43px, 5.5dvh, 54px)); padding-bottom: 1px;
     background: var(--surface); border-bottom-color: var(--line);
     box-shadow: none; filter: none; -webkit-backdrop-filter: none; backdrop-filter: none;
   }

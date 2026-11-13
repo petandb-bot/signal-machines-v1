@@ -15,3 +15,7 @@ The secondary zoom dock moves to the bottom-right. It has no large container fra
 Browser verification covers SPLIT ORBITS, STORED RAIN and a three-module patch at 390×844, 402×874, 320×568, 844×390 and 1280×800. Initial chip rectangles must be inside the viewport and above the zoom dock. Landscape and desktop images match before/after exactly for all three patches. The header, dock, editing, pan, pinch, dragging, cable alignment and rotation are checked in Chromium 156 viewport/touch emulation. Physical iPhone/Safari remains unverified.
 
 No DSP, AudioWorklet, module parameters, patch serialization or landscape/desktop styling changes.
+
+## v0.17.8 — iPhone portrait header clearance
+
+The two-row transport and preset controls are lowered together by replacing the portrait top offset `safe-area + 9px` with `safe-area + clamp(43px, 5.5dvh, 54px)` (roughly two visible dotted-grid steps on iPhone). This is a portrait-only CSS change: controls retain their 44px targets, the two-column graph and FIT recalculate within the remaining viewport, and landscape/desktop CSS is unchanged. Physical iPhone Safari appearance still requires user verification.
