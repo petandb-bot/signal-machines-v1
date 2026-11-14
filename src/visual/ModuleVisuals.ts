@@ -18,7 +18,9 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
   g.fill(INK.frame);
   for(let x=4;x<4+Math.round((W-8)*motion.activity);x+=4){point(g,x,2);point(g,W-5-x,H-3);}
   g.push();g.translate(motion.dx,motion.dy);g.fill(color);
-  if(type==='LOSS'){
+  if(type==='CUTS'){
+    const peaks=t.curve??[];g.fill(INK.amber);for(let x=7;x<98;x+=2){const h=Math.min(19,(peaks[Math.floor((x-7)/91*104)]??0)*110);point(g,x,37-h);point(g,x,37+h);}const start=7+clamp(t.a,0,1)*90,end=7+clamp(t.b,0,1)*90;g.fill(color);g.rect(start,9,Math.max(2,end-start),3);for(let y=17;y<65;y+=5){point(g,start,y,2);point(g,end,y,2);}g.rect(7,74,Math.round(clamp(t.envelope,0,1)*90),3);point(g,7+clamp(t.phase,0,1)*90,64,3);
+  }else if(type==='LOSS'){
     const bands=t.bands??[];for(let row=0;row<3;row++)for(let col=0;col<13;col++){const missing=(bands[row]??0)>.5&&col>Math.floor(t.phase*13);g.fill(missing?(t.b>.5?INK.blue:INK.grid):color);g.rect(8+col*7,15+row*19,missing?2:5,3+Math.abs(sample(t,col*4))*20);if(missing&&t.b>.1){g.fill(INK.cyan);point(g,9+col*7,22+row*19,2);}}g.fill(color);g.rect(8,76,Math.round(clamp(t.a,0,1)*87),2);
   }else if(type==='MIRAGE'){
     const generation=Math.round(t.bands?.[0]??0),energy=clamp(t.a,0,1);

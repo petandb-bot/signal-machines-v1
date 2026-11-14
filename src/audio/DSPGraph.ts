@@ -1,3 +1,4 @@
+import {Cuts} from './modules/Cuts';
 import {Found} from './modules/Found';
 import {validateFoundAudio,MAX_FOUND,validFoundRef} from '../samples/FoundData';
 import type {FoundAudio} from '../samples/FoundData';
@@ -32,7 +33,7 @@ export class DSPGraph {
     const existing=reset?(preserveLoops?new Map([...this.modules].filter(([,dsp])=>dsp.state.type==='LOOP'||dsp.state.type==='PRISM'||dsp.state.type==='TIDE'||dsp.state.type==='BOUNCE'||dsp.state.type==='PENDULUM')):undefined):this.modules;
     const compiled = compilePatch(patch, this.sampleRate,existing);
     if(reset&&preserveLoops)for(const dsp of compiled.modules.values())if(dsp.state.type==='LOOP')dsp.command('restart');
-    for(const dsp of compiled.modules.values())if(dsp instanceof Found)dsp.attach(this.foundAssets.get(dsp.reference));
+    for(const dsp of compiled.modules.values())if(dsp instanceof Found||dsp instanceof Cuts)dsp.attach(this.foundAssets.get(dsp.reference));
     this.modules = compiled.modules; this.ordered = compiled.ordered; this.outputs = compiled.outputs;
     this.bpm = patch.bpm; this.targetMaster = patch.master;
     if (reset) { this.sample = 0; this.faults = 0; }

@@ -1,3 +1,4 @@
+import {isSampleType} from '../samples/FoundData';
 import {FoundLibrary} from '../samples/FoundLibrary';
 import {foundRef} from '../samples/FoundData';
 import type {FoundAudio} from '../samples/FoundData';
@@ -8,7 +9,7 @@ import type { EngineTelemetry, Patch } from '../graph/types';
 type RecordedAudio={blob:Blob;extension:string};
 export class AudioEngine {
   readonly foundLibrary=new FoundLibrary();private foundGeneration=0;private transportGeneration=0;private desiredFoundRefs:string[]=[];private sentFound=new Map<string,FoundAudio>();
-  async foundAudio(patch:Patch){const ids=[...new Set(patch.modules.filter(m=>m.type==='FOUND').map(m=>foundRef(m.sample)))];const assets:FoundAudio[]=[];for(const id of ids){if(!this.desiredFoundRefs.includes(id))continue;try{const audio=await this.foundLibrary.get(id,()=>this.desiredFoundRefs.includes(id));if(audio)assets.push(audio);else if(this.desiredFoundRefs.includes(id))this.onError('FOUND sample missing on this browser. Load the original file again.');}catch{if(this.desiredFoundRefs.includes(id))this.onError('FOUND sample could not be restored. Load the original file again.');}}this.foundLibrary.retain(this.desiredFoundRefs);return assets;}
+  async foundAudio(patch:Patch){const ids=[...new Set(patch.modules.filter(m=>isSampleType(m.type)).map(m=>foundRef(m.sample)))];const assets:FoundAudio[]=[];for(const id of ids){if(!this.desiredFoundRefs.includes(id))continue;try{const audio=await this.foundLibrary.get(id,()=>this.desiredFoundRefs.includes(id));if(audio)assets.push(audio);else if(this.desiredFoundRefs.includes(id))this.onError('FOUND sample missing on this browser. Load the original file again.');}catch{if(this.desiredFoundRefs.includes(id))this.onError('FOUND sample could not be restored. Load the original file again.');}}this.foundLibrary.retain(this.desiredFoundRefs);return assets;}
   private sendFound(assets:FoundAudio[]){if(!this.node)return;const same=assets.length===this.sentFound.size&&assets.every(a=>this.sentFound.get(a.id)===a);if(same)return;const transfer:ArrayBuffer[]=[],copies=assets.filter(a=>this.sentFound.get(a.id)!==a).map(a=>{const left=a.left.slice(),right=a.right.slice();transfer.push(left.buffer,right.buffer);return{...a,left,right};});this.node.port.postMessage({type:'foundAssets',assets:copies,retain:assets.map(a=>a.id)},transfer);this.sentFound=new Map(assets.map(a=>[a.id,a]));this.foundLibrary.retain(assets.map(a=>a.id));}
 
   private pcm?:PcmRecording;private recordId=0;private stoppingPcm?:{resolve:(result:{blob:Blob;extension:string})=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
@@ -24,7 +25,7 @@ export class AudioEngine {
   get sampleRate() { return this.context?.sampleRate ?? 0; }
   async start(patch: Patch) {
     this.transportGeneration++;
-    const generation=++this.foundGeneration;this.desiredFoundRefs=patch.modules.filter(m=>m.type==='FOUND').map(m=>foundRef(m.sample));this.foundLibrary.retain(this.desiredFoundRefs);
+    const generation=++this.foundGeneration;this.desiredFoundRefs=patch.modules.filter(m=>isSampleType(m.type)).map(m=>foundRef(m.sample));this.foundLibrary.retain(this.desiredFoundRefs);
     if (!window.isSecureContext) throw new Error('AudioWorklet requires HTTPS or localhost.');
     if (!this.context || this.context.state === 'closed') {
       if (!window.AudioContext || !window.AudioWorkletNode) throw new Error('This browser does not support AudioWorklet. Please use a current Chrome or Safari.');
@@ -52,7 +53,7 @@ export class AudioEngine {
     }
     clearTimeout(this.parameterTimer); this.parameterTimer = undefined; this.pendingParameters = undefined;
     await this.context.resume();
-    if(generation!==this.foundGeneration)throw Error('Patch changed while loading samples. Tap RUN again.');const assets=patch.modules.some(m=>m.type==='FOUND')?await this.foundAudio(patch):[];if(generation!==this.foundGeneration)throw Error('Patch changed while loading samples. Tap RUN again.');
+    if(generation!==this.foundGeneration)throw Error('Patch changed while loading samples. Tap RUN again.');const assets=patch.modules.some(m=>isSampleType(m.type))?await this.foundAudio(patch):[];if(generation!==this.foundGeneration)throw Error('Patch changed while loading samples. Tap RUN again.');
     // A phone can suspend audio while a local sample is being decoded.
     if(this.context.state!=='running')await this.context.resume();
     if(generation!==this.foundGeneration)throw Error('Patch changed while loading samples. Tap RUN again.');this.sendFound(assets);
@@ -74,9 +75,9 @@ export class AudioEngine {
     if (generation===this.transportGeneration&&!this.running) await context.suspend();
   }
   sync(patch: Patch, routing: boolean, reset = false) {
-    const generation=routing?++this.foundGeneration:this.foundGeneration;if(routing){this.desiredFoundRefs=patch.modules.filter(m=>m.type==='FOUND').map(m=>foundRef(m.sample));this.foundLibrary.retain(this.desiredFoundRefs);}
+    const generation=routing?++this.foundGeneration:this.foundGeneration;if(routing){this.desiredFoundRefs=patch.modules.filter(m=>isSampleType(m.type)).map(m=>foundRef(m.sample));this.foundLibrary.retain(this.desiredFoundRefs);}
     if (!this.node) return;
-    if(routing&&patch.modules.some(m=>m.type==='FOUND')){clearTimeout(this.parameterTimer);this.parameterTimer=undefined;this.pendingParameters=undefined;const copy=structuredClone(patch);void this.foundAudio(copy).then(assets=>{if(generation!==this.foundGeneration)return;copy.bpm=patch.bpm;copy.master=patch.master;for(const m of copy.modules){const latest=patch.modules.find(n=>n.id===m.id);if(latest){m.params={...latest.params};m.character=latest.character;m.mode=latest.mode;m.wide=latest.wide;m.bypass=latest.bypass;m.gesture=latest.gesture?structuredClone(latest.gesture):undefined;}}this.sendFound(assets);this.node!.port.postMessage({type:'patch',patch:copy,reset});}).catch(error=>this.onError(error.message));return;}
+    if(routing&&patch.modules.some(m=>isSampleType(m.type))){clearTimeout(this.parameterTimer);this.parameterTimer=undefined;this.pendingParameters=undefined;const copy=structuredClone(patch);void this.foundAudio(copy).then(assets=>{if(generation!==this.foundGeneration)return;copy.bpm=patch.bpm;copy.master=patch.master;for(const m of copy.modules){const latest=patch.modules.find(n=>n.id===m.id);if(latest){m.params={...latest.params};m.character=latest.character;m.mode=latest.mode;m.wide=latest.wide;m.bypass=latest.bypass;m.gesture=latest.gesture?structuredClone(latest.gesture):undefined;}}this.sendFound(assets);this.node!.port.postMessage({type:'patch',patch:copy,reset});}).catch(error=>this.onError(error.message));return;}
     if(routing)this.sendFound([]);
     if (routing) { clearTimeout(this.parameterTimer); this.parameterTimer = undefined; this.pendingParameters = undefined; this.node.port.postMessage({type:'patch',patch,reset}); }
     else {

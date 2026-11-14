@@ -1,3 +1,4 @@
+import {isSampleType} from '../samples/FoundData';
 import {FoundControls} from './FoundControls';
 import {foundRef} from '../samples/FoundData';
 import type {FoundAudio} from '../samples/FoundData';
@@ -34,7 +35,7 @@ export class ModuleEditor {
     const visual=element('div','editor-visual'),canvas=element('canvas');canvas.width=VISUAL_WIDTH;canvas.height=VISUAL_HEIGHT;canvas.dataset.visual=module.id;canvas.setAttribute('aria-label',`Expanded ${module.type} signal display`);visual.append(canvas);
     this.root.append(element('p','editor-subtitle',definition.subtitle),visual);
     const controls=element('div','editor-controls');definition.parameters.forEach((_,i)=>controls.append(parameterControl(module,i,(id,value)=>this.onParameter(module,id,value),true)));this.root.append(controls);
-    if(module.type==='FOUND'){this.foundControls=new FoundControls(module.id,foundRef(module.sample),ref=>this.onFoundChoose(module,ref),file=>this.onFoundFile(module,file));this.root.append(this.foundControls.root);this.onFoundInspect(module);}
+    if(isSampleType(module.type)){this.foundControls=new FoundControls(module.id,foundRef(module.sample),ref=>this.onFoundChoose(module,ref),file=>this.onFoundFile(module,file),module.type);this.root.append(this.foundControls.root);this.onFoundInspect(module);}
     if(module.type==='LOOP'){this.loopControls=new LoopControls(module.id,action=>this.onAction(module,action),file=>this.onImport(module,file));this.loopControls.update(this.store.telemetry?.modules[module.id]?.loop);this.root.append(this.loopControls.root);}
     if(module.type==='ALLOY'){
       const modes=element('div','mode-options');for(const mode of ['SOFT','METAL','ROUGH'] as const){const option=button(mode,`${mode} character`,()=>{module.character=mode;this.store.changed('parameters');modes.querySelectorAll('button').forEach(b=>{b.classList.toggle('active',b===option);b.setAttribute('aria-pressed',String(b===option));});});option.classList.toggle('active',module.character===mode);option.setAttribute('aria-pressed',String(module.character===mode));modes.append(option);}this.root.append(modes);
