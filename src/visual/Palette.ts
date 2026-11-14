@@ -14,6 +14,7 @@ export const PALETTE = {
 
 // The original warm/cool identities remain, using eight small families of ink.
 export const MODULE_COLORS = {
+  LOSS: PALETTE.blueBright,
   MIRAGE: PALETTE.purpleSoft,
   LEVEL: PALETTE.greenSoft,
   FOUND: PALETTE.cyanSoft,

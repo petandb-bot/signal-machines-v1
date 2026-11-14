@@ -18,7 +18,9 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
   g.fill(INK.frame);
   for(let x=4;x<4+Math.round((W-8)*motion.activity);x+=4){point(g,x,2);point(g,W-5-x,H-3);}
   g.push();g.translate(motion.dx,motion.dy);g.fill(color);
-  if(type==='MIRAGE'){
+  if(type==='LOSS'){
+    const bands=t.bands??[];for(let row=0;row<3;row++)for(let col=0;col<13;col++){const missing=(bands[row]??0)>.5&&col>Math.floor(t.phase*13);g.fill(missing?(t.b>.5?INK.blue:INK.grid):color);g.rect(8+col*7,15+row*19,missing?2:5,3+Math.abs(sample(t,col*4))*20);if(missing&&t.b>.1){g.fill(INK.cyan);point(g,9+col*7,22+row*19,2);}}g.fill(color);g.rect(8,76,Math.round(clamp(t.a,0,1)*87),2);
+  }else if(type==='MIRAGE'){
     const generation=Math.round(t.bands?.[0]??0),energy=clamp(t.a,0,1);
     for(let i=0;i<5;i++){const x=12+i*18,y=27+(i%2)*17,reach=3+energy*(12-i);g.fill(i===(generation%5)?color:INK.purple);for(let k=0;k<8;k++){const angle=k*Math.PI/4;point(g,x+Math.cos(angle)*reach,y+Math.sin(angle)*reach,2);}g.fill(i%2?INK.cyan:color);point(g,x,67-clamp(Math.abs(sample(t,i*11)),0,1)*25,2);}
     g.fill(color);g.rect(8,76,Math.round(clamp(t.phase,0,1)*87),2);
