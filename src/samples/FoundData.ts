@@ -1,13 +1,16 @@
+import {analyzeCuts} from './CutsAnalysis';
+import type {CutEvent} from './CutsAnalysis';
 export const FOUND_RATE=24000,FOUND_SECONDS=60,FOUND_BYTES=32_000_000,MAX_FOUND=2;
 export const BUILTINS=['room','rain','machine'] as const;
 export type Builtin=typeof BUILTINS[number];
 export interface FoundRegion{start:number;energy:number;change:number}
-export interface FoundAudio{id:string;name:string;sampleRate:number;left:Float32Array;right:Float32Array;regions:FoundRegion[];peaks:number[]}
+export interface FoundAudio{id:string;name:string;sampleRate:number;left:Float32Array;right:Float32Array;regions:FoundRegion[];peaks:number[];cuts?:CutEvent[]}
 export const foundRef=(sample?:string)=>sample??'builtin:room';
 export const validFoundRef=(v:unknown):v is string=>typeof v==='string'&&(/^(builtin:(room|rain|machine)|local:[a-zA-Z0-9_-]{1,80})$/).test(v);
 export function validateFoundAudio(value:unknown):FoundAudio{
   const a=value as FoundAudio,typed=(n:unknown)=>Object.prototype.toString.call(n)==='[object Float32Array]';
   if(!a||!validFoundRef(a.id)||typeof a.name!=='string'||a.name.length>160||a.sampleRate!==FOUND_RATE||!typed(a.left)||!typed(a.right)||a.left.length!==a.right.length||a.left.length<240||a.left.length>FOUND_RATE*FOUND_SECONDS||!Array.isArray(a.regions)||!a.regions.length||a.regions.length>32||!a.regions.every(r=>Number.isInteger(r.start)&&r.start>=0&&r.start<a.left.length&&Number.isFinite(r.energy)&&r.energy>=0&&r.energy<=1&&Number.isFinite(r.change)&&r.change>=0&&r.change<=2)||!Array.isArray(a.peaks)||a.peaks.length!==104||!a.peaks.every(p=>Number.isFinite(p)&&p>=0&&p<=1))throw Error('Invalid FOUND audio.');
+  if(a.cuts!==undefined&&(!Array.isArray(a.cuts)||a.cuts.length>63||!a.cuts.every(c=>Number.isInteger(c.start)&&Number.isInteger(c.end)&&c.start>=0&&c.end<=a.left.length&&c.end>c.start&&['attack','texture','tail'].includes(c.kind)&&Number.isFinite(c.weight)&&c.weight>=0&&c.weight<=2)))throw Error('Invalid sample event metadata.');
   return a;
 }
 /** Run on the main thread/offline, never in the render callback. Quiet anchors stay eligible. */
@@ -23,7 +26,7 @@ export function analyzeFound(id:string,name:string,left:Float32Array,right:Float
   for(let i=0;i<16;i++){const j=Math.round(i*(features.length-1)/15);chosen.set(j,features[j]);}
   const ranked=features.map((r,i)=>({i,score:r.change+(i>0&&i<features.length-1&&r.energy<features[i-1].energy&&r.energy<features[i+1].energy?.03:0)})).sort((a,b)=>b.score-a.score);
   for(const {i} of ranked){if(chosen.size>=32)break;if([...chosen.keys()].every(j=>Math.abs(i-j)>1))chosen.set(i,features[i]);}
-  return validateFoundAudio({id,name,sampleRate:FOUND_RATE,left,right,regions:[...chosen.values()].sort((a,b)=>a.start-b.start),peaks});
+  return validateFoundAudio({id,name,sampleRate:FOUND_RATE,left,right,regions:[...chosen.values()].sort((a,b)=>a.start-b.start),peaks,cuts:analyzeCuts(left,right,FOUND_RATE)});
 }
 export function builtinFound(kind:Builtin):FoundAudio{
   const n=FOUND_RATE*12,left=new Float32Array(n),right=new Float32Array(n);let seed=kind==='room'?901:kind==='rain'?902:903,low=0,lowR=0,drop=0;
@@ -35,3 +38,5 @@ export function builtinFound(kind:Builtin):FoundAudio{
   }
   return analyzeFound('builtin:'+kind,kind.toUpperCase()+' · synthetic',left,right);
 }
+
+export const isSampleType=(type:string)=>type==='FOUND'||type==='CUTS';

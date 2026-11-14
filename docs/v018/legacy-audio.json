@@ -1,0 +1,155 @@
+{
+  "result": "37/37 identical stereo float32 streams",
+  "secondsPerPreset": 0.5013333333333333,
+  "baseline": "v0.17.7 DSP, unchanged through v0.17.9",
+  "results": [
+    {
+      "name": "METAL DRIFT",
+      "hash": "feecd1de55839cac18f7dbd3e5ba0c0be0878449d77b8c7a08fbf5d2d92ffee8"
+    },
+    {
+      "name": "UNEVEN MEMORY",
+      "hash": "3aad7fc3e5bc692dfa1085a32247a28fa4235d56e49327f0a1fb4c2f8fbf7103"
+    },
+    {
+      "name": "EMPTY CHAMBER",
+      "hash": "8833f28a95b4cbadb3a6265e70218a0c747d856431819ff947d83687617ccfb1"
+    },
+    {
+      "name": "BAD CONTACT",
+      "hash": "5a68d8ff3e9bcb2eb33445aef516bb8a6b4f7c4c18ea5c5dfa69a2b3b24ee75f"
+    },
+    {
+      "name": "TAPE GARDEN",
+      "hash": "481632208f42eb0f473a6eaa196f0619675fa94ba4e269326d832116a315640f"
+    },
+    {
+      "name": "HOST FEVER",
+      "hash": "c1172cf3ba0ea1d7066b7ca8b31cf5cf14e4740bf575a3180547012b06069836"
+    },
+    {
+      "name": "UNSTABLE CIRCUIT",
+      "hash": "7444fd9f2ad483b902112e96fea54858b5dc85c8c9358e65c8af3933b4d3310f"
+    },
+    {
+      "name": "BREATHING CIRCUIT",
+      "hash": "a0fcc48cedc548195d843445944d280c859a69c785a71f1ca7a23e47367aa07f"
+    },
+    {
+      "name": "FORKED MEMORY",
+      "hash": "fd06d9e1b0f41a173eb3e680d1f97e84c32f24bf05a35d6e3e909685d12d1d33"
+    },
+    {
+      "name": "LOOP WEATHER",
+      "hash": "175f4d5aaaf60191b27dd5de583dc4fd25e8aa4709c015a36786a8e068da1fca"
+    },
+    {
+      "name": "CLEAR SIGNAL",
+      "hash": "8ae46b9d5ba2bbcbc4c140767c0d99247335dc96a155d43abf39c6c35557e0f4"
+    },
+    {
+      "name": "WIRE STRINGS",
+      "hash": "4082edaa530c11642513f689440820a15d1032e74d3112e5a11d3a55ce1693de"
+    },
+    {
+      "name": "SIDEBAND GARDEN",
+      "hash": "71d618ff87a8af16ddd8076bb47195ae1deb584ead51d1da1aeddb3de79f6fa6"
+    },
+    {
+      "name": "CHANCE GARDEN",
+      "hash": "ea2ae4e5954f601939d8888a61fd3f1fcd3e04c9cc26742602e5675cd6f75763"
+    },
+    {
+      "name": "SPECTRAL GHOST",
+      "hash": "d1ea89a4566dd195f13c201820d210871ffab74d70b3340ba38154005499ff2d"
+    },
+    {
+      "name": "HARMONIC WEATHER",
+      "hash": "59be9bc7f2bccba2b9ba053c667695704f025e5868fd6c60d7b3ba2337357222"
+    },
+    {
+      "name": "CLOCKWORK GARDEN",
+      "hash": "16b3fb85a1fbbee9c6af52cccb779cff8f1475574be57bdde076c3b2070eb9a2"
+    },
+    {
+      "name": "SLOW WEATHER",
+      "hash": "0cbb096e9d4597e6341d1ab45023e68bd5be26e26dbf2cf5f59a817f4ef19f10"
+    },
+    {
+      "name": "MARBLE ROOM",
+      "hash": "ba7a417cd5f2869614e149006dfedcd6125d42804d123656410d7d930f8d384e"
+    },
+    {
+      "name": "BINARY FEVER",
+      "hash": "431abc85c92b937ff9f40a5dae01d4ec8a78a556d51a1ce09dac0ffa066b62be"
+    },
+    {
+      "name": "BENT VOWELS",
+      "hash": "01046b58b83bcb60c07aa54e136f648f8ffee57d5518f4d0dea45f4eb9cf34f3"
+    },
+    {
+      "name": "SPLIT ORBITS",
+      "hash": "55038781a49f28181ab13af27812cd38ca5182b4062969783b38dbf516a4044d"
+    },
+    {
+      "name": "TRITAVE FIELD",
+      "hash": "0fc18226a673a83c8c84208288221a96509389cb841491637469caa9c149e350"
+    },
+    {
+      "name": "OFF GRID",
+      "hash": "28a2e031b83b19bf0b78ddd960cd37d2e19a06f2cda62cf6d486fb0489b11088"
+    },
+    {
+      "name": "COLONY CRACKS",
+      "hash": "ec98a866bcb952ffbd7534180acfb745e75b21ea3541355f14b0037e01ab19ab"
+    },
+    {
+      "name": "STORED RAIN",
+      "hash": "c48af5c476c8898413186dec43d77e9df894b3914edaea1167efbc4463563a37"
+    },
+    {
+      "name": "DISSENTING BODIES",
+      "hash": "8210cdd9edcf09d91011626f1b77213e96865987082641f48d33e8f6a1b29424"
+    },
+    {
+      "name": "OUTER BAND",
+      "hash": "dbdeefae403497e6c7b4abb71e14e698b0f66bfeb63e2f095cee07b553ee40ea"
+    },
+    {
+      "name": "PIXEL DUST",
+      "hash": "963ff8743dd7a1acc4396f5c3ae87258bfd91f5c17771bc82d1d65ee477a0906"
+    },
+    {
+      "name": "BIASED ORBIT",
+      "hash": "07be0dc7000161d57795cb61cf1b8c843e6aa83dda7755f0d561ec3b0849c6ba"
+    },
+    {
+      "name": "DRAWN METAL",
+      "hash": "ab8f44f7ff0364a67f778c873445c87d2c6287d7abd55ff813232a9a5f35e4ea"
+    },
+    {
+      "name": "TWIN SWINGS",
+      "hash": "963ff8743dd7a1acc4396f5c3ae87258bfd91f5c17771bc82d1d65ee477a0906"
+    },
+    {
+      "name": "DISSOLVING METAL",
+      "hash": "14f5c0883c5416fb41919e8a529cffd56ffeea9d5c8f670ca3849d889e071eaa"
+    },
+    {
+      "name": "SLIDING GLASS",
+      "hash": "e959aa21f3952d38aefeeb27ab439e0c88954fcee8fb099ceddd5fb69935275d"
+    },
+    {
+      "name": "FOUND / QUIET",
+      "hash": "9e812c235bf8388c5790b359722f3597036c383843d58c6432eb838566b4842e"
+    },
+    {
+      "name": "FOUND / STRANGE",
+      "hash": "3a42a5d8c147d4aed5f9f9fcfb58e80b2b391e5ae6836d99670d2820ad6593cd"
+    },
+    {
+      "name": "LEVEL / RECOVERY",
+      "hash": "f45177f5a92da30a21a2f2b543812c41514479b4aa177db03d919eee753494ba"
+    }
+  ]
+}

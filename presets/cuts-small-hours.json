@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "CUTS / SMALL HOURS",
+  "bpm": 82,
+  "master": 0.65,
+  "seed": 181803,
+  "modules": [
+    {
+      "id": "cuts-1",
+      "type": "CUTS",
+      "x": 16,
+      "y": 16,
+      "seed": 6301,
+      "character": "METAL",
+      "params": {
+        "sparse": 0.44,
+        "change": 0.58
+      },
+      "sample": "builtin:rain"
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 192,
+      "y": 184,
+      "seed": 6302,
+      "character": "METAL",
+      "params": {
+        "material": 0.27,
+        "decay": 0.22
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 368,
+      "y": 16,
+      "seed": 6303,
+      "character": "METAL",
+      "params": {
+        "boost": 0.53,
+        "comp": 0
+      }
+    },
+    {
+      "id": "orbit-1",
+      "type": "ORBIT",
+      "x": 544,
+      "y": 16,
+      "seed": 6304,
+      "character": "METAL",
+      "params": {
+        "rate": 0.22,
+        "depth": 0.8
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 6305,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "cuts-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "cuts-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "orbit-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

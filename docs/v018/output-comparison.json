@@ -1,0 +1,184 @@
+{
+  "limitations": "Different time-domain outputs and event sequences are evidence of distinct behavior, not a human perceptual or musical-quality verdict. Comparisons use actual constant-gain WAV exports.",
+  "outputs": [
+    {
+      "first": "mirage-default.wav",
+      "second": "tape-comparison.wav",
+      "normalizedCorrelation": 0.552576297895044,
+      "postInputEnergy": [
+        0.08161466475576162,
+        0.02335707563906908
+      ]
+    },
+    {
+      "first": "mirage-default.wav",
+      "second": "chamber-comparison.wav",
+      "normalizedCorrelation": 0.7122391722745649,
+      "postInputEnergy": [
+        0.08161466475576162,
+        0.008546977303922176
+      ]
+    },
+    {
+      "first": "loss-default.wav",
+      "second": "crush-comparison.wav",
+      "normalizedCorrelation": 0.6920879024536754,
+      "postInputEnergy": [
+        0.00011325720697641373,
+        0
+      ]
+    },
+    {
+      "first": "loss-default.wav",
+      "second": "fault-line-comparison.wav",
+      "normalizedCorrelation": 0.8462022620959763,
+      "postInputEnergy": [
+        0.00011325720697641373,
+        0
+      ]
+    },
+    {
+      "first": "cuts-default.wav",
+      "second": "found-comparison.wav",
+      "normalizedCorrelation": 0.01487591628605254,
+      "postInputEnergy": [
+        0.27062247321009636,
+        0.08369023911654949
+      ]
+    },
+    {
+      "first": "cuts-default.wav",
+      "second": "fracture-comparison.wav",
+      "normalizedCorrelation": -0.003440053258571846,
+      "postInputEnergy": [
+        0.27062247321009636,
+        0.04697911813855171
+      ]
+    }
+  ],
+  "eventComparisons": [
+    {
+      "first": "nerve-default.wav",
+      "second": "chance-comparison.wav",
+      "firstEvents": [
+        0,
+        0.137,
+        0.274,
+        0.548,
+        0.822,
+        1.096,
+        1.37,
+        1.644,
+        1.918,
+        2.192,
+        2.466,
+        2.74,
+        3.151,
+        3.562,
+        3.973,
+        4.384,
+        4.932,
+        5.343
+      ],
+      "secondEvents": [
+        0.137,
+        0.274,
+        0.411,
+        0.822,
+        0.959,
+        1.233,
+        1.507,
+        1.644,
+        1.918,
+        2.055,
+        2.329,
+        2.603,
+        2.74,
+        3.014,
+        3.151,
+        3.425,
+        3.562,
+        3.699,
+        3.836,
+        4.11,
+        4.247,
+        4.521,
+        4.795,
+        4.932,
+        5.206,
+        5.343,
+        5.617
+      ],
+      "identical": false
+    },
+    {
+      "first": "nerve-default.wav",
+      "second": "unspent-comparison.wav",
+      "firstEvents": [
+        0,
+        0.137,
+        0.274,
+        0.548,
+        0.822,
+        1.096,
+        1.37,
+        1.644,
+        1.918,
+        2.192,
+        2.466,
+        2.74,
+        3.151,
+        3.562,
+        3.973,
+        4.384,
+        4.932,
+        5.343
+      ],
+      "secondEvents": [
+        0.34370833333333334,
+        0.664625,
+        0.959,
+        0.9704166666666667,
+        1.233,
+        1.2744166666666668,
+        1.37,
+        1.5819166666666666,
+        1.880875,
+        1.918,
+        2.177208333333333,
+        2.192,
+        2.329,
+        2.4767916666666667,
+        2.7709166666666665,
+        2.877,
+        3.061,
+        3.288,
+        3.347125,
+        3.425,
+        3.6365,
+        3.699,
+        3.836,
+        3.927791666666667,
+        4.11,
+        4.220416666666667,
+        4.5092083333333335,
+        4.521,
+        4.795,
+        4.796833333333334,
+        5.0837916666666665,
+        5.206,
+        5.367083333333333,
+        5.6462916666666665,
+        5.754,
+        5.9235,
+        6.207333333333334,
+        6.498666666666667,
+        6.798541666666667,
+        7.108583333333334,
+        7.430958333333334,
+        7.769291666666667
+      ],
+      "identical": false
+    }
+  ]
+}

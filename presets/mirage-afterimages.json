@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "MIRAGE / AFTERIMAGES",
+  "bpm": 68,
+  "master": 0.65,
+  "seed": 181801,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 6101,
+      "character": "METAL",
+      "params": {
+        "rate": 0.19,
+        "irregular": 0.36
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 192,
+      "y": 16,
+      "seed": 6102,
+      "character": "METAL",
+      "params": {
+        "material": 0.74,
+        "decay": 0.25
+      }
+    },
+    {
+      "id": "mirage-1",
+      "type": "MIRAGE",
+      "x": 368,
+      "y": 16,
+      "seed": 6103,
+      "character": "METAL",
+      "params": {
+        "distance": 0.52,
+        "mutate": 0.62
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 6104,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 192,
+      "y": 184,
+      "seed": 6105,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.32
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 544,
+      "y": 184,
+      "seed": 6106,
+      "character": "METAL",
+      "params": {
+        "boost": 0.7,
+        "comp": 0
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mirage-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "mirage-1",
+        "port": "mutate"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "mirage-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

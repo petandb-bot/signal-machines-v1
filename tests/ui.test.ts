@@ -85,8 +85,8 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(false);
 
   });
-  it('exposes sixty-one grouped module choices, thirty-seven presets and no large title',()=>{
-    expect(document.querySelectorAll('.library-module')).toHaveLength(61);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(38);
+  it('exposes sixty-five grouped module choices, forty-two presets and no large title',()=>{
+    expect(document.querySelectorAll('.library-module')).toHaveLength(65);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(43);
     const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;preset.value='1';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='BRANCH')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='FRACTURE')).toBe(true);
     preset.value='2';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='RESON')).toBe(true);
     preset.value='3';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='VENOM')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='CAUSTIC')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='SNAP')).toBe(true);
@@ -176,7 +176,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
 
   it('groups every library choice exactly once without adding search or favourites',()=>{
-    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(61);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
+    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(65);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
   });
   it('captures a TOUCH path, preserves it with bypass in a snapshot, cancels incomplete strokes and clears explicitly',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add FUZZ module"]')!.click();const fuzz=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${fuzz}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));document.querySelector<HTMLButtonElement>('[aria-label="FUZZ bypass"]')!.click();expect(app.store.patch.modules.find(m=>m.id===fuzz)!.bypass).toBe(true);
@@ -295,4 +295,16 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
   it('shows LEVEL zero-dB reference and all three new demos',()=>{document.querySelector<HTMLButtonElement>('[aria-label="Add LEVEL module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));expect(document.querySelectorAll('.editor-controls input[type=range]')).toHaveLength(2);expect(document.querySelector('.editor .gain-zero')!.textContent).toBe('0 dB');expect(document.querySelector('.editor output')!.textContent).toBe('0.0 dB');const boost=document.querySelector<HTMLInputElement>('.editor input[data-parameter=boost]')!;boost.value='.333';boost.dispatchEvent(new Event('input'));expect(app.store.patch.modules.find(m=>m.id===id)!.params.boost).toBe(1/3);const select=document.querySelector<HTMLSelectElement>('.preset-select')!;for(const [index,name] of [['34','FOUND / QUIET'],['35','FOUND / STRANGE'],['36','LEVEL / RECOVERY']]){select.value=index;select.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe(name);}});
 
+});
+
+describe('v0.18 library and shared sample UI',()=>{
+  it.each(['MIRAGE','LOSS','CUTS','NERVE'])('edits and snapshots %s with two controls',async type=>{
+    const start=vi.spyOn(app.audio,'start');document.querySelector<HTMLButtonElement>(`[aria-label="Add ${type} module"]`)!.click();const id=app.store.selectedModule!;
+    document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));expect(document.querySelectorAll('.editor-controls input[type=range]')).toHaveLength(2);
+    if(type==='CUTS'){await vi.waitFor(()=>expect(document.querySelector('.found-preview path')!.getAttribute('d')!.length).toBeGreaterThan(20));const source=document.querySelector<HTMLSelectElement>('[aria-label="CUTS source"]')!;source.value='builtin:machine';source.dispatchEvent(new Event('change'));expect(app.store.patch.modules.find(m=>m.id===id)!.sample).toBe('builtin:machine');expect(document.querySelector('[aria-label="Load CUTS audio file"]')).not.toBeNull();}
+    const p=structuredClone(app.store.patch),snapshot=app.snapshots.storage.capture(p,type);app.store.replace(app.snapshots.storage.recall(snapshot,p));expect(app.store.patch).toEqual(p);expect(start).not.toHaveBeenCalled();
+  });
+  it('caps FOUND and CUTS together before allocating another source',()=>{
+    for(const type of ['FOUND','CUTS','CUTS'])document.querySelector<HTMLButtonElement>(`[aria-label="Add ${type} module"]`)!.click();expect(app.store.patch.modules.filter(m=>m.type==='FOUND'||m.type==='CUTS')).toHaveLength(2);expect(document.querySelector('.toast')!.textContent).toContain('at most 2 FOUND/CUTS');
+  });
 });

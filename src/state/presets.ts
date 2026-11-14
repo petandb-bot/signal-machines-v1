@@ -236,3 +236,35 @@ export function levelRecovery():Patch{
   wire(p,'drone-1','audio','vca-1','a');wire(p,'vca-1','audio','level-1','audio');wire(p,'pulse-1','trigger','alloy-1','trigger');wire(p,'alloy-1','audio','hit-gain','a');wire(p,'hit-gain','audio','level-1','audio');wire(p,'level-1','audio','output-1','audio');return p;
 }
 PRESETS.push({name:'LEVEL / RECOVERY',description:'A small continuous source is brought forward without changing its stereo field',create:levelRecovery});
+
+export function mirageReflections():Patch{
+  const p=patch('MIRAGE / AFTERIMAGES',68,181801);
+  add(p,'PULSE',16,16,6101);add(p,'RESON',192,16,6102);add(p,'MIRAGE',368,16,6103);add(p,'OUTPUT',544,16,6104);add(p,'FLOCK',192,184,6105);
+  p.modules[0].params.rate=.19;p.modules[0].params.irregular=.36;p.modules[1].params.material=.74;p.modules[1].params.decay=.25;p.modules[2].params.distance=.52;p.modules[2].params.mutate=.62;add(p,'LEVEL',544,184,6106);p.modules[5].params.boost=.7;
+  wire(p,'pulse-1','trigger','reson-1','trigger');wire(p,'reson-1','audio','mirage-1','audio');wire(p,'flock-1','controlA','mirage-1','mutate');wire(p,'mirage-1','audio','level-1','audio');wire(p,'level-1','audio','output-1','audio');return p;
+}
+export function lossTransmission():Patch{
+  const p=patch('LOSS / UNCERTAIN',74,181802);
+  add(p,'FOUND',16,16,6201);add(p,'LOSS',192,16,6202);add(p,'LEVEL',368,16,6203);add(p,'OUTPUT',544,16,6204);add(p,'TIDE',192,184,6205);
+  p.modules[0].sample='builtin:machine';p.modules[0].params={wander:.15,alter:.08};p.modules[1].params={damage:.65,recover:.74};p.modules[2].params.boost=.65;
+  wire(p,'found-1','audio','loss-1','audio');wire(p,'loss-1','audio','level-1','audio');wire(p,'level-1','audio','output-1','audio');wire(p,'tide-1','drift','loss-1','recover');return p;
+}
+export function cutsSmallEvents():Patch{
+  const p=patch('CUTS / SMALL HOURS',82,181803);
+  add(p,'CUTS',16,16,6301);add(p,'RESON',192,184,6302);add(p,'LEVEL',368,16,6303);add(p,'ORBIT',544,16,6304);add(p,'OUTPUT',720,16,6305);
+  p.modules[0].sample='builtin:rain';p.modules[0].params={sparse:.44,change:.58};p.modules[1].params.material=.27;p.modules[1].params.decay=.22;p.modules[2].params.boost=.53;p.modules[3].params.rate=.22;
+  wire(p,'cuts-1','audio','level-1','audio');wire(p,'cuts-1','event','reson-1','trigger');wire(p,'reson-1','audio','level-1','audio');wire(p,'level-1','audio','orbit-1','audio');wire(p,'orbit-1','audio','output-1','audio');return p;
+}
+export function nerveRecovery():Patch{
+  const p=patch('NERVE / RECOVERY',92,181804);
+  add(p,'PULSE',16,16,6401);add(p,'NERVE',192,16,6402);add(p,'ALLOY',368,16,6403);add(p,'OUTPUT',544,16,6404);add(p,'TIDE',16,184,6405);
+  p.modules[0].params.rate=.6;p.modules[0].params.irregular=.2;p.modules[1].params={sense:.68,fatigue:.6};p.modules[2].params.body=.28;p.modules[2].params.tension=.32;p.modules[2].character='SOFT';
+  wire(p,'pulse-1','trigger','nerve-1','trigger');wire(p,'tide-1','drift','nerve-1','stim');wire(p,'nerve-1','spike','alloy-1','trigger');wire(p,'nerve-1','charge','alloy-1','tension');wire(p,'alloy-1','audio','output-1','audio');return p;
+}
+export function uncertainEcosystem():Patch{
+  const p=patch('UNCERTAIN ECOSYSTEM',76,181805);
+  add(p,'CUTS',16,16,6501);add(p,'NERVE',192,184,6502);add(p,'RESON',368,184,6503);add(p,'LOSS',192,16,6504);add(p,'MIRAGE',368,16,6505);add(p,'LEVEL',544,16,6506);add(p,'ORBIT',720,16,6507);add(p,'OUTPUT',896,16,6508);add(p,'TIDE',16,184,6509);
+  p.modules[0].sample='builtin:machine';p.modules[0].params={sparse:.51,change:.62};p.modules[1].params={sense:.7,fatigue:.68};p.modules[2].params={material:.62,decay:.37};p.modules[3].params={damage:.32,recover:.68};p.modules[4].params={distance:.54,mutate:.57};p.modules[5].params.boost=.53;p.modules[6].params.rate=.16;
+  wire(p,'cuts-1','audio','loss-1','audio');wire(p,'cuts-1','event','nerve-1','trigger');wire(p,'tide-1','drift','nerve-1','stim');wire(p,'nerve-1','spike','reson-1','trigger');wire(p,'nerve-1','charge','loss-1','damage');wire(p,'loss-1','audio','mirage-1','audio');wire(p,'reson-1','audio','mirage-1','audio');wire(p,'tide-1','age','mirage-1','mutate');wire(p,'mirage-1','audio','level-1','audio');wire(p,'level-1','audio','orbit-1','audio');wire(p,'orbit-1','audio','output-1','audio');return p;
+}
+PRESETS.push({name:'MIRAGE / AFTERIMAGES',description:'Each reflection returns as a different metal outline',create:mirageReflections},{name:'LOSS / UNCERTAIN',description:'A small machine loses and repairs parts of its transmission',create:lossTransmission},{name:'CUTS / SMALL HOURS',description:'Rain gestures and a second body leave room for silence',create:cutsSmallEvents},{name:'NERVE / RECOVERY',description:'Stimulation, adaptation and rest choose the next strike',create:nerveRecovery},{name:'UNCERTAIN ECOSYSTEM',description:'Sample events stimulate a tired body inside a changing echo',create:uncertainEcosystem});

@@ -1,4 +1,11 @@
-# Verification / v0.17 (proposed)
+# Verification / v0.18.0
+
+## v0.18 release checks
+
+- `npm ci`, `npm test` (559 passing tests / 41 files), `npm run build` and `npm run verify:build` passed. The emitted worklet rendered all 42 presets, plus the existing LOOP and recording message checks.
+- Four dedicated DSP suites and integration tests cover 44.1/48 kHz, macro corners, moving parameters/CV, seeds, invalid values, silence/quiet/loud audio, independent instances, persistence, sample replacement and routing. The final CUTS display-only adjustment also passed its six targeted tests.
+- Real Chromium screenshots at all five requested sizes, CUTS local WAV decode/IndexedDB restore, Run/Stop and actual AudioWorklet telemetry passed. No physical iPhone Safari or human listening assessment is claimed.
+- [Design and evidence](docs/FOUR_MACHINES.md) · [Screenshots, metrics, limits and review](docs/v018/README.md) · [Listening comparisons](https://petandb-bot.github.io/signal-machines-v1/listening/four-machines.html).
 
 ## Automated coverage
 

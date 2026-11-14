@@ -1,0 +1,284 @@
+{
+  "result": "PASS",
+  "cases": [
+    {
+      "width": 390,
+      "height": 844,
+      "fit": true,
+      "cables": true,
+      "run": true,
+      "editor": true,
+      "deleteCancel": true,
+      "controls": {
+        "bottom": 832,
+        "right": 378,
+        "sliders": 2,
+        "source": true,
+        "file": true
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "fit": true,
+      "cables": true,
+      "run": true,
+      "editor": true,
+      "deleteCancel": true,
+      "controls": {
+        "bottom": 862,
+        "right": 390,
+        "sliders": 2,
+        "source": true,
+        "file": true
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "fit": true,
+      "cables": true,
+      "run": true,
+      "editor": true,
+      "deleteCancel": true,
+      "controls": {
+        "bottom": 556,
+        "right": 308,
+        "sliders": 2,
+        "source": true,
+        "file": true
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "fit": true,
+      "cables": true,
+      "run": true,
+      "editor": true,
+      "deleteCancel": true,
+      "controls": {
+        "bottom": 384,
+        "right": 832,
+        "sliders": 2,
+        "source": true,
+        "file": true
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "fit": true,
+      "cables": true,
+      "run": true,
+      "editor": true,
+      "deleteCancel": true,
+      "controls": {
+        "bottom": 788,
+        "right": 1268,
+        "sliders": 2,
+        "source": true,
+        "file": true
+      }
+    }
+  ],
+  "localImportRestore": true,
+  "telemetry": {
+    "rows": [
+      {
+        "peak": 0,
+        "faults": 0,
+        "sample": 2304,
+        "types": 0
+      },
+      {
+        "peak": 0,
+        "faults": 0,
+        "sample": 512,
+        "types": 9
+      },
+      {
+        "peak": 0,
+        "faults": 0,
+        "sample": 2688,
+        "types": 9
+      },
+      {
+        "peak": 0.05910620838403702,
+        "faults": 0,
+        "sample": 4864,
+        "types": 9
+      },
+      {
+        "peak": 0.045036375522613525,
+        "faults": 0,
+        "sample": 7168,
+        "types": 9
+      },
+      {
+        "peak": 0.031445421278476715,
+        "faults": 0,
+        "sample": 9344,
+        "types": 9
+      },
+      {
+        "peak": 0.0162194836884737,
+        "faults": 0,
+        "sample": 11520,
+        "types": 9
+      },
+      {
+        "peak": 0.011117259040474892,
+        "faults": 0,
+        "sample": 13696,
+        "types": 9
+      },
+      {
+        "peak": 0.010212919674813747,
+        "faults": 0,
+        "sample": 16000,
+        "types": 9
+      },
+      {
+        "peak": 0.008280620910227299,
+        "faults": 0,
+        "sample": 18176,
+        "types": 9
+      },
+      {
+        "peak": 0.008969314396381378,
+        "faults": 0,
+        "sample": 20352,
+        "types": 9
+      },
+      {
+        "peak": 0.008579171262681484,
+        "faults": 0,
+        "sample": 22528,
+        "types": 9
+      },
+      {
+        "peak": 0.03922991454601288,
+        "faults": 0,
+        "sample": 24704,
+        "types": 9
+      },
+      {
+        "peak": 0.023051200434565544,
+        "faults": 0,
+        "sample": 27008,
+        "types": 9
+      },
+      {
+        "peak": 0.015889789909124374,
+        "faults": 0,
+        "sample": 29184,
+        "types": 9
+      },
+      {
+        "peak": 0.00794330332428217,
+        "faults": 0,
+        "sample": 31360,
+        "types": 9
+      },
+      {
+        "peak": 0.007121649570763111,
+        "faults": 0,
+        "sample": 33536,
+        "types": 9
+      },
+      {
+        "peak": 0.005268739070743322,
+        "faults": 0,
+        "sample": 35840,
+        "types": 9
+      },
+      {
+        "peak": 0.004684637300670147,
+        "faults": 0,
+        "sample": 38016,
+        "types": 9
+      },
+      {
+        "peak": 0.006496998015791178,
+        "faults": 0,
+        "sample": 40192,
+        "types": 9
+      },
+      {
+        "peak": 0.02275978773832321,
+        "faults": 0,
+        "sample": 42368,
+        "types": 9
+      },
+      {
+        "peak": 0.015004805289208889,
+        "faults": 0,
+        "sample": 44544,
+        "types": 9
+      },
+      {
+        "peak": 0.011411353945732117,
+        "faults": 0,
+        "sample": 46848,
+        "types": 9
+      },
+      {
+        "peak": 0.006499319337308407,
+        "faults": 0,
+        "sample": 49024,
+        "types": 9
+      },
+      {
+        "peak": 0.003229838563129306,
+        "faults": 0,
+        "sample": 51200,
+        "types": 9
+      },
+      {
+        "peak": 0.0029569307807832956,
+        "faults": 0,
+        "sample": 53376,
+        "types": 9
+      },
+      {
+        "peak": 0.0026343478821218014,
+        "faults": 0,
+        "sample": 55680,
+        "types": 9
+      },
+      {
+        "peak": 0.002904455875977874,
+        "faults": 0,
+        "sample": 57856,
+        "types": 9
+      },
+      {
+        "peak": 0.0034432769753038883,
+        "faults": 0,
+        "sample": 60032,
+        "types": 9
+      },
+      {
+        "peak": 0.015113458968698978,
+        "faults": 0,
+        "sample": 62208,
+        "types": 9
+      },
+      {
+        "peak": 0.030384467914700508,
+        "faults": 0,
+        "sample": 64512,
+        "types": 9
+      },
+      {
+        "peak": 0.02164655178785324,
+        "faults": 0,
+        "sample": 66688,
+        "types": 9
+      }
+    ],
+    "errors": [],
+    "rate": 44100
+  }
+}
