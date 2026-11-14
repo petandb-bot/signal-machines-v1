@@ -84,7 +84,8 @@ input[type=range]::-moz-range-thumb {
 .record-button { font-size: 15px !important; color: var(--red-soft); }
 .record-button.recording { color: var(--background); background: var(--red); border-color: var(--red); }
 .add-button { color: var(--green); font-size: 26px !important; }
-.menu-button { font-size: 23px !important; letter-spacing: 1px; }
+.menu-button { display: grid; place-items: center; padding: 0; font-size: 0 !important; letter-spacing: 0; overflow: hidden; }
+.menu-button .menu-gear { display: block; width: 20px; height: 20px; pointer-events: none; flex: none; }
 .main-layout { flex: 1; min-height: 0; position: relative; display: flex; }
 .workspace {
   position: relative; flex: 1; min-width: 0; overflow: hidden; background: var(--background);
@@ -351,16 +352,8 @@ input[type=range]::-moz-range-thumb {
     -webkit-filter: none !important;
   }
   .topbar > button, .topbar .preset-select { border-color: var(--line); }
-  /* The old 23px three-dot text overflowed its 44px button; draw three fixed dots. */
-  .topbar .menu-button {
-    position: relative; display: block; padding: 0; font-size: 0 !important;
-    letter-spacing: 0; overflow: hidden; line-height: 1; color: var(--ink);
-  }
-  .topbar .menu-button::before {
-    content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-    display: block; width: 4px; height: 4px; background: currentColor;
-    box-shadow: -10px 0 currentColor, 10px 0 currentColor;
-  }
+  /* Desktop and portrait use the same bounded, sharp gear icon. */
+  .topbar .menu-button { color: var(--ink); }
   .master-range::-webkit-slider-thumb { box-shadow: none; }
   /* A small, centered control dock instead of loose controls in the bottom-left corner. */
   .workspace-nav {
