@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "NERVE / RECOVERY",
+  "bpm": 92,
+  "master": 0.65,
+  "seed": 181804,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 6401,
+      "character": "METAL",
+      "params": {
+        "rate": 0.6,
+        "irregular": 0.2
+      }
+    },
+    {
+      "id": "nerve-1",
+      "type": "NERVE",
+      "x": 192,
+      "y": 16,
+      "seed": 6402,
+      "character": "METAL",
+      "params": {
+        "sense": 0.68,
+        "fatigue": 0.6
+      }
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 368,
+      "y": 16,
+      "seed": 6403,
+      "character": "SOFT",
+      "params": {
+        "body": 0.28,
+        "tension": 0.32
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 6404,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 184,
+      "seed": 6405,
+      "character": "METAL",
+      "params": {
+        "flow": 0.5,
+        "range": 0.8
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "nerve-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "nerve-1",
+        "port": "stim"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "nerve-1",
+        "port": "spike"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "nerve-1",
+        "port": "charge"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "tension"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

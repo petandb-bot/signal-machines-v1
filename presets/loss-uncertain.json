@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "LOSS / UNCERTAIN",
+  "bpm": 74,
+  "master": 0.65,
+  "seed": 181802,
+  "modules": [
+    {
+      "id": "found-1",
+      "type": "FOUND",
+      "x": 16,
+      "y": 16,
+      "seed": 6201,
+      "character": "METAL",
+      "params": {
+        "wander": 0.15,
+        "alter": 0.08
+      },
+      "sample": "builtin:machine"
+    },
+    {
+      "id": "loss-1",
+      "type": "LOSS",
+      "x": 192,
+      "y": 16,
+      "seed": 6202,
+      "character": "METAL",
+      "params": {
+        "damage": 0.65,
+        "recover": 0.74
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 368,
+      "y": 16,
+      "seed": 6203,
+      "character": "METAL",
+      "params": {
+        "boost": 0.65,
+        "comp": 0
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 6204,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 192,
+      "y": 184,
+      "seed": 6205,
+      "character": "METAL",
+      "params": {
+        "flow": 0.5,
+        "range": 0.8
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "found-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "loss-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "loss-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "loss-1",
+        "port": "recover"
+      }
+    }
+  ]
+}

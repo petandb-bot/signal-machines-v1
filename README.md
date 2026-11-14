@@ -6,7 +6,7 @@ A tiny modular playground for sound, chance and happy accidents.
 
 Connect little machines. Make strange sounds. See what happens.
 
-61 modules, 37 starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
+65 modules, 42 starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
 
 An old-computer face for a living sound circuit: green text, small pixel windows and a handful of signal colors.
 
@@ -17,6 +17,8 @@ An old-computer face for a living sound circuit: green text, small pixel windows
 - Tap an output, then an input to connect them.
 - Draw a motion path in TOUCH, or let PENDULUM swing.
 - Try a few changes. Save a snapshot. Keep wandering.
+
+[Four new machines](docs/FOUR_MACHINES.md): mutating echoes, imperfect transmission, sample events and excitable triggers. [Compare WAVs](https://petandb-bot.github.io/signal-machines-v1/listening/four-machines.html).
 
 [New sound studies](https://petandb-bot.github.io/signal-machines-v1/listening/): dissolving attacks and a slipping contact voice. [Notes](docs/STRANGE_SOUNDS.md).
 

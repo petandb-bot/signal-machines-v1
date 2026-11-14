@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "UNCERTAIN ECOSYSTEM",
+  "bpm": 76,
+  "master": 0.65,
+  "seed": 181805,
+  "modules": [
+    {
+      "id": "cuts-1",
+      "type": "CUTS",
+      "x": 16,
+      "y": 16,
+      "seed": 6501,
+      "character": "METAL",
+      "params": {
+        "sparse": 0.51,
+        "change": 0.62
+      },
+      "sample": "builtin:machine"
+    },
+    {
+      "id": "nerve-1",
+      "type": "NERVE",
+      "x": 192,
+      "y": 184,
+      "seed": 6502,
+      "character": "METAL",
+      "params": {
+        "sense": 0.7,
+        "fatigue": 0.68
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 368,
+      "y": 184,
+      "seed": 6503,
+      "character": "METAL",
+      "params": {
+        "material": 0.62,
+        "decay": 0.37
+      }
+    },
+    {
+      "id": "loss-1",
+      "type": "LOSS",
+      "x": 192,
+      "y": 16,
+      "seed": 6504,
+      "character": "METAL",
+      "params": {
+        "damage": 0.32,
+        "recover": 0.68
+      }
+    },
+    {
+      "id": "mirage-1",
+      "type": "MIRAGE",
+      "x": 368,
+      "y": 16,
+      "seed": 6505,
+      "character": "METAL",
+      "params": {
+        "distance": 0.54,
+        "mutate": 0.57
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 544,
+      "y": 16,
+      "seed": 6506,
+      "character": "METAL",
+      "params": {
+        "boost": 0.53,
+        "comp": 0
+      }
+    },
+    {
+      "id": "orbit-1",
+      "type": "ORBIT",
+      "x": 720,
+      "y": 16,
+      "seed": 6507,
+      "character": "METAL",
+      "params": {
+        "rate": 0.16,
+        "depth": 0.8
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 896,
+      "y": 16,
+      "seed": 6508,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 184,
+      "seed": 6509,
+      "character": "METAL",
+      "params": {
+        "flow": 0.5,
+        "range": 0.8
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "preset-cable-1",
+      "from": {
+        "module": "cuts-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "loss-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-2",
+      "from": {
+        "module": "cuts-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "nerve-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-3",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "nerve-1",
+        "port": "stim"
+      }
+    },
+    {
+      "id": "preset-cable-4",
+      "from": {
+        "module": "nerve-1",
+        "port": "spike"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "preset-cable-5",
+      "from": {
+        "module": "nerve-1",
+        "port": "charge"
+      },
+      "to": {
+        "module": "loss-1",
+        "port": "damage"
+      }
+    },
+    {
+      "id": "preset-cable-6",
+      "from": {
+        "module": "loss-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mirage-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-7",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mirage-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-8",
+      "from": {
+        "module": "tide-1",
+        "port": "age"
+      },
+      "to": {
+        "module": "mirage-1",
+        "port": "mutate"
+      }
+    },
+    {
+      "id": "preset-cable-9",
+      "from": {
+        "module": "mirage-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-10",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "preset-cable-11",
+      "from": {
+        "module": "orbit-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

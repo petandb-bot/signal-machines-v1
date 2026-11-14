@@ -10,7 +10,7 @@ export class Cuts extends DSPModule {
   private readonly ages=new Float64Array(3);private readonly lengths=new Float64Array(3);
   private readonly history=new Int16Array(8).fill(-1);private historyAt=0;
   private next=Math.round(this.sampleRate*.08);private cooldown=0;private high=false;
-  private sparse=.58;private change=.35;private selected=0;
+  private sparse=.58;private change=.35;private selected=0;private displayed=0;
   override update(state:typeof this.state){super.update(state);this.reference=foundRef(state.sample);}
   attach(audio?:FoundAudio){if(this.audio===audio)return;this.audio=audio;this.lengths.fill(0);this.history.fill(-1);this.next=Math.round(this.sampleRate*.08);this.a=this.b=this.phase=0;}
   process(sample:number){
@@ -35,7 +35,7 @@ export class Cuts extends DSPModule {
         const available=event.end-event.start,duration=Math.min(available/audio.sampleRate/speed,.56-this.change*.22);
         this.positions[voice]=reverse?event.end-2:event.start;this.steps[voice]=audio.sampleRate/this.sampleRate*speed*(reverse?-1:1);
         this.lengths[voice]=Math.max(16,Math.floor(duration*this.sampleRate));this.ages[voice]=0;
-        this.history[this.historyAt++%this.history.length]=chosen;this.selected=chosen;
+        this.history[this.historyAt++%this.history.length]=chosen;this.selected=chosen;this.displayed=voice;
         this.a=event.start/audio.left.length;this.b=event.end/audio.left.length;
         this.outputL[1]=this.outputR[1]=1;this.triggerSample=sample;
         this.cooldown=Math.round(this.sampleRate*(.025+this.sparse*this.sparse*.3));
@@ -49,9 +49,9 @@ export class Cuts extends DSPModule {
       // Raised-cosine edges, with a longer release, retain short attacks without clicks.
       const attack=Math.min(1,age/(this.sampleRate*.004)),release=Math.min(1,(length-1-age)/(this.sampleRate*.018));
       const env=(.5-.5*Math.cos(Math.PI*attack))*(.5-.5*Math.cos(Math.PI*release));
-      if(i>=0&&i<audio.left.length-1){l+=(audio.left[i]+(audio.left[i+1]-audio.left[i])*f)*env;r+=(audio.right[i]+(audio.right[i+1]-audio.right[i])*f)*env;}
+      if(i>=0&&i<audio.left.length-1){l+=finiteAudio(audio.left[i]+(audio.left[i+1]-audio.left[i])*f)*env;r+=finiteAudio(audio.right[i]+(audio.right[i+1]-audio.right[i])*f)*env;}
       activity=Math.max(activity,env);this.positions[v]+=this.steps[v];this.ages[v]++;
-      if(v===0)this.phase=Math.max(0,Math.min(1,at/audio.left.length));
+      if(v===this.displayed)this.phase=Math.max(0,Math.min(1,at/audio.left.length));
     }
     this.outputL[0]=l*.78;this.outputR[0]=r*.78;
     this.envelope+=(activity-this.envelope)*.01;

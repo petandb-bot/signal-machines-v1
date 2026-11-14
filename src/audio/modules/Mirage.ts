@@ -1,5 +1,5 @@
 import {Effect} from './Effect';
-import {finiteAudio, machineControl} from './MachineSafety';
+import {finiteAudio, finiteUnit, machineControl} from './MachineSafety';
 
 /** Whole echo packets exchange banks. No moving delay heads or diffusion network. */
 export class Mirage extends Effect {
@@ -9,7 +9,7 @@ export class Mirage extends Effect {
   private bank=0; private cursor=0; private length=0; private previousLength=0;
   private generation=0; private energy=0; private previousEnergy=0;
   private modulation=0; private frequency=23; private lastL=0; private lastR=0;
-  private seamL=0; private seamR=0; private distance=.42; private mutate=.48;
+  private seamL=0; private seamR=0; private distance=finiteUnit(this.parameters[0],.42); private mutate=finiteUnit(this.parameters[1],.48);
   private readonly follow=1-Math.exp(-1/(this.sampleRate*.008));
 
   process(){
@@ -49,7 +49,8 @@ export class Mirage extends Effect {
   private packetLength(){return Math.min(this.capacity,Math.max(64,Math.round(this.sampleRate*(.12+this.distance*this.distance*1.05))));}
   private read(buffer:Float32Array,at:number){
     if(at<0||at>=this.previousLength-1)return 0;
-    const i=Math.floor(at),f=at-i;return buffer[i]+(buffer[i+1]-buffer[i])*f;
+    const i=Math.floor(at),f=at-i,edge=Math.min(1,at/(this.sampleRate*.003),(this.previousLength-1-at)/(this.sampleRate*.003));
+    return (buffer[i]+(buffer[i+1]-buffer[i])*f)*edge;
   }
   override telemetry(){return {...super.telemetry(),bands:[this.generation%8,this.previousEnergy,this.frequency]};}
 }

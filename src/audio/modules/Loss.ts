@@ -26,6 +26,7 @@ export class Loss extends Effect {
       this.lostAge=this.erased[0]+this.erased[1]+this.erased[2];
     }
     let left=0,right=0;
+    const decay=Math.exp(-1/(this.sampleRate*(.001+this.recover*.065))),memoryDecay=Math.exp(-1/(this.sampleRate*(.008+this.recover*.18)));
     for(let b=0;b<3;b++)this.blend[b]+=((transparent?0:this.erased[b])-this.blend[b])*this.follow;
     for(let c=0;c<2;c++){
       const x=c?r:l;this.low[c]+=(x-this.low[c])*this.lowPole;this.high[c]+=(x-this.high[c])*this.highPole;
@@ -37,7 +38,6 @@ export class Loss extends Effect {
           this.history[at]=band;this.peak[j]=Math.max(Math.abs(band),this.peak[j]*.999);
           this.slope[j]=(band-this.last[j])*.35;this.decoded[j]=band;
         }else{
-          const decay=Math.exp(-1/(this.sampleRate*(.001+this.recover*.065)));
           this.slope[j]*=.87;this.decoded[j]=(this.decoded[j]+this.slope[j])*decay;
         }
         // Recovery moves from a damped extrapolation to a last-good-frame echo.
@@ -46,7 +46,7 @@ export class Loss extends Effect {
         const estimate=Math.max(-limit,Math.min(limit,this.decoded[j]*(1-repair)+remembered*repair));
         this.repairState[j]+=(estimate-this.repairState[j])*this.follow;
         y+=band*(1-this.blend[b])+this.repairState[j]*this.blend[b];this.last[j]=band;
-        if(this.erased[b])this.peak[j]*=Math.exp(-1/(this.sampleRate*(.008+this.recover*.18)));
+        if(this.erased[b])this.peak[j]*=memoryDecay;
       }
       if(c)right=y;else left=y;
     }

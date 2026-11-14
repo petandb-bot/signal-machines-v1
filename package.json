@@ -1,7 +1,7 @@
 {
   "name": "signal-machines",
   "private": true,
-  "version": "0.17.9",
+  "version": "0.18.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
@@ -10,11 +10,12 @@
     "test": "vitest run",
     "preview": "vite preview --host 0.0.0.0",
     "verify:build": "node scripts/verify-build.mjs",
-    "prebuild": "node scripts/render-strange-sounds.mjs && node scripts/render-found-level.mjs && node scripts/package-source.mjs",
+    "prebuild": "node scripts/render-strange-sounds.mjs && node scripts/render-found-level.mjs && node scripts/render-four-machines.mjs && node scripts/package-source.mjs",
     "package:source": "node scripts/package-source.mjs",
-    "predev": "node scripts/render-strange-sounds.mjs && node scripts/render-found-level.mjs && node scripts/package-source.mjs",
+    "predev": "node scripts/render-strange-sounds.mjs && node scripts/render-found-level.mjs && node scripts/render-four-machines.mjs && node scripts/package-source.mjs",
     "render:examples": "node scripts/render-strange-sounds.mjs",
-    "render:found": "node scripts/render-found-level.mjs"
+    "render:found": "node scripts/render-found-level.mjs",
+    "render:four": "node scripts/render-four-machines.mjs"
   },
   "dependencies": {
     "p5": "2.3.4"
