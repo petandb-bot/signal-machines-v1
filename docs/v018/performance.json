@@ -1,0 +1,79 @@
+{
+  "environment": {
+    "node": "v24.22.1",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "platform": "linux",
+    "outputRate": 48000
+  },
+  "limitations": "Offline wall time, not iPhone performance or a real-time deadline guarantee. Typed-array accounting excludes JS object, browser, decoder and transport overhead. No human listening assessment.",
+  "results": [
+    {
+      "type": "MIRAGE",
+      "seconds": 60,
+      "cpuMs": 1287.3554479999998,
+      "realtimePercent": 2.145592413333333,
+      "persistentTypedBytes": 1075635,
+      "unchangedBytes": true,
+      "peak": 0.19715962514499158,
+      "rms": 0.040535803078008026,
+      "maxStep": 0.008176050686561102,
+      "events": 0,
+      "minInterval": null,
+      "finalSecondEnergy": 4.6124782641847276e-23
+    },
+    {
+      "type": "LOSS",
+      "seconds": 60,
+      "cpuMs": 2257.7588299999998,
+      "realtimePercent": 3.762931383333333,
+      "persistentTypedBytes": 4766,
+      "unchangedBytes": true,
+      "peak": 0.11315302942603601,
+      "rms": 0.03561476268664936,
+      "maxStep": 0.007015541507012876,
+      "events": 0,
+      "minInterval": null,
+      "finalSecondEnergy": 0
+    },
+    {
+      "type": "CUTS",
+      "seconds": 60,
+      "cpuMs": 657.5396340000007,
+      "realtimePercent": 1.0958993900000011,
+      "persistentTypedBytes": 2304513,
+      "unchangedBytes": true,
+      "peak": 0.08311535384089969,
+      "rms": 0.0033367865076109637,
+      "maxStep": 0.03521212044543528,
+      "events": 37,
+      "minInterval": 1.2590833333333333,
+      "finalSecondEnergy": 0.20198434847324417
+    },
+    {
+      "type": "NERVE",
+      "seconds": 60,
+      "cpuMs": 860.2999679999994,
+      "realtimePercent": 1.4338332799999989,
+      "persistentTypedBytes": 435,
+      "unchangedBytes": true,
+      "peak": 1,
+      "rms": 0.006997023176561111,
+      "maxStep": 1,
+      "events": 141,
+      "minInterval": 0.137,
+      "finalSecondEnergy": 0
+    }
+  ],
+  "combined": {
+    "seconds": 30,
+    "cpuMs": 9434.358836,
+    "realtimePercent": 31.447862786666665,
+    "persistentTypedBytes": 3387896,
+    "faults": 0
+  },
+  "sampleBudget": {
+    "maxInstruments": 2,
+    "sharedPcmBytesPer60SecondStereoAsset": 11520000,
+    "note": "Same PCM object shared inside each realm. Main thread and worklet each retain their own copy; transfer/decode/replacement has transient overhead."
+  }
+}

@@ -349,3 +349,12 @@ Chips now have tinted shells, a stepped rim, a raised nameplate and a recessed s
 SMEAR loosens an attack into separate lingering histories with SMEAR/MEMORY. At zero it passes exact stereo dry; MEMORY has no freeze setting. FRICTION generates sound from catching and slipping, controlled by PRESSURE/SPEED, with PITCH CV and a SLIP event for other voices. Both keep the current two-slider housing and typed patching.
 
 Try the appended DISSOLVING METAL and SLIDING GLASS presets, then compare the [listening studies](https://petandb-bot.github.io/signal-machines-v1/listening/). See [Strange sound notes](STRANGE_SOUNDS.md) for connections, cues, overlap decisions and limits. These renders are available for human evaluation; no listening-quality verdict is claimed. All original 57 modules, 32 presets and recording/snapshot/interaction behavior are preserved.
+
+## v0.18 — Four new machines
+
+- **MIRAGE / DISTANCE + MUTATE:** returning echo packets change their spectral outline from generation to generation. DISTANCE changes the next packet's interval; MUTATE changes the transformation. AUDIO in/out, two macro CVs, ACTIVITY out.
+- **LOSS / DAMAGE + RECOVER:** lose short packets in three bands and reconstruct their traces. DAMAGE=0 passes the exact stereo original. RECOVER changes the repair method, not the wet mix. AUDIO in/out, two macro CVs, ACTIVITY out.
+- **CUTS / SPARSE + CHANGE:** choose finite attacks, textures and tails from a sample, leaving rests. Higher SPARSE means longer gaps; CHANGE explores class, length, speed and occasional reverse playback. It plays autonomously; connected TRIG takes over timing, with a short SPARSE-dependent recovery period. AUDIO and EVENT out. Source/load/storage controls are shared with FOUND. The combined FOUND+CUTS limit is two, up to 60 seconds / 32 MB per file. Local sound stays in this browser; JSON/snapshots store references only.
+- **NERVE / SENSE + FATIGUE:** STIM accumulates membrane charge; TRIG adds a short stimulus; RESET holds the machine at rest. SENSE changes sensitivity/threshold, FATIGUE changes adaptation and recovery. SPIKE is an event; CHARGE is a continuous control. No stimulus means no spontaneous random firing.
+
+Try the five appended presets: MIRAGE / AFTERIMAGES, LOSS / UNCERTAIN, CUTS / SMALL HOURS, NERVE / RECOVERY and UNCERTAIN ECOSYSTEM. [Comparison WAVs](https://petandb-bot.github.io/signal-machines-v1/listening/four-machines.html) and [review limits](v018/README.md).

@@ -1,6 +1,6 @@
 # Four sound machines — design before implementation
 
-Base: public main `666b252` (v0.17.9). These designs were recorded before writing the new DSP. The existing 60 module definitions, compiler, sample transport and visual interfaces were inspected. No existing sound algorithm is copied or changed.
+Base: public main `666b252` (v0.17.9). These designs were recorded before writing the new DSP. The existing 61 module definitions, compiler, sample transport and visual interfaces were inspected. No existing sound algorithm is copied or changed.
 
 ## MIRAGE
 
