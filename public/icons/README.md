@@ -1,7 +1,5 @@
 # Signal Machines icon
 
-Three connected little sound chips, in the instrument's sage, sea-glass and cream palette.
+A little green enclosure with a mint and cyan signal trace, square sockets and amber indicators. Original artwork generated for SIGNAL MACHINES v0.18, matching the instrument's home-computer palette.
 
-`icon-master.png` is the original artwork. PNG exports: 16, 32, 48, 180 (Apple touch), 192, 512 and 1024 pixels. `../favicon.ico` includes 16/32/48-pixel sizes.
-
-The artwork and exports are included under the project's MIT license.
+`icon-master.png` preserves the generated source. PNG exports: 16, 32, 48, 180 (Apple touch), 192, 512 and 1024 pixels. `../favicon.ico` includes 16/32/48-pixel sizes. The source and exports are included under the project's MIT license.
