@@ -19,19 +19,40 @@ import { Workspace } from '../ui/Workspace';
 import { ModuleEditor } from '../ui/ModuleEditor';
 import { SnapshotPanel } from '../ui/SnapshotPanel';
 import { button, element } from '../ui/Controls';
+
+// Fixed SVG geometry avoids font-dependent overflow on desktop and iPhone.
+function gearIcon(){
+  const ns='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('viewBox','0 0 24 24');
+  svg.setAttribute('fill','none');
+  svg.setAttribute('stroke','currentColor');
+  svg.setAttribute('stroke-width','1.75');
+  svg.setAttribute('stroke-linecap','round');
+  svg.setAttribute('stroke-linejoin','round');
+  svg.setAttribute('aria-hidden','true');
+  svg.classList.add('menu-gear');
+  const body=document.createElementNS(ns,'path');
+  body.setAttribute('d','M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33A1.65 1.65 0 0 0 14 20.91V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.5 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.5-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6h.08A1.65 1.65 0 0 0 10 3.09V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1.08 1.5 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v.08A1.65 1.65 0 0 0 20.91 10H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.5 1Z');
+  const center=document.createElementNS(ns,'circle');
+  center.setAttribute('cx','12');center.setAttribute('cy','12');center.setAttribute('r','3');
+  svg.append(body,center);
+  return svg;
+}
 export class AppController {
   readonly store=new StateStore();readonly audio=new AudioEngine();readonly workspace=new Workspace(this.store);readonly editor=new ModuleEditor(this.store);readonly snapshots=new SnapshotPanel(()=>this.store.patch);
   private foundImports=new Map<string,number>();private foundPending=new Set<string>();
   private runButton=button('▶','Run audio engine',()=>void this.toggleRun(),'run-button');
   private recButton=button('●','Record master output',()=>void this.toggleRecording(),'record-button');
   private addButton=button('+','Add a module',()=>this.togglePanel('library'),'add-button');
-  private menuButton=button('···','Patch menu',()=>this.togglePanel('menu'),'menu-button');
+  private menuButton=button('','Patch menu',()=>this.togglePanel('menu'),'menu-button');
   private tempo=element('input','tempo-input');private volume=element('input','master-range');private preset=element('select','preset-select');
   private recordingFormat=element('select','record-format');
   private meter=element('span','master-meter');private status=element('span','engine-status','Stopped');
   private toast=element('div','toast');private toastTimer?:ReturnType<typeof setTimeout>;private loadInput=element('input');private busy=false;private saveWarningShown=false;
   private library=element('aside','library floating-panel');private menu=element('aside','patch-menu floating-panel');
   constructor(readonly root:HTMLElement){
+    this.menuButton.append(gearIcon());
     this.build();
     this.store.onChange=type=>{
       if(type!=='layout')this.audio.sync(this.store.patch,type==='routing'||type==='replace',type==='replace');
