@@ -18,7 +18,11 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
   g.fill(INK.frame);
   for(let x=4;x<4+Math.round((W-8)*motion.activity);x+=4){point(g,x,2);point(g,W-5-x,H-3);}
   g.push();g.translate(motion.dx,motion.dy);g.fill(color);
-  if(type==='LEVEL'){
+  if(type==='MIRAGE'){
+    const generation=Math.round(t.bands?.[0]??0),energy=clamp(t.a,0,1);
+    for(let i=0;i<5;i++){const x=12+i*18,y=27+(i%2)*17,reach=3+energy*(12-i);g.fill(i===(generation%5)?color:INK.purple);for(let k=0;k<8;k++){const angle=k*Math.PI/4;point(g,x+Math.cos(angle)*reach,y+Math.sin(angle)*reach,2);}g.fill(i%2?INK.cyan:color);point(g,x,67-clamp(Math.abs(sample(t,i*11)),0,1)*25,2);}
+    g.fill(color);g.rect(8,76,Math.round(clamp(t.phase,0,1)*87),2);
+  }else if(type==='LEVEL'){
     for(let row=0;row<16;row++){g.fill(row/16<clamp(t.a,0,1)?INK.green:INK.grid);g.rect(15,66-row*3,22,2);g.fill(row/16<clamp(t.envelope,0,1)?color:INK.grid);g.rect(65,66-row*3,22,2);}
     g.fill(PALETTE.amber);g.rect(44,12,9,Math.round(clamp(t.b,0,1)*50));g.fill(color);wave(g,t,75,15,3,2);
   }else if(type==='FOUND'){
