@@ -1,7 +1,7 @@
 import {SIGNAL_INKS} from '../visual/Palette';
 import type {LoopStatus} from '../audio/LoopAudio';
 export type SignalType = 'audio' | 'control' | 'trigger';
-export type ModuleType = 'CUTS' | 'LOSS' | 'MIRAGE' | 'LEVEL' | 'FOUND' | 'SMEAR' | 'FRICTION' | 'PULSE' | 'BRANCH' | 'FLOCK' | 'ALLOY' | 'RESON' | 'FRACTURE' | 'VENOM' | 'CAUSTIC' | 'SNAP' | 'TAPE' | 'DRONE' | 'SIEVE' | 'PARASITE' | 'VCA' | 'SHAPE' | 'SWITCH' | 'LOOP' | 'CHORUS' | 'CLOUD' | 'OSC' | 'NOISE' | 'FILTER' | 'RING' | 'COMB' | 'SHIFT' | 'CHANCE' | 'PRISM' | 'PARTIAL' | 'WEFT' | 'TIDE' | 'BOUNCE' | 'FERAL' | 'COUNT' | 'MAP' | 'QUANTIZE' | 'SLEW' | 'FORMANT' | 'LOGIC' | 'DUCK' | 'SWARM' | 'UNSPENT' | 'SIDEWAYS' | 'QUORUM' | 'FAULT LINE' | 'CLIP' | 'FUZZ' | 'CRUSH' | 'CHIP' | 'TOUCH' | 'PENDULUM' | 'LPG' | 'OPERATOR' | 'EDGE' | 'MESH' | 'ORBIT' | 'CHAMBER' | 'OUTPUT';
+export type ModuleType = 'NERVE' | 'CUTS' | 'LOSS' | 'MIRAGE' | 'LEVEL' | 'FOUND' | 'SMEAR' | 'FRICTION' | 'PULSE' | 'BRANCH' | 'FLOCK' | 'ALLOY' | 'RESON' | 'FRACTURE' | 'VENOM' | 'CAUSTIC' | 'SNAP' | 'TAPE' | 'DRONE' | 'SIEVE' | 'PARASITE' | 'VCA' | 'SHAPE' | 'SWITCH' | 'LOOP' | 'CHORUS' | 'CLOUD' | 'OSC' | 'NOISE' | 'FILTER' | 'RING' | 'COMB' | 'SHIFT' | 'CHANCE' | 'PRISM' | 'PARTIAL' | 'WEFT' | 'TIDE' | 'BOUNCE' | 'FERAL' | 'COUNT' | 'MAP' | 'QUANTIZE' | 'SLEW' | 'FORMANT' | 'LOGIC' | 'DUCK' | 'SWARM' | 'UNSPENT' | 'SIDEWAYS' | 'QUORUM' | 'FAULT LINE' | 'CLIP' | 'FUZZ' | 'CRUSH' | 'CHIP' | 'TOUCH' | 'PENDULUM' | 'LPG' | 'OPERATOR' | 'EDGE' | 'MESH' | 'ORBIT' | 'CHAMBER' | 'OUTPUT';
 export interface PortDefinition {
   id: string; label: string; signal: SignalType; direction: 'in' | 'out';
   position: number; parameter?: string; delayed?: boolean;
