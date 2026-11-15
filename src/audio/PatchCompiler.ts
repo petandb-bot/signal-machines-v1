@@ -42,7 +42,7 @@ import {Comb} from './modules/Comb';
 import {Shift} from './modules/Shift';
 import {Chance} from './modules/Chance';
 import {Prism} from './modules/Prism';
-import {Partial} from './modules/Partial';
+import {PartialInstrument as Partial} from './modules/PartialInstrument';
 import {Weft} from './modules/Weft';
 import {Tide} from './modules/Tide';
 import {Bounce} from './modules/Bounce';
