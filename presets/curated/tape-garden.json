@@ -67,18 +67,6 @@
       }
     },
     {
-      "id": "branch-1",
-      "type": "BRANCH",
-      "x": 192,
-      "y": 184,
-      "seed": 115829,
-      "character": "METAL",
-      "params": {
-        "change": 0.08,
-        "memory": 0.95
-      }
-    },
-    {
       "id": "pulse-1",
       "type": "PULSE",
       "x": 368,
@@ -89,20 +77,47 @@
         "rate": 0.16,
         "irregular": 0.03
       }
+    },
+    {
+      "id": "count-1",
+      "type": "COUNT",
+      "x": 192,
+      "y": 184,
+      "seed": 20247922,
+      "character": "METAL",
+      "params": {
+        "step": 0.5,
+        "rate": 0.3
+      },
+      "mode": "CLOCK"
+    },
+    {
+      "id": "quantize-1",
+      "type": "QUANTIZE",
+      "x": 544,
+      "y": 184,
+      "seed": 20255841,
+      "character": "METAL",
+      "params": {
+        "span": 0,
+        "pull": 1
+      },
+      "mode": "12-TET"
+    },
+    {
+      "id": "lpg-1",
+      "type": "LPG",
+      "x": 16,
+      "y": 352,
+      "seed": 20263760,
+      "character": "METAL",
+      "params": {
+        "bite": 0.42,
+        "decay": 0.78
+      }
     }
   ],
   "connections": [
-    {
-      "id": "5ee9bbba-ad67-4446-8225-0fc638c1c6a5",
-      "from": {
-        "module": "drone-1",
-        "port": "audio"
-      },
-      "to": {
-        "module": "sieve-1",
-        "port": "audio"
-      }
-    },
     {
       "id": "2e1ac95b-0c52-463e-8a3c-2f3de3085e15",
       "from": {
@@ -148,25 +163,69 @@
       }
     },
     {
-      "id": "music-pulse-1-trigger-branch-1-clock",
+      "id": "p6-pulse-1-trigger-count-1-clock",
       "from": {
         "module": "pulse-1",
         "port": "trigger"
       },
       "to": {
-        "module": "branch-1",
+        "module": "count-1",
         "port": "clock"
       }
     },
     {
-      "id": "music-branch-1-pitch-drone-1-pitch",
+      "id": "p6-count-1-value-quantize-1-cv",
       "from": {
-        "module": "branch-1",
-        "port": "pitch"
+        "module": "count-1",
+        "port": "value"
+      },
+      "to": {
+        "module": "quantize-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "p6-quantize-1-cv-drone-1-pitch",
+      "from": {
+        "module": "quantize-1",
+        "port": "cv"
       },
       "to": {
         "module": "drone-1",
         "port": "pitch"
+      }
+    },
+    {
+      "id": "p6-drone-1-audio-lpg-1-audio",
+      "from": {
+        "module": "drone-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "lpg-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "p6-pulse-1-trigger-lpg-1-strike",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "lpg-1",
+        "port": "strike"
+      }
+    },
+    {
+      "id": "p6-lpg-1-audio-sieve-1-audio",
+      "from": {
+        "module": "lpg-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "sieve-1",
+        "port": "audio"
       }
     }
   ]

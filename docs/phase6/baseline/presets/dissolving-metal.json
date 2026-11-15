@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "DISSOLVING METAL",
+  "bpm": 72,
+  "master": 0.65,
+  "seed": 161601,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 4101,
+      "character": "METAL",
+      "params": {
+        "rate": 0.34,
+        "irregular": 0.12
+      }
+    },
+    {
+      "id": "alloy-1",
+      "type": "ALLOY",
+      "x": 192,
+      "y": 16,
+      "seed": 4102,
+      "character": "METAL",
+      "params": {
+        "body": 0.32,
+        "tension": 0.36
+      }
+    },
+    {
+      "id": "smear-1",
+      "type": "SMEAR",
+      "x": 368,
+      "y": 16,
+      "seed": 4103,
+      "character": "METAL",
+      "params": {
+        "smear": 0.45,
+        "memory": 0.58
+      }
+    },
+    {
+      "id": "orbit-1",
+      "type": "ORBIT",
+      "x": 544,
+      "y": 16,
+      "seed": 4104,
+      "character": "METAL",
+      "params": {
+        "rate": 0.3,
+        "depth": 0.5
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 720,
+      "y": 16,
+      "seed": 4105,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 192,
+      "y": 184,
+      "seed": 4106,
+      "character": "METAL",
+      "params": {
+        "spread": 0.2,
+        "drift": 0.15
+      }
+    },
+    {
+      "id": "parasite-1",
+      "type": "PARASITE",
+      "x": 368,
+      "y": 184,
+      "seed": 4107,
+      "character": "METAL",
+      "params": {
+        "feed": 0.4,
+        "memory": 0.6
+      }
+    },
+    {
+      "id": "chance-1",
+      "type": "CHANCE",
+      "x": 544,
+      "y": 184,
+      "seed": 79834,
+      "character": "METAL",
+      "params": {
+        "density": 1,
+        "recall": 1
+      },
+      "mode": "HIGH"
+    }
+  ],
+  "connections": [
+    {
+      "id": "35e01594-8e0e-4deb-850a-88dfeca54a47",
+      "from": {
+        "module": "alloy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "smear-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "57224000-9f1b-4c67-bef5-d5114c52086b",
+      "from": {
+        "module": "smear-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "dba08d43-46c8-4b05-8a4a-8c3519f7e98e",
+      "from": {
+        "module": "orbit-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "943fe289-59ff-4844-b1b7-4c31e49f5f72",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "smear-1",
+        "port": "smear"
+      }
+    },
+    {
+      "id": "530d64d1-3f54-4fb0-8dbc-c5f0c77dc666",
+      "from": {
+        "module": "smear-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "parasite-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "19cf6eb5-459f-4ff5-a4c2-61f54b2fa84a",
+      "from": {
+        "module": "parasite-1",
+        "port": "fever"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "tension"
+      }
+    },
+    {
+      "id": "music-pulse-1-trigger-chance-1-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "chance-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "music-chance-1-a-alloy-1-trigger",
+      "from": {
+        "module": "chance-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "music-chance-1-pitch-alloy-1-pitch",
+      "from": {
+        "module": "chance-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "pitch"
+      }
+    }
+  ]
+}

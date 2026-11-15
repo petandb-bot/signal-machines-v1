@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "TAPE GARDEN",
+  "seed": 20200408,
+  "bpm": 64,
+  "master": 0.65,
+  "modules": [
+    {
+      "id": "drone-1",
+      "type": "DRONE",
+      "x": 16,
+      "y": 16,
+      "seed": 20200408,
+      "character": "METAL",
+      "params": {
+        "spread": 0.24,
+        "color": 0.57
+      },
+      "mode": "220 Hz"
+    },
+    {
+      "id": "sieve-1",
+      "type": "SIEVE",
+      "x": 192,
+      "y": 16,
+      "seed": 20208327,
+      "character": "METAL",
+      "params": {
+        "focus": 0.5,
+        "width": 0.56
+      }
+    },
+    {
+      "id": "tape-1",
+      "type": "TAPE",
+      "x": 368,
+      "y": 16,
+      "seed": 20216246,
+      "character": "METAL",
+      "params": {
+        "wear": 0.42,
+        "echo": 0.75
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 544,
+      "y": 16,
+      "seed": 20224165,
+      "character": "METAL",
+      "params": {
+        "spread": 0.18,
+        "drift": 0.11
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 16,
+      "y": 184,
+      "seed": 20232084,
+      "character": "METAL",
+      "params": {
+        "level": 0.74
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 192,
+      "y": 184,
+      "seed": 115829,
+      "character": "METAL",
+      "params": {
+        "change": 0.08,
+        "memory": 0.95
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 368,
+      "y": 184,
+      "seed": 20247922,
+      "character": "METAL",
+      "params": {
+        "rate": 0.16,
+        "irregular": 0.03
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "5ee9bbba-ad67-4446-8225-0fc638c1c6a5",
+      "from": {
+        "module": "drone-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "sieve-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "2e1ac95b-0c52-463e-8a3c-2f3de3085e15",
+      "from": {
+        "module": "sieve-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "tape-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "0329f4ac-b055-4196-8fcd-93d5fe8dc8fd",
+      "from": {
+        "module": "tape-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "31ff16a6-9054-4b6f-aa4f-c9aba62e57fd",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "sieve-1",
+        "port": "focus"
+      }
+    },
+    {
+      "id": "ad854061-8dd0-4c12-b876-a164bbe9d9a6",
+      "from": {
+        "module": "flock-1",
+        "port": "controlB"
+      },
+      "to": {
+        "module": "drone-1",
+        "port": "spread"
+      }
+    },
+    {
+      "id": "music-pulse-1-trigger-branch-1-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "music-branch-1-pitch-drone-1-pitch",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "drone-1",
+        "port": "pitch"
+      }
+    }
+  ]
+}

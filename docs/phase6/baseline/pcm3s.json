@@ -1,0 +1,106 @@
+{
+  "base": "v0.21.0 610a6f45, frozen JSON and byte-identical DSP",
+  "seconds": 3,
+  "rows": [
+    {
+      "id": "still-almost-moving-ii",
+      "rate": 44100,
+      "pcm": "4c2e1cff3d9f1c7b4bb08f6e20e014493f14a97e0621a13f64f783764eec10a2"
+    },
+    {
+      "id": "pixel-dust",
+      "rate": 44100,
+      "pcm": "3396954b38a355c960b8271a93de5ff3fd437d3ba4dad6d1e5a9e67b06f9d11e"
+    },
+    {
+      "id": "room-air",
+      "rate": 44100,
+      "pcm": "7c213bdcdff5a7a9c1c9879a74e116db55c30be98bf2ba5a925530a7714d3521"
+    },
+    {
+      "id": "small-hours",
+      "rate": 44100,
+      "pcm": "807f854b9508ff04bd5e9ef53c2c3852c0594529681be273bb3d2d3322b31f86"
+    },
+    {
+      "id": "exchanging-bodies",
+      "rate": 44100,
+      "pcm": "c2dd96d25c26aa200b78ff9cb55b6b9d566cade59d975f03c74d47d270d370e9"
+    },
+    {
+      "id": "dissolving-metal",
+      "rate": 44100,
+      "pcm": "cb8b54566dd111ed170c3ae4c1a468b7e695a282c42e4e28487e111df1b8f495"
+    },
+    {
+      "id": "binary-fever",
+      "rate": 44100,
+      "pcm": "61af7df812184bd540c7da95050b6ed3d13b9bf6452daf1ccaaf9c15973e096e"
+    },
+    {
+      "id": "tape-garden",
+      "rate": 44100,
+      "pcm": "3ac4305579b35b2737636c4cd841bde9bec9780e9756c125386b74c8c88e7afd"
+    },
+    {
+      "id": "late-light",
+      "rate": 44100,
+      "pcm": "41752568bd0b8c4c62ef1337109214d2b88f654bd54e4192d0d2be4400ae475b"
+    },
+    {
+      "id": "off-grid",
+      "rate": 44100,
+      "pcm": "cacc94be0a7e1d87ea1fe28d5f44ee557fca93896f0575e2ee91a9ce47e9aae9"
+    },
+    {
+      "id": "still-almost-moving-ii",
+      "rate": 48000,
+      "pcm": "6e15a969448d79e497eaf0138db0ec63165212a47a43c78b55ce2a3fc823a0e3"
+    },
+    {
+      "id": "pixel-dust",
+      "rate": 48000,
+      "pcm": "283e8bb2b2c86bf675982d4f809b6f8b0149c5ccd3c9b2ea296d806ef969d0cd"
+    },
+    {
+      "id": "room-air",
+      "rate": 48000,
+      "pcm": "c9066029e2fc653ab8615f282c127d4418803f56d1d6766eca3bb37ed1df1aed"
+    },
+    {
+      "id": "small-hours",
+      "rate": 48000,
+      "pcm": "5ee3f2f16711dba0e4aa81655a64baa7f98e6f68efe84accce1efc5114dece4e"
+    },
+    {
+      "id": "exchanging-bodies",
+      "rate": 48000,
+      "pcm": "4f01bfe4ea3d46eac1d8b299c6c4d5f865aebe8197467a6a4eccf48a01b8eb42"
+    },
+    {
+      "id": "dissolving-metal",
+      "rate": 48000,
+      "pcm": "d46db473e8d3f3d835df542c7f710ea58319b72bd74b2be218c97eb4a2e82d07"
+    },
+    {
+      "id": "binary-fever",
+      "rate": 48000,
+      "pcm": "968c8f4836b568b6dee59bcdcfda49460728dd7316ef8c8998aad1f8c030bd53"
+    },
+    {
+      "id": "tape-garden",
+      "rate": 48000,
+      "pcm": "35c154d75ebfc77687175a4903c52e2ff9cdb860ec8c5933a64e04a3c0569065"
+    },
+    {
+      "id": "late-light",
+      "rate": 48000,
+      "pcm": "473a910ef2010e48dfb6a5d314693ac7a9f06de84bb03d47a83b02296578396d"
+    },
+    {
+      "id": "off-grid",
+      "rate": 48000,
+      "pcm": "7dd2d555325ad1845ddd092890b3ddb9af48ff64c2894ef1ea5e01b18dcdf16b"
+    }
+  ]
+}

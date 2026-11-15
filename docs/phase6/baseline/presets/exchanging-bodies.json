@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "EXCHANGING BODIES",
+  "bpm": 71,
+  "master": 0.65,
+  "seed": 33102,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 33102,
+      "character": "METAL",
+      "params": {
+        "rate": 0.16,
+        "irregular": 0.08
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 192,
+      "y": 16,
+      "seed": 41021,
+      "character": "METAL",
+      "params": {
+        "flow": 0.25,
+        "range": 0.28
+      }
+    },
+    {
+      "id": "sympathy-1",
+      "type": "SYMPATHY",
+      "x": 368,
+      "y": 16,
+      "seed": 48940,
+      "character": "METAL",
+      "params": {
+        "body": 0.62,
+        "couple": 0.6
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 544,
+      "y": 16,
+      "seed": 56859,
+      "character": "METAL",
+      "params": {
+        "boost": 0.4,
+        "comp": 0
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 16,
+      "y": 184,
+      "seed": 64778,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    },
+    {
+      "id": "chance-1",
+      "type": "CHANCE",
+      "x": 192,
+      "y": 184,
+      "seed": 100614,
+      "character": "METAL",
+      "params": {
+        "density": 1,
+        "recall": 1
+      },
+      "mode": "HIGH"
+    }
+  ],
+  "connections": [
+    {
+      "id": "sympathy-cable-2",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "sympathy-1",
+        "port": "couple"
+      }
+    },
+    {
+      "id": "sympathy-cable-3",
+      "from": {
+        "module": "tide-1",
+        "port": "tide"
+      },
+      "to": {
+        "module": "sympathy-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "sympathy-cable-4",
+      "from": {
+        "module": "sympathy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "sympathy-cable-5",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "music-pulse-1-trigger-chance-1-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "chance-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "music-chance-1-a-sympathy-1-trigger",
+      "from": {
+        "module": "chance-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "sympathy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "music-chance-1-pitch-sympathy-1-pitch",
+      "from": {
+        "module": "chance-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "sympathy-1",
+        "port": "pitch"
+      }
+    }
+  ]
+}

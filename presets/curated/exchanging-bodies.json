@@ -66,17 +66,29 @@
       }
     },
     {
-      "id": "chance-1",
-      "type": "CHANCE",
+      "id": "logic-1",
+      "type": "LOGIC",
       "x": 192,
       "y": 184,
-      "seed": 100614,
+      "seed": 72697,
       "character": "METAL",
       "params": {
-        "density": 1,
-        "recall": 1
+        "ratio": 0.16666666666666666,
+        "shift": 0.72
       },
-      "mode": "HIGH"
+      "mode": "OR"
+    },
+    {
+      "id": "reply-1",
+      "type": "SYMPATHY",
+      "x": 368,
+      "y": 184,
+      "seed": 80616,
+      "character": "METAL",
+      "params": {
+        "body": 0.25,
+        "couple": 0.32
+      }
     }
   ],
   "connections": [
@@ -125,20 +137,20 @@
       }
     },
     {
-      "id": "music-pulse-1-trigger-chance-1-clock",
+      "id": "p6-pulse-1-trigger-logic-1-a",
       "from": {
         "module": "pulse-1",
         "port": "trigger"
       },
       "to": {
-        "module": "chance-1",
-        "port": "clock"
+        "module": "logic-1",
+        "port": "a"
       }
     },
     {
-      "id": "music-chance-1-a-sympathy-1-trigger",
+      "id": "p6-logic-1-a-sympathy-1-trigger",
       "from": {
-        "module": "chance-1",
+        "module": "logic-1",
         "port": "a"
       },
       "to": {
@@ -147,14 +159,47 @@
       }
     },
     {
-      "id": "music-chance-1-pitch-sympathy-1-pitch",
+      "id": "p6-logic-1-b-reply-1-trigger",
       "from": {
-        "module": "chance-1",
-        "port": "pitch"
+        "module": "logic-1",
+        "port": "b"
       },
       "to": {
+        "module": "reply-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "p6-sympathy-1-audio-reply-1-audio",
+      "from": {
         "module": "sympathy-1",
-        "port": "pitch"
+        "port": "audio"
+      },
+      "to": {
+        "module": "reply-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "p6-reply-1-audio-level-1-audio",
+      "from": {
+        "module": "reply-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "p6-tide-1-age-reply-1-couple",
+      "from": {
+        "module": "tide-1",
+        "port": "age"
+      },
+      "to": {
+        "module": "reply-1",
+        "port": "couple"
       }
     }
   ]

@@ -14,8 +14,8 @@
       "seed": 20200404,
       "character": "METAL",
       "params": {
-        "sparse": 0.78,
-        "change": 0.3
+        "sparse": 0.88,
+        "change": 0.24
       },
       "sample": "builtin:rain"
     },
@@ -77,19 +77,6 @@
       "params": {
         "level": 0.74
       }
-    },
-    {
-      "id": "weft-1",
-      "type": "WEFT",
-      "x": 368,
-      "y": 184,
-      "seed": 20247918,
-      "character": "METAL",
-      "params": {
-        "rate": 0.3333333333333333,
-        "fill": 0.42
-      },
-      "mode": "16"
     }
   ],
   "connections": [
@@ -157,17 +144,6 @@
       "to": {
         "module": "output-1",
         "port": "audio"
-      }
-    },
-    {
-      "id": "music-weft-1-a-cuts-1-trigger",
-      "from": {
-        "module": "weft-1",
-        "port": "a"
-      },
-      "to": {
-        "module": "cuts-1",
-        "port": "trigger"
       }
     }
   ]

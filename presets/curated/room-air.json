@@ -65,6 +65,18 @@
       "params": {
         "level": 0.78
       }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 192,
+      "y": 184,
+      "seed": 20239998,
+      "character": "METAL",
+      "params": {
+        "boost": 0.6666666666666666,
+        "comp": 0
+      }
     }
   ],
   "connections": [
@@ -91,17 +103,6 @@
       }
     },
     {
-      "id": "c2c10027-28b0-4721-8510-9291a8ed52ca",
-      "from": {
-        "module": "chamber-1",
-        "port": "audio"
-      },
-      "to": {
-        "module": "output-1",
-        "port": "audio"
-      }
-    },
-    {
       "id": "9d9ffef0-2681-4b30-9c23-741ae0d99bf7",
       "from": {
         "module": "tide-1",
@@ -110,6 +111,28 @@
       "to": {
         "module": "found-1",
         "port": "move"
+      }
+    },
+    {
+      "id": "p6-chamber-1-audio-level-1-audio",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "p6-level-1-audio-output-1-audio",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
       }
     }
   ]

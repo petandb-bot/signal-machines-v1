@@ -28,7 +28,7 @@
       "character": "METAL",
       "params": {
         "mass": 0.37,
-        "warp": 0.51
+        "warp": 0.5
       },
       "mode": "LIVING 220 Hz"
     },
@@ -40,7 +40,7 @@
       "seed": 20216239,
       "character": "METAL",
       "params": {
-        "level": 0.38,
+        "level": 0.18,
         "blend": 0
       }
     },
@@ -76,8 +76,8 @@
       "seed": 20239996,
       "character": "METAL",
       "params": {
-        "rise": 0.6,
-        "fall": 0.65
+        "rise": 0.9,
+        "fall": 0.95
       },
       "mode": "GLIDE"
     },
@@ -90,30 +90,6 @@
       "character": "METAL",
       "params": {
         "level": 0.76
-      }
-    },
-    {
-      "id": "branch-1",
-      "type": "BRANCH",
-      "x": 544,
-      "y": 184,
-      "seed": 85051,
-      "character": "METAL",
-      "params": {
-        "change": 0.08,
-        "memory": 0.95
-      }
-    },
-    {
-      "id": "pulse-1",
-      "type": "PULSE",
-      "x": 16,
-      "y": 352,
-      "seed": 20263753,
-      "character": "METAL",
-      "params": {
-        "rate": 0.16,
-        "irregular": 0
       }
     }
   ],
@@ -174,17 +150,6 @@
       }
     },
     {
-      "id": "9865e66d-92b9-4c54-9bcc-2582db2a0579",
-      "from": {
-        "module": "slew-1",
-        "port": "cv"
-      },
-      "to": {
-        "module": "partial-1",
-        "port": "pitch"
-      }
-    },
-    {
       "id": "6215a8f5-70b3-436e-a533-a8fec70508ed",
       "from": {
         "module": "tide-1",
@@ -196,25 +161,25 @@
       }
     },
     {
-      "id": "music-pulse-1-trigger-branch-1-clock",
+      "id": "p6-tide-1-tide-slew-1-cv",
       "from": {
-        "module": "pulse-1",
-        "port": "trigger"
-      },
-      "to": {
-        "module": "branch-1",
-        "port": "clock"
-      }
-    },
-    {
-      "id": "music-branch-1-pitch-slew-1-cv",
-      "from": {
-        "module": "branch-1",
-        "port": "pitch"
+        "module": "tide-1",
+        "port": "tide"
       },
       "to": {
         "module": "slew-1",
         "port": "cv"
+      }
+    },
+    {
+      "id": "p6-slew-1-cv-partial-1-warp",
+      "from": {
+        "module": "slew-1",
+        "port": "cv"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "warp"
       }
     }
   ]

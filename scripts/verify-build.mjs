@@ -75,3 +75,4 @@ console.log(JSON.stringify({result:'PASS',test:'production worklet: legacy prese
 await import('./check-v019-compat.mjs');
 await import('./verify-phase4-worklet.mjs');
 await import('./verify-walls-worklet.mjs');
+await import('./verify-phase6-references.mjs');
