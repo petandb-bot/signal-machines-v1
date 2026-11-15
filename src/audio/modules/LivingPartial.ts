@@ -1,9 +1,9 @@
-import {DSPModule,clamp} from '../DSPModule';import {sineAt} from '../SineTable';import {LivingField,unit,bipolar} from './LivingField';
+import {DSPModule,SeededRandom,clamp} from '../DSPModule';import {sineAt} from '../SineTable';import {LivingField,unit,bipolar} from './LivingField';
 export class LivingPartial extends DSPModule{
  private readonly phases=new Float64Array(32);private readonly amplitudes=new Float64Array(32);private readonly targetsA=new Float64Array(32);private readonly frequencies=new Float64Array(32);private readonly field=new LivingField(32,this.random);
  private mass=unit(this.parameters[0],.5);private warp=unit(this.parameters[1],.5);private pitch=0;private tick=0;private attack=0;private norm=1;private targetNorm=1;
  private readonly slew=1-Math.exp(-1/(this.sampleRate*.012));
- constructor(...args:ConstructorParameters<typeof DSPModule>){super(...args);for(let i=0;i<32;i++)this.phases[i]=this.random.next();}
+ constructor(...args:ConstructorParameters<typeof DSPModule>){super(...args);const phases=new SeededRandom(args[0].seed^args[2]);for(let i=0;i<32;i++)this.phases[i]=phases.next();}
  process(){
   this.mass+=(unit(unit(this.parameters[0],.5)+bipolar(this.inputL[1])*.5)-this.mass)*this.slew;this.warp+=(unit(unit(this.parameters[1],.5)+bipolar(this.inputL[2])*.5)-this.warp)*this.slew;this.pitch+=(bipolar(this.inputL[0])-this.pitch)*this.slew;
   if(this.tick%64===0)this.field.step(64/this.sampleRate);

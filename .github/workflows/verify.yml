@@ -26,6 +26,14 @@ jobs:
         run: npm run build
       - name: Verify production AudioWorklet
         run: npm run verify:build
+      - name: Verify LIVING worklet at both output rates
+        run: node scripts/verify-living-worklet.mjs
+      - name: Render opt-in LIVING comparisons
+        run: |
+          node scripts/render-living-character.mjs 120
+          node scripts/render-audit-baselines.mjs
+          mkdir -p dist/listening/audio
+          cp -R public/listening/audio/living-character dist/listening/audio/
       - name: Upload comparative sound studies
         uses: actions/upload-artifact@v5
         with:

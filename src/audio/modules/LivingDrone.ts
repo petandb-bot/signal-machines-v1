@@ -1,11 +1,12 @@
-import {DSPModule,clamp} from '../DSPModule';import {sineAt} from '../SineTable';import {LivingField,unit,bipolar} from './LivingField';
+import {DSPModule,SeededRandom,clamp} from '../DSPModule';import {sineAt} from '../SineTable';import {LivingField,unit,bipolar} from './LivingField';
 const ratios=[1,1.002,1.5,2,2.5,3];
 export class LivingDrone extends DSPModule{
+ private readonly pitchSlew=1-Math.exp(-1/(this.sampleRate*.012));
  private readonly phases=new Float64Array(6);private readonly field=new LivingField(6,this.random);private tick=0;private pitch=0;private attack=0;
- constructor(...args:ConstructorParameters<typeof DSPModule>){super(...args);for(let i=0;i<6;i++)this.phases[i]=this.random.next();}
+ constructor(...args:ConstructorParameters<typeof DSPModule>){super(...args);const phases=new SeededRandom(args[0].seed^args[2]);for(let i=0;i<6;i++)this.phases[i]=phases.next();}
  process(){
   const spread=unit(unit(this.parameters[0],.3)+bipolar(this.inputL[1])*.5),color=unit(unit(this.parameters[1],.4)+bipolar(this.inputL[2])*.5);
-  this.pitch+=(bipolar(this.inputL[0])-this.pitch)*(1-Math.exp(-1/(this.sampleRate*.012)));this.attack+=(1-this.attack)/(this.sampleRate*.12);
+  this.pitch+=(bipolar(this.inputL[0])-this.pitch)*this.pitchSlew;this.attack+=(1-this.attack)/(this.sampleRate*.12);
   if(this.tick++%64===0)this.field.step(64/this.sampleRate);
   const base=this.selectedMode?.includes('220')?220:this.selectedMode?.includes('110')?110:55,fundamental=base*Math.pow(2,this.pitch*(this.wide?8:2));let l=0,r=0;
   for(let i=0;i<6;i++){

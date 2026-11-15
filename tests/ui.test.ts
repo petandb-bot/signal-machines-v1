@@ -308,3 +308,10 @@ describe('v0.18 library and shared sample UI',()=>{
     for(const type of ['FOUND','CUTS','CUTS'])document.querySelector<HTMLButtonElement>(`[aria-label="Add ${type} module"]`)!.click();expect(app.store.patch.modules.filter(m=>m.type==='FOUND'||m.type==='CUTS')).toHaveLength(2);expect(document.querySelector('.toast')!.textContent).toContain('at most 2 FOUND/CUTS');
   });
 });
+
+describe('opt-in LIVING character controls',()=>{
+ it.each(['DRONE','PARTIAL'])('keeps two sliders and snapshots %s frequency and character',type=>{
+  document.querySelector<HTMLButtonElement>(`[aria-label="Add ${type} module"]`)!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));expect(document.querySelectorAll('.editor-controls input[type=range]')).toHaveLength(2);
+  document.querySelector<HTMLButtonElement>(`[aria-label="${type} LIVING 110 Hz mode"]`)!.click();const p=structuredClone(app.store.patch);expect(p.modules.find(m=>m.id===id)!.mode).toBe('LIVING 110 Hz');const snapshot=app.snapshots.storage.capture(p,'Living');app.store.replace(app.snapshots.storage.recall(snapshot,p));expect(app.store.patch).toEqual(p);
+ });
+});
