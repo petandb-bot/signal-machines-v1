@@ -28,15 +28,17 @@ jobs:
         run: npm run verify:build
       - name: Verify SYMPATHY worklet at both output rates
         run: node scripts/verify-sympathy-worklet.mjs
-      - name: Render SYMPATHY comparisons
+      - name: Render Phase 3.1 before/after comparisons
         run: |
-          node scripts/render-sympathy.mjs
+          node scripts/render-sympathy-excitation.mjs
           mkdir -p dist/listening/audio
-          cp -R public/listening/audio/sympathy dist/listening/audio/
+          cp -R public/listening/audio/sympathy-phase31 dist/listening/audio/
       - name: Upload comparative sound studies
         uses: actions/upload-artifact@v5
         with:
-          name: four-machines-listening
-          path: dist/listening/
+          name: phase31-sympathy-excitation
+          path: |
+            dist/listening/sympathy-excitation.html
+            dist/listening/audio/sympathy-phase31/
           if-no-files-found: error
           retention-days: 14

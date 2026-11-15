@@ -1,0 +1,529 @@
+{
+  "host": {
+    "node": "v24.22.1",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C"
+  },
+  "limitations": "Sequential offline before/after timing includes input synthesis and observation. Shared server scheduling and GC affect maxima; no physical iPhone or AudioWorklet realtime guarantee. Typed arrays only, not JS heap/browser memory.",
+  "rows": [
+    {
+      "version": "before",
+      "rate": 48000,
+      "seconds": 60,
+      "voices": 8,
+      "blockFrames": 128,
+      "deadlineMs": 2.6666666666666665,
+      "meanBlockMs": 0.2251328690222201,
+      "p95BlockMs": 0.34078000000044995,
+      "p99BlockMs": 0.5331119999991643,
+      "maxBlockMs": 11.16281699999945,
+      "peak": 0.1594014028222092,
+      "maxEnergy": 0.17999712107108423,
+      "typedBytesPerVoice": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "seconds": 60,
+      "voices": 8,
+      "blockFrames": 128,
+      "deadlineMs": 2.6666666666666665,
+      "meanBlockMs": 0.2797046529777871,
+      "p95BlockMs": 0.4029149999987567,
+      "p99BlockMs": 0.6537430000007589,
+      "maxBlockMs": 6.155791000001045,
+      "peak": 0.15951679387967865,
+      "maxEnergy": 0.17999562214860804,
+      "typedBytesPerVoice": 700,
+      "bufferGrowth": 0
+    }
+  ],
+  "rates": [
+    {
+      "version": "before",
+      "rate": 24000,
+      "body": 0,
+      "couple": 0,
+      "peak": 0.08339707178986418,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 24000,
+      "body": 0,
+      "couple": 0.55,
+      "peak": 0.08360717013545234,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 24000,
+      "body": 0,
+      "couple": 1,
+      "peak": 0.08489694919949989,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 24000,
+      "body": 0.42,
+      "couple": 0,
+      "peak": 0.08349764322533737,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 24000,
+      "body": 0.42,
+      "couple": 0.55,
+      "peak": 0.08762077464295236,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 24000,
+      "body": 0.42,
+      "couple": 1,
+      "peak": 0.08547004803782579,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 24000,
+      "body": 1,
+      "couple": 0,
+      "peak": 0.08354214945811382,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 24000,
+      "body": 1,
+      "couple": 0.55,
+      "peak": 0.08377449600632303,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 24000,
+      "body": 1,
+      "couple": 1,
+      "peak": 0.08561342717408853,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 44100,
+      "body": 0,
+      "couple": 0,
+      "peak": 0.08349447516624477,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 44100,
+      "body": 0,
+      "couple": 0.55,
+      "peak": 0.0836090883424606,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 44100,
+      "body": 0,
+      "couple": 1,
+      "peak": 0.08486618035972356,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 44100,
+      "body": 0.42,
+      "couple": 0,
+      "peak": 0.08354923682202016,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 44100,
+      "body": 0.42,
+      "couple": 0.55,
+      "peak": 0.08761808740846944,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 44100,
+      "body": 0.42,
+      "couple": 1,
+      "peak": 0.08543927733569702,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 44100,
+      "body": 1,
+      "couple": 0,
+      "peak": 0.08357346536330804,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 44100,
+      "body": 1,
+      "couple": 0.55,
+      "peak": 0.08374485123586185,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 44100,
+      "body": 1,
+      "couple": 1,
+      "peak": 0.08558242372621483,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 48000,
+      "body": 0,
+      "couple": 0,
+      "peak": 0.08350316244645051,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 48000,
+      "body": 0,
+      "couple": 0.55,
+      "peak": 0.0836084872249661,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 48000,
+      "body": 0,
+      "couple": 1,
+      "peak": 0.08486365139141874,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 48000,
+      "body": 0.42,
+      "couple": 0,
+      "peak": 0.08355347698709195,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 48000,
+      "body": 0.42,
+      "couple": 0.55,
+      "peak": 0.08761850055234384,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 48000,
+      "body": 0.42,
+      "couple": 1,
+      "peak": 0.08543664363988028,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 48000,
+      "body": 1,
+      "couple": 0,
+      "peak": 0.0835757374885776,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 48000,
+      "body": 1,
+      "couple": 0.55,
+      "peak": 0.08374154776238608,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "before",
+      "rate": 48000,
+      "body": 1,
+      "couple": 1,
+      "peak": 0.08557951088432215,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 24000,
+      "body": 0,
+      "couple": 0,
+      "peak": 0.07563457093015043,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 24000,
+      "body": 0,
+      "couple": 0.55,
+      "peak": 0.08722510841924487,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 24000,
+      "body": 0,
+      "couple": 1,
+      "peak": 0.0944492116784088,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 24000,
+      "body": 0.42,
+      "couple": 0,
+      "peak": 0.07572869416707699,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 24000,
+      "body": 0.42,
+      "couple": 0.55,
+      "peak": 0.08521808670289911,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 24000,
+      "body": 0.42,
+      "couple": 1,
+      "peak": 0.0905589387804984,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 24000,
+      "body": 1,
+      "couple": 0,
+      "peak": 0.07577034735273472,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 24000,
+      "body": 1,
+      "couple": 0.55,
+      "peak": 0.07606853641247464,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 24000,
+      "body": 1,
+      "couple": 1,
+      "peak": 0.07863452208147688,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 44100,
+      "body": 0,
+      "couple": 0,
+      "peak": 0.0757261719540073,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 44100,
+      "body": 0,
+      "couple": 0.55,
+      "peak": 0.08729661133124814,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 44100,
+      "body": 0,
+      "couple": 1,
+      "peak": 0.09454918339886569,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 44100,
+      "body": 0.42,
+      "couple": 0,
+      "peak": 0.07577670252644043,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 44100,
+      "body": 0.42,
+      "couple": 0.55,
+      "peak": 0.0852521120687272,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 44100,
+      "body": 0.42,
+      "couple": 1,
+      "peak": 0.09060159340054695,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 44100,
+      "body": 1,
+      "couple": 0,
+      "peak": 0.07579905916334867,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 44100,
+      "body": 1,
+      "couple": 0.55,
+      "peak": 0.0760453665588181,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 44100,
+      "body": 1,
+      "couple": 1,
+      "peak": 0.0786081810647489,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "body": 0,
+      "couple": 0,
+      "peak": 0.07573426528573983,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "body": 0,
+      "couple": 0.55,
+      "peak": 0.0872033206167225,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "body": 0,
+      "couple": 1,
+      "peak": 0.09445023214418043,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "body": 0.42,
+      "couple": 0,
+      "peak": 0.07578062804297717,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "body": 0.42,
+      "couple": 0.55,
+      "peak": 0.08521927844107982,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "body": 0.42,
+      "couple": 1,
+      "peak": 0.09056301173983416,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "body": 1,
+      "couple": 0,
+      "peak": 0.0758011402317946,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "body": 1,
+      "couple": 0.55,
+      "peak": 0.07604469044704515,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    },
+    {
+      "version": "after",
+      "rate": 48000,
+      "body": 1,
+      "couple": 1,
+      "peak": 0.0786052826595497,
+      "unforcedEnergyIncreases": 0,
+      "finalEnergy": 0
+    }
+  ]
+}

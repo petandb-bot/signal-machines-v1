@@ -1,0 +1,41 @@
+{
+  "engine": "Headless Chromium156 on Linux; not physical iPhone Safari",
+  "rows": [
+    {
+      "width": 1280,
+      "overflow": false,
+      "audios": 20,
+      "status": "7 inputs × 9 settings, plus 3 unchanged demos. BODY / COUPLE above affect the input studies only."
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "audios": 20,
+      "status": "7 inputs × 9 settings, plus 3 unchanged demos. BODY / COUPLE above affect the input studies only."
+    },
+    [
+      {
+        "name": "cuts-b0.42-c0.55-after-raw.wav",
+        "channels": 2,
+        "seconds": 7.999977324263039,
+        "sampleRate": 44100,
+        "nonzero": true
+      },
+      {
+        "name": "quiet-b0.42-c0.55-after-raw.wav",
+        "channels": 2,
+        "seconds": 7.999977324263039,
+        "sampleRate": 44100,
+        "nonzero": true
+      },
+      {
+        "name": "living-material-after-matched.wav",
+        "channels": 2,
+        "seconds": 15.999977324263039,
+        "sampleRate": 44100,
+        "nonzero": true
+      }
+    ]
+  ],
+  "errors": []
+}
