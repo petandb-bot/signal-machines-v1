@@ -3,6 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 vi.mock('p5',()=>({default:class{}})); // Pixel rendering needs a real browser; DOM interactions are tested here.
 import {readFileSync} from 'node:fs';
 import {version} from '../package.json';
+import {metalDrift,PRESETS,splitOrbits} from '../src/state/presets';
 import { AppController } from '../src/app/AppController';
 import { connect } from '../src/graph/PatchGraph';
 vi.stubGlobal('ResizeObserver',class{observe(){}disconnect(){}});
@@ -10,7 +11,7 @@ vi.stubGlobal('requestAnimationFrame',(callback:FrameRequestCallback)=>{callback
 HTMLElement.prototype.setPointerCapture=()=>{};HTMLElement.prototype.hasPointerCapture=()=>false;
 let app:AppController;
 afterEach(()=>vi.restoreAllMocks());
-beforeEach(()=>{localStorage.clear();document.body.innerHTML='<div id="app"></div>';app=new AppController(document.querySelector('#app')!);});
+beforeEach(()=>{localStorage.clear();localStorage.setItem('signal-machines.patch.v1',JSON.stringify(metalDrift()));document.body.innerHTML='<div id="app"></div>';app=new AppController(document.querySelector('#app')!);});
 describe('DOM patch interactions (not browser/audio integration)',()=>{
   it('links the source archive generated from the current package version',()=>{
     const link=document.querySelector<HTMLAnchorElement>('.source-download')!;
@@ -53,7 +54,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
   it('starts an empty patch and restores the playable preset',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Create an empty patch"]')!.click();expect(app.store.patch.modules).toHaveLength(0);
-    const preset=document.querySelector<HTMLSelectElement>('[aria-label="Preset"]')!;preset.value='0';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules).toHaveLength(5);expect(app.store.patch.connections).toHaveLength(4);
+    const preset=document.querySelector<HTMLSelectElement>('[aria-label="Preset"]')!;preset.value='pixel-dust';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules).toHaveLength(3);expect(app.store.patch.connections).toHaveLength(4);
   });
   it('keeps a tapped output armed until a compatible input is tapped',()=>{
     const out=document.querySelector<HTMLButtonElement>('.port.out[data-module="flock-1"][data-port="controlB"]')!,input=document.querySelector<HTMLButtonElement>('.port.in[data-module="alloy-1"][data-port="body"]')!;
@@ -85,11 +86,10 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(false);
 
   });
-  it('exposes sixty-seven grouped module choices, forty-two presets and no large title',()=>{
-    expect(document.querySelectorAll('.library-module')).toHaveLength(67);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(43);
-    const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;preset.value='1';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='BRANCH')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='FRACTURE')).toBe(true);
-    preset.value='2';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='RESON')).toBe(true);
-    preset.value='3';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type==='VENOM')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='CAUSTIC')).toBe(true);expect(app.store.patch.modules.some(m=>m.type==='SNAP')).toBe(true);
+  it('exposes 67 grouped modules, ten curated presets and no large title',()=>{
+    expect(document.querySelectorAll('.library-module')).toHaveLength(67);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(11);
+    const selector=document.querySelector<HTMLSelectElement>('.preset-select')!;
+    for(const entry of PRESETS){selector.value=entry.id;selector.dispatchEvent(new Event('change'));expect(app.store.patch).toEqual(entry.create());}
   });
   it('arranges chips without changing parameters, audio routes or seeds',()=>{
     const before=structuredClone(app.store.patch);document.querySelector<HTMLButtonElement>('[aria-label="Arrange modules compactly"]')!.click();expect(app.store.patch.connections).toEqual(before.connections);expect(app.store.patch.modules.map(m=>m.params)).toEqual(before.modules.map(m=>m.params));expect(app.store.patch.modules.map(m=>m.seed)).toEqual(before.modules.map(m=>m.seed));
@@ -115,9 +115,9 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Recall snapshot Before damage"]')!.click();expect(app.store.patch).toEqual(original);
     document.querySelector<HTMLButtonElement>('[aria-label="Open snapshots"]')!.click();const back=document.querySelector<HTMLButtonElement>('[aria-label="Return to patch before recall"]')!;expect(back.disabled).toBe(false);back.click();expect(app.store.patch).toEqual(damaged);
   });
-  it('persists snapshots across an app reload and exposes new drone/parasite presets',()=>{
+  it('persists snapshots across an app reload and selects by stable preset ID',()=>{
     app.snapshots.storage.capture(app.store.patch,'Persistent');const storage=app.snapshots.storage.export();document.body.innerHTML='<div id="app"></div>';const reloaded=new AppController(document.querySelector('#app')!);expect(reloaded.snapshots.storage.export()).toBe(storage);
-    const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;preset.value='5';preset.dispatchEvent(new Event('change'));expect(reloaded.store.patch.modules.some(m=>m.type==='DRONE')).toBe(true);expect(reloaded.store.patch.modules.some(m=>m.type==='PARASITE')).toBe(true);
+    const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;preset.value='dissolving-metal';preset.dispatchEvent(new Event('change'));expect(reloaded.store.patch.modules.some(m=>m.type==='ALLOY')).toBe(true);expect(reloaded.store.patch.modules.some(m=>m.type==='PARASITE')).toBe(true);
   });
 
   it('enlarges chip displays without moving the chip body or jack anchors',()=>{
@@ -151,9 +151,9 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     await vi.waitFor(()=>expect(JSON.parse(localStorage.getItem('signal-machines.patch.v1')??'null')).toEqual(original));
     document.body.innerHTML='<div id="app"></div>';const restored=new AppController(document.querySelector('#app')!);expect(restored.store.patch).toEqual(original);expect(restored.snapshots.storage.list()[0].patch).toEqual(original);
   });
-  it('loads the source, spectral and dynamics circuits from the actual preset selector',()=>{
+  it('keeps dry digital, quiet sample and dense-tail worlds distinct in the actual selector',()=>{
     const selector=document.querySelector<HTMLSelectElement>('.preset-select')!;
-    for(const [index,name,type] of [['10','CLEAR SIGNAL','FILTER'],['11','WIRE STRINGS','COMB'],['12','SIDEBAND GARDEN','SHIFT'],['13','CHANCE GARDEN','CHANCE'],['14','SPECTRAL GHOST','PRISM'],['15','HARMONIC WEATHER','PARTIAL'],['16','CLOCKWORK GARDEN','WEFT'],['17','SLOW WEATHER','TIDE'],['18','MARBLE ROOM','BOUNCE'],['19','BINARY FEVER','COUNT'],['20','BENT VOWELS','FORMANT'],['21','SPLIT ORBITS','LOGIC'],['22','TRITAVE FIELD','QUANTIZE'],['23','OFF GRID','SLEW'],['24','COLONY CRACKS','FAULT LINE'],['25','STORED RAIN','UNSPENT'],['26','DISSENTING BODIES','QUORUM'],['27','OUTER BAND','OSC'],['28','PIXEL DUST','CHIP'],['29','BIASED ORBIT','FUZZ'],['30','DRAWN METAL','TOUCH'],['31','TWIN SWINGS','PENDULUM']]){selector.value=index;selector.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe(name);expect(app.store.patch.modules.some(m=>m.type===type)).toBe(true);}
+    for(const [id,type] of [['pixel-dust','CHIP'],['small-hours','CUTS'],['late-light','PLATE'],['off-grid','QUANTIZE']]){selector.value=id;selector.dispatchEvent(new Event('change'));expect(app.store.patch.modules.some(m=>m.type===type)).toBe(true);}
   });
   it('kicks the marble through the actual editor and module-action bridge',async()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add BOUNCE module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
@@ -194,8 +194,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     Object.defineProperty(app.workspace,'portraitLayout',{configurable:true,value:{matches:true}});
     const height=700;
     app.workspace.viewport.getBoundingClientRect=()=>new DOMRect(0,0,width,height);
-    const preset=document.querySelector<HTMLSelectElement>('.preset-select')!;
-    preset.value='21';preset.dispatchEvent(new Event('change'));
+    app.store.replace(splitOrbits());
     const original=structuredClone(app.store.patch);
     app.workspace.fit();
     const transform=app.workspace.world.style.transform;
@@ -281,9 +280,8 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     app.store.replace(app.snapshots.storage.recall(snapshot,app.store.patch));expect(app.store.patch).toEqual(saved);
     await vi.waitFor(()=>expect(JSON.parse(localStorage.getItem('signal-machines.patch.v1')??'null')).toEqual(saved));
   });
-  it('opens both new sound studies from the browser preset selector',()=>{
-    const selector=document.querySelector<HTMLSelectElement>('.preset-select')!;
-    for(const [index,name,type] of [['32','DISSOLVING METAL','SMEAR'],['33','SLIDING GLASS','FRICTION']]){selector.value=index;selector.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe(name);expect(app.store.patch.modules.some(m=>m.type===type)).toBe(true);}
+  it('opens the curated metal world with the existing smear instrument',()=>{
+    const selector=document.querySelector<HTMLSelectElement>('.preset-select')!;selector.value='dissolving-metal';selector.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe('DISSOLVING METAL');expect(app.store.patch.modules.some(m=>m.type==='SMEAR')).toBe(true);
   });
 
   it('loads FOUND samples without starting audio, retains references in snapshots and caps two instances',async()=>{
@@ -293,7 +291,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   it('loads a local FOUND file through its file input without starting RUN',async()=>{
     const {builtinFound}=await import('../src/samples/FoundData');const audio={...builtinFound('machine'),id:'local:ui-test',name:'field.m4a'};const start=vi.spyOn(app.audio,'start');vi.spyOn(app.audio.foundLibrary,'import').mockResolvedValue({audio,persisted:false});document.querySelector<HTMLButtonElement>('[aria-label="Add FOUND module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));const file=document.querySelector<HTMLInputElement>('[aria-label="FOUND audio file"]')!;Object.defineProperty(file,'files',{value:[new File(['sample'],'field.m4a')],configurable:true});file.dispatchEvent(new Event('change'));await vi.waitFor(()=>expect(app.store.patch.modules.find(m=>m.id===id)!.sample).toBe('local:ui-test'));expect(start).not.toHaveBeenCalled();expect(JSON.stringify(app.store.patch)).not.toContain('Float32Array');expect(document.querySelector('.toast')!.textContent).toContain('session');
   });
-  it('shows LEVEL zero-dB reference and all three new demos',()=>{document.querySelector<HTMLButtonElement>('[aria-label="Add LEVEL module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));expect(document.querySelectorAll('.editor-controls input[type=range]')).toHaveLength(2);expect(document.querySelector('.editor .gain-zero')!.textContent).toBe('0 dB');expect(document.querySelector('.editor output')!.textContent).toBe('0.0 dB');const boost=document.querySelector<HTMLInputElement>('.editor input[data-parameter=boost]')!;boost.value='.333';boost.dispatchEvent(new Event('input'));expect(app.store.patch.modules.find(m=>m.id===id)!.params.boost).toBe(1/3);const select=document.querySelector<HTMLSelectElement>('.preset-select')!;for(const [index,name] of [['34','FOUND / QUIET'],['35','FOUND / STRANGE'],['36','LEVEL / RECOVERY']]){select.value=index;select.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe(name);}});
+  it('shows LEVEL zero-dB reference and keeps curated sample selection accessible',()=>{document.querySelector<HTMLButtonElement>('[aria-label="Add LEVEL module"]')!.click();const id=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${id}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));expect(document.querySelectorAll('.editor-controls input[type=range]')).toHaveLength(2);expect(document.querySelector('.editor .gain-zero')!.textContent).toBe('0 dB');expect(document.querySelector('.editor output')!.textContent).toBe('0.0 dB');const boost=document.querySelector<HTMLInputElement>('.editor input[data-parameter=boost]')!;boost.value='.333';boost.dispatchEvent(new Event('input'));expect(app.store.patch.modules.find(m=>m.id===id)!.params.boost).toBe(1/3);const select=document.querySelector<HTMLSelectElement>('.preset-select')!;select.value='room-air';select.dispatchEvent(new Event('change'));expect(app.store.patch.name).toBe('ROOM AIR');expect(app.store.patch.modules.some(m=>m.type==='FOUND')).toBe(true);});
 
 });
 

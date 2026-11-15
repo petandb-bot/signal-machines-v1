@@ -1,6 +1,6 @@
 import type { EngineTelemetry, Patch } from '../graph/types';
 import { loadLocal, saveLocal } from '../state/PatchStorage';
-import { metalDrift } from '../state/presets';
+import { startupPatch } from '../state/curatedPresets';
 export type ChangeType = 'routing' | 'parameters' | 'layout' | 'replace';
 export class StateStore {
   patch: Patch;
@@ -12,8 +12,8 @@ export class StateStore {
   onStorageError: (message: string) => void = () => {};
   initialWarning = '';
   constructor() {
-    try { this.patch = loadLocal() ?? metalDrift(); }
-    catch (error) { this.patch = metalDrift(); this.initialWarning = `Local patch could not be restored: ${error instanceof Error ? error.message : 'storage unavailable'}`; }
+    try { this.patch = loadLocal() ?? startupPatch(); }
+    catch (error) { this.patch = startupPatch(); this.initialWarning = `Local patch could not be restored: ${error instanceof Error ? error.message : 'storage unavailable'}`; }
   }
   changed(type: ChangeType) {
     this.onChange(type); clearTimeout(this.persistTimer);

@@ -70,4 +70,7 @@ interaction.connections=[
 const interacting=new Processor(),interactionBefore=messages.length;interacting.port.onmessage({data:{type:'patch',patch:interaction,reset:true}});let interactionEnergy=0;
 for(let i=0;i<300;i++){const l=new Float32Array(193),r=new Float32Array(193);interacting.process([],[ [l,r] ]);for(const v of [...l,...r]){assert(Number.isFinite(v)&&Math.abs(v)<=.63);interactionEnergy+=v*v;}}
 assert(interactionEnergy>.0001);assert(!messages.slice(interactionBefore).some(m=>m.type==='error'||m.type==='telemetry'&&m.data.faults>0));
-console.log(JSON.stringify({result:'PASS',test:'production worklet: thirty-seven presets, 3 s each / 48 kHz / stereo / variable blocks; LOOP record, overdub, import/export and restart/reset bridge; sample-identical master PCM capture',results},null,2));
+console.log(JSON.stringify({result:'PASS',test:'production worklet: legacy preset fixtures, 3 s each / 48 kHz / stereo / variable blocks; LOOP record, overdub, import/export and restart/reset bridge; sample-identical master PCM capture',results},null,2));
+// Visible curation never removes historical fixtures from the checks above.
+await import('./check-v019-compat.mjs');
+await import('./verify-phase4-worklet.mjs');

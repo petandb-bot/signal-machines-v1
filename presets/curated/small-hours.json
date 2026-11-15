@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "SMALL HOURS",
+  "seed": 20200404,
+  "bpm": 82,
+  "master": 0.65,
+  "modules": [
+    {
+      "id": "cuts-1",
+      "type": "CUTS",
+      "x": 16,
+      "y": 16,
+      "seed": 20200404,
+      "character": "METAL",
+      "params": {
+        "sparse": 0.78,
+        "change": 0.56
+      },
+      "sample": "builtin:rain"
+    },
+    {
+      "id": "loss-1",
+      "type": "LOSS",
+      "x": 192,
+      "y": 16,
+      "seed": 20208323,
+      "character": "METAL",
+      "params": {
+        "damage": 0.28,
+        "recover": 0.66
+      }
+    },
+    {
+      "id": "mirage-1",
+      "type": "MIRAGE",
+      "x": 368,
+      "y": 16,
+      "seed": 20216242,
+      "character": "METAL",
+      "params": {
+        "distance": 0,
+        "mutate": 0.14
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 544,
+      "y": 16,
+      "seed": 20224161,
+      "character": "METAL",
+      "params": {
+        "boost": 0.58,
+        "comp": 0
+      }
+    },
+    {
+      "id": "nerve-1",
+      "type": "NERVE",
+      "x": 16,
+      "y": 184,
+      "seed": 20232080,
+      "character": "METAL",
+      "params": {
+        "sense": 0.64,
+        "fatigue": 0.71
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 192,
+      "y": 184,
+      "seed": 20239999,
+      "character": "METAL",
+      "params": {
+        "level": 0.74
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "6ce5ba4a-44bc-4fc4-9ea0-2b9edef0da87",
+      "from": {
+        "module": "cuts-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "loss-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "fb42f73a-82be-4d83-b40f-9b0acc2c53c3",
+      "from": {
+        "module": "cuts-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "nerve-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "4ad1836e-3807-450f-a287-7f4fec9249ce",
+      "from": {
+        "module": "nerve-1",
+        "port": "charge"
+      },
+      "to": {
+        "module": "loss-1",
+        "port": "damage"
+      }
+    },
+    {
+      "id": "259aaf19-d6cd-46fc-8af1-066bf74ddf83",
+      "from": {
+        "module": "loss-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mirage-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "7c844b2c-6cce-4eb2-832d-ba3ec2767e11",
+      "from": {
+        "module": "mirage-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "33c31d1c-a5ed-4688-9ff3-be24e4e597cb",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

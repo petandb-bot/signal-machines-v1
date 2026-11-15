@@ -1,0 +1,542 @@
+{
+  "engine": "Linux headless Chromium156, emulated CSS viewports and touch. Not physical iPhone Safari. Fit geometry only; visual inspection screenshots retained locally.",
+  "results": [
+    {
+      "width": 390,
+      "height": 844,
+      "id": "still-almost-moving-ii",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "still-almost-moving-ii",
+      "canvas": 14
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "pixel-dust",
+      "chips": 3,
+      "clipped": [],
+      "overflow": false,
+      "preset": "pixel-dust",
+      "canvas": 6
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "room-air",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "room-air",
+      "canvas": 10
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "small-hours",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "small-hours",
+      "canvas": 12
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "exchanging-bodies",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "exchanging-bodies",
+      "canvas": 10
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "dissolving-metal",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "dissolving-metal",
+      "canvas": 14
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "binary-fever",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "binary-fever",
+      "canvas": 12
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "tape-garden",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "tape-garden",
+      "canvas": 10
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "late-light",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "late-light",
+      "canvas": 10
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "off-grid",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "off-grid",
+      "canvas": 14
+    },
+    {
+      "touchEditor": true,
+      "deleteCancelPreserves": true,
+      "deleteRemoves": true
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "still-almost-moving-ii",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "still-almost-moving-ii",
+      "canvas": 14
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "pixel-dust",
+      "chips": 3,
+      "clipped": [],
+      "overflow": false,
+      "preset": "pixel-dust",
+      "canvas": 6
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "room-air",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "room-air",
+      "canvas": 10
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "small-hours",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "small-hours",
+      "canvas": 12
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "exchanging-bodies",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "exchanging-bodies",
+      "canvas": 10
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "dissolving-metal",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "dissolving-metal",
+      "canvas": 14
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "binary-fever",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "binary-fever",
+      "canvas": 12
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "tape-garden",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "tape-garden",
+      "canvas": 10
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "late-light",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "late-light",
+      "canvas": 10
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "off-grid",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "off-grid",
+      "canvas": 14
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "still-almost-moving-ii",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "still-almost-moving-ii",
+      "canvas": 14
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "pixel-dust",
+      "chips": 3,
+      "clipped": [],
+      "overflow": false,
+      "preset": "pixel-dust",
+      "canvas": 6
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "room-air",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "room-air",
+      "canvas": 10
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "small-hours",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "small-hours",
+      "canvas": 12
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "exchanging-bodies",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "exchanging-bodies",
+      "canvas": 10
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "dissolving-metal",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "dissolving-metal",
+      "canvas": 14
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "binary-fever",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "binary-fever",
+      "canvas": 12
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "tape-garden",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "tape-garden",
+      "canvas": 10
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "late-light",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "late-light",
+      "canvas": 10
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "off-grid",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "off-grid",
+      "canvas": 14
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "still-almost-moving-ii",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "still-almost-moving-ii",
+      "canvas": 14
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "pixel-dust",
+      "chips": 3,
+      "clipped": [],
+      "overflow": false,
+      "preset": "pixel-dust",
+      "canvas": 6
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "room-air",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "room-air",
+      "canvas": 10
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "small-hours",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "small-hours",
+      "canvas": 12
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "exchanging-bodies",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "exchanging-bodies",
+      "canvas": 10
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "dissolving-metal",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "dissolving-metal",
+      "canvas": 14
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "binary-fever",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "binary-fever",
+      "canvas": 12
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "tape-garden",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "tape-garden",
+      "canvas": 10
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "late-light",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "late-light",
+      "canvas": 10
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "off-grid",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "off-grid",
+      "canvas": 14
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "still-almost-moving-ii",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "still-almost-moving-ii",
+      "canvas": 14
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "pixel-dust",
+      "chips": 3,
+      "clipped": [],
+      "overflow": false,
+      "preset": "pixel-dust",
+      "canvas": 6
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "room-air",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "room-air",
+      "canvas": 10
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "small-hours",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "small-hours",
+      "canvas": 12
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "exchanging-bodies",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "exchanging-bodies",
+      "canvas": 10
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "dissolving-metal",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "dissolving-metal",
+      "canvas": 14
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "binary-fever",
+      "chips": 6,
+      "clipped": [],
+      "overflow": false,
+      "preset": "binary-fever",
+      "canvas": 12
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "tape-garden",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "tape-garden",
+      "canvas": 10
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "late-light",
+      "chips": 5,
+      "clipped": [],
+      "overflow": false,
+      "preset": "late-light",
+      "canvas": 10
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "off-grid",
+      "chips": 7,
+      "clipped": [],
+      "overflow": false,
+      "preset": "off-grid",
+      "canvas": 14
+    }
+  ],
+  "screenshots": [
+    "screens/late-light-portrait.png",
+    "screens/still-small-portrait.png",
+    "screens/pixel-desktop.png"
+  ],
+  "runningPlate": {
+    "button": "\u25a0",
+    "audioContextState": "running",
+    "rate": 44100,
+    "renderedSeconds": 7.230113378684807,
+    "toast": ""
+  },
+  "listeningPages": [
+    {
+      "page": "/listening/phase4-plate.html",
+      "audioControls": 6,
+      "overflow": false,
+      "status": "Six identical sources / six reverb settings. Start quietly."
+    },
+    {
+      "page": "/listening/phase4-presets.html",
+      "audioControls": 10,
+      "overflow": false,
+      "status": "Original seeds and patch settings. Audio starts only when you press play."
+    }
+  ],
+  "decodedPreset": {
+    "channels": 2,
+    "seconds": 59.999977324263035,
+    "nonzero": true
+  },
+  "audioExceptions": []
+}

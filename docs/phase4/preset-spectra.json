@@ -1,0 +1,116 @@
+{
+  "rate": 24000,
+  "method": "4096-point Hann-windowed power spectra, non-overlapping sampled windows at 8192-frame spacing. Bands normalized to each own total spectral power; no judgement of musical identity from centroid alone. Raw output PCM24.",
+  "rows": [
+    {
+      "id": "still-almost-moving-ii",
+      "spectralCentroidHz": 146.83630945001792,
+      "centroidStdHz": 44.890511850402454,
+      "bandPowerFraction": {
+        "sub": 1.0227982613651846e-06,
+        "low": 0.9837609924326551,
+        "mid": 0.016237984683837102,
+        "high": 8.524656953450295e-11
+      }
+    },
+    {
+      "id": "pixel-dust",
+      "spectralCentroidHz": 567.1805594105359,
+      "centroidStdHz": 77.06791510139246,
+      "bandPowerFraction": {
+        "sub": 0.0004766765869749844,
+        "low": 0.8117609562106689,
+        "mid": 0.1556222458575645,
+        "high": 0.03214012134479152
+      }
+    },
+    {
+      "id": "room-air",
+      "spectralCentroidHz": 90.04620339467569,
+      "centroidStdHz": 17.7213579636033,
+      "bandPowerFraction": {
+        "sub": 0.8709533292106556,
+        "low": 0.11324150404203481,
+        "mid": 0.013995028961461356,
+        "high": 0.0018101377858481618
+      }
+    },
+    {
+      "id": "small-hours",
+      "spectralCentroidHz": 2467.5819022855576,
+      "centroidStdHz": 629.5410896941091,
+      "bandPowerFraction": {
+        "sub": 0.09135123910517998,
+        "low": 0.07782460825965788,
+        "mid": 0.583161345592745,
+        "high": 0.24766280704241703
+      }
+    },
+    {
+      "id": "exchanging-bodies",
+      "spectralCentroidHz": 115.0613589227496,
+      "centroidStdHz": 92.82302493242466,
+      "bandPowerFraction": {
+        "sub": 0.0014773476908314799,
+        "low": 0.9971423629399784,
+        "mid": 0.0011683417743222112,
+        "high": 0.0002119475948678776
+      }
+    },
+    {
+      "id": "dissolving-metal",
+      "spectralCentroidHz": 169.93857171187582,
+      "centroidStdHz": 184.2222800025497,
+      "bandPowerFraction": {
+        "sub": 0.05494556461390306,
+        "low": 0.9044308859034995,
+        "mid": 0.04062206629998207,
+        "high": 1.4831826154021295e-06
+      }
+    },
+    {
+      "id": "binary-fever",
+      "spectralCentroidHz": 143.70185670220138,
+      "centroidStdHz": 50.76553784120234,
+      "bandPowerFraction": {
+        "sub": 0.4650626254631526,
+        "low": 0.5236864408709513,
+        "mid": 0.010325971859643304,
+        "high": 0.0009249618062530631
+      }
+    },
+    {
+      "id": "tape-garden",
+      "spectralCentroidHz": 153.11248241688858,
+      "centroidStdHz": 20.75627263353067,
+      "bandPowerFraction": {
+        "sub": 5.5191008541476355e-06,
+        "low": 0.9977438153153549,
+        "mid": 0.0022506655697797254,
+        "high": 1.401142411913555e-11
+      }
+    },
+    {
+      "id": "late-light",
+      "spectralCentroidHz": 447.60241755530984,
+      "centroidStdHz": 58.15829106489188,
+      "bandPowerFraction": {
+        "sub": 0.0007626466655607201,
+        "low": 0.8618658231166987,
+        "mid": 0.11453931453453567,
+        "high": 0.022832215683205065
+      }
+    },
+    {
+      "id": "off-grid",
+      "spectralCentroidHz": 484.86433749171385,
+      "centroidStdHz": 339.8373409217174,
+      "bandPowerFraction": {
+        "sub": 2.2567401756101077e-05,
+        "low": 0.8191395287888906,
+        "mid": 0.17890819155245624,
+        "high": 0.0019297122568969877
+      }
+    }
+  ]
+}

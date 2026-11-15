@@ -32,3 +32,33 @@ jobs:
         run: node scripts/verify-sympathy-worklet.mjs
       - name: Validate Phase 1 audio architecture
         run: node scripts/render-sound-architecture.mjs 60
+      - name: Render PLATE and curated environments
+        run: |
+          npm run render:phase4
+          mkdir -p dist/listening/audio dist/listening/presets
+          cp -R public/listening/audio/phase4 dist/listening/audio/
+          cp -R public/listening/presets/curated dist/listening/presets/
+      - name: Upload PLATE comparisons
+        uses: actions/upload-artifact@v5
+        with:
+          name: phase4-plate-comparisons
+          path: |
+            dist/listening/phase4-plate.html
+            dist/listening/audio/phase4/*plate*.wav
+            dist/listening/audio/phase4/*chamber*.wav
+            dist/listening/audio/phase4/input-*.wav
+            dist/listening/audio/phase4/plate-report.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload ten preset environments
+        uses: actions/upload-artifact@v5
+        with:
+          name: phase4-ten-environments
+          path: |
+            dist/listening/phase4-presets.html
+            dist/listening/audio/phase4/preset-*.wav
+            dist/listening/audio/phase4/long-*.wav
+            dist/listening/audio/phase4/preset-report.json
+            dist/listening/presets/curated/
+          if-no-files-found: error
+          retention-days: 14

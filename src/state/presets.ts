@@ -1,3 +1,4 @@
+export {CURATED_PRESETS as PRESETS} from './curatedPresets';
 import { createModule, connect } from '../graph/PatchGraph';
 import type { ModuleType, Patch } from '../graph/types';
 const patch=(name:string,bpm:number,seed:number):Patch=>({version:1,layout:2,name,bpm,master:.65,seed,modules:[],connections:[]});
@@ -62,7 +63,7 @@ export function loopWeather():Patch{
   p.modules[5].params.rate=0;p.modules[5].params.irregular=0;p.modules[0].params.color=.74;p.modules[2].params.mix=.8;
   wire(p,'drone-1','audio','cloud-1','audio');wire(p,'cloud-1','audio','loop-1','audio');wire(p,'loop-1','audio','chorus-1','audio');wire(p,'chorus-1','audio','output-1','audio');wire(p,'pulse-1','trigger','loop-1','trigger');wire(p,'flock-1','controlA','cloud-1','spread');wire(p,'flock-1','controlB','drone-1','color');return p;
 }
-export const PRESETS=[{name:'METAL DRIFT',description:'Metal + slow movement',create:metalDrift},{name:'UNEVEN MEMORY',description:'Mutating notes + fragments',create:unevenMemory},{name:'EMPTY CHAMBER',description:'Resonance + open space',create:emptyChamber},{name:'BAD CONTACT',description:'Toxic noise + corrosion + failing wires',create:badContact},{name:'TAPE GARDEN',description:'Continuous drone + worn echo',create:tapeGarden},{name:'HOST FEVER',description:'Sound drives its own faults and spectrum',create:hostFever},{name:'UNSTABLE CIRCUIT',description:'Resonant energy infects future notes',create:unstableCircuit},{name:'BREATHING CIRCUIT',description:'Envelopes give the drone a rhythm',create:breathingCircuit},{name:'FORKED MEMORY',description:'Two voices take alternate effects paths',create:forkedMemory},{name:'LOOP WEATHER',description:'Granular layers capture and replay',create:loopWeather}];
+export const LEGACY_PRESETS=[{name:'METAL DRIFT',description:'Metal + slow movement',create:metalDrift},{name:'UNEVEN MEMORY',description:'Mutating notes + fragments',create:unevenMemory},{name:'EMPTY CHAMBER',description:'Resonance + open space',create:emptyChamber},{name:'BAD CONTACT',description:'Toxic noise + corrosion + failing wires',create:badContact},{name:'TAPE GARDEN',description:'Continuous drone + worn echo',create:tapeGarden},{name:'HOST FEVER',description:'Sound drives its own faults and spectrum',create:hostFever},{name:'UNSTABLE CIRCUIT',description:'Resonant energy infects future notes',create:unstableCircuit},{name:'BREATHING CIRCUIT',description:'Envelopes give the drone a rhythm',create:breathingCircuit},{name:'FORKED MEMORY',description:'Two voices take alternate effects paths',create:forkedMemory},{name:'LOOP WEATHER',description:'Granular layers capture and replay',create:loopWeather}];
 export function clearSignal():Patch{
   const p=patch('CLEAR SIGNAL',94,71604);
   add(p,'PULSE',16,16,1701);add(p,'BRANCH',192,16,1702);add(p,'OSC',368,16,1703);add(p,'CAUSTIC',544,16,1704);add(p,'FILTER',720,16,1705);add(p,'SHAPE',192,184,1706);add(p,'VCA',720,184,1707);add(p,'OUTPUT',896,184,1708);
@@ -81,7 +82,7 @@ export function sidebandGarden():Patch{
   p.modules[0].mode='110 Hz';p.modules[0].params.color=.68;p.modules[1].params.mix=.86;p.modules[2].params.shift=.58;p.modules[2].params.mix=.72;p.modules[5].params.tune=.7;p.modules[5].params.level=.9;p.modules[6].params.drift=.18;
   wire(p,'drone-1','audio','ring-1','a');wire(p,'osc-1','audio','ring-1','b');wire(p,'ring-1','audio','shift-1','audio');wire(p,'shift-1','audio','chamber-1','audio');wire(p,'chamber-1','audio','output-1','audio');wire(p,'flock-1','controlA','osc-1','pitch');wire(p,'flock-1','controlB','shift-1','shift');return p;
 }
-PRESETS.push({name:'CLEAR SIGNAL',description:'Basic waveforms + shaped resonant filtering',create:clearSignal},{name:'WIRE STRINGS',description:'Pink noise plucks a resonant string',create:wireStrings},{name:'SIDEBAND GARDEN',description:'Two sources multiply and their harmonics drift',create:sidebandGarden});
+LEGACY_PRESETS.push({name:'CLEAR SIGNAL',description:'Basic waveforms + shaped resonant filtering',create:clearSignal},{name:'WIRE STRINGS',description:'Pink noise plucks a resonant string',create:wireStrings},{name:'SIDEBAND GARDEN',description:'Two sources multiply and their harmonics drift',create:sidebandGarden});
 export function chanceGarden():Patch{
   const p=patch('CHANCE GARDEN',104,81601);
   add(p,'PULSE',16,16,2001);add(p,'CHANCE',192,16,2002);add(p,'COMB',368,16,2003);add(p,'CHAMBER',544,16,2004);add(p,'OUTPUT',720,16,2005);add(p,'ALLOY',368,184,2006);add(p,'FLOCK',16,184,2007);
@@ -100,7 +101,7 @@ export function harmonicWeather():Patch{
   p.modules[0].params.mass=.62;p.modules[0].params.warp=.5;p.modules[2].mode='WEAVE';p.modules[2].params.size=.72;p.modules[2].params.density=.8;p.modules[5].params.feed=.62;
   wire(p,'partial-1','audio','chorus-1','audio');wire(p,'chorus-1','audio','chamber-1','audio');wire(p,'chamber-1','audio','output-1','audio');wire(p,'chamber-1','audio','parasite-1','audio');wire(p,'parasite-1','pressure','partial-1','mass');wire(p,'flock-1','controlA','partial-1','warp');wire(p,'flock-1','controlB','partial-1','pitch');return p;
 }
-PRESETS.push({name:'CHANCE GARDEN',description:'Remembered probability chooses two rhythms',create:chanceGarden},{name:'SPECTRAL GHOST',description:'A source leaves its spectrum in a new voice',create:spectralGhost},{name:'HARMONIC WEATHER',description:'Partial clusters feed an entangled space',create:harmonicWeather});
+LEGACY_PRESETS.push({name:'CHANCE GARDEN',description:'Remembered probability chooses two rhythms',create:chanceGarden},{name:'SPECTRAL GHOST',description:'A source leaves its spectrum in a new voice',create:spectralGhost},{name:'HARMONIC WEATHER',description:'Partial clusters feed an entangled space',create:harmonicWeather});
 export function clockworkGarden():Patch{
   const p=patch('CLOCKWORK GARDEN',104,91601);
   add(p,'WEFT',16,16,2301);add(p,'BRANCH',192,16,2302);add(p,'ALLOY',368,16,2303);add(p,'CHAMBER',544,16,2304);add(p,'OUTPUT',720,16,2305);add(p,'DRONE',16,184,2306);add(p,'VCA',192,184,2307);add(p,'COMB',368,184,2308);
@@ -125,7 +126,7 @@ export function binaryFever():Patch{
   p.modules[0].mode='AUDIO';p.modules[0].params.rate=.82;p.modules[0].params.step=4/14;p.modules[1].params.table=4/7;p.modules[1].params.amount=.6;p.modules[2].params.chaos=.73;p.modules[2].params.tune=.48;p.modules[3].params.cutoff=.7;p.modules[4].params.level=.6;p.modules[5].params.flow=.7;
   wire(p,'count-1','audio','map-1','audio');wire(p,'count-1','value','map-1','cv');wire(p,'map-1','audio','feral-1','audio');wire(p,'feral-1','audio','filter-1','audio');wire(p,'filter-1','audio','output-1','audio');wire(p,'map-1','cv','filter-1','cutoff');wire(p,'tide-1','drift','map-1','table');wire(p,'tide-1','tide','feral-1','chaos');return p;
 }
-PRESETS.push({name:'CLOCKWORK GARDEN',description:'One timebase weaves rhythms and shaped controls',create:clockworkGarden},{name:'SLOW WEATHER',description:'Three time scales move a harmonic landscape',create:slowWeather},{name:'MARBLE ROOM',description:'A marble hits walls and strikes a resonant body',create:marbleRoom},{name:'BINARY FEVER',description:'Counting and lookup tables become a nonlinear voice',create:binaryFever});
+LEGACY_PRESETS.push({name:'CLOCKWORK GARDEN',description:'One timebase weaves rhythms and shaped controls',create:clockworkGarden},{name:'SLOW WEATHER',description:'Three time scales move a harmonic landscape',create:slowWeather},{name:'MARBLE ROOM',description:'A marble hits walls and strikes a resonant body',create:marbleRoom},{name:'BINARY FEVER',description:'Counting and lookup tables become a nonlinear voice',create:binaryFever});
 export function bentVowels():Patch{
   const p=patch('BENT VOWELS',82,101601);
   add(p,'BOUNCE',16,16,2701);add(p,'QUANTIZE',192,16,2702);add(p,'SLEW',368,16,2703);add(p,'FORMANT',544,16,2704);add(p,'CHAMBER',720,16,2705);add(p,'OUTPUT',896,16,2706);add(p,'WEFT',16,184,2707);add(p,'DUCK',544,184,2708);
@@ -150,7 +151,7 @@ export function offGrid():Patch{
   p.modules[0].params.rate=.33;p.modules[0].params.irregular=0;p.modules[1].mode='XOR';p.modules[1].params.ratio=1;p.modules[1].params.shift=.54;p.modules[3].mode='GLIDE';p.modules[3].params.rise=.18;p.modules[3].params.fall=.35;p.modules[4].params.tune=.62;p.modules[4].params.chaos=.62;p.modules[5].mode='WHISPER';p.modules[6].params.depth=.6;p.modules[6].params.recover=.5;p.modules[7].mode='WEAVE';
   wire(p,'pulse-1','trigger','logic-1','a');wire(p,'logic-1','a','bounce-1','kick');wire(p,'logic-1','b','feral-1','kick');wire(p,'logic-1','event','duck-1','trigger');wire(p,'bounce-1','x','slew-1','cv');wire(p,'slew-1','cv','feral-1','pitch');wire(p,'bounce-1','y','formant-1','vowel');wire(p,'bounce-1','speed','formant-1','breath');wire(p,'formant-1','audio','duck-1','audio');wire(p,'duck-1','audio','chamber-1','audio');wire(p,'feral-1','audio','chamber-1','audio');wire(p,'chamber-1','audio','output-1','audio');return p;
 }
-PRESETS.push({name:'BENT VOWELS',description:'A marble bends a 19-step vowel voice',create:bentVowels},{name:'SPLIT ORBITS',description:'Three-to-five clocks make space in a drone',create:splitOrbits},{name:'TRITAVE FIELD',description:'Thirteen steps across a tritave, with asymmetric glides',create:tritaveField},{name:'OFF GRID',description:'Irrational clocks and unquantized physical pitch',create:offGrid});
+LEGACY_PRESETS.push({name:'BENT VOWELS',description:'A marble bends a 19-step vowel voice',create:bentVowels},{name:'SPLIT ORBITS',description:'Three-to-five clocks make space in a drone',create:splitOrbits},{name:'TRITAVE FIELD',description:'Thirteen steps across a tritave, with asymmetric glides',create:tritaveField},{name:'OFF GRID',description:'Irrational clocks and unquantized physical pitch',create:offGrid});
 export function emptyPatch():Patch{return patch('UNTITLED CIRCUIT',76,crypto.getRandomValues(new Uint32Array(1))[0]);}
 
 export function colonyCracks():Patch{
@@ -177,7 +178,7 @@ export function outerBand():Patch{
   p.modules[0].wide=p.modules[1].wide=p.modules[3].wide=true;p.modules[0].params.tune=Math.log(6/.05)/Math.log(480000);p.modules[1].params.tune=Math.log(12000/.05)/Math.log(480000);p.modules[1].params.level=.35;p.modules[2].params.pressure=.8;
   wire(p,'low-1','audio','output-1','audio');wire(p,'high-1','audio','fault-line-1','audio');wire(p,'fault-line-1','audio','output-1','audio');wire(p,'tide-1','drift','high-1','pitch');return p;
 }
-PRESETS.push({name:'COLONY CRACKS',description:'Four moving voices fracture a worn signal path',create:colonyCracks},{name:'STORED RAIN',description:'Saved events return to a cracked resonant body',create:storedRain},{name:'DISSENTING BODIES',description:'Attraction and dissent choose a colony pitch',create:dissentingBodies},{name:'OUTER BAND',description:'Six-hertz motion and a wandering high voice, with wide output',create:outerBand});
+LEGACY_PRESETS.push({name:'COLONY CRACKS',description:'Four moving voices fracture a worn signal path',create:colonyCracks},{name:'STORED RAIN',description:'Saved events return to a cracked resonant body',create:storedRain},{name:'DISSENTING BODIES',description:'Attraction and dissent choose a colony pitch',create:dissentingBodies},{name:'OUTER BAND',description:'Six-hertz motion and a wandering high voice, with wide output',create:outerBand});
 
 export function pixelDust():Patch{
   const p=patch('PIXEL DUST',108,121601);
@@ -202,7 +203,7 @@ export function twinSwings():Patch{
   p.modules[0].params.energy=.7;p.modules[0].params.coupling=.65;p.modules[3].params.drive=.4;p.modules[4].mode='WEAVE';
   wire(p,'pendulum-1','aCross','comb-1','trigger');wire(p,'pendulum-1','bCross','reson-1','trigger');wire(p,'pendulum-1','a','comb-1','pitch');wire(p,'pendulum-1','b','reson-1','pitch');wire(p,'reson-1','audio','fuzz-1','audio');wire(p,'fuzz-1','audio','chamber-1','audio');wire(p,'comb-1','audio','chamber-1','audio');wire(p,'chamber-1','audio','output-1','audio');return p;
 }
-PRESETS.push({name:'PIXEL DUST',description:'A stepped voice follows a gesture and two swings',create:pixelDust},{name:'BIASED ORBIT',description:'Two angles bend a gated fuzz voice',create:biasedOrbit},{name:'DRAWN METAL',description:'A saved drawing changes pitch and broken time',create:drawnMetal},{name:'TWIN SWINGS',description:'Two coupled bodies strike strings and metal',create:twinSwings});
+LEGACY_PRESETS.push({name:'PIXEL DUST',description:'A stepped voice follows a gesture and two swings',create:pixelDust},{name:'BIASED ORBIT',description:'Two angles bend a gated fuzz voice',create:biasedOrbit},{name:'DRAWN METAL',description:'A saved drawing changes pitch and broken time',create:drawnMetal},{name:'TWIN SWINGS',description:'Two coupled bodies strike strings and metal',create:twinSwings});
 
 export function dissolvingMetal():Patch{
   const p=patch('DISSOLVING METAL',72,161601);
@@ -216,7 +217,7 @@ export function slidingGlass():Patch{
   p.modules[0].params.pressure=.64;p.modules[0].params.speed=.28;p.modules[1].params.material=.72;p.modules[1].params.decay=.38;p.modules[2].params.smear=.42;p.modules[2].params.memory=.58;p.modules[3].params.feed=.4;p.modules[3].params.memory=.6;
   wire(p,'friction-1','slip','reson-1','trigger');wire(p,'friction-1','activity','reson-1','material');wire(p,'friction-1','audio','smear-1','audio');wire(p,'reson-1','audio','smear-1','audio');wire(p,'smear-1','audio','output-1','audio');wire(p,'smear-1','audio','parasite-1','audio');wire(p,'parasite-1','fever','friction-1','speed');return p;
 }
-PRESETS.push({name:'DISSOLVING METAL',description:'Irregular metal attacks loosen into separate histories',create:dissolvingMetal},{name:'SLIDING GLASS',description:'A slipping surface excites a second body and listens to its own trace',create:slidingGlass});
+LEGACY_PRESETS.push({name:'DISSOLVING METAL',description:'Irregular metal attacks loosen into separate histories',create:dissolvingMetal},{name:'SLIDING GLASS',description:'A slipping surface excites a second body and listens to its own trace',create:slidingGlass});
 
 export function foundQuiet():Patch{
   const p=patch('FOUND / QUIET',64,171701);add(p,'FOUND',16,16,5101);add(p,'TIDE',16,184,5102);add(p,'ORBIT',192,16,5103);add(p,'OUTPUT',368,16,5104);
@@ -228,14 +229,14 @@ export function foundStrange():Patch{
   p.modules[0].sample='builtin:machine';p.modules[0].params.wander=.75;p.modules[0].params.alter=.65;p.modules[1].params.decay=.25;p.modules[3].params.grain=.25;
   wire(p,'found-1','audio','cloud-1','audio');wire(p,'found-1','event','reson-1','trigger');wire(p,'cloud-1','audio','mesh-1','a');wire(p,'reson-1','audio','mesh-1','b');wire(p,'mesh-1','audio','output-1','audio');return p;
 }
-PRESETS.push({name:'FOUND / QUIET',description:'Quiet synthetic room air follows a slow tide',create:foundQuiet},{name:'FOUND / STRANGE',description:'Discovered machine events excite another body',create:foundStrange});
+LEGACY_PRESETS.push({name:'FOUND / QUIET',description:'Quiet synthetic room air follows a slow tide',create:foundQuiet},{name:'FOUND / STRANGE',description:'Discovered machine events excite another body',create:foundStrange});
 
 export function levelRecovery():Patch{
   const p=patch('LEVEL / RECOVERY',76,171703);add(p,'DRONE',16,16,5301);add(p,'VCA',192,16,5302);add(p,'LEVEL',544,96,5303);add(p,'OUTPUT',720,96,5304);add(p,'PULSE',16,184,5305);add(p,'ALLOY',192,184,5306);p.modules.push(createModule('VCA',368,184,5307,'hit-gain'));
   p.modules[0].params.color=.7;p.modules[1].params.level=.035;p.modules[2].params.boost=.9;p.modules[2].params.comp=.6;p.modules[4].params.rate=.4;p.modules[4].params.irregular=0;p.modules[5].params.body=.22;p.modules[5].params.tension=.3;p.modules[5].character='SOFT';p.modules[6].params.level=.25;
   wire(p,'drone-1','audio','vca-1','a');wire(p,'vca-1','audio','level-1','audio');wire(p,'pulse-1','trigger','alloy-1','trigger');wire(p,'alloy-1','audio','hit-gain','a');wire(p,'hit-gain','audio','level-1','audio');wire(p,'level-1','audio','output-1','audio');return p;
 }
-PRESETS.push({name:'LEVEL / RECOVERY',description:'A small continuous source is brought forward without changing its stereo field',create:levelRecovery});
+LEGACY_PRESETS.push({name:'LEVEL / RECOVERY',description:'A small continuous source is brought forward without changing its stereo field',create:levelRecovery});
 
 export function mirageReflections():Patch{
   const p=patch('MIRAGE / AFTERIMAGES',68,181801);
@@ -267,4 +268,4 @@ export function uncertainEcosystem():Patch{
   p.modules[0].sample='builtin:machine';p.modules[0].params={sparse:.51,change:.62};p.modules[1].params={sense:.7,fatigue:.68};p.modules[2].params={material:.62,decay:.37};p.modules[3].params={damage:.32,recover:.68};p.modules[4].params={distance:.54,mutate:.57};p.modules[5].params.boost=.53;p.modules[6].params.rate=.16;
   wire(p,'cuts-1','audio','loss-1','audio');wire(p,'cuts-1','event','nerve-1','trigger');wire(p,'tide-1','drift','nerve-1','stim');wire(p,'nerve-1','spike','reson-1','trigger');wire(p,'nerve-1','charge','loss-1','damage');wire(p,'loss-1','audio','mirage-1','audio');wire(p,'reson-1','audio','mirage-1','audio');wire(p,'tide-1','age','mirage-1','mutate');wire(p,'mirage-1','audio','level-1','audio');wire(p,'level-1','audio','orbit-1','audio');wire(p,'orbit-1','audio','output-1','audio');return p;
 }
-PRESETS.push({name:'MIRAGE / AFTERIMAGES',description:'Each reflection returns as a different metal outline',create:mirageReflections},{name:'LOSS / UNCERTAIN',description:'A small machine loses and repairs parts of its transmission',create:lossTransmission},{name:'CUTS / SMALL HOURS',description:'Rain gestures and a second body leave room for silence',create:cutsSmallEvents},{name:'NERVE / RECOVERY',description:'Stimulation, adaptation and rest choose the next strike',create:nerveRecovery},{name:'UNCERTAIN ECOSYSTEM',description:'Sample events stimulate a tired body inside a changing echo',create:uncertainEcosystem});
+LEGACY_PRESETS.push({name:'MIRAGE / AFTERIMAGES',description:'Each reflection returns as a different metal outline',create:mirageReflections},{name:'LOSS / UNCERTAIN',description:'A small machine loses and repairs parts of its transmission',create:lossTransmission},{name:'CUTS / SMALL HOURS',description:'Rain gestures and a second body leave room for silence',create:cutsSmallEvents},{name:'NERVE / RECOVERY',description:'Stimulation, adaptation and rest choose the next strike',create:nerveRecovery},{name:'UNCERTAIN ECOSYSTEM',description:'Sample events stimulate a tired body inside a changing echo',create:uncertainEcosystem});
