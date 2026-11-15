@@ -9,7 +9,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -20,16 +20,15 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Test
+      - name: Full test suite
         run: npm test
-      - name: Build the app
+      - name: Build
         run: npm run build
-      - name: Verify production AudioWorklet
+      - name: Verify production AudioWorklet and legacy presets
         run: npm run verify:build
-      - name: Upload comparative sound studies
-        uses: actions/upload-artifact@v5
-        with:
-          name: four-machines-listening
-          path: dist/listening/
-          if-no-files-found: error
-          retention-days: 14
+      - name: Verify opt-in LIVING modes in emitted worklet
+        run: node scripts/verify-living-worklet.mjs
+      - name: Verify SYMPATHY in emitted worklet
+        run: node scripts/verify-sympathy-worklet.mjs
+      - name: Validate Phase 1 audio architecture
+        run: node scripts/render-sound-architecture.mjs 60

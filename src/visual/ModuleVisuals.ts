@@ -18,7 +18,12 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
   g.fill(INK.frame);
   for(let x=4;x<4+Math.round((W-8)*motion.activity);x+=4){point(g,x,2);point(g,W-5-x,H-3);}
   g.push();g.translate(motion.dx,motion.dy);g.fill(color);
-  if(type==='NERVE'){
+  if(type==='SYMPATHY'){
+    const bodies=t.particles??[],energy=t.bands??[];
+    for(let i=0;i<2;i++){const transfer=energy[i+3]??0,hot=Math.min(1,Math.abs(transfer)*8000);g.fill(hot>.15?color:INK.green);for(let x=25+i*30;x<48+i*30;x+=4)point(g,x,39,hot>.15?2:1);if(hot>.15){const center=36+i*30,sign=transfer>=0?1:-1;point(g,center+sign*4,36,2);point(g,center+sign*4,42,2);}}
+    for(let i=0;i<3;i++){const p=bodies[i],e=clamp(p?.activity??Math.sqrt(Math.max(0,energy[i]??0))*4,0,1),x=22+i*30+clamp(p?.x??0,-1,1)*5,size=2+Math.round(e*6);g.fill(e>.04?color:INK.green);point(g,x-size/2,39-size/2,size);g.fill(INK.cyan);g.rect(16+i*30,65,Math.round(e*15),2);}
+    g.fill(color);wave(g,t,75,80,4,2);
+  }else if(type==='NERVE'){
     g.fill(INK.purple);for(let y=12;y<70;y+=4){point(g,18,y,2);point(g,85,y,2);}for(let i=0;i<16;i++){g.fill(i/16<t.a?color:INK.grid);g.rect(26,65-i*3,23,2);g.fill(i/16<t.b?INK.amber:INK.grid);g.rect(59,65-i*3,18,2);}g.fill(color);const reach=3+clamp(t.envelope,0,1)*21;for(let j=0;j<8;j++){const angle=j*Math.PI/4;point(g,52+Math.cos(angle)*reach,23+Math.sin(angle)*reach,2);}g.fill(INK.cyan);g.rect(8,76,Math.round(clamp(t.phase,0,1)*87),2);
   }else if(type==='CUTS'){
     const peaks=t.curve??[];g.fill(INK.amber);for(let x=7;x<98;x+=2){const h=Math.min(19,(peaks[Math.floor((x-7)/91*104)]??0)*110);point(g,x,37-h);point(g,x,37+h);}const start=7+clamp(t.a,0,1)*90,end=7+clamp(t.b,0,1)*90;g.fill(color);g.rect(start,9,Math.max(2,end-start),3);for(let y=17;y<65;y+=5){point(g,start,y,2);point(g,end,y,2);}g.rect(7,74,Math.round(clamp(t.envelope,0,1)*90),3);point(g,7+clamp(t.phase,0,1)*90,64,3);

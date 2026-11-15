@@ -1,0 +1,73 @@
+{
+  "method": "Actual exported matched WAVs; 2 s rectangular FFT (0.5 Hz bins), local maxima above1% power, >3Hz separation. These are observed response peaks, not proof of alias-free operation. Matching uses constant gain only.",
+  "rows": [
+    {
+      "file": "pulse-body0.42-couple0-matched.wav",
+      "couple": 0,
+      "dominantPeaksHz": [
+        110.0
+      ],
+      "analysisBands": [
+        0.999284904121739,
+        0.0007145155568229654,
+        5.803197521835517e-07
+      ]
+    },
+    {
+      "file": "pulse-body0.42-couple0.55-matched.wav",
+      "couple": 0.55,
+      "dominantPeaksHz": [
+        108.0,
+        147.0
+      ],
+      "analysisBands": [
+        0.9991651390234831,
+        0.0008342697518245535,
+        5.912246615415897e-07
+      ]
+    },
+    {
+      "file": "pulse-body0.42-couple1-matched.wav",
+      "couple": 1,
+      "dominantPeaksHz": [
+        94.0,
+        149.0,
+        209.0
+      ],
+      "analysisBands": [
+        0.9984512930039823,
+        0.0015477207306182133,
+        9.862644336036177e-07
+      ]
+    }
+  ],
+  "exchangeSummary": [
+    {
+      "couple": 0,
+      "maxBodyEnergy": [
+        0.06472438111682195,
+        0,
+        0
+      ],
+      "totalEnergyNeverIncreases": true
+    },
+    {
+      "couple": 0.55,
+      "maxBodyEnergy": [
+        0.06472272915212411,
+        0.01914440685383792,
+        0.021384933632788376
+      ],
+      "totalEnergyNeverIncreases": true
+    },
+    {
+      "couple": 1,
+      "maxBodyEnergy": [
+        0.06470633075981999,
+        0.022741717099661492,
+        0.04303881109390031
+      ],
+      "totalEnergyNeverIncreases": true
+    }
+  ]
+}
