@@ -1,0 +1,11 @@
+import {writeFileSync} from 'node:fs';import os from 'node:os';import {api,typedBytes} from './lib/phase5-audio.mjs';
+const a=await api(),seconds=20,rows=[];
+for(const rate of [44100,48000])for(const voices of [1,4,8]){
+ const make=k=>{const state=a.createModule('WALLS',0,0,71+k);state.params={distance:.6,motion:1};return new a.Walls(state,rate,31);},warm=make(0);for(let i=0;i<rate;i++){warm.inputL[0]=.1*Math.sin(i*.031);warm.process();}
+ const modules=Array.from({length:voices},(_,k)=>make(k)),before=modules.map(typedBytes),blocks=[];
+ // Precompute input so reported timings exclude synthesis, UI and observation loops.
+ const signal=Float32Array.from({length:rate*seconds+128},(_,i)=>.2*Math.sin(i*2*Math.PI*330/rate)+.03*Math.sin(i*.771));let peak=0;
+ for(let at=0;at<rate*seconds;at+=128){const start=performance.now();for(let j=0;j<128;j++)for(let k=0;k<voices;k++){const m=modules[k];m.inputL[0]=signal[at+j];m.inputR[0]=signal[at+j]*.73;m.process();}blocks.push(performance.now()-start);for(const m of modules){if(!Number.isFinite(m.outputL[0])||!Number.isFinite(m.outputR[0]))throw Error('Invalid instance');peak=Math.max(peak,Math.abs(m.outputL[0]),Math.abs(m.outputR[0]));}}
+ if(JSON.stringify(before)!==JSON.stringify(modules.map(typedBytes)))throw Error('Growing memory');blocks.sort((a,b)=>a-b);rows.push({rate,voices,seconds,blockFrames:128,intervalMs:128/rate*1000,meanMs:blocks.reduce((a,b)=>a+b,0)/blocks.length,p95Ms:blocks[Math.floor(blocks.length*.95)],p99Ms:blocks[Math.floor(blocks.length*.99)],maxMs:blocks.at(-1),blocksAboveDeadline:blocks.filter(t=>t>128/rate*1000).length,typedBytesPerVoice:before[0],bufferGrowth:0,observedBlockEndPeak:peak});console.log(rows.at(-1));
+}
+writeFileSync('docs/phase5/performance.json',JSON.stringify({host:{node:process.version,cpu:os.cpus()[0]?.model},method:'Precomputed inputs, warmedJIT, processing-only timed loop includes writing input slots and process calls. Validation/memory/UI/render/synthesis are outside timing. Shared server scheduling/GC can affect max outliers. Block-end peak is not a full sample-peak measure (separate DSP/render tests check samples). No physical iPhone or browser real-time guarantee. Typed buffers exclude JS heap.',rows},null,2)+'\n');

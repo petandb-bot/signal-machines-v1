@@ -1,0 +1,99 @@
+{
+  "host": {
+    "node": "v24.22.1",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C"
+  },
+  "method": "Precomputed inputs, warmedJIT, processing-only timed loop includes writing input slots and process calls. Validation/memory/UI/render/synthesis are outside timing. Shared server scheduling/GC can affect max outliers. Block-end peak is not a full sample-peak measure (separate DSP/render tests check samples). No physical iPhone or browser real-time guarantee. Typed buffers exclude JS heap.",
+  "rows": [
+    {
+      "rate": 44100,
+      "voices": 1,
+      "seconds": 20,
+      "blockFrames": 128,
+      "intervalMs": 2.9024943310657596,
+      "meanMs": 0.09272528167174543,
+      "p95Ms": 0.16567300000008345,
+      "p99Ms": 0.33150499999999283,
+      "maxMs": 4.835732000000007,
+      "blocksAboveDeadline": 5,
+      "typedBytesPerVoice": 59419,
+      "bufferGrowth": 0,
+      "observedBlockEndPeak": 0.2386548283773965
+    },
+    {
+      "rate": 44100,
+      "voices": 4,
+      "seconds": 20,
+      "blockFrames": 128,
+      "intervalMs": 2.9024943310657596,
+      "meanMs": 0.3495248910172668,
+      "p95Ms": 0.5096189999999297,
+      "p99Ms": 0.7790879999997742,
+      "maxMs": 3.6308839999996962,
+      "blocksAboveDeadline": 1,
+      "typedBytesPerVoice": 59419,
+      "bufferGrowth": 0,
+      "observedBlockEndPeak": 0.2386548283773965
+    },
+    {
+      "rate": 44100,
+      "voices": 8,
+      "seconds": 20,
+      "blockFrames": 128,
+      "intervalMs": 2.9024943310657596,
+      "meanMs": 0.7232419818604016,
+      "p95Ms": 0.9642199999998411,
+      "p99Ms": 1.4667180000005828,
+      "maxMs": 10.972574999999779,
+      "blocksAboveDeadline": 12,
+      "typedBytesPerVoice": 59419,
+      "bufferGrowth": 0,
+      "observedBlockEndPeak": 0.24039345894178582
+    },
+    {
+      "rate": 48000,
+      "voices": 1,
+      "seconds": 20,
+      "blockFrames": 128,
+      "intervalMs": 2.6666666666666665,
+      "meanMs": 0.08984303960000349,
+      "p95Ms": 0.1688319999993837,
+      "p99Ms": 0.27702399999907357,
+      "maxMs": 9.444978999999876,
+      "blocksAboveDeadline": 2,
+      "typedBytesPerVoice": 64531,
+      "bufferGrowth": 0,
+      "observedBlockEndPeak": 0.2417689641649714
+    },
+    {
+      "rate": 48000,
+      "voices": 4,
+      "seconds": 20,
+      "blockFrames": 128,
+      "intervalMs": 2.6666666666666665,
+      "meanMs": 0.3505033894666616,
+      "p95Ms": 0.5138699999988603,
+      "p99Ms": 0.7931479999988369,
+      "maxMs": 3.428038000000015,
+      "blocksAboveDeadline": 5,
+      "typedBytesPerVoice": 64531,
+      "bufferGrowth": 0,
+      "observedBlockEndPeak": 0.2417689641649714
+    },
+    {
+      "rate": 48000,
+      "voices": 8,
+      "seconds": 20,
+      "blockFrames": 128,
+      "intervalMs": 2.6666666666666665,
+      "meanMs": 0.7126702697333349,
+      "p95Ms": 0.9347859999998036,
+      "p99Ms": 1.4346220000006724,
+      "maxMs": 5.751212000001033,
+      "blocksAboveDeadline": 12,
+      "typedBytesPerVoice": 64531,
+      "bufferGrowth": 0,
+      "observedBlockEndPeak": 0.2417689641649714
+    }
+  ]
+}

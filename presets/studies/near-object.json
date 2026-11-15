@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "NEAR OBJECT",
+  "bpm": 72,
+  "master": 0.65,
+  "seed": 20200501,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 20200501,
+      "character": "METAL",
+      "params": {
+        "rate": 0.26,
+        "irregular": 0.2
+      }
+    },
+    {
+      "id": "chip-1",
+      "type": "CHIP",
+      "x": 192,
+      "y": 16,
+      "seed": 20208420,
+      "character": "METAL",
+      "params": {
+        "tune": 0.48,
+        "character": 0.25
+      }
+    },
+    {
+      "id": "walls-1",
+      "type": "WALLS",
+      "x": 368,
+      "y": 16,
+      "seed": 20216339,
+      "character": "METAL",
+      "params": {
+        "distance": 0.42,
+        "motion": 0.5
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 16,
+      "seed": 20224258,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "727226b2-fb4d-4492-b706-5f5f51952836",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "da18dd9d-85f9-4bd9-ae57-b5b6ccb35b4e",
+      "from": {
+        "module": "chip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "walls-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "f95dc3c3-404c-45a7-8b5e-ae9d18fe7ea3",
+      "from": {
+        "module": "walls-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

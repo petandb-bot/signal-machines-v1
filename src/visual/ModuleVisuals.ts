@@ -18,7 +18,11 @@ export function drawModule(g:p5.Graphics,type:ModuleType,t?:ModuleTelemetry,live
   g.fill(INK.frame);
   for(let x=4;x<4+Math.round((W-8)*motion.activity);x+=4){point(g,x,2);point(g,W-5-x,H-3);}
   g.push();g.translate(motion.dx,motion.dy);g.fill(color);
-  if(type==='PLATE'){
+  if(type==='WALLS'){
+    const positions=t.curve??[],levels=t.bands??[];g.fill(INK.cyan);point(g,11,38,4);
+    for(let i=0;i<8;i++){const x=27+clamp(positions[i]??.2,0,1)*66,y=13+(i%4)*16,hot=clamp((levels[i]??0)*35,0,1);g.fill(i<4?INK.cyan:INK.blue);g.rect(x,y-5,2,11);g.fill(color);point(g,x-2, y-1,2+Math.round(hot*3));if(hot>.02){g.fill(color);for(let k=1;k<9;k++)point(g,13+(x-13)*k/9,39+(y-39)*k/9,1);}}
+    g.fill(color);wave(g,t,76,25,3,2);
+  }else if(type==='PLATE'){
     const bands=t.bands??[];
     for(let i=0;i<8;i++){const level=clamp((bands[i]??0)*32,0,1),x=12+i*11;g.fill(i%2?INK.cyan:color);for(let y=0;y<3+Math.round(level*24);y+=3){point(g,x,39-y,2);point(g,x,43+y,2);}g.fill(INK.blue);point(g,x,12,2);point(g,x,69,2);}
     g.fill(color);wave(g,t,75,35,3,2);

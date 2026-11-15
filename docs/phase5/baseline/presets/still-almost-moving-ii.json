@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "STILL, ALMOST MOVING II",
+  "seed": 20200401,
+  "bpm": 73,
+  "master": 0.65,
+  "modules": [
+    {
+      "id": "drone-1",
+      "type": "DRONE",
+      "x": 16,
+      "y": 16,
+      "seed": 20200401,
+      "character": "METAL",
+      "params": {
+        "spread": 0.17,
+        "color": 0.3
+      },
+      "mode": "LIVING 110 Hz"
+    },
+    {
+      "id": "partial-1",
+      "type": "PARTIAL",
+      "x": 192,
+      "y": 16,
+      "seed": 20208320,
+      "character": "METAL",
+      "params": {
+        "mass": 0.37,
+        "warp": 0.51
+      },
+      "mode": "LIVING 220 Hz"
+    },
+    {
+      "id": "vca-1",
+      "type": "VCA",
+      "x": 368,
+      "y": 16,
+      "seed": 20216239,
+      "character": "METAL",
+      "params": {
+        "level": 0.22,
+        "blend": 0
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 16,
+      "seed": 20224158,
+      "character": "METAL",
+      "params": {
+        "size": 0.48,
+        "density": 0.46
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 184,
+      "seed": 20232077,
+      "character": "METAL",
+      "params": {
+        "flow": 0.21,
+        "range": 0.16
+      }
+    },
+    {
+      "id": "slew-1",
+      "type": "SLEW",
+      "x": 192,
+      "y": 184,
+      "seed": 20239996,
+      "character": "METAL",
+      "params": {
+        "rise": 0.88,
+        "fall": 0.9
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 184,
+      "seed": 20247915,
+      "character": "METAL",
+      "params": {
+        "level": 0.76
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "cdc441cc-5a6b-4149-bb7c-066e993577bb",
+      "from": {
+        "module": "drone-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "ff344e8e-2dba-4a97-b4b0-49116d1d65ac",
+      "from": {
+        "module": "partial-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "d15b03ce-439e-4102-8ecb-e34aa9e2353f",
+      "from": {
+        "module": "vca-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "450cbcb3-e615-4555-9e2e-976154f37c21",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "40e90564-fa00-44c0-bd9d-b4f4ef85dfc4",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "drone-1",
+        "port": "spread"
+      }
+    },
+    {
+      "id": "74e0acbc-d3f6-4859-8317-5cf598e0e723",
+      "from": {
+        "module": "tide-1",
+        "port": "tide"
+      },
+      "to": {
+        "module": "slew-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "9865e66d-92b9-4c54-9bcc-2582db2a0579",
+      "from": {
+        "module": "slew-1",
+        "port": "cv"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "6215a8f5-70b3-436e-a533-a8fec70508ed",
+      "from": {
+        "module": "tide-1",
+        "port": "age"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "mass"
+      }
+    }
+  ]
+}

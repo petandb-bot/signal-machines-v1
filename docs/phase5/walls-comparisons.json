@@ -1,0 +1,1666 @@
+{
+  "rate": 24000,
+  "cases": [
+    {
+      "id": "dry"
+    },
+    {
+      "id": "orbit",
+      "type": "ORBIT",
+      "params": {
+        "rate": 0.28,
+        "depth": 0.65
+      }
+    },
+    {
+      "id": "chamber-room",
+      "type": "CHAMBER",
+      "mode": "ROOM",
+      "params": {
+        "size": 0.5,
+        "density": 0.5
+      }
+    },
+    {
+      "id": "chamber-weave",
+      "type": "CHAMBER",
+      "mode": "WEAVE",
+      "params": {
+        "size": 0.5,
+        "density": 0.5
+      }
+    },
+    {
+      "id": "plate-default",
+      "type": "PLATE",
+      "params": {
+        "body": 0.5,
+        "decay": 0.5
+      }
+    },
+    {
+      "id": "walls-static",
+      "type": "WALLS",
+      "params": {
+        "distance": 0.55,
+        "motion": 0
+      }
+    },
+    {
+      "id": "walls-moving",
+      "type": "WALLS",
+      "params": {
+        "distance": 0.55,
+        "motion": 0.8
+      }
+    }
+  ],
+  "files": [
+    {
+      "name": "spatial-input-chip.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-input-metal.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-input-pulse.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-input-cuts.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-input-drone.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-input-noise.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-input-stereo.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-dry-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-dry-matched.wav",
+      "gain": 0.8220223941440334,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-dry-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-dry-matched.wav",
+      "gain": 0.8343788019860592,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-dry-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-dry-matched.wav",
+      "gain": 0.2371708209785078,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-dry-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-dry-matched.wav",
+      "gain": 4.1281818701149415,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-dry-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-dry-matched.wav",
+      "gain": 0.6546601975061651,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-dry-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-dry-matched.wav",
+      "gain": 0.7758342121001014,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-dry-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-dry-matched.wav",
+      "gain": 0.5245741375369328,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-orbit-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-orbit-matched.wav",
+      "gain": 0.822022394084667,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-orbit-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-orbit-matched.wav",
+      "gain": 0.8343788019471382,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-orbit-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-orbit-matched.wav",
+      "gain": 0.23717082075090676,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-orbit-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-orbit-matched.wav",
+      "gain": 4.128181870662753,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-orbit-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-orbit-matched.wav",
+      "gain": 0.6546601973798378,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-orbit-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-orbit-matched.wav",
+      "gain": 0.7758342120961532,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-orbit-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-orbit-matched.wav",
+      "gain": 0.5245741375271193,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-chamber-room-matched.wav",
+      "gain": 1.219495848654044,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-chamber-room-matched.wav",
+      "gain": 1.162379306037061,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-chamber-room-matched.wav",
+      "gain": 2.3691578470962993,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-chamber-room-matched.wav",
+      "gain": 9.561179081724607,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-chamber-room-matched.wav",
+      "gain": 0.8286811477066252,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-chamber-room-matched.wav",
+      "gain": 1.0408943036650553,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-chamber-room-matched.wav",
+      "gain": 0.7506839760199624,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-chamber-weave-matched.wav",
+      "gain": 1.3017250516607377,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-chamber-weave-matched.wav",
+      "gain": 1.16994872339648,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-chamber-weave-matched.wav",
+      "gain": 2.4502943241116975,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-chamber-weave-matched.wav",
+      "gain": 9.470574220213392,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-chamber-weave-matched.wav",
+      "gain": 0.8532170467359714,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-chamber-weave-matched.wav",
+      "gain": 1.0476815632476675,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-chamber-weave-matched.wav",
+      "gain": 0.8240436611017131,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-plate-default-matched.wav",
+      "gain": 1.2780496680893052,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-plate-default-matched.wav",
+      "gain": 1.1994879761019297,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-plate-default-matched.wav",
+      "gain": 2.7492795853546284,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-plate-default-matched.wav",
+      "gain": 10.218686634814121,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-plate-default-matched.wav",
+      "gain": 0.9842899654890377,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-plate-default-matched.wav",
+      "gain": 1.087494555067579,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-plate-default-matched.wav",
+      "gain": 0.6375620251094499,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-walls-static-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-walls-static-matched.wav",
+      "gain": 0.8415277146820866,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-walls-static-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-walls-static-matched.wav",
+      "gain": 0.8578723379072607,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-walls-static-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-walls-static-matched.wav",
+      "gain": 0.5264813384756363,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-walls-static-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-walls-static-matched.wav",
+      "gain": 4.822835152827713,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-walls-static-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-walls-static-matched.wav",
+      "gain": 0.7140972251228502,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-walls-static-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-walls-static-matched.wav",
+      "gain": 0.8692907170582399,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-walls-static-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-walls-static-matched.wav",
+      "gain": 0.6359356464216037,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-walls-moving-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-chip-walls-moving-matched.wav",
+      "gain": 0.8565693532740947,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-walls-moving-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-metal-walls-moving-matched.wav",
+      "gain": 0.8836803613543007,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-walls-moving-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-pulse-walls-moving-matched.wav",
+      "gain": 0.558348819561913,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-walls-moving-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-cuts-walls-moving-matched.wav",
+      "gain": 4.856321969839817,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-walls-moving-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-drone-walls-moving-matched.wav",
+      "gain": 0.7385623222287786,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-walls-moving-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-noise-walls-moving-matched.wav",
+      "gain": 0.8691389980772456,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-walls-moving-raw.wav",
+      "gain": 1,
+      "seconds": 14
+    },
+    {
+      "name": "spatial-stereo-walls-moving-matched.wav",
+      "gain": 0.6376857172628628,
+      "seconds": 14
+    },
+    {
+      "name": "walls-ir-distance0.wav",
+      "gain": 1,
+      "seconds": 1
+    },
+    {
+      "name": "walls-ir-distance0.45.wav",
+      "gain": 1,
+      "seconds": 1
+    },
+    {
+      "name": "walls-ir-distance1.wav",
+      "gain": 1,
+      "seconds": 1
+    }
+  ],
+  "rows": [
+    {
+      "source": "chip",
+      "case": "dry",
+      "rms": 0.021722735949809537,
+      "peak": 0.22466886043548584,
+      "dc": [
+        -0.00060521634882068,
+        -0.00060521634882068
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.298947311937809,
+      "activeRms": 0.03649535610430517,
+      "gain": 0.8220223941440334,
+      "typedBytes": 0,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "metal",
+      "case": "dry",
+      "rms": 0.030387430243320135,
+      "peak": 0.19601896405220032,
+      "dc": [
+        0.00009005320074944453,
+        0.00009066646174509554
+      ],
+      "stereoCorrelation": 0.9588716298037715,
+      "monoPowerRatio": 0.97943477769245,
+      "maxStep": 0.018550340086221695,
+      "activeRms": 0.035954892344569944,
+      "gain": 0.8343788019860592,
+      "typedBytes": 0,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "pulse",
+      "case": "dry",
+      "rms": 0.009561829017157483,
+      "peak": 0.4000000059604645,
+      "dc": [
+        0.00022857143197740828,
+        0.00022857143197740828
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.4000000059604645,
+      "activeRms": 0.12649110829159954,
+      "gain": 0.2371708209785078,
+      "typedBytes": 0,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "cuts",
+      "case": "dry",
+      "rms": 0.0023787267751820074,
+      "peak": 0.04370764642953873,
+      "dc": [
+        0.000002702285662699986,
+        9.001291552565994e-7
+      ],
+      "stereoCorrelation": -0.03344100622800324,
+      "monoPowerRatio": 0.48349394687674646,
+      "maxStep": 0.012747596949338913,
+      "activeRms": 0.007267121687922316,
+      "gain": 4.1281818701149415,
+      "typedBytes": 0,
+      "events": [
+        0.07995833333333334,
+        2.17,
+        4.019916666666667,
+        6.245541666666667,
+        8.380875
+      ]
+    },
+    {
+      "source": "drone",
+      "case": "dry",
+      "rms": 0.038729447335337744,
+      "peak": 0.15424604713916779,
+      "dc": [
+        -5.1716963417965043e-8,
+        1.1463568012702398e-7
+      ],
+      "stereoCorrelation": 0.9633568854200593,
+      "monoPowerRatio": 0.9750288614730483,
+      "maxStep": 0.006084641441702843,
+      "activeRms": 0.04582530007824018,
+      "gain": 0.6546601975061651,
+      "typedBytes": 0,
+      "events": []
+    },
+    {
+      "source": "noise",
+      "case": "dry",
+      "rms": 0.03268047122235642,
+      "peak": 0.10091866552829742,
+      "dc": [
+        -3.711545811840062e-7,
+        -3.711545811840062e-7
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.1235172189772129,
+      "activeRms": 0.03866805502014813,
+      "gain": 0.7758342121001014,
+      "typedBytes": 0,
+      "events": []
+    },
+    {
+      "source": "stereo",
+      "case": "dry",
+      "rms": 0.04833373555338771,
+      "peak": 0.10999012738466263,
+      "dc": [
+        3.4169228293362286e-16,
+        -8.07364226859807e-9
+      ],
+      "stereoCorrelation": -0.0005174785853727042,
+      "monoPowerRatio": 0.4997429623552123,
+      "maxStep": 0.009120679460465908,
+      "activeRms": 0.05718924714981367,
+      "gain": 0.5245741375369328,
+      "typedBytes": 0,
+      "events": []
+    },
+    {
+      "source": "chip",
+      "case": "orbit",
+      "rms": 0.02172273595137833,
+      "peak": 0.3002421259880066,
+      "dc": [
+        -0.0006006501218496017,
+        -0.0006118330020847632
+      ],
+      "stereoCorrelation": 0.8956079169645274,
+      "monoPowerRatio": 0.9104752154260192,
+      "maxStep": 0.39941664040088654,
+      "activeRms": 0.03649535610694086,
+      "gain": 0.822022394084667,
+      "typedBytes": 418,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "metal",
+      "case": "orbit",
+      "rms": 0.0303874302447377,
+      "peak": 0.22464759647846222,
+      "dc": [
+        0.00006508737544493166,
+        0.000106285853047055
+      ],
+      "stereoCorrelation": 0.8538973205725917,
+      "monoPowerRatio": 0.8896074012869769,
+      "maxStep": 0.0212564617395401,
+      "activeRms": 0.035954892346247116,
+      "gain": 0.8343788019471382,
+      "typedBytes": 418,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "pulse",
+      "case": "orbit",
+      "rms": 0.00956182902633351,
+      "peak": 0.5362558364868164,
+      "dc": [
+        0.0001645022245744864,
+        0.0002700418863622915
+      ],
+      "stereoCorrelation": 0.8943305506145779,
+      "monoPowerRatio": 0.9059497649440472,
+      "maxStep": 0.5362558364868164,
+      "activeRms": 0.12649110841298677,
+      "gain": 0.23717082075090676,
+      "typedBytes": 418,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "cuts",
+      "case": "orbit",
+      "rms": 0.0023787267748663398,
+      "peak": 0.04736076295375824,
+      "dc": [
+        0.0000023590302127491847,
+        0.0000013460097060920286
+      ],
+      "stereoCorrelation": 0.07940109916896888,
+      "monoPowerRatio": 0.5396120175406969,
+      "maxStep": 0.012266125064343214,
+      "activeRms": 0.007267121686957966,
+      "gain": 4.128181870662753,
+      "typedBytes": 418,
+      "events": [
+        0.07995833333333334,
+        2.17,
+        4.019916666666667,
+        6.245541666666667,
+        8.380875
+      ]
+    },
+    {
+      "source": "drone",
+      "case": "orbit",
+      "rms": 0.03872944734281093,
+      "peak": 0.19242754578590393,
+      "dc": [
+        -4.092685669545465e-8,
+        1.2262605984634352e-7
+      ],
+      "stereoCorrelation": 0.8312392948538934,
+      "monoPowerRatio": 0.8216019310815978,
+      "maxStep": 0.007962097239214927,
+      "activeRms": 0.04582530008708291,
+      "gain": 0.6546601973798378,
+      "typedBytes": 418,
+      "events": []
+    },
+    {
+      "source": "noise",
+      "case": "orbit",
+      "rms": 0.032680471222522885,
+      "peak": 0.1352737843990326,
+      "dc": [
+        -3.687883769425098e-7,
+        -3.7076341643858617e-7
+      ],
+      "stereoCorrelation": 0.9119453925896005,
+      "monoPowerRatio": 0.8855763887261485,
+      "maxStep": 0.1654350347816944,
+      "activeRms": 0.03866805502034491,
+      "gain": 0.7758342120961532,
+      "typedBytes": 418,
+      "events": []
+    },
+    {
+      "source": "stereo",
+      "case": "orbit",
+      "rms": 0.048333735554292774,
+      "peak": 0.14361004531383514,
+      "dc": [
+        7.83605916560808e-9,
+        5.501700831715761e-9
+      ],
+      "stereoCorrelation": 0.06081750801764356,
+      "monoPowerRatio": 0.5302901355081652,
+      "maxStep": 0.012059899279847741,
+      "activeRms": 0.05718924715088353,
+      "gain": 0.5245741375271193,
+      "typedBytes": 418,
+      "events": []
+    },
+    {
+      "source": "chip",
+      "case": "chamber-room",
+      "rms": 0.01795752974311673,
+      "peak": 0.1741219311952591,
+      "dc": [
+        -0.00046904267072239383,
+        -0.0004690426724006597
+      ],
+      "stereoCorrelation": 0.9378601541843073,
+      "monoPowerRatio": 0.9680068620020681,
+      "maxStep": 0.2316843718290329,
+      "activeRms": 0.024600329745370565,
+      "gain": 1.219495848654044,
+      "typedBytes": 461427,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "metal",
+      "case": "chamber-room",
+      "rms": 0.02306376978895798,
+      "peak": 0.1519540250301361,
+      "dc": [
+        0.00006979122738627798,
+        0.00007026650946015082
+      ],
+      "stereoCorrelation": 0.8797429902417163,
+      "monoPowerRatio": 0.9381714775052652,
+      "maxStep": 0.014376559294760227,
+      "activeRms": 0.02580913118823494,
+      "gain": 1.162379306037061,
+      "typedBytes": 461427,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "pulse",
+      "case": "chamber-room",
+      "rms": 0.007597662501155201,
+      "peak": 0.3100013732910156,
+      "dc": [
+        0.00017714285893757157,
+        0.00017714285933701556
+      ],
+      "stereoCorrelation": 0.9367947337840528,
+      "monoPowerRatio": 0.9683963691002664,
+      "maxStep": 0.3100000605652866,
+      "activeRms": 0.012662727406183075,
+      "gain": 2.3691578470962993,
+      "typedBytes": 461427,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "cuts",
+      "case": "chamber-room",
+      "rms": 0.0019050087847881894,
+      "peak": 0.03387530520558357,
+      "dc": [
+        0.0000020942714847920117,
+        6.975999986519403e-7
+      ],
+      "stereoCorrelation": -0.020199104715580327,
+      "monoPowerRatio": 0.490076019866608,
+      "maxStep": 0.009879440069198608,
+      "activeRms": 0.003137688327304996,
+      "gain": 9.561179081724607,
+      "typedBytes": 461427,
+      "events": [
+        0.07995833333333334,
+        2.17,
+        4.019916666666667,
+        6.245541666666667,
+        8.380875
+      ]
+    },
+    {
+      "source": "drone",
+      "case": "chamber-room",
+      "rms": 0.03261061386541381,
+      "peak": 0.13032272458076477,
+      "dc": [
+        -4.007460768407287e-8,
+        8.88296235363348e-8
+      ],
+      "stereoCorrelation": 0.9047920697525299,
+      "monoPowerRatio": 0.9472463721897116,
+      "maxStep": 0.0050091007724404335,
+      "activeRms": 0.036202102682105164,
+      "gain": 0.8286811477066252,
+      "typedBytes": 461427,
+      "events": []
+    },
+    {
+      "source": "noise",
+      "case": "chamber-room",
+      "rms": 0.025640147182737535,
+      "peak": 0.08555413037538528,
+      "dc": [
+        -2.876460008285488e-7,
+        -2.8764509124469436e-7
+      ],
+      "stereoCorrelation": 0.9686690264943183,
+      "monoPowerRatio": 0.9843344954820493,
+      "maxStep": 0.10079124383628368,
+      "activeRms": 0.028821370137551993,
+      "gain": 1.0408943036650553,
+      "typedBytes": 461427,
+      "events": []
+    },
+    {
+      "source": "stereo",
+      "case": "chamber-room",
+      "rms": 0.03612543765049765,
+      "peak": 0.09764057397842407,
+      "dc": [
+        -3.503966550943594e-13,
+        -6.2565124199856236e-9
+      ],
+      "stereoCorrelation": 0.05697206379944615,
+      "monoPowerRatio": 0.5281455490664454,
+      "maxStep": 0.00826622755266726,
+      "activeRms": 0.039963554516051415,
+      "gain": 0.7506839760199624,
+      "typedBytes": 461427,
+      "events": []
+    },
+    {
+      "source": "chip",
+      "case": "chamber-weave",
+      "rms": 0.017787763235047792,
+      "peak": 0.17413240671157837,
+      "dc": [
+        -0.00046904266997858755,
+        -0.0004690426679648107
+      ],
+      "stereoCorrelation": 0.9642047973899726,
+      "monoPowerRatio": 0.9812254712772716,
+      "maxStep": 0.2316843345761299,
+      "activeRms": 0.023046341438790065,
+      "gain": 1.3017250516607377,
+      "typedBytes": 461427,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "metal",
+      "case": "chamber-weave",
+      "rms": 0.02297595726491777,
+      "peak": 0.15186122059822083,
+      "dc": [
+        0.00006979123275602708,
+        0.00007026649902852774
+      ],
+      "stereoCorrelation": 0.8839842757107779,
+      "monoPowerRatio": 0.9409858936053214,
+      "maxStep": 0.014373569749295712,
+      "activeRms": 0.025642149437888995,
+      "gain": 1.16994872339648,
+      "typedBytes": 461427,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "pulse",
+      "case": "chamber-weave",
+      "rms": 0.0075898284171473825,
+      "peak": 0.31000199913978577,
+      "dc": [
+        0.00017714285964734412,
+        0.00017714286021687227
+      ],
+      "stereoCorrelation": 0.9334655202561692,
+      "monoPowerRatio": 0.9667326667810248,
+      "maxStep": 0.3100000534253695,
+      "activeRms": 0.012243427128239325,
+      "gain": 2.4502943241116975,
+      "typedBytes": 461427,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "cuts",
+      "case": "chamber-weave",
+      "rms": 0.001893257355120969,
+      "peak": 0.03387465700507164,
+      "dc": [
+        0.0000020942714294607097,
+        6.976000770770455e-7
+      ],
+      "stereoCorrelation": -0.026354484899990194,
+      "monoPowerRatio": 0.48703943373077335,
+      "maxStep": 0.009879517368972301,
+      "activeRms": 0.003167706551094854,
+      "gain": 9.470574220213392,
+      "typedBytes": 461427,
+      "events": [
+        0.07995833333333334,
+        2.17,
+        4.019916666666667,
+        6.245541666666667,
+        8.380875
+      ]
+    },
+    {
+      "source": "drone",
+      "case": "chamber-weave",
+      "rms": 0.031978053162298396,
+      "peak": 0.12795758247375488,
+      "dc": [
+        -4.008994334138401e-8,
+        8.884208918665316e-8
+      ],
+      "stereoCorrelation": 0.8800507569285692,
+      "monoPowerRatio": 0.9327728147110237,
+      "maxStep": 0.004956121556460857,
+      "activeRms": 0.03516104151313742,
+      "gain": 0.8532170467359714,
+      "typedBytes": 461427,
+      "events": []
+    },
+    {
+      "source": "noise",
+      "case": "chamber-weave",
+      "rms": 0.02563447322783013,
+      "peak": 0.08480197191238403,
+      "dc": [
+        -2.8764602468383886e-7,
+        -2.8764586166462184e-7
+      ],
+      "stereoCorrelation": 0.9668335237299109,
+      "monoPowerRatio": 0.9834167270182619,
+      "maxStep": 0.0995741318911314,
+      "activeRms": 0.028634654891705986,
+      "gain": 1.0476815632476675,
+      "typedBytes": 461427,
+      "events": []
+    },
+    {
+      "source": "stereo",
+      "case": "chamber-weave",
+      "rms": 0.03302427401438468,
+      "peak": 0.08744170516729355,
+      "dc": [
+        2.7989284907369197e-12,
+        -6.261935834511736e-9
+      ],
+      "stereoCorrelation": 0.07197929034950981,
+      "monoPowerRatio": 0.5356439609231829,
+      "maxStep": 0.008261541603133082,
+      "activeRms": 0.03640583796238565,
+      "gain": 0.8240436611017131,
+      "typedBytes": 461427,
+      "events": []
+    },
+    {
+      "source": "chip",
+      "case": "plate-default",
+      "rms": 0.01785469295713638,
+      "peak": 0.16176335513591766,
+      "dc": [
+        -0.0004357557704241767,
+        -0.00043575577360461994
+      ],
+      "stereoCorrelation": 0.9505884107245213,
+      "monoPowerRatio": 0.9752466983716532,
+      "maxStep": 0.21524546295404434,
+      "activeRms": 0.023473266140626795,
+      "gain": 1.2780496680893052,
+      "typedBytes": 52575,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "metal",
+      "case": "plate-default",
+      "rms": 0.022509607121603138,
+      "peak": 0.14144493639469147,
+      "dc": [
+        0.00006483830612349591,
+        0.00006527985356712935
+      ],
+      "stereoCorrelation": 0.801495189868716,
+      "monoPowerRatio": 0.8884293031409608,
+      "maxStep": 0.013392032124102116,
+      "activeRms": 0.025010671718022015,
+      "gain": 1.1994879761019297,
+      "typedBytes": 52575,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "pulse",
+      "case": "plate-default",
+      "rms": 0.0072850543082321455,
+      "peak": 0.28800225257873535,
+      "dc": [
+        0.0001645714338794558,
+        0.00016457143232199612
+      ],
+      "stereoCorrelation": 0.8822507551581754,
+      "monoPowerRatio": 0.9411249607241311,
+      "maxStep": 0.2880000174045563,
+      "activeRms": 0.010911949501174618,
+      "gain": 2.7492795853546284,
+      "typedBytes": 52575,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "cuts",
+      "case": "plate-default",
+      "rms": 0.0018701314946853733,
+      "peak": 0.03142347186803818,
+      "dc": [
+        0.0000019456454906712208,
+        6.480927956278676e-7
+      ],
+      "stereoCorrelation": 0.04248218314824108,
+      "monoPowerRatio": 0.5206767473146423,
+      "maxStep": 0.009181216824799776,
+      "activeRms": 0.002935798021028727,
+      "gain": 10.218686634814121,
+      "typedBytes": 52575,
+      "events": [
+        0.07995833333333334,
+        2.17,
+        4.019916666666667,
+        6.245541666666667,
+        8.380875
+      ]
+    },
+    {
+      "source": "drone",
+      "case": "plate-default",
+      "rms": 0.02764779215908476,
+      "peak": 0.10504370927810669,
+      "dc": [
+        -3.723775421600457e-8,
+        8.253647254274157e-8
+      ],
+      "stereoCorrelation": 0.7990434987934979,
+      "monoPowerRatio": 0.898451701127837,
+      "maxStep": 0.004095657728612423,
+      "activeRms": 0.03047882336694828,
+      "gain": 0.9842899654890377,
+      "typedBytes": 52575,
+      "events": []
+    },
+    {
+      "source": "noise",
+      "case": "plate-default",
+      "rms": 0.025175578858719454,
+      "peak": 0.0983625277876854,
+      "dc": [
+        -2.672320950219517e-7,
+        -2.672311782144444e-7
+      ],
+      "stereoCorrelation": 0.8693819011623888,
+      "monoPowerRatio": 0.9346904009665472,
+      "maxStep": 0.11907001584768295,
+      "activeRms": 0.027586345016813205,
+      "gain": 1.087494555067579,
+      "typedBytes": 52575,
+      "events": []
+    },
+    {
+      "source": "stereo",
+      "case": "plate-default",
+      "rms": 0.043235804617153636,
+      "peak": 0.13421790301799774,
+      "dc": [
+        -3.101356920112085e-12,
+        -5.810922166787824e-9
+      ],
+      "stereoCorrelation": 0.11019701258599675,
+      "monoPowerRatio": 0.549695983676954,
+      "maxStep": 0.010586444288492203,
+      "activeRms": 0.04705424542004351,
+      "gain": 0.6375620251094499,
+      "typedBytes": 52575,
+      "events": []
+    },
+    {
+      "source": "chip",
+      "case": "walls-static",
+      "rms": 0.02121923660541133,
+      "peak": 0.210526704788208,
+      "dc": [
+        -0.0007002353156835317,
+        -0.0007002353138232772
+      ],
+      "stereoCorrelation": 0.9890534039283607,
+      "monoPowerRatio": 0.9937296798162883,
+      "maxStep": 0.2660631090402603,
+      "activeRms": 0.035649449776390826,
+      "gain": 0.8415277146820866,
+      "typedBytes": 33043,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "metal",
+      "case": "walls-static",
+      "rms": 0.029702654224996832,
+      "peak": 0.19365482032299042,
+      "dc": [
+        0.00010421840629305486,
+        0.00010487424380587524
+      ],
+      "stereoCorrelation": 0.9433525727605079,
+      "monoPowerRatio": 0.9716725466174222,
+      "maxStep": 0.017620624974370003,
+      "activeRms": 0.034970238197892696,
+      "gain": 0.8578723379072607,
+      "typedBytes": 33043,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "pulse",
+      "case": "walls-static",
+      "rms": 0.008614880233443685,
+      "peak": 0.35600000619888306,
+      "dc": [
+        0.00026445714802953476,
+        0.00026445714810168804
+      ],
+      "stereoCorrelation": 0.9854565409870938,
+      "monoPowerRatio": 0.9927282702819442,
+      "maxStep": 0.35600000619888306,
+      "activeRms": 0.05698207668074506,
+      "gain": 0.5264813384756363,
+      "typedBytes": 33043,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "cuts",
+      "case": "walls-static",
+      "rms": 0.0022794737678887753,
+      "peak": 0.03989651799201965,
+      "dc": [
+        0.0000030476315895139876,
+        0.0000011203622844471537
+      ],
+      "stereoCorrelation": -0.007754445171277808,
+      "monoPowerRatio": 0.49614143511970743,
+      "maxStep": 0.011462772265076637,
+      "activeRms": 0.006220407509141272,
+      "gain": 4.822835152827713,
+      "typedBytes": 33043,
+      "events": [
+        0.07995833333333334,
+        2.17,
+        4.019916666666667,
+        6.245541666666667,
+        8.380875
+      ]
+    },
+    {
+      "source": "drone",
+      "case": "walls-static",
+      "rms": 0.03568293577623927,
+      "peak": 0.1330091506242752,
+      "dc": [
+        -5.2552145187832014e-8,
+        1.253472366779106e-7
+      ],
+      "stereoCorrelation": 0.9721456003496931,
+      "monoPowerRatio": 0.9851728204897267,
+      "maxStep": 0.005375279040890746,
+      "activeRms": 0.04201108608822689,
+      "gain": 0.7140972251228502,
+      "typedBytes": 33043,
+      "events": []
+    },
+    {
+      "source": "noise",
+      "case": "walls-static",
+      "rms": 0.02931250147048575,
+      "peak": 0.09436991810798645,
+      "dc": [
+        -4.2942503930786826e-7,
+        -4.294236264464214e-7
+      ],
+      "stereoCorrelation": 0.9839215577045661,
+      "monoPowerRatio": 0.991960634730519,
+      "maxStep": 0.11490534245967865,
+      "activeRms": 0.03451089423975764,
+      "gain": 0.8692907170582399,
+      "typedBytes": 33043,
+      "events": []
+    },
+    {
+      "source": "stereo",
+      "case": "walls-static",
+      "rms": 0.040068654061823826,
+      "peak": 0.0934569388628006,
+      "dc": [
+        -3.4601492264540484e-10,
+        -8.985645517265016e-9
+      ],
+      "stereoCorrelation": 0.02430547059477581,
+      "monoPowerRatio": 0.5120374611687847,
+      "maxStep": 0.008077842532657087,
+      "activeRms": 0.04717458467505219,
+      "gain": 0.6359356464216037,
+      "typedBytes": 33043,
+      "events": []
+    },
+    {
+      "source": "chip",
+      "case": "walls-moving",
+      "rms": 0.020804548337308697,
+      "peak": 0.210526704788208,
+      "dc": [
+        -0.0007002353156835317,
+        -0.0007001653989336096
+      ],
+      "stereoCorrelation": 0.9855103335847812,
+      "monoPowerRatio": 0.9903197783418054,
+      "maxStep": 0.2660631090402603,
+      "activeRms": 0.03502343375388106,
+      "gain": 0.8565693532740947,
+      "typedBytes": 33043,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "metal",
+      "case": "walls-moving",
+      "rms": 0.028835183553244968,
+      "peak": 0.18517737090587616,
+      "dc": [
+        0.00010421840629305486,
+        0.00010514187595808392
+      ],
+      "stereoCorrelation": 0.9519079751151944,
+      "monoPowerRatio": 0.9749382147033556,
+      "maxStep": 0.017620624974370003,
+      "activeRms": 0.03394892691065686,
+      "gain": 0.8836803613543007,
+      "typedBytes": 33043,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "pulse",
+      "case": "walls-moving",
+      "rms": 0.008615944344967338,
+      "peak": 0.35600000619888306,
+      "dc": [
+        0.00026445714802953476,
+        0.00026513656840013156
+      ],
+      "stereoCorrelation": 0.9846611106304787,
+      "monoPowerRatio": 0.9923305365233811,
+      "maxStep": 0.35600000619888306,
+      "activeRms": 0.05372985300396686,
+      "gain": 0.558348819561913,
+      "typedBytes": 33043,
+      "events": [
+        0,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "source": "cuts",
+      "case": "walls-moving",
+      "rms": 0.002263755690339246,
+      "peak": 0.03989651799201965,
+      "dc": [
+        0.0000030476315895139876,
+        0.000001121253465114369
+      ],
+      "stereoCorrelation": -0.004905813029198143,
+      "monoPowerRatio": 0.49756288415322086,
+      "maxStep": 0.011462772265076637,
+      "activeRms": 0.006177514626566148,
+      "gain": 4.856321969839817,
+      "typedBytes": 33043,
+      "events": [
+        0.07995833333333334,
+        2.17,
+        4.019916666666667,
+        6.245541666666667,
+        8.380875
+      ]
+    },
+    {
+      "source": "drone",
+      "case": "walls-moving",
+      "rms": 0.03450092789076293,
+      "peak": 0.1330091506242752,
+      "dc": [
+        -5.2552145187832014e-8,
+        1.2520732751924736e-7
+      ],
+      "stereoCorrelation": 0.9589836213375554,
+      "monoPowerRatio": 0.9794866704546283,
+      "maxStep": 0.005365112796425819,
+      "activeRms": 0.04061945633710128,
+      "gain": 0.7385623222287786,
+      "typedBytes": 33043,
+      "events": []
+    },
+    {
+      "source": "noise",
+      "case": "walls-moving",
+      "rms": 0.029317618330807774,
+      "peak": 0.09469149261713028,
+      "dc": [
+        -4.2942503930786826e-7,
+        -4.3038493674886424e-7
+      ],
+      "stereoCorrelation": 0.9834290121611395,
+      "monoPowerRatio": 0.9917142008563895,
+      "maxStep": 0.11701452359557152,
+      "activeRms": 0.034516918543947006,
+      "gain": 0.8691389980772456,
+      "typedBytes": 33043,
+      "events": []
+    },
+    {
+      "source": "stereo",
+      "case": "walls-moving",
+      "rms": 0.03995868926063167,
+      "peak": 0.0934569388628006,
+      "dc": [
+        -3.4601492264540484e-10,
+        -9.007354400347722e-9
+      ],
+      "stereoCorrelation": 0.0010617444317625587,
+      "monoPowerRatio": 0.5005253642476747,
+      "maxStep": 0.008257649838924408,
+      "activeRms": 0.04704511828925531,
+      "gain": 0.6376857172628628,
+      "typedBytes": 33043,
+      "events": []
+    }
+  ],
+  "irs": [
+    {
+      "distance": 0,
+      "firstReflection": 0.004458333333333333,
+      "lastNonzero": 0.049708333333333334,
+      "directEnergy": 0.16000000476837162,
+      "reflectedEnergy": 0.00014318790941625202,
+      "ratio": 0.0008949244071807493,
+      "geometry": [
+        0.0045555396549869336,
+        0.014477932453760877,
+        0.025106064156582578,
+        0.049598341251024976,
+        0.005908689460624009,
+        0.011974269355880097,
+        0.0284496309182141,
+        0.04457021811776794
+      ],
+      "rms": 0.0025831440200347255,
+      "peak": 0.4000000059604645,
+      "dc": [
+        0.000018000000246866913,
+        0.00001800000025427077
+      ],
+      "stereoCorrelation": 0.9991058789983261,
+      "monoPowerRatio": 0.9995529378832093,
+      "maxStep": 0.4000000059604645
+    },
+    {
+      "distance": 0.45,
+      "firstReflection": 0.009708333333333333,
+      "lastNonzero": 0.08854166666666667,
+      "directEnergy": 0.13249599461936956,
+      "reflectedEnergy": 0.0011012595681463796,
+      "ratio": 0.00831164422222758,
+      "geometry": [
+        0.009800135878298899,
+        0.0255274612330948,
+        0.047232154522778,
+        0.0884474777798052,
+        0.01088917612460209,
+        0.024344119941734244,
+        0.04969225995000452,
+        0.08263148931155448
+      ],
+      "rms": 0.0023593542035508716,
+      "peak": 0.36399999260902405,
+      "dc": [
+        0.000019049999762387416,
+        0.000019049999728508738
+      ],
+      "stereoCorrelation": 0.9917568723015527,
+      "monoPowerRatio": 0.9958784348718693,
+      "maxStep": 0.36399999260902405
+    },
+    {
+      "distance": 1,
+      "firstReflection": 0.016125,
+      "lastNonzero": 0.136,
+      "directEnergy": 0.10239999542236333,
+      "reflectedEnergy": 0.003419144676457795,
+      "ratio": 0.03339008622368631,
+      "geometry": [
+        0.01621019792901352,
+        0.039032440852280706,
+        0.07427515385923908,
+        0.13592975575942548,
+        0.016976437602797524,
+        0.03946282621333375,
+        0.07565547321108171,
+        0.1291508207706269
+      ],
+      "rms": 0.002099793046338348,
+      "peak": 0.3199999928474426,
+      "dc": [
+        0.000020333333188318647,
+        0.000020333333216512983
+      ],
+      "stereoCorrelation": 0.9676905061202344,
+      "monoPowerRatio": 0.9838443939666078,
+      "maxStep": 0.3199999928474426
+    }
+  ],
+  "method": "Identical inputs across DRY/ORBIT/ROOM/WEAVE/PLATE/WALLS static/moving. PCM24 RAW and one constant active20ms RMS-matched gain toward .03, capped at .8 sample peak. Not LUFS or perceptual approval. FIR impulse extent measured before WAV quantization. Geometry is real weighted tap timing during crossfades; no claim of HRTF/binaural/physical room simulation. Human audition and iPhone hardware unverified."
+}

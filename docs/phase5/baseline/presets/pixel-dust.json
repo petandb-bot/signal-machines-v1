@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "PIXEL DUST",
+  "seed": 20200402,
+  "bpm": 96,
+  "master": 0.65,
+  "modules": [
+    {
+      "id": "pendulum-1",
+      "type": "PENDULUM",
+      "x": 16,
+      "y": 16,
+      "seed": 20200402,
+      "character": "METAL",
+      "params": {
+        "energy": 0.57,
+        "coupling": 0.38
+      }
+    },
+    {
+      "id": "chip-1",
+      "type": "CHIP",
+      "x": 192,
+      "y": 16,
+      "seed": 20208321,
+      "character": "METAL",
+      "params": {
+        "tune": 0.43,
+        "character": 0.39
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 16,
+      "seed": 20216240,
+      "character": "METAL",
+      "params": {
+        "level": 0.68
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "85b2b8e6-5b22-4adf-95fa-a83a7e45e126",
+      "from": {
+        "module": "pendulum-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "cdde386e-aaf2-453c-913e-a3db69943a3e",
+      "from": {
+        "module": "pendulum-1",
+        "port": "aCross"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "b87e6da8-35fb-4091-a30f-29966b664d4e",
+      "from": {
+        "module": "pendulum-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "character"
+      }
+    },
+    {
+      "id": "269f42cf-7044-4b5e-b647-58531cf61663",
+      "from": {
+        "module": "chip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}
