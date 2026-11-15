@@ -1,0 +1,3798 @@
+{
+  "scope": "Preset-only curation, no DSP/mode/UI/storage changes.",
+  "changes": [
+    {
+      "id": "still-almost-moving-ii",
+      "name": "STILL, ALMOST MOVING II",
+      "principle": "A fixed110/220Hz harmonic relationship changes partial overlap and density, without foreground note sequencing.",
+      "tradeoff": "Two fewer modules. The upper source is quieter and nearer harmonic partials; drift/mass and slowly smoothed WARP around its harmonic center create internal development rather than a melody.",
+      "beforeModules": 9,
+      "afterModules": 7,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "STILL, ALMOST MOVING II",
+        "seed": 20200401,
+        "bpm": 73,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "drone-1",
+            "type": "DRONE",
+            "x": 16,
+            "y": 16,
+            "seed": 20200401,
+            "character": "METAL",
+            "params": {
+              "spread": 0.17,
+              "color": 0.38
+            },
+            "mode": "LIVING 110 Hz"
+          },
+          {
+            "id": "partial-1",
+            "type": "PARTIAL",
+            "x": 192,
+            "y": 16,
+            "seed": 20208320,
+            "character": "METAL",
+            "params": {
+              "mass": 0.37,
+              "warp": 0.51
+            },
+            "mode": "LIVING 220 Hz"
+          },
+          {
+            "id": "vca-1",
+            "type": "VCA",
+            "x": 368,
+            "y": 16,
+            "seed": 20216239,
+            "character": "METAL",
+            "params": {
+              "level": 0.38,
+              "blend": 0
+            }
+          },
+          {
+            "id": "chamber-1",
+            "type": "CHAMBER",
+            "x": 544,
+            "y": 16,
+            "seed": 20224158,
+            "character": "METAL",
+            "params": {
+              "size": 0.48,
+              "density": 0.46
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 16,
+            "y": 184,
+            "seed": 20232077,
+            "character": "METAL",
+            "params": {
+              "flow": 0.21,
+              "range": 0.16
+            }
+          },
+          {
+            "id": "slew-1",
+            "type": "SLEW",
+            "x": 192,
+            "y": 184,
+            "seed": 20239996,
+            "character": "METAL",
+            "params": {
+              "rise": 0.6,
+              "fall": 0.65
+            },
+            "mode": "GLIDE"
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 368,
+            "y": 184,
+            "seed": 20247915,
+            "character": "METAL",
+            "params": {
+              "level": 0.76
+            }
+          },
+          {
+            "id": "branch-1",
+            "type": "BRANCH",
+            "x": 544,
+            "y": 184,
+            "seed": 85051,
+            "character": "METAL",
+            "params": {
+              "change": 0.08,
+              "memory": 0.95
+            }
+          },
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 16,
+            "y": 352,
+            "seed": 20263753,
+            "character": "METAL",
+            "params": {
+              "rate": 0.16,
+              "irregular": 0
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "cdc441cc-5a6b-4149-bb7c-066e993577bb",
+            "from": {
+              "module": "drone-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "chamber-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "ff344e8e-2dba-4a97-b4b0-49116d1d65ac",
+            "from": {
+              "module": "partial-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "vca-1",
+              "port": "a"
+            }
+          },
+          {
+            "id": "d15b03ce-439e-4102-8ecb-e34aa9e2353f",
+            "from": {
+              "module": "vca-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "chamber-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "450cbcb3-e615-4555-9e2e-976154f37c21",
+            "from": {
+              "module": "chamber-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "40e90564-fa00-44c0-bd9d-b4f4ef85dfc4",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "drone-1",
+              "port": "spread"
+            }
+          },
+          {
+            "id": "9865e66d-92b9-4c54-9bcc-2582db2a0579",
+            "from": {
+              "module": "slew-1",
+              "port": "cv"
+            },
+            "to": {
+              "module": "partial-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "6215a8f5-70b3-436e-a533-a8fec70508ed",
+            "from": {
+              "module": "tide-1",
+              "port": "age"
+            },
+            "to": {
+              "module": "partial-1",
+              "port": "mass"
+            }
+          },
+          {
+            "id": "music-pulse-1-trigger-branch-1-clock",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "branch-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "music-branch-1-pitch-slew-1-cv",
+            "from": {
+              "module": "branch-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "slew-1",
+              "port": "cv"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "STILL, ALMOST MOVING II",
+        "seed": 20200401,
+        "bpm": 73,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "drone-1",
+            "type": "DRONE",
+            "x": 16,
+            "y": 16,
+            "seed": 20200401,
+            "character": "METAL",
+            "params": {
+              "spread": 0.17,
+              "color": 0.38
+            },
+            "mode": "LIVING 110 Hz"
+          },
+          {
+            "id": "partial-1",
+            "type": "PARTIAL",
+            "x": 192,
+            "y": 16,
+            "seed": 20208320,
+            "character": "METAL",
+            "params": {
+              "mass": 0.37,
+              "warp": 0.5
+            },
+            "mode": "LIVING 220 Hz"
+          },
+          {
+            "id": "vca-1",
+            "type": "VCA",
+            "x": 368,
+            "y": 16,
+            "seed": 20216239,
+            "character": "METAL",
+            "params": {
+              "level": 0.18,
+              "blend": 0
+            }
+          },
+          {
+            "id": "chamber-1",
+            "type": "CHAMBER",
+            "x": 544,
+            "y": 16,
+            "seed": 20224158,
+            "character": "METAL",
+            "params": {
+              "size": 0.48,
+              "density": 0.46
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 16,
+            "y": 184,
+            "seed": 20232077,
+            "character": "METAL",
+            "params": {
+              "flow": 0.21,
+              "range": 0.16
+            }
+          },
+          {
+            "id": "slew-1",
+            "type": "SLEW",
+            "x": 192,
+            "y": 184,
+            "seed": 20239996,
+            "character": "METAL",
+            "params": {
+              "rise": 0.9,
+              "fall": 0.95
+            },
+            "mode": "GLIDE"
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 368,
+            "y": 184,
+            "seed": 20247915,
+            "character": "METAL",
+            "params": {
+              "level": 0.76
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "cdc441cc-5a6b-4149-bb7c-066e993577bb",
+            "from": {
+              "module": "drone-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "chamber-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "ff344e8e-2dba-4a97-b4b0-49116d1d65ac",
+            "from": {
+              "module": "partial-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "vca-1",
+              "port": "a"
+            }
+          },
+          {
+            "id": "d15b03ce-439e-4102-8ecb-e34aa9e2353f",
+            "from": {
+              "module": "vca-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "chamber-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "450cbcb3-e615-4555-9e2e-976154f37c21",
+            "from": {
+              "module": "chamber-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "40e90564-fa00-44c0-bd9d-b4f4ef85dfc4",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "drone-1",
+              "port": "spread"
+            }
+          },
+          {
+            "id": "6215a8f5-70b3-436e-a533-a8fec70508ed",
+            "from": {
+              "module": "tide-1",
+              "port": "age"
+            },
+            "to": {
+              "module": "partial-1",
+              "port": "mass"
+            }
+          },
+          {
+            "id": "p6-tide-1-tide-slew-1-cv",
+            "from": {
+              "module": "tide-1",
+              "port": "tide"
+            },
+            "to": {
+              "module": "slew-1",
+              "port": "cv"
+            }
+          },
+          {
+            "id": "p6-slew-1-cv-partial-1-warp",
+            "from": {
+              "module": "slew-1",
+              "port": "cv"
+            },
+            "to": {
+              "module": "partial-1",
+              "port": "warp"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "pixel-dust",
+      "name": "PIXEL DUST",
+      "principle": "The collection's intentionally familiar, dry eight-note pentatonic melody.",
+      "tradeoff": "Preserved byte-for-byte: existing rare gate omissions, later BRANCH memory changes and PENDULUM colour already supply modest variation.",
+      "beforeModules": 5,
+      "afterModules": 5,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "PIXEL DUST",
+        "seed": 20200402,
+        "bpm": 96,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "pendulum-1",
+            "type": "PENDULUM",
+            "x": 16,
+            "y": 16,
+            "seed": 20200402,
+            "character": "METAL",
+            "params": {
+              "energy": 0.57,
+              "coupling": 0.38
+            }
+          },
+          {
+            "id": "chip-1",
+            "type": "CHIP",
+            "x": 192,
+            "y": 16,
+            "seed": 20208321,
+            "character": "METAL",
+            "params": {
+              "tune": 0.5,
+              "character": 0.34
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 368,
+            "y": 16,
+            "seed": 20216240,
+            "character": "METAL",
+            "params": {
+              "level": 0.4
+            }
+          },
+          {
+            "id": "branch-1",
+            "type": "BRANCH",
+            "x": 544,
+            "y": 16,
+            "seed": 17190,
+            "character": "METAL",
+            "params": {
+              "change": 0.08,
+              "memory": 0.95
+            }
+          },
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 16,
+            "y": 184,
+            "seed": 20232078,
+            "character": "METAL",
+            "params": {
+              "rate": 0.6666666666666666,
+              "irregular": 0
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "b87e6da8-35fb-4091-a30f-29966b664d4e",
+            "from": {
+              "module": "pendulum-1",
+              "port": "b"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "character"
+            }
+          },
+          {
+            "id": "269f42cf-7044-4b5e-b647-58531cf61663",
+            "from": {
+              "module": "chip-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "music-pulse-1-trigger-branch-1-clock",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "branch-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "music-branch-1-pitch-chip-1-pitch",
+            "from": {
+              "module": "branch-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "music-branch-1-gate-chip-1-trigger",
+            "from": {
+              "module": "branch-1",
+              "port": "gate"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "trigger"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "PIXEL DUST",
+        "seed": 20200402,
+        "bpm": 96,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "pendulum-1",
+            "type": "PENDULUM",
+            "x": 16,
+            "y": 16,
+            "seed": 20200402,
+            "character": "METAL",
+            "params": {
+              "energy": 0.57,
+              "coupling": 0.38
+            }
+          },
+          {
+            "id": "chip-1",
+            "type": "CHIP",
+            "x": 192,
+            "y": 16,
+            "seed": 20208321,
+            "character": "METAL",
+            "params": {
+              "tune": 0.5,
+              "character": 0.34
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 368,
+            "y": 16,
+            "seed": 20216240,
+            "character": "METAL",
+            "params": {
+              "level": 0.4
+            }
+          },
+          {
+            "id": "branch-1",
+            "type": "BRANCH",
+            "x": 544,
+            "y": 16,
+            "seed": 17190,
+            "character": "METAL",
+            "params": {
+              "change": 0.08,
+              "memory": 0.95
+            }
+          },
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 16,
+            "y": 184,
+            "seed": 20232078,
+            "character": "METAL",
+            "params": {
+              "rate": 0.6666666666666666,
+              "irregular": 0
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "b87e6da8-35fb-4091-a30f-29966b664d4e",
+            "from": {
+              "module": "pendulum-1",
+              "port": "b"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "character"
+            }
+          },
+          {
+            "id": "269f42cf-7044-4b5e-b647-58531cf61663",
+            "from": {
+              "module": "chip-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "music-pulse-1-trigger-branch-1-clock",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "branch-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "music-branch-1-pitch-chip-1-pitch",
+            "from": {
+              "module": "branch-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "music-branch-1-gate-chip-1-trigger",
+            "from": {
+              "module": "branch-1",
+              "port": "gate"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "trigger"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "room-air",
+      "name": "ROOM AIR",
+      "principle": "Original nonmetrical room presence, with a minimal +12dB LEVEL proposal.",
+      "tradeoff": "One gain-only module; no low-cut, compression or source/timing/spatial edits. Low-frequency room weight remains. Review at matched playback levels before accepting this gain choice.",
+      "beforeModules": 5,
+      "afterModules": 6,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "ROOM AIR",
+        "seed": 20200403,
+        "bpm": 62,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "found-1",
+            "type": "FOUND",
+            "x": 16,
+            "y": 16,
+            "seed": 20200403,
+            "character": "METAL",
+            "params": {
+              "wander": 0.22,
+              "alter": 0.12
+            },
+            "sample": "builtin:room"
+          },
+          {
+            "id": "orbit-1",
+            "type": "ORBIT",
+            "x": 192,
+            "y": 16,
+            "seed": 20208322,
+            "character": "METAL",
+            "params": {
+              "rate": 0.12,
+              "depth": 0.36
+            }
+          },
+          {
+            "id": "chamber-1",
+            "type": "CHAMBER",
+            "x": 368,
+            "y": 16,
+            "seed": 20216241,
+            "character": "METAL",
+            "params": {
+              "size": 0.32,
+              "density": 0.29
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 544,
+            "y": 16,
+            "seed": 20224160,
+            "character": "METAL",
+            "params": {
+              "flow": 0.14,
+              "range": 0.2
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 16,
+            "y": 184,
+            "seed": 20232079,
+            "character": "METAL",
+            "params": {
+              "level": 0.78
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "789712f9-ec63-4e61-9f3a-c72291944340",
+            "from": {
+              "module": "found-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "orbit-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "13ad9c32-16f3-4a6d-bcf2-51dc88e53b86",
+            "from": {
+              "module": "orbit-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "chamber-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "c2c10027-28b0-4721-8510-9291a8ed52ca",
+            "from": {
+              "module": "chamber-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "9d9ffef0-2681-4b30-9c23-741ae0d99bf7",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "found-1",
+              "port": "move"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "ROOM AIR",
+        "seed": 20200403,
+        "bpm": 62,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "found-1",
+            "type": "FOUND",
+            "x": 16,
+            "y": 16,
+            "seed": 20200403,
+            "character": "METAL",
+            "params": {
+              "wander": 0.22,
+              "alter": 0.12
+            },
+            "sample": "builtin:room"
+          },
+          {
+            "id": "orbit-1",
+            "type": "ORBIT",
+            "x": 192,
+            "y": 16,
+            "seed": 20208322,
+            "character": "METAL",
+            "params": {
+              "rate": 0.12,
+              "depth": 0.36
+            }
+          },
+          {
+            "id": "chamber-1",
+            "type": "CHAMBER",
+            "x": 368,
+            "y": 16,
+            "seed": 20216241,
+            "character": "METAL",
+            "params": {
+              "size": 0.32,
+              "density": 0.29
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 544,
+            "y": 16,
+            "seed": 20224160,
+            "character": "METAL",
+            "params": {
+              "flow": 0.14,
+              "range": 0.2
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 16,
+            "y": 184,
+            "seed": 20232079,
+            "character": "METAL",
+            "params": {
+              "level": 0.78
+            }
+          },
+          {
+            "id": "level-1",
+            "type": "LEVEL",
+            "x": 192,
+            "y": 184,
+            "seed": 20239998,
+            "character": "METAL",
+            "params": {
+              "boost": 0.6666666666666666,
+              "comp": 0
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "789712f9-ec63-4e61-9f3a-c72291944340",
+            "from": {
+              "module": "found-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "orbit-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "13ad9c32-16f3-4a6d-bcf2-51dc88e53b86",
+            "from": {
+              "module": "orbit-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "chamber-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "9d9ffef0-2681-4b30-9c23-741ae0d99bf7",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "found-1",
+              "port": "move"
+            }
+          },
+          {
+            "id": "p6-chamber-1-audio-level-1-audio",
+            "from": {
+              "module": "chamber-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "level-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "p6-level-1-audio-output-1-audio",
+            "from": {
+              "module": "level-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "small-hours",
+      "name": "SMALL HOURS",
+      "principle": "Irregular autonomous fragments, sample-feature recency and returning MIRAGE memory, with no explicit beat.",
+      "tradeoff": "One fewer module. CUTS now controls event spacing; intervals are bounded but seeded, and MIRAGE/NERVE/LOSS retain contextual memory. No fixed phrase is promised.",
+      "beforeModules": 7,
+      "afterModules": 6,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "SMALL HOURS",
+        "seed": 20200404,
+        "bpm": 82,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "cuts-1",
+            "type": "CUTS",
+            "x": 16,
+            "y": 16,
+            "seed": 20200404,
+            "character": "METAL",
+            "params": {
+              "sparse": 0.78,
+              "change": 0.3
+            },
+            "sample": "builtin:rain"
+          },
+          {
+            "id": "loss-1",
+            "type": "LOSS",
+            "x": 192,
+            "y": 16,
+            "seed": 20208323,
+            "character": "METAL",
+            "params": {
+              "damage": 0.28,
+              "recover": 0.66
+            }
+          },
+          {
+            "id": "mirage-1",
+            "type": "MIRAGE",
+            "x": 368,
+            "y": 16,
+            "seed": 20216242,
+            "character": "METAL",
+            "params": {
+              "distance": 0,
+              "mutate": 0.14
+            }
+          },
+          {
+            "id": "level-1",
+            "type": "LEVEL",
+            "x": 544,
+            "y": 16,
+            "seed": 20224161,
+            "character": "METAL",
+            "params": {
+              "boost": 0.58,
+              "comp": 0
+            }
+          },
+          {
+            "id": "nerve-1",
+            "type": "NERVE",
+            "x": 16,
+            "y": 184,
+            "seed": 20232080,
+            "character": "METAL",
+            "params": {
+              "sense": 0.64,
+              "fatigue": 0.71
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 192,
+            "y": 184,
+            "seed": 20239999,
+            "character": "METAL",
+            "params": {
+              "level": 0.74
+            }
+          },
+          {
+            "id": "weft-1",
+            "type": "WEFT",
+            "x": 368,
+            "y": 184,
+            "seed": 20247918,
+            "character": "METAL",
+            "params": {
+              "rate": 0.3333333333333333,
+              "fill": 0.42
+            },
+            "mode": "16"
+          }
+        ],
+        "connections": [
+          {
+            "id": "6ce5ba4a-44bc-4fc4-9ea0-2b9edef0da87",
+            "from": {
+              "module": "cuts-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "loss-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "fb42f73a-82be-4d83-b40f-9b0acc2c53c3",
+            "from": {
+              "module": "cuts-1",
+              "port": "event"
+            },
+            "to": {
+              "module": "nerve-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "4ad1836e-3807-450f-a287-7f4fec9249ce",
+            "from": {
+              "module": "nerve-1",
+              "port": "charge"
+            },
+            "to": {
+              "module": "loss-1",
+              "port": "damage"
+            }
+          },
+          {
+            "id": "259aaf19-d6cd-46fc-8af1-066bf74ddf83",
+            "from": {
+              "module": "loss-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "mirage-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "7c844b2c-6cce-4eb2-832d-ba3ec2767e11",
+            "from": {
+              "module": "mirage-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "level-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "33c31d1c-a5ed-4688-9ff3-be24e4e597cb",
+            "from": {
+              "module": "level-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "music-weft-1-a-cuts-1-trigger",
+            "from": {
+              "module": "weft-1",
+              "port": "a"
+            },
+            "to": {
+              "module": "cuts-1",
+              "port": "trigger"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "SMALL HOURS",
+        "seed": 20200404,
+        "bpm": 82,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "cuts-1",
+            "type": "CUTS",
+            "x": 16,
+            "y": 16,
+            "seed": 20200404,
+            "character": "METAL",
+            "params": {
+              "sparse": 0.88,
+              "change": 0.24
+            },
+            "sample": "builtin:rain"
+          },
+          {
+            "id": "loss-1",
+            "type": "LOSS",
+            "x": 192,
+            "y": 16,
+            "seed": 20208323,
+            "character": "METAL",
+            "params": {
+              "damage": 0.28,
+              "recover": 0.66
+            }
+          },
+          {
+            "id": "mirage-1",
+            "type": "MIRAGE",
+            "x": 368,
+            "y": 16,
+            "seed": 20216242,
+            "character": "METAL",
+            "params": {
+              "distance": 0,
+              "mutate": 0.14
+            }
+          },
+          {
+            "id": "level-1",
+            "type": "LEVEL",
+            "x": 544,
+            "y": 16,
+            "seed": 20224161,
+            "character": "METAL",
+            "params": {
+              "boost": 0.58,
+              "comp": 0
+            }
+          },
+          {
+            "id": "nerve-1",
+            "type": "NERVE",
+            "x": 16,
+            "y": 184,
+            "seed": 20232080,
+            "character": "METAL",
+            "params": {
+              "sense": 0.64,
+              "fatigue": 0.71
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 192,
+            "y": 184,
+            "seed": 20239999,
+            "character": "METAL",
+            "params": {
+              "level": 0.74
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "6ce5ba4a-44bc-4fc4-9ea0-2b9edef0da87",
+            "from": {
+              "module": "cuts-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "loss-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "fb42f73a-82be-4d83-b40f-9b0acc2c53c3",
+            "from": {
+              "module": "cuts-1",
+              "port": "event"
+            },
+            "to": {
+              "module": "nerve-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "4ad1836e-3807-450f-a287-7f4fec9249ce",
+            "from": {
+              "module": "nerve-1",
+              "port": "charge"
+            },
+            "to": {
+              "module": "loss-1",
+              "port": "damage"
+            }
+          },
+          {
+            "id": "259aaf19-d6cd-46fc-8af1-066bf74ddf83",
+            "from": {
+              "module": "loss-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "mirage-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "7c844b2c-6cce-4eb2-832d-ba3ec2767e11",
+            "from": {
+              "module": "mirage-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "level-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "33c31d1c-a5ed-4688-9ff3-be24e4e597cb",
+            "from": {
+              "module": "level-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "exchanging-bodies",
+      "name": "EXCHANGING BODIES",
+      "principle": "A longer ringing body and a shorter responding body interact under3:2 companion timing; the first physically excites the second.",
+      "tradeoff": "One net additional module. No bell melody; two materials share a nominal110Hz root with slowly changing coupling. The reply is also excited by the first body between its own strikes.",
+      "beforeModules": 6,
+      "afterModules": 7,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "EXCHANGING BODIES",
+        "bpm": 71,
+        "master": 0.65,
+        "seed": 33102,
+        "modules": [
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 16,
+            "y": 16,
+            "seed": 33102,
+            "character": "METAL",
+            "params": {
+              "rate": 0.16,
+              "irregular": 0.08
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 192,
+            "y": 16,
+            "seed": 41021,
+            "character": "METAL",
+            "params": {
+              "flow": 0.25,
+              "range": 0.28
+            }
+          },
+          {
+            "id": "sympathy-1",
+            "type": "SYMPATHY",
+            "x": 368,
+            "y": 16,
+            "seed": 48940,
+            "character": "METAL",
+            "params": {
+              "body": 0.62,
+              "couple": 0.6
+            }
+          },
+          {
+            "id": "level-1",
+            "type": "LEVEL",
+            "x": 544,
+            "y": 16,
+            "seed": 56859,
+            "character": "METAL",
+            "params": {
+              "boost": 0.4,
+              "comp": 0
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 16,
+            "y": 184,
+            "seed": 64778,
+            "character": "METAL",
+            "params": {
+              "level": 0.72
+            }
+          },
+          {
+            "id": "chance-1",
+            "type": "CHANCE",
+            "x": 192,
+            "y": 184,
+            "seed": 100614,
+            "character": "METAL",
+            "params": {
+              "density": 1,
+              "recall": 1
+            },
+            "mode": "HIGH"
+          }
+        ],
+        "connections": [
+          {
+            "id": "sympathy-cable-2",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "sympathy-1",
+              "port": "couple"
+            }
+          },
+          {
+            "id": "sympathy-cable-3",
+            "from": {
+              "module": "tide-1",
+              "port": "tide"
+            },
+            "to": {
+              "module": "sympathy-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "sympathy-cable-4",
+            "from": {
+              "module": "sympathy-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "level-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "sympathy-cable-5",
+            "from": {
+              "module": "level-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "music-pulse-1-trigger-chance-1-clock",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "chance-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "music-chance-1-a-sympathy-1-trigger",
+            "from": {
+              "module": "chance-1",
+              "port": "a"
+            },
+            "to": {
+              "module": "sympathy-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "music-chance-1-pitch-sympathy-1-pitch",
+            "from": {
+              "module": "chance-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "sympathy-1",
+              "port": "pitch"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "EXCHANGING BODIES",
+        "bpm": 71,
+        "master": 0.65,
+        "seed": 33102,
+        "modules": [
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 16,
+            "y": 16,
+            "seed": 33102,
+            "character": "METAL",
+            "params": {
+              "rate": 0.16,
+              "irregular": 0.08
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 192,
+            "y": 16,
+            "seed": 41021,
+            "character": "METAL",
+            "params": {
+              "flow": 0.25,
+              "range": 0.28
+            }
+          },
+          {
+            "id": "sympathy-1",
+            "type": "SYMPATHY",
+            "x": 368,
+            "y": 16,
+            "seed": 48940,
+            "character": "METAL",
+            "params": {
+              "body": 0.62,
+              "couple": 0.6
+            }
+          },
+          {
+            "id": "level-1",
+            "type": "LEVEL",
+            "x": 544,
+            "y": 16,
+            "seed": 56859,
+            "character": "METAL",
+            "params": {
+              "boost": 0.4,
+              "comp": 0
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 16,
+            "y": 184,
+            "seed": 64778,
+            "character": "METAL",
+            "params": {
+              "level": 0.72
+            }
+          },
+          {
+            "id": "logic-1",
+            "type": "LOGIC",
+            "x": 192,
+            "y": 184,
+            "seed": 72697,
+            "character": "METAL",
+            "params": {
+              "ratio": 0.16666666666666666,
+              "shift": 0.72
+            },
+            "mode": "OR"
+          },
+          {
+            "id": "reply-1",
+            "type": "SYMPATHY",
+            "x": 368,
+            "y": 184,
+            "seed": 80616,
+            "character": "METAL",
+            "params": {
+              "body": 0.25,
+              "couple": 0.32
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "sympathy-cable-2",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "sympathy-1",
+              "port": "couple"
+            }
+          },
+          {
+            "id": "sympathy-cable-3",
+            "from": {
+              "module": "tide-1",
+              "port": "tide"
+            },
+            "to": {
+              "module": "sympathy-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "sympathy-cable-4",
+            "from": {
+              "module": "sympathy-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "level-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "sympathy-cable-5",
+            "from": {
+              "module": "level-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "p6-pulse-1-trigger-logic-1-a",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "logic-1",
+              "port": "a"
+            }
+          },
+          {
+            "id": "p6-logic-1-a-sympathy-1-trigger",
+            "from": {
+              "module": "logic-1",
+              "port": "a"
+            },
+            "to": {
+              "module": "sympathy-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "p6-logic-1-b-reply-1-trigger",
+            "from": {
+              "module": "logic-1",
+              "port": "b"
+            },
+            "to": {
+              "module": "reply-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "p6-sympathy-1-audio-reply-1-audio",
+            "from": {
+              "module": "sympathy-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "reply-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "p6-reply-1-audio-level-1-audio",
+            "from": {
+              "module": "reply-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "level-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "p6-tide-1-age-reply-1-couple",
+            "from": {
+              "module": "tide-1",
+              "port": "age"
+            },
+            "to": {
+              "module": "reply-1",
+              "port": "couple"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "dissolving-metal",
+      "name": "DISSOLVING METAL",
+      "principle": "Unequal7.3s three-plateau motion and an independent strike clock produce imperfect near-unisons/fifth-like intervals.",
+      "tradeoff": "Same module count. Approximate held targets220/329/229Hz are not a conventional scale. TOUCH transitions and existing ALLOY continuous-pitch tracking also retune overlapping tails; interference is intentional, listening still required.",
+      "beforeModules": 8,
+      "afterModules": 8,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "DISSOLVING METAL",
+        "bpm": 72,
+        "master": 0.65,
+        "seed": 161601,
+        "modules": [
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 16,
+            "y": 16,
+            "seed": 4101,
+            "character": "METAL",
+            "params": {
+              "rate": 0.34,
+              "irregular": 0.12
+            }
+          },
+          {
+            "id": "alloy-1",
+            "type": "ALLOY",
+            "x": 192,
+            "y": 16,
+            "seed": 4102,
+            "character": "METAL",
+            "params": {
+              "body": 0.32,
+              "tension": 0.36
+            }
+          },
+          {
+            "id": "smear-1",
+            "type": "SMEAR",
+            "x": 368,
+            "y": 16,
+            "seed": 4103,
+            "character": "METAL",
+            "params": {
+              "smear": 0.45,
+              "memory": 0.58
+            }
+          },
+          {
+            "id": "orbit-1",
+            "type": "ORBIT",
+            "x": 544,
+            "y": 16,
+            "seed": 4104,
+            "character": "METAL",
+            "params": {
+              "rate": 0.3,
+              "depth": 0.5
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 720,
+            "y": 16,
+            "seed": 4105,
+            "character": "METAL",
+            "params": {
+              "level": 0.72
+            }
+          },
+          {
+            "id": "flock-1",
+            "type": "FLOCK",
+            "x": 192,
+            "y": 184,
+            "seed": 4106,
+            "character": "METAL",
+            "params": {
+              "spread": 0.2,
+              "drift": 0.15
+            }
+          },
+          {
+            "id": "parasite-1",
+            "type": "PARASITE",
+            "x": 368,
+            "y": 184,
+            "seed": 4107,
+            "character": "METAL",
+            "params": {
+              "feed": 0.4,
+              "memory": 0.6
+            }
+          },
+          {
+            "id": "chance-1",
+            "type": "CHANCE",
+            "x": 544,
+            "y": 184,
+            "seed": 79834,
+            "character": "METAL",
+            "params": {
+              "density": 1,
+              "recall": 1
+            },
+            "mode": "HIGH"
+          }
+        ],
+        "connections": [
+          {
+            "id": "35e01594-8e0e-4deb-850a-88dfeca54a47",
+            "from": {
+              "module": "alloy-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "smear-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "57224000-9f1b-4c67-bef5-d5114c52086b",
+            "from": {
+              "module": "smear-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "orbit-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "dba08d43-46c8-4b05-8a4a-8c3519f7e98e",
+            "from": {
+              "module": "orbit-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "943fe289-59ff-4844-b1b7-4c31e49f5f72",
+            "from": {
+              "module": "flock-1",
+              "port": "controlA"
+            },
+            "to": {
+              "module": "smear-1",
+              "port": "smear"
+            }
+          },
+          {
+            "id": "530d64d1-3f54-4fb0-8dbc-c5f0c77dc666",
+            "from": {
+              "module": "smear-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "parasite-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "19cf6eb5-459f-4ff5-a4c2-61f54b2fa84a",
+            "from": {
+              "module": "parasite-1",
+              "port": "fever"
+            },
+            "to": {
+              "module": "alloy-1",
+              "port": "tension"
+            }
+          },
+          {
+            "id": "music-pulse-1-trigger-chance-1-clock",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "chance-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "music-chance-1-a-alloy-1-trigger",
+            "from": {
+              "module": "chance-1",
+              "port": "a"
+            },
+            "to": {
+              "module": "alloy-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "music-chance-1-pitch-alloy-1-pitch",
+            "from": {
+              "module": "chance-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "alloy-1",
+              "port": "pitch"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "DISSOLVING METAL",
+        "bpm": 72,
+        "master": 0.65,
+        "seed": 161601,
+        "modules": [
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 16,
+            "y": 16,
+            "seed": 4101,
+            "character": "METAL",
+            "params": {
+              "rate": 0.34,
+              "irregular": 0.18
+            }
+          },
+          {
+            "id": "alloy-1",
+            "type": "ALLOY",
+            "x": 192,
+            "y": 16,
+            "seed": 4102,
+            "character": "METAL",
+            "params": {
+              "body": 0.32,
+              "tension": 0.36
+            }
+          },
+          {
+            "id": "smear-1",
+            "type": "SMEAR",
+            "x": 368,
+            "y": 16,
+            "seed": 4103,
+            "character": "METAL",
+            "params": {
+              "smear": 0.45,
+              "memory": 0.58
+            }
+          },
+          {
+            "id": "orbit-1",
+            "type": "ORBIT",
+            "x": 544,
+            "y": 16,
+            "seed": 4104,
+            "character": "METAL",
+            "params": {
+              "rate": 0.3,
+              "depth": 0.5
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 720,
+            "y": 16,
+            "seed": 4105,
+            "character": "METAL",
+            "params": {
+              "level": 0.72
+            }
+          },
+          {
+            "id": "flock-1",
+            "type": "FLOCK",
+            "x": 192,
+            "y": 184,
+            "seed": 4106,
+            "character": "METAL",
+            "params": {
+              "spread": 0.2,
+              "drift": 0.15
+            }
+          },
+          {
+            "id": "parasite-1",
+            "type": "PARASITE",
+            "x": 368,
+            "y": 184,
+            "seed": 4107,
+            "character": "METAL",
+            "params": {
+              "feed": 0.4,
+              "memory": 0.6
+            }
+          },
+          {
+            "id": "touch-1",
+            "type": "TOUCH",
+            "x": 544,
+            "y": 184,
+            "seed": 217034,
+            "character": "METAL",
+            "params": {
+              "speed": 0.5,
+              "smooth": 0.04
+            },
+            "gesture": {
+              "duration": 7.3,
+              "points": [
+                {
+                  "t": 0,
+                  "x": 0.5,
+                  "y": 0
+                },
+                {
+                  "t": 1.45,
+                  "x": 0.5,
+                  "y": 0
+                },
+                {
+                  "t": 1.5,
+                  "x": 0.79,
+                  "y": 0
+                },
+                {
+                  "t": 3.55,
+                  "x": 0.79,
+                  "y": 0
+                },
+                {
+                  "t": 3.6,
+                  "x": 0.53,
+                  "y": 0
+                },
+                {
+                  "t": 4.35,
+                  "x": 0.53,
+                  "y": 0
+                },
+                {
+                  "t": 4.4,
+                  "x": 0.79,
+                  "y": 0
+                },
+                {
+                  "t": 6.05,
+                  "x": 0.79,
+                  "y": 0
+                },
+                {
+                  "t": 6.1,
+                  "x": 0.5,
+                  "y": 0
+                },
+                {
+                  "t": 7.3,
+                  "x": 0.5,
+                  "y": 0
+                }
+              ]
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "35e01594-8e0e-4deb-850a-88dfeca54a47",
+            "from": {
+              "module": "alloy-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "smear-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "57224000-9f1b-4c67-bef5-d5114c52086b",
+            "from": {
+              "module": "smear-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "orbit-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "dba08d43-46c8-4b05-8a4a-8c3519f7e98e",
+            "from": {
+              "module": "orbit-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "943fe289-59ff-4844-b1b7-4c31e49f5f72",
+            "from": {
+              "module": "flock-1",
+              "port": "controlA"
+            },
+            "to": {
+              "module": "smear-1",
+              "port": "smear"
+            }
+          },
+          {
+            "id": "530d64d1-3f54-4fb0-8dbc-c5f0c77dc666",
+            "from": {
+              "module": "smear-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "parasite-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "19cf6eb5-459f-4ff5-a4c2-61f54b2fa84a",
+            "from": {
+              "module": "parasite-1",
+              "port": "fever"
+            },
+            "to": {
+              "module": "alloy-1",
+              "port": "tension"
+            }
+          },
+          {
+            "id": "p6-pulse-1-trigger-alloy-1-trigger",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "alloy-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "p6-touch-1-x-alloy-1-pitch",
+            "from": {
+              "module": "touch-1",
+              "port": "x"
+            },
+            "to": {
+              "module": "alloy-1",
+              "port": "pitch"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "binary-fever",
+      "name": "BINARY FEVER",
+      "principle": "Seven-in-twelve articulation interacts with a three-times-longer reset pattern and an audio-rate binary divider.",
+      "tradeoff": "One fewer module; OSC/FERAL pitch is fixed. Counter resets can change the waveform at an accent; existing MAP/filtering and bounded levels remain. Rhythm replaces melodic variety.",
+      "beforeModules": 10,
+      "afterModules": 9,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "BINARY FEVER",
+        "bpm": 112,
+        "master": 0.5,
+        "seed": 91604,
+        "modules": [
+          {
+            "id": "count-1",
+            "type": "COUNT",
+            "x": 16,
+            "y": 16,
+            "seed": 2601,
+            "character": "METAL",
+            "params": {
+              "step": 0.5,
+              "rate": 0.82
+            },
+            "mode": "AUDIO"
+          },
+          {
+            "id": "map-1",
+            "type": "MAP",
+            "x": 192,
+            "y": 16,
+            "seed": 2602,
+            "character": "METAL",
+            "params": {
+              "table": 0.5714285714285714,
+              "amount": 0.6
+            }
+          },
+          {
+            "id": "feral-1",
+            "type": "FERAL",
+            "x": 368,
+            "y": 16,
+            "seed": 2603,
+            "character": "METAL",
+            "params": {
+              "tune": 0.65,
+              "chaos": 0.28
+            }
+          },
+          {
+            "id": "filter-1",
+            "type": "FILTER",
+            "x": 544,
+            "y": 16,
+            "seed": 2604,
+            "character": "METAL",
+            "params": {
+              "cutoff": 0.82,
+              "resonance": 0.3
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 720,
+            "y": 16,
+            "seed": 2605,
+            "character": "METAL",
+            "params": {
+              "level": 0.6
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 192,
+            "y": 184,
+            "seed": 2606,
+            "character": "METAL",
+            "params": {
+              "flow": 0.7,
+              "range": 0.16
+            }
+          },
+          {
+            "id": "branch-1",
+            "type": "BRANCH",
+            "x": 368,
+            "y": 184,
+            "seed": 96034,
+            "character": "METAL",
+            "params": {
+              "change": 0.08,
+              "memory": 0.95
+            }
+          },
+          {
+            "id": "weft-1",
+            "type": "WEFT",
+            "x": 544,
+            "y": 184,
+            "seed": 147037,
+            "character": "METAL",
+            "params": {
+              "rate": 0.6666666666666666,
+              "fill": 0.58
+            },
+            "mode": "16"
+          },
+          {
+            "id": "osc-1",
+            "type": "OSC",
+            "x": 16,
+            "y": 352,
+            "seed": 154956,
+            "character": "METAL",
+            "params": {
+              "tune": 0.75,
+              "level": 0
+            },
+            "mode": "PULSE"
+          },
+          {
+            "id": "shape-1",
+            "type": "SHAPE",
+            "x": 192,
+            "y": 352,
+            "seed": 162875,
+            "character": "METAL",
+            "params": {
+              "rise": 0.02,
+              "fall": 0.55
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "e5a5f013-4522-449c-afca-e569767bb97e",
+            "from": {
+              "module": "count-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "map-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "5317b351-0aaa-45a6-9e8e-f8b511f7454a",
+            "from": {
+              "module": "count-1",
+              "port": "value"
+            },
+            "to": {
+              "module": "map-1",
+              "port": "cv"
+            }
+          },
+          {
+            "id": "7d6c3748-020e-4395-b03c-137243417e06",
+            "from": {
+              "module": "map-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "feral-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "bf366486-ea66-45f3-9f88-a527c1c3f557",
+            "from": {
+              "module": "feral-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "filter-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "06292606-0d9d-49be-83ea-0fe711946aca",
+            "from": {
+              "module": "filter-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "245cf51e-b9ee-488f-aba5-257db29502cb",
+            "from": {
+              "module": "map-1",
+              "port": "cv"
+            },
+            "to": {
+              "module": "filter-1",
+              "port": "cutoff"
+            }
+          },
+          {
+            "id": "5864de66-0ada-4ee2-9975-805afd5dcc42",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "map-1",
+              "port": "table"
+            }
+          },
+          {
+            "id": "696ac366-2954-4008-96b4-1f2a80133f47",
+            "from": {
+              "module": "tide-1",
+              "port": "tide"
+            },
+            "to": {
+              "module": "feral-1",
+              "port": "chaos"
+            }
+          },
+          {
+            "id": "music-weft-1-a-branch-1-clock",
+            "from": {
+              "module": "weft-1",
+              "port": "a"
+            },
+            "to": {
+              "module": "branch-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "music-branch-1-gate-shape-1-trigger",
+            "from": {
+              "module": "branch-1",
+              "port": "gate"
+            },
+            "to": {
+              "module": "shape-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "music-shape-1-control-osc-1-level",
+            "from": {
+              "module": "shape-1",
+              "port": "control"
+            },
+            "to": {
+              "module": "osc-1",
+              "port": "level"
+            }
+          },
+          {
+            "id": "music-branch-1-pitch-osc-1-pitch",
+            "from": {
+              "module": "branch-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "osc-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "music-branch-1-pitch-feral-1-pitch",
+            "from": {
+              "module": "branch-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "feral-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "music-osc-1-audio-count-1-audioClock",
+            "from": {
+              "module": "osc-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "count-1",
+              "port": "audioClock"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "BINARY FEVER",
+        "bpm": 112,
+        "master": 0.5,
+        "seed": 91604,
+        "modules": [
+          {
+            "id": "count-1",
+            "type": "COUNT",
+            "x": 16,
+            "y": 16,
+            "seed": 2601,
+            "character": "METAL",
+            "params": {
+              "step": 0.5,
+              "rate": 0.82
+            },
+            "mode": "AUDIO"
+          },
+          {
+            "id": "map-1",
+            "type": "MAP",
+            "x": 192,
+            "y": 16,
+            "seed": 2602,
+            "character": "METAL",
+            "params": {
+              "table": 0.5714285714285714,
+              "amount": 0.6
+            }
+          },
+          {
+            "id": "feral-1",
+            "type": "FERAL",
+            "x": 368,
+            "y": 16,
+            "seed": 2603,
+            "character": "METAL",
+            "params": {
+              "tune": 0.65,
+              "chaos": 0.28
+            }
+          },
+          {
+            "id": "filter-1",
+            "type": "FILTER",
+            "x": 544,
+            "y": 16,
+            "seed": 2604,
+            "character": "METAL",
+            "params": {
+              "cutoff": 0.82,
+              "resonance": 0.3
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 720,
+            "y": 16,
+            "seed": 2605,
+            "character": "METAL",
+            "params": {
+              "level": 0.6
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 192,
+            "y": 184,
+            "seed": 2606,
+            "character": "METAL",
+            "params": {
+              "flow": 0.7,
+              "range": 0.16
+            }
+          },
+          {
+            "id": "weft-1",
+            "type": "WEFT",
+            "x": 544,
+            "y": 184,
+            "seed": 147037,
+            "character": "METAL",
+            "params": {
+              "rate": 0.6666666666666666,
+              "fill": 0.58
+            },
+            "mode": "12"
+          },
+          {
+            "id": "osc-1",
+            "type": "OSC",
+            "x": 16,
+            "y": 352,
+            "seed": 154956,
+            "character": "METAL",
+            "params": {
+              "tune": 0.75,
+              "level": 0
+            },
+            "mode": "PULSE"
+          },
+          {
+            "id": "shape-1",
+            "type": "SHAPE",
+            "x": 192,
+            "y": 352,
+            "seed": 162875,
+            "character": "METAL",
+            "params": {
+              "rise": 0.02,
+              "fall": 0.55
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "e5a5f013-4522-449c-afca-e569767bb97e",
+            "from": {
+              "module": "count-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "map-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "5317b351-0aaa-45a6-9e8e-f8b511f7454a",
+            "from": {
+              "module": "count-1",
+              "port": "value"
+            },
+            "to": {
+              "module": "map-1",
+              "port": "cv"
+            }
+          },
+          {
+            "id": "7d6c3748-020e-4395-b03c-137243417e06",
+            "from": {
+              "module": "map-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "feral-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "bf366486-ea66-45f3-9f88-a527c1c3f557",
+            "from": {
+              "module": "feral-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "filter-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "06292606-0d9d-49be-83ea-0fe711946aca",
+            "from": {
+              "module": "filter-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "245cf51e-b9ee-488f-aba5-257db29502cb",
+            "from": {
+              "module": "map-1",
+              "port": "cv"
+            },
+            "to": {
+              "module": "filter-1",
+              "port": "cutoff"
+            }
+          },
+          {
+            "id": "5864de66-0ada-4ee2-9975-805afd5dcc42",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "map-1",
+              "port": "table"
+            }
+          },
+          {
+            "id": "696ac366-2954-4008-96b4-1f2a80133f47",
+            "from": {
+              "module": "tide-1",
+              "port": "tide"
+            },
+            "to": {
+              "module": "feral-1",
+              "port": "chaos"
+            }
+          },
+          {
+            "id": "music-shape-1-control-osc-1-level",
+            "from": {
+              "module": "shape-1",
+              "port": "control"
+            },
+            "to": {
+              "module": "osc-1",
+              "port": "level"
+            }
+          },
+          {
+            "id": "music-osc-1-audio-count-1-audioClock",
+            "from": {
+              "module": "osc-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "count-1",
+              "port": "audioClock"
+            }
+          },
+          {
+            "id": "p6-weft-1-a-shape-1-trigger",
+            "from": {
+              "module": "weft-1",
+              "port": "a"
+            },
+            "to": {
+              "module": "shape-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "p6-weft-1-b-count-1-reset",
+            "from": {
+              "module": "weft-1",
+              "port": "b"
+            },
+            "to": {
+              "module": "count-1",
+              "port": "reset"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "tape-garden",
+      "name": "TAPE GARDEN",
+      "principle": "A two-tone tritone family becomes finite gestures; worn delayed memory supplies the returns.",
+      "tradeoff": "Two net additional modules. Continuous upper melody is replaced by155.6/220Hz gestures, separated from approximately.484s echoes; original tape/space colour remains.",
+      "beforeModules": 7,
+      "afterModules": 9,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "TAPE GARDEN",
+        "seed": 20200408,
+        "bpm": 64,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "drone-1",
+            "type": "DRONE",
+            "x": 16,
+            "y": 16,
+            "seed": 20200408,
+            "character": "METAL",
+            "params": {
+              "spread": 0.24,
+              "color": 0.57
+            },
+            "mode": "220 Hz"
+          },
+          {
+            "id": "sieve-1",
+            "type": "SIEVE",
+            "x": 192,
+            "y": 16,
+            "seed": 20208327,
+            "character": "METAL",
+            "params": {
+              "focus": 0.5,
+              "width": 0.56
+            }
+          },
+          {
+            "id": "tape-1",
+            "type": "TAPE",
+            "x": 368,
+            "y": 16,
+            "seed": 20216246,
+            "character": "METAL",
+            "params": {
+              "wear": 0.42,
+              "echo": 0.75
+            }
+          },
+          {
+            "id": "flock-1",
+            "type": "FLOCK",
+            "x": 544,
+            "y": 16,
+            "seed": 20224165,
+            "character": "METAL",
+            "params": {
+              "spread": 0.18,
+              "drift": 0.11
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 16,
+            "y": 184,
+            "seed": 20232084,
+            "character": "METAL",
+            "params": {
+              "level": 0.74
+            }
+          },
+          {
+            "id": "branch-1",
+            "type": "BRANCH",
+            "x": 192,
+            "y": 184,
+            "seed": 115829,
+            "character": "METAL",
+            "params": {
+              "change": 0.08,
+              "memory": 0.95
+            }
+          },
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 368,
+            "y": 184,
+            "seed": 20247922,
+            "character": "METAL",
+            "params": {
+              "rate": 0.16,
+              "irregular": 0.03
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "5ee9bbba-ad67-4446-8225-0fc638c1c6a5",
+            "from": {
+              "module": "drone-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "sieve-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "2e1ac95b-0c52-463e-8a3c-2f3de3085e15",
+            "from": {
+              "module": "sieve-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "tape-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "0329f4ac-b055-4196-8fcd-93d5fe8dc8fd",
+            "from": {
+              "module": "tape-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "31ff16a6-9054-4b6f-aa4f-c9aba62e57fd",
+            "from": {
+              "module": "flock-1",
+              "port": "controlA"
+            },
+            "to": {
+              "module": "sieve-1",
+              "port": "focus"
+            }
+          },
+          {
+            "id": "ad854061-8dd0-4c12-b876-a164bbe9d9a6",
+            "from": {
+              "module": "flock-1",
+              "port": "controlB"
+            },
+            "to": {
+              "module": "drone-1",
+              "port": "spread"
+            }
+          },
+          {
+            "id": "music-pulse-1-trigger-branch-1-clock",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "branch-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "music-branch-1-pitch-drone-1-pitch",
+            "from": {
+              "module": "branch-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "drone-1",
+              "port": "pitch"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "TAPE GARDEN",
+        "seed": 20200408,
+        "bpm": 64,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "drone-1",
+            "type": "DRONE",
+            "x": 16,
+            "y": 16,
+            "seed": 20200408,
+            "character": "METAL",
+            "params": {
+              "spread": 0.24,
+              "color": 0.57
+            },
+            "mode": "220 Hz"
+          },
+          {
+            "id": "sieve-1",
+            "type": "SIEVE",
+            "x": 192,
+            "y": 16,
+            "seed": 20208327,
+            "character": "METAL",
+            "params": {
+              "focus": 0.5,
+              "width": 0.56
+            }
+          },
+          {
+            "id": "tape-1",
+            "type": "TAPE",
+            "x": 368,
+            "y": 16,
+            "seed": 20216246,
+            "character": "METAL",
+            "params": {
+              "wear": 0.42,
+              "echo": 0.75
+            }
+          },
+          {
+            "id": "flock-1",
+            "type": "FLOCK",
+            "x": 544,
+            "y": 16,
+            "seed": 20224165,
+            "character": "METAL",
+            "params": {
+              "spread": 0.18,
+              "drift": 0.11
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 16,
+            "y": 184,
+            "seed": 20232084,
+            "character": "METAL",
+            "params": {
+              "level": 0.74
+            }
+          },
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 368,
+            "y": 184,
+            "seed": 20247922,
+            "character": "METAL",
+            "params": {
+              "rate": 0.16,
+              "irregular": 0.03
+            }
+          },
+          {
+            "id": "count-1",
+            "type": "COUNT",
+            "x": 368,
+            "y": 184,
+            "seed": 20247922,
+            "character": "METAL",
+            "params": {
+              "step": 0.5,
+              "rate": 0.3
+            },
+            "mode": "CLOCK"
+          },
+          {
+            "id": "quantize-1",
+            "type": "QUANTIZE",
+            "x": 544,
+            "y": 184,
+            "seed": 20255841,
+            "character": "METAL",
+            "params": {
+              "span": 0,
+              "pull": 1
+            },
+            "mode": "12-TET"
+          },
+          {
+            "id": "lpg-1",
+            "type": "LPG",
+            "x": 16,
+            "y": 352,
+            "seed": 20263760,
+            "character": "METAL",
+            "params": {
+              "bite": 0.42,
+              "decay": 0.78
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "2e1ac95b-0c52-463e-8a3c-2f3de3085e15",
+            "from": {
+              "module": "sieve-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "tape-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "0329f4ac-b055-4196-8fcd-93d5fe8dc8fd",
+            "from": {
+              "module": "tape-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "31ff16a6-9054-4b6f-aa4f-c9aba62e57fd",
+            "from": {
+              "module": "flock-1",
+              "port": "controlA"
+            },
+            "to": {
+              "module": "sieve-1",
+              "port": "focus"
+            }
+          },
+          {
+            "id": "ad854061-8dd0-4c12-b876-a164bbe9d9a6",
+            "from": {
+              "module": "flock-1",
+              "port": "controlB"
+            },
+            "to": {
+              "module": "drone-1",
+              "port": "spread"
+            }
+          },
+          {
+            "id": "p6-pulse-1-trigger-count-1-clock",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "count-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "p6-count-1-value-quantize-1-cv",
+            "from": {
+              "module": "count-1",
+              "port": "value"
+            },
+            "to": {
+              "module": "quantize-1",
+              "port": "cv"
+            }
+          },
+          {
+            "id": "p6-quantize-1-cv-drone-1-pitch",
+            "from": {
+              "module": "quantize-1",
+              "port": "cv"
+            },
+            "to": {
+              "module": "drone-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "p6-drone-1-audio-lpg-1-audio",
+            "from": {
+              "module": "drone-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "lpg-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "p6-pulse-1-trigger-lpg-1-strike",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "lpg-1",
+              "port": "strike"
+            }
+          },
+          {
+            "id": "p6-lpg-1-audio-sieve-1-audio",
+            "from": {
+              "module": "lpg-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "sieve-1",
+              "port": "audio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "late-light",
+      "name": "LATE LIGHT",
+      "principle": "Four held interval positions become related through PLATE overlap, with slower uneven arrivals and missing events.",
+      "tradeoff": "One net additional module. The arithmetic cycle is four states, not eight notes; longer gaps retain openness. The four pitches are approximately370/440/554/311Hz, with no root-to-root phrase closure.",
+      "beforeModules": 6,
+      "afterModules": 7,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "LATE LIGHT",
+        "seed": 20200409,
+        "bpm": 58,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 16,
+            "y": 16,
+            "seed": 20200409,
+            "character": "METAL",
+            "params": {
+              "rate": 0.3333333333333333,
+              "irregular": 0.06
+            }
+          },
+          {
+            "id": "chip-1",
+            "type": "CHIP",
+            "x": 192,
+            "y": 16,
+            "seed": 20208328,
+            "character": "METAL",
+            "params": {
+              "tune": 0.75,
+              "character": 0.3
+            }
+          },
+          {
+            "id": "plate-1",
+            "type": "PLATE",
+            "x": 368,
+            "y": 16,
+            "seed": 20216247,
+            "character": "METAL",
+            "params": {
+              "body": 0.52,
+              "decay": 0.72
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 544,
+            "y": 16,
+            "seed": 20224166,
+            "character": "METAL",
+            "params": {
+              "flow": 0.19,
+              "range": 0.17
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 16,
+            "y": 184,
+            "seed": 20232085,
+            "character": "METAL",
+            "params": {
+              "level": 0.73
+            }
+          },
+          {
+            "id": "branch-1",
+            "type": "BRANCH",
+            "x": 192,
+            "y": 184,
+            "seed": 116841,
+            "character": "METAL",
+            "params": {
+              "change": 0.08,
+              "memory": 0.95
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "c08e6715-1001-4bb1-990d-2d6143a7801b",
+            "from": {
+              "module": "chip-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "plate-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "04e67e5a-2dba-463e-90e2-39ea5677c769",
+            "from": {
+              "module": "plate-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "0a9eaea7-2bfa-4fe2-9b50-6c5627e3846e",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "plate-1",
+              "port": "body"
+            }
+          },
+          {
+            "id": "music-pulse-1-trigger-branch-1-clock",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "branch-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "music-branch-1-pitch-chip-1-pitch",
+            "from": {
+              "module": "branch-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "music-branch-1-gate-chip-1-trigger",
+            "from": {
+              "module": "branch-1",
+              "port": "gate"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "trigger"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "LATE LIGHT",
+        "seed": 20200409,
+        "bpm": 58,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "pulse-1",
+            "type": "PULSE",
+            "x": 16,
+            "y": 16,
+            "seed": 20200409,
+            "character": "METAL",
+            "params": {
+              "rate": 0.16,
+              "irregular": 0.32
+            }
+          },
+          {
+            "id": "chip-1",
+            "type": "CHIP",
+            "x": 192,
+            "y": 16,
+            "seed": 20208328,
+            "character": "METAL",
+            "params": {
+              "tune": 0.75,
+              "character": 0.3
+            }
+          },
+          {
+            "id": "plate-1",
+            "type": "PLATE",
+            "x": 368,
+            "y": 16,
+            "seed": 20216247,
+            "character": "METAL",
+            "params": {
+              "body": 0.52,
+              "decay": 0.72
+            }
+          },
+          {
+            "id": "tide-1",
+            "type": "TIDE",
+            "x": 544,
+            "y": 16,
+            "seed": 20224166,
+            "character": "METAL",
+            "params": {
+              "flow": 0.19,
+              "range": 0.17
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 16,
+            "y": 184,
+            "seed": 20232085,
+            "character": "METAL",
+            "params": {
+              "level": 0.73
+            }
+          },
+          {
+            "id": "count-1",
+            "type": "COUNT",
+            "x": 192,
+            "y": 184,
+            "seed": 20240004,
+            "character": "METAL",
+            "params": {
+              "step": 0.21428571428571427,
+              "rate": 0.3
+            },
+            "mode": "CLOCK"
+          },
+          {
+            "id": "quantize-1",
+            "type": "QUANTIZE",
+            "x": 368,
+            "y": 184,
+            "seed": 20247923,
+            "character": "METAL",
+            "params": {
+              "span": 0,
+              "pull": 1
+            },
+            "mode": "12-TET"
+          }
+        ],
+        "connections": [
+          {
+            "id": "c08e6715-1001-4bb1-990d-2d6143a7801b",
+            "from": {
+              "module": "chip-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "plate-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "04e67e5a-2dba-463e-90e2-39ea5677c769",
+            "from": {
+              "module": "plate-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "0a9eaea7-2bfa-4fe2-9b50-6c5627e3846e",
+            "from": {
+              "module": "tide-1",
+              "port": "drift"
+            },
+            "to": {
+              "module": "plate-1",
+              "port": "body"
+            }
+          },
+          {
+            "id": "p6-pulse-1-trigger-count-1-clock",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "count-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "p6-count-1-value-quantize-1-cv",
+            "from": {
+              "module": "count-1",
+              "port": "value"
+            },
+            "to": {
+              "module": "quantize-1",
+              "port": "cv"
+            }
+          },
+          {
+            "id": "p6-quantize-1-cv-chip-1-pitch",
+            "from": {
+              "module": "quantize-1",
+              "port": "cv"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "p6-pulse-1-trigger-chip-1-trigger",
+            "from": {
+              "module": "pulse-1",
+              "port": "trigger"
+            },
+            "to": {
+              "module": "chip-1",
+              "port": "trigger"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "off-grid",
+      "name": "OFF GRID",
+      "principle": "Asymmetric12-step time samples moving physical coordinates onto19-TET; the second clock stream disturbs the motion.",
+      "tradeoff": "Same module count. Held physical pitch replaces the pentatonic source. Every WEFT A event now articulates directly instead of BRANCH probabilistically omitting some; narrower span and existing long fall preserve space.",
+      "beforeModules": 7,
+      "afterModules": 7,
+      "before": {
+        "version": 1,
+        "layout": 2,
+        "name": "OFF GRID",
+        "seed": 20200410,
+        "bpm": 106,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "weft-1",
+            "type": "WEFT",
+            "x": 16,
+            "y": 16,
+            "seed": 20200410,
+            "character": "METAL",
+            "params": {
+              "rate": 0.55,
+              "fill": 0.58
+            },
+            "mode": "12"
+          },
+          {
+            "id": "branch-1",
+            "type": "BRANCH",
+            "x": 192,
+            "y": 16,
+            "seed": 20208329,
+            "character": "METAL",
+            "params": {
+              "change": 0.12,
+              "memory": 0.9
+            }
+          },
+          {
+            "id": "quantize-1",
+            "type": "QUANTIZE",
+            "x": 368,
+            "y": 16,
+            "seed": 20216248,
+            "character": "METAL",
+            "params": {
+              "span": 0.35,
+              "pull": 1
+            },
+            "mode": "19-TET"
+          },
+          {
+            "id": "formant-1",
+            "type": "FORMANT",
+            "x": 544,
+            "y": 16,
+            "seed": 20224167,
+            "character": "METAL",
+            "params": {
+              "tune": 0.5,
+              "vowel": 0.41
+            }
+          },
+          {
+            "id": "shape-1",
+            "type": "SHAPE",
+            "x": 16,
+            "y": 184,
+            "seed": 20232086,
+            "character": "METAL",
+            "params": {
+              "rise": 0.02,
+              "fall": 0.52
+            }
+          },
+          {
+            "id": "vca-1",
+            "type": "VCA",
+            "x": 192,
+            "y": 184,
+            "seed": 20240005,
+            "character": "METAL",
+            "params": {
+              "level": 0.7,
+              "blend": 0
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 368,
+            "y": 184,
+            "seed": 20247924,
+            "character": "METAL",
+            "params": {
+              "level": 0.71
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "c4d66e80-2fc7-4ac7-9bfa-45ea8ed01f99",
+            "from": {
+              "module": "weft-1",
+              "port": "a"
+            },
+            "to": {
+              "module": "branch-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "ccff9a67-3829-4333-8c0e-17685231c241",
+            "from": {
+              "module": "branch-1",
+              "port": "pitch"
+            },
+            "to": {
+              "module": "quantize-1",
+              "port": "cv"
+            }
+          },
+          {
+            "id": "01218a94-1157-428f-88ae-fa8f65f50ae9",
+            "from": {
+              "module": "quantize-1",
+              "port": "cv"
+            },
+            "to": {
+              "module": "formant-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "773aac8c-36b0-4679-8642-bd6ae4134a26",
+            "from": {
+              "module": "weft-1",
+              "port": "wander"
+            },
+            "to": {
+              "module": "formant-1",
+              "port": "vowel"
+            }
+          },
+          {
+            "id": "d2afc748-2afe-4fc4-800a-cb80a8ced0fa",
+            "from": {
+              "module": "branch-1",
+              "port": "gate"
+            },
+            "to": {
+              "module": "shape-1",
+              "port": "trigger"
+            }
+          },
+          {
+            "id": "5444b98e-b8e3-48be-9b83-73c2d423a917",
+            "from": {
+              "module": "shape-1",
+              "port": "control"
+            },
+            "to": {
+              "module": "vca-1",
+              "port": "level"
+            }
+          },
+          {
+            "id": "510fc8eb-42ea-4ae5-b012-bd5653404f31",
+            "from": {
+              "module": "formant-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "vca-1",
+              "port": "a"
+            }
+          },
+          {
+            "id": "3245192f-6092-4bd4-8083-83e7e925b520",
+            "from": {
+              "module": "vca-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          }
+        ]
+      },
+      "after": {
+        "version": 1,
+        "layout": 2,
+        "name": "OFF GRID",
+        "seed": 20200410,
+        "bpm": 106,
+        "master": 0.65,
+        "modules": [
+          {
+            "id": "weft-1",
+            "type": "WEFT",
+            "x": 16,
+            "y": 16,
+            "seed": 20200410,
+            "character": "METAL",
+            "params": {
+              "rate": 0.55,
+              "fill": 0.58
+            },
+            "mode": "12"
+          },
+          {
+            "id": "quantize-1",
+            "type": "QUANTIZE",
+            "x": 368,
+            "y": 16,
+            "seed": 20216248,
+            "character": "METAL",
+            "params": {
+              "span": 0.1,
+              "pull": 1
+            },
+            "mode": "19-TET"
+          },
+          {
+            "id": "formant-1",
+            "type": "FORMANT",
+            "x": 544,
+            "y": 16,
+            "seed": 20224167,
+            "character": "METAL",
+            "params": {
+              "tune": 0.5,
+              "vowel": 0.41
+            }
+          },
+          {
+            "id": "shape-1",
+            "type": "SHAPE",
+            "x": 16,
+            "y": 184,
+            "seed": 20232086,
+            "character": "METAL",
+            "params": {
+              "rise": 0.02,
+              "fall": 0.52
+            }
+          },
+          {
+            "id": "vca-1",
+            "type": "VCA",
+            "x": 192,
+            "y": 184,
+            "seed": 20240005,
+            "character": "METAL",
+            "params": {
+              "level": 0.7,
+              "blend": 0
+            }
+          },
+          {
+            "id": "output-1",
+            "type": "OUTPUT",
+            "x": 368,
+            "y": 184,
+            "seed": 20247924,
+            "character": "METAL",
+            "params": {
+              "level": 0.71
+            }
+          },
+          {
+            "id": "bounce-1",
+            "type": "BOUNCE",
+            "x": 368,
+            "y": 184,
+            "seed": 20247924,
+            "character": "METAL",
+            "params": {
+              "tilt": 0.25,
+              "elastic": 0.82
+            }
+          }
+        ],
+        "connections": [
+          {
+            "id": "01218a94-1157-428f-88ae-fa8f65f50ae9",
+            "from": {
+              "module": "quantize-1",
+              "port": "cv"
+            },
+            "to": {
+              "module": "formant-1",
+              "port": "pitch"
+            }
+          },
+          {
+            "id": "773aac8c-36b0-4679-8642-bd6ae4134a26",
+            "from": {
+              "module": "weft-1",
+              "port": "wander"
+            },
+            "to": {
+              "module": "formant-1",
+              "port": "vowel"
+            }
+          },
+          {
+            "id": "5444b98e-b8e3-48be-9b83-73c2d423a917",
+            "from": {
+              "module": "shape-1",
+              "port": "control"
+            },
+            "to": {
+              "module": "vca-1",
+              "port": "level"
+            }
+          },
+          {
+            "id": "510fc8eb-42ea-4ae5-b012-bd5653404f31",
+            "from": {
+              "module": "formant-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "vca-1",
+              "port": "a"
+            }
+          },
+          {
+            "id": "3245192f-6092-4bd4-8083-83e7e925b520",
+            "from": {
+              "module": "vca-1",
+              "port": "audio"
+            },
+            "to": {
+              "module": "output-1",
+              "port": "audio"
+            }
+          },
+          {
+            "id": "p6-weft-1-b-bounce-1-kick",
+            "from": {
+              "module": "weft-1",
+              "port": "b"
+            },
+            "to": {
+              "module": "bounce-1",
+              "port": "kick"
+            }
+          },
+          {
+            "id": "p6-bounce-1-x-quantize-1-cv",
+            "from": {
+              "module": "bounce-1",
+              "port": "x"
+            },
+            "to": {
+              "module": "quantize-1",
+              "port": "cv"
+            }
+          },
+          {
+            "id": "p6-weft-1-a-quantize-1-clock",
+            "from": {
+              "module": "weft-1",
+              "port": "a"
+            },
+            "to": {
+              "module": "quantize-1",
+              "port": "clock"
+            }
+          },
+          {
+            "id": "p6-weft-1-a-shape-1-trigger",
+            "from": {
+              "module": "weft-1",
+              "port": "a"
+            },
+            "to": {
+              "module": "shape-1",
+              "port": "trigger"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

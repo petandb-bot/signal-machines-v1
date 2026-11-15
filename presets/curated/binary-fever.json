@@ -79,18 +79,6 @@
       }
     },
     {
-      "id": "branch-1",
-      "type": "BRANCH",
-      "x": 368,
-      "y": 184,
-      "seed": 96034,
-      "character": "METAL",
-      "params": {
-        "change": 0.08,
-        "memory": 0.95
-      }
-    },
-    {
       "id": "weft-1",
       "type": "WEFT",
       "x": 544,
@@ -101,7 +89,7 @@
         "rate": 0.6666666666666666,
         "fill": 0.58
       },
-      "mode": "16"
+      "mode": "12"
     },
     {
       "id": "osc-1",
@@ -219,28 +207,6 @@
       }
     },
     {
-      "id": "music-weft-1-a-branch-1-clock",
-      "from": {
-        "module": "weft-1",
-        "port": "a"
-      },
-      "to": {
-        "module": "branch-1",
-        "port": "clock"
-      }
-    },
-    {
-      "id": "music-branch-1-gate-shape-1-trigger",
-      "from": {
-        "module": "branch-1",
-        "port": "gate"
-      },
-      "to": {
-        "module": "shape-1",
-        "port": "trigger"
-      }
-    },
-    {
       "id": "music-shape-1-control-osc-1-level",
       "from": {
         "module": "shape-1",
@@ -252,28 +218,6 @@
       }
     },
     {
-      "id": "music-branch-1-pitch-osc-1-pitch",
-      "from": {
-        "module": "branch-1",
-        "port": "pitch"
-      },
-      "to": {
-        "module": "osc-1",
-        "port": "pitch"
-      }
-    },
-    {
-      "id": "music-branch-1-pitch-feral-1-pitch",
-      "from": {
-        "module": "branch-1",
-        "port": "pitch"
-      },
-      "to": {
-        "module": "feral-1",
-        "port": "pitch"
-      }
-    },
-    {
       "id": "music-osc-1-audio-count-1-audioClock",
       "from": {
         "module": "osc-1",
@@ -282,6 +226,28 @@
       "to": {
         "module": "count-1",
         "port": "audioClock"
+      }
+    },
+    {
+      "id": "p6-weft-1-a-shape-1-trigger",
+      "from": {
+        "module": "weft-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "shape-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "p6-weft-1-b-count-1-reset",
+      "from": {
+        "module": "weft-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "count-1",
+        "port": "reset"
       }
     }
   ]

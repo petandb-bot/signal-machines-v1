@@ -15,7 +15,7 @@
       "character": "METAL",
       "params": {
         "rate": 0.34,
-        "irregular": 0.12
+        "irregular": 0.18
       }
     },
     {
@@ -90,17 +90,71 @@
       }
     },
     {
-      "id": "chance-1",
-      "type": "CHANCE",
+      "id": "touch-1",
+      "type": "TOUCH",
       "x": 544,
       "y": 184,
-      "seed": 79834,
+      "seed": 217034,
       "character": "METAL",
       "params": {
-        "density": 1,
-        "recall": 1
+        "speed": 0.5,
+        "smooth": 0.04
       },
-      "mode": "HIGH"
+      "gesture": {
+        "duration": 7.3,
+        "points": [
+          {
+            "t": 0,
+            "x": 0.5,
+            "y": 0
+          },
+          {
+            "t": 1.45,
+            "x": 0.5,
+            "y": 0
+          },
+          {
+            "t": 1.5,
+            "x": 0.79,
+            "y": 0
+          },
+          {
+            "t": 3.55,
+            "x": 0.79,
+            "y": 0
+          },
+          {
+            "t": 3.6,
+            "x": 0.53,
+            "y": 0
+          },
+          {
+            "t": 4.35,
+            "x": 0.53,
+            "y": 0
+          },
+          {
+            "t": 4.4,
+            "x": 0.79,
+            "y": 0
+          },
+          {
+            "t": 6.05,
+            "x": 0.79,
+            "y": 0
+          },
+          {
+            "t": 6.1,
+            "x": 0.5,
+            "y": 0
+          },
+          {
+            "t": 7.3,
+            "x": 0.5,
+            "y": 0
+          }
+        ]
+      }
     }
   ],
   "connections": [
@@ -171,21 +225,10 @@
       }
     },
     {
-      "id": "music-pulse-1-trigger-chance-1-clock",
+      "id": "p6-pulse-1-trigger-alloy-1-trigger",
       "from": {
         "module": "pulse-1",
         "port": "trigger"
-      },
-      "to": {
-        "module": "chance-1",
-        "port": "clock"
-      }
-    },
-    {
-      "id": "music-chance-1-a-alloy-1-trigger",
-      "from": {
-        "module": "chance-1",
-        "port": "a"
       },
       "to": {
         "module": "alloy-1",
@@ -193,10 +236,10 @@
       }
     },
     {
-      "id": "music-chance-1-pitch-alloy-1-pitch",
+      "id": "p6-touch-1-x-alloy-1-pitch",
       "from": {
-        "module": "chance-1",
-        "port": "pitch"
+        "module": "touch-1",
+        "port": "x"
       },
       "to": {
         "module": "alloy-1",

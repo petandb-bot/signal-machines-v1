@@ -51,8 +51,8 @@ Pull requests run tests, build and AudioWorklet verification without deploying. 
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
 
-## v0.21.0 — WALLS and musical starting worlds
+## Phase 6 review candidate
 
-WALLS adds finite early reflections with DISTANCE and MOTION. The ten starting patches now mix recurring note phrases, asymmetric beats and quiet sustained harmony. All original sound engines and saved user circuits remain compatible.
+Ten starting worlds now use different musical languages: melody, sustained partials, material responses, machine rhythm, physical pitch and audio memory. PIXEL DUST stays familiar; the existing68 sound engines stay unchanged.
 
-[Phase 5: patches, measured comparisons and limitations](docs/phase5/README.md). ROOM AIR stays unchanged; its optional low-cut study is separate. Standalone patches live in [presets/curated](presets/curated). Phase 5 is the v0.21.0 public release. Musical quality and physical iPhone Safari performance still require listening/device confirmation.
+[Phase 6: musical audit, exact changes and before/after review](docs/phase6/README.md). This is a review candidate, not a published release. [Phase 5 WALLS and references](docs/phase5/README.md) remain available.

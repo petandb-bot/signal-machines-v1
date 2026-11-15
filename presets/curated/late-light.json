@@ -14,8 +14,8 @@
       "seed": 20200409,
       "character": "METAL",
       "params": {
-        "rate": 0.3333333333333333,
-        "irregular": 0.06
+        "rate": 0.16,
+        "irregular": 0.32
       }
     },
     {
@@ -66,16 +66,30 @@
       }
     },
     {
-      "id": "branch-1",
-      "type": "BRANCH",
+      "id": "count-1",
+      "type": "COUNT",
       "x": 192,
       "y": 184,
-      "seed": 116841,
+      "seed": 20240004,
       "character": "METAL",
       "params": {
-        "change": 0.08,
-        "memory": 0.95
-      }
+        "step": 0.21428571428571427,
+        "rate": 0.3
+      },
+      "mode": "CLOCK"
+    },
+    {
+      "id": "quantize-1",
+      "type": "QUANTIZE",
+      "x": 368,
+      "y": 184,
+      "seed": 20247923,
+      "character": "METAL",
+      "params": {
+        "span": 0,
+        "pull": 1
+      },
+      "mode": "12-TET"
     }
   ],
   "connections": [
@@ -113,21 +127,32 @@
       }
     },
     {
-      "id": "music-pulse-1-trigger-branch-1-clock",
+      "id": "p6-pulse-1-trigger-count-1-clock",
       "from": {
         "module": "pulse-1",
         "port": "trigger"
       },
       "to": {
-        "module": "branch-1",
+        "module": "count-1",
         "port": "clock"
       }
     },
     {
-      "id": "music-branch-1-pitch-chip-1-pitch",
+      "id": "p6-count-1-value-quantize-1-cv",
       "from": {
-        "module": "branch-1",
-        "port": "pitch"
+        "module": "count-1",
+        "port": "value"
+      },
+      "to": {
+        "module": "quantize-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "p6-quantize-1-cv-chip-1-pitch",
+      "from": {
+        "module": "quantize-1",
+        "port": "cv"
       },
       "to": {
         "module": "chip-1",
@@ -135,10 +160,10 @@
       }
     },
     {
-      "id": "music-branch-1-gate-chip-1-trigger",
+      "id": "p6-pulse-1-trigger-chip-1-trigger",
       "from": {
-        "module": "branch-1",
-        "port": "gate"
+        "module": "pulse-1",
+        "port": "trigger"
       },
       "to": {
         "module": "chip-1",

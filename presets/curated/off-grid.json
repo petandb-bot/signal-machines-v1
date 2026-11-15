@@ -20,18 +20,6 @@
       "mode": "12"
     },
     {
-      "id": "branch-1",
-      "type": "BRANCH",
-      "x": 192,
-      "y": 16,
-      "seed": 20208329,
-      "character": "METAL",
-      "params": {
-        "change": 0.12,
-        "memory": 0.9
-      }
-    },
-    {
       "id": "quantize-1",
       "type": "QUANTIZE",
       "x": 368,
@@ -39,7 +27,7 @@
       "seed": 20216248,
       "character": "METAL",
       "params": {
-        "span": 0.35,
+        "span": 0.1,
         "pull": 1
       },
       "mode": "19-TET"
@@ -90,31 +78,21 @@
       "params": {
         "level": 0.71
       }
+    },
+    {
+      "id": "bounce-1",
+      "type": "BOUNCE",
+      "x": 368,
+      "y": 184,
+      "seed": 20247924,
+      "character": "METAL",
+      "params": {
+        "tilt": 0.25,
+        "elastic": 0.82
+      }
     }
   ],
   "connections": [
-    {
-      "id": "c4d66e80-2fc7-4ac7-9bfa-45ea8ed01f99",
-      "from": {
-        "module": "weft-1",
-        "port": "a"
-      },
-      "to": {
-        "module": "branch-1",
-        "port": "clock"
-      }
-    },
-    {
-      "id": "ccff9a67-3829-4333-8c0e-17685231c241",
-      "from": {
-        "module": "branch-1",
-        "port": "pitch"
-      },
-      "to": {
-        "module": "quantize-1",
-        "port": "cv"
-      }
-    },
     {
       "id": "01218a94-1157-428f-88ae-fa8f65f50ae9",
       "from": {
@@ -135,17 +113,6 @@
       "to": {
         "module": "formant-1",
         "port": "vowel"
-      }
-    },
-    {
-      "id": "d2afc748-2afe-4fc4-800a-cb80a8ced0fa",
-      "from": {
-        "module": "branch-1",
-        "port": "gate"
-      },
-      "to": {
-        "module": "shape-1",
-        "port": "trigger"
       }
     },
     {
@@ -179,6 +146,50 @@
       "to": {
         "module": "output-1",
         "port": "audio"
+      }
+    },
+    {
+      "id": "p6-weft-1-b-bounce-1-kick",
+      "from": {
+        "module": "weft-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "bounce-1",
+        "port": "kick"
+      }
+    },
+    {
+      "id": "p6-bounce-1-x-quantize-1-cv",
+      "from": {
+        "module": "bounce-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "quantize-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "p6-weft-1-a-quantize-1-clock",
+      "from": {
+        "module": "weft-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "quantize-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "p6-weft-1-a-shape-1-trigger",
+      "from": {
+        "module": "weft-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "shape-1",
+        "port": "trigger"
       }
     }
   ]
