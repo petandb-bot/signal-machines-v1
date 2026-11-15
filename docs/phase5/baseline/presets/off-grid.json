@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "OFF GRID",
+  "seed": 20200410,
+  "bpm": 106,
+  "master": 0.65,
+  "modules": [
+    {
+      "id": "weft-1",
+      "type": "WEFT",
+      "x": 16,
+      "y": 16,
+      "seed": 20200410,
+      "character": "METAL",
+      "params": {
+        "rate": 0.55,
+        "fill": 0.58
+      },
+      "mode": "12"
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 192,
+      "y": 16,
+      "seed": 20208329,
+      "character": "METAL",
+      "params": {
+        "change": 0.62,
+        "memory": 0.52
+      }
+    },
+    {
+      "id": "quantize-1",
+      "type": "QUANTIZE",
+      "x": 368,
+      "y": 16,
+      "seed": 20216248,
+      "character": "METAL",
+      "params": {
+        "span": 0.85,
+        "pull": 1
+      },
+      "mode": "19-TET"
+    },
+    {
+      "id": "formant-1",
+      "type": "FORMANT",
+      "x": 544,
+      "y": 16,
+      "seed": 20224167,
+      "character": "METAL",
+      "params": {
+        "tune": 0.48,
+        "vowel": 0.41
+      }
+    },
+    {
+      "id": "shape-1",
+      "type": "SHAPE",
+      "x": 16,
+      "y": 184,
+      "seed": 20232086,
+      "character": "METAL",
+      "params": {
+        "rise": 0.02,
+        "fall": 0.32
+      }
+    },
+    {
+      "id": "vca-1",
+      "type": "VCA",
+      "x": 192,
+      "y": 184,
+      "seed": 20240005,
+      "character": "METAL",
+      "params": {
+        "level": 0.7,
+        "blend": 0
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 184,
+      "seed": 20247924,
+      "character": "METAL",
+      "params": {
+        "level": 0.71
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "c4d66e80-2fc7-4ac7-9bfa-45ea8ed01f99",
+      "from": {
+        "module": "weft-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "ccff9a67-3829-4333-8c0e-17685231c241",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "quantize-1",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "01218a94-1157-428f-88ae-fa8f65f50ae9",
+      "from": {
+        "module": "quantize-1",
+        "port": "cv"
+      },
+      "to": {
+        "module": "formant-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "773aac8c-36b0-4679-8642-bd6ae4134a26",
+      "from": {
+        "module": "weft-1",
+        "port": "wander"
+      },
+      "to": {
+        "module": "formant-1",
+        "port": "vowel"
+      }
+    },
+    {
+      "id": "d2afc748-2afe-4fc4-800a-cb80a8ced0fa",
+      "from": {
+        "module": "branch-1",
+        "port": "gate"
+      },
+      "to": {
+        "module": "shape-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "5444b98e-b8e3-48be-9b83-73c2d423a917",
+      "from": {
+        "module": "shape-1",
+        "port": "control"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "level"
+      }
+    },
+    {
+      "id": "510fc8eb-42ea-4ae5-b012-bd5653404f31",
+      "from": {
+        "module": "formant-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "3245192f-6092-4bd4-8083-83e7e925b520",
+      "from": {
+        "module": "vca-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

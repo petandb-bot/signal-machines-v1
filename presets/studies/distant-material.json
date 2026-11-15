@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "DISTANT MATERIAL",
+  "bpm": 72,
+  "master": 0.65,
+  "seed": 20200502,
+  "modules": [
+    {
+      "id": "cuts-1",
+      "type": "CUTS",
+      "x": 16,
+      "y": 16,
+      "seed": 20200502,
+      "character": "METAL",
+      "params": {
+        "sparse": 0.72,
+        "change": 0.46
+      },
+      "sample": "builtin:machine"
+    },
+    {
+      "id": "sympathy-1",
+      "type": "SYMPATHY",
+      "x": 192,
+      "y": 16,
+      "seed": 20208421,
+      "character": "METAL",
+      "params": {
+        "body": 0.24,
+        "couple": 0.63
+      }
+    },
+    {
+      "id": "walls-1",
+      "type": "WALLS",
+      "x": 368,
+      "y": 16,
+      "seed": 20216340,
+      "character": "METAL",
+      "params": {
+        "distance": 0.74,
+        "motion": 0.65
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 544,
+      "y": 16,
+      "seed": 20224259,
+      "character": "METAL",
+      "params": {
+        "flow": 0.12,
+        "range": 0.12
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 16,
+      "y": 184,
+      "seed": 20232178,
+      "character": "METAL",
+      "params": {
+        "level": 0.78
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "386754fa-8958-45e6-bf71-866227cb3ae3",
+      "from": {
+        "module": "cuts-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "walls-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "1af4cd27-7e9e-45e1-bb9e-07dc66918c7d",
+      "from": {
+        "module": "cuts-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "sympathy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "998ea1eb-8ea3-4c48-aa8f-65233b316c73",
+      "from": {
+        "module": "sympathy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "walls-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "cd00bf9f-159c-459e-9b38-8b879f3afec5",
+      "from": {
+        "module": "walls-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "bbb11e70-3b41-42af-bb88-a6314609359a",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "walls-1",
+        "port": "distance"
+      }
+    }
+  ]
+}

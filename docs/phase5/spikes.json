@@ -1,0 +1,87 @@
+{
+  "rate": 48000,
+  "voices": 8,
+  "seconds": 15,
+  "warmupSeconds": 6,
+  "cold128Ms": 9.03213999999997,
+  "deadlineMs": 2.6666666666666665,
+  "largestWallSpikes": [
+    {
+      "second": 12.578666666666667,
+      "wallMs": 5.375833000000057,
+      "cpuMs": 5.379
+    },
+    {
+      "second": 0.5893333333333333,
+      "wallMs": 4.918578000000252,
+      "cpuMs": 4.926
+    },
+    {
+      "second": 14.394666666666666,
+      "wallMs": 4.361847000000125,
+      "cpuMs": 1.548
+    },
+    {
+      "second": 2.776,
+      "wallMs": 4.096774000000096,
+      "cpuMs": 4.1
+    },
+    {
+      "second": 1.6719999999999997,
+      "wallMs": 3.459860999999819,
+      "cpuMs": 3.463
+    },
+    {
+      "second": 6.7333333333333325,
+      "wallMs": 3.1632669999999052,
+      "cpuMs": 1.361
+    },
+    {
+      "second": 5.4079999999999995,
+      "wallMs": 2.9375,
+      "cpuMs": 2.942
+    },
+    {
+      "second": 2.834666666666667,
+      "wallMs": 2.851941999999781,
+      "cpuMs": 2.857
+    },
+    {
+      "second": 0.6159999999999997,
+      "wallMs": 2.8098159999999552,
+      "cpuMs": 2.818
+    },
+    {
+      "second": 2.6720000000000006,
+      "wallMs": 2.7958580000004076,
+      "cpuMs": 2.801
+    },
+    {
+      "second": 3.6240000000000006,
+      "wallMs": 2.682430999999724,
+      "cpuMs": 2.686
+    },
+    {
+      "second": 10.570666666666668,
+      "wallMs": 2.647229999999581,
+      "cpuMs": 2.651
+    },
+    {
+      "second": 3.6159999999999997,
+      "wallMs": 2.6456819999998515,
+      "cpuMs": 2.649
+    },
+    {
+      "second": 8.242666666666667,
+      "wallMs": 2.583329999999478,
+      "cpuMs": 2.587
+    },
+    {
+      "second": 3.7653333333333325,
+      "wallMs": 2.5678579999998874,
+      "cpuMs": 2.574
+    }
+  ],
+  "aboveDeadline": 11,
+  "method": "Warm6s exercises geometry transitions before measurement. Main performance.json remains the original independent non-instrumented run. This probe adds process.cpuUsage observations outside the wall-clock timed region; instrumentation and OS/V8 scheduling can still influence outliers. Wall much larger than CPU suggests descheduling, not a deterministic FIR cost. No mobile guarantee."
+}

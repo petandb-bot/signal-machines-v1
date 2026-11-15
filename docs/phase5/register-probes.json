@@ -1,0 +1,100 @@
+{
+  "seconds": 60,
+  "method": "Full-file stereo FFT and A-weighted RMS; not LUFS. Same seeds and source graph state. Short12s probe was insufficient for the slow BINARY regime changes, so this60s check controls candidate selection.",
+  "rows": [
+    {
+      "name": "binary-original",
+      "id": "binary-fever",
+      "changes": [],
+      "rate": 24000,
+      "seconds": 60,
+      "rms": 0.02256294555710601,
+      "peak": 0.12471315264701843,
+      "dc": [
+        -3.2291045779304146e-06,
+        -3.2291045779304146e-06
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.05110340379178524,
+      "sub80Fraction": 0.4822332561016083,
+      "centroidHz": 143.10409078761458,
+      "aWeightedRms": 0.005465857381754637
+    },
+    {
+      "name": "binary-tune",
+      "id": "binary-fever",
+      "changes": [
+        [
+          "feral-1",
+          "tune",
+          0.54
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 60,
+      "rms": 0.023882708003778317,
+      "peak": 0.1316862851381302,
+      "dc": [
+        -2.793192462023384e-06,
+        -2.793192462023384e-06
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.061652831733226776,
+      "sub80Fraction": 0.45416542887687683,
+      "centroidHz": 159.00914483581792,
+      "aWeightedRms": 0.006426179102029404
+    },
+    {
+      "name": "binary-count",
+      "id": "binary-fever",
+      "changes": [
+        [
+          "count-1",
+          "rate",
+          0.76
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 60,
+      "rms": 0.022954741114398103,
+      "peak": 0.1315014660358429,
+      "dc": [
+        -2.9501597530201934e-06,
+        -2.9501597530201934e-06
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.06188298016786575,
+      "sub80Fraction": 0.4074622690677643,
+      "centroidHz": 148.04177665839248,
+      "aWeightedRms": 0.005660599210856288
+    },
+    {
+      "name": "metal-tension",
+      "id": "dissolving-metal",
+      "changes": [
+        [
+          "alloy-1",
+          "tension",
+          0.6
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 60,
+      "rms": 0.005191254364058727,
+      "peak": 0.08361504226922989,
+      "dc": [
+        -9.077950192636486e-08,
+        -7.056664916817298e-08
+      ],
+      "stereoCorrelation": 0.8356487173066999,
+      "monoPowerRatio": 0.9133728740018163,
+      "maxStep": 0.009845354594290257,
+      "sub80Fraction": 0.026281137019395828,
+      "centroidHz": 211.52236278772043,
+      "aWeightedRms": 0.0018574513543722806
+    }
+  ]
+}

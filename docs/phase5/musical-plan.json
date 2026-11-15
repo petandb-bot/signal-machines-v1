@@ -1,0 +1,1968 @@
+{
+  "scope": "Later user instruction asks for musical form beyond minor balancing; only existing modules/data are arranged. ROOM AIR explicitly remains unchanged. All original DSP and both reference collections are protected.",
+  "plans": [
+    {
+      "id": "STILL, ALMOST MOVING II",
+      "type": "BRANCH",
+      "module": "branch-1",
+      "seed": 85051,
+      "semitones": [
+        0,
+        3,
+        7,
+        7,
+        3,
+        0,
+        -2,
+        0
+      ],
+      "rootHz": null,
+      "meaning": "A minor pentatonic relative intervals; high-register CHANCE root12 is one octave above its base. Fixed initial seed, no custom pattern data or DSP changes."
+    },
+    {
+      "id": "PIXEL DUST",
+      "type": "BRANCH",
+      "module": "branch-1",
+      "seed": 17190,
+      "semitones": [
+        0,
+        3,
+        3,
+        5,
+        -2,
+        -2,
+        -5,
+        0
+      ],
+      "rootHz": null,
+      "meaning": "A minor pentatonic relative intervals; high-register CHANCE root12 is one octave above its base. Fixed initial seed, no custom pattern data or DSP changes."
+    },
+    {
+      "id": "EXCHANGING BODIES",
+      "type": "CHANCE",
+      "module": "chance-1",
+      "seed": 100614,
+      "semitones": [
+        12,
+        17,
+        22,
+        22,
+        19,
+        15,
+        12,
+        12
+      ],
+      "rootHz": 110,
+      "meaning": "A minor pentatonic relative intervals; high-register CHANCE root12 is one octave above its base. Fixed initial seed, no custom pattern data or DSP changes."
+    },
+    {
+      "id": "DISSOLVING METAL",
+      "type": "CHANCE",
+      "module": "chance-1",
+      "seed": 79834,
+      "semitones": [
+        12,
+        15,
+        15,
+        15,
+        7,
+        7,
+        5,
+        12
+      ],
+      "rootHz": 110,
+      "meaning": "A minor pentatonic relative intervals; high-register CHANCE root12 is one octave above its base. Fixed initial seed, no custom pattern data or DSP changes."
+    },
+    {
+      "id": "BINARY FEVER",
+      "type": "BRANCH",
+      "module": "branch-1",
+      "seed": 96034,
+      "semitones": [
+        0,
+        0,
+        5,
+        3,
+        0,
+        -2,
+        -2,
+        0
+      ],
+      "rootHz": null,
+      "meaning": "A minor pentatonic relative intervals; high-register CHANCE root12 is one octave above its base. Fixed initial seed, no custom pattern data or DSP changes."
+    },
+    {
+      "id": "TAPE GARDEN",
+      "type": "BRANCH",
+      "module": "branch-1",
+      "seed": 115829,
+      "semitones": [
+        0,
+        7,
+        5,
+        5,
+        0,
+        -2,
+        3,
+        0
+      ],
+      "rootHz": null,
+      "meaning": "A minor pentatonic relative intervals; high-register CHANCE root12 is one octave above its base. Fixed initial seed, no custom pattern data or DSP changes."
+    },
+    {
+      "id": "LATE LIGHT",
+      "type": "BRANCH",
+      "module": "branch-1",
+      "seed": 116841,
+      "semitones": [
+        0,
+        7,
+        10,
+        7,
+        5,
+        3,
+        -5,
+        0
+      ],
+      "rootHz": null,
+      "meaning": "A minor pentatonic relative intervals; high-register CHANCE root12 is one octave above its base. Fixed initial seed, no custom pattern data or DSP changes."
+    }
+  ],
+  "changes": [
+    {
+      "id": "still-almost-moving-ii",
+      "name": "STILL, ALMOST MOVING II",
+      "reason": "A slow repeated upper phrase moves above the A pedal instead of continuously wandering pitch.",
+      "tradeoff": "The harmonic contour is more defined and the upper layer more present; free wandering is reduced.",
+      "humanListeningRequired": true,
+      "parameterChanges": [
+        {
+          "module": "drone-1",
+          "parameter": "color",
+          "old": 0.3,
+          "new": 0.38
+        },
+        {
+          "module": "vca-1",
+          "parameter": "level",
+          "old": 0.22,
+          "new": 0.38
+        },
+        {
+          "module": "slew-1",
+          "parameter": "rise",
+          "old": 0.88,
+          "new": 0.6
+        },
+        {
+          "module": "slew-1",
+          "parameter": "fall",
+          "old": 0.9,
+          "new": 0.65
+        },
+        {
+          "module": "slew-1",
+          "parameter": "mode",
+          "old": null,
+          "new": "GLIDE"
+        }
+      ],
+      "addedModules": [
+        {
+          "id": "branch-1",
+          "type": "BRANCH"
+        },
+        {
+          "id": "pulse-1",
+          "type": "PULSE"
+        }
+      ],
+      "removedModules": [],
+      "oldConnections": [
+        {
+          "id": "cdc441cc-5a6b-4149-bb7c-066e993577bb",
+          "from": {
+            "module": "drone-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "chamber-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "ff344e8e-2dba-4a97-b4b0-49116d1d65ac",
+          "from": {
+            "module": "partial-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "vca-1",
+            "port": "a"
+          }
+        },
+        {
+          "id": "d15b03ce-439e-4102-8ecb-e34aa9e2353f",
+          "from": {
+            "module": "vca-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "chamber-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "450cbcb3-e615-4555-9e2e-976154f37c21",
+          "from": {
+            "module": "chamber-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "40e90564-fa00-44c0-bd9d-b4f4ef85dfc4",
+          "from": {
+            "module": "tide-1",
+            "port": "drift"
+          },
+          "to": {
+            "module": "drone-1",
+            "port": "spread"
+          }
+        },
+        {
+          "id": "74e0acbc-d3f6-4859-8317-5cf598e0e723",
+          "from": {
+            "module": "tide-1",
+            "port": "tide"
+          },
+          "to": {
+            "module": "slew-1",
+            "port": "cv"
+          }
+        },
+        {
+          "id": "9865e66d-92b9-4c54-9bcc-2582db2a0579",
+          "from": {
+            "module": "slew-1",
+            "port": "cv"
+          },
+          "to": {
+            "module": "partial-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "6215a8f5-70b3-436e-a533-a8fec70508ed",
+          "from": {
+            "module": "tide-1",
+            "port": "age"
+          },
+          "to": {
+            "module": "partial-1",
+            "port": "mass"
+          }
+        }
+      ],
+      "newConnections": [
+        {
+          "id": "cdc441cc-5a6b-4149-bb7c-066e993577bb",
+          "from": {
+            "module": "drone-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "chamber-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "ff344e8e-2dba-4a97-b4b0-49116d1d65ac",
+          "from": {
+            "module": "partial-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "vca-1",
+            "port": "a"
+          }
+        },
+        {
+          "id": "d15b03ce-439e-4102-8ecb-e34aa9e2353f",
+          "from": {
+            "module": "vca-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "chamber-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "450cbcb3-e615-4555-9e2e-976154f37c21",
+          "from": {
+            "module": "chamber-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "40e90564-fa00-44c0-bd9d-b4f4ef85dfc4",
+          "from": {
+            "module": "tide-1",
+            "port": "drift"
+          },
+          "to": {
+            "module": "drone-1",
+            "port": "spread"
+          }
+        },
+        {
+          "id": "9865e66d-92b9-4c54-9bcc-2582db2a0579",
+          "from": {
+            "module": "slew-1",
+            "port": "cv"
+          },
+          "to": {
+            "module": "partial-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "6215a8f5-70b3-436e-a533-a8fec70508ed",
+          "from": {
+            "module": "tide-1",
+            "port": "age"
+          },
+          "to": {
+            "module": "partial-1",
+            "port": "mass"
+          }
+        },
+        {
+          "id": "music-pulse-1-trigger-branch-1-clock",
+          "from": {
+            "module": "pulse-1",
+            "port": "trigger"
+          },
+          "to": {
+            "module": "branch-1",
+            "port": "clock"
+          }
+        },
+        {
+          "id": "music-branch-1-pitch-slew-1-cv",
+          "from": {
+            "module": "branch-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "slew-1",
+            "port": "cv"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pixel-dust",
+      "name": "PIXEL DUST",
+      "reason": "A recurring eighth-note pentatonic phrase gives the dry CHIP an immediate musical anchor. Pendulum still shapes its colour.",
+      "tradeoff": "Five modules replace the original three-module configuration; physical motion no longer directly sweeps pitch/timing. CHIP DSP stays unchanged.",
+      "humanListeningRequired": true,
+      "parameterChanges": [
+        {
+          "module": "chip-1",
+          "parameter": "tune",
+          "old": 0.43,
+          "new": 0.5
+        },
+        {
+          "module": "chip-1",
+          "parameter": "character",
+          "old": 0.39,
+          "new": 0.34
+        },
+        {
+          "module": "output-1",
+          "parameter": "level",
+          "old": 0.68,
+          "new": 0.4
+        }
+      ],
+      "addedModules": [
+        {
+          "id": "branch-1",
+          "type": "BRANCH"
+        },
+        {
+          "id": "pulse-1",
+          "type": "PULSE"
+        }
+      ],
+      "removedModules": [],
+      "oldConnections": [
+        {
+          "id": "85b2b8e6-5b22-4adf-95fa-a83a7e45e126",
+          "from": {
+            "module": "pendulum-1",
+            "port": "a"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "cdde386e-aaf2-453c-913e-a3db69943a3e",
+          "from": {
+            "module": "pendulum-1",
+            "port": "aCross"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "b87e6da8-35fb-4091-a30f-29966b664d4e",
+          "from": {
+            "module": "pendulum-1",
+            "port": "b"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "character"
+          }
+        },
+        {
+          "id": "269f42cf-7044-4b5e-b647-58531cf61663",
+          "from": {
+            "module": "chip-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        }
+      ],
+      "newConnections": [
+        {
+          "id": "b87e6da8-35fb-4091-a30f-29966b664d4e",
+          "from": {
+            "module": "pendulum-1",
+            "port": "b"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "character"
+          }
+        },
+        {
+          "id": "269f42cf-7044-4b5e-b647-58531cf61663",
+          "from": {
+            "module": "chip-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "music-pulse-1-trigger-branch-1-clock",
+          "from": {
+            "module": "pulse-1",
+            "port": "trigger"
+          },
+          "to": {
+            "module": "branch-1",
+            "port": "clock"
+          }
+        },
+        {
+          "id": "music-branch-1-pitch-chip-1-pitch",
+          "from": {
+            "module": "branch-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "music-branch-1-gate-chip-1-trigger",
+          "from": {
+            "module": "branch-1",
+            "port": "gate"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "trigger"
+          }
+        }
+      ]
+    },
+    {
+      "id": "small-hours",
+      "name": "SMALL HOURS",
+      "reason": "A restrained seven-in-sixteen trigger pattern gives sample gestures a repeatable temporal shape without filling every gap.",
+      "tradeoff": "External clock takes over CUTS timing; silence remains central and the SPARSE knob becomes a cooldown control.",
+      "humanListeningRequired": true,
+      "parameterChanges": [
+        {
+          "module": "cuts-1",
+          "parameter": "change",
+          "old": 0.56,
+          "new": 0.3
+        }
+      ],
+      "addedModules": [
+        {
+          "id": "weft-1",
+          "type": "WEFT"
+        }
+      ],
+      "removedModules": [],
+      "oldConnections": [
+        {
+          "id": "6ce5ba4a-44bc-4fc4-9ea0-2b9edef0da87",
+          "from": {
+            "module": "cuts-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "loss-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "fb42f73a-82be-4d83-b40f-9b0acc2c53c3",
+          "from": {
+            "module": "cuts-1",
+            "port": "event"
+          },
+          "to": {
+            "module": "nerve-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "4ad1836e-3807-450f-a287-7f4fec9249ce",
+          "from": {
+            "module": "nerve-1",
+            "port": "charge"
+          },
+          "to": {
+            "module": "loss-1",
+            "port": "damage"
+          }
+        },
+        {
+          "id": "259aaf19-d6cd-46fc-8af1-066bf74ddf83",
+          "from": {
+            "module": "loss-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "mirage-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "7c844b2c-6cce-4eb2-832d-ba3ec2767e11",
+          "from": {
+            "module": "mirage-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "level-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "33c31d1c-a5ed-4688-9ff3-be24e4e597cb",
+          "from": {
+            "module": "level-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        }
+      ],
+      "newConnections": [
+        {
+          "id": "6ce5ba4a-44bc-4fc4-9ea0-2b9edef0da87",
+          "from": {
+            "module": "cuts-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "loss-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "fb42f73a-82be-4d83-b40f-9b0acc2c53c3",
+          "from": {
+            "module": "cuts-1",
+            "port": "event"
+          },
+          "to": {
+            "module": "nerve-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "4ad1836e-3807-450f-a287-7f4fec9249ce",
+          "from": {
+            "module": "nerve-1",
+            "port": "charge"
+          },
+          "to": {
+            "module": "loss-1",
+            "port": "damage"
+          }
+        },
+        {
+          "id": "259aaf19-d6cd-46fc-8af1-066bf74ddf83",
+          "from": {
+            "module": "loss-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "mirage-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "7c844b2c-6cce-4eb2-832d-ba3ec2767e11",
+          "from": {
+            "module": "mirage-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "level-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "33c31d1c-a5ed-4688-9ff3-be24e4e597cb",
+          "from": {
+            "module": "level-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "music-weft-1-a-cuts-1-trigger",
+          "from": {
+            "module": "weft-1",
+            "port": "a"
+          },
+          "to": {
+            "module": "cuts-1",
+            "port": "trigger"
+          }
+        }
+      ]
+    },
+    {
+      "id": "exchanging-bodies",
+      "name": "EXCHANGING BODIES",
+      "reason": "A remembered upper-register bell phrase exposes both notes and body-to-body exchange.",
+      "tradeoff": "The original single low strike becomes a pitch motif; zero-random-recall mode is stable until the user lowers RECALL.",
+      "humanListeningRequired": true,
+      "parameterChanges": [
+        {
+          "module": "pulse-1",
+          "parameter": "irregular",
+          "old": 0.45,
+          "new": 0.08
+        },
+        {
+          "module": "sympathy-1",
+          "parameter": "couple",
+          "old": 0.45,
+          "new": 0.6
+        }
+      ],
+      "addedModules": [
+        {
+          "id": "chance-1",
+          "type": "CHANCE"
+        }
+      ],
+      "removedModules": [],
+      "oldConnections": [
+        {
+          "id": "sympathy-cable-1",
+          "from": {
+            "module": "pulse-1",
+            "port": "trigger"
+          },
+          "to": {
+            "module": "sympathy-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "sympathy-cable-2",
+          "from": {
+            "module": "tide-1",
+            "port": "drift"
+          },
+          "to": {
+            "module": "sympathy-1",
+            "port": "couple"
+          }
+        },
+        {
+          "id": "sympathy-cable-3",
+          "from": {
+            "module": "tide-1",
+            "port": "tide"
+          },
+          "to": {
+            "module": "sympathy-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "sympathy-cable-4",
+          "from": {
+            "module": "sympathy-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "level-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "sympathy-cable-5",
+          "from": {
+            "module": "level-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        }
+      ],
+      "newConnections": [
+        {
+          "id": "sympathy-cable-2",
+          "from": {
+            "module": "tide-1",
+            "port": "drift"
+          },
+          "to": {
+            "module": "sympathy-1",
+            "port": "couple"
+          }
+        },
+        {
+          "id": "sympathy-cable-3",
+          "from": {
+            "module": "tide-1",
+            "port": "tide"
+          },
+          "to": {
+            "module": "sympathy-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "sympathy-cable-4",
+          "from": {
+            "module": "sympathy-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "level-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "sympathy-cable-5",
+          "from": {
+            "module": "level-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "music-pulse-1-trigger-chance-1-clock",
+          "from": {
+            "module": "pulse-1",
+            "port": "trigger"
+          },
+          "to": {
+            "module": "chance-1",
+            "port": "clock"
+          }
+        },
+        {
+          "id": "music-chance-1-a-sympathy-1-trigger",
+          "from": {
+            "module": "chance-1",
+            "port": "a"
+          },
+          "to": {
+            "module": "sympathy-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "music-chance-1-pitch-sympathy-1-pitch",
+          "from": {
+            "module": "chance-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "sympathy-1",
+            "port": "pitch"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dissolving-metal",
+      "name": "DISSOLVING METAL",
+      "reason": "Repeatable pitched metal attacks remain identifiable before dissolving into their traces.",
+      "tradeoff": "Less timing disorder and less attack smearing; the parasitic timbral feedback and metal source remain.",
+      "humanListeningRequired": true,
+      "parameterChanges": [
+        {
+          "module": "pulse-1",
+          "parameter": "irregular",
+          "old": 0.6,
+          "new": 0.12
+        },
+        {
+          "module": "alloy-1",
+          "parameter": "body",
+          "old": 0.18,
+          "new": 0.32
+        },
+        {
+          "module": "alloy-1",
+          "parameter": "tension",
+          "old": 0.52,
+          "new": 0.36
+        },
+        {
+          "module": "smear-1",
+          "parameter": "smear",
+          "old": 0.76,
+          "new": 0.45
+        },
+        {
+          "module": "smear-1",
+          "parameter": "memory",
+          "old": 0.72,
+          "new": 0.58
+        },
+        {
+          "module": "flock-1",
+          "parameter": "spread",
+          "old": 0.58,
+          "new": 0.2
+        }
+      ],
+      "addedModules": [
+        {
+          "id": "chance-1",
+          "type": "CHANCE"
+        }
+      ],
+      "removedModules": [],
+      "oldConnections": [
+        {
+          "id": "bf490c42-2d11-4054-9259-9adfc5cb15fc",
+          "from": {
+            "module": "pulse-1",
+            "port": "trigger"
+          },
+          "to": {
+            "module": "alloy-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "35e01594-8e0e-4deb-850a-88dfeca54a47",
+          "from": {
+            "module": "alloy-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "smear-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "57224000-9f1b-4c67-bef5-d5114c52086b",
+          "from": {
+            "module": "smear-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "orbit-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "dba08d43-46c8-4b05-8a4a-8c3519f7e98e",
+          "from": {
+            "module": "orbit-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "943fe289-59ff-4844-b1b7-4c31e49f5f72",
+          "from": {
+            "module": "flock-1",
+            "port": "controlA"
+          },
+          "to": {
+            "module": "smear-1",
+            "port": "smear"
+          }
+        },
+        {
+          "id": "530d64d1-3f54-4fb0-8dbc-c5f0c77dc666",
+          "from": {
+            "module": "smear-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "parasite-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "19cf6eb5-459f-4ff5-a4c2-61f54b2fa84a",
+          "from": {
+            "module": "parasite-1",
+            "port": "fever"
+          },
+          "to": {
+            "module": "alloy-1",
+            "port": "tension"
+          }
+        }
+      ],
+      "newConnections": [
+        {
+          "id": "35e01594-8e0e-4deb-850a-88dfeca54a47",
+          "from": {
+            "module": "alloy-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "smear-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "57224000-9f1b-4c67-bef5-d5114c52086b",
+          "from": {
+            "module": "smear-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "orbit-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "dba08d43-46c8-4b05-8a4a-8c3519f7e98e",
+          "from": {
+            "module": "orbit-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "943fe289-59ff-4844-b1b7-4c31e49f5f72",
+          "from": {
+            "module": "flock-1",
+            "port": "controlA"
+          },
+          "to": {
+            "module": "smear-1",
+            "port": "smear"
+          }
+        },
+        {
+          "id": "530d64d1-3f54-4fb0-8dbc-c5f0c77dc666",
+          "from": {
+            "module": "smear-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "parasite-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "19cf6eb5-459f-4ff5-a4c2-61f54b2fa84a",
+          "from": {
+            "module": "parasite-1",
+            "port": "fever"
+          },
+          "to": {
+            "module": "alloy-1",
+            "port": "tension"
+          }
+        },
+        {
+          "id": "music-pulse-1-trigger-chance-1-clock",
+          "from": {
+            "module": "pulse-1",
+            "port": "trigger"
+          },
+          "to": {
+            "module": "chance-1",
+            "port": "clock"
+          }
+        },
+        {
+          "id": "music-chance-1-a-alloy-1-trigger",
+          "from": {
+            "module": "chance-1",
+            "port": "a"
+          },
+          "to": {
+            "module": "alloy-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "music-chance-1-pitch-alloy-1-pitch",
+          "from": {
+            "module": "chance-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "alloy-1",
+            "port": "pitch"
+          }
+        }
+      ]
+    },
+    {
+      "id": "binary-fever",
+      "name": "BINARY FEVER",
+      "reason": "An enveloped oscillator clocks the binary circuit into a syncopated pitched line. The driven FERAL setting avoids a continuously dominant low chaotic attractor.",
+      "tradeoff": "Ten modules, more metrical structure and less autonomous chaos; COUNT RATE is overridden by its patched audio clock. Digital mapping and nonlinear filtering remain.",
+      "humanListeningRequired": true,
+      "parameterChanges": [
+        {
+          "module": "count-1",
+          "parameter": "step",
+          "old": 0.2857142857142857,
+          "new": 0.5
+        },
+        {
+          "module": "feral-1",
+          "parameter": "tune",
+          "old": 0.48,
+          "new": 0.65
+        },
+        {
+          "module": "feral-1",
+          "parameter": "chaos",
+          "old": 0.73,
+          "new": 0.28
+        },
+        {
+          "module": "filter-1",
+          "parameter": "cutoff",
+          "old": 0.7,
+          "new": 0.82
+        },
+        {
+          "module": "tide-1",
+          "parameter": "range",
+          "old": 0.8,
+          "new": 0.16
+        }
+      ],
+      "addedModules": [
+        {
+          "id": "branch-1",
+          "type": "BRANCH"
+        },
+        {
+          "id": "weft-1",
+          "type": "WEFT"
+        },
+        {
+          "id": "osc-1",
+          "type": "OSC"
+        },
+        {
+          "id": "shape-1",
+          "type": "SHAPE"
+        }
+      ],
+      "removedModules": [],
+      "oldConnections": [
+        {
+          "id": "e5a5f013-4522-449c-afca-e569767bb97e",
+          "from": {
+            "module": "count-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "map-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "5317b351-0aaa-45a6-9e8e-f8b511f7454a",
+          "from": {
+            "module": "count-1",
+            "port": "value"
+          },
+          "to": {
+            "module": "map-1",
+            "port": "cv"
+          }
+        },
+        {
+          "id": "7d6c3748-020e-4395-b03c-137243417e06",
+          "from": {
+            "module": "map-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "feral-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "bf366486-ea66-45f3-9f88-a527c1c3f557",
+          "from": {
+            "module": "feral-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "filter-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "06292606-0d9d-49be-83ea-0fe711946aca",
+          "from": {
+            "module": "filter-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "245cf51e-b9ee-488f-aba5-257db29502cb",
+          "from": {
+            "module": "map-1",
+            "port": "cv"
+          },
+          "to": {
+            "module": "filter-1",
+            "port": "cutoff"
+          }
+        },
+        {
+          "id": "5864de66-0ada-4ee2-9975-805afd5dcc42",
+          "from": {
+            "module": "tide-1",
+            "port": "drift"
+          },
+          "to": {
+            "module": "map-1",
+            "port": "table"
+          }
+        },
+        {
+          "id": "696ac366-2954-4008-96b4-1f2a80133f47",
+          "from": {
+            "module": "tide-1",
+            "port": "tide"
+          },
+          "to": {
+            "module": "feral-1",
+            "port": "chaos"
+          }
+        }
+      ],
+      "newConnections": [
+        {
+          "id": "e5a5f013-4522-449c-afca-e569767bb97e",
+          "from": {
+            "module": "count-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "map-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "5317b351-0aaa-45a6-9e8e-f8b511f7454a",
+          "from": {
+            "module": "count-1",
+            "port": "value"
+          },
+          "to": {
+            "module": "map-1",
+            "port": "cv"
+          }
+        },
+        {
+          "id": "7d6c3748-020e-4395-b03c-137243417e06",
+          "from": {
+            "module": "map-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "feral-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "bf366486-ea66-45f3-9f88-a527c1c3f557",
+          "from": {
+            "module": "feral-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "filter-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "06292606-0d9d-49be-83ea-0fe711946aca",
+          "from": {
+            "module": "filter-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "245cf51e-b9ee-488f-aba5-257db29502cb",
+          "from": {
+            "module": "map-1",
+            "port": "cv"
+          },
+          "to": {
+            "module": "filter-1",
+            "port": "cutoff"
+          }
+        },
+        {
+          "id": "5864de66-0ada-4ee2-9975-805afd5dcc42",
+          "from": {
+            "module": "tide-1",
+            "port": "drift"
+          },
+          "to": {
+            "module": "map-1",
+            "port": "table"
+          }
+        },
+        {
+          "id": "696ac366-2954-4008-96b4-1f2a80133f47",
+          "from": {
+            "module": "tide-1",
+            "port": "tide"
+          },
+          "to": {
+            "module": "feral-1",
+            "port": "chaos"
+          }
+        },
+        {
+          "id": "music-weft-1-a-branch-1-clock",
+          "from": {
+            "module": "weft-1",
+            "port": "a"
+          },
+          "to": {
+            "module": "branch-1",
+            "port": "clock"
+          }
+        },
+        {
+          "id": "music-branch-1-gate-shape-1-trigger",
+          "from": {
+            "module": "branch-1",
+            "port": "gate"
+          },
+          "to": {
+            "module": "shape-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "music-shape-1-control-osc-1-level",
+          "from": {
+            "module": "shape-1",
+            "port": "control"
+          },
+          "to": {
+            "module": "osc-1",
+            "port": "level"
+          }
+        },
+        {
+          "id": "music-branch-1-pitch-osc-1-pitch",
+          "from": {
+            "module": "branch-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "osc-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "music-branch-1-pitch-feral-1-pitch",
+          "from": {
+            "module": "branch-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "feral-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "music-osc-1-audio-count-1-audioClock",
+          "from": {
+            "module": "osc-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "count-1",
+            "port": "audioClock"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tape-garden",
+      "name": "TAPE GARDEN",
+      "reason": "A slow upper-register phrase and approximately eighth-note tape returns make the memory audible as a musical relationship.",
+      "tradeoff": "Less sub-register weight and gentler wear; the delay is near the tempo subdivision but retains flutter and is not hard-synced.",
+      "humanListeningRequired": true,
+      "parameterChanges": [
+        {
+          "module": "drone-1",
+          "parameter": "mode",
+          "old": "110 Hz",
+          "new": "220 Hz"
+        },
+        {
+          "module": "sieve-1",
+          "parameter": "focus",
+          "old": 0.4,
+          "new": 0.5
+        },
+        {
+          "module": "sieve-1",
+          "parameter": "width",
+          "old": 0.61,
+          "new": 0.56
+        },
+        {
+          "module": "tape-1",
+          "parameter": "wear",
+          "old": 0.56,
+          "new": 0.42
+        },
+        {
+          "module": "tape-1",
+          "parameter": "echo",
+          "old": 0.55,
+          "new": 0.75
+        },
+        {
+          "module": "flock-1",
+          "parameter": "spread",
+          "old": 0.34,
+          "new": 0.18
+        }
+      ],
+      "addedModules": [
+        {
+          "id": "branch-1",
+          "type": "BRANCH"
+        },
+        {
+          "id": "pulse-1",
+          "type": "PULSE"
+        }
+      ],
+      "removedModules": [],
+      "oldConnections": [
+        {
+          "id": "5ee9bbba-ad67-4446-8225-0fc638c1c6a5",
+          "from": {
+            "module": "drone-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "sieve-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "2e1ac95b-0c52-463e-8a3c-2f3de3085e15",
+          "from": {
+            "module": "sieve-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "tape-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "0329f4ac-b055-4196-8fcd-93d5fe8dc8fd",
+          "from": {
+            "module": "tape-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "31ff16a6-9054-4b6f-aa4f-c9aba62e57fd",
+          "from": {
+            "module": "flock-1",
+            "port": "controlA"
+          },
+          "to": {
+            "module": "sieve-1",
+            "port": "focus"
+          }
+        },
+        {
+          "id": "ad854061-8dd0-4c12-b876-a164bbe9d9a6",
+          "from": {
+            "module": "flock-1",
+            "port": "controlB"
+          },
+          "to": {
+            "module": "drone-1",
+            "port": "spread"
+          }
+        }
+      ],
+      "newConnections": [
+        {
+          "id": "5ee9bbba-ad67-4446-8225-0fc638c1c6a5",
+          "from": {
+            "module": "drone-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "sieve-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "2e1ac95b-0c52-463e-8a3c-2f3de3085e15",
+          "from": {
+            "module": "sieve-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "tape-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "0329f4ac-b055-4196-8fcd-93d5fe8dc8fd",
+          "from": {
+            "module": "tape-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "31ff16a6-9054-4b6f-aa4f-c9aba62e57fd",
+          "from": {
+            "module": "flock-1",
+            "port": "controlA"
+          },
+          "to": {
+            "module": "sieve-1",
+            "port": "focus"
+          }
+        },
+        {
+          "id": "ad854061-8dd0-4c12-b876-a164bbe9d9a6",
+          "from": {
+            "module": "flock-1",
+            "port": "controlB"
+          },
+          "to": {
+            "module": "drone-1",
+            "port": "spread"
+          }
+        },
+        {
+          "id": "music-pulse-1-trigger-branch-1-clock",
+          "from": {
+            "module": "pulse-1",
+            "port": "trigger"
+          },
+          "to": {
+            "module": "branch-1",
+            "port": "clock"
+          }
+        },
+        {
+          "id": "music-branch-1-pitch-drone-1-pitch",
+          "from": {
+            "module": "branch-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "drone-1",
+            "port": "pitch"
+          }
+        }
+      ]
+    },
+    {
+      "id": "late-light",
+      "name": "LATE LIGHT",
+      "reason": "A bright repeating note contour remains clear while its harmonically related PLATE tails overlap.",
+      "tradeoff": "Higher CHIP register, more frequent notes and a shorter/brighter tail; still the only curated PLATE environment.",
+      "humanListeningRequired": true,
+      "parameterChanges": [
+        {
+          "module": "pulse-1",
+          "parameter": "rate",
+          "old": 0.16,
+          "new": 0.3333333333333333
+        },
+        {
+          "module": "pulse-1",
+          "parameter": "irregular",
+          "old": 0.26,
+          "new": 0.06
+        },
+        {
+          "module": "chip-1",
+          "parameter": "tune",
+          "old": 0.32,
+          "new": 0.75
+        },
+        {
+          "module": "plate-1",
+          "parameter": "body",
+          "old": 0.64,
+          "new": 0.52
+        },
+        {
+          "module": "plate-1",
+          "parameter": "decay",
+          "old": 0.85,
+          "new": 0.72
+        }
+      ],
+      "addedModules": [
+        {
+          "id": "branch-1",
+          "type": "BRANCH"
+        }
+      ],
+      "removedModules": [],
+      "oldConnections": [
+        {
+          "id": "ad540a7a-7eca-401b-a4cb-08cae1b2425a",
+          "from": {
+            "module": "pulse-1",
+            "port": "trigger"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "c08e6715-1001-4bb1-990d-2d6143a7801b",
+          "from": {
+            "module": "chip-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "plate-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "04e67e5a-2dba-463e-90e2-39ea5677c769",
+          "from": {
+            "module": "plate-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "0a9eaea7-2bfa-4fe2-9b50-6c5627e3846e",
+          "from": {
+            "module": "tide-1",
+            "port": "drift"
+          },
+          "to": {
+            "module": "plate-1",
+            "port": "body"
+          }
+        },
+        {
+          "id": "9fc9a5cf-93aa-4696-8836-88f8fbb6f024",
+          "from": {
+            "module": "tide-1",
+            "port": "age"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "pitch"
+          }
+        }
+      ],
+      "newConnections": [
+        {
+          "id": "c08e6715-1001-4bb1-990d-2d6143a7801b",
+          "from": {
+            "module": "chip-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "plate-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "04e67e5a-2dba-463e-90e2-39ea5677c769",
+          "from": {
+            "module": "plate-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        },
+        {
+          "id": "0a9eaea7-2bfa-4fe2-9b50-6c5627e3846e",
+          "from": {
+            "module": "tide-1",
+            "port": "drift"
+          },
+          "to": {
+            "module": "plate-1",
+            "port": "body"
+          }
+        },
+        {
+          "id": "music-pulse-1-trigger-branch-1-clock",
+          "from": {
+            "module": "pulse-1",
+            "port": "trigger"
+          },
+          "to": {
+            "module": "branch-1",
+            "port": "clock"
+          }
+        },
+        {
+          "id": "music-branch-1-pitch-chip-1-pitch",
+          "from": {
+            "module": "branch-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "music-branch-1-gate-chip-1-trigger",
+          "from": {
+            "module": "branch-1",
+            "port": "gate"
+          },
+          "to": {
+            "module": "chip-1",
+            "port": "trigger"
+          }
+        }
+      ]
+    },
+    {
+      "id": "off-grid",
+      "name": "OFF GRID",
+      "reason": "Longer vowel notes and a retained narrower phrase make the asymmetric19-TET rhythm easier to follow; lower CHANGE also omits fewer gates.",
+      "tradeoff": "The12-step clock rate and19-TET character stay intact, but lower BRANCH CHANGE also reduces random gate omissions:53 ->62 rendered note triggers per60s. Longer articulation and fewer omissions jointly reduce quiet time; this is not solely a level adjustment.",
+      "humanListeningRequired": true,
+      "parameterChanges": [
+        {
+          "module": "branch-1",
+          "parameter": "change",
+          "old": 0.62,
+          "new": 0.12
+        },
+        {
+          "module": "branch-1",
+          "parameter": "memory",
+          "old": 0.52,
+          "new": 0.9
+        },
+        {
+          "module": "quantize-1",
+          "parameter": "span",
+          "old": 0.85,
+          "new": 0.35
+        },
+        {
+          "module": "formant-1",
+          "parameter": "tune",
+          "old": 0.48,
+          "new": 0.5
+        },
+        {
+          "module": "shape-1",
+          "parameter": "fall",
+          "old": 0.32,
+          "new": 0.52
+        }
+      ],
+      "addedModules": [],
+      "removedModules": [],
+      "oldConnections": [
+        {
+          "id": "c4d66e80-2fc7-4ac7-9bfa-45ea8ed01f99",
+          "from": {
+            "module": "weft-1",
+            "port": "a"
+          },
+          "to": {
+            "module": "branch-1",
+            "port": "clock"
+          }
+        },
+        {
+          "id": "ccff9a67-3829-4333-8c0e-17685231c241",
+          "from": {
+            "module": "branch-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "quantize-1",
+            "port": "cv"
+          }
+        },
+        {
+          "id": "01218a94-1157-428f-88ae-fa8f65f50ae9",
+          "from": {
+            "module": "quantize-1",
+            "port": "cv"
+          },
+          "to": {
+            "module": "formant-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "773aac8c-36b0-4679-8642-bd6ae4134a26",
+          "from": {
+            "module": "weft-1",
+            "port": "wander"
+          },
+          "to": {
+            "module": "formant-1",
+            "port": "vowel"
+          }
+        },
+        {
+          "id": "d2afc748-2afe-4fc4-800a-cb80a8ced0fa",
+          "from": {
+            "module": "branch-1",
+            "port": "gate"
+          },
+          "to": {
+            "module": "shape-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "5444b98e-b8e3-48be-9b83-73c2d423a917",
+          "from": {
+            "module": "shape-1",
+            "port": "control"
+          },
+          "to": {
+            "module": "vca-1",
+            "port": "level"
+          }
+        },
+        {
+          "id": "510fc8eb-42ea-4ae5-b012-bd5653404f31",
+          "from": {
+            "module": "formant-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "vca-1",
+            "port": "a"
+          }
+        },
+        {
+          "id": "3245192f-6092-4bd4-8083-83e7e925b520",
+          "from": {
+            "module": "vca-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        }
+      ],
+      "newConnections": [
+        {
+          "id": "c4d66e80-2fc7-4ac7-9bfa-45ea8ed01f99",
+          "from": {
+            "module": "weft-1",
+            "port": "a"
+          },
+          "to": {
+            "module": "branch-1",
+            "port": "clock"
+          }
+        },
+        {
+          "id": "ccff9a67-3829-4333-8c0e-17685231c241",
+          "from": {
+            "module": "branch-1",
+            "port": "pitch"
+          },
+          "to": {
+            "module": "quantize-1",
+            "port": "cv"
+          }
+        },
+        {
+          "id": "01218a94-1157-428f-88ae-fa8f65f50ae9",
+          "from": {
+            "module": "quantize-1",
+            "port": "cv"
+          },
+          "to": {
+            "module": "formant-1",
+            "port": "pitch"
+          }
+        },
+        {
+          "id": "773aac8c-36b0-4679-8642-bd6ae4134a26",
+          "from": {
+            "module": "weft-1",
+            "port": "wander"
+          },
+          "to": {
+            "module": "formant-1",
+            "port": "vowel"
+          }
+        },
+        {
+          "id": "d2afc748-2afe-4fc4-800a-cb80a8ced0fa",
+          "from": {
+            "module": "branch-1",
+            "port": "gate"
+          },
+          "to": {
+            "module": "shape-1",
+            "port": "trigger"
+          }
+        },
+        {
+          "id": "5444b98e-b8e3-48be-9b83-73c2d423a917",
+          "from": {
+            "module": "shape-1",
+            "port": "control"
+          },
+          "to": {
+            "module": "vca-1",
+            "port": "level"
+          }
+        },
+        {
+          "id": "510fc8eb-42ea-4ae5-b012-bd5653404f31",
+          "from": {
+            "module": "formant-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "vca-1",
+            "port": "a"
+          }
+        },
+        {
+          "id": "3245192f-6092-4bd4-8083-83e7e925b520",
+          "from": {
+            "module": "vca-1",
+            "port": "audio"
+          },
+          "to": {
+            "module": "output-1",
+            "port": "audio"
+          }
+        }
+      ]
+    }
+  ]
+}

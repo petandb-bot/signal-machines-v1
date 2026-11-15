@@ -1,0 +1,34 @@
+{
+  "rate": 24000,
+  "rows": [
+    {
+      "id": "near-object",
+      "seconds": 30,
+      "rms": 0.010457441701361175,
+      "peak": 0.10414353013038635,
+      "dc": [
+        -7.322098536897396e-7,
+        -5.6745685429179484e-8
+      ],
+      "stereoCorrelation": 0.9870053957060813,
+      "monoPowerRatio": 0.9929225526195291,
+      "maxStep": 0.1280749887228012,
+      "gain": 2.868770475296563
+    },
+    {
+      "id": "distant-material",
+      "seconds": 30,
+      "rms": 0.003187445321934495,
+      "peak": 0.06003834307193756,
+      "dc": [
+        7.398525748858025e-9,
+        2.5228316562928954e-9
+      ],
+      "stereoCorrelation": 0.7128691384822454,
+      "monoPowerRatio": 0.8563014450842662,
+      "maxStep": 0.03281005471944809,
+      "gain": 9.411926157149788
+    }
+  ],
+  "matching": "Fixed full-duration .03RMS target and .8peak cap for these two study clips only, explicitly distinct from active-window-matched source comparisons."
+}

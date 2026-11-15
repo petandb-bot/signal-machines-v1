@@ -27,8 +27,8 @@
       "seed": 20208329,
       "character": "METAL",
       "params": {
-        "change": 0.62,
-        "memory": 0.52
+        "change": 0.12,
+        "memory": 0.9
       }
     },
     {
@@ -39,7 +39,7 @@
       "seed": 20216248,
       "character": "METAL",
       "params": {
-        "span": 0.85,
+        "span": 0.35,
         "pull": 1
       },
       "mode": "19-TET"
@@ -52,7 +52,7 @@
       "seed": 20224167,
       "character": "METAL",
       "params": {
-        "tune": 0.48,
+        "tune": 0.5,
         "vowel": 0.41
       }
     },
@@ -65,7 +65,7 @@
       "character": "METAL",
       "params": {
         "rise": 0.02,
-        "fall": 0.32
+        "fall": 0.52
       }
     },
     {

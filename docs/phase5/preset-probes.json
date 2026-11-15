@@ -1,0 +1,254 @@
+{
+  "seconds": 12,
+  "method": "Short exploratory measurements only; full-file stereo FFT and A-weighted RMS, not equivalent to final60s Welch estimates or listening. All original source modules unchanged.",
+  "rows": [
+    {
+      "name": "binary-original",
+      "id": "binary-fever",
+      "changes": [],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.020046989336550754,
+      "peak": 0.06286584585905075,
+      "dc": [
+        -1.6263319308033478e-05,
+        -1.6263319308033478e-05
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.02497776225209236,
+      "sub80Fraction": 0.07634629309177399,
+      "centroidHz": 243.46886274479297,
+      "aWeightedRms": 0.007140076219259113
+    },
+    {
+      "name": "binary-open",
+      "id": "binary-fever",
+      "changes": [
+        [
+          "filter-1",
+          "cutoff",
+          0.8
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.02005465120619233,
+      "peak": 0.0628155991435051,
+      "dc": [
+        -1.651189736069971e-05,
+        -1.651189736069971e-05
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.022281772922724485,
+      "sub80Fraction": 0.07392613589763641,
+      "centroidHz": 233.86645212234242,
+      "aWeightedRms": 0.006936309490969513
+    },
+    {
+      "name": "binary-tune",
+      "id": "binary-fever",
+      "changes": [
+        [
+          "feral-1",
+          "tune",
+          0.54
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.020946970725198272,
+      "peak": 0.08060897141695023,
+      "dc": [
+        -1.769932624484083e-05,
+        -1.769932624484083e-05
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.024931459687650204,
+      "sub80Fraction": 0.035000938922166824,
+      "centroidHz": 273.0800983843786,
+      "aWeightedRms": 0.008377153736031661
+    },
+    {
+      "name": "binary-count",
+      "id": "binary-fever",
+      "changes": [
+        [
+          "count-1",
+          "rate",
+          0.76
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.020215209179656662,
+      "peak": 0.06461479514837265,
+      "dc": [
+        -1.4047244567847568e-05,
+        -1.4047244567847568e-05
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.025222637690603733,
+      "sub80Fraction": 0.029870416969060898,
+      "centroidHz": 243.6062576215555,
+      "aWeightedRms": 0.007278355780510212
+    },
+    {
+      "name": "binary-band",
+      "id": "binary-fever",
+      "changes": [
+        [
+          "filter-1",
+          "mode",
+          "BAND"
+        ],
+        [
+          "filter-1",
+          "cutoff",
+          0.55
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.0034475804374349893,
+      "peak": 0.022129150107502937,
+      "dc": [
+        -8.063931454239743e-06,
+        -8.063931454239743e-06
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.014625056413933635,
+      "sub80Fraction": 0.04932381212711334,
+      "centroidHz": 683.0686986697325,
+      "aWeightedRms": 0.002228596943482017
+    },
+    {
+      "name": "binary-high",
+      "id": "binary-fever",
+      "changes": [
+        [
+          "filter-1",
+          "mode",
+          "HIGH"
+        ],
+        [
+          "filter-1",
+          "cutoff",
+          0.16
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.01776893916240066,
+      "peak": 0.06663507968187332,
+      "dc": [
+        -8.032924337221136e-06,
+        -8.032924337221136e-06
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.01974419876933098,
+      "sub80Fraction": 0.07402421534061432,
+      "centroidHz": 282.14934069280963,
+      "aWeightedRms": 0.007449785698024371
+    },
+    {
+      "name": "room-original",
+      "id": "room-air",
+      "changes": [],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.002502525892340578,
+      "peak": 0.009787624701857567,
+      "dc": [
+        -7.938533757480579e-08,
+        -1.478668082098042e-07
+      ],
+      "stereoCorrelation": 0.8932419928822087,
+      "monoPowerRatio": 0.9277020949091553,
+      "maxStep": 0.000634870957583189,
+      "sub80Fraction": 0.850102961063385,
+      "centroidHz": 90.56009788634158,
+      "aWeightedRms": 0.00038831676117353185
+    },
+    {
+      "name": "room-alter",
+      "id": "room-air",
+      "changes": [
+        [
+          "found-1",
+          "alter",
+          0.22
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.0028297446184071566,
+      "peak": 0.010372434742748737,
+      "dc": [
+        -1.1354285049696803e-07,
+        -5.988390206642843e-07
+      ],
+      "stereoCorrelation": 0.8672626213528484,
+      "monoPowerRatio": 0.9190702229695823,
+      "maxStep": 0.0006602259818464518,
+      "sub80Fraction": 0.8725441098213196,
+      "centroidHz": 83.0200905912696,
+      "aWeightedRms": 0.0003941329150407892
+    },
+    {
+      "name": "room-chamber",
+      "id": "room-air",
+      "changes": [
+        [
+          "chamber-1",
+          "density",
+          0.42
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.002437409368691725,
+      "peak": 0.00972206611186266,
+      "dc": [
+        -7.306426120824254e-08,
+        -1.291286019254932e-07
+      ],
+      "stereoCorrelation": 0.8847022205274238,
+      "monoPowerRatio": 0.9253728603452845,
+      "maxStep": 0.0006055757403373718,
+      "sub80Fraction": 0.8530033230781555,
+      "centroidHz": 90.08559336021617,
+      "aWeightedRms": 0.0003770590122038231
+    },
+    {
+      "name": "metal-tension",
+      "id": "dissolving-metal",
+      "changes": [
+        [
+          "alloy-1",
+          "tension",
+          0.6
+        ]
+      ],
+      "rate": 24000,
+      "seconds": 12,
+      "rms": 0.005412434738803892,
+      "peak": 0.08361504226922989,
+      "dc": [
+        -4.147826122316613e-07,
+        -2.925927259656012e-07
+      ],
+      "stereoCorrelation": 0.7687324124173054,
+      "monoPowerRatio": 0.8841424746377333,
+      "maxStep": 0.006272627040743828,
+      "sub80Fraction": 0.03923851251602173,
+      "centroidHz": 184.91775566997157,
+      "aWeightedRms": 0.0017155313077890312
+    }
+  ]
+}

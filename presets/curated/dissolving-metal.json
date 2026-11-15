@@ -15,7 +15,7 @@
       "character": "METAL",
       "params": {
         "rate": 0.34,
-        "irregular": 0.6
+        "irregular": 0.12
       }
     },
     {
@@ -26,8 +26,8 @@
       "seed": 4102,
       "character": "METAL",
       "params": {
-        "body": 0.18,
-        "tension": 0.52
+        "body": 0.32,
+        "tension": 0.36
       }
     },
     {
@@ -38,8 +38,8 @@
       "seed": 4103,
       "character": "METAL",
       "params": {
-        "smear": 0.76,
-        "memory": 0.72
+        "smear": 0.45,
+        "memory": 0.58
       }
     },
     {
@@ -73,7 +73,7 @@
       "seed": 4106,
       "character": "METAL",
       "params": {
-        "spread": 0.58,
+        "spread": 0.2,
         "drift": 0.15
       }
     },
@@ -88,20 +88,22 @@
         "feed": 0.4,
         "memory": 0.6
       }
+    },
+    {
+      "id": "chance-1",
+      "type": "CHANCE",
+      "x": 544,
+      "y": 184,
+      "seed": 79834,
+      "character": "METAL",
+      "params": {
+        "density": 1,
+        "recall": 1
+      },
+      "mode": "HIGH"
     }
   ],
   "connections": [
-    {
-      "id": "bf490c42-2d11-4054-9259-9adfc5cb15fc",
-      "from": {
-        "module": "pulse-1",
-        "port": "trigger"
-      },
-      "to": {
-        "module": "alloy-1",
-        "port": "trigger"
-      }
-    },
     {
       "id": "35e01594-8e0e-4deb-850a-88dfeca54a47",
       "from": {
@@ -166,6 +168,39 @@
       "to": {
         "module": "alloy-1",
         "port": "tension"
+      }
+    },
+    {
+      "id": "music-pulse-1-trigger-chance-1-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "chance-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "music-chance-1-a-alloy-1-trigger",
+      "from": {
+        "module": "chance-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "music-chance-1-pitch-alloy-1-pitch",
+      "from": {
+        "module": "chance-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "alloy-1",
+        "port": "pitch"
       }
     }
   ]

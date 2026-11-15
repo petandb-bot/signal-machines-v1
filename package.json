@@ -1,7 +1,7 @@
 {
   "name": "signal-machines",
   "private": true,
-  "version": "0.20.0",
+  "version": "0.21.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
@@ -16,7 +16,8 @@
     "render:examples": "node scripts/render-strange-sounds.mjs",
     "render:found": "node scripts/render-found-level.mjs",
     "render:four": "node scripts/render-four-machines.mjs",
-    "render:phase4": "node scripts/render-plate.mjs && node scripts/render-curated-presets.mjs"
+    "render:phase4": "node scripts/render-plate.mjs && node scripts/render-curated-presets.mjs",
+    "render:phase5": "node scripts/render-walls.mjs && node scripts/render-walls-studies.mjs && node scripts/render-preset-balance.mjs --baseline && node scripts/render-preset-balance.mjs && node scripts/render-room-proposal.mjs && node scripts/package-phase5-listening.mjs"
   },
   "dependencies": {
     "p5": "2.3.4"

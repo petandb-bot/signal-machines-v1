@@ -54,7 +54,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
   it('starts an empty patch and restores the playable preset',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Create an empty patch"]')!.click();expect(app.store.patch.modules).toHaveLength(0);
-    const preset=document.querySelector<HTMLSelectElement>('[aria-label="Preset"]')!;preset.value='pixel-dust';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules).toHaveLength(3);expect(app.store.patch.connections).toHaveLength(4);
+    const preset=document.querySelector<HTMLSelectElement>('[aria-label="Preset"]')!;preset.value='pixel-dust';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules).toHaveLength(5);expect(app.store.patch.connections).toHaveLength(5);
   });
   it('keeps a tapped output armed until a compatible input is tapped',()=>{
     const out=document.querySelector<HTMLButtonElement>('.port.out[data-module="flock-1"][data-port="controlB"]')!,input=document.querySelector<HTMLButtonElement>('.port.in[data-module="alloy-1"][data-port="body"]')!;
@@ -86,8 +86,8 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(false);
 
   });
-  it('exposes 67 grouped modules, ten curated presets and no large title',()=>{
-    expect(document.querySelectorAll('.library-module')).toHaveLength(67);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(11);
+  it('exposes 68 grouped modules, ten curated presets and no large title',()=>{
+    expect(document.querySelectorAll('.library-module')).toHaveLength(68);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(11);
     const selector=document.querySelector<HTMLSelectElement>('.preset-select')!;
     for(const entry of PRESETS){selector.value=entry.id;selector.dispatchEvent(new Event('change'));expect(app.store.patch).toEqual(entry.create());}
   });
@@ -176,7 +176,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
 
   it('groups every library choice exactly once without adding search or favourites',()=>{
-    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(67);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
+    const sections=[...document.querySelectorAll('.library-section')];expect(sections.map(s=>s.querySelector('h3')!.textContent)).toEqual(['Sources','Clocks & patterns','Motion & control','Tone & damage','Space & memory','Routing & output']);const choices=[...document.querySelectorAll('.library-module')].map(b=>b.getAttribute('aria-label'));expect(new Set(choices).size).toBe(68);expect(document.querySelector('.library input')).toBeNull();expect(sections[3].querySelector('[aria-label="Add FUZZ module"]')).not.toBeNull();
   });
   it('captures a TOUCH path, preserves it with bypass in a snapshot, cancels incomplete strokes and clears explicitly',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Add FUZZ module"]')!.click();const fuzz=app.store.selectedModule!;document.querySelector<HTMLElement>(`.module-card[data-module="${fuzz}"]`)!.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));document.querySelector<HTMLButtonElement>('[aria-label="FUZZ bypass"]')!.click();expect(app.store.patch.modules.find(m=>m.id===fuzz)!.bypass).toBe(true);
