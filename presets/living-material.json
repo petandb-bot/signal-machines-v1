@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "LIVING MATERIAL",
+  "bpm": 71,
+  "master": 0.65,
+  "seed": 33103,
+  "modules": [
+    {
+      "id": "cuts-1",
+      "type": "CUTS",
+      "x": 16,
+      "y": 16,
+      "seed": 33103,
+      "character": "METAL",
+      "params": {
+        "sparse": 0.62,
+        "change": 0.38
+      },
+      "sample": "builtin:machine"
+    },
+    {
+      "id": "nerve-1",
+      "type": "NERVE",
+      "x": 192,
+      "y": 16,
+      "seed": 41022,
+      "character": "METAL",
+      "params": {
+        "sense": 0.63,
+        "fatigue": 0.74
+      }
+    },
+    {
+      "id": "sympathy-1",
+      "type": "SYMPATHY",
+      "x": 368,
+      "y": 16,
+      "seed": 48941,
+      "character": "METAL",
+      "params": {
+        "body": 0.62,
+        "couple": 0.7
+      }
+    },
+    {
+      "id": "mirage-1",
+      "type": "MIRAGE",
+      "x": 544,
+      "y": 16,
+      "seed": 56860,
+      "character": "METAL",
+      "params": {
+        "distance": 0.42,
+        "mutate": 0.22
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 184,
+      "seed": 64779,
+      "character": "METAL",
+      "params": {
+        "flow": 0.2,
+        "range": 0.2
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 192,
+      "y": 184,
+      "seed": 72698,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "sympathy-cable-1",
+      "from": {
+        "module": "cuts-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "sympathy-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "sympathy-cable-2",
+      "from": {
+        "module": "cuts-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "nerve-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "sympathy-cable-3",
+      "from": {
+        "module": "nerve-1",
+        "port": "spike"
+      },
+      "to": {
+        "module": "sympathy-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "sympathy-cable-4",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "sympathy-1",
+        "port": "couple"
+      }
+    },
+    {
+      "id": "sympathy-cable-5",
+      "from": {
+        "module": "sympathy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mirage-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "sympathy-cable-6",
+      "from": {
+        "module": "mirage-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

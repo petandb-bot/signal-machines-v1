@@ -26,6 +26,13 @@ jobs:
         run: npm run build
       - name: Verify production AudioWorklet
         run: npm run verify:build
+      - name: Verify SYMPATHY worklet at both output rates
+        run: node scripts/verify-sympathy-worklet.mjs
+      - name: Render SYMPATHY comparisons
+        run: |
+          node scripts/render-sympathy.mjs
+          mkdir -p dist/listening/audio
+          cp -R public/listening/audio/sympathy dist/listening/audio/
       - name: Upload comparative sound studies
         uses: actions/upload-artifact@v5
         with:

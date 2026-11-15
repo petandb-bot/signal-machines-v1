@@ -1,0 +1,114 @@
+{
+  "host": {
+    "node": "v24.22.1",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C"
+  },
+  "limitations": "Offline server timing, including observation, is not an iPhone or AudioWorklet real-time deadline guarantee. Typed arrays exclude JS/browser/renderer overhead. Physical iPhone unverified.",
+  "rates": [
+    {
+      "rate": 24000,
+      "couple": 0,
+      "peak": 0.08353744231226369,
+      "rms": 0.00873944279922661,
+      "firstSecondZeroCrossings": 110,
+      "lastSecondEnergy": 9.344807207627032e-15,
+      "typedBytes": 684
+    },
+    {
+      "rate": 24000,
+      "couple": 0.55,
+      "peak": 0.08900970823860772,
+      "rms": 0.008181139974288302,
+      "firstSecondZeroCrossings": 108,
+      "lastSecondEnergy": 6.086847903644507e-15,
+      "typedBytes": 684
+    },
+    {
+      "rate": 24000,
+      "couple": 1,
+      "peak": 0.08572784680068099,
+      "rms": 0.006421958707776659,
+      "firstSecondZeroCrossings": 98,
+      "lastSecondEnergy": 7.653821095176811e-16,
+      "typedBytes": 684
+    },
+    {
+      "rate": 44100,
+      "couple": 0,
+      "peak": 0.08357090170106186,
+      "rms": 0.00873882765417166,
+      "firstSecondZeroCrossings": 110,
+      "lastSecondEnergy": 1.717609208256063e-14,
+      "typedBytes": 684
+    },
+    {
+      "rate": 44100,
+      "couple": 0.55,
+      "peak": 0.08900897618535855,
+      "rms": 0.008180716089951105,
+      "firstSecondZeroCrossings": 108,
+      "lastSecondEnergy": 1.1181372379895525e-14,
+      "typedBytes": 684
+    },
+    {
+      "rate": 44100,
+      "couple": 1,
+      "peak": 0.08570224243168145,
+      "rms": 0.006422151406986547,
+      "firstSecondZeroCrossings": 98,
+      "lastSecondEnergy": 1.4069599040602189e-15,
+      "typedBytes": 684
+    },
+    {
+      "rate": 48000,
+      "couple": 0,
+      "peak": 0.08357338199485477,
+      "rms": 0.00873876795690953,
+      "firstSecondZeroCrossings": 110,
+      "lastSecondEnergy": 1.8695596325029773e-14,
+      "typedBytes": 684
+    },
+    {
+      "rate": 48000,
+      "couple": 0.55,
+      "peak": 0.08900728737390698,
+      "rms": 0.008180674107418767,
+      "firstSecondZeroCrossings": 108,
+      "lastSecondEnergy": 1.2169843614053582e-14,
+      "typedBytes": 684
+    },
+    {
+      "rate": 48000,
+      "couple": 1,
+      "peak": 0.08569887443427801,
+      "rms": 0.0064221684658665856,
+      "firstSecondZeroCrossings": 98,
+      "lastSecondEnergy": 1.5314086959559941e-15,
+      "typedBytes": 684
+    }
+  ],
+  "stress": {
+    "rate": 48000,
+    "seconds": 60,
+    "voices": 8,
+    "cpuMs": 4036.493671,
+    "realtimePercent": 6.727489451666667,
+    "blockFrames": 128,
+    "meanBlockMs": 0.1793054682222215,
+    "p99BlockMs": 0.4566850000001068,
+    "maxBlockMs": 4.379014999999981,
+    "peak": 0.15744429792827497,
+    "maxBodyEnergy": 0.17999712107108423,
+    "typedBytesPerVoice": [
+      684,
+      684,
+      684,
+      684,
+      684,
+      684,
+      684,
+      684
+    ],
+    "bufferGrowth": 0
+  }
+}
