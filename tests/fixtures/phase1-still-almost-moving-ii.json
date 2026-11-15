@@ -1,0 +1,507 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "STILL, ALMOST MOVING II",
+  "bpm": 73,
+  "master": 0.68,
+  "seed": 26111501,
+  "modules": [
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 16,
+      "y": 16,
+      "seed": 26119420,
+      "character": "METAL",
+      "params": {
+        "spread": 0.38,
+        "drift": 0.065
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 192,
+      "y": 16,
+      "seed": 26127339,
+      "character": "METAL",
+      "params": {
+        "flow": 0.22,
+        "range": 0.24
+      }
+    },
+    {
+      "id": "drone-1",
+      "type": "DRONE",
+      "x": 368,
+      "y": 16,
+      "seed": 26135258,
+      "character": "SOFT",
+      "params": {
+        "spread": 0.19,
+        "color": 0.27
+      },
+      "mode": "110 Hz"
+    },
+    {
+      "id": "partial-1",
+      "type": "PARTIAL",
+      "x": 544,
+      "y": 16,
+      "seed": 26143177,
+      "character": "SOFT",
+      "params": {
+        "mass": 0.38,
+        "warp": 0.515
+      },
+      "mode": "220 Hz"
+    },
+    {
+      "id": "cuts-1",
+      "type": "CUTS",
+      "x": 16,
+      "y": 184,
+      "seed": 26151096,
+      "character": "METAL",
+      "params": {
+        "sparse": 0.56,
+        "change": 0.61
+      },
+      "sample": "builtin:machine"
+    },
+    {
+      "id": "nerve-1",
+      "type": "NERVE",
+      "x": 192,
+      "y": 184,
+      "seed": 26159015,
+      "character": "METAL",
+      "params": {
+        "sense": 0.47,
+        "fatigue": 0.84
+      }
+    },
+    {
+      "id": "vca-1",
+      "type": "VCA",
+      "x": 368,
+      "y": 184,
+      "seed": 26166934,
+      "character": "SOFT",
+      "params": {
+        "level": 0.43,
+        "blend": 0
+      }
+    },
+    {
+      "id": "chorus-1",
+      "type": "CHORUS",
+      "x": 544,
+      "y": 184,
+      "seed": 26174853,
+      "character": "SOFT",
+      "params": {
+        "depth": 0.12,
+        "drift": 0.13
+      }
+    },
+    {
+      "id": "loss-1",
+      "type": "LOSS",
+      "x": 16,
+      "y": 352,
+      "seed": 26182772,
+      "character": "METAL",
+      "params": {
+        "damage": 0.08,
+        "recover": 0.7
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 192,
+      "y": 352,
+      "seed": 26190691,
+      "character": "SOFT",
+      "params": {
+        "material": 0.34,
+        "decay": 0.48
+      }
+    },
+    {
+      "id": "mirage-1",
+      "type": "MIRAGE",
+      "x": 368,
+      "y": 352,
+      "seed": 26198610,
+      "character": "SOFT",
+      "params": {
+        "distance": 0.57,
+        "mutate": 0.24
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 544,
+      "y": 352,
+      "seed": 26206529,
+      "character": "SOFT",
+      "params": {
+        "size": 0.59,
+        "density": 0.36
+      },
+      "mode": "ROOM"
+    },
+    {
+      "id": "parasite-1",
+      "type": "PARASITE",
+      "x": 16,
+      "y": 520,
+      "seed": 26214448,
+      "character": "METAL",
+      "params": {
+        "feed": 0.4,
+        "memory": 0.46
+      }
+    },
+    {
+      "id": "orbit-1",
+      "type": "ORBIT",
+      "x": 192,
+      "y": 520,
+      "seed": 26222367,
+      "character": "SOFT",
+      "params": {
+        "rate": 0.065,
+        "depth": 0.25
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 368,
+      "y": 520,
+      "seed": 26230286,
+      "character": "METAL",
+      "params": {
+        "boost": 0.3333333333333333,
+        "comp": 0
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 520,
+      "seed": 26238205,
+      "character": "METAL",
+      "params": {
+        "level": 0.78
+      }
+    },
+    {
+      "id": "partial-gain",
+      "type": "VCA",
+      "x": 720,
+      "y": 16,
+      "seed": 26246140,
+      "character": "SOFT",
+      "params": {
+        "level": 0.24,
+        "blend": 0
+      }
+    },
+    {
+      "id": "event-gain",
+      "type": "VCA",
+      "x": 720,
+      "y": 184,
+      "seed": 26246141,
+      "character": "SOFT",
+      "params": {
+        "level": 0.72,
+        "blend": 0
+      }
+    },
+    {
+      "id": "harmonic-slew",
+      "type": "SLEW",
+      "x": 720,
+      "y": 352,
+      "seed": 26246142,
+      "character": "SOFT",
+      "params": {
+        "rise": 0.8,
+        "fall": 0.85
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "architecture-1",
+      "from": {
+        "module": "drone-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "vca-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "architecture-2",
+      "from": {
+        "module": "vca-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-3",
+      "from": {
+        "module": "partial-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "partial-gain",
+        "port": "a"
+      }
+    },
+    {
+      "id": "architecture-4",
+      "from": {
+        "module": "partial-gain",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chorus-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-5",
+      "from": {
+        "module": "chorus-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-6",
+      "from": {
+        "module": "cuts-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "event-gain",
+        "port": "a"
+      }
+    },
+    {
+      "id": "architecture-7",
+      "from": {
+        "module": "event-gain",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-8",
+      "from": {
+        "module": "cuts-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "loss-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-9",
+      "from": {
+        "module": "cuts-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "nerve-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "architecture-10",
+      "from": {
+        "module": "loss-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "parasite-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-11",
+      "from": {
+        "module": "parasite-1",
+        "port": "pressure"
+      },
+      "to": {
+        "module": "nerve-1",
+        "port": "stim"
+      }
+    },
+    {
+      "id": "architecture-12",
+      "from": {
+        "module": "nerve-1",
+        "port": "spike"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "architecture-13",
+      "from": {
+        "module": "nerve-1",
+        "port": "charge"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "material"
+      }
+    },
+    {
+      "id": "architecture-14",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mirage-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-15",
+      "from": {
+        "module": "loss-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mirage-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-16",
+      "from": {
+        "module": "mirage-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-17",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-18",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "drone-1",
+        "port": "color"
+      }
+    },
+    {
+      "id": "architecture-19",
+      "from": {
+        "module": "tide-1",
+        "port": "tide"
+      },
+      "to": {
+        "module": "harmonic-slew",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "architecture-20",
+      "from": {
+        "module": "harmonic-slew",
+        "port": "cv"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "warp"
+      }
+    },
+    {
+      "id": "architecture-21",
+      "from": {
+        "module": "tide-1",
+        "port": "age"
+      },
+      "to": {
+        "module": "partial-1",
+        "port": "mass"
+      }
+    },
+    {
+      "id": "architecture-22",
+      "from": {
+        "module": "orbit-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-23",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "architecture-24",
+      "from": {
+        "module": "flock-1",
+        "port": "controlB"
+      },
+      "to": {
+        "module": "chorus-1",
+        "port": "drift"
+      }
+    }
+  ]
+}
