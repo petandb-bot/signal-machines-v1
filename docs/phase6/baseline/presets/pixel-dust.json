@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "PIXEL DUST",
+  "seed": 20200402,
+  "bpm": 96,
+  "master": 0.65,
+  "modules": [
+    {
+      "id": "pendulum-1",
+      "type": "PENDULUM",
+      "x": 16,
+      "y": 16,
+      "seed": 20200402,
+      "character": "METAL",
+      "params": {
+        "energy": 0.57,
+        "coupling": 0.38
+      }
+    },
+    {
+      "id": "chip-1",
+      "type": "CHIP",
+      "x": 192,
+      "y": 16,
+      "seed": 20208321,
+      "character": "METAL",
+      "params": {
+        "tune": 0.5,
+        "character": 0.34
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 16,
+      "seed": 20216240,
+      "character": "METAL",
+      "params": {
+        "level": 0.4
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 544,
+      "y": 16,
+      "seed": 17190,
+      "character": "METAL",
+      "params": {
+        "change": 0.08,
+        "memory": 0.95
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 184,
+      "seed": 20232078,
+      "character": "METAL",
+      "params": {
+        "rate": 0.6666666666666666,
+        "irregular": 0
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "b87e6da8-35fb-4091-a30f-29966b664d4e",
+      "from": {
+        "module": "pendulum-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "character"
+      }
+    },
+    {
+      "id": "269f42cf-7044-4b5e-b647-58531cf61663",
+      "from": {
+        "module": "chip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "music-pulse-1-trigger-branch-1-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "music-branch-1-pitch-chip-1-pitch",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "music-branch-1-gate-chip-1-trigger",
+      "from": {
+        "module": "branch-1",
+        "port": "gate"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "trigger"
+      }
+    }
+  ]
+}
