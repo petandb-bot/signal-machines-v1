@@ -82,8 +82,8 @@
     {
       "id": "bounce-1",
       "type": "BOUNCE",
-      "x": 368,
-      "y": 184,
+      "x": 192,
+      "y": 16,
       "seed": 20247924,
       "character": "METAL",
       "params": {

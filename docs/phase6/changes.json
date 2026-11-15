@@ -2924,7 +2924,7 @@
           {
             "id": "count-1",
             "type": "COUNT",
-            "x": 368,
+            "x": 192,
             "y": 184,
             "seed": 20247922,
             "character": "METAL",
@@ -3681,8 +3681,8 @@
           {
             "id": "bounce-1",
             "type": "BOUNCE",
-            "x": 368,
-            "y": 184,
+            "x": 192,
+            "y": 16,
             "seed": 20247924,
             "character": "METAL",
             "params": {
