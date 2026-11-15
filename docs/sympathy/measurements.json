@@ -1,0 +1,1890 @@
+{
+  "sampleRate": 24000,
+  "seconds": 8,
+  "host": {
+    "node": "v24.22.1",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C"
+  },
+  "limitations": "No human listening or physical iPhone assessment. One constant matched gain targets .025 RMS, capped at64x/.8 peak; raw outputs and actual gains are retained. CPU includes observation/analysis and is not a device real-time benchmark. Body energies use normalized coordinates, not physical joules. Resonance peaks require the accompanying FFT analysis; listed frequencies are uncoupled coefficients.",
+  "files": [
+    {
+      "name": "input-pulse.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "input-chip.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "input-metal.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "input-sine.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "input-noise.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "input-cuts.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body0-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body0-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "pulse-body0-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body0-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "pulse-body0-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body0-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "pulse-body0.42-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body0.42-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "pulse-body0.42-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body0.42-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "pulse-body0.42-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body0.42-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "pulse-body1-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body1-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "pulse-body1-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body1-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "pulse-body1-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "pulse-body1-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "pulse-reson-matched.wav",
+      "seconds": 8,
+      "gain": 10.302616090071437
+    },
+    {
+      "name": "pulse-chamber-matched.wav",
+      "seconds": 8,
+      "gain": 2.6546322938647178
+    },
+    {
+      "name": "chip-body0-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "chip-body0-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 6.7237840963396165
+    },
+    {
+      "name": "chip-body0-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "chip-body0-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 10.026328929274554
+    },
+    {
+      "name": "chip-body0-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "chip-body0-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 10.793354142400345
+    },
+    {
+      "name": "chip-body0.42-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "chip-body0.42-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 7.862150466904661
+    },
+    {
+      "name": "chip-body0.42-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "chip-body0.42-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 13.928386600399103
+    },
+    {
+      "name": "chip-body0.42-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "chip-body0.42-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "chip-body1-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "chip-body1-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 11.197768853657657
+    },
+    {
+      "name": "chip-body1-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "chip-body1-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 12.778284768398818
+    },
+    {
+      "name": "chip-body1-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "chip-body1-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 34.54701768264711
+    },
+    {
+      "name": "chip-reson-matched.wav",
+      "seconds": 8,
+      "gain": 0.4323313341051468
+    },
+    {
+      "name": "chip-chamber-matched.wav",
+      "seconds": 8,
+      "gain": 1.16042724152545
+    },
+    {
+      "name": "metal-body0-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "metal-body0-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 9.591697344466569
+    },
+    {
+      "name": "metal-body0-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "metal-body0-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 14.776740424506455
+    },
+    {
+      "name": "metal-body0-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "metal-body0-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 15.810655919684436
+    },
+    {
+      "name": "metal-body0.42-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "metal-body0.42-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 10.268244649900957
+    },
+    {
+      "name": "metal-body0.42-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "metal-body0.42-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 23.539965149100087
+    },
+    {
+      "name": "metal-body0.42-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "metal-body0.42-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "metal-body1-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "metal-body1-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 13.130047581057926
+    },
+    {
+      "name": "metal-body1-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "metal-body1-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 14.669664786511426
+    },
+    {
+      "name": "metal-body1-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "metal-body1-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "metal-reson-matched.wav",
+      "seconds": 8,
+      "gain": 0.5273948046387364
+    },
+    {
+      "name": "metal-chamber-matched.wav",
+      "seconds": 8,
+      "gain": 1.6415643897696852
+    },
+    {
+      "name": "sine-body0-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "sine-body0-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 3.44983590732443
+    },
+    {
+      "name": "sine-body0-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "sine-body0-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 5.286990178005842
+    },
+    {
+      "name": "sine-body0-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "sine-body0-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 5.678005087591627
+    },
+    {
+      "name": "sine-body0.42-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "sine-body0.42-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 3.552427119889081
+    },
+    {
+      "name": "sine-body0.42-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "sine-body0.42-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 8.927186299584301
+    },
+    {
+      "name": "sine-body0.42-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "sine-body0.42-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "sine-body1-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "sine-body1-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 4.1334477611344465
+    },
+    {
+      "name": "sine-body1-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "sine-body1-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 4.868813568661433
+    },
+    {
+      "name": "sine-body1-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "sine-body1-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 33.5851229634885
+    },
+    {
+      "name": "sine-reson-matched.wav",
+      "seconds": 8,
+      "gain": 0.18836171197397195
+    },
+    {
+      "name": "sine-chamber-matched.wav",
+      "seconds": 8,
+      "gain": 1.0531472234841714
+    },
+    {
+      "name": "noise-body0-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "noise-body0-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "noise-body0-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "noise-body0-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "noise-body0-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "noise-body0-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "noise-body0.42-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "noise-body0.42-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "noise-body0.42-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "noise-body0.42-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "noise-body0.42-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "noise-body0.42-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "noise-body1-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "noise-body1-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "noise-body1-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "noise-body1-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "noise-body1-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "noise-body1-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "noise-reson-matched.wav",
+      "seconds": 8,
+      "gain": 5.567122177005917
+    },
+    {
+      "name": "noise-chamber-matched.wav",
+      "seconds": 8,
+      "gain": 2.2153792511574455
+    },
+    {
+      "name": "cuts-body0-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "cuts-body0-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "cuts-body0-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "cuts-body0-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "cuts-body0-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "cuts-body0-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "cuts-body0.42-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "cuts-body0.42-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "cuts-body0.42-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "cuts-body0.42-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "cuts-body0.42-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "cuts-body0.42-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "cuts-body1-couple0-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "cuts-body1-couple0-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "cuts-body1-couple0.55-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "cuts-body1-couple0.55-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "cuts-body1-couple1-raw.wav",
+      "seconds": 8,
+      "gain": 1
+    },
+    {
+      "name": "cuts-body1-couple1-matched.wav",
+      "seconds": 8,
+      "gain": 64
+    },
+    {
+      "name": "cuts-reson-matched.wav",
+      "seconds": 8,
+      "gain": 48.00385581825761
+    },
+    {
+      "name": "cuts-chamber-matched.wav",
+      "seconds": 8,
+      "gain": 10.68554116399977
+    },
+    {
+      "name": "strike-couple0.wav",
+      "seconds": 8,
+      "gain": 2
+    },
+    {
+      "name": "strike-couple0.55.wav",
+      "seconds": 8,
+      "gain": 2
+    },
+    {
+      "name": "strike-couple1.wav",
+      "seconds": 8,
+      "gain": 2
+    },
+    {
+      "name": "small-resonance.wav",
+      "seconds": 16,
+      "gain": 1
+    },
+    {
+      "name": "exchanging-bodies.wav",
+      "seconds": 16,
+      "gain": 1
+    },
+    {
+      "name": "living-material.wav",
+      "seconds": 16,
+      "gain": 1
+    }
+  ],
+  "measurements": [
+    {
+      "input": "pulse",
+      "body": 0,
+      "couple": 0,
+      "gain": 64,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.004418245530490664,
+      "rms": 0.00021146032685481119,
+      "maxStep": 0.00013187474276382655,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 0,
+      "cpuMs": 99.977393,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "body": 0,
+      "couple": 0.55,
+      "gain": 64,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.0048773785237461635,
+      "rms": 0.00017878103892445254,
+      "maxStep": 0.0001408120907345118,
+      "stereoCorrelation": 0.9900180529251031,
+      "lastSecondEnergy": 0,
+      "cpuMs": 54.90013899999997,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "body": 0,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.00473565408566436,
+      "rms": 0.0001578419351497746,
+      "maxStep": 0.00016001859165902922,
+      "stereoCorrelation": 0.9814919742638103,
+      "lastSecondEnergy": 0,
+      "cpuMs": 26.672237999999993,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "body": 0.42,
+      "couple": 0,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.0017170551032800732,
+      "rms": 0.000129834845265125,
+      "maxStep": 5.0121255169313213e-05,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 0,
+      "cpuMs": 51.8509939999999,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "body": 0.42,
+      "couple": 0.55,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.0018616691737985964,
+      "rms": 0.00012067768660779302,
+      "maxStep": 5.457630775724341e-05,
+      "stereoCorrelation": 0.9976353434174775,
+      "lastSecondEnergy": 0,
+      "cpuMs": 36.21195799999998,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "body": 0.42,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.0017431977133912989,
+      "rms": 9.324064398984846e-05,
+      "maxStep": 6.204448297211706e-05,
+      "stereoCorrelation": 0.9863539325334093,
+      "lastSecondEnergy": 0,
+      "cpuMs": 31.778435999999942,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "body": 1,
+      "couple": 0,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.0004452146925794427,
+      "rms": 6.567307331728606e-05,
+      "maxStep": 1.2872487433939314e-05,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 1.1337395291368945e-12,
+      "cpuMs": 30.37284699999998,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "body": 1,
+      "couple": 0.55,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.0004421452169007389,
+      "rms": 6.536891193749953e-05,
+      "maxStep": 1.3213791989408114e-05,
+      "stereoCorrelation": 0.9999616797794473,
+      "lastSecondEnergy": 1.1130603305223796e-12,
+      "cpuMs": 40.32819600000016,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "body": 1,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.00043547675489953824,
+      "rms": 6.252673049943578e-05,
+      "maxStep": 1.350168336671111e-05,
+      "stereoCorrelation": 0.9996010609082745,
+      "lastSecondEnergy": 9.573829162925877e-13,
+      "cpuMs": 24.93387699999994,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "comparison": "RESON",
+      "gain": 10.302616090071437,
+      "peak": 0.038149758468662816,
+      "rms": 0.0024265681436089165,
+      "maxStep": 0.003672391714380079,
+      "stereoCorrelation": 0.9786351379881362,
+      "lastSecondEnergy": 4.8569408029928944e-17,
+      "cpuMs": 37.878901999999925,
+      "typedBytes": 740,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "pulse",
+      "comparison": "CHAMBER",
+      "gain": 2.6546322938647178,
+      "peak": 0.3013600044906139,
+      "rms": 0.004936238415916232,
+      "maxStep": 0.3013600044906139,
+      "stereoCorrelation": 0.9139027693314518,
+      "lastSecondEnergy": 4.0806505012122924e-11,
+      "cpuMs": 64.51438499999995,
+      "typedBytes": 461427,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "body": 0,
+      "couple": 0,
+      "gain": 6.7237840963396165,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.017396021436298984,
+      "rms": 0.0037181443725431093,
+      "maxStep": 0.0005193499797082076,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 1.5287512132123402e-11,
+      "cpuMs": 28.17169600000011,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "body": 0,
+      "couple": 0.55,
+      "gain": 10.026328929274554,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.012937955429463579,
+      "rms": 0.0024934350524852423,
+      "maxStep": 0.00036621596045939727,
+      "stereoCorrelation": 0.9989601133751137,
+      "lastSecondEnergy": 4.68759986504341e-12,
+      "cpuMs": 29.377741000000015,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "body": 0,
+      "couple": 1,
+      "gain": 10.793354142400345,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.012265287899558844,
+      "rms": 0.002316240129821241,
+      "maxStep": 0.00033482809592810846,
+      "stereoCorrelation": 0.9998208460307295,
+      "lastSecondEnergy": 4.057219441738597e-12,
+      "cpuMs": 36.51859999999988,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "body": 0.42,
+      "couple": 0,
+      "gain": 7.862150466904661,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.012028812736794372,
+      "rms": 0.003179791598397446,
+      "maxStep": 0.00035105291881507066,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 1.2305089571095994e-10,
+      "cpuMs": 37.941605999999865,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "body": 0.42,
+      "couple": 0.55,
+      "gain": 13.928386600399103,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.009372462442155676,
+      "rms": 0.0017948956126249147,
+      "maxStep": 0.00026779603156230946,
+      "stereoCorrelation": 0.9989204957432304,
+      "lastSecondEnergy": 1.2971971343873296e-12,
+      "cpuMs": 38.647279000000026,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "body": 0.42,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.0022556804247906197,
+      "rms": 0.00018771390735548073,
+      "maxStep": 6.323051783434014e-05,
+      "stereoCorrelation": 0.986822406926732,
+      "lastSecondEnergy": 8.010671227028712e-15,
+      "cpuMs": 56.96252800000002,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "body": 1,
+      "couple": 0,
+      "gain": 11.197768853657657,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.006024675394279652,
+      "rms": 0.0022325876097928172,
+      "maxStep": 0.00017408462071125705,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 0.00015088708701919545,
+      "cpuMs": 34.38228900000013,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "body": 1,
+      "couple": 0.55,
+      "gain": 12.778284768398818,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.005449960687191215,
+      "rms": 0.0019564441122666126,
+      "maxStep": 0.00015675379476652764,
+      "stereoCorrelation": 0.9999866398764788,
+      "lastSecondEnergy": 9.584267583931807e-05,
+      "cpuMs": 45.29580899999996,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "body": 1,
+      "couple": 1,
+      "gain": 34.54701768264711,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.003195485010794855,
+      "rms": 0.0007236514662322776,
+      "maxStep": 9.341607029147501e-05,
+      "stereoCorrelation": 0.9998558891860516,
+      "lastSecondEnergy": 4.294800339134284e-06,
+      "cpuMs": 47.82759800000008,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "comparison": "RESON",
+      "gain": 0.4323313341051468,
+      "peak": 0.19833282920771153,
+      "rms": 0.05782601913818206,
+      "maxStep": 0.0075896494065990396,
+      "stereoCorrelation": 0.9999578809125858,
+      "lastSecondEnergy": 0.00032205215660655766,
+      "cpuMs": 41.14612399999987,
+      "typedBytes": 740,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "chip",
+      "comparison": "CHAMBER",
+      "gain": 1.16042724152545,
+      "peak": 0.17053393602088326,
+      "rms": 0.021543789309130687,
+      "maxStep": 0.22584844410320987,
+      "stereoCorrelation": 0.9180431413251804,
+      "lastSecondEnergy": 5.8769610523914585e-05,
+      "cpuMs": 82.975819,
+      "typedBytes": 461427,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "body": 0,
+      "couple": 0,
+      "gain": 9.591697344466569,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.017810020972963327,
+      "rms": 0.0026064208556812367,
+      "maxStep": 0.0004956267662392719,
+      "stereoCorrelation": 0.9999999999999616,
+      "lastSecondEnergy": 6.936474910878205e-12,
+      "cpuMs": 53.49952799999983,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "body": 0,
+      "couple": 0.55,
+      "gain": 14.776740424506455,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.01215520019770083,
+      "rms": 0.001691848085694109,
+      "maxStep": 0.00032987850344584385,
+      "stereoCorrelation": 0.9993167823002446,
+      "lastSecondEnergy": 2.376903964391713e-12,
+      "cpuMs": 61.83303299999989,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "body": 0,
+      "couple": 1,
+      "gain": 15.810655919684436,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.012725755095759949,
+      "rms": 0.0015812120715924716,
+      "maxStep": 0.00031452600868449917,
+      "stereoCorrelation": 0.9980479767581959,
+      "lastSecondEnergy": 2.0369822154085505e-12,
+      "cpuMs": 58.54379599999993,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "body": 0.42,
+      "couple": 0,
+      "gain": 10.268244649900957,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.014048620661059505,
+      "rms": 0.002434690723914641,
+      "maxStep": 0.0004003682208509312,
+      "stereoCorrelation": 0.9999999999999076,
+      "lastSecondEnergy": 1.4139303544312538e-11,
+      "cpuMs": 68.03419799999983,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "body": 0.42,
+      "couple": 0.55,
+      "gain": 23.539965149100087,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.008715517955402036,
+      "rms": 0.0010620236623823435,
+      "maxStep": 0.000253964302901409,
+      "stereoCorrelation": 0.9988841173629369,
+      "lastSecondEnergy": 9.423805210817682e-13,
+      "cpuMs": 59.8177639999999,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "body": 0.42,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.0014526453965797903,
+      "rms": 9.722304312894744e-05,
+      "maxStep": 5.231083882168157e-05,
+      "stereoCorrelation": 0.9881356546097286,
+      "lastSecondEnergy": 6.5720513466307314e-15,
+      "cpuMs": 57.580159000000094,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "body": 1,
+      "couple": 0,
+      "gain": 13.130047581057926,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.008211400178006442,
+      "rms": 0.001904029657597454,
+      "maxStep": 0.00023595948185718533,
+      "stereoCorrelation": 0.9999999999999918,
+      "lastSecondEnergy": 5.518671870347437e-08,
+      "cpuMs": 68.65265799999997,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "body": 1,
+      "couple": 0.55,
+      "gain": 14.669664786511426,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.0078285369917419,
+      "rms": 0.001704197087242729,
+      "maxStep": 0.0002251122394563529,
+      "stereoCorrelation": 0.9999866284977176,
+      "lastSecondEnergy": 4.129312258167942e-09,
+      "cpuMs": 62.521389,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "body": 1,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.002804774152812048,
+      "rms": 0.00031349631743753407,
+      "maxStep": 8.202815885874641e-05,
+      "stereoCorrelation": 0.9998468316168352,
+      "lastSecondEnergy": 1.330432570397771e-11,
+      "cpuMs": 79.3937289999999,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "comparison": "RESON",
+      "gain": 0.5273948046387364,
+      "peak": 0.22733812471948694,
+      "rms": 0.04740281811673308,
+      "maxStep": 0.008152161361165897,
+      "stereoCorrelation": 0.9982979707728726,
+      "lastSecondEnergy": 4.1661492893793067e-08,
+      "cpuMs": 65.23304600000029,
+      "typedBytes": 740,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "metal",
+      "comparison": "CHAMBER",
+      "gain": 1.6415643897696852,
+      "peak": 0.14737633615732193,
+      "rms": 0.015229375195881016,
+      "maxStep": 0.013972708050906658,
+      "stereoCorrelation": 0.9122787567538893,
+      "lastSecondEnergy": 3.798945938322406e-10,
+      "cpuMs": 71.79287199999999,
+      "typedBytes": 461427,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "body": 0,
+      "couple": 0,
+      "gain": 3.44983590732443,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.020893447868445464,
+      "rms": 0.007246721488092201,
+      "maxStep": 0.0006016674762187474,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 0,
+      "cpuMs": 56.489852000000155,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "body": 0,
+      "couple": 0.55,
+      "gain": 5.286990178005842,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.014152884345256099,
+      "rms": 0.004728588319305249,
+      "maxStep": 0.0003742013269497575,
+      "stereoCorrelation": 0.9994034048514392,
+      "lastSecondEnergy": 0,
+      "cpuMs": 57.59830000000011,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "body": 0,
+      "couple": 1,
+      "gain": 5.678005087591627,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.013447370869609518,
+      "rms": 0.004402954843177846,
+      "maxStep": 0.00033965971823301307,
+      "stereoCorrelation": 0.9999335729864325,
+      "lastSecondEnergy": 0,
+      "cpuMs": 56.72537299999976,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "body": 0.42,
+      "couple": 0,
+      "gain": 3.552427119889081,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.020894061854630212,
+      "rms": 0.007037442051951396,
+      "maxStep": 0.000601687472477542,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 2.388294407468672e-36,
+      "cpuMs": 58.06364399999984,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "body": 0.42,
+      "couple": 0.55,
+      "gain": 8.927186299584301,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.009960367579134087,
+      "rms": 0.002800434443847569,
+      "maxStep": 0.0002855316460549668,
+      "stereoCorrelation": 0.9988727155232358,
+      "lastSecondEnergy": 2.618371707853092e-39,
+      "cpuMs": 86.29316599999993,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "body": 0.42,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.0013135726001212527,
+      "rms": 0.00021609536185595554,
+      "maxStep": 3.692619819584916e-05,
+      "stereoCorrelation": 0.9876894021730367,
+      "lastSecondEnergy": 0,
+      "cpuMs": 47.88808599999993,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "body": 1,
+      "couple": 0,
+      "gain": 4.1334477611344465,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.019728016759257037,
+      "rms": 0.006048219656981614,
+      "maxStep": 0.0005682206203488616,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 7.241748862372696e-07,
+      "cpuMs": 40.454813000000286,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "body": 1,
+      "couple": 0.55,
+      "gain": 4.868813568661433,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.015589121884819191,
+      "rms": 0.005134721148682875,
+      "maxStep": 0.00044878633743714497,
+      "stereoCorrelation": 0.9999866563099615,
+      "lastSecondEnergy": 4.3313184312691156e-07,
+      "cpuMs": 79.66420299999982,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "body": 1,
+      "couple": 1,
+      "gain": 33.5851229634885,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.0032152469896131646,
+      "rms": 0.000744377206156974,
+      "maxStep": 9.167606917269097e-05,
+      "stereoCorrelation": 0.999855653526871,
+      "lastSecondEnergy": 5.231349417840906e-09,
+      "cpuMs": 49.641051999999945,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "comparison": "RESON",
+      "gain": 0.18836171197397195,
+      "peak": 0.4164622035439576,
+      "rms": 0.13272336367092763,
+      "maxStep": 0.014785877557273482,
+      "stereoCorrelation": 0.999825772863113,
+      "lastSecondEnergy": 1.3615358459700562e-09,
+      "cpuMs": 89.70157999999992,
+      "typedBytes": 740,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "sine",
+      "comparison": "CHAMBER",
+      "gain": 1.0531472234841714,
+      "peak": 0.08317344016274841,
+      "rms": 0.023738371466518658,
+      "maxStep": 0.0024045020167142547,
+      "stereoCorrelation": 0.9047862384950623,
+      "lastSecondEnergy": 1.51814802924791e-08,
+      "cpuMs": 93.90610100000049,
+      "typedBytes": 461427,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "body": 0,
+      "couple": 0,
+      "gain": 64,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.0009512241619282929,
+      "rms": 0.000141547893893306,
+      "maxStep": 4.508047213641198e-05,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 0,
+      "cpuMs": 54.97946200000024,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "body": 0,
+      "couple": 0.55,
+      "gain": 64,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.0008082490425521822,
+      "rms": 0.00011831916222892793,
+      "maxStep": 3.9273788383155405e-05,
+      "stereoCorrelation": 0.990656404990832,
+      "lastSecondEnergy": 0,
+      "cpuMs": 44.05207100000007,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "body": 0,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.0008685242089613697,
+      "rms": 0.00010679850407287341,
+      "maxStep": 4.6375202743285826e-05,
+      "stereoCorrelation": 0.9807427507677223,
+      "lastSecondEnergy": 0,
+      "cpuMs": 59.43444499999987,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "body": 0.42,
+      "couple": 0,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.0005506536594285328,
+      "rms": 8.747448508074135e-05,
+      "maxStep": 2.045626631160757e-05,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 0,
+      "cpuMs": 35.31124100000034,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "body": 0.42,
+      "couple": 0.55,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.0004917814972877442,
+      "rms": 8.230913659169844e-05,
+      "maxStep": 2.0622346462396692e-05,
+      "stereoCorrelation": 0.9972474593089697,
+      "lastSecondEnergy": 0,
+      "cpuMs": 49.81040500000017,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "body": 0.42,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.00037533051285011806,
+      "rms": 6.190186765509197e-05,
+      "maxStep": 1.8922209204160705e-05,
+      "stereoCorrelation": 0.9829132607804724,
+      "lastSecondEnergy": 0,
+      "cpuMs": 52.929024999999456,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "body": 1,
+      "couple": 0,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.00024204718449139006,
+      "rms": 5.197565425061292e-05,
+      "maxStep": 8.281572075319844e-06,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 5.754906039959287e-11,
+      "cpuMs": 38.893347999999605,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "body": 1,
+      "couple": 0.55,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.00021924292526708027,
+      "rms": 4.837045470999414e-05,
+      "maxStep": 8.008391034766696e-06,
+      "stereoCorrelation": 0.9998820471751904,
+      "lastSecondEnergy": 2.3536704215383153e-11,
+      "cpuMs": 34.541197999999895,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "body": 1,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 0.00021585645927314239,
+      "rms": 4.053953714592984e-05,
+      "maxStep": 8.578747876351754e-06,
+      "stereoCorrelation": 0.9976287484158367,
+      "lastSecondEnergy": 1.5154615670251822e-11,
+      "cpuMs": 33.219961999999214,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "comparison": "RESON",
+      "gain": 5.567122177005917,
+      "peak": 0.035623548345115746,
+      "rms": 0.004490650502203525,
+      "maxStep": 0.009489665092707251,
+      "stereoCorrelation": 0.9757362200473634,
+      "lastSecondEnergy": 1.4312441292011745e-13,
+      "cpuMs": 49.66402899999957,
+      "typedBytes": 740,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "noise",
+      "comparison": "CHAMBER",
+      "gain": 2.2153792511574455,
+      "peak": 0.07964323687492506,
+      "rms": 0.011284749546579223,
+      "maxStep": 0.05186800876395546,
+      "stereoCorrelation": 0.9388858897900321,
+      "lastSecondEnergy": 6.548971849861247e-09,
+      "cpuMs": 87.41334499999994,
+      "typedBytes": 461427,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "body": 0,
+      "couple": 0,
+      "gain": 64,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.0004718097878074588,
+      "rms": 4.550636024925025e-05,
+      "maxStep": 1.532906311789607e-05,
+      "stereoCorrelation": -0.3338865525989485,
+      "lastSecondEnergy": 2.3256493421224166e-11,
+      "cpuMs": 65.05293299999994,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "body": 0,
+      "couple": 0.55,
+      "gain": 64,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.000498984101493235,
+      "rms": 5.9834839056979525e-05,
+      "maxStep": 1.5732590672067482e-05,
+      "stereoCorrelation": -0.2988957172756499,
+      "lastSecondEnergy": 4.359192271558861e-12,
+      "cpuMs": 33.126648999999816,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "body": 0,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        110.66,
+        111.86999999999999
+      ],
+      "peak": 0.00032968305195305085,
+      "rms": 4.140741445411933e-05,
+      "maxStep": 1.3604240001120381e-05,
+      "stereoCorrelation": -0.08347763385935839,
+      "lastSecondEnergy": 1.832753718149265e-12,
+      "cpuMs": 31.040220000000772,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "body": 0.42,
+      "couple": 0,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.00020182041463531343,
+      "rms": 2.0759924304638923e-05,
+      "maxStep": 5.931960229440159e-06,
+      "stereoCorrelation": -0.442897677393924,
+      "lastSecondEnergy": 2.5854698684960394e-08,
+      "cpuMs": 60.97890700000062,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "body": 0.42,
+      "couple": 0.55,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.00021515909283590192,
+      "rms": 2.1411903243187525e-05,
+      "maxStep": 6.083807809659031e-06,
+      "stereoCorrelation": -0.3687056966459753,
+      "lastSecondEnergy": 4.494737022605799e-08,
+      "cpuMs": 56.97131799999988,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "body": 0.42,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        146.36336,
+        181.7244
+      ],
+      "peak": 0.000662938178451072,
+      "rms": 9.18830029420284e-05,
+      "maxStep": 1.6305215030075838e-05,
+      "stereoCorrelation": -0.11520392947357477,
+      "lastSecondEnergy": 1.8830759802222959e-06,
+      "cpuMs": 37.23222200000055,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "body": 1,
+      "couple": 0,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 5.5275192214051975e-05,
+      "rms": 8.514421206569167e-06,
+      "maxStep": 1.5358988530054989e-06,
+      "stereoCorrelation": -0.6334290987064357,
+      "lastSecondEnergy": 1.1803508932014513e-07,
+      "cpuMs": 34.50853199999983,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "body": 1,
+      "couple": 0.55,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 5.593716658426949e-05,
+      "rms": 8.802013902911662e-06,
+      "maxStep": 1.5513220020316969e-06,
+      "stereoCorrelation": -0.6296107690886887,
+      "lastSecondEnergy": 1.3595752414848292e-07,
+      "cpuMs": 51.33163700000023,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "body": 1,
+      "couple": 1,
+      "gain": 64,
+      "frequencies": [
+        110,
+        313.06,
+        507.87
+      ],
+      "peak": 6.299925143060282e-05,
+      "rms": 7.926466786122306e-06,
+      "maxStep": 1.6595661409509823e-06,
+      "stereoCorrelation": -0.46254832176853505,
+      "lastSecondEnergy": 5.838774968189807e-07,
+      "cpuMs": 81.8319449999999,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "comparison": "RESON",
+      "gain": 48.00385581825761,
+      "peak": 0.008937860345761717,
+      "rms": 0.0005207914983881689,
+      "maxStep": 0.0013711021053686853,
+      "stereoCorrelation": 0.9980579810180027,
+      "lastSecondEnergy": 2.0063915314102772e-05,
+      "cpuMs": 31.92081000000053,
+      "typedBytes": 740,
+      "bufferGrowth": 0
+    },
+    {
+      "input": "cuts",
+      "comparison": "CHAMBER",
+      "gain": 10.68554116399977,
+      "peak": 0.033015418866957594,
+      "rms": 0.0023396100970745873,
+      "maxStep": 0.009608125445651957,
+      "stereoCorrelation": -0.07049750247961593,
+      "lastSecondEnergy": 0.0043942881724895145,
+      "cpuMs": 53.91961900000024,
+      "typedBytes": 461427,
+      "bufferGrowth": 0
+    }
+  ],
+  "exchanges": [
+    {
+      "couple": 0,
+      "peak": 0.08350857190996659,
+      "rms": 0.0039462962012006,
+      "maxStep": 0.08350857190996659,
+      "stereoCorrelation": 1,
+      "lastSecondEnergy": 0,
+      "cpuMs": 196.10465699999986,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "couple": 0.55,
+      "peak": 0.08691034059838862,
+      "rms": 0.0032863019348136516,
+      "maxStep": 0.0837188162962486,
+      "stereoCorrelation": 0.9893492964592373,
+      "lastSecondEnergy": 0,
+      "cpuMs": 89.73330299999998,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    },
+    {
+      "couple": 1,
+      "peak": 0.08610480711104168,
+      "rms": 0.002975491287636219,
+      "maxStep": 0.0841977574012897,
+      "stereoCorrelation": 0.9801609135461062,
+      "lastSecondEnergy": 0,
+      "cpuMs": 84.40525900000011,
+      "typedBytes": 684,
+      "bufferGrowth": 0
+    }
+  ]
+}

@@ -1,0 +1,2105 @@
+{
+  "method": "8192-sample Hann FFT; 24 windows; normalized-power L1 flux. Upper-band energy is NOT an alias measurement. PCM16 exports limit the floor; apparent zero is not proof of no aliasing. Human listening unverified.",
+  "rows": [
+    {
+      "file": "drone-high-classic-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9440028884812861,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 264.2838527687974,
+          "upperBandEnergyFraction": 3.3574690397992745e-09,
+          "spectralFlux": null,
+          "monoRms": 0.045323349889293894
+        },
+        {
+          "seconds": 2.246,
+          "centroidHz": 252.30677343961827,
+          "upperBandEnergyFraction": 2.800396665013199e-09,
+          "spectralFlux": 0.34685247794339524,
+          "monoRms": 0.046569262378844685
+        },
+        {
+          "seconds": 3.4920416666666667,
+          "centroidHz": 244.0265514100396,
+          "upperBandEnergyFraction": 2.036364337844249e-09,
+          "spectralFlux": 0.38479311171501185,
+          "monoRms": 0.05688282128577017
+        },
+        {
+          "seconds": 4.738083333333333,
+          "centroidHz": 242.46579854440768,
+          "upperBandEnergyFraction": 1.5965661102366996e-09,
+          "spectralFlux": 0.2035329966779638,
+          "monoRms": 0.06161569206358427
+        },
+        {
+          "seconds": 5.984083333333333,
+          "centroidHz": 243.15406550260084,
+          "upperBandEnergyFraction": 1.5939153269592957e-09,
+          "spectralFlux": 0.06243310008234299,
+          "monoRms": 0.0612534325944686
+        },
+        {
+          "seconds": 7.230125,
+          "centroidHz": 242.61857840953996,
+          "upperBandEnergyFraction": 1.7456308748807424e-09,
+          "spectralFlux": 0.042821433689489805,
+          "monoRms": 0.061230926156001744
+        },
+        {
+          "seconds": 8.476166666666666,
+          "centroidHz": 242.64174742502993,
+          "upperBandEnergyFraction": 1.8518543642902266e-09,
+          "spectralFlux": 0.10471911593559292,
+          "monoRms": 0.057728471495449137
+        },
+        {
+          "seconds": 9.722166666666666,
+          "centroidHz": 244.1225528248586,
+          "upperBandEnergyFraction": 2.135990727126365e-09,
+          "spectralFlux": 0.12486101414890582,
+          "monoRms": 0.05361345958082163
+        },
+        {
+          "seconds": 10.968208333333333,
+          "centroidHz": 246.35344974196457,
+          "upperBandEnergyFraction": 2.2236117608971215e-09,
+          "spectralFlux": 0.12530569842748412,
+          "monoRms": 0.05186788199791645
+        },
+        {
+          "seconds": 12.21425,
+          "centroidHz": 248.87523820822165,
+          "upperBandEnergyFraction": 2.5895648476273674e-09,
+          "spectralFlux": 0.12119825621494172,
+          "monoRms": 0.051597592971296846
+        },
+        {
+          "seconds": 13.46025,
+          "centroidHz": 251.37184597606293,
+          "upperBandEnergyFraction": 2.755571624743561e-09,
+          "spectralFlux": 0.11061109590930149,
+          "monoRms": 0.05017518071925422
+        },
+        {
+          "seconds": 14.706291666666667,
+          "centroidHz": 253.85635435219896,
+          "upperBandEnergyFraction": 2.694089965706867e-09,
+          "spectralFlux": 0.09290147378356745,
+          "monoRms": 0.047110349222080135
+        },
+        {
+          "seconds": 15.952333333333334,
+          "centroidHz": 256.8735418999974,
+          "upperBandEnergyFraction": 2.8174144187307364e-09,
+          "spectralFlux": 0.09897923956961764,
+          "monoRms": 0.046995823323366506
+        },
+        {
+          "seconds": 17.198375,
+          "centroidHz": 260.5355653088335,
+          "upperBandEnergyFraction": 3.0490487778497972e-09,
+          "spectralFlux": 0.10882681205084688,
+          "monoRms": 0.04563350765891587
+        },
+        {
+          "seconds": 18.444375,
+          "centroidHz": 263.8533086089079,
+          "upperBandEnergyFraction": 3.11550684576758e-09,
+          "spectralFlux": 0.08847388277932988,
+          "monoRms": 0.043797540315520446
+        },
+        {
+          "seconds": 19.690416666666668,
+          "centroidHz": 264.32009541539696,
+          "upperBandEnergyFraction": 2.890521899007435e-09,
+          "spectralFlux": 0.027415917531775445,
+          "monoRms": 0.04337521417156893
+        },
+        {
+          "seconds": 20.936458333333334,
+          "centroidHz": 260.3114794627317,
+          "upperBandEnergyFraction": 3.010591409024842e-09,
+          "spectralFlux": 0.10121472885895205,
+          "monoRms": 0.04624928244697033
+        },
+        {
+          "seconds": 22.182458333333333,
+          "centroidHz": 253.01617526342045,
+          "upperBandEnergyFraction": 2.370138133899099e-09,
+          "spectralFlux": 0.22257829342304328,
+          "monoRms": 0.04931308125263745
+        },
+        {
+          "seconds": 23.4285,
+          "centroidHz": 246.43587852792191,
+          "upperBandEnergyFraction": 2.3527696605377055e-09,
+          "spectralFlux": 0.2782373427179011,
+          "monoRms": 0.05252793382448909
+        },
+        {
+          "seconds": 24.674541666666666,
+          "centroidHz": 242.7021208565148,
+          "upperBandEnergyFraction": 1.7783477940150121e-09,
+          "spectralFlux": 0.24147133015145103,
+          "monoRms": 0.05862974781183992
+        },
+        {
+          "seconds": 25.920541666666665,
+          "centroidHz": 242.82618265278197,
+          "upperBandEnergyFraction": 1.743093287605396e-09,
+          "spectralFlux": 0.1421480302495989,
+          "monoRms": 0.06203563457076204
+        },
+        {
+          "seconds": 27.16658333333333,
+          "centroidHz": 242.67666725052644,
+          "upperBandEnergyFraction": 1.6630316127830785e-09,
+          "spectralFlux": 0.021074857640474114,
+          "monoRms": 0.0600283023052821
+        },
+        {
+          "seconds": 28.412625,
+          "centroidHz": 243.84388959816079,
+          "upperBandEnergyFraction": 1.7993107031324857e-09,
+          "spectralFlux": 0.22056523269286793,
+          "monoRms": 0.0530942950056645
+        },
+        {
+          "seconds": 29.658666666666665,
+          "centroidHz": 253.67988718797955,
+          "upperBandEnergyFraction": 2.9490873089415724e-09,
+          "spectralFlux": 0.445814784822943,
+          "monoRms": 0.04867781331129326
+        }
+      ]
+    },
+    {
+      "file": "drone-high-living-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9436448236890883,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 264.0197272871503,
+          "upperBandEnergyFraction": 2.9137354837740848e-09,
+          "spectralFlux": null,
+          "monoRms": 0.04584632575282696
+        },
+        {
+          "seconds": 2.246,
+          "centroidHz": 260.5891060120229,
+          "upperBandEnergyFraction": 3.1892952879712606e-09,
+          "spectralFlux": 0.08627393755215008,
+          "monoRms": 0.04278294371051405
+        },
+        {
+          "seconds": 3.4920416666666667,
+          "centroidHz": 250.56750796686987,
+          "upperBandEnergyFraction": 2.2272841863091053e-09,
+          "spectralFlux": 0.32294929208351936,
+          "monoRms": 0.05059231287307757
+        },
+        {
+          "seconds": 4.738083333333333,
+          "centroidHz": 244.43913765094598,
+          "upperBandEnergyFraction": 2.123333018302651e-09,
+          "spectralFlux": 0.2994555451156027,
+          "monoRms": 0.056245035591521116
+        },
+        {
+          "seconds": 5.984083333333333,
+          "centroidHz": 242.50155166128872,
+          "upperBandEnergyFraction": 1.6362359861144182e-09,
+          "spectralFlux": 0.19558249098016248,
+          "monoRms": 0.06055617268932712
+        },
+        {
+          "seconds": 7.230125,
+          "centroidHz": 243.05753296684932,
+          "upperBandEnergyFraction": 1.5399863503041908e-09,
+          "spectralFlux": 0.08775915105372899,
+          "monoRms": 0.059464382999892755
+        },
+        {
+          "seconds": 8.476166666666666,
+          "centroidHz": 242.55999012658364,
+          "upperBandEnergyFraction": 1.646711865318567e-09,
+          "spectralFlux": 0.03041875504967395,
+          "monoRms": 0.06056961006148717
+        },
+        {
+          "seconds": 9.722166666666666,
+          "centroidHz": 242.7988355253963,
+          "upperBandEnergyFraction": 1.7812723526565738e-09,
+          "spectralFlux": 0.13971055799223156,
+          "monoRms": 0.059198241370668564
+        },
+        {
+          "seconds": 10.968208333333333,
+          "centroidHz": 246.91184818695956,
+          "upperBandEnergyFraction": 2.3847478924329896e-09,
+          "spectralFlux": 0.25040709883534623,
+          "monoRms": 0.05352035434158288
+        },
+        {
+          "seconds": 12.21425,
+          "centroidHz": 255.62665215595652,
+          "upperBandEnergyFraction": 2.6534932507659385e-09,
+          "spectralFlux": 0.3408718236421616,
+          "monoRms": 0.04591536568398682
+        },
+        {
+          "seconds": 13.46025,
+          "centroidHz": 264.5100138433064,
+          "upperBandEnergyFraction": 3.2554097913627934e-09,
+          "spectralFlux": 0.2419574738657628,
+          "monoRms": 0.041848957058403406
+        },
+        {
+          "seconds": 14.706291666666667,
+          "centroidHz": 260.51484208618257,
+          "upperBandEnergyFraction": 2.914145212667198e-09,
+          "spectralFlux": 0.11056613065047523,
+          "monoRms": 0.0459229024093176
+        },
+        {
+          "seconds": 15.952333333333334,
+          "centroidHz": 250.11697837073652,
+          "upperBandEnergyFraction": 2.390146658491219e-09,
+          "spectralFlux": 0.3369381189348737,
+          "monoRms": 0.051041830334409476
+        },
+        {
+          "seconds": 17.198375,
+          "centroidHz": 243.8848794988441,
+          "upperBandEnergyFraction": 1.9291380793049598e-09,
+          "spectralFlux": 0.30644770139864985,
+          "monoRms": 0.056481946916089404
+        },
+        {
+          "seconds": 18.444375,
+          "centroidHz": 242.49689507861024,
+          "upperBandEnergyFraction": 1.6195386812841934e-09,
+          "spectralFlux": 0.19302679011775833,
+          "monoRms": 0.0596396629801502
+        },
+        {
+          "seconds": 19.690416666666668,
+          "centroidHz": 243.28609233619164,
+          "upperBandEnergyFraction": 1.6107456991462058e-09,
+          "spectralFlux": 0.06350213682104501,
+          "monoRms": 0.06197979017941554
+        },
+        {
+          "seconds": 20.936458333333334,
+          "centroidHz": 242.65132172423202,
+          "upperBandEnergyFraction": 1.7173010367434827e-09,
+          "spectralFlux": 0.06661263967569264,
+          "monoRms": 0.060676139413050716
+        },
+        {
+          "seconds": 22.182458333333333,
+          "centroidHz": 243.81805197738151,
+          "upperBandEnergyFraction": 1.8438236674166159e-09,
+          "spectralFlux": 0.18030940486852257,
+          "monoRms": 0.05719925768569071
+        },
+        {
+          "seconds": 23.4285,
+          "centroidHz": 249.35446401283593,
+          "upperBandEnergyFraction": 2.2511251921636387e-09,
+          "spectralFlux": 0.2799881406375693,
+          "monoRms": 0.05000083379503034
+        },
+        {
+          "seconds": 24.674541666666666,
+          "centroidHz": 258.9757792813565,
+          "upperBandEnergyFraction": 2.782214726466121e-09,
+          "spectralFlux": 0.3314475883429861,
+          "monoRms": 0.045211454119793375
+        },
+        {
+          "seconds": 25.920541666666665,
+          "centroidHz": 264.6839027400646,
+          "upperBandEnergyFraction": 3.1179920034710774e-09,
+          "spectralFlux": 0.14706553107444179,
+          "monoRms": 0.04613757181441116
+        },
+        {
+          "seconds": 27.16658333333333,
+          "centroidHz": 257.69960305511984,
+          "upperBandEnergyFraction": 3.0148562762543728e-09,
+          "spectralFlux": 0.18336867161089593,
+          "monoRms": 0.04831351288640429
+        },
+        {
+          "seconds": 28.412625,
+          "centroidHz": 248.58840699399966,
+          "upperBandEnergyFraction": 2.426249334585148e-09,
+          "spectralFlux": 0.32910635602787625,
+          "monoRms": 0.05122727328285209
+        },
+        {
+          "seconds": 29.658666666666665,
+          "centroidHz": 243.64520250512368,
+          "upperBandEnergyFraction": 1.987237276040709e-09,
+          "spectralFlux": 0.26487576374035704,
+          "monoRms": 0.05395617293967949
+        }
+      ]
+    },
+    {
+      "file": "drone-low-classic-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9430044121588222,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 135.32227158329079,
+          "upperBandEnergyFraction": 4.534245684460782e-09,
+          "spectralFlux": null,
+          "monoRms": 0.046924477143901785
+        },
+        {
+          "seconds": 6.130416666666667,
+          "centroidHz": 124.11992504779073,
+          "upperBandEnergyFraction": 1.964585147132225e-09,
+          "spectralFlux": 0.8558859811148564,
+          "monoRms": 0.050888081911997486
+        },
+        {
+          "seconds": 11.260833333333334,
+          "centroidHz": 120.59077390333874,
+          "upperBandEnergyFraction": 1.8013305411645853e-09,
+          "spectralFlux": 0.4395102864991251,
+          "monoRms": 0.05487437330269826
+        },
+        {
+          "seconds": 16.391291666666667,
+          "centroidHz": 120.19058304212129,
+          "upperBandEnergyFraction": 1.5265933871220269e-09,
+          "spectralFlux": 0.15716069570872876,
+          "monoRms": 0.05800374948710223
+        },
+        {
+          "seconds": 21.521708333333333,
+          "centroidHz": 122.21612205788898,
+          "upperBandEnergyFraction": 1.8542097716469728e-09,
+          "spectralFlux": 0.3578746387893497,
+          "monoRms": 0.06250625962510958
+        },
+        {
+          "seconds": 26.652166666666666,
+          "centroidHz": 121.57077949331469,
+          "upperBandEnergyFraction": 2.0347577439546264e-09,
+          "spectralFlux": 0.34968703781956,
+          "monoRms": 0.05810969975509664
+        },
+        {
+          "seconds": 31.782583333333335,
+          "centroidHz": 130.19114741855498,
+          "upperBandEnergyFraction": 2.5913434996256625e-09,
+          "spectralFlux": 0.7104048026938026,
+          "monoRms": 0.041430952253327574
+        },
+        {
+          "seconds": 36.913041666666665,
+          "centroidHz": 121.13257685034196,
+          "upperBandEnergyFraction": 1.5585465542713989e-09,
+          "spectralFlux": 0.7268173030426591,
+          "monoRms": 0.05459706094843778
+        },
+        {
+          "seconds": 42.043458333333334,
+          "centroidHz": 119.73895651163804,
+          "upperBandEnergyFraction": 1.7453921792514883e-09,
+          "spectralFlux": 0.37744626427173394,
+          "monoRms": 0.05928837751936503
+        },
+        {
+          "seconds": 47.173875,
+          "centroidHz": 122.0316225074885,
+          "upperBandEnergyFraction": 1.8620964912555474e-09,
+          "spectralFlux": 0.4867195001905971,
+          "monoRms": 0.0524478559485936
+        },
+        {
+          "seconds": 52.30433333333333,
+          "centroidHz": 124.29596770879463,
+          "upperBandEnergyFraction": 2.1483869391258296e-09,
+          "spectralFlux": 0.29465847767051356,
+          "monoRms": 0.044947758899167384
+        },
+        {
+          "seconds": 57.43475,
+          "centroidHz": 129.49692071309917,
+          "upperBandEnergyFraction": 2.9151177279398035e-09,
+          "spectralFlux": 0.49693883130559874,
+          "monoRms": 0.04707372757485625
+        },
+        {
+          "seconds": 62.56520833333333,
+          "centroidHz": 129.18600412519856,
+          "upperBandEnergyFraction": 3.252520086959757e-09,
+          "spectralFlux": 0.4033186644926713,
+          "monoRms": 0.04699440857193649
+        },
+        {
+          "seconds": 67.695625,
+          "centroidHz": 122.05142348763289,
+          "upperBandEnergyFraction": 2.3405439767641623e-09,
+          "spectralFlux": 0.8010685982596072,
+          "monoRms": 0.06196266584167835
+        },
+        {
+          "seconds": 72.82608333333333,
+          "centroidHz": 122.72849352516809,
+          "upperBandEnergyFraction": 2.1135946583956687e-09,
+          "spectralFlux": 0.48229024510749746,
+          "monoRms": 0.05553592701414297
+        },
+        {
+          "seconds": 77.9565,
+          "centroidHz": 131.82032910238848,
+          "upperBandEnergyFraction": 2.7153923671761035e-09,
+          "spectralFlux": 0.6829277494980937,
+          "monoRms": 0.04356602117772672
+        },
+        {
+          "seconds": 83.08691666666667,
+          "centroidHz": 125.17396021052447,
+          "upperBandEnergyFraction": 3.14259620972826e-09,
+          "spectralFlux": 0.7332914354604687,
+          "monoRms": 0.052263239788444445
+        },
+        {
+          "seconds": 88.217375,
+          "centroidHz": 122.82673808966169,
+          "upperBandEnergyFraction": 2.0899676158770437e-09,
+          "spectralFlux": 0.4944501265908119,
+          "monoRms": 0.05700065804388663
+        },
+        {
+          "seconds": 93.34779166666667,
+          "centroidHz": 121.75052134443436,
+          "upperBandEnergyFraction": 1.7195601101210544e-09,
+          "spectralFlux": 0.3595812580070702,
+          "monoRms": 0.05989575798831953
+        },
+        {
+          "seconds": 98.47825,
+          "centroidHz": 120.9689158864262,
+          "upperBandEnergyFraction": 1.304183970621917e-09,
+          "spectralFlux": 0.21080791190448359,
+          "monoRms": 0.05500026722757067
+        },
+        {
+          "seconds": 103.60866666666666,
+          "centroidHz": 127.22508457769707,
+          "upperBandEnergyFraction": 2.5949712154823856e-09,
+          "spectralFlux": 0.7174808155628492,
+          "monoRms": 0.049656082409758835
+        },
+        {
+          "seconds": 108.739125,
+          "centroidHz": 123.77227824062092,
+          "upperBandEnergyFraction": 2.716088576352955e-09,
+          "spectralFlux": 0.3656217247102253,
+          "monoRms": 0.052200742379154584
+        },
+        {
+          "seconds": 113.86954166666666,
+          "centroidHz": 122.91800464218059,
+          "upperBandEnergyFraction": 1.5576187294558266e-09,
+          "spectralFlux": 0.564306182926136,
+          "monoRms": 0.06380476296765526
+        },
+        {
+          "seconds": 119.0,
+          "centroidHz": 122.98212267048882,
+          "upperBandEnergyFraction": 2.315119772832567e-09,
+          "spectralFlux": 0.4563380592323226,
+          "monoRms": 0.05621496190658557
+        }
+      ]
+    },
+    {
+      "file": "drone-low-living-raw.wav",
+      "rate": 24000,
+      "correlation": 0.943057477181465,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 134.355553071352,
+          "upperBandEnergyFraction": 4.313970411136834e-09,
+          "spectralFlux": null,
+          "monoRms": 0.04743584808797413
+        },
+        {
+          "seconds": 6.130416666666667,
+          "centroidHz": 126.38455498504106,
+          "upperBandEnergyFraction": 2.5489508987614143e-09,
+          "spectralFlux": 0.6327006989935284,
+          "monoRms": 0.048603589536377625
+        },
+        {
+          "seconds": 11.260833333333334,
+          "centroidHz": 121.66085446033952,
+          "upperBandEnergyFraction": 1.7327733306034187e-09,
+          "spectralFlux": 0.4645002632090263,
+          "monoRms": 0.05369377202449618
+        },
+        {
+          "seconds": 16.391291666666667,
+          "centroidHz": 122.48992343679417,
+          "upperBandEnergyFraction": 2.090231883041721e-09,
+          "spectralFlux": 0.25056237021163036,
+          "monoRms": 0.06426779267828449
+        },
+        {
+          "seconds": 21.521708333333333,
+          "centroidHz": 123.99676749185662,
+          "upperBandEnergyFraction": 3.331895117775021e-09,
+          "spectralFlux": 0.4963839294345354,
+          "monoRms": 0.05407543980674221
+        },
+        {
+          "seconds": 26.652166666666666,
+          "centroidHz": 133.02777222058182,
+          "upperBandEnergyFraction": 3.3622961310675467e-09,
+          "spectralFlux": 0.7064689500506174,
+          "monoRms": 0.046845399063662085
+        },
+        {
+          "seconds": 31.782583333333335,
+          "centroidHz": 126.11768704989203,
+          "upperBandEnergyFraction": 2.166687616675971e-09,
+          "spectralFlux": 0.4807847082119103,
+          "monoRms": 0.04832396671935593
+        },
+        {
+          "seconds": 36.913041666666665,
+          "centroidHz": 120.82004711694698,
+          "upperBandEnergyFraction": 1.580093620444696e-09,
+          "spectralFlux": 0.6187807178859133,
+          "monoRms": 0.05868238930391215
+        },
+        {
+          "seconds": 42.043458333333334,
+          "centroidHz": 119.6330053535639,
+          "upperBandEnergyFraction": 1.6312563276545796e-09,
+          "spectralFlux": 0.29981611397692554,
+          "monoRms": 0.05913107348923873
+        },
+        {
+          "seconds": 47.173875,
+          "centroidHz": 125.47772815007262,
+          "upperBandEnergyFraction": 2.6953222544098786e-09,
+          "spectralFlux": 0.6186891774186978,
+          "monoRms": 0.0513461809263684
+        },
+        {
+          "seconds": 52.30433333333333,
+          "centroidHz": 131.43949759882682,
+          "upperBandEnergyFraction": 2.519140999283145e-09,
+          "spectralFlux": 0.5086709923570897,
+          "monoRms": 0.04357746592001199
+        },
+        {
+          "seconds": 57.43475,
+          "centroidHz": 122.22414451101285,
+          "upperBandEnergyFraction": 1.8230783336933208e-09,
+          "spectralFlux": 0.6758435604412547,
+          "monoRms": 0.05104239775028059
+        },
+        {
+          "seconds": 62.56520833333333,
+          "centroidHz": 121.188102576892,
+          "upperBandEnergyFraction": 1.8785832701317585e-09,
+          "spectralFlux": 0.44582913036749183,
+          "monoRms": 0.06328064881232544
+        },
+        {
+          "seconds": 67.695625,
+          "centroidHz": 122.61199843811164,
+          "upperBandEnergyFraction": 2.1957582965268607e-09,
+          "spectralFlux": 0.35313131234420997,
+          "monoRms": 0.05963409426202059
+        },
+        {
+          "seconds": 72.82608333333333,
+          "centroidHz": 129.21771186368065,
+          "upperBandEnergyFraction": 2.7385604470548985e-09,
+          "spectralFlux": 0.7199073549415095,
+          "monoRms": 0.046696679663097616
+        },
+        {
+          "seconds": 77.9565,
+          "centroidHz": 130.18515060869646,
+          "upperBandEnergyFraction": 3.057345454194295e-09,
+          "spectralFlux": 0.26640210826257693,
+          "monoRms": 0.04589679686855897
+        },
+        {
+          "seconds": 83.08691666666667,
+          "centroidHz": 121.63641526033159,
+          "upperBandEnergyFraction": 2.2359971651153125e-09,
+          "spectralFlux": 0.7851107221770701,
+          "monoRms": 0.058574977012211746
+        },
+        {
+          "seconds": 88.217375,
+          "centroidHz": 120.73177198370963,
+          "upperBandEnergyFraction": 1.5694872927102207e-09,
+          "spectralFlux": 0.398985119656932,
+          "monoRms": 0.061612765055373823
+        },
+        {
+          "seconds": 93.34779166666667,
+          "centroidHz": 121.76776957442543,
+          "upperBandEnergyFraction": 1.7881352730676893e-09,
+          "spectralFlux": 0.450096898287769,
+          "monoRms": 0.05419504013467629
+        },
+        {
+          "seconds": 98.47825,
+          "centroidHz": 130.37658617929108,
+          "upperBandEnergyFraction": 2.95707351506344e-09,
+          "spectralFlux": 0.603620194433692,
+          "monoRms": 0.04338895543029061
+        },
+        {
+          "seconds": 103.60866666666666,
+          "centroidHz": 126.39732519393662,
+          "upperBandEnergyFraction": 2.6520988493470542e-09,
+          "spectralFlux": 0.5364492676491784,
+          "monoRms": 0.047787775778148356
+        },
+        {
+          "seconds": 108.739125,
+          "centroidHz": 119.902803437894,
+          "upperBandEnergyFraction": 1.5638256956483435e-09,
+          "spectralFlux": 0.570646329023887,
+          "monoRms": 0.05662766861262427
+        },
+        {
+          "seconds": 113.86954166666666,
+          "centroidHz": 122.1486694069058,
+          "upperBandEnergyFraction": 1.7263181477021168e-09,
+          "spectralFlux": 0.39878582642878874,
+          "monoRms": 0.06306958230069667
+        },
+        {
+          "seconds": 119.0,
+          "centroidHz": 124.86394435396132,
+          "upperBandEnergyFraction": 2.4191020102741654e-09,
+          "spectralFlux": 0.4491693207502755,
+          "monoRms": 0.0522868193500771
+        }
+      ]
+    },
+    {
+      "file": "drone-sweep-classic-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9464449823875857,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 152.49523911928267,
+          "upperBandEnergyFraction": 2.649587769604106e-09,
+          "spectralFlux": null,
+          "monoRms": 0.048223771613507556
+        },
+        {
+          "seconds": 2.246,
+          "centroidHz": 183.9662250711954,
+          "upperBandEnergyFraction": 2.9272355205380117e-09,
+          "spectralFlux": 1.9420904977049507,
+          "monoRms": 0.041963971920836715
+        },
+        {
+          "seconds": 3.4920416666666667,
+          "centroidHz": 208.68794165218108,
+          "upperBandEnergyFraction": 2.648304434658448e-09,
+          "spectralFlux": 1.7709866656875033,
+          "monoRms": 0.0478026850942879
+        },
+        {
+          "seconds": 4.738083333333333,
+          "centroidHz": 233.98552238806062,
+          "upperBandEnergyFraction": 2.3597114977100274e-09,
+          "spectralFlux": 1.6046319658284474,
+          "monoRms": 0.05480022079924617
+        },
+        {
+          "seconds": 5.984083333333333,
+          "centroidHz": 261.0742256968971,
+          "upperBandEnergyFraction": 1.7265349685138543e-09,
+          "spectralFlux": 1.5285055228487736,
+          "monoRms": 0.05735776620939151
+        },
+        {
+          "seconds": 7.230125,
+          "centroidHz": 287.9910683450557,
+          "upperBandEnergyFraction": 1.6694406824655362e-09,
+          "spectralFlux": 1.438454668996989,
+          "monoRms": 0.06193231185497741
+        },
+        {
+          "seconds": 8.476166666666666,
+          "centroidHz": 308.29705684632705,
+          "upperBandEnergyFraction": 1.6717126880574513e-09,
+          "spectralFlux": 1.8123191764420745,
+          "monoRms": 0.06232068259235366
+        },
+        {
+          "seconds": 9.722166666666666,
+          "centroidHz": 318.3560341906508,
+          "upperBandEnergyFraction": 1.9602803128936433e-09,
+          "spectralFlux": 1.5594320026955846,
+          "monoRms": 0.06048931823401929
+        },
+        {
+          "seconds": 10.968208333333333,
+          "centroidHz": 319.07287449081025,
+          "upperBandEnergyFraction": 1.7922486044671697e-09,
+          "spectralFlux": 0.16429406744883385,
+          "monoRms": 0.05864464373914731
+        },
+        {
+          "seconds": 12.21425,
+          "centroidHz": 310.5838386330624,
+          "upperBandEnergyFraction": 2.0280040232245255e-09,
+          "spectralFlux": 1.5981943549864155,
+          "monoRms": 0.055431080115467476
+        },
+        {
+          "seconds": 13.46025,
+          "centroidHz": 293.05022569585117,
+          "upperBandEnergyFraction": 2.203168165262292e-09,
+          "spectralFlux": 1.8013942368189357,
+          "monoRms": 0.05261890205307032
+        },
+        {
+          "seconds": 14.706291666666667,
+          "centroidHz": 268.2972934765039,
+          "upperBandEnergyFraction": 2.2096545665925585e-09,
+          "spectralFlux": 1.3293215676678338,
+          "monoRms": 0.05139840775113906
+        },
+        {
+          "seconds": 15.952333333333334,
+          "centroidHz": 239.55283881592874,
+          "upperBandEnergyFraction": 2.3896792840428e-09,
+          "spectralFlux": 1.4925988782081676,
+          "monoRms": 0.050903174995820206
+        },
+        {
+          "seconds": 17.198375,
+          "centroidHz": 209.54461246211594,
+          "upperBandEnergyFraction": 2.5374735021834357e-09,
+          "spectralFlux": 1.5787300946707157,
+          "monoRms": 0.048424173099590025
+        },
+        {
+          "seconds": 18.444375,
+          "centroidHz": 180.436668864334,
+          "upperBandEnergyFraction": 2.8182646204255344e-09,
+          "spectralFlux": 1.7826453720712232,
+          "monoRms": 0.045189487075034784
+        },
+        {
+          "seconds": 19.690416666666668,
+          "centroidHz": 153.98130174393995,
+          "upperBandEnergyFraction": 2.8257240104820316e-09,
+          "spectralFlux": 1.7032094975456853,
+          "monoRms": 0.0467337226016895
+        },
+        {
+          "seconds": 20.936458333333334,
+          "centroidHz": 130.8095913820122,
+          "upperBandEnergyFraction": 3.09122322809292e-09,
+          "spectralFlux": 1.8922428119547254,
+          "monoRms": 0.04488208046831536
+        },
+        {
+          "seconds": 22.182458333333333,
+          "centroidHz": 109.71759700426388,
+          "upperBandEnergyFraction": 2.502992777271312e-09,
+          "spectralFlux": 1.8772601663665167,
+          "monoRms": 0.042363727042880155
+        },
+        {
+          "seconds": 23.4285,
+          "centroidHz": 92.03989449945351,
+          "upperBandEnergyFraction": 2.43740401449982e-09,
+          "spectralFlux": 1.8856921995293587,
+          "monoRms": 0.04341398704455237
+        },
+        {
+          "seconds": 24.674541666666666,
+          "centroidHz": 77.22656513054449,
+          "upperBandEnergyFraction": 2.819437939317983e-09,
+          "spectralFlux": 1.7500428783120956,
+          "monoRms": 0.04452003374151781
+        },
+        {
+          "seconds": 25.920541666666665,
+          "centroidHz": 66.5073569965721,
+          "upperBandEnergyFraction": 2.3221386049677274e-09,
+          "spectralFlux": 1.585672471813759,
+          "monoRms": 0.04692854075984324
+        },
+        {
+          "seconds": 27.16658333333333,
+          "centroidHz": 59.25102490386696,
+          "upperBandEnergyFraction": 1.990497206225623e-09,
+          "spectralFlux": 1.4299121387786276,
+          "monoRms": 0.047479651705815966
+        },
+        {
+          "seconds": 28.412625,
+          "centroidHz": 53.46020772373951,
+          "upperBandEnergyFraction": 2.085085025266207e-09,
+          "spectralFlux": 1.219665312064375,
+          "monoRms": 0.05199321846991349
+        },
+        {
+          "seconds": 29.658666666666665,
+          "centroidHz": 49.165960921977586,
+          "upperBandEnergyFraction": 3.339722351105699e-09,
+          "spectralFlux": 1.2196159599426555,
+          "monoRms": 0.044571351213570046
+        }
+      ]
+    },
+    {
+      "file": "drone-sweep-living-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9426037223624708,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 152.9149503316652,
+          "upperBandEnergyFraction": 2.7715222861270643e-09,
+          "spectralFlux": null,
+          "monoRms": 0.0476772644807798
+        },
+        {
+          "seconds": 2.246,
+          "centroidHz": 186.93069252177932,
+          "upperBandEnergyFraction": 3.0044893381207327e-09,
+          "spectralFlux": 1.9480808372935718,
+          "monoRms": 0.04238154078069326
+        },
+        {
+          "seconds": 3.4920416666666667,
+          "centroidHz": 216.03455176837045,
+          "upperBandEnergyFraction": 3.0712949709674035e-09,
+          "spectralFlux": 1.824529947603114,
+          "monoRms": 0.04552501573833889
+        },
+        {
+          "seconds": 4.738083333333333,
+          "centroidHz": 241.19924545429583,
+          "upperBandEnergyFraction": 2.4860511493104433e-09,
+          "spectralFlux": 1.5753671005821084,
+          "monoRms": 0.05055871695317721
+        },
+        {
+          "seconds": 5.984083333333333,
+          "centroidHz": 265.2523775107837,
+          "upperBandEnergyFraction": 2.4606498787811015e-09,
+          "spectralFlux": 1.4553415033658295,
+          "monoRms": 0.05463572892905705
+        },
+        {
+          "seconds": 7.230125,
+          "centroidHz": 288.86299777279277,
+          "upperBandEnergyFraction": 1.7180464472701441e-09,
+          "spectralFlux": 1.4045785381247824,
+          "monoRms": 0.05848611508928022
+        },
+        {
+          "seconds": 8.476166666666666,
+          "centroidHz": 309.15043099973286,
+          "upperBandEnergyFraction": 1.5400235098563594e-09,
+          "spectralFlux": 1.8250628470350487,
+          "monoRms": 0.060360360388258476
+        },
+        {
+          "seconds": 9.722166666666666,
+          "centroidHz": 318.5094865208544,
+          "upperBandEnergyFraction": 1.8083643426484816e-09,
+          "spectralFlux": 1.6474909606941102,
+          "monoRms": 0.06019513218183316
+        },
+        {
+          "seconds": 10.968208333333333,
+          "centroidHz": 323.1475109158871,
+          "upperBandEnergyFraction": 2.226742484464556e-09,
+          "spectralFlux": 0.2969823922090517,
+          "monoRms": 0.05358060181031863
+        },
+        {
+          "seconds": 12.21425,
+          "centroidHz": 326.3748528030549,
+          "upperBandEnergyFraction": 3.0180760557325833e-09,
+          "spectralFlux": 1.365885640150991,
+          "monoRms": 0.04772855125808578
+        },
+        {
+          "seconds": 13.46025,
+          "centroidHz": 314.10309250558555,
+          "upperBandEnergyFraction": 3.189187232728586e-09,
+          "spectralFlux": 1.7869048514372423,
+          "monoRms": 0.04371100336392034
+        },
+        {
+          "seconds": 14.706291666666667,
+          "centroidHz": 274.5675247433404,
+          "upperBandEnergyFraction": 2.659963113305813e-09,
+          "spectralFlux": 1.521077995032034,
+          "monoRms": 0.04802894810467834
+        },
+        {
+          "seconds": 15.952333333333334,
+          "centroidHz": 234.25983714598576,
+          "upperBandEnergyFraction": 2.2792896712328195e-09,
+          "spectralFlux": 1.5448369101956094,
+          "monoRms": 0.05213378284713957
+        },
+        {
+          "seconds": 17.198375,
+          "centroidHz": 199.61055156335823,
+          "upperBandEnergyFraction": 1.820431158917011e-09,
+          "spectralFlux": 1.632284972187213,
+          "monoRms": 0.05758110032083853
+        },
+        {
+          "seconds": 18.444375,
+          "centroidHz": 169.40699556555813,
+          "upperBandEnergyFraction": 1.5540486485141431e-09,
+          "spectralFlux": 1.7396360920895864,
+          "monoRms": 0.06029673439373514
+        },
+        {
+          "seconds": 19.690416666666668,
+          "centroidHz": 142.6368193153526,
+          "upperBandEnergyFraction": 1.550932360610917e-09,
+          "spectralFlux": 1.6541565098811288,
+          "monoRms": 0.06316459782830702
+        },
+        {
+          "seconds": 20.936458333333334,
+          "centroidHz": 118.45371753446322,
+          "upperBandEnergyFraction": 1.554621845425585e-09,
+          "spectralFlux": 1.6851606195517441,
+          "monoRms": 0.06191324288367495
+        },
+        {
+          "seconds": 22.182458333333333,
+          "centroidHz": 99.41543684123619,
+          "upperBandEnergyFraction": 1.4891147844729118e-09,
+          "spectralFlux": 1.6075381687500812,
+          "monoRms": 0.059997032061874275
+        },
+        {
+          "seconds": 23.4285,
+          "centroidHz": 84.09062663915631,
+          "upperBandEnergyFraction": 1.4890197855105632e-09,
+          "spectralFlux": 1.4575864778994352,
+          "monoRms": 0.05727148676234764
+        },
+        {
+          "seconds": 24.674541666666666,
+          "centroidHz": 69.17241871853933,
+          "upperBandEnergyFraction": 1.770032066856636e-09,
+          "spectralFlux": 1.7921351234861178,
+          "monoRms": 0.05934275957010368
+        },
+        {
+          "seconds": 25.920541666666665,
+          "centroidHz": 64.16601157668157,
+          "upperBandEnergyFraction": 1.648133742597578e-09,
+          "spectralFlux": 0.8507584713394029,
+          "monoRms": 0.057226908780469175
+        },
+        {
+          "seconds": 27.16658333333333,
+          "centroidHz": 56.27999381228621,
+          "upperBandEnergyFraction": 1.8376103086673518e-09,
+          "spectralFlux": 1.4736350543693995,
+          "monoRms": 0.05835181825230482
+        },
+        {
+          "seconds": 28.412625,
+          "centroidHz": 52.68385773951945,
+          "upperBandEnergyFraction": 1.6005715868862887e-09,
+          "spectralFlux": 1.0695244398475217,
+          "monoRms": 0.055316851193954554
+        },
+        {
+          "seconds": 29.658666666666665,
+          "centroidHz": 46.82326488513043,
+          "upperBandEnergyFraction": 3.5485577745383705e-09,
+          "spectralFlux": 1.5209126677146318,
+          "monoRms": 0.053278865122099166
+        }
+      ]
+    },
+    {
+      "file": "partial-high-classic-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9894156370137372,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 691.9803843115603,
+          "upperBandEnergyFraction": 7.388570705433879e-10,
+          "spectralFlux": null,
+          "monoRms": 0.0918695217287972
+        },
+        {
+          "seconds": 2.246,
+          "centroidHz": 691.9827772979006,
+          "upperBandEnergyFraction": 7.265586690826353e-10,
+          "spectralFlux": 5.4357517484182534e-06,
+          "monoRms": 0.09195502425583686
+        },
+        {
+          "seconds": 3.4920416666666667,
+          "centroidHz": 691.9841752557999,
+          "upperBandEnergyFraction": 7.431639355871121e-10,
+          "spectralFlux": 7.174559946762025e-06,
+          "monoRms": 0.09192257174057128
+        },
+        {
+          "seconds": 4.738083333333333,
+          "centroidHz": 691.9848296156484,
+          "upperBandEnergyFraction": 6.783386782197829e-10,
+          "spectralFlux": 6.801203248039844e-06,
+          "monoRms": 0.09193481050479058
+        },
+        {
+          "seconds": 5.984083333333333,
+          "centroidHz": 691.9832461818746,
+          "upperBandEnergyFraction": 7.514492570067282e-10,
+          "spectralFlux": 7.408372632080762e-06,
+          "monoRms": 0.09195706694789353
+        },
+        {
+          "seconds": 7.230125,
+          "centroidHz": 691.98016250391,
+          "upperBandEnergyFraction": 7.42361426609206e-10,
+          "spectralFlux": 7.85395914569386e-06,
+          "monoRms": 0.09187291618438928
+        },
+        {
+          "seconds": 8.476166666666666,
+          "centroidHz": 691.9787863478855,
+          "upperBandEnergyFraction": 7.346333499215995e-10,
+          "spectralFlux": 6.6305956661382254e-06,
+          "monoRms": 0.0918759497919086
+        },
+        {
+          "seconds": 9.722166666666666,
+          "centroidHz": 691.9787276016373,
+          "upperBandEnergyFraction": 8.010754128564684e-10,
+          "spectralFlux": 1.0390144445132581e-05,
+          "monoRms": 0.09195804018367885
+        },
+        {
+          "seconds": 10.968208333333333,
+          "centroidHz": 691.9824558721513,
+          "upperBandEnergyFraction": 7.160329074599831e-10,
+          "spectralFlux": 7.460716552169384e-06,
+          "monoRms": 0.09188560876931687
+        },
+        {
+          "seconds": 12.21425,
+          "centroidHz": 691.9821784928512,
+          "upperBandEnergyFraction": 8.39291146762748e-10,
+          "spectralFlux": 4.949097158297101e-06,
+          "monoRms": 0.09195630211594698
+        },
+        {
+          "seconds": 13.46025,
+          "centroidHz": 691.9838554528886,
+          "upperBandEnergyFraction": 6.352396487922207e-10,
+          "spectralFlux": 7.981285691628275e-06,
+          "monoRms": 0.09196850657478042
+        },
+        {
+          "seconds": 14.706291666666667,
+          "centroidHz": 691.9841527398692,
+          "upperBandEnergyFraction": 7.988018962736553e-10,
+          "spectralFlux": 8.268699248609091e-06,
+          "monoRms": 0.09188658701115278
+        },
+        {
+          "seconds": 15.952333333333334,
+          "centroidHz": 691.9841764850128,
+          "upperBandEnergyFraction": 8.180033627744455e-10,
+          "spectralFlux": 7.790540862338938e-06,
+          "monoRms": 0.0919509903794098
+        },
+        {
+          "seconds": 17.198375,
+          "centroidHz": 691.9818363244623,
+          "upperBandEnergyFraction": 6.820152097081948e-10,
+          "spectralFlux": 7.807319354546403e-06,
+          "monoRms": 0.09188065843982098
+        },
+        {
+          "seconds": 18.444375,
+          "centroidHz": 691.9855297645779,
+          "upperBandEnergyFraction": 7.403416666508688e-10,
+          "spectralFlux": 7.360375505543233e-06,
+          "monoRms": 0.09187991850174668
+        },
+        {
+          "seconds": 19.690416666666668,
+          "centroidHz": 691.9828864012455,
+          "upperBandEnergyFraction": 7.039070040500572e-10,
+          "spectralFlux": 6.519863818323604e-06,
+          "monoRms": 0.09198270946636769
+        },
+        {
+          "seconds": 20.936458333333334,
+          "centroidHz": 691.9786646043045,
+          "upperBandEnergyFraction": 7.445255571411155e-10,
+          "spectralFlux": 7.378920667239701e-06,
+          "monoRms": 0.09193556715631979
+        },
+        {
+          "seconds": 22.182458333333333,
+          "centroidHz": 691.9817018514341,
+          "upperBandEnergyFraction": 7.038480038518708e-10,
+          "spectralFlux": 5.890268990834186e-06,
+          "monoRms": 0.09191701397346144
+        },
+        {
+          "seconds": 23.4285,
+          "centroidHz": 691.9806671871928,
+          "upperBandEnergyFraction": 6.995930621200914e-10,
+          "spectralFlux": 8.438823378473334e-06,
+          "monoRms": 0.09194488716037177
+        },
+        {
+          "seconds": 24.674541666666666,
+          "centroidHz": 691.9834376732063,
+          "upperBandEnergyFraction": 7.664166572572275e-10,
+          "spectralFlux": 5.700759898350685e-06,
+          "monoRms": 0.09187687996591962
+        },
+        {
+          "seconds": 25.920541666666665,
+          "centroidHz": 691.984522609043,
+          "upperBandEnergyFraction": 7.381948636433022e-10,
+          "spectralFlux": 6.512610091974265e-06,
+          "monoRms": 0.09194111063067045
+        },
+        {
+          "seconds": 27.16658333333333,
+          "centroidHz": 691.9833075743304,
+          "upperBandEnergyFraction": 7.433693228051293e-10,
+          "spectralFlux": 6.10701088516928e-06,
+          "monoRms": 0.09192053092606213
+        },
+        {
+          "seconds": 28.412625,
+          "centroidHz": 691.9841609632654,
+          "upperBandEnergyFraction": 7.273877272237867e-10,
+          "spectralFlux": 5.063966674540117e-06,
+          "monoRms": 0.09189169113852019
+        },
+        {
+          "seconds": 29.658666666666665,
+          "centroidHz": 691.9843735676428,
+          "upperBandEnergyFraction": 7.004489030078136e-10,
+          "spectralFlux": 6.376258254945222e-06,
+          "monoRms": 0.09190331195286809
+        }
+      ]
+    },
+    {
+      "file": "partial-high-living-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9888941663752355,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 699.661189774652,
+          "upperBandEnergyFraction": 6.809218927638669e-10,
+          "spectralFlux": null,
+          "monoRms": 0.09186867695287694
+        },
+        {
+          "seconds": 2.246,
+          "centroidHz": 704.7175444907822,
+          "upperBandEnergyFraction": 7.099800375872872e-10,
+          "spectralFlux": 0.00919839913449697,
+          "monoRms": 0.09193832982781411
+        },
+        {
+          "seconds": 3.4920416666666667,
+          "centroidHz": 708.4502308536381,
+          "upperBandEnergyFraction": 6.937543618150738e-10,
+          "spectralFlux": 0.005665373796600391,
+          "monoRms": 0.0919602082439084
+        },
+        {
+          "seconds": 4.738083333333333,
+          "centroidHz": 701.3606074318476,
+          "upperBandEnergyFraction": 7.225170797133304e-10,
+          "spectralFlux": 0.01507111914594673,
+          "monoRms": 0.09189102997132112
+        },
+        {
+          "seconds": 5.984083333333333,
+          "centroidHz": 695.5256812635306,
+          "upperBandEnergyFraction": 6.876721532281152e-10,
+          "spectralFlux": 0.013897144333491582,
+          "monoRms": 0.09191318257713652
+        },
+        {
+          "seconds": 7.230125,
+          "centroidHz": 691.3492065579467,
+          "upperBandEnergyFraction": 7.372841355457777e-10,
+          "spectralFlux": 0.010587129669691586,
+          "monoRms": 0.0919701607022867
+        },
+        {
+          "seconds": 8.476166666666666,
+          "centroidHz": 689.5155388466038,
+          "upperBandEnergyFraction": 6.778258149400042e-10,
+          "spectralFlux": 0.0065138149451210575,
+          "monoRms": 0.09192370950154123
+        },
+        {
+          "seconds": 9.722166666666666,
+          "centroidHz": 688.5683446908947,
+          "upperBandEnergyFraction": 7.319491433831504e-10,
+          "spectralFlux": 0.004185052462066876,
+          "monoRms": 0.09189010203884475
+        },
+        {
+          "seconds": 10.968208333333333,
+          "centroidHz": 687.9920839109332,
+          "upperBandEnergyFraction": 7.452809782998891e-10,
+          "spectralFlux": 0.0025775902816367845,
+          "monoRms": 0.09191511222718725
+        },
+        {
+          "seconds": 12.21425,
+          "centroidHz": 690.3445155984123,
+          "upperBandEnergyFraction": 7.322984832205311e-10,
+          "spectralFlux": 0.005166752735465795,
+          "monoRms": 0.09194532758476259
+        },
+        {
+          "seconds": 13.46025,
+          "centroidHz": 698.5625684536614,
+          "upperBandEnergyFraction": 7.357585735612421e-10,
+          "spectralFlux": 0.016794618922971648,
+          "monoRms": 0.09195694938973377
+        },
+        {
+          "seconds": 14.706291666666667,
+          "centroidHz": 703.9284688035949,
+          "upperBandEnergyFraction": 7.767623969879603e-10,
+          "spectralFlux": 0.011270031856016311,
+          "monoRms": 0.09189013407098874
+        },
+        {
+          "seconds": 15.952333333333334,
+          "centroidHz": 707.5164372455744,
+          "upperBandEnergyFraction": 6.378404307574576e-10,
+          "spectralFlux": 0.007651614724052134,
+          "monoRms": 0.09189883367015156
+        },
+        {
+          "seconds": 17.198375,
+          "centroidHz": 710.5475117413001,
+          "upperBandEnergyFraction": 7.285915091430636e-10,
+          "spectralFlux": 0.005626291238239149,
+          "monoRms": 0.09192899763201495
+        },
+        {
+          "seconds": 18.444375,
+          "centroidHz": 712.5292125316273,
+          "upperBandEnergyFraction": 8.01650296760583e-10,
+          "spectralFlux": 0.003983171547718422,
+          "monoRms": 0.09194930552000327
+        },
+        {
+          "seconds": 19.690416666666668,
+          "centroidHz": 713.166054942599,
+          "upperBandEnergyFraction": 6.947597600829287e-10,
+          "spectralFlux": 0.0084816634403741,
+          "monoRms": 0.09190375859166432
+        },
+        {
+          "seconds": 20.936458333333334,
+          "centroidHz": 713.4107316919601,
+          "upperBandEnergyFraction": 7.273756476659117e-10,
+          "spectralFlux": 0.006429600320315951,
+          "monoRms": 0.09189721941475806
+        },
+        {
+          "seconds": 22.182458333333333,
+          "centroidHz": 713.8988732130205,
+          "upperBandEnergyFraction": 7.497528908575135e-10,
+          "spectralFlux": 0.00453157073741723,
+          "monoRms": 0.09192925488803039
+        },
+        {
+          "seconds": 23.4285,
+          "centroidHz": 714.6124102321922,
+          "upperBandEnergyFraction": 7.474277002525908e-10,
+          "spectralFlux": 0.0036339539141916804,
+          "monoRms": 0.09197333277336281
+        },
+        {
+          "seconds": 24.674541666666666,
+          "centroidHz": 714.6234189720354,
+          "upperBandEnergyFraction": 8.139048817256168e-10,
+          "spectralFlux": 0.0026185003007895527,
+          "monoRms": 0.09188056521008922
+        },
+        {
+          "seconds": 25.920541666666665,
+          "centroidHz": 711.8498900846071,
+          "upperBandEnergyFraction": 7.036079548887476e-10,
+          "spectralFlux": 0.005421399864356098,
+          "monoRms": 0.09190977302982725
+        },
+        {
+          "seconds": 27.16658333333333,
+          "centroidHz": 707.9927867023772,
+          "upperBandEnergyFraction": 6.813357591699159e-10,
+          "spectralFlux": 0.008290314484649501,
+          "monoRms": 0.09191870960116387
+        },
+        {
+          "seconds": 28.412625,
+          "centroidHz": 705.4061326318362,
+          "upperBandEnergyFraction": 7.244893315117533e-10,
+          "spectralFlux": 0.005469160319874366,
+          "monoRms": 0.09194838777365794
+        },
+        {
+          "seconds": 29.658666666666665,
+          "centroidHz": 702.6734025296715,
+          "upperBandEnergyFraction": 6.792309600576553e-10,
+          "spectralFlux": 0.006009169386540385,
+          "monoRms": 0.09191096014942825
+        }
+      ]
+    },
+    {
+      "file": "partial-low-classic-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9894155791056672,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 172.99670454518372,
+          "upperBandEnergyFraction": 7.085570892431464e-10,
+          "spectralFlux": null,
+          "monoRms": 0.09174421744375483
+        },
+        {
+          "seconds": 6.130416666666667,
+          "centroidHz": 172.9953113988999,
+          "upperBandEnergyFraction": 7.052158191530569e-10,
+          "spectralFlux": 1.542380219052444e-05,
+          "monoRms": 0.09197231982658349
+        },
+        {
+          "seconds": 11.260833333333334,
+          "centroidHz": 172.99564863950226,
+          "upperBandEnergyFraction": 7.314210304592715e-10,
+          "spectralFlux": 1.53640773294746e-05,
+          "monoRms": 0.09168886269229447
+        },
+        {
+          "seconds": 16.391291666666667,
+          "centroidHz": 172.99577029744304,
+          "upperBandEnergyFraction": 7.339522080993396e-10,
+          "spectralFlux": 1.5743187561182743e-05,
+          "monoRms": 0.0920996678327799
+        },
+        {
+          "seconds": 21.521708333333333,
+          "centroidHz": 172.99652789739963,
+          "upperBandEnergyFraction": 8.550889125942811e-10,
+          "spectralFlux": 1.572586280228492e-05,
+          "monoRms": 0.09169954269184122
+        },
+        {
+          "seconds": 26.652166666666666,
+          "centroidHz": 172.99549181858873,
+          "upperBandEnergyFraction": 7.813469777993128e-10,
+          "spectralFlux": 1.8296308010715663e-05,
+          "monoRms": 0.09219240730478762
+        },
+        {
+          "seconds": 31.782583333333335,
+          "centroidHz": 172.9953427610451,
+          "upperBandEnergyFraction": 7.65333183401446e-10,
+          "spectralFlux": 1.8448958619141837e-05,
+          "monoRms": 0.09180142316893276
+        },
+        {
+          "seconds": 36.913041666666665,
+          "centroidHz": 172.99546511537437,
+          "upperBandEnergyFraction": 7.307258799616548e-10,
+          "spectralFlux": 1.3555552421045079e-05,
+          "monoRms": 0.09199359169094436
+        },
+        {
+          "seconds": 42.043458333333334,
+          "centroidHz": 172.9955947860025,
+          "upperBandEnergyFraction": 6.697936692404441e-10,
+          "spectralFlux": 1.2105419177680592e-05,
+          "monoRms": 0.09176589782340908
+        },
+        {
+          "seconds": 47.173875,
+          "centroidHz": 172.9958091345982,
+          "upperBandEnergyFraction": 7.784418805306746e-10,
+          "spectralFlux": 1.058779208663836e-05,
+          "monoRms": 0.09193464469151781
+        },
+        {
+          "seconds": 52.30433333333333,
+          "centroidHz": 172.99627527458165,
+          "upperBandEnergyFraction": 7.444946941636967e-10,
+          "spectralFlux": 7.5542293578743965e-06,
+          "monoRms": 0.09189603181177422
+        },
+        {
+          "seconds": 57.43475,
+          "centroidHz": 172.99542553645878,
+          "upperBandEnergyFraction": 7.291828145372279e-10,
+          "spectralFlux": 1.1982037435802666e-05,
+          "monoRms": 0.09191561088885643
+        },
+        {
+          "seconds": 62.56520833333333,
+          "centroidHz": 172.9958704132556,
+          "upperBandEnergyFraction": 6.990997369447729e-10,
+          "spectralFlux": 1.0161640524929965e-05,
+          "monoRms": 0.09219840451463596
+        },
+        {
+          "seconds": 67.695625,
+          "centroidHz": 172.99557445574368,
+          "upperBandEnergyFraction": 7.165058184594157e-10,
+          "spectralFlux": 1.361201935036921e-05,
+          "monoRms": 0.09170474789735938
+        },
+        {
+          "seconds": 72.82608333333333,
+          "centroidHz": 172.9960549681497,
+          "upperBandEnergyFraction": 8.260941579456898e-10,
+          "spectralFlux": 1.553297485065471e-05,
+          "monoRms": 0.09215251892802842
+        },
+        {
+          "seconds": 77.9565,
+          "centroidHz": 172.99550819587498,
+          "upperBandEnergyFraction": 7.343090511673533e-10,
+          "spectralFlux": 1.5251723100670346e-05,
+          "monoRms": 0.09162297994128765
+        },
+        {
+          "seconds": 83.08691666666667,
+          "centroidHz": 172.99528265471773,
+          "upperBandEnergyFraction": 6.896303856787371e-10,
+          "spectralFlux": 1.5206190140442624e-05,
+          "monoRms": 0.09207674768336131
+        },
+        {
+          "seconds": 88.217375,
+          "centroidHz": 172.99467365127794,
+          "upperBandEnergyFraction": 7.025526337676242e-10,
+          "spectralFlux": 1.8192699513566982e-05,
+          "monoRms": 0.09170689085960694
+        },
+        {
+          "seconds": 93.34779166666667,
+          "centroidHz": 172.9947648452266,
+          "upperBandEnergyFraction": 7.034589487424377e-10,
+          "spectralFlux": 1.957295747361597e-05,
+          "monoRms": 0.09221608417368884
+        },
+        {
+          "seconds": 98.47825,
+          "centroidHz": 172.99502069613493,
+          "upperBandEnergyFraction": 7.276895804587138e-10,
+          "spectralFlux": 1.4534450053876465e-05,
+          "monoRms": 0.09180659213811661
+        },
+        {
+          "seconds": 103.60866666666666,
+          "centroidHz": 172.99621061305885,
+          "upperBandEnergyFraction": 7.790766914780234e-10,
+          "spectralFlux": 1.6021465692941716e-05,
+          "monoRms": 0.09197938941181634
+        },
+        {
+          "seconds": 108.739125,
+          "centroidHz": 172.99501429283367,
+          "upperBandEnergyFraction": 7.934922047744119e-10,
+          "spectralFlux": 7.724680659793828e-06,
+          "monoRms": 0.0918087200921774
+        },
+        {
+          "seconds": 113.86954166666666,
+          "centroidHz": 172.9962466480595,
+          "upperBandEnergyFraction": 6.954775008738741e-10,
+          "spectralFlux": 6.93536939839576e-06,
+          "monoRms": 0.09183391018093699
+        },
+        {
+          "seconds": 119.0,
+          "centroidHz": 172.99610740633818,
+          "upperBandEnergyFraction": 7.374636676127134e-10,
+          "spectralFlux": 7.496922265968613e-06,
+          "monoRms": 0.091956711102451
+        }
+      ]
+    },
+    {
+      "file": "partial-low-living-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9893498449623492,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 174.9159261072798,
+          "upperBandEnergyFraction": 7.843138087294146e-10,
+          "spectralFlux": null,
+          "monoRms": 0.09174557016441394
+        },
+        {
+          "seconds": 6.130416666666667,
+          "centroidHz": 173.7306183036995,
+          "upperBandEnergyFraction": 7.020257709665067e-10,
+          "spectralFlux": 0.018189747211359807,
+          "monoRms": 0.09198246489142851
+        },
+        {
+          "seconds": 11.260833333333334,
+          "centroidHz": 171.97305090086215,
+          "upperBandEnergyFraction": 7.543848004971632e-10,
+          "spectralFlux": 0.019745306919070088,
+          "monoRms": 0.09185445623142265
+        },
+        {
+          "seconds": 16.391291666666667,
+          "centroidHz": 177.13251584819523,
+          "upperBandEnergyFraction": 7.891026074992551e-10,
+          "spectralFlux": 0.04216660565259216,
+          "monoRms": 0.09182371337293056
+        },
+        {
+          "seconds": 21.521708333333333,
+          "centroidHz": 178.39001931133745,
+          "upperBandEnergyFraction": 7.292564781891211e-10,
+          "spectralFlux": 0.020555631130485398,
+          "monoRms": 0.09207600545075108
+        },
+        {
+          "seconds": 26.652166666666666,
+          "centroidHz": 177.3542950123515,
+          "upperBandEnergyFraction": 6.78612529615284e-10,
+          "spectralFlux": 0.00832437023924229,
+          "monoRms": 0.09167517287757583
+        },
+        {
+          "seconds": 31.782583333333335,
+          "centroidHz": 174.8557343670381,
+          "upperBandEnergyFraction": 7.522529059456404e-10,
+          "spectralFlux": 0.0162090606710354,
+          "monoRms": 0.09201546366137273
+        },
+        {
+          "seconds": 36.913041666666665,
+          "centroidHz": 173.75658972966542,
+          "upperBandEnergyFraction": 7.59498891626118e-10,
+          "spectralFlux": 0.01333850260510766,
+          "monoRms": 0.0916575297297119
+        },
+        {
+          "seconds": 42.043458333333334,
+          "centroidHz": 172.28166301892094,
+          "upperBandEnergyFraction": 7.627493771356243e-10,
+          "spectralFlux": 0.028055775666444054,
+          "monoRms": 0.09217813582917689
+        },
+        {
+          "seconds": 47.173875,
+          "centroidHz": 168.00491879010343,
+          "upperBandEnergyFraction": 7.785189983478342e-10,
+          "spectralFlux": 0.042415782887178184,
+          "monoRms": 0.09195125661354481
+        },
+        {
+          "seconds": 52.30433333333333,
+          "centroidHz": 170.0755727440612,
+          "upperBandEnergyFraction": 7.776555937498513e-10,
+          "spectralFlux": 0.027340786475163407,
+          "monoRms": 0.09172552764959886
+        },
+        {
+          "seconds": 57.43475,
+          "centroidHz": 169.41374549381243,
+          "upperBandEnergyFraction": 6.721304405776402e-10,
+          "spectralFlux": 0.007361122997106643,
+          "monoRms": 0.0921247974613956
+        },
+        {
+          "seconds": 62.56520833333333,
+          "centroidHz": 169.5984340528061,
+          "upperBandEnergyFraction": 7.502931538567673e-10,
+          "spectralFlux": 0.009627358973515479,
+          "monoRms": 0.09168963735574003
+        },
+        {
+          "seconds": 67.695625,
+          "centroidHz": 168.94314721635135,
+          "upperBandEnergyFraction": 7.093122298961436e-10,
+          "spectralFlux": 0.016445739731177272,
+          "monoRms": 0.09209812658865246
+        },
+        {
+          "seconds": 72.82608333333333,
+          "centroidHz": 167.8556699377132,
+          "upperBandEnergyFraction": 7.725417669620249e-10,
+          "spectralFlux": 0.013798629102357646,
+          "monoRms": 0.0915990859559528
+        },
+        {
+          "seconds": 77.9565,
+          "centroidHz": 170.5994507526601,
+          "upperBandEnergyFraction": 7.565642969070096e-10,
+          "spectralFlux": 0.02273446644490137,
+          "monoRms": 0.09215751546962782
+        },
+        {
+          "seconds": 83.08691666666667,
+          "centroidHz": 173.9731571505302,
+          "upperBandEnergyFraction": 7.580532740752321e-10,
+          "spectralFlux": 0.025619675419734554,
+          "monoRms": 0.09200418560501748
+        },
+        {
+          "seconds": 88.217375,
+          "centroidHz": 175.757033905363,
+          "upperBandEnergyFraction": 7.749492862254429e-10,
+          "spectralFlux": 0.013138707189703848,
+          "monoRms": 0.09170120871525654
+        },
+        {
+          "seconds": 93.34779166666667,
+          "centroidHz": 176.64908133043764,
+          "upperBandEnergyFraction": 7.423212247696556e-10,
+          "spectralFlux": 0.013343521296835359,
+          "monoRms": 0.0922733970593085
+        },
+        {
+          "seconds": 98.47825,
+          "centroidHz": 177.24828884217465,
+          "upperBandEnergyFraction": 7.273430329108253e-10,
+          "spectralFlux": 0.006008077529666798,
+          "monoRms": 0.09184492939650421
+        },
+        {
+          "seconds": 103.60866666666666,
+          "centroidHz": 177.35607691772756,
+          "upperBandEnergyFraction": 7.284640351341414e-10,
+          "spectralFlux": 0.01179319060520295,
+          "monoRms": 0.09193334643943411
+        },
+        {
+          "seconds": 108.739125,
+          "centroidHz": 177.7187564940645,
+          "upperBandEnergyFraction": 7.633440493221421e-10,
+          "spectralFlux": 0.010854910784564843,
+          "monoRms": 0.09184921743427893
+        },
+        {
+          "seconds": 113.86954166666666,
+          "centroidHz": 175.36776681716145,
+          "upperBandEnergyFraction": 6.798659982804023e-10,
+          "spectralFlux": 0.013608813712623239,
+          "monoRms": 0.09182000575585292
+        },
+        {
+          "seconds": 119.0,
+          "centroidHz": 170.8134722075699,
+          "upperBandEnergyFraction": 7.786221148373232e-10,
+          "spectralFlux": 0.03247438055077617,
+          "monoRms": 0.09174404472613709
+        }
+      ]
+    },
+    {
+      "file": "partial-sweep-classic-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9894182362033682,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 204.6006386029405,
+          "upperBandEnergyFraction": 7.523546911537601e-10,
+          "spectralFlux": null,
+          "monoRms": 0.09191673735917207
+        },
+        {
+          "seconds": 2.246,
+          "centroidHz": 243.6479457250868,
+          "upperBandEnergyFraction": 7.319019457675508e-10,
+          "spectralFlux": 1.9809702184157179,
+          "monoRms": 0.09197054960770226
+        },
+        {
+          "seconds": 3.4920416666666667,
+          "centroidHz": 286.7100156468074,
+          "upperBandEnergyFraction": 8.043581776223298e-10,
+          "spectralFlux": 1.9867525770967451,
+          "monoRms": 0.09202069743637671
+        },
+        {
+          "seconds": 4.738083333333333,
+          "centroidHz": 331.49690556333906,
+          "upperBandEnergyFraction": 7.878524517210854e-10,
+          "spectralFlux": 1.9901897680940221,
+          "monoRms": 0.09194157600293203
+        },
+        {
+          "seconds": 5.984083333333333,
+          "centroidHz": 374.6950459235581,
+          "upperBandEnergyFraction": 7.984558401731255e-10,
+          "spectralFlux": 1.9924842354377668,
+          "monoRms": 0.09176479069799078
+        },
+        {
+          "seconds": 7.230125,
+          "centroidHz": 412.2749265618646,
+          "upperBandEnergyFraction": 7.133057827824291e-10,
+          "spectralFlux": 1.9943894956289354,
+          "monoRms": 0.09198091430353444
+        },
+        {
+          "seconds": 8.476166666666666,
+          "centroidHz": 440.1111361894088,
+          "upperBandEnergyFraction": 7.816795915231513e-10,
+          "spectralFlux": 1.9996480105179997,
+          "monoRms": 0.09196072893973632
+        },
+        {
+          "seconds": 9.722166666666666,
+          "centroidHz": 454.7886888434447,
+          "upperBandEnergyFraction": 7.11742469415307e-10,
+          "spectralFlux": 1.991494892777711,
+          "monoRms": 0.09193155761152318
+        },
+        {
+          "seconds": 10.968208333333333,
+          "centroidHz": 454.3987077794567,
+          "upperBandEnergyFraction": 7.081107528951237e-10,
+          "spectralFlux": 0.17648346861170028,
+          "monoRms": 0.09194768086921307
+        },
+        {
+          "seconds": 12.21425,
+          "centroidHz": 438.99160055041483,
+          "upperBandEnergyFraction": 7.646565330291554e-10,
+          "spectralFlux": 1.9856023950308974,
+          "monoRms": 0.09192606176289993
+        },
+        {
+          "seconds": 13.46025,
+          "centroidHz": 410.57134110424994,
+          "upperBandEnergyFraction": 7.41692629350783e-10,
+          "spectralFlux": 1.9996967418279679,
+          "monoRms": 0.09192059966941224
+        },
+        {
+          "seconds": 14.706291666666667,
+          "centroidHz": 372.6029800978558,
+          "upperBandEnergyFraction": 7.236784346426192e-10,
+          "spectralFlux": 1.9944014810484991,
+          "monoRms": 0.09194513298950716
+        },
+        {
+          "seconds": 15.952333333333334,
+          "centroidHz": 329.23199939713516,
+          "upperBandEnergyFraction": 7.70483862015485e-10,
+          "spectralFlux": 1.9925516538457637,
+          "monoRms": 0.09204493681449591
+        },
+        {
+          "seconds": 17.198375,
+          "centroidHz": 284.459399750347,
+          "upperBandEnergyFraction": 7.754396236919376e-10,
+          "spectralFlux": 1.9897199599464166,
+          "monoRms": 0.0920393505308543
+        },
+        {
+          "seconds": 18.444375,
+          "centroidHz": 241.55598712735988,
+          "upperBandEnergyFraction": 7.288782199723689e-10,
+          "spectralFlux": 1.9864427453705888,
+          "monoRms": 0.09205659902270862
+        },
+        {
+          "seconds": 19.690416666666668,
+          "centroidHz": 202.75065800019914,
+          "upperBandEnergyFraction": 7.145293866740516e-10,
+          "spectralFlux": 1.980441549177177,
+          "monoRms": 0.09191497918449408
+        },
+        {
+          "seconds": 20.936458333333334,
+          "centroidHz": 169.24178863124257,
+          "upperBandEnergyFraction": 6.56201052440939e-10,
+          "spectralFlux": 1.9760151105253496,
+          "monoRms": 0.09192924684375231
+        },
+        {
+          "seconds": 22.182458333333333,
+          "centroidHz": 141.37968045323373,
+          "upperBandEnergyFraction": 7.22549591810446e-10,
+          "spectralFlux": 1.975785926638298,
+          "monoRms": 0.09162086350734173
+        },
+        {
+          "seconds": 23.4285,
+          "centroidHz": 118.93611339845725,
+          "upperBandEnergyFraction": 6.960162534139892e-10,
+          "spectralFlux": 1.9805917272695994,
+          "monoRms": 0.09205675847591825
+        },
+        {
+          "seconds": 24.674541666666666,
+          "centroidHz": 101.37028650018647,
+          "upperBandEnergyFraction": 7.733034296037224e-10,
+          "spectralFlux": 1.9818569640685664,
+          "monoRms": 0.09193716305450203
+        },
+        {
+          "seconds": 25.920541666666665,
+          "centroidHz": 88.02222279708437,
+          "upperBandEnergyFraction": 6.800955497264939e-10,
+          "spectralFlux": 1.9841917887411495,
+          "monoRms": 0.09194118630724078
+        },
+        {
+          "seconds": 27.16658333333333,
+          "centroidHz": 78.25256837761563,
+          "upperBandEnergyFraction": 6.905067280404099e-10,
+          "spectralFlux": 1.8058741278761874,
+          "monoRms": 0.09195598140417348
+        },
+        {
+          "seconds": 28.412625,
+          "centroidHz": 71.51545396927051,
+          "upperBandEnergyFraction": 7.286533934498324e-10,
+          "spectralFlux": 1.6947374578655459,
+          "monoRms": 0.09115509705269131
+        },
+        {
+          "seconds": 29.658666666666665,
+          "centroidHz": 67.40155470000646,
+          "upperBandEnergyFraction": 6.878081682930128e-10,
+          "spectralFlux": 1.1738287283519204,
+          "monoRms": 0.09258550206532631
+        }
+      ]
+    },
+    {
+      "file": "partial-sweep-living-raw.wav",
+      "rate": 24000,
+      "correlation": 0.9888962037057896,
+      "frames": [
+        {
+          "seconds": 1.0,
+          "centroidHz": 206.87060841216064,
+          "upperBandEnergyFraction": 7.080992395161488e-10,
+          "spectralFlux": null,
+          "monoRms": 0.09191966637550765
+        },
+        {
+          "seconds": 2.246,
+          "centroidHz": 248.13269685589606,
+          "upperBandEnergyFraction": 7.239644819054936e-10,
+          "spectralFlux": 1.979857738847745,
+          "monoRms": 0.09196947080848612
+        },
+        {
+          "seconds": 3.4920416666666667,
+          "centroidHz": 293.53150024272327,
+          "upperBandEnergyFraction": 7.626275754980345e-10,
+          "spectralFlux": 1.9861477851730929,
+          "monoRms": 0.09197710425849649
+        },
+        {
+          "seconds": 4.738083333333333,
+          "centroidHz": 335.9869278713898,
+          "upperBandEnergyFraction": 7.904110354405654e-10,
+          "spectralFlux": 1.989371970976575,
+          "monoRms": 0.09194564650930497
+        },
+        {
+          "seconds": 5.984083333333333,
+          "centroidHz": 376.61401080065855,
+          "upperBandEnergyFraction": 6.502539707813249e-10,
+          "spectralFlux": 1.9918959970608183,
+          "monoRms": 0.0917741023139593
+        },
+        {
+          "seconds": 7.230125,
+          "centroidHz": 411.89875372114614,
+          "upperBandEnergyFraction": 6.500783730171517e-10,
+          "spectralFlux": 1.9941146549929325,
+          "monoRms": 0.09188860885973468
+        },
+        {
+          "seconds": 8.476166666666666,
+          "centroidHz": 438.5413581952687,
+          "upperBandEnergyFraction": 7.698062911421962e-10,
+          "spectralFlux": 1.9996421857651525,
+          "monoRms": 0.09207718544488935
+        },
+        {
+          "seconds": 9.722166666666666,
+          "centroidHz": 452.5431151090633,
+          "upperBandEnergyFraction": 7.960678286375601e-10,
+          "spectralFlux": 1.9913786323751528,
+          "monoRms": 0.09202204493380209
+        },
+        {
+          "seconds": 10.968208333333333,
+          "centroidHz": 451.7751860134846,
+          "upperBandEnergyFraction": 7.4439321811312e-10,
+          "spectralFlux": 0.17469466875464645,
+          "monoRms": 0.09203309405288969
+        },
+        {
+          "seconds": 12.21425,
+          "centroidHz": 437.8940794121915,
+          "upperBandEnergyFraction": 6.794845524408454e-10,
+          "spectralFlux": 1.985415927311344,
+          "monoRms": 0.0919941284274975
+        },
+        {
+          "seconds": 13.46025,
+          "centroidHz": 414.4385703682701,
+          "upperBandEnergyFraction": 7.471593012730038e-10,
+          "spectralFlux": 1.9996879651415844,
+          "monoRms": 0.09189334791621497
+        },
+        {
+          "seconds": 14.706291666666667,
+          "centroidHz": 379.0168732386492,
+          "upperBandEnergyFraction": 7.61174608540045e-10,
+          "spectralFlux": 1.9939140947664125,
+          "monoRms": 0.09189339386728976
+        },
+        {
+          "seconds": 15.952333333333334,
+          "centroidHz": 336.6113967458594,
+          "upperBandEnergyFraction": 7.371164268391796e-10,
+          "spectralFlux": 1.992366164356203,
+          "monoRms": 0.0920535122969483
+        },
+        {
+          "seconds": 17.198375,
+          "centroidHz": 292.0825670037149,
+          "upperBandEnergyFraction": 7.244818909774151e-10,
+          "spectralFlux": 1.9893150881211012,
+          "monoRms": 0.09203260479447138
+        },
+        {
+          "seconds": 18.444375,
+          "centroidHz": 248.7266704407934,
+          "upperBandEnergyFraction": 7.34909249457882e-10,
+          "spectralFlux": 1.985333930094892,
+          "monoRms": 0.09218566196941763
+        },
+        {
+          "seconds": 19.690416666666668,
+          "centroidHz": 208.95698637082154,
+          "upperBandEnergyFraction": 6.971004532860283e-10,
+          "spectralFlux": 1.9791262569544832,
+          "monoRms": 0.09190467776801925
+        },
+        {
+          "seconds": 20.936458333333334,
+          "centroidHz": 174.48101908305478,
+          "upperBandEnergyFraction": 7.499378214048717e-10,
+          "spectralFlux": 1.975507673363898,
+          "monoRms": 0.09209540300566522
+        },
+        {
+          "seconds": 22.182458333333333,
+          "centroidHz": 145.856062244415,
+          "upperBandEnergyFraction": 6.993699404242946e-10,
+          "spectralFlux": 1.975337319770968,
+          "monoRms": 0.09169509270511558
+        },
+        {
+          "seconds": 23.4285,
+          "centroidHz": 122.82566112545723,
+          "upperBandEnergyFraction": 7.192938731674221e-10,
+          "spectralFlux": 1.9790818631630975,
+          "monoRms": 0.09214925457729607
+        },
+        {
+          "seconds": 24.674541666666666,
+          "centroidHz": 104.6858263261893,
+          "upperBandEnergyFraction": 7.54328905132628e-10,
+          "spectralFlux": 1.9808750421237078,
+          "monoRms": 0.09191538562371811
+        },
+        {
+          "seconds": 25.920541666666665,
+          "centroidHz": 90.55557615195968,
+          "upperBandEnergyFraction": 7.172274204596242e-10,
+          "spectralFlux": 1.983413878679506,
+          "monoRms": 0.09171123715418864
+        },
+        {
+          "seconds": 27.16658333333333,
+          "centroidHz": 80.06622043099941,
+          "upperBandEnergyFraction": 7.15555116658848e-10,
+          "spectralFlux": 1.808962831268336,
+          "monoRms": 0.09196948258036963
+        },
+        {
+          "seconds": 28.412625,
+          "centroidHz": 72.90448871122717,
+          "upperBandEnergyFraction": 7.585717347361364e-10,
+          "spectralFlux": 1.699917303291146,
+          "monoRms": 0.09143342244852465
+        },
+        {
+          "seconds": 29.658666666666665,
+          "centroidHz": 68.4434974221487,
+          "upperBandEnergyFraction": 7.152313912792938e-10,
+          "spectralFlux": 1.184407539838602,
+          "monoRms": 0.09233750109616554
+        }
+      ]
+    }
+  ]
+}

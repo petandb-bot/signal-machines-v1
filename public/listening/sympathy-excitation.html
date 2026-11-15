@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SYMPATHY — excitation study</title>
+<style>body{max-width:840px;margin:auto;padding:20px;background:#080d0c;color:#d4f5dc;font:15px/1.6 monospace}h1,h2{color:#d9e978}a{color:#67dce7}section{border-top:1px solid #365243;padding:18px 0}audio{display:block;width:100%;margin:12px 0}select,button{min-height:44px;max-width:100%;font:inherit;background:#17271e;color:#d4f5dc;border:1px solid #466c57}label{display:inline-block;margin:4px}p{overflow-wrap:anywhere}output{display:block;color:#b5bfad}</style>
+<h1>SYMPATHY / EXCITATION</h1><p>The same bodies, a different contact with incoming sound. Compare Phase 3 with Phase 3.1, using identical inputs and patches.</p>
+<p>Start quietly. RAW preserves actual output. MATCHED applies one constant gain per file toward .025 RMS, capped at .8 peak. It can strongly amplify very quiet material. No compression. These are float32 WAVs; download if your player does not support them.</p>
+<p>No human listening assessment or physical iPhone Safari verification. Loudness alone does not establish better sound. Demo patches are unchanged; LIVING MATERIAL includes TRIG excitation, so its full-mix level is not a measure of the AUDIO path alone.</p>
+<label>BODY <select id="body"><option>0</option><option selected>0.42</option><option>1</option></select></label><label>COUPLE <select id="couple"><option>0</option><option selected>0.55</option><option>1</option></select></label><label>LEVEL <select id="level"><option value="matched">MATCHED</option><option value="raw">RAW</option></select></label>
+<p id="status">Loading measurements…</p><div id="studies"></div><a href="audio/sympathy-phase31/report.json">Full measurements, event windows and energy curves</a>
+<script type="module">
+const base='audio/sympathy-phase31/',controls=['body','couple','level'].map(id=>document.getElementById(id));
+try{const response=await fetch(base+'report.json');if(!response.ok)throw Error('Missing audio artifact');const report=await response.json();const entries=[];
+for(const group of ['pulse','chip','metal','sine','noise','cuts','quiet','small-resonance','exchanging-bodies','living-material']){
+ const section=document.createElement('section'),h=document.createElement('h2');h.textContent=group.toUpperCase();section.append(h);
+ for(const version of ['before','after']){const label=document.createElement('p'),audio=document.createElement('audio'),download=document.createElement('a'),info=document.createElement('output');label.textContent=version==='before'?'PHASE 3':'PHASE 3.1';audio.controls=true;audio.preload='none';download.textContent='Download WAV';download.download='';section.append(label,audio,download,info);entries.push({group,version,audio,download,info});}
+ document.getElementById('studies').append(section);
+}
+function update(){const [body,couple,level]=controls.map(c=>c.value);for(const e of entries){const demo=report.demos.find(d=>d.slug===e.group&&d.version===e.version),row=demo??report.rows.find(r=>r.input===e.group&&r.version===e.version&&r.body===Number(body)&&r.couple===Number(couple));const prefix=demo?`${e.group}-${e.version}`:`${e.group}-b${body}-c${couple}-${e.version}`;e.audio.pause();e.audio.src=e.download.href=base+prefix+'-'+level+'.wav';e.info.textContent=`RAW RMS ${row.rms.toExponential(3)} / peak ${row.peak.toExponential(3)} / matched gain ${row.matchedGain.toFixed(2)}×`;}}
+controls.forEach(c=>c.addEventListener('change',update));update();document.getElementById('status').textContent='7 inputs × 9 settings, plus 3 unchanged demos. BODY / COUPLE above affect the input studies only.';
+}catch(error){document.getElementById('status').textContent='Generate the audio with node scripts/render-sympathy-excitation.mjs, then serve this folder over HTTP. '+error.message;}
+</script></html>

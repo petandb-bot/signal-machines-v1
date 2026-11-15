@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "SMALL RESONANCE",
+  "bpm": 71,
+  "master": 0.65,
+  "seed": 33101,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 33101,
+      "character": "METAL",
+      "params": {
+        "rate": 0.3,
+        "irregular": 0.28
+      }
+    },
+    {
+      "id": "chip-1",
+      "type": "CHIP",
+      "x": 192,
+      "y": 16,
+      "seed": 41020,
+      "character": "METAL",
+      "params": {
+        "tune": 0.25,
+        "character": 0.24
+      }
+    },
+    {
+      "id": "sympathy-1",
+      "type": "SYMPATHY",
+      "x": 368,
+      "y": 16,
+      "seed": 48939,
+      "character": "METAL",
+      "params": {
+        "body": 0.42,
+        "couple": 0.55
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 544,
+      "y": 16,
+      "seed": 56858,
+      "character": "METAL",
+      "params": {
+        "boost": 0.65,
+        "comp": 0
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 16,
+      "y": 184,
+      "seed": 64777,
+      "character": "METAL",
+      "params": {
+        "level": 0.72
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "sympathy-cable-1",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "sympathy-cable-2",
+      "from": {
+        "module": "chip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "sympathy-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "sympathy-cable-3",
+      "from": {
+        "module": "sympathy-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "sympathy-cable-4",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}
