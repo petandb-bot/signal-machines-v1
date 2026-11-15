@@ -1,0 +1,1143 @@
+{
+  "rate": 24000,
+  "seconds": 16,
+  "cases": [
+    {
+      "id": "chamber-room",
+      "type": "CHAMBER",
+      "mode": "ROOM",
+      "params": {
+        "size": 0.5,
+        "density": 0.5
+      }
+    },
+    {
+      "id": "chamber-weave",
+      "type": "CHAMBER",
+      "mode": "WEAVE",
+      "params": {
+        "size": 0.5,
+        "density": 0.5
+      }
+    },
+    {
+      "id": "plate-low",
+      "type": "PLATE",
+      "params": {
+        "body": 0,
+        "decay": 0.5
+      }
+    },
+    {
+      "id": "plate-default",
+      "type": "PLATE",
+      "params": {
+        "body": 0.5,
+        "decay": 0.5
+      }
+    },
+    {
+      "id": "plate-high",
+      "type": "PLATE",
+      "params": {
+        "body": 1,
+        "decay": 0.5
+      }
+    },
+    {
+      "id": "plate-long",
+      "type": "PLATE",
+      "params": {
+        "body": 0.5,
+        "decay": 1
+      }
+    }
+  ],
+  "files": [
+    {
+      "name": "input-electronic.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "input-metal.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "input-noise.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "input-chip.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "input-cuts.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "input-sustained.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "ir-chamber-room-wet.wav",
+      "gain": 1,
+      "seconds": 24
+    },
+    {
+      "name": "electronic-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "electronic-chamber-room-matched.wav",
+      "gain": 6.8854131179933775,
+      "seconds": 16
+    },
+    {
+      "name": "metal-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "metal-chamber-room-matched.wav",
+      "gain": 3.2815009896940803,
+      "seconds": 16
+    },
+    {
+      "name": "noise-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "noise-chamber-room-matched.wav",
+      "gain": 8.641139217840372,
+      "seconds": 16
+    },
+    {
+      "name": "chip-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "chip-chamber-room-matched.wav",
+      "gain": 4.432505573985212,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-chamber-room-matched.wav",
+      "gain": 65.82293788097883,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-chamber-room-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-chamber-room-matched.wav",
+      "gain": 1.7455765989767686,
+      "seconds": 16
+    },
+    {
+      "name": "ir-chamber-weave-wet.wav",
+      "gain": 1,
+      "seconds": 24
+    },
+    {
+      "name": "electronic-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "electronic-chamber-weave-matched.wav",
+      "gain": 6.8854131179933775,
+      "seconds": 16
+    },
+    {
+      "name": "metal-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "metal-chamber-weave-matched.wav",
+      "gain": 3.2617654340375144,
+      "seconds": 16
+    },
+    {
+      "name": "noise-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "noise-chamber-weave-matched.wav",
+      "gain": 8.641139217840372,
+      "seconds": 16
+    },
+    {
+      "name": "chip-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "chip-chamber-weave-matched.wav",
+      "gain": 4.354241176630886,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-chamber-weave-matched.wav",
+      "gain": 66.05660318681804,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-chamber-weave-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-chamber-weave-matched.wav",
+      "gain": 1.8716002558477731,
+      "seconds": 16
+    },
+    {
+      "name": "ir-plate-low-wet.wav",
+      "gain": 1,
+      "seconds": 24
+    },
+    {
+      "name": "electronic-plate-low-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "electronic-plate-low-matched.wav",
+      "gain": 7.411485816292596,
+      "seconds": 16
+    },
+    {
+      "name": "metal-plate-low-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "metal-plate-low-matched.wav",
+      "gain": 3.36915850490076,
+      "seconds": 16
+    },
+    {
+      "name": "noise-plate-low-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "noise-plate-low-matched.wav",
+      "gain": 9.259601570647353,
+      "seconds": 16
+    },
+    {
+      "name": "chip-plate-low-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "chip-plate-low-matched.wav",
+      "gain": 4.572340767718228,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-plate-low-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-plate-low-matched.wav",
+      "gain": 69.73487149966112,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-plate-low-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-plate-low-matched.wav",
+      "gain": 2.0412747468892776,
+      "seconds": 16
+    },
+    {
+      "name": "ir-plate-default-wet.wav",
+      "gain": 1,
+      "seconds": 24
+    },
+    {
+      "name": "electronic-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "electronic-plate-default-matched.wav",
+      "gain": 7.413561864029787,
+      "seconds": 16
+    },
+    {
+      "name": "metal-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "metal-plate-default-matched.wav",
+      "gain": 3.420560891204829,
+      "seconds": 16
+    },
+    {
+      "name": "noise-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "noise-plate-default-matched.wav",
+      "gain": 9.284285508371571,
+      "seconds": 16
+    },
+    {
+      "name": "chip-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "chip-plate-default-matched.wav",
+      "gain": 4.655387847307621,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-plate-default-matched.wav",
+      "gain": 68.67349171230077,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-plate-default-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-plate-default-matched.wav",
+      "gain": 1.7867217639836919,
+      "seconds": 16
+    },
+    {
+      "name": "ir-plate-high-wet.wav",
+      "gain": 1,
+      "seconds": 24
+    },
+    {
+      "name": "electronic-plate-high-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "electronic-plate-high-matched.wav",
+      "gain": 7.427343248661322,
+      "seconds": 16
+    },
+    {
+      "name": "metal-plate-high-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "metal-plate-high-matched.wav",
+      "gain": 3.4593218923237337,
+      "seconds": 16
+    },
+    {
+      "name": "noise-plate-high-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "noise-plate-high-matched.wav",
+      "gain": 9.40300984427096,
+      "seconds": 16
+    },
+    {
+      "name": "chip-plate-high-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "chip-plate-high-matched.wav",
+      "gain": 4.622974543798722,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-plate-high-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-plate-high-matched.wav",
+      "gain": 63.36988502816268,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-plate-high-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-plate-high-matched.wav",
+      "gain": 1.8995741569460578,
+      "seconds": 16
+    },
+    {
+      "name": "ir-plate-long-wet.wav",
+      "gain": 1,
+      "seconds": 24
+    },
+    {
+      "name": "electronic-plate-long-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "electronic-plate-long-matched.wav",
+      "gain": 7.412539302290246,
+      "seconds": 16
+    },
+    {
+      "name": "metal-plate-long-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "metal-plate-long-matched.wav",
+      "gain": 3.286610203250096,
+      "seconds": 16
+    },
+    {
+      "name": "noise-plate-long-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "noise-plate-long-matched.wav",
+      "gain": 9.29241194253001,
+      "seconds": 16
+    },
+    {
+      "name": "chip-plate-long-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "chip-plate-long-matched.wav",
+      "gain": 4.664681666930539,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-plate-long-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "cuts-plate-long-matched.wav",
+      "gain": 68.1773036775128,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-plate-long-raw.wav",
+      "gain": 1,
+      "seconds": 16
+    },
+    {
+      "name": "sustained-plate-long-matched.wav",
+      "gain": 1.6690769858475334,
+      "seconds": 16
+    }
+  ],
+  "impulses": [
+    {
+      "id": "chamber-room",
+      "wetOnly": true,
+      "rms": 0.000051944393156611436,
+      "peak": 0.021221676841378212,
+      "dc": [
+        1.0278276599363667e-15,
+        -1.1564188552436008e-16
+      ],
+      "stereoCorrelation": -0.33368635491393733,
+      "monoPowerRatio": 0.33322556557091687,
+      "maxStep": 0.0192673657402338,
+      "typedBytes": 461427
+    },
+    {
+      "id": "chamber-weave",
+      "wetOnly": true,
+      "rms": 0.000051319044395411434,
+      "peak": 0.021221676841378212,
+      "dc": [
+        1.8514477197474073e-15,
+        3.2615968273407354e-16
+      ],
+      "stereoCorrelation": -0.4283735579421023,
+      "monoPowerRatio": 0.28584428438629583,
+      "maxStep": 0.019267302661319263,
+      "typedBytes": 461427
+    },
+    {
+      "id": "plate-low",
+      "wetOnly": true,
+      "rms": 0.00015285490622316252,
+      "peak": 0.0151893962174654,
+      "dc": [
+        -2.081193142034065e-14,
+        -1.370588513665218e-14
+      ],
+      "stereoCorrelation": -0.02120716455786239,
+      "monoPowerRatio": 0.48939663408624656,
+      "maxStep": 0.018190228613093495,
+      "typedBytes": 52575
+    },
+    {
+      "id": "plate-default",
+      "wetOnly": true,
+      "rms": 0.00014077984385492027,
+      "peak": 0.009057201445102692,
+      "dc": [
+        5.685097861750974e-15,
+        -2.292443284966412e-14
+      ],
+      "stereoCorrelation": -0.05373207072091453,
+      "monoPowerRatio": 0.4731346899385043,
+      "maxStep": 0.011975064408034086,
+      "typedBytes": 52575
+    },
+    {
+      "id": "plate-high",
+      "wetOnly": true,
+      "rms": 0.00011426882222125019,
+      "peak": 0.0053196377120912075,
+      "dc": [
+        -2.932552187969815e-15,
+        3.31292818192232e-15
+      ],
+      "stereoCorrelation": 0.009945396629750256,
+      "monoPowerRatio": 0.5049723175606751,
+      "maxStep": 0.008096727542579174,
+      "typedBytes": 52575
+    },
+    {
+      "id": "plate-long",
+      "wetOnly": true,
+      "rms": 0.00014555527828537593,
+      "peak": 0.005022053141146898,
+      "dc": [
+        5.904143103039869e-14,
+        -1.8440241514005904e-13
+      ],
+      "stereoCorrelation": -0.04828209085004683,
+      "monoPowerRatio": 0.4758595786037279,
+      "maxStep": 0.006721590762026608,
+      "typedBytes": 52575
+    }
+  ],
+  "rows": [
+    {
+      "source": "electronic",
+      "case": "chamber-room",
+      "rms": 0.003660361702702202,
+      "peak": 0.11618765443563461,
+      "dc": [
+        -4.5543134558426815e-9,
+        -4.5543265078348335e-9
+      ],
+      "stereoCorrelation": 0.9289303705342471,
+      "monoPowerRatio": 0.9644642262557552,
+      "maxStep": 0.010034456849098206,
+      "matchedGain": 6.8854131179933775,
+      "matchedRms": 0.025203102484386317,
+      "typedBytes": 461427
+    },
+    {
+      "source": "metal",
+      "case": "chamber-room",
+      "rms": 0.010665850813369066,
+      "peak": 0.1516016125679016,
+      "dc": [
+        0.000017390293676512865,
+        0.00001171479869202722
+      ],
+      "stereoCorrelation": 0.9345153024811911,
+      "monoPowerRatio": 0.9472723465282928,
+      "maxStep": 0.014373306185007095,
+      "matchedGain": 3.2815009896940803,
+      "matchedRms": 0.035,
+      "typedBytes": 461427
+    },
+    {
+      "source": "noise",
+      "case": "chamber-room",
+      "rms": 0.0021282443421797082,
+      "peak": 0.0925803855061531,
+      "dc": [
+        4.790224171036747e-7,
+        4.790224155850216e-7
+      ],
+      "stereoCorrelation": 0.9603284356920988,
+      "monoPowerRatio": 0.9801639055227955,
+      "maxStep": 0.08165359310805798,
+      "matchedGain": 8.641139217840372,
+      "matchedRms": 0.01839045565035596,
+      "typedBytes": 461427
+    },
+    {
+      "source": "chip",
+      "case": "chamber-room",
+      "rms": 0.00789621116449763,
+      "peak": 0.11621801555156708,
+      "dc": [
+        -0.0003666779360651875,
+        -0.0003666779360813799
+      ],
+      "stereoCorrelation": 0.947939956538398,
+      "monoPowerRatio": 0.9724647708470339,
+      "maxStep": 0.2300010696053505,
+      "matchedGain": 4.432505573985212,
+      "matchedRms": 0.035,
+      "typedBytes": 461427
+    },
+    {
+      "source": "cuts",
+      "case": "chamber-room",
+      "rms": 0.0005317295326940143,
+      "peak": 0.007533716969192028,
+      "dc": [
+        5.91999305813054e-7,
+        -5.2384673704729454e-8
+      ],
+      "stereoCorrelation": -0.733187566613023,
+      "monoPowerRatio": 0.13355890297851825,
+      "maxStep": 0.00018679306413105223,
+      "matchedGain": 65.82293788097883,
+      "matchedRms": 0.035,
+      "typedBytes": 461427
+    },
+    {
+      "source": "sustained",
+      "case": "chamber-room",
+      "rms": 0.020050681259428254,
+      "peak": 0.11306469887495041,
+      "dc": [
+        -3.203020549267966e-13,
+        -5.624854405123497e-13
+      ],
+      "stereoCorrelation": 0.9108778717830212,
+      "monoPowerRatio": 0.9495327697081773,
+      "maxStep": 0.004839427987462841,
+      "matchedGain": 1.7455765989767686,
+      "matchedRms": 0.035,
+      "typedBytes": 461427
+    },
+    {
+      "source": "electronic",
+      "case": "chamber-weave",
+      "rms": 0.003658108556286927,
+      "peak": 0.11618765443563461,
+      "dc": [
+        -4.554313289640515e-9,
+        -4.554354554083819e-9
+      ],
+      "stereoCorrelation": 0.9191174371017978,
+      "monoPowerRatio": 0.9595584789741936,
+      "maxStep": 0.010034456849098206,
+      "matchedGain": 6.8854131179933775,
+      "matchedRms": 0.025187588640501822,
+      "typedBytes": 461427
+    },
+    {
+      "source": "metal",
+      "case": "chamber-weave",
+      "rms": 0.010730385341252426,
+      "peak": 0.1516016125679016,
+      "dc": [
+        0.000017390293409984095,
+        0.000011714799336988411
+      ],
+      "stereoCorrelation": 0.9198545398993654,
+      "monoPowerRatio": 0.9396703229336688,
+      "maxStep": 0.014373306185007095,
+      "matchedGain": 3.2617654340375144,
+      "matchedRms": 0.035,
+      "typedBytes": 461427
+    },
+    {
+      "source": "noise",
+      "case": "chamber-weave",
+      "rms": 0.002127581627006647,
+      "peak": 0.0925803855061531,
+      "dc": [
+        4.790224384535589e-7,
+        4.790224141658113e-7
+      ],
+      "stereoCorrelation": 0.9577215223352876,
+      "monoPowerRatio": 0.9788607223163596,
+      "maxStep": 0.08165359310805798,
+      "matchedGain": 8.641139217840372,
+      "matchedRms": 0.018384729036283763,
+      "typedBytes": 461427
+    },
+    {
+      "source": "chip",
+      "case": "chamber-weave",
+      "rms": 0.008038139960607652,
+      "peak": 0.11621801555156708,
+      "dc": [
+        -0.00036667793605682817,
+        -0.00036667793593385335
+      ],
+      "stereoCorrelation": 0.9336808359418416,
+      "monoPowerRatio": 0.9645573906524442,
+      "maxStep": 0.2300010696053505,
+      "matchedGain": 4.354241176630886,
+      "matchedRms": 0.035,
+      "typedBytes": 461427
+    },
+    {
+      "source": "cuts",
+      "case": "chamber-weave",
+      "rms": 0.0005298486193880531,
+      "peak": 0.007533716969192028,
+      "dc": [
+        5.919993127511052e-7,
+        -5.238466545286541e-8
+      ],
+      "stereoCorrelation": -0.7287459622870569,
+      "monoPowerRatio": 0.1356476579081245,
+      "maxStep": 0.00018679306413105223,
+      "matchedGain": 66.05660318681804,
+      "matchedRms": 0.035,
+      "typedBytes": 461427
+    },
+    {
+      "source": "sustained",
+      "case": "chamber-weave",
+      "rms": 0.01870057449000837,
+      "peak": 0.1095779538154602,
+      "dc": [
+        -1.4394173880489083e-13,
+        -2.103232716145375e-13
+      ],
+      "stereoCorrelation": 0.9325430523793858,
+      "monoPowerRatio": 0.9602921294851976,
+      "maxStep": 0.0047942346427589655,
+      "matchedGain": 1.8716002558477731,
+      "matchedRms": 0.035,
+      "typedBytes": 461427
+    },
+    {
+      "source": "electronic",
+      "case": "plate-low",
+      "rms": 0.0036271504962636955,
+      "peak": 0.10794056951999664,
+      "dc": [
+        -4.2307565346651444e-9,
+        -4.230841111175089e-9
+      ],
+      "stereoCorrelation": 0.6929722411768959,
+      "monoPowerRatio": 0.8463356841546551,
+      "maxStep": 0.009322193451225758,
+      "matchedGain": 7.411485816292596,
+      "matchedRms": 0.026882574456617032,
+      "typedBytes": 52575
+    },
+    {
+      "source": "metal",
+      "case": "plate-low",
+      "rms": 0.010388350666520791,
+      "peak": 0.14084279537200928,
+      "dc": [
+        0.00001615614590436985,
+        0.000010883424895466502
+      ],
+      "stereoCorrelation": 0.7487075470094249,
+      "monoPowerRatio": 0.8712184143318329,
+      "maxStep": 0.013361217454075813,
+      "matchedGain": 3.36915850490076,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "noise",
+      "case": "plate-low",
+      "rms": 0.002101552857948689,
+      "peak": 0.08639680594205856,
+      "dc": [
+        4.4502722095734537e-7,
+        4.4502696811133673e-7
+      ],
+      "stereoCorrelation": 0.8532221776207443,
+      "monoPowerRatio": 0.926609551430523,
+      "maxStep": 0.07582278735935688,
+      "matchedGain": 9.259601570647353,
+      "matchedRms": 0.019459542144260118,
+      "typedBytes": 52575
+    },
+    {
+      "source": "chip",
+      "case": "plate-low",
+      "rms": 0.007654722554169193,
+      "peak": 0.10797028243541718,
+      "dc": [
+        -0.0003406556297625893,
+        -0.0003406556304651581
+      ],
+      "stereoCorrelation": 0.8742902152646607,
+      "monoPowerRatio": 0.9371350597974222,
+      "maxStep": 0.21367840468883514,
+      "matchedGain": 4.572340767718228,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "cuts",
+      "case": "plate-low",
+      "rms": 0.0005019009750404442,
+      "peak": 0.008146104402840137,
+      "dc": [
+        5.499865789933206e-7,
+        -4.866697893418762e-8
+      ],
+      "stereoCorrelation": -0.678004609388442,
+      "monoPowerRatio": 0.16467462928265716,
+      "maxStep": 0.00019849147065542638,
+      "matchedGain": 69.73487149966112,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "sustained",
+      "case": "plate-low",
+      "rms": 0.017146148529656242,
+      "peak": 0.09978075325489044,
+      "dc": [
+        -2.13227832305739e-12,
+        5.7640872891141694e-12
+      ],
+      "stereoCorrelation": 0.911104677910613,
+      "monoPowerRatio": 0.9509024476585444,
+      "maxStep": 0.004777987487614155,
+      "matchedGain": 2.0412747468892776,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "electronic",
+      "case": "plate-default",
+      "rms": 0.0035772288558093665,
+      "peak": 0.10791034251451492,
+      "dc": [
+        -4.230930624195786e-9,
+        -4.231274138539239e-9
+      ],
+      "stereoCorrelation": 0.8712068856782276,
+      "monoPowerRatio": 0.9355451209116763,
+      "maxStep": 0.009319442324340343,
+      "matchedGain": 7.413561864029787,
+      "matchedRms": 0.02652000742433523,
+      "typedBytes": 52575
+    },
+    {
+      "source": "metal",
+      "case": "plate-default",
+      "rms": 0.01023224000777016,
+      "peak": 0.14084279537200928,
+      "dc": [
+        0.000016156144851471007,
+        0.000010883426468615245
+      ],
+      "stereoCorrelation": 0.8430245854127912,
+      "monoPowerRatio": 0.9190477160961812,
+      "maxStep": 0.013392032124102116,
+      "matchedGain": 3.420560891204829,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "noise",
+      "case": "plate-default",
+      "rms": 0.0020843600425222244,
+      "peak": 0.0861671045422554,
+      "dc": [
+        4.4502740574033646e-7,
+        4.450274213132692e-7
+      ],
+      "stereoCorrelation": 0.8663473489665456,
+      "monoPowerRatio": 0.9331732100068396,
+      "maxStep": 0.07617025263607502,
+      "matchedGain": 9.284285508371571,
+      "matchedRms": 0.019351793737017838,
+      "typedBytes": 52575
+    },
+    {
+      "source": "chip",
+      "case": "plate-default",
+      "rms": 0.0075181705902853556,
+      "peak": 0.10797028243541718,
+      "dc": [
+        -0.0003406556313988259,
+        -0.00034065562974570576
+      ],
+      "stereoCorrelation": 0.9297665328121164,
+      "monoPowerRatio": 0.9645102521978125,
+      "maxStep": 0.21367840468883514,
+      "matchedGain": 4.655387847307621,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "cuts",
+      "case": "plate-default",
+      "rms": 0.0005096580809758187,
+      "peak": 0.008633257821202278,
+      "dc": [
+        5.499864873507152e-7,
+        -4.8666968826556764e-8
+      ],
+      "stereoCorrelation": -0.5922018381479268,
+      "monoPowerRatio": 0.20753520384525118,
+      "maxStep": 0.00021039959392510355,
+      "matchedGain": 68.67349171230077,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "sustained",
+      "case": "plate-default",
+      "rms": 0.019588948153832116,
+      "peak": 0.10976291447877884,
+      "dc": [
+        -3.269579037444895e-12,
+        -1.4044765912192748e-12
+      ],
+      "stereoCorrelation": 0.8650487257022095,
+      "monoPowerRatio": 0.9212170427715425,
+      "maxStep": 0.00462113437242806,
+      "matchedGain": 1.7867217639836919,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "electronic",
+      "case": "plate-high",
+      "rms": 0.0034474183983365966,
+      "peak": 0.10771011561155319,
+      "dc": [
+        -4.230510921914026e-9,
+        -4.230632319799447e-9
+      ],
+      "stereoCorrelation": 0.9049413471006648,
+      "monoPowerRatio": 0.9523791948567035,
+      "maxStep": 0.009304446168243885,
+      "matchedGain": 7.427343248661322,
+      "matchedRms": 0.02560515976619615,
+      "typedBytes": 52575
+    },
+    {
+      "source": "metal",
+      "case": "plate-high",
+      "rms": 0.010117589831020153,
+      "peak": 0.14084279537200928,
+      "dc": [
+        0.0000161561437490652,
+        0.000010883426447570528
+      ],
+      "stereoCorrelation": 0.844631384643532,
+      "monoPowerRatio": 0.9040304115704975,
+      "maxStep": 0.013354729395359755,
+      "matchedGain": 3.4593218923237337,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "noise",
+      "case": "plate-high",
+      "rms": 0.0020466541302779514,
+      "peak": 0.0850791409611702,
+      "dc": [
+        4.4502722342845583e-7,
+        4.4502763751025277e-7
+      ],
+      "stereoCorrelation": 0.9012904959792257,
+      "monoPowerRatio": 0.9506451966715399,
+      "maxStep": 0.07643312960863113,
+      "matchedGain": 9.40300984427096,
+      "matchedRms": 0.019244708934821397,
+      "typedBytes": 52575
+    },
+    {
+      "source": "chip",
+      "case": "plate-high",
+      "rms": 0.0075708831334468756,
+      "peak": 0.10797028243541718,
+      "dc": [
+        -0.0003406556303931375,
+        -0.0003406556301650328
+      ],
+      "stereoCorrelation": 0.914129137523776,
+      "monoPowerRatio": 0.9562877869388093,
+      "maxStep": 0.21367840468883514,
+      "matchedGain": 4.622974543798722,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "cuts",
+      "case": "plate-high",
+      "rms": 0.0005523128215310063,
+      "peak": 0.008647782728075981,
+      "dc": [
+        5.499864283965566e-7,
+        -4.866696787466845e-8
+      ],
+      "stereoCorrelation": -0.3808391874434083,
+      "monoPowerRatio": 0.31100925710082356,
+      "maxStep": 0.0002127750267391093,
+      "matchedGain": 63.36988502816268,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "sustained",
+      "case": "plate-high",
+      "rms": 0.01842518222940527,
+      "peak": 0.0994078740477562,
+      "dc": [
+        2.570321699664979e-12,
+        -2.4840867886640676e-12
+      ],
+      "stereoCorrelation": 0.9671982115355591,
+      "monoPowerRatio": 0.9796593234652188,
+      "maxStep": 0.004308358067646623,
+      "matchedGain": 1.8995741569460578,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "electronic",
+      "case": "plate-long",
+      "rms": 0.0035704072149089065,
+      "peak": 0.10792522877454758,
+      "dc": [
+        -4.231458501550967e-9,
+        -4.230986515688541e-9
+      ],
+      "stereoCorrelation": 0.8891840457973572,
+      "monoPowerRatio": 0.9445919551566707,
+      "maxStep": 0.009320797864347696,
+      "matchedGain": 7.412539302290246,
+      "matchedRms": 0.026465783805692925,
+      "typedBytes": 52575
+    },
+    {
+      "source": "metal",
+      "case": "plate-long",
+      "rms": 0.01064927017064234,
+      "peak": 0.14084279537200928,
+      "dc": [
+        0.000016156142106920418,
+        0.000010883424723075671
+      ],
+      "stereoCorrelation": 0.7792513248835216,
+      "monoPowerRatio": 0.8834333002900787,
+      "maxStep": 0.013372838962823153,
+      "matchedGain": 3.286610203250096,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "noise",
+      "case": "plate-long",
+      "rms": 0.002093850725896347,
+      "peak": 0.08609174937009811,
+      "dc": [
+        4.450274970168129e-7,
+        4.450267387990682e-7
+      ],
+      "stereoCorrelation": 0.8571374218006776,
+      "monoPowerRatio": 0.9285685822782005,
+      "maxStep": 0.07602581195533276,
+      "matchedGain": 9.29241194253001,
+      "matchedRms": 0.019456923491194343,
+      "typedBytes": 52575
+    },
+    {
+      "source": "chip",
+      "case": "plate-long",
+      "rms": 0.007503191535689671,
+      "peak": 0.10797028243541718,
+      "dc": [
+        -0.0003406556299410265,
+        -0.00034065562930517273
+      ],
+      "stereoCorrelation": 0.9258644782533695,
+      "monoPowerRatio": 0.9628353095762645,
+      "maxStep": 0.21367840468883514,
+      "matchedGain": 4.664681666930539,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "cuts",
+      "case": "plate-long",
+      "rms": 0.0005133673247853038,
+      "peak": 0.00781355518847704,
+      "dc": [
+        5.499864984783037e-7,
+        -4.866707757982914e-8
+      ],
+      "stereoCorrelation": -0.6055896078547243,
+      "monoPowerRatio": 0.1986271090863867,
+      "maxStep": 0.0001907541009131819,
+      "matchedGain": 68.1773036775128,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    },
+    {
+      "source": "sustained",
+      "case": "plate-long",
+      "rms": 0.020969673835762287,
+      "peak": 0.1171596571803093,
+      "dc": [
+        -9.735069786096696e-12,
+        -1.4365187791976917e-11
+      ],
+      "stereoCorrelation": 0.6626694560867455,
+      "monoPowerRatio": 0.8248593686247379,
+      "maxStep": 0.004950524307787418,
+      "matchedGain": 1.6690769858475334,
+      "matchedRms": 0.035,
+      "typedBytes": 52575
+    }
+  ],
+  "limitations": "No human listening or physical iPhone. PCM24 WAV, no dither. Matching uses one constant gain toward .035 RMS, capped at .8 peak. IR files subtract the known dry coefficient, retaining the complete wet response. Chamber settings .5/.5 in ROOM/WEAVE; PLATE .5/.5 default. No uniform delay-time or RT60 matching: topology/density and measured decay are compared explicitly."
+}

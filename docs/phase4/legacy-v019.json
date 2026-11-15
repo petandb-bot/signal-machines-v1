@@ -1,0 +1,549 @@
+{
+  "baseline": "Public v0.19.0 8f09add; captured before curation; all existing DSP unchanged",
+  "seconds": 3,
+  "rows": [
+    {
+      "name": "METAL DRIFT",
+      "rate": 44100,
+      "sha256": "ed2979ad5105c40ce13c3c7497d6dd2e5517ea4b17eece2861109f3ea13ae71c"
+    },
+    {
+      "name": "UNEVEN MEMORY",
+      "rate": 44100,
+      "sha256": "01fa88d8a5ad2cdd33ec6f4e8967c3532a9e8feaf6cbcdea28cc8c797bba3ef2"
+    },
+    {
+      "name": "EMPTY CHAMBER",
+      "rate": 44100,
+      "sha256": "a99a5427dd9afec49efbffff9c66c4454391c85c36f8b434e8b5308b7b47bb5f"
+    },
+    {
+      "name": "BAD CONTACT",
+      "rate": 44100,
+      "sha256": "14cd7e4e72480b1edc00a8dc819fb3e86aa25efdc86f217a2ed1899bea129a56"
+    },
+    {
+      "name": "TAPE GARDEN",
+      "rate": 44100,
+      "sha256": "588b9ceb9ba8df0b253ebc4ab87f09763edac5251a97586284fc663f28f4bc35"
+    },
+    {
+      "name": "HOST FEVER",
+      "rate": 44100,
+      "sha256": "a45d46019975212f3fafb49245e95affaa8df78157c5484e80b30acd67451d86"
+    },
+    {
+      "name": "UNSTABLE CIRCUIT",
+      "rate": 44100,
+      "sha256": "937a91c214339f3bba4ee14b6de51fc3e4dd1f0dbc1316bf0dbb7e86546ca3c0"
+    },
+    {
+      "name": "BREATHING CIRCUIT",
+      "rate": 44100,
+      "sha256": "819e0af5403e5ec3ec10cef32179f764a2872bb8d1276df1b92ba9d65ed1e1ab"
+    },
+    {
+      "name": "FORKED MEMORY",
+      "rate": 44100,
+      "sha256": "579801c0bc628340e0e6b0621dec3cc43636358bc318b29c9c552c513b77ebea"
+    },
+    {
+      "name": "LOOP WEATHER",
+      "rate": 44100,
+      "sha256": "c5acee3cf6a52cc2fffa0ac32db8e981ac84dcea2b92587e08d53e8ab3516517"
+    },
+    {
+      "name": "CLEAR SIGNAL",
+      "rate": 44100,
+      "sha256": "57d95369bbd0b59cd64efe29c753fc0f5b19a935cea6bff38cc09807df7a0d27"
+    },
+    {
+      "name": "WIRE STRINGS",
+      "rate": 44100,
+      "sha256": "1ba20c3fd5a3e4881953433c403d6598ef283b664e99107fc40456016a84996e"
+    },
+    {
+      "name": "SIDEBAND GARDEN",
+      "rate": 44100,
+      "sha256": "e0a30129e3733c71094d8289e658e3bebdc2de3d6d87017efa3e60b3b78f327b"
+    },
+    {
+      "name": "CHANCE GARDEN",
+      "rate": 44100,
+      "sha256": "acb00983f0377c8586c5385de09e96ce777d83d64cdc83e1905148f0e499f160"
+    },
+    {
+      "name": "SPECTRAL GHOST",
+      "rate": 44100,
+      "sha256": "ac97c9259ce59c5837fba9b355cbbf34ff65e01039d94975d413d6e7b067eb24"
+    },
+    {
+      "name": "HARMONIC WEATHER",
+      "rate": 44100,
+      "sha256": "e4429968081ca8ae0c69fa96c205af6c01e1016789739de24cffabb3188aa0a7"
+    },
+    {
+      "name": "CLOCKWORK GARDEN",
+      "rate": 44100,
+      "sha256": "14d3e9571275d04ceffe80c56e890b72b3226be9160d8e4703aaf73c7cbe7982"
+    },
+    {
+      "name": "SLOW WEATHER",
+      "rate": 44100,
+      "sha256": "efef260bc9695c4a48b25648c4c388eddcaf4aace81be4030efbf241e12f3513"
+    },
+    {
+      "name": "MARBLE ROOM",
+      "rate": 44100,
+      "sha256": "1ec7ff51d1688ac394de2e80dc9930013ecd05dcdd8caf3bb43699156940eb66"
+    },
+    {
+      "name": "BINARY FEVER",
+      "rate": 44100,
+      "sha256": "7a2350c106f448a7ae33e25ac8a98976b333964e48b1543f70b20441496f8c85"
+    },
+    {
+      "name": "BENT VOWELS",
+      "rate": 44100,
+      "sha256": "01d7d8c9af0053ff576d5479dc2b6bef87be523152198cee741730407929b763"
+    },
+    {
+      "name": "SPLIT ORBITS",
+      "rate": 44100,
+      "sha256": "3a235efe2ec6d06443831e8cbc73c6b6fbd215c61d2a65f824b7f2a483885af6"
+    },
+    {
+      "name": "TRITAVE FIELD",
+      "rate": 44100,
+      "sha256": "dddd285d880947b47b5fe8fdd1ea961f40f82fe65e47f6ffe8b203a48c8f7304"
+    },
+    {
+      "name": "OFF GRID",
+      "rate": 44100,
+      "sha256": "26dae65a5b06c69dd44da20aa15ecd009952898d5b6dd2854501816a138366fa"
+    },
+    {
+      "name": "COLONY CRACKS",
+      "rate": 44100,
+      "sha256": "0d55b085d8cde92b3738e93972dcf91538324612b57e2499e7c4a1c912fc99f9"
+    },
+    {
+      "name": "STORED RAIN",
+      "rate": 44100,
+      "sha256": "d0f498d7705ff5bd12bc27cabef4e8e43a83e8571d019ec73a16143adf5a2cbb"
+    },
+    {
+      "name": "DISSENTING BODIES",
+      "rate": 44100,
+      "sha256": "798d404b6fbc5c9bdaa24bf300372eafef2254c40fba58f55c55ee0c4a9b008a"
+    },
+    {
+      "name": "OUTER BAND",
+      "rate": 44100,
+      "sha256": "2b0ade98f22576769e72869b151c057053acbc20742e1353de56acda4558fb92"
+    },
+    {
+      "name": "PIXEL DUST",
+      "rate": 44100,
+      "sha256": "376c789c5078a5acdf1ae6ac28e7635adf3c5e13c4a12a79bb5b360c12a9d8f6"
+    },
+    {
+      "name": "BIASED ORBIT",
+      "rate": 44100,
+      "sha256": "9b3d63d206be40cf07a6e5c667a84bcf06f333c542caa6fa6fed75a06f1cfeb8"
+    },
+    {
+      "name": "DRAWN METAL",
+      "rate": 44100,
+      "sha256": "24a7eee13e95f80efa9f46383991789a20fdafbe7df4249d87a4454d0c865b2a"
+    },
+    {
+      "name": "TWIN SWINGS",
+      "rate": 44100,
+      "sha256": "92dfce2cd6599f0bc0eadd6c45d885d59f58993a1061897b73a75fe6c8b8bb05"
+    },
+    {
+      "name": "DISSOLVING METAL",
+      "rate": 44100,
+      "sha256": "ce3ebc43ad581635fb0a91e1a5371fedf0161a6fc6839d889f1b61d87b3d270b"
+    },
+    {
+      "name": "SLIDING GLASS",
+      "rate": 44100,
+      "sha256": "90187b7c0b0888a22acac6591c64130ad3df7607df6d6f71f13c121067459391"
+    },
+    {
+      "name": "FOUND / QUIET",
+      "rate": 44100,
+      "sha256": "084f16622a7d42c9dcd4c69dda2dead8bbd022435ee40848de6a0ad8c3b5ec0f"
+    },
+    {
+      "name": "FOUND / STRANGE",
+      "rate": 44100,
+      "sha256": "e6633138e3204f82a0798cc9f722c8a12b45422782c47f735c8493bf4d621ce1"
+    },
+    {
+      "name": "LEVEL / RECOVERY",
+      "rate": 44100,
+      "sha256": "be88e957a7d6d83de8aa3e7ee307ad66eb438fef1bd7e52417edfede3e0bda40"
+    },
+    {
+      "name": "MIRAGE / AFTERIMAGES",
+      "rate": 44100,
+      "sha256": "1f6f48b7a9839a5adb2176d09c9662391dfa8434e7702e74fb6a21f2b49a79f1"
+    },
+    {
+      "name": "LOSS / UNCERTAIN",
+      "rate": 44100,
+      "sha256": "626680d814710081571dad411868a93a126679bac9961f036b6c9c4b76fa89a8"
+    },
+    {
+      "name": "CUTS / SMALL HOURS",
+      "rate": 44100,
+      "sha256": "f31cf103044efad980887fa89deff580c9115c3e2fc39c0faeb4f30fbf99f58a"
+    },
+    {
+      "name": "NERVE / RECOVERY",
+      "rate": 44100,
+      "sha256": "97e3ead8ed028edb2edded17f7756d9cd7ab8da235fba6db7c88fc17dddc0f91"
+    },
+    {
+      "name": "UNCERTAIN ECOSYSTEM",
+      "rate": 44100,
+      "sha256": "f4914940175c53baf3376b244a1cd9bd0957dcede3501499651e7dcac9d4f643"
+    },
+    {
+      "name": "METAL DRIFT",
+      "rate": 48000,
+      "sha256": "8a076b4c24a9bfc8c7b2747a901af2bea4da7f7d829e714c0a68d1bfbbafb1fb"
+    },
+    {
+      "name": "UNEVEN MEMORY",
+      "rate": 48000,
+      "sha256": "56f2099245fb76c0b4f79c5ca29e87c8f901595cc7e488cb6a8a3264a9d5baf7"
+    },
+    {
+      "name": "EMPTY CHAMBER",
+      "rate": 48000,
+      "sha256": "14cd77ab791b13769d595bb42c7f3c58baedf0b4abc21e8db61e91b69b4fb4d8"
+    },
+    {
+      "name": "BAD CONTACT",
+      "rate": 48000,
+      "sha256": "c13449797a15b611e7b740c49ae144f49fb39dd061869be7d3208831859ff826"
+    },
+    {
+      "name": "TAPE GARDEN",
+      "rate": 48000,
+      "sha256": "364ef411640b50a931620618efc2a2c2077e68a317a5b1cc7d4f194fc33c3caf"
+    },
+    {
+      "name": "HOST FEVER",
+      "rate": 48000,
+      "sha256": "d82aaabd5464c99c92c3f004c1f197bb59c0c1d5ac2642e4cd1edee079bc2950"
+    },
+    {
+      "name": "UNSTABLE CIRCUIT",
+      "rate": 48000,
+      "sha256": "995734d7ecd55d8788d9e891dbc5e9640ff281b2d7cf23fc83a610c18c1a7cbf"
+    },
+    {
+      "name": "BREATHING CIRCUIT",
+      "rate": 48000,
+      "sha256": "fe5b12beaef8b724b0ead0caee0b5d72cc497c40dc065c631be692dbf7b6e88b"
+    },
+    {
+      "name": "FORKED MEMORY",
+      "rate": 48000,
+      "sha256": "39a13fe1703af828c3ffad02f9bc298abd27aeffa91c1c249a1bbbfab7a47dc0"
+    },
+    {
+      "name": "LOOP WEATHER",
+      "rate": 48000,
+      "sha256": "b0d99e62f11679b39e3880ff821a99c9643823ddfd8928ae2759bef18a75905e"
+    },
+    {
+      "name": "CLEAR SIGNAL",
+      "rate": 48000,
+      "sha256": "5a11e520346211cc4f1ca3d8ef8df0eff420b1feee21e93aaf8e89a884ce911c"
+    },
+    {
+      "name": "WIRE STRINGS",
+      "rate": 48000,
+      "sha256": "5c579835c28443aa37862139cef4cb3a596c42a4de22a51802c40c4602b79c0f"
+    },
+    {
+      "name": "SIDEBAND GARDEN",
+      "rate": 48000,
+      "sha256": "d7ceb4ee4660dcd7b34add08e87fc685aee45d9b41ed56374ea4691e047fa27d"
+    },
+    {
+      "name": "CHANCE GARDEN",
+      "rate": 48000,
+      "sha256": "1dae82f0fc4f0e158898e27ba2da4191c43f354326ea674798d390ca965a8b1e"
+    },
+    {
+      "name": "SPECTRAL GHOST",
+      "rate": 48000,
+      "sha256": "513f081d41561b9d87d8375bbab04b347ffad1efaa5ca2a0497ae71c57e19f0c"
+    },
+    {
+      "name": "HARMONIC WEATHER",
+      "rate": 48000,
+      "sha256": "205e45a795a4e3b7517ea7599d9529616dcc1fe44ae716a262f19db06083ad3f"
+    },
+    {
+      "name": "CLOCKWORK GARDEN",
+      "rate": 48000,
+      "sha256": "8f9a8dab64adeeefd7701d17f5a122587db1f6cdc2070831e847ef8d9a1c2059"
+    },
+    {
+      "name": "SLOW WEATHER",
+      "rate": 48000,
+      "sha256": "99fe3a8744be652f1a8a05ce1f287145dae24aa05bb88c7f684d34f79d67e819"
+    },
+    {
+      "name": "MARBLE ROOM",
+      "rate": 48000,
+      "sha256": "4612ae2b2bb89a9f821f0d717cb063bf109f96781997b62329c07e28e32a3353"
+    },
+    {
+      "name": "BINARY FEVER",
+      "rate": 48000,
+      "sha256": "4b401e3a1723649bd4c6615d339f5e5262e834a809acbd36eab2687981065256"
+    },
+    {
+      "name": "BENT VOWELS",
+      "rate": 48000,
+      "sha256": "b5458aeac03bd161c7ef5702e8eb160596aa99024ae9d2c3c4fbc7b230ca1a75"
+    },
+    {
+      "name": "SPLIT ORBITS",
+      "rate": 48000,
+      "sha256": "3667dc398d4bec11ce04e90436517dfc74bfeba6d41913b0a8c0d5c50825d462"
+    },
+    {
+      "name": "TRITAVE FIELD",
+      "rate": 48000,
+      "sha256": "bd6e06458f61bbcea5689f56a85bd71b8536b850f5a93688bc2f630821a8f740"
+    },
+    {
+      "name": "OFF GRID",
+      "rate": 48000,
+      "sha256": "6db91f19047654806eb309cb2b7883e349d37e8c4425b12039debe1c60b57d24"
+    },
+    {
+      "name": "COLONY CRACKS",
+      "rate": 48000,
+      "sha256": "c1800e5eb113c5acfadf90d103800ff052714badc43b8988d9fc6921fca13a2f"
+    },
+    {
+      "name": "STORED RAIN",
+      "rate": 48000,
+      "sha256": "ee6d945cf08d24948b6427d3fbb46b2b62db4bded2cea30c66421dc8ce4e6e83"
+    },
+    {
+      "name": "DISSENTING BODIES",
+      "rate": 48000,
+      "sha256": "a8369cc7d2b4b03fe657e511cbbc277edc8b969ae0726d8b27040e1f92c06d55"
+    },
+    {
+      "name": "OUTER BAND",
+      "rate": 48000,
+      "sha256": "877dcb6630d3b7bc3e72d6d03f8d206fb243304629154ac5da6a7cce62743313"
+    },
+    {
+      "name": "PIXEL DUST",
+      "rate": 48000,
+      "sha256": "d3c84ced0e031d7c5f14de91eae60365f9132829e358cc6cebad321cdbf786a7"
+    },
+    {
+      "name": "BIASED ORBIT",
+      "rate": 48000,
+      "sha256": "ae2217a4b7dd184084bb198bf2ed5422aacd2c55954b1c4255cf5e8a2d7cccf0"
+    },
+    {
+      "name": "DRAWN METAL",
+      "rate": 48000,
+      "sha256": "6a98a619ad7b2f0c8e919f6311bf9d06d4f0e2b29440fdf3fb88ab7effa5ddb9"
+    },
+    {
+      "name": "TWIN SWINGS",
+      "rate": 48000,
+      "sha256": "340d2a6487496ff9f256ef36b95ed21732e10fba6442fbe62cc563d44e472582"
+    },
+    {
+      "name": "DISSOLVING METAL",
+      "rate": 48000,
+      "sha256": "ad7aaf8e6b321d351dfcddc03bd755be834751ae5cbee790931198b4e7780cab"
+    },
+    {
+      "name": "SLIDING GLASS",
+      "rate": 48000,
+      "sha256": "2d7b274be4044a6331bacf4bd26beb61c8c21473f334fa376ad910e5ee06e3de"
+    },
+    {
+      "name": "FOUND / QUIET",
+      "rate": 48000,
+      "sha256": "5fb719f1d9f2c16f007d3ec7ec3e41633caaa00574d0ab07540d13b6f69fad57"
+    },
+    {
+      "name": "FOUND / STRANGE",
+      "rate": 48000,
+      "sha256": "9219152f5e7359d71bb80fa0e08734b6fe6c801f6fc0160866e127087b2732da"
+    },
+    {
+      "name": "LEVEL / RECOVERY",
+      "rate": 48000,
+      "sha256": "a899d6b38dc826115040636b6436f1e64f71ac22351399424d8724bf4a3c986d"
+    },
+    {
+      "name": "MIRAGE / AFTERIMAGES",
+      "rate": 48000,
+      "sha256": "663b40440e2c71862f26d25e099d1c94090f822e5187e0b41801e862d0128e6f"
+    },
+    {
+      "name": "LOSS / UNCERTAIN",
+      "rate": 48000,
+      "sha256": "6c2a8833309fbe6300438074d6a4f025ceb615497ee3e3b612d46c62262dd5d3"
+    },
+    {
+      "name": "CUTS / SMALL HOURS",
+      "rate": 48000,
+      "sha256": "92f5bf991cb82660b28850d00dfa8ff0cd7006e4dbae50e9af6828fa08e299c0"
+    },
+    {
+      "name": "NERVE / RECOVERY",
+      "rate": 48000,
+      "sha256": "d009ff1830cc936d94d6e68498947d9fb59aab0b016115412addbda093dc45bc"
+    },
+    {
+      "name": "UNCERTAIN ECOSYSTEM",
+      "rate": 48000,
+      "sha256": "589a79eb4821965471a8ffc34b7057e51b06bdb7676851209aaf54a60358fe8f"
+    }
+  ],
+  "hashes": {
+    "presets/bad-contact.json": "897084a476a49c457f9870b901756100e3640ae3db5f7cd549fe15b01716d518",
+    "presets/bent-vowels.json": "23c72d0c4d3a787c5e94226f286e7ac1c9c0223a7d13fdfa840c31096182059e",
+    "presets/biased-orbit.json": "fd55eb0356cea92f9fd21ac4001651298fc40b89d5f7869449797f2c28bbdc34",
+    "presets/binary-fever.json": "67814fc5b7cf9d67d30c32459edb3532b7c13d0598d54fccfa675b10843788ce",
+    "presets/breathing-circuit.json": "f56cc1681bf624c1bd00a42c44b411fd2af0344fc1cd75842401a8741a65f94c",
+    "presets/chance-garden.json": "5fb4ff39ef78d6ddd8dc4c9b504d8d4714f0d3b609ba28bd012360529fbf54da",
+    "presets/clear-signal.json": "ec739f80c9d17534c81915c6d2a5891da013223216bfaa185a43a558c042b6c6",
+    "presets/clockwork-garden.json": "4dfa272446e170a4422157097d3cb1cff1137e6031efcd5ea55355443966f636",
+    "presets/colony-cracks.json": "1aa02f41cd8a202103e5ac84a30c0862434837aa27b0b4bfcea5b88bb007306f",
+    "presets/cuts-small-hours.json": "740a16dce3c3ffed6248ccbc1b6577526af37e2705589fd4367d2aea565f45fa",
+    "presets/dissenting-bodies.json": "71234d32d2f9992ea60fae968fac13da11654c63a63fc4f9b88a09ee16e53cad",
+    "presets/dissolving-metal.json": "9161a75930516d0ffcff86b0a304810536a27f0af596926e43f9c9a96d70a360",
+    "presets/drawn-metal.json": "edfef98124eb8d2f846a60f02c6ae9fb9a2c21be3f2daf5d60c6b359e05af5bc",
+    "presets/empty-chamber.json": "c17d956dc18e69042589d0977f1e067520137cca055ad10e351cb5c59c0fd9dc",
+    "presets/exchanging-bodies.json": "8462a6ce0529ca4b80b975bd4e0217708f7b415fb08d6885611a4351190db25f",
+    "presets/forked-memory.json": "471b63a2a23d9d3b5100a90cb0674cbdea28c4bb334bed1665ac9526c8f64958",
+    "presets/found-quiet.json": "80540c8ba12f0213cd98f2c48dd9c53f98f359c11ca4dee0123627a5537d70a3",
+    "presets/found-strange.json": "af427e52b03a4a20c57190a91353d72528f117b1145d2fefa578ddcf2d5da2e0",
+    "presets/harmonic-weather.json": "d7f766858ca79f470b27f0efa39828fa33b62e0271022b3690a3beebd5357213",
+    "presets/host-fever.json": "62bbb6b6159aefe87c795992a9ead0e0ade7096c5d3569585430b29aeef00631",
+    "presets/level-recovery.json": "e3755a9b7ffaafccf988444f16cb99820e3be594ddc4664b3214ebc119e374e2",
+    "presets/living-almost-moving.json": "f70ca55b77a808eca57393c8b13e34098c27c31ff4cf105f5382ca11094c8870",
+    "presets/living-material.json": "c703e670fcd872ed8236948cecf617ae1e4a44ed4fc4ff02ec24a5d14eb15628",
+    "presets/loop-weather.json": "6f3374de36cd07732b9bcd32fb2c19efa371ecaa5e50a7eaf14d907bf4b84fef",
+    "presets/loss-uncertain.json": "164fd01906e06d5bcbfafa299f3e897b92b7a9c3a8417586a2fe25892bc56cee",
+    "presets/marble-room.json": "2e0a18f530ca66be3b2cdd5405bc48b77bc1d87c27f9383e2d60c857d11ed517",
+    "presets/metal-drift.json": "3b2b160872865db3cdf7a4d8fead273d817ba4508f9c0049a3eec62ba4cf7ebf",
+    "presets/mirage-afterimages.json": "81d094577c261728ebfdf8835bed6038a1b1f4186c4d11a407c8f66e255e54bc",
+    "presets/nerve-recovery.json": "f698d9e692c9bb3053c22ebe3c7951451c86380b5b479b1c64f50c53b4b94e11",
+    "presets/off-grid.json": "ccde351b0e8c5b86b575bb5c6414d07dbdf61460fa1ee7f6ff9fc017db95f813",
+    "presets/outer-band.json": "a8318b3d2555e119c6079b586158bd77faa4fd620dc7507dd16b9635b7f3c3f5",
+    "presets/pixel-dust.json": "1c6ad1313538b512aa727ce9e31a579bfa28f87964893deea2387402ad6e8923",
+    "presets/sideband-garden.json": "c6592c088d0683d5b2ed4f9a425dc9cc2c9f69ca6bec491cd70abd0e1a93059c",
+    "presets/sliding-glass.json": "3be7b301b2b90944ad93a13357597149c3da0a68f0ff3c213cf3f71e883864d2",
+    "presets/slow-weather.json": "7e6f7226728f93ea94a7cc8993b3a3e089c8f5012cf90d78aa64c4f4fdb18620",
+    "presets/small-resonance.json": "bdc19d945f05c86eda6dc7b9a17de53558e0a004d803e9a09ad06e44c03290d1",
+    "presets/spectral-ghost.json": "1989c2886376e6565beabdb8a3edfbf8f98a59395a792ca6cd169bd6a5359c14",
+    "presets/split-orbits.json": "15ab933ab79b98c4506e12ce1929d43f2bafb3e43c03e9f25335b23d94ff96e0",
+    "presets/still-almost-moving-ii.json": "86319f5e39dceae7e53e0099151621200d6a942ecd9f3f32657aa7581460ae67",
+    "presets/stored-rain.json": "9863582946d8121df02e9c2be6cf3daf9ca4d2444ee64deae1bd827021e3f19e",
+    "presets/tape-garden.json": "212eab9d213693902243e580f76595a70b12bc55210427d04a606931bc95e8cb",
+    "presets/tritave-field.json": "7c8c51d3ffcf33b06049f057705beee6b88e8c3b9ecf75a0464501d30aee8833",
+    "presets/twin-swings.json": "d3a76b195837c15744752d4f50766f36516d65ce7d30f57f55d721f3d8ca8584",
+    "presets/uncertain-ecosystem.json": "f52b42cf84babb6a14dc1e3e3871f7cb2fd69d8390520dd6f90e263f1a19dd35",
+    "presets/uneven-memory.json": "315d0da8f2c51559fcc870dfa36cb26ea82beedf80b443a6b5a1a22edff422aa",
+    "presets/unstable-circuit.json": "7c62b97f0e1e27b1b2c5d9cd84dd092743695b16888980f7cff0772ac0874bef",
+    "presets/wire-strings.json": "0c2f06c555020547bee88290f9a8487ca93ae203e1dccf1505b4718006994bc8",
+    "src/audio/modules/Alloy.ts": "304fe458da946882b04e513d4b794eda038bd19ab33bd29e9d8a1b52ab615106",
+    "src/audio/modules/Bounce.ts": "2b000551203bc13ab4a26fe5a51e8ba5570d67eac1223ae621852da41c554a01",
+    "src/audio/modules/Branch.ts": "39ea776730d968a045c994b09bad6ae6102996703bcec24a705237895577fb67",
+    "src/audio/modules/Caustic.ts": "9304c64204eaf26857d031ab6eb19edad289c4a7c30eb654376cde04807adcde",
+    "src/audio/modules/Chamber.ts": "af1b18c643b787fe09df7bfa9c7e9af72ca8b484f9744af6c1e944a2c3b6fac9",
+    "src/audio/modules/Chance.ts": "75307131f4372d8b70771384fbd2da1e91444cd4622307351100ce5700ac5c02",
+    "src/audio/modules/CharacterBlend.ts": "ef113351ff7f59f4fb4979842c284f9139cbc1fd9e60096abb81c82048cf9fd5",
+    "src/audio/modules/Chip.ts": "6f7cb2d8fb5705d53d6f294cd97290e55f2f778cb537eaa668cbda15f3309656",
+    "src/audio/modules/Chorus.ts": "e035d63279d3fe8b9703e9f7628351c217217fcdccafc0d2e9f85ed4c9b7fca0",
+    "src/audio/modules/Clip.ts": "dc1db634aa0217c89993be4fd499c12add8e7a7f922fb6726c42fd3cc9fbaf7c",
+    "src/audio/modules/Cloud.ts": "70a970fe5f5fc59a3dd3594c09d73e47eaee7b4292e064a238ccda48a6771e52",
+    "src/audio/modules/Comb.ts": "606ec4713f6e4f0a62f22df586a0050caa661f8dd6a071b519060bed490b9dd0",
+    "src/audio/modules/Count.ts": "23412ed05162f9d0f5e7be546074d497b9712379a88a37d1996a8bae56b0b627",
+    "src/audio/modules/Crush.ts": "58847c66c55e581820fa2d7dd162d5e81f3d3ceb85a91ce3f4c8d3f21d0c90f6",
+    "src/audio/modules/Cuts.ts": "b379d888dfad2d572bd686df9cc43b562d627a70d9c8b31e62bc17c8ae45139d",
+    "src/audio/modules/Drone.ts": "08aa78605aa918f673e5d4a92cb92f4ed854edb52332eea94ef2098aa836398d",
+    "src/audio/modules/DroneInstrument.ts": "f074aaaf6c1c9958761c9de097b9d5e0034c8d930496624602371ee6efc4bc68",
+    "src/audio/modules/Duck.ts": "0b228d57f3c1fa54ca98751cbb1e5d7d362c4b331f8c83bf901053aef2dd9fc6",
+    "src/audio/modules/Edge.ts": "8d70456fb4302359accf872d37357ac49a539c5f367be6b23521218fb60efb40",
+    "src/audio/modules/Effect.ts": "77ef93eaff8822f583eb941549f82666c4dba38d49c9b01b50a39924d1684b18",
+    "src/audio/modules/FaultLine.ts": "9b6653ee94dd16d2a7551e39ef155bc5f00f0564eadba0514a3cb67637195afe",
+    "src/audio/modules/Feral.ts": "076c013f25ebe35eff8c68410c5ac812386066a504a25b51bd0199fe58a28369",
+    "src/audio/modules/Filter.ts": "100186f177b7bcb8f80c03caa59d1237b0a4627caa1f9e1a114903a2c5dc0836",
+    "src/audio/modules/Flock.ts": "8b0c756501d1ee2ebe6dc962bf4bcc25a1ec73712c15eb80b8d561171717f78a",
+    "src/audio/modules/Formant.ts": "158655c338068b2112288eb4d8067caf40705c0da524181af4068c0ff9a23d73",
+    "src/audio/modules/Found.ts": "7e7fdcdc75bd13cacb803738cafa480a99ac1da1d91556f3665cdcfddf3ee321",
+    "src/audio/modules/Fracture.ts": "fa9fd293610ae0babb0d68f42d6ef9553fa1761be159a6279359db3055b3b0e7",
+    "src/audio/modules/Friction.ts": "7db6cca170364d0e98d220a7e9fe0f426f0fe94d43fc6cd989eadeccf1db5346",
+    "src/audio/modules/Fuzz.ts": "0606ef4dde34db872fefcd6c8b5833b9371290219238c52c944e98347f10cdd0",
+    "src/audio/modules/Level.ts": "65cb7747fcbaa3797fd63b6773d9eff573fc6c328a96daa4e389fbecf6f76d9c",
+    "src/audio/modules/LivingDrone.ts": "3812f8cf4a303d4667ced224e1b3a940ce3f178becfc3460c3d007fe3a173991",
+    "src/audio/modules/LivingField.ts": "c1d516d03a9dc2920cbeb2468e293797ec5a2c96379aa6a6a92b0a2d95c07b5b",
+    "src/audio/modules/LivingPartial.ts": "3e0e2d444d6bf68abd5787e198e0a2aa9186e399720d58f795629fddb9d3ceb5",
+    "src/audio/modules/Logic.ts": "3d2a79d58b24b8ac9bbf669e6f3b28a3f530c141a2f06442dad1f81a1e35c221",
+    "src/audio/modules/Loop.ts": "a0f0daf7b5768337eae34621e1324a9877ce2fc6d41c215b2922c01a6f584f50",
+    "src/audio/modules/Loss.ts": "591320d3e8dd16044eb922ba2737c9dfb116cfd07771f8530554503a55ee2c7b",
+    "src/audio/modules/Lpg.ts": "9cf4961f8df03c1d33d89ae9be23e084c25d1a67ab59291555ac6d0f0471206a",
+    "src/audio/modules/MachineSafety.ts": "e2aa9d9a35ac8c48944374d91ae0bcf89ca474ac046beda9302217368c0a9cd9",
+    "src/audio/modules/Map.ts": "4414e3ef9cb5237d154d7b49ee73da1a584db355af78917059a076ab60ef66cc",
+    "src/audio/modules/Mesh.ts": "87ec46ed056c9f0150e56ce4088303845d7dbdb849976ec5c0735737ac1735a7",
+    "src/audio/modules/Mirage.ts": "387e26c5b1aa8884345de84cb3a4067541b01388ae474d5b97c632b0b863cef0",
+    "src/audio/modules/Nerve.ts": "f8bea30e9344f4a0e3099892814f46dc2ec40f31618237e478bb842c42c02f28",
+    "src/audio/modules/Noise.ts": "8c794e955f2b3fb71aa50447ed75f641a181b4bb205fd1662603eb82cff32c80",
+    "src/audio/modules/Operator.ts": "8e0a425e2b5e49529867c01e9b50af0ba1035c947eaf3fea947405f1837ffacc",
+    "src/audio/modules/Orbit.ts": "3c96e6c8c58fcbeb1761716f0a885fdf89c9acb3bc820c34be74e77e8c49229c",
+    "src/audio/modules/Osc.ts": "26819b0dedabae34553ceb115a756bb393ecd2454b17673bc51b0e905faa4f9d",
+    "src/audio/modules/Output.ts": "a49f634d677b7666e11e82dc7a173d42cdebfdf1c937b805b72b34ca2c53b10f",
+    "src/audio/modules/Parasite.ts": "f3d6166e1638b4df18cd4f2b61eeefd470dc8ec03fdb5268a0441819fb601598",
+    "src/audio/modules/Partial.ts": "10f2720f76aa933275d7cfa45dff11bc9eba1a6e7929f06f0e414095096bc6d8",
+    "src/audio/modules/PartialInstrument.ts": "c19dcdad98fc15fb8b6f0f0140234022967ad37a5c19deab5a78568aa638433d",
+    "src/audio/modules/Pendulum.ts": "d8db8abad98e4fb9592a0f42810ad31b0b6e9371397379617c47352711dee596",
+    "src/audio/modules/Prism.ts": "b6bb00c93ef2702bb1cbbc32d92c8248cdca1b4c9e9c484aba38d3060152d3d0",
+    "src/audio/modules/Pulse.ts": "32a17bf8ae5509187566bfdb4ae2386c6749dc2bdbe43af80ccf4d613ea921ea",
+    "src/audio/modules/Quantize.ts": "4233b7258ebe9db655381166e05b84008cdd187ac01cd46c7edcadea6c57a4ae",
+    "src/audio/modules/Quorum.ts": "cb46e630af49752a38ebca61f3d7a7cfcb1c84dbf298eff713043d0a86155790",
+    "src/audio/modules/Reson.ts": "bc4cf79dc07ef9cb702ce1cd96cd417616a0eae525719c7ac7b4ff8599f1789a",
+    "src/audio/modules/Ring.ts": "e0a819e6db61661bb8682433634bd3b4f28855e88c3db9d2ccd584721ff9f2e4",
+    "src/audio/modules/Shape.ts": "a4417a104a2cb45e064dc58b3e6263798fb14a6dee3e856adb21f4169a89a940",
+    "src/audio/modules/Shift.ts": "9751c29f5a42c958bd9cd847b552ec4b284adfdf86653739e609532b82793b7f",
+    "src/audio/modules/Sideways.ts": "94da38f91e89749e046ca942c9b15ca3258cd5f4aee09b88aaa6482c4167ffd0",
+    "src/audio/modules/Sieve.ts": "68577ced51ec75631894a00137610234b622e74a67e47a667354c9092221c1f8",
+    "src/audio/modules/Slew.ts": "96ff8b68544dfac11f7432e4621397f9f5e171ec45a7f38d9d934bd6761e535b",
+    "src/audio/modules/Smear.ts": "717eb11fc45e5f7a0fe8d1b51d39f515084b40e322907c02975189f8e6518e3f",
+    "src/audio/modules/Snap.ts": "25f87107938e0882fe383ae54b9a9769abdae44d777c255558ea0be1d1884db1",
+    "src/audio/modules/Swarm.ts": "ab8d60daef78fe985c0473bccadba1e36fa01943e84bfc38f153446e7c8d734e",
+    "src/audio/modules/Switch.ts": "61ad239586bba3aa48d304b4d9416c9d7f1470aeb8c9fe46df9d8f4a51f4420d",
+    "src/audio/modules/Sympathy.ts": "4a7762f7132bdaaa213659e6e86bf7a4afe25b2e7638558301fea22a88861b26",
+    "src/audio/modules/Tape.ts": "002cafd4ef46eb5d29ec4534edca1630867a52ad44378458c819394f15b937d1",
+    "src/audio/modules/Tide.ts": "46c7dfdf33903796b4070d680790933def3184cdaa26eb37284b25b37f87010a",
+    "src/audio/modules/Touch.ts": "32c14dfd559c83ae086c1f8a95d1ad5ecd95bce86e484f5a77d1606c2104d584",
+    "src/audio/modules/Unspent.ts": "4da9e711b4c181ed560a980fd2f947f6b975672bf60ed65d9f9722a7fb37c075",
+    "src/audio/modules/Vca.ts": "2c3782ce3bd6dc9641b8a83b245d76c626c6165159723246ad9ea3d2b89aacd2",
+    "src/audio/modules/Venom.ts": "2d2325102db2d11c034c06e64b836606d5309a5d3b08d99f59e879dbefe1b76c",
+    "src/audio/modules/Weft.ts": "24d85fb1a5a3ca2ae4b5f5a22d3e5a61a77d804e7a0b84c4c5ebfb2391b27a15"
+  }
+}

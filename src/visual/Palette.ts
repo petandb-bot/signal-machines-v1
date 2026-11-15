@@ -14,6 +14,7 @@ export const PALETTE = {
 
 // The original warm/cool identities remain, using eight small families of ink.
 export const MODULE_COLORS = {
+  PLATE: PALETTE.blueSoft,
   SYMPATHY: PALETTE.limeSoft,
   NERVE: PALETTE.pinkBright,
   CUTS: PALETTE.amberSoft,
