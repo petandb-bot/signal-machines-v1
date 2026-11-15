@@ -51,8 +51,8 @@ Pull requests run tests, build and AudioWorklet verification without deploying. 
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
 
-## Phase 6 review candidate
+## v0.22.0 — Phase 6: Musical Diversity
 
 Ten starting worlds now use different musical languages: melody, sustained partials, material responses, machine rhythm, physical pitch and audio memory. PIXEL DUST stays familiar; the existing68 sound engines stay unchanged.
 
-[Phase 6: musical audit, exact changes and before/after review](docs/phase6/README.md). This is a review candidate, not a published release. [Phase 5 WALLS and references](docs/phase5/README.md) remain available.
+[Phase 6: musical audit, exact changes and before/after review](docs/phase6/README.md). Phase 6 is publicly released as v0.22.0. Human listening and physical iPhone Safari performance remain to be verified. [Phase 5 WALLS and references](docs/phase5/README.md) remain available.

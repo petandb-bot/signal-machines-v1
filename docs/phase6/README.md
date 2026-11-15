@@ -1,6 +1,6 @@
 # Phase 6 — different musical languages
 
-Review candidate from public v0.21.0, `610a6f450e88f1165732a6ced1156befaa7320cf`. **Review-only: no merge, tag or Pages deployment.**
+Released as v0.22.0 from the v0.21.0 base, `610a6f450e88f1165732a6ced1156befaa7320cf`. Original comparison reports were prepared on the review branch before release.
 
 The collection no longer relies on seven related pentatonic phrases. PIXEL deliberately keeps that accessible language; the other worlds organize sustained partials, environmental presence, irregular sample memory, interacting materials, imperfect intervals, counting, delayed fragments, overlapping decays and physical19-TET motion. Musical improvement still requires human listening.
 
@@ -79,7 +79,7 @@ The last command produces68 stereo24kHz PCM24 WAV files. GitHub Actions uploads:
 - `phase6-short-ab`:all ten60s RAW/MATCHED pairs, two players, original/candidate JSON and full analysis reports. Extract and open `phase6-short.html`.
 - `phase6-long-ab`:all ten180s RAW pairs and four300s RAW pairs, original/candidate JSON. Extract and open `phase6-long.html`. Use the short artifact for level-matched comparison.
 
-Keep the audio/ and presets/ folders beside the HTML. Pages have no external dependencies or fetch requests; serve locally with `python3 -m http.server` if local-file media is restricted. GitHub can require sign-in for artifact download; retention is14days. No large WAVs are committed and no Pages deployment is performed.
+Keep the audio/ and presets/ folders beside the HTML. Pages have no external dependencies or fetch requests; serve locally with `python3 -m http.server` if local-file media is restricted. GitHub can require sign-in for artifact download; retention is14days. No large WAVs are committed. The A/B review artifacts are separate from the released Pages application.
 
 RAW is protected graph output before WAV quantization. MATCHED uses one constant offline gain toward.03 active20ms RMS, capped at.8 sample peak, and preserves spatial/temporal differences. It is not perceptual normalization. The lower bit-level quantization noise of PCM24 does not replace listening. Comparison sample rate is24kHz for download size; compatibility separately covers44.1/48kHz. The exact Float32 pre-WAV hashes are retained.
 
@@ -106,4 +106,4 @@ Chromium156 checked all ten presets at390×844,402×874,320×568,844×390 and128
 ![STILL portrait](screenshots/still-portrait.png)
 ![LATE small portrait](screenshots/late-small-portrait.png)
 
-**Unverified:**human listening, perceived musical improvement, physical iPhone Safari, headphones/speakers and hardware deadline behavior. The review materials are for judging these questions; algorithmic diversity does not establish musical quality. Keep the current public release until listening and code review are complete.
+**Unverified:**human listening, perceived musical improvement, physical iPhone Safari, headphones/speakers and hardware deadline behavior. The review materials are for judging these questions; algorithmic diversity does not establish musical quality. v0.22.0 was released after technical review and passing CI; human listening and physical-device performance are still unverified.
