@@ -26,6 +26,11 @@ jobs:
         run: npm run build
       - name: Verify production AudioWorklet
         run: npm run verify:build
+      - name: Render Phase 1 sound architecture comparisons
+        run: |
+          node scripts/render-sound-architecture.mjs 300
+          mkdir -p dist/listening/audio
+          cp -R public/listening/audio/sound-architecture dist/listening/audio/
       - name: Upload comparative sound studies
         uses: actions/upload-artifact@v5
         with:
