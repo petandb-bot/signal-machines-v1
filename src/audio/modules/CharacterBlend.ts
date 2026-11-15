@@ -4,7 +4,7 @@ export class CharacterBlend{
  constructor(private readonly owner:DSPModule,private readonly voice:DSPModule){this.mix=owner.selectedMode?.startsWith('LIVING ')?1:0;}
  process(sample:number,bpm:number,classic:()=>void){
   const o=this.owner,v=this.voice,living=o.selectedMode?.startsWith('LIVING ')??false;
-  this.mix=Math.max(0,Math.min(1,this.mix+(living?1:-1)/(o.sampleRate*.03)));
+  this.mix=Math.max(0,Math.min(1,this.mix+(living?1:-1)/(o.sampleRate*(o.state.type==='DRONE'?.36:.03))));
   // Guard the transition's legacy side too; steady CLASSIC stays untouched.
   if(this.mix>0){for(let i=0;i<o.inputL.length;i++){if(!Number.isFinite(o.inputL[i]))o.inputL[i]=0;if(!Number.isFinite(o.inputR[i]))o.inputR[i]=0;}for(let i=0;i<o.parameters.length;i++)if(!Number.isFinite(o.parameters[i]))o.parameters[i]=.5;}
   let l=0,r=0,activity=0;
