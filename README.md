@@ -6,7 +6,7 @@ A tiny modular playground for sound, chance and happy accidents.
 
 Connect little machines. Make strange sounds. See what happens.
 
-65 modules, 42 starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
+67 modules, 10 curated starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
 
 An old-computer face for a living sound circuit: green text, small pixel windows and a handful of signal colors.
 
@@ -50,3 +50,9 @@ npm run verify:build
 Pull requests run tests, build and AudioWorklet verification without deploying. The build is in `dist/`. [GitHub setup](docs/GITHUB.md) · [Full guide](docs/GUIDE.md) · [Verification](VERIFICATION.md)
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
+
+## v0.20 release candidate
+
+PLATE adds dense diffusion with two controls: BODY and DECAY. The ten starting worlds range from dry stepped tones to quiet sample gestures and long tails. The original42 patches and all saved user circuits remain compatible.
+
+[Preset collection, controls and comparison notes](docs/phase4/README.md). Standalone patches live in [presets/curated](presets/curated); builds also serve them at `presets/curated/`. No new audio assets are required: ROOM AIR and SMALL HOURS use the existing original synthetic environment samples.

@@ -8,3 +8,5 @@ public/downloads/
 .openai/
 release/
 public/listening/audio/
+public/presets/curated/
+public/listening/presets/

@@ -1,0 +1,10 @@
+import {writeFileSync} from 'node:fs';import os from 'node:os';import {api,typedBytes} from './lib/phase4-audio.mjs';
+const a=await api(),rate=48000,seconds=30,rows=[];
+for(const [type,voices,mode]of [['PLATE',1],['PLATE',4],['CHAMBER',1,'ROOM'],['CHAMBER',1,'WEAVE']]){
+ const make=()=>{const state=a.createModule(type,0,0,71);state.mode=mode;return type==='PLATE'?new a.Plate(state,rate,31):new a.Chamber(state,rate,31);};
+ const warm=make();for(let i=0;i<rate;i++){warm.inputL[0]=.1*Math.sin(i*.1);warm.process();}
+ const modules=Array.from({length:voices},make),before=modules.map(typedBytes),blocks=[];let peak=0;
+ for(let at=0;at<rate*seconds;at+=128){const start=performance.now();for(let j=0;j<128;j++){const t=(at+j)/rate;for(let k=0;k<voices;k++){const m=modules[k];m.inputL[0]=.2*Math.sin(t*2*Math.PI*(110+k*11));m.inputR[0]=.17*Math.sin(t*2*Math.PI*(147+k*13));if(type==='PLATE'){m.inputL[1]=Math.sin(t*.11)*.7;m.inputL[2]=Math.sin(t*.07)*.7;}m.process();peak=Math.max(peak,Math.abs(m.outputL[0]),Math.abs(m.outputR[0]));if(!Number.isFinite(peak)||peak>16)throw Error('Invalid sustained tank');}}blocks.push(performance.now()-start);}
+ if(JSON.stringify(before)!==JSON.stringify(modules.map(typedBytes)))throw Error('Growing buffers');blocks.sort((a,b)=>a-b);rows.push({type,mode,voices,rate,seconds,blockFrames:128,intervalMs:128/rate*1000,meanMs:blocks.reduce((a,b)=>a+b,0)/blocks.length,p95Ms:blocks[Math.floor(blocks.length*.95)],p99Ms:blocks[Math.floor(blocks.length*.99)],maxMs:blocks.at(-1),typedBytesPerVoice:before[0],bufferGrowth:0,peak});console.log(rows.at(-1));
+}
+writeFileSync('docs/phase4/performance.json',JSON.stringify({host:{node:process.version,cpu:os.cpus()[0]?.model},limitations:'Offline shared-server timings include input synthesis and observation. PLATE has moving BODY/DECAY CV, CHAMBER fixed default controls. Not a hardware-comparable realtime deadline guarantee. Typed arrays exclude JS heap/renderer/browser memory; physical iPhone Safari unverified.',rows},null,2)+'\n');

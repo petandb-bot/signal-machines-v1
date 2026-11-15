@@ -1,0 +1,71 @@
+{
+  "host": {
+    "node": "v24.22.1",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C"
+  },
+  "limitations": "Offline shared-server timings include input synthesis and observation. PLATE has moving BODY/DECAY CV, CHAMBER fixed default controls. Not a hardware-comparable realtime deadline guarantee. Typed arrays exclude JS heap/renderer/browser memory; physical iPhone Safari unverified.",
+  "rows": [
+    {
+      "type": "PLATE",
+      "voices": 1,
+      "rate": 48000,
+      "seconds": 30,
+      "blockFrames": 128,
+      "intervalMs": 2.6666666666666665,
+      "meanMs": 0.039899746755555576,
+      "p95Ms": 0.07678999999995995,
+      "p99Ms": 0.17826700000000528,
+      "maxMs": 1.8699829999999906,
+      "typedBytesPerVoice": 104111,
+      "bufferGrowth": 0,
+      "peak": 0.1805724472563224
+    },
+    {
+      "type": "PLATE",
+      "voices": 4,
+      "rate": 48000,
+      "seconds": 30,
+      "blockFrames": 128,
+      "intervalMs": 2.6666666666666665,
+      "meanMs": 0.15339354471110866,
+      "p95Ms": 0.2430819999999585,
+      "p99Ms": 0.3713930000003529,
+      "maxMs": 3.34790699999985,
+      "typedBytesPerVoice": 104111,
+      "bufferGrowth": 0,
+      "peak": 0.2733555920359553
+    },
+    {
+      "type": "CHAMBER",
+      "mode": "ROOM",
+      "voices": 1,
+      "rate": 48000,
+      "seconds": 30,
+      "blockFrames": 128,
+      "intervalMs": 2.6666666666666665,
+      "meanMs": 0.03495459493333377,
+      "p95Ms": 0.07202899999992951,
+      "p99Ms": 0.13606800000025032,
+      "maxMs": 2.9464379999999437,
+      "typedBytesPerVoice": 922227,
+      "bufferGrowth": 0,
+      "peak": 0.1772505820777423
+    },
+    {
+      "type": "CHAMBER",
+      "mode": "WEAVE",
+      "voices": 1,
+      "rate": 48000,
+      "seconds": 30,
+      "blockFrames": 128,
+      "intervalMs": 2.6666666666666665,
+      "meanMs": 0.03354529955555469,
+      "p95Ms": 0.04920799999990777,
+      "p99Ms": 0.10450300000002244,
+      "maxMs": 1.6901229999998577,
+      "typedBytesPerVoice": 922227,
+      "bufferGrowth": 0,
+      "peak": 0.18016912842975719
+    }
+  ]
+}

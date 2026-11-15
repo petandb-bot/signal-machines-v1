@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "LATE LIGHT",
+  "seed": 20200409,
+  "bpm": 58,
+  "master": 0.65,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 20200409,
+      "character": "METAL",
+      "params": {
+        "rate": 0.16,
+        "irregular": 0.26
+      }
+    },
+    {
+      "id": "chip-1",
+      "type": "CHIP",
+      "x": 192,
+      "y": 16,
+      "seed": 20208328,
+      "character": "METAL",
+      "params": {
+        "tune": 0.32,
+        "character": 0.3
+      }
+    },
+    {
+      "id": "plate-1",
+      "type": "PLATE",
+      "x": 368,
+      "y": 16,
+      "seed": 20216247,
+      "character": "METAL",
+      "params": {
+        "body": 0.64,
+        "decay": 0.85
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 544,
+      "y": 16,
+      "seed": 20224166,
+      "character": "METAL",
+      "params": {
+        "flow": 0.19,
+        "range": 0.17
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 16,
+      "y": 184,
+      "seed": 20232085,
+      "character": "METAL",
+      "params": {
+        "level": 0.73
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "ad540a7a-7eca-401b-a4cb-08cae1b2425a",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "c08e6715-1001-4bb1-990d-2d6143a7801b",
+      "from": {
+        "module": "chip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "plate-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "04e67e5a-2dba-463e-90e2-39ea5677c769",
+      "from": {
+        "module": "plate-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "0a9eaea7-2bfa-4fe2-9b50-6c5627e3846e",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "plate-1",
+        "port": "body"
+      }
+    },
+    {
+      "id": "9fc9a5cf-93aa-4696-8836-88f8fbb6f024",
+      "from": {
+        "module": "tide-1",
+        "port": "age"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "pitch"
+      }
+    }
+  ]
+}

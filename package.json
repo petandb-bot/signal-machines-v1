@@ -1,7 +1,7 @@
 {
   "name": "signal-machines",
   "private": true,
-  "version": "0.19.0",
+  "version": "0.20.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
@@ -10,12 +10,13 @@
     "test": "vitest run",
     "preview": "vite preview --host 0.0.0.0",
     "verify:build": "node scripts/verify-build.mjs",
-    "prebuild": "node scripts/render-strange-sounds.mjs && node scripts/render-found-level.mjs && node scripts/render-four-machines.mjs && node scripts/package-source.mjs",
+    "prebuild": "node scripts/package-curated-presets.mjs && node scripts/render-strange-sounds.mjs && node scripts/render-found-level.mjs && node scripts/render-four-machines.mjs && node scripts/package-source.mjs",
     "package:source": "node scripts/package-source.mjs",
-    "predev": "node scripts/render-strange-sounds.mjs && node scripts/render-found-level.mjs && node scripts/render-four-machines.mjs && node scripts/package-source.mjs",
+    "predev": "node scripts/package-curated-presets.mjs && node scripts/render-strange-sounds.mjs && node scripts/render-found-level.mjs && node scripts/render-four-machines.mjs && node scripts/package-source.mjs",
     "render:examples": "node scripts/render-strange-sounds.mjs",
     "render:found": "node scripts/render-found-level.mjs",
-    "render:four": "node scripts/render-four-machines.mjs"
+    "render:four": "node scripts/render-four-machines.mjs",
+    "render:phase4": "node scripts/render-plate.mjs && node scripts/render-curated-presets.mjs"
   },
   "dependencies": {
     "p5": "2.3.4"

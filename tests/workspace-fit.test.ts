@@ -2,6 +2,7 @@
 import {afterEach,beforeEach,describe,expect,it,vi} from 'vitest';
 import {Workspace} from '../src/ui/Workspace';
 import {StateStore} from '../src/app/StateStore';
+import {metalDrift} from '../src/state/presets';
 import splitJSON from '../presets/split-orbits.json';
 import {parsePatch} from '../src/state/PatchStorage';
 import {portPosition,DEFINITIONS} from '../src/graph/definitions';
@@ -9,7 +10,7 @@ import {createModule} from '../src/graph/PatchGraph';
 
 let portrait=true,width=390,height=751,resize:()=>void,initialFrame:FrameRequestCallback;
 beforeEach(()=>{
-  localStorage.clear();document.body.replaceChildren();portrait=true;width=390;height=751;
+  localStorage.clear();localStorage.setItem('signal-machines.patch.v1',JSON.stringify(metalDrift()));document.body.replaceChildren();portrait=true;width=390;height=751;
   vi.spyOn(window,'matchMedia').mockImplementation(()=>({get matches(){return portrait;}} as MediaQueryList));
   vi.stubGlobal('ResizeObserver',class{constructor(callback:()=>void){resize=callback;}observe(){}disconnect(){}});
   HTMLElement.prototype.setPointerCapture=()=>{};
@@ -91,7 +92,7 @@ describe('portrait display coordinates and viewport',()=>{
   const {view,store}=useSplit();view.root.style.paddingLeft='24px';view.root.style.paddingRight='12px';view.root.style.paddingBottom='34px';width=320;height=475;resize();
   const t=transform(view);expect(t.zoom).toBeLessThan(.875);for(const p of points(view,store)){expect(p.x*t.zoom+t.x).toBeGreaterThanOrEqual(24);expect((p.x+128)*t.zoom+t.x).toBeLessThanOrEqual(308);}
  });
- it.each([[844,340,108.57777778,9.64444444,.91111111],[1280,744,296,196,1]])('retains the original default FIT at %s×%s',(w,h,x,y,zoom)=>{
+ it.each([[844,340,108.57777778,9.64444444,.91111111],[1280,744,296,196,1]])('retains the archived METAL DRIFT FIT at %s×%s',(w,h,x,y,zoom)=>{
   portrait=false;width=w;height=h;const {view}=workspace(),t=transform(view);expect(t.x).toBeCloseTo(x,6);expect(t.y).toBeCloseTo(y,6);expect(t.zoom).toBeCloseTo(zoom,6);
  });
  it('persists a normal landscape drag while portrait dragging remains display-only',()=>{

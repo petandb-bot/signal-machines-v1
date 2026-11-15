@@ -1,0 +1,990 @@
+{
+  "rate": 24000,
+  "method": "Wet-only impulse; 20ms local Abel/Huang normalized echo density, Gaussian reference .31731. Schroeder reverse integrated energy, linear regression -5 to -25dB extrapolated to -60dB (T20), r2 retained. Broad FFT masks for band analysis are noncausal and can smear early boundaries: band results are decay estimates only, not exact filter calibration. PCM24 quantization and finite 24s IR bias very late tails. No listening/iPhone guarantee.",
+  "rows": [
+    {
+      "id": "chamber-room",
+      "broadband": {
+        "rt60": 1.6910650723626617,
+        "r2": 0.9931955369231057,
+        "fitRangeDb": [
+          -5,
+          -25
+        ],
+        "lastFitSecond": 0.7847916666666667
+      },
+      "bands": {
+        "low": {
+          "rt60": 2.0298097333176734,
+          "r2": 0.9952666281885294,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 0.95475
+        },
+        "mid": {
+          "rt60": 1.7419538467048854,
+          "r2": 0.9938035674748043,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 0.8232916666666666
+        },
+        "high": {
+          "rt60": 1.2339675629209372,
+          "r2": 0.9559732178021484,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 0.5407916666666667
+        }
+      },
+      "echoDensity": [
+        {
+          "seconds": 0.025,
+          "normalizedEchoDensity": 0,
+          "nonzeroFraction": 0.0
+        },
+        {
+          "seconds": 0.05,
+          "normalizedEchoDensity": 0,
+          "nonzeroFraction": 0.0
+        },
+        {
+          "seconds": 0.1,
+          "normalizedEchoDensity": 0.03282799153297963,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.2,
+          "normalizedEchoDensity": 0.03939358983957556,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.4,
+          "normalizedEchoDensity": 0.538379061140866,
+          "nonzeroFraction": 0.9958333333333333
+        },
+        {
+          "seconds": 0.8,
+          "normalizedEchoDensity": 0.21009914581106964,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 1.6,
+          "normalizedEchoDensity": 0.8535277798574704,
+          "nonzeroFraction": 0.925
+        }
+      ],
+      "earlyEnergy10ms": [
+        {
+          "seconds": 0.0,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.01,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.02,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.03,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.04,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.05,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.06,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.07,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.08,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.09,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.1,
+          "energy": 0.0005661059154533632
+        },
+        {
+          "seconds": 0.11,
+          "energy": 9.021056825986307e-07
+        },
+        {
+          "seconds": 0.12,
+          "energy": 2.1321973520116444e-07
+        },
+        {
+          "seconds": 0.13,
+          "energy": 0.0005310321673590579
+        },
+        {
+          "seconds": 0.14,
+          "energy": 1.8109589490222788e-06
+        },
+        {
+          "seconds": 0.15,
+          "energy": 4.282007353140216e-07
+        },
+        {
+          "seconds": 0.16,
+          "energy": 1.0123991955879319e-07
+        },
+        {
+          "seconds": 0.17,
+          "energy": 2.394904186076019e-08
+        },
+        {
+          "seconds": 0.18,
+          "energy": 0.0006822439441549477
+        },
+        {
+          "seconds": 0.19,
+          "energy": 1.8981443616894467e-06
+        },
+        {
+          "seconds": 0.2,
+          "energy": 2.6440833153174026e-05
+        }
+      ]
+    },
+    {
+      "id": "chamber-weave",
+      "broadband": {
+        "rt60": 2.0899959040203555,
+        "r2": 0.9797153628627135,
+        "fitRangeDb": [
+          -5,
+          -25
+        ],
+        "lastFitSecond": 0.8749166666666667
+      },
+      "bands": {
+        "low": {
+          "rt60": 2.5120313945874484,
+          "r2": 0.9908800246769824,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 1.0950416666666667
+        },
+        "mid": {
+          "rt60": 2.1940623153766214,
+          "r2": 0.9848347618965052,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 0.9894583333333333
+        },
+        "high": {
+          "rt60": 1.4599923185542134,
+          "r2": 0.9028895798603569,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 0.62475
+        }
+      },
+      "echoDensity": [
+        {
+          "seconds": 0.025,
+          "normalizedEchoDensity": 0,
+          "nonzeroFraction": 0.0
+        },
+        {
+          "seconds": 0.05,
+          "normalizedEchoDensity": 0,
+          "nonzeroFraction": 0.0
+        },
+        {
+          "seconds": 0.1,
+          "normalizedEchoDensity": 0.03282799153297963,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.2,
+          "normalizedEchoDensity": 0.03939358983957556,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.4,
+          "normalizedEchoDensity": 0.05252478645276741,
+          "nonzeroFraction": 0.9895833333333334
+        },
+        {
+          "seconds": 0.8,
+          "normalizedEchoDensity": 0.07222158137255519,
+          "nonzeroFraction": 0.9895833333333334
+        },
+        {
+          "seconds": 1.6,
+          "normalizedEchoDensity": 0.4333294882353312,
+          "nonzeroFraction": 0.9145833333333333
+        }
+      ],
+      "earlyEnergy10ms": [
+        {
+          "seconds": 0.0,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.01,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.02,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.03,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.04,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.05,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.06,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.07,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.08,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.09,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.1,
+          "energy": 0.0005661059154533632
+        },
+        {
+          "seconds": 0.11,
+          "energy": 9.021056825986307e-07
+        },
+        {
+          "seconds": 0.12,
+          "energy": 2.1321973520116444e-07
+        },
+        {
+          "seconds": 0.13,
+          "energy": 0.0005310321673590579
+        },
+        {
+          "seconds": 0.14,
+          "energy": 1.8109589490222788e-06
+        },
+        {
+          "seconds": 0.15,
+          "energy": 4.282007353140216e-07
+        },
+        {
+          "seconds": 0.16,
+          "energy": 1.0123991955879319e-07
+        },
+        {
+          "seconds": 0.17,
+          "energy": 2.394904186076019e-08
+        },
+        {
+          "seconds": 0.18,
+          "energy": 0.0006822439441549477
+        },
+        {
+          "seconds": 0.19,
+          "energy": 1.8981443616894467e-06
+        },
+        {
+          "seconds": 0.2,
+          "energy": 7.687633203090627e-05
+        }
+      ]
+    },
+    {
+      "id": "plate-low",
+      "broadband": {
+        "rt60": 2.4984361359177325,
+        "r2": 0.9999893305044093,
+        "fitRangeDb": [
+          -5,
+          -25
+        ],
+        "lastFitSecond": 1.1299583333333334
+      },
+      "bands": {
+        "low": {
+          "rt60": 2.5135784135460413,
+          "r2": 0.9994624094638604,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 1.1299166666666667
+        },
+        "mid": {
+          "rt60": 2.6303426187177967,
+          "r2": 0.9999393410020072,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 1.184
+        },
+        "high": {
+          "rt60": 2.499453625334855,
+          "r2": 0.9999534811433453,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 1.1345416666666666
+        }
+      },
+      "echoDensity": [
+        {
+          "seconds": 0.025,
+          "normalizedEchoDensity": 0.16413995766489817,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.05,
+          "normalizedEchoDensity": 0.17727115427809004,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.1,
+          "normalizedEchoDensity": 0.3545423085561801,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.2,
+          "normalizedEchoDensity": 0.5712070526738456,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.4,
+          "normalizedEchoDensity": 0.892921369697046,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.8,
+          "normalizedEchoDensity": 1.0242333358289646,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 1.6,
+          "normalizedEchoDensity": 0.9388805578432176,
+          "nonzeroFraction": 0.9958333333333333
+        }
+      ],
+      "earlyEnergy10ms": [
+        {
+          "seconds": 0.0,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.01,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.02,
+          "energy": 1.0304574971087277e-09
+        },
+        {
+          "seconds": 0.03,
+          "energy": 4.129047823653309e-07
+        },
+        {
+          "seconds": 0.04,
+          "energy": 7.571067840217438e-06
+        },
+        {
+          "seconds": 0.05,
+          "energy": 6.259393209973041e-05
+        },
+        {
+          "seconds": 0.06,
+          "energy": 0.0005875747458645719
+        },
+        {
+          "seconds": 0.07,
+          "energy": 0.0005793244156251376
+        },
+        {
+          "seconds": 0.08,
+          "energy": 0.0010056611997839582
+        },
+        {
+          "seconds": 0.09,
+          "energy": 0.0009856017675105022
+        },
+        {
+          "seconds": 0.1,
+          "energy": 0.001196742081177149
+        },
+        {
+          "seconds": 0.11,
+          "energy": 0.0010862888214262512
+        },
+        {
+          "seconds": 0.12,
+          "energy": 0.0009783787996582305
+        },
+        {
+          "seconds": 0.13,
+          "energy": 0.001534813555196024
+        },
+        {
+          "seconds": 0.14,
+          "energy": 0.0007392343513288324
+        },
+        {
+          "seconds": 0.15,
+          "energy": 0.0007449860372048533
+        },
+        {
+          "seconds": 0.16,
+          "energy": 0.0008613578047942383
+        },
+        {
+          "seconds": 0.17,
+          "energy": 0.0008494835232966125
+        },
+        {
+          "seconds": 0.18,
+          "energy": 0.0008282594867523585
+        },
+        {
+          "seconds": 0.19,
+          "energy": 0.0006881300490562126
+        },
+        {
+          "seconds": 0.2,
+          "energy": 0.0007487344586820655
+        }
+      ]
+    },
+    {
+      "id": "plate-default",
+      "broadband": {
+        "rt60": 2.1836156344327833,
+        "r2": 0.9999570657250166,
+        "fitRangeDb": [
+          -5,
+          -25
+        ],
+        "lastFitSecond": 0.9899166666666667
+      },
+      "bands": {
+        "low": {
+          "rt60": 2.4269346209201506,
+          "r2": 0.9992153300705305,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 1.089125
+        },
+        "mid": {
+          "rt60": 2.4684960561335276,
+          "r2": 0.9999359667597896,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 1.1229166666666666
+        },
+        "high": {
+          "rt60": 2.059744934271214,
+          "r2": 0.9999758874873451,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 0.9416666666666667
+        }
+      },
+      "echoDensity": [
+        {
+          "seconds": 0.025,
+          "normalizedEchoDensity": 0.4398950865419271,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.05,
+          "normalizedEchoDensity": 0.630297437433209,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.1,
+          "normalizedEchoDensity": 0.7813061984849153,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.2,
+          "normalizedEchoDensity": 0.9651429510696014,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.4,
+          "normalizedEchoDensity": 0.9520117544564093,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.8,
+          "normalizedEchoDensity": 1.0242333358289646,
+          "nonzeroFraction": 0.9979166666666667
+        },
+        {
+          "seconds": 1.6,
+          "normalizedEchoDensity": 1.0176677375223686,
+          "nonzeroFraction": 0.9979166666666667
+        }
+      ],
+      "earlyEnergy10ms": [
+        {
+          "seconds": 0.0,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.01,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.02,
+          "energy": 1.3176835409467458e-06
+        },
+        {
+          "seconds": 0.03,
+          "energy": 1.5347740784932284e-05
+        },
+        {
+          "seconds": 0.04,
+          "energy": 7.22112153823673e-05
+        },
+        {
+          "seconds": 0.05,
+          "energy": 0.00023142108544504936
+        },
+        {
+          "seconds": 0.06,
+          "energy": 0.00046588269687219963
+        },
+        {
+          "seconds": 0.07,
+          "energy": 0.0006442063845781831
+        },
+        {
+          "seconds": 0.08,
+          "energy": 0.0008858326407619188
+        },
+        {
+          "seconds": 0.09,
+          "energy": 0.0010527570325393754
+        },
+        {
+          "seconds": 0.1,
+          "energy": 0.0011201082308502919
+        },
+        {
+          "seconds": 0.11,
+          "energy": 0.0012176085274120396
+        },
+        {
+          "seconds": 0.12,
+          "energy": 0.0011128173213137416
+        },
+        {
+          "seconds": 0.13,
+          "energy": 0.0009749321679066725
+        },
+        {
+          "seconds": 0.14,
+          "energy": 0.0008863616385497153
+        },
+        {
+          "seconds": 0.15,
+          "energy": 0.0007849826736503474
+        },
+        {
+          "seconds": 0.16,
+          "energy": 0.0007327430559342929
+        },
+        {
+          "seconds": 0.17,
+          "energy": 0.000783714762803811
+        },
+        {
+          "seconds": 0.18,
+          "energy": 0.0007252020896260092
+        },
+        {
+          "seconds": 0.19,
+          "energy": 0.0006506885383714689
+        },
+        {
+          "seconds": 0.2,
+          "energy": 0.0006859457206900288
+        }
+      ]
+    },
+    {
+      "id": "plate-high",
+      "broadband": {
+        "rt60": 1.700761929636775,
+        "r2": 0.9976386413114516,
+        "fitRangeDb": [
+          -5,
+          -25
+        ],
+        "lastFitSecond": 0.7551666666666667
+      },
+      "bands": {
+        "low": {
+          "rt60": 2.1823820031388887,
+          "r2": 0.9996041254167489,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 0.9667916666666667
+        },
+        "mid": {
+          "rt60": 1.9896460168388128,
+          "r2": 0.9996774157580912,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 0.8940833333333333
+        },
+        "high": {
+          "rt60": 1.2139971860766334,
+          "r2": 0.9998270313323705,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 0.5838333333333333
+        }
+      },
+      "echoDensity": [
+        {
+          "seconds": 0.025,
+          "normalizedEchoDensity": 0.5055510696078864,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.05,
+          "normalizedEchoDensity": 0.8403965832442786,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.1,
+          "normalizedEchoDensity": 0.9520117544564093,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.2,
+          "normalizedEchoDensity": 1.057061327361944,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.4,
+          "normalizedEchoDensity": 0.9126181646168339,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.8,
+          "normalizedEchoDensity": 0.9848397459893891,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 1.6,
+          "normalizedEchoDensity": 1.1161517121213076,
+          "nonzeroFraction": 0.9770833333333333
+        }
+      ],
+      "earlyEnergy10ms": [
+        {
+          "seconds": 0.0,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.01,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.02,
+          "energy": 4.5095316977494804e-05
+        },
+        {
+          "seconds": 0.03,
+          "energy": 7.247207311422699e-05
+        },
+        {
+          "seconds": 0.04,
+          "energy": 0.00021763360606996685
+        },
+        {
+          "seconds": 0.05,
+          "energy": 0.0003889228696181135
+        },
+        {
+          "seconds": 0.06,
+          "energy": 0.0005032698420848192
+        },
+        {
+          "seconds": 0.07,
+          "energy": 0.000631661226492497
+        },
+        {
+          "seconds": 0.08,
+          "energy": 0.00082048118419209
+        },
+        {
+          "seconds": 0.09,
+          "energy": 0.0009553319553106121
+        },
+        {
+          "seconds": 0.1,
+          "energy": 0.0008834891683022761
+        },
+        {
+          "seconds": 0.11,
+          "energy": 0.0009804797096677476
+        },
+        {
+          "seconds": 0.12,
+          "energy": 0.0008052653853098946
+        },
+        {
+          "seconds": 0.13,
+          "energy": 0.0008174828485181251
+        },
+        {
+          "seconds": 0.14,
+          "energy": 0.0007383511715204349
+        },
+        {
+          "seconds": 0.15,
+          "energy": 0.0005898847855263512
+        },
+        {
+          "seconds": 0.16,
+          "energy": 0.0005976403365224314
+        },
+        {
+          "seconds": 0.17,
+          "energy": 0.0005335998507547401
+        },
+        {
+          "seconds": 0.18,
+          "energy": 0.000486235065423557
+        },
+        {
+          "seconds": 0.19,
+          "energy": 0.0004619363455162784
+        },
+        {
+          "seconds": 0.2,
+          "energy": 0.00042526417102806136
+        }
+      ]
+    },
+    {
+      "id": "plate-long",
+      "broadband": {
+        "rt60": 8.025707575241395,
+        "r2": 0.9999106625090658,
+        "fitRangeDb": [
+          -5,
+          -25
+        ],
+        "lastFitSecond": 3.412375
+      },
+      "bands": {
+        "low": {
+          "rt60": 8.566616997434163,
+          "r2": 0.9998723605235809,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 3.673625
+        },
+        "mid": {
+          "rt60": 9.147871921769532,
+          "r2": 0.999989446042775,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 3.911
+        },
+        "high": {
+          "rt60": 7.500377412633846,
+          "r2": 0.9999891076893236,
+          "fitRangeDb": [
+            -5,
+            -25
+          ],
+          "lastFitSecond": 3.2211666666666665
+        }
+      },
+      "echoDensity": [
+        {
+          "seconds": 0.025,
+          "normalizedEchoDensity": 0.4398950865419271,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.05,
+          "normalizedEchoDensity": 0.630297437433209,
+          "nonzeroFraction": 0.9979166666666667
+        },
+        {
+          "seconds": 0.1,
+          "normalizedEchoDensity": 0.7944373950981071,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.2,
+          "normalizedEchoDensity": 0.9651429510696014,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.4,
+          "normalizedEchoDensity": 0.9454461561498134,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 0.8,
+          "normalizedEchoDensity": 0.9914053442959849,
+          "nonzeroFraction": 1.0
+        },
+        {
+          "seconds": 1.6,
+          "normalizedEchoDensity": 1.076758122281732,
+          "nonzeroFraction": 1.0
+        }
+      ],
+      "earlyEnergy10ms": [
+        {
+          "seconds": 0.0,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.01,
+          "energy": 0.0
+        },
+        {
+          "seconds": 0.02,
+          "energy": 3.7190537227616005e-07
+        },
+        {
+          "seconds": 0.03,
+          "energy": 4.34117373515619e-06
+        },
+        {
+          "seconds": 0.04,
+          "energy": 2.051657688184605e-05
+        },
+        {
+          "seconds": 0.05,
+          "energy": 6.612065480737783e-05
+        },
+        {
+          "seconds": 0.06,
+          "energy": 0.00013461308152784568
+        },
+        {
+          "seconds": 0.07,
+          "energy": 0.0001887458489875371
+        },
+        {
+          "seconds": 0.08,
+          "energy": 0.00026557002452420875
+        },
+        {
+          "seconds": 0.09,
+          "energy": 0.0003256854680273591
+        },
+        {
+          "seconds": 0.1,
+          "energy": 0.0003550112935784
+        },
+        {
+          "seconds": 0.11,
+          "energy": 0.00039629586869693867
+        },
+        {
+          "seconds": 0.12,
+          "energy": 0.00037670580192639136
+        },
+        {
+          "seconds": 0.13,
+          "energy": 0.00034611851383203884
+        },
+        {
+          "seconds": 0.14,
+          "energy": 0.0003390727493695067
+        },
+        {
+          "seconds": 0.15,
+          "energy": 0.0003162416174831151
+        },
+        {
+          "seconds": 0.16,
+          "energy": 0.00031459278986289974
+        },
+        {
+          "seconds": 0.17,
+          "energy": 0.0003542370775164727
+        },
+        {
+          "seconds": 0.18,
+          "energy": 0.00034368526651462616
+        },
+        {
+          "seconds": 0.19,
+          "energy": 0.00031912721139804034
+        },
+        {
+          "seconds": 0.2,
+          "energy": 0.000351524317650842
+        }
+      ]
+    }
+  ]
+}
