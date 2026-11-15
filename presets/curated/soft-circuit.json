@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "SOFT CIRCUIT",
+  "bpm": 76,
+  "master": 0.55,
+  "seed": 230001,
+  "modules": [
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 16,
+      "seed": 230001,
+      "character": "METAL",
+      "params": {
+        "flow": 0.28,
+        "range": 0.12
+      }
+    },
+    {
+      "id": "sideways-1",
+      "type": "SIDEWAYS",
+      "x": 192,
+      "y": 16,
+      "seed": 237920,
+      "character": "METAL",
+      "params": {
+        "attraction": 0.68,
+        "inertia": 0.72
+      }
+    },
+    {
+      "id": "modulator-1",
+      "type": "OPERATOR",
+      "x": 368,
+      "y": 16,
+      "seed": 245839,
+      "character": "METAL",
+      "params": {
+        "tune": 0.75,
+        "depth": 0
+      }
+    },
+    {
+      "id": "carrier-1",
+      "type": "OPERATOR",
+      "x": 544,
+      "y": 16,
+      "seed": 253758,
+      "character": "METAL",
+      "params": {
+        "tune": 0.5,
+        "depth": 0.36
+      }
+    },
+    {
+      "id": "caustic-1",
+      "type": "CAUSTIC",
+      "x": 16,
+      "y": 184,
+      "seed": 261677,
+      "character": "METAL",
+      "params": {
+        "burn": 0.12,
+        "starve": 0.05
+      }
+    },
+    {
+      "id": "chorus-1",
+      "type": "CHORUS",
+      "x": 192,
+      "y": 184,
+      "seed": 269596,
+      "character": "METAL",
+      "params": {
+        "depth": 0.24,
+        "drift": 0.12
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 184,
+      "seed": 277515,
+      "character": "METAL",
+      "params": {
+        "level": 0.45
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "new-tide-1-drift-sideways-1-a",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "sideways-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "new-tide-1-tide-sideways-1-b",
+      "from": {
+        "module": "tide-1",
+        "port": "tide"
+      },
+      "to": {
+        "module": "sideways-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "new-sideways-1-a-carrier-1-pitch",
+      "from": {
+        "module": "sideways-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "carrier-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "new-sideways-1-b-modulator-1-pitch",
+      "from": {
+        "module": "sideways-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "modulator-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "new-modulator-1-audio-carrier-1-mod",
+      "from": {
+        "module": "modulator-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "carrier-1",
+        "port": "mod"
+      }
+    },
+    {
+      "id": "new-carrier-1-audio-caustic-1-audio",
+      "from": {
+        "module": "carrier-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "caustic-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-caustic-1-audio-chorus-1-audio",
+      "from": {
+        "module": "caustic-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chorus-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-chorus-1-audio-output-1-audio",
+      "from": {
+        "module": "chorus-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

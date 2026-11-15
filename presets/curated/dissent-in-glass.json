@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "DISSENT IN GLASS",
+  "bpm": 79,
+  "master": 0.55,
+  "seed": 230008,
+  "modules": [
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 16,
+      "y": 16,
+      "seed": 230008,
+      "character": "METAL",
+      "params": {
+        "flow": 0.4,
+        "range": 0.24
+      }
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 192,
+      "y": 16,
+      "seed": 237927,
+      "character": "METAL",
+      "params": {
+        "spread": 0.18,
+        "drift": 0.08
+      }
+    },
+    {
+      "id": "bounce-1",
+      "type": "BOUNCE",
+      "x": 368,
+      "y": 16,
+      "seed": 245846,
+      "character": "METAL",
+      "params": {
+        "tilt": 0.19,
+        "elastic": 0.7
+      }
+    },
+    {
+      "id": "quorum-1",
+      "type": "QUORUM",
+      "x": 544,
+      "y": 16,
+      "seed": 253765,
+      "character": "METAL",
+      "params": {
+        "agreement": 0.72,
+        "stubborn": 0.7
+      }
+    },
+    {
+      "id": "osc-a",
+      "type": "OSC",
+      "x": 16,
+      "y": 184,
+      "seed": 261684,
+      "character": "METAL",
+      "params": {
+        "tune": 0.65,
+        "level": 0.25
+      },
+      "mode": "TRIANGLE"
+    },
+    {
+      "id": "osc-b",
+      "type": "OSC",
+      "x": 192,
+      "y": 184,
+      "seed": 269603,
+      "character": "METAL",
+      "params": {
+        "tune": 0.79,
+        "level": 0.22
+      },
+      "mode": "SINE"
+    },
+    {
+      "id": "switch-1",
+      "type": "SWITCH",
+      "x": 368,
+      "y": 184,
+      "seed": 277522,
+      "character": "METAL",
+      "params": {
+        "chance": 0.68,
+        "fade": 0.58
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 184,
+      "seed": 285441,
+      "character": "METAL",
+      "params": {
+        "level": 0.64
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "new-flock-1-controlA-quorum-1-a",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "quorum-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "new-tide-1-drift-quorum-1-b",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "quorum-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "new-bounce-1-x-quorum-1-c",
+      "from": {
+        "module": "bounce-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "quorum-1",
+        "port": "c"
+      }
+    },
+    {
+      "id": "new-quorum-1-value-osc-a-pitch",
+      "from": {
+        "module": "quorum-1",
+        "port": "value"
+      },
+      "to": {
+        "module": "osc-a",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "new-quorum-1-dissent-switch-1-trigger",
+      "from": {
+        "module": "quorum-1",
+        "port": "dissent"
+      },
+      "to": {
+        "module": "switch-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "new-osc-a-audio-switch-1-a",
+      "from": {
+        "module": "osc-a",
+        "port": "audio"
+      },
+      "to": {
+        "module": "switch-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "new-osc-b-audio-switch-1-b",
+      "from": {
+        "module": "osc-b",
+        "port": "audio"
+      },
+      "to": {
+        "module": "switch-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "new-switch-1-audio-output-1-audio",
+      "from": {
+        "module": "switch-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

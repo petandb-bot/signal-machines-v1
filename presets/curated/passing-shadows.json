@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "PASSING SHADOWS",
+  "bpm": 71,
+  "master": 0.55,
+  "seed": 230010,
+  "modules": [
+    {
+      "id": "found-1",
+      "type": "FOUND",
+      "x": 16,
+      "y": 16,
+      "seed": 230010,
+      "character": "METAL",
+      "params": {
+        "wander": 0.15,
+        "alter": 0.24
+      },
+      "sample": "builtin:machine"
+    },
+    {
+      "id": "cloud-1",
+      "type": "CLOUD",
+      "x": 192,
+      "y": 16,
+      "seed": 237929,
+      "character": "METAL",
+      "params": {
+        "grain": 0.4,
+        "spread": 0.54
+      }
+    },
+    {
+      "id": "bounce-1",
+      "type": "BOUNCE",
+      "x": 368,
+      "y": 16,
+      "seed": 245848,
+      "character": "METAL",
+      "params": {
+        "tilt": 0.15,
+        "elastic": 0.8
+      }
+    },
+    {
+      "id": "switch-1",
+      "type": "SWITCH",
+      "x": 544,
+      "y": 16,
+      "seed": 253767,
+      "character": "METAL",
+      "params": {
+        "chance": 0.55,
+        "fade": 0.58
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 184,
+      "seed": 261686,
+      "character": "METAL",
+      "params": {
+        "rate": 0,
+        "irregular": 0.17
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 192,
+      "y": 184,
+      "seed": 269605,
+      "character": "METAL",
+      "params": {
+        "level": 0.78
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "new-pulse-1-trigger-found-1-trigger",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "found-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "new-found-1-audio-cloud-1-audio",
+      "from": {
+        "module": "found-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "cloud-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-found-1-audio-switch-1-a",
+      "from": {
+        "module": "found-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "switch-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "new-cloud-1-audio-switch-1-b",
+      "from": {
+        "module": "cloud-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "switch-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "new-bounce-1-x-cloud-1-spread",
+      "from": {
+        "module": "bounce-1",
+        "port": "x"
+      },
+      "to": {
+        "module": "cloud-1",
+        "port": "spread"
+      }
+    },
+    {
+      "id": "new-bounce-1-hit-switch-1-trigger",
+      "from": {
+        "module": "bounce-1",
+        "port": "hit"
+      },
+      "to": {
+        "module": "switch-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "new-switch-1-audio-output-1-audio",
+      "from": {
+        "module": "switch-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

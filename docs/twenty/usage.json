@@ -1,0 +1,349 @@
+{
+  "originalUsed": [
+    "ALLOY",
+    "BOUNCE",
+    "BRANCH",
+    "CHAMBER",
+    "CHIP",
+    "COUNT",
+    "CUTS",
+    "DRONE",
+    "FERAL",
+    "FILTER",
+    "FLOCK",
+    "FORMANT",
+    "FOUND",
+    "LEVEL",
+    "LOGIC",
+    "LOSS",
+    "LPG",
+    "MAP",
+    "MIRAGE",
+    "NERVE",
+    "ORBIT",
+    "OSC",
+    "OUTPUT",
+    "PARASITE",
+    "PARTIAL",
+    "PENDULUM",
+    "PLATE",
+    "PULSE",
+    "QUANTIZE",
+    "SHAPE",
+    "SIEVE",
+    "SLEW",
+    "SMEAR",
+    "SYMPATHY",
+    "TAPE",
+    "TIDE",
+    "TOUCH",
+    "VCA",
+    "WEFT"
+  ],
+  "newlyUsed": [
+    "CAUSTIC",
+    "CHANCE",
+    "CHORUS",
+    "CLIP",
+    "CLOUD",
+    "COMB",
+    "CRUSH",
+    "DUCK",
+    "EDGE",
+    "FAULT LINE",
+    "FRACTURE",
+    "FRICTION",
+    "FUZZ",
+    "MESH",
+    "NOISE",
+    "OPERATOR",
+    "PRISM",
+    "QUORUM",
+    "RESON",
+    "RING",
+    "SHIFT",
+    "SIDEWAYS",
+    "SNAP",
+    "SWARM",
+    "SWITCH",
+    "UNSPENT",
+    "VENOM",
+    "WALLS"
+  ],
+  "totalUsed": 67,
+  "notInAutonomousPresets": [
+    "LOOP"
+  ],
+  "presetsByModule": {
+    "WALLS": [
+      "paper-windows"
+    ],
+    "PLATE": [
+      "late-light"
+    ],
+    "SYMPATHY": [
+      "exchanging-bodies"
+    ],
+    "NERVE": [
+      "small-hours"
+    ],
+    "CUTS": [
+      "small-hours"
+    ],
+    "LOSS": [
+      "small-hours"
+    ],
+    "MIRAGE": [
+      "small-hours"
+    ],
+    "LEVEL": [
+      "room-air",
+      "small-hours",
+      "exchanging-bodies",
+      "deferred-signal",
+      "broken-radio"
+    ],
+    "FOUND": [
+      "room-air",
+      "passing-shadows"
+    ],
+    "SMEAR": [
+      "dissolving-metal"
+    ],
+    "FRICTION": [
+      "borrowed-light"
+    ],
+    "PULSE": [
+      "pixel-dust",
+      "exchanging-bodies",
+      "dissolving-metal",
+      "tape-garden",
+      "late-light",
+      "borrowed-light",
+      "deferred-signal",
+      "shattered-clock",
+      "passing-shadows"
+    ],
+    "BRANCH": [
+      "pixel-dust"
+    ],
+    "FLOCK": [
+      "dissolving-metal",
+      "tape-garden",
+      "borrowed-light",
+      "dissent-in-glass"
+    ],
+    "ALLOY": [
+      "dissolving-metal"
+    ],
+    "RESON": [
+      "deferred-signal"
+    ],
+    "FRACTURE": [
+      "shattered-clock"
+    ],
+    "VENOM": [
+      "broken-radio"
+    ],
+    "CAUSTIC": [
+      "soft-circuit"
+    ],
+    "SNAP": [
+      "broken-radio"
+    ],
+    "TAPE": [
+      "tape-garden"
+    ],
+    "DRONE": [
+      "still-almost-moving-ii",
+      "tape-garden"
+    ],
+    "SIEVE": [
+      "tape-garden"
+    ],
+    "PARASITE": [
+      "dissolving-metal"
+    ],
+    "VCA": [
+      "still-almost-moving-ii",
+      "off-grid"
+    ],
+    "SHAPE": [
+      "binary-fever",
+      "off-grid",
+      "velvet-engine"
+    ],
+    "SWITCH": [
+      "dissent-in-glass",
+      "passing-shadows"
+    ],
+    "LOOP": [],
+    "CHORUS": [
+      "soft-circuit"
+    ],
+    "CLOUD": [
+      "passing-shadows"
+    ],
+    "OSC": [
+      "binary-fever",
+      "velvet-engine",
+      "dissent-in-glass"
+    ],
+    "NOISE": [
+      "paper-windows"
+    ],
+    "FILTER": [
+      "binary-fever",
+      "velvet-engine",
+      "broken-radio"
+    ],
+    "RING": [
+      "threads-cross"
+    ],
+    "COMB": [
+      "paper-windows"
+    ],
+    "SHIFT": [
+      "borrowed-light"
+    ],
+    "CHANCE": [
+      "deferred-signal"
+    ],
+    "PRISM": [
+      "borrowed-light"
+    ],
+    "PARTIAL": [
+      "still-almost-moving-ii"
+    ],
+    "WEFT": [
+      "binary-fever",
+      "off-grid",
+      "paper-windows",
+      "velvet-engine",
+      "broken-radio"
+    ],
+    "TIDE": [
+      "still-almost-moving-ii",
+      "room-air",
+      "exchanging-bodies",
+      "binary-fever",
+      "late-light",
+      "soft-circuit",
+      "dissent-in-glass",
+      "broken-radio"
+    ],
+    "BOUNCE": [
+      "off-grid",
+      "dissent-in-glass",
+      "passing-shadows"
+    ],
+    "FERAL": [
+      "binary-fever"
+    ],
+    "COUNT": [
+      "binary-fever",
+      "tape-garden",
+      "late-light"
+    ],
+    "MAP": [
+      "binary-fever"
+    ],
+    "QUANTIZE": [
+      "tape-garden",
+      "late-light",
+      "off-grid"
+    ],
+    "SLEW": [
+      "still-almost-moving-ii"
+    ],
+    "FORMANT": [
+      "off-grid"
+    ],
+    "LOGIC": [
+      "exchanging-bodies"
+    ],
+    "DUCK": [
+      "velvet-engine"
+    ],
+    "SWARM": [
+      "threads-cross"
+    ],
+    "UNSPENT": [
+      "deferred-signal"
+    ],
+    "SIDEWAYS": [
+      "soft-circuit"
+    ],
+    "QUORUM": [
+      "dissent-in-glass"
+    ],
+    "FAULT LINE": [
+      "shattered-clock"
+    ],
+    "CLIP": [
+      "velvet-engine"
+    ],
+    "FUZZ": [
+      "velvet-engine"
+    ],
+    "CRUSH": [
+      "shattered-clock"
+    ],
+    "CHIP": [
+      "pixel-dust",
+      "late-light",
+      "shattered-clock"
+    ],
+    "TOUCH": [
+      "dissolving-metal"
+    ],
+    "PENDULUM": [
+      "pixel-dust"
+    ],
+    "LPG": [
+      "tape-garden",
+      "paper-windows"
+    ],
+    "OPERATOR": [
+      "soft-circuit",
+      "threads-cross"
+    ],
+    "EDGE": [
+      "shattered-clock"
+    ],
+    "MESH": [
+      "threads-cross"
+    ],
+    "ORBIT": [
+      "room-air",
+      "dissolving-metal",
+      "threads-cross"
+    ],
+    "CHAMBER": [
+      "still-almost-moving-ii",
+      "room-air"
+    ],
+    "OUTPUT": [
+      "still-almost-moving-ii",
+      "pixel-dust",
+      "room-air",
+      "small-hours",
+      "exchanging-bodies",
+      "dissolving-metal",
+      "binary-fever",
+      "tape-garden",
+      "late-light",
+      "off-grid",
+      "soft-circuit",
+      "paper-windows",
+      "borrowed-light",
+      "velvet-engine",
+      "deferred-signal",
+      "threads-cross",
+      "shattered-clock",
+      "dissent-in-glass",
+      "broken-radio",
+      "passing-shadows"
+    ]
+  }
+}

@@ -2,9 +2,9 @@
 import {describe,it,expect,beforeEach,vi} from 'vitest';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
 import {PRESETS,LEGACY_PRESETS,metalDrift} from '../src/state/presets';import {DEFAULT_PRESET_ID} from '../src/state/curatedPresets';import {StateStore} from '../src/app/StateStore';import {parsePatch} from '../src/state/PatchStorage';import {DSPGraph} from '../src/audio/DSPGraph';import {builtinFound} from '../src/samples/FoundData';
 beforeEach(()=>localStorage.clear());
-describe('ten musical environments and preserved archives',()=>{
- it('has ten stable identities, independent patch objects and matching standalone JSON',()=>{
-  expect(PRESETS).toHaveLength(10);expect(new Set(PRESETS.map(p=>p.id)).size).toBe(10);expect(LEGACY_PRESETS).toHaveLength(42);
+describe('twenty musical environments and preserved archives',()=>{
+ it('has twenty stable identities, independent patch objects and matching standalone JSON',()=>{
+  expect(PRESETS).toHaveLength(20);expect(new Set(PRESETS.map(p=>p.id)).size).toBe(20);expect(LEGACY_PRESETS).toHaveLength(42);
   for(const preset of PRESETS){const p=preset.create();expect(p).toEqual(parsePatch(readFileSync('presets/curated/'+preset.id+'.json','utf8')));expect(p.name).toBe(preset.name);p.modules[0].params={};expect(preset.create().modules[0].params).not.toEqual({});}
  });
  it('protects every legacy DSP source and JSON fixture byte for byte',()=>{const baseline=JSON.parse(readFileSync('docs/phase4/legacy-v019.json','utf8'));for(const [path,hash]of Object.entries(baseline.hashes))expect(createHash('sha256').update(readFileSync(path)).digest('hex'),path).toBe(hash);});

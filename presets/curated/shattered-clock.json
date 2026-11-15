@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "SHATTERED CLOCK",
+  "bpm": 91,
+  "master": 0.55,
+  "seed": 230007,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 230007,
+      "character": "METAL",
+      "params": {
+        "rate": 0.34,
+        "irregular": 0.19
+      }
+    },
+    {
+      "id": "chip-1",
+      "type": "CHIP",
+      "x": 192,
+      "y": 16,
+      "seed": 237926,
+      "character": "METAL",
+      "params": {
+        "tune": 0.6,
+        "character": 0.24
+      },
+      "mode": "PULSE"
+    },
+    {
+      "id": "edge-1",
+      "type": "EDGE",
+      "x": 368,
+      "y": 16,
+      "seed": 245845,
+      "character": "METAL",
+      "params": {
+        "sense": 0.72,
+        "recovery": 0.42
+      }
+    },
+    {
+      "id": "fault-1",
+      "type": "FAULT LINE",
+      "x": 544,
+      "y": 16,
+      "seed": 253764,
+      "character": "METAL",
+      "params": {
+        "pressure": 0.46,
+        "heal": 0.73
+      }
+    },
+    {
+      "id": "fracture-1",
+      "type": "FRACTURE",
+      "x": 16,
+      "y": 184,
+      "seed": 261683,
+      "character": "METAL",
+      "params": {
+        "break": 0.28,
+        "hold": 0.22
+      }
+    },
+    {
+      "id": "crush-1",
+      "type": "CRUSH",
+      "x": 192,
+      "y": 184,
+      "seed": 269602,
+      "character": "METAL",
+      "params": {
+        "bits": 0.38,
+        "rate": 0.86
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 184,
+      "seed": 277521,
+      "character": "METAL",
+      "params": {
+        "level": 0.57
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "new-pulse-1-trigger-chip-1-trigger",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "new-chip-1-audio-edge-1-audio",
+      "from": {
+        "module": "chip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "edge-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-chip-1-audio-fault-1-audio",
+      "from": {
+        "module": "chip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fault-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-edge-1-activity-fault-1-pressure",
+      "from": {
+        "module": "edge-1",
+        "port": "activity"
+      },
+      "to": {
+        "module": "fault-1",
+        "port": "pressure"
+      }
+    },
+    {
+      "id": "new-edge-1-event-fracture-1-trigger",
+      "from": {
+        "module": "edge-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "fracture-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "new-fault-1-audio-fracture-1-audio",
+      "from": {
+        "module": "fault-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fracture-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-fracture-1-audio-crush-1-audio",
+      "from": {
+        "module": "fracture-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "crush-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-crush-1-audio-output-1-audio",
+      "from": {
+        "module": "crush-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

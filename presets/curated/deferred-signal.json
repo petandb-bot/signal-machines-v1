@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "DEFERRED SIGNAL",
+  "bpm": 107,
+  "master": 0.55,
+  "seed": 230005,
+  "modules": [
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 16,
+      "seed": 230005,
+      "character": "METAL",
+      "params": {
+        "rate": 0.5,
+        "irregular": 0.1
+      }
+    },
+    {
+      "id": "chance-1",
+      "type": "CHANCE",
+      "x": 192,
+      "y": 16,
+      "seed": 237924,
+      "character": "METAL",
+      "params": {
+        "density": 0.6,
+        "recall": 0.94
+      },
+      "mode": "HIGH"
+    },
+    {
+      "id": "unspent-1",
+      "type": "UNSPENT",
+      "x": 368,
+      "y": 16,
+      "seed": 245843,
+      "character": "METAL",
+      "params": {
+        "hold": 0.62,
+        "release": 0.32
+      }
+    },
+    {
+      "id": "reson-1",
+      "type": "RESON",
+      "x": 544,
+      "y": 16,
+      "seed": 253762,
+      "character": "METAL",
+      "params": {
+        "material": 0.38,
+        "decay": 0.43
+      }
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 16,
+      "y": 184,
+      "seed": 261681,
+      "character": "METAL",
+      "params": {
+        "boost": 0.53,
+        "comp": 0
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 192,
+      "y": 184,
+      "seed": 269600,
+      "character": "METAL",
+      "params": {
+        "level": 0.74
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "new-pulse-1-trigger-chance-1-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "chance-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "new-chance-1-a-unspent-1-event",
+      "from": {
+        "module": "chance-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "unspent-1",
+        "port": "event"
+      }
+    },
+    {
+      "id": "new-chance-1-pitch-reson-1-pitch",
+      "from": {
+        "module": "chance-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "new-unspent-1-event-reson-1-trigger",
+      "from": {
+        "module": "unspent-1",
+        "port": "event"
+      },
+      "to": {
+        "module": "reson-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "new-reson-1-audio-level-1-audio",
+      "from": {
+        "module": "reson-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-level-1-audio-output-1-audio",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

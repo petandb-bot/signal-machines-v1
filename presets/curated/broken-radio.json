@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "BROKEN RADIO",
+  "bpm": 86,
+  "master": 0.55,
+  "seed": 230009,
+  "modules": [
+    {
+      "id": "venom-1",
+      "type": "VENOM",
+      "x": 16,
+      "y": 16,
+      "seed": 230009,
+      "character": "METAL",
+      "params": {
+        "dose": 0.6,
+        "strain": 0.63
+      }
+    },
+    {
+      "id": "filter-1",
+      "type": "FILTER",
+      "x": 192,
+      "y": 16,
+      "seed": 237928,
+      "character": "METAL",
+      "params": {
+        "cutoff": 0.72,
+        "resonance": 0.28
+      },
+      "mode": "BAND"
+    },
+    {
+      "id": "snap-1",
+      "type": "SNAP",
+      "x": 368,
+      "y": 16,
+      "seed": 245847,
+      "character": "METAL",
+      "params": {
+        "fault": 0.24,
+        "recover": 0.72
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 544,
+      "y": 16,
+      "seed": 253766,
+      "character": "METAL",
+      "params": {
+        "flow": 0.26,
+        "range": 0.16
+      }
+    },
+    {
+      "id": "weft-1",
+      "type": "WEFT",
+      "x": 16,
+      "y": 184,
+      "seed": 261685,
+      "character": "METAL",
+      "params": {
+        "rate": 0.34,
+        "fill": 0.25
+      },
+      "mode": "12"
+    },
+    {
+      "id": "level-1",
+      "type": "LEVEL",
+      "x": 192,
+      "y": 184,
+      "seed": 269604,
+      "character": "METAL",
+      "params": {
+        "boost": 0.61,
+        "comp": 0
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 184,
+      "seed": 277523,
+      "character": "METAL",
+      "params": {
+        "level": 0.8
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "new-venom-1-audio-filter-1-audio",
+      "from": {
+        "module": "venom-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-filter-1-audio-snap-1-audio",
+      "from": {
+        "module": "filter-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "snap-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-tide-1-tide-filter-1-cutoff",
+      "from": {
+        "module": "tide-1",
+        "port": "tide"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "cutoff"
+      }
+    },
+    {
+      "id": "new-weft-1-b-snap-1-trigger",
+      "from": {
+        "module": "weft-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "snap-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "new-snap-1-audio-level-1-audio",
+      "from": {
+        "module": "snap-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "level-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-level-1-audio-output-1-audio",
+      "from": {
+        "module": "level-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

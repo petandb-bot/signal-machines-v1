@@ -1,0 +1,202 @@
+[
+  {
+    "id": "soft-circuit",
+    "name": "SOFT CIRCUIT",
+    "description": "A softly coupled pair of phase-modulated tones.",
+    "principle": "Slow interval attraction rather than a note sequence; mild folding and short stereo motion.",
+    "controls": [
+      [
+        "carrier-1",
+        "depth"
+      ],
+      [
+        "sideways-1",
+        "attraction"
+      ],
+      [
+        "caustic-1",
+        "burn"
+      ]
+    ]
+  },
+  {
+    "id": "paper-windows",
+    "name": "PAPER WINDOWS",
+    "description": "Paper-like noise taps find a small resonant space.",
+    "principle": "Five-in-twelve noise gestures meet a slower plucked comb; finite early reflections, no reverb tank.",
+    "controls": [
+      [
+        "weft-1",
+        "fill"
+      ],
+      [
+        "comb-1",
+        "decay"
+      ],
+      [
+        "walls-1",
+        "distance"
+      ]
+    ]
+  },
+  {
+    "id": "borrowed-light",
+    "name": "BORROWED LIGHT",
+    "description": "A rubbing surface lends its spectrum to a held harmonic voice.",
+    "principle": "A new oscillator spectrum remembers intermittent captures; small frequency-shifted interference changes the held light.",
+    "controls": [
+      [
+        "friction-1",
+        "pressure"
+      ],
+      [
+        "prism-1",
+        "memory"
+      ],
+      [
+        "shift-1",
+        "shift"
+      ]
+    ]
+  },
+  {
+    "id": "velvet-engine",
+    "name": "VELVET ENGINE",
+    "description": "A fuzzy pulse rhythm loses its expected accents.",
+    "principle": "Five-in-eight articulation and a slower ducking cycle give one repeated tone different weights.",
+    "controls": [
+      [
+        "fuzz-1",
+        "drive"
+      ],
+      [
+        "weft-1",
+        "fill"
+      ],
+      [
+        "duck-1",
+        "depth"
+      ]
+    ]
+  },
+  {
+    "id": "deferred-signal",
+    "name": "DEFERRED SIGNAL",
+    "description": "Remembered chances arrive late as small ringing objects.",
+    "principle": "Gate storage defers events, not pitches: the resonator strikes its current held pitch when the queue releases.",
+    "controls": [
+      [
+        "unspent-1",
+        "hold"
+      ],
+      [
+        "unspent-1",
+        "release"
+      ],
+      [
+        "reson-1",
+        "material"
+      ]
+    ]
+  },
+  {
+    "id": "threads-cross",
+    "name": "THREADS CROSS",
+    "description": "A small moving swarm changes another voice from within.",
+    "principle": "Physical group motion shapes spectral energy, low ring-modulation depth and actual stereo position.",
+    "controls": [
+      [
+        "swarm-1",
+        "sympathy"
+      ],
+      [
+        "mesh-1",
+        "transfer"
+      ],
+      [
+        "ring-1",
+        "mix"
+      ]
+    ]
+  },
+  {
+    "id": "shattered-clock",
+    "name": "SHATTERED CLOCK",
+    "description": "A simple chip tone trips its own small digital failures.",
+    "principle": "Actual detected attacks capture fragments while accumulated stress cracks their timing; stepped output remains restrained.",
+    "controls": [
+      [
+        "fault-1",
+        "pressure"
+      ],
+      [
+        "fracture-1",
+        "break"
+      ],
+      [
+        "crush-1",
+        "bits"
+      ]
+    ]
+  },
+  {
+    "id": "dissent-in-glass",
+    "name": "DISSENT IN GLASS",
+    "description": "Three motions disagree about which glass tone should remain.",
+    "principle": "A held consensus steers one pitch; dissent occasionally changes the audible source with a smooth crossfade.",
+    "controls": [
+      [
+        "quorum-1",
+        "agreement"
+      ],
+      [
+        "quorum-1",
+        "stubborn"
+      ],
+      [
+        "switch-1",
+        "fade"
+      ]
+    ]
+  },
+  {
+    "id": "broken-radio",
+    "name": "BROKEN RADIO",
+    "description": "A tuned band of electrical noise briefly loses contact.",
+    "principle": "No melody: a slowly moving noise band and sparse transmission interruptions form a mid-register surface.",
+    "controls": [
+      [
+        "venom-1",
+        "strain"
+      ],
+      [
+        "filter-1",
+        "cutoff"
+      ],
+      [
+        "snap-1",
+        "fault"
+      ]
+    ]
+  },
+  {
+    "id": "passing-shadows",
+    "name": "PASSING SHADOWS",
+    "description": "A little machine passes between the present and a granular shadow.",
+    "principle": "Long region changes, physically steered grain spread and occasional dry/memory switching preserve the source identity.",
+    "controls": [
+      [
+        "cloud-1",
+        "grain"
+      ],
+      [
+        "cloud-1",
+        "spread"
+      ],
+      [
+        "found-1",
+        "alter"
+      ]
+    ]
+  }
+]

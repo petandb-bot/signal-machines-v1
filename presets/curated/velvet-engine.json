@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "VELVET ENGINE",
+  "bpm": 103,
+  "master": 0.55,
+  "seed": 230004,
+  "modules": [
+    {
+      "id": "weft-1",
+      "type": "WEFT",
+      "x": 16,
+      "y": 16,
+      "seed": 230004,
+      "character": "METAL",
+      "params": {
+        "rate": 0.6666666666666666,
+        "fill": 0.625
+      },
+      "mode": "8"
+    },
+    {
+      "id": "shape-1",
+      "type": "SHAPE",
+      "x": 192,
+      "y": 16,
+      "seed": 237923,
+      "character": "METAL",
+      "params": {
+        "rise": 0.015,
+        "fall": 0.39
+      }
+    },
+    {
+      "id": "osc-1",
+      "type": "OSC",
+      "x": 368,
+      "y": 16,
+      "seed": 245842,
+      "character": "METAL",
+      "params": {
+        "tune": 0.63,
+        "level": 0
+      },
+      "mode": "PULSE"
+    },
+    {
+      "id": "fuzz-1",
+      "type": "FUZZ",
+      "x": 544,
+      "y": 16,
+      "seed": 253761,
+      "character": "METAL",
+      "params": {
+        "drive": 0.28,
+        "bias": 0.43
+      }
+    },
+    {
+      "id": "clip-1",
+      "type": "CLIP",
+      "x": 16,
+      "y": 184,
+      "seed": 261680,
+      "character": "METAL",
+      "params": {
+        "drive": 0.12,
+        "hardness": 0.4
+      }
+    },
+    {
+      "id": "filter-1",
+      "type": "FILTER",
+      "x": 192,
+      "y": 184,
+      "seed": 269599,
+      "character": "METAL",
+      "params": {
+        "cutoff": 0.62,
+        "resonance": 0.1
+      },
+      "mode": "LOW"
+    },
+    {
+      "id": "duck-1",
+      "type": "DUCK",
+      "x": 368,
+      "y": 184,
+      "seed": 277518,
+      "character": "METAL",
+      "params": {
+        "depth": 0.32,
+        "recover": 0.25
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 544,
+      "y": 184,
+      "seed": 285437,
+      "character": "METAL",
+      "params": {
+        "level": 0.6
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "new-weft-1-a-shape-1-trigger",
+      "from": {
+        "module": "weft-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "shape-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "new-shape-1-control-osc-1-level",
+      "from": {
+        "module": "shape-1",
+        "port": "control"
+      },
+      "to": {
+        "module": "osc-1",
+        "port": "level"
+      }
+    },
+    {
+      "id": "new-weft-1-b-duck-1-trigger",
+      "from": {
+        "module": "weft-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "duck-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "new-osc-1-audio-fuzz-1-audio",
+      "from": {
+        "module": "osc-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "fuzz-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-fuzz-1-audio-clip-1-audio",
+      "from": {
+        "module": "fuzz-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "clip-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-clip-1-audio-filter-1-audio",
+      "from": {
+        "module": "clip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "filter-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-filter-1-audio-duck-1-audio",
+      "from": {
+        "module": "filter-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "duck-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-duck-1-audio-output-1-audio",
+      "from": {
+        "module": "duck-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}
