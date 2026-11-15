@@ -185,7 +185,7 @@ export const DEFINITIONS: Record<ModuleType, ModuleDefinition> = {
   OUTPUT: { type: 'OUTPUT', subtitle: 'Master output', description: 'Bring the circuit into the room.', color: MODULE_COLORS.OUTPUT, symbol: '▂▅▇', inputs: [input('audio', 'AUDIO', 'audio', 0)], outputs: [], parameters: [
     { id: 'level', label: 'LEVEL', default: .72, description: 'Module output gain before the protected master bus.' } ] }
 };
-export const MODE_OPTIONS:Partial<Record<ModuleType,readonly string[]>>={OSC:['SINE','TRIANGLE','SAW','PULSE'],NOISE:['WHITE','PINK','BROWN'],FILTER:['LOW','BAND','HIGH'],DRONE:['55 Hz','110 Hz','220 Hz'],CHIP:['PULSE','TRIANGLE','NOISE'],CHANCE:['MID','LOW','HIGH'],PRISM:['LIVE','HOLD'],PARTIAL:['220 Hz','110 Hz','440 Hz'],CHAMBER:['ROOM','WEAVE'],WEFT:['16','8','12'],COUNT:['CLOCK','AUDIO'],QUANTIZE:['12-TET','19-TET','13-TRIT'],SLEW:['LAG','GLIDE'],FORMANT:['VOICE','WHISPER'],LOGIC:['OR','XOR','AND']};
+export const MODE_OPTIONS:Partial<Record<ModuleType,readonly string[]>>={OSC:['SINE','TRIANGLE','SAW','PULSE'],NOISE:['WHITE','PINK','BROWN'],FILTER:['LOW','BAND','HIGH'],DRONE:['55 Hz','110 Hz','220 Hz','LIVING 55 Hz','LIVING 110 Hz','LIVING 220 Hz'],CHIP:['PULSE','TRIANGLE','NOISE'],CHANCE:['MID','LOW','HIGH'],PRISM:['LIVE','HOLD'],PARTIAL:['220 Hz','110 Hz','440 Hz'],CHAMBER:['ROOM','WEAVE'],WEFT:['16','8','12'],COUNT:['CLOCK','AUDIO'],QUANTIZE:['12-TET','19-TET','13-TRIT'],SLEW:['LAG','GLIDE'],FORMANT:['VOICE','WHISPER'],LOGIC:['OR','XOR','AND']};
 export const MODULE_TYPES = Object.keys(DEFINITIONS) as ModuleType[];
 export const NODE_WIDTH = 128;
 export const NODE_HEIGHT = 132;

@@ -25,7 +25,7 @@ import { Venom } from './modules/Venom';
 import { Snap } from './modules/Snap';
 import { Caustic } from './modules/Caustic';
 import { Tape } from './modules/Tape';
-import { Drone } from './modules/Drone';
+import { DroneInstrument as Drone } from './modules/DroneInstrument';
 import { Sieve } from './modules/Sieve';
 import { Parasite } from './modules/Parasite';
 import {Vca} from './modules/Vca';
