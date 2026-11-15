@@ -9,7 +9,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -32,33 +32,38 @@ jobs:
         run: node scripts/verify-sympathy-worklet.mjs
       - name: Validate Phase 1 audio architecture
         run: node scripts/render-sound-architecture.mjs 60
-      - name: Render PLATE and curated environments
+      - name: Render WALLS and independent preset comparisons
         run: |
-          npm run render:phase4
+          npm run render:phase5
           mkdir -p dist/listening/audio dist/listening/presets
-          cp -R public/listening/audio/phase4 dist/listening/audio/
+          cp -R public/listening/audio/phase5 dist/listening/audio/
+          cp -R public/listening/studies dist/listening/
           cp -R public/listening/presets/curated dist/listening/presets/
-      - name: Upload PLATE comparisons
+          cp public/listening/phase5-*.html dist/listening/
+      - name: Upload WALLS comparisons
         uses: actions/upload-artifact@v5
         with:
-          name: phase4-plate-comparisons
+          name: phase5-walls-comparisons
           path: |
-            dist/listening/phase4-plate.html
-            dist/listening/audio/phase4/*plate*.wav
-            dist/listening/audio/phase4/*chamber*.wav
-            dist/listening/audio/phase4/input-*.wav
-            dist/listening/audio/phase4/plate-report.json
+            dist/listening/phase5-walls.html
+            dist/listening/audio/phase5/spatial-*.wav
+            dist/listening/audio/phase5/walls-ir-*.wav
+            dist/listening/audio/phase5/study-*.wav
+            dist/listening/audio/phase5/walls-report.json
+            dist/listening/studies/near-object.json
+            dist/listening/studies/distant-material.json
           if-no-files-found: error
           retention-days: 14
-      - name: Upload ten preset environments
+      - name: Upload musical preset comparisons
         uses: actions/upload-artifact@v5
         with:
-          name: phase4-ten-environments
+          name: phase5-musical-presets
           path: |
-            dist/listening/phase4-presets.html
-            dist/listening/audio/phase4/preset-*.wav
-            dist/listening/audio/phase4/long-*.wav
-            dist/listening/audio/phase4/preset-report.json
+            dist/listening/phase5-presets.html
+            dist/listening/audio/phase5/balance-*.wav
+            dist/listening/audio/phase5/balance-*.json
+            dist/listening/audio/phase5/room-proposal-*.wav
+            dist/listening/studies/room-air-low-cut.json
             dist/listening/presets/curated/
           if-no-files-found: error
           retention-days: 14

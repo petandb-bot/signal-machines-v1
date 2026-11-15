@@ -74,3 +74,4 @@ console.log(JSON.stringify({result:'PASS',test:'production worklet: legacy prese
 // Visible curation never removes historical fixtures from the checks above.
 await import('./check-v019-compat.mjs');
 await import('./verify-phase4-worklet.mjs');
+await import('./verify-walls-worklet.mjs');

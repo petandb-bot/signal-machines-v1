@@ -54,7 +54,7 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
   });
   it('starts an empty patch and restores the playable preset',()=>{
     document.querySelector<HTMLButtonElement>('[aria-label="Create an empty patch"]')!.click();expect(app.store.patch.modules).toHaveLength(0);
-    const preset=document.querySelector<HTMLSelectElement>('[aria-label="Preset"]')!;preset.value='pixel-dust';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules).toHaveLength(3);expect(app.store.patch.connections).toHaveLength(4);
+    const preset=document.querySelector<HTMLSelectElement>('[aria-label="Preset"]')!;preset.value='pixel-dust';preset.dispatchEvent(new Event('change'));expect(app.store.patch.modules).toHaveLength(5);expect(app.store.patch.connections).toHaveLength(5);
   });
   it('keeps a tapped output armed until a compatible input is tapped',()=>{
     const out=document.querySelector<HTMLButtonElement>('.port.out[data-module="flock-1"][data-port="controlB"]')!,input=document.querySelector<HTMLButtonElement>('.port.in[data-module="alloy-1"][data-port="body"]')!;

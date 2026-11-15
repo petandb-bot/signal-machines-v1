@@ -17,7 +17,7 @@
         "spread": 0.24,
         "color": 0.57
       },
-      "mode": "110 Hz"
+      "mode": "220 Hz"
     },
     {
       "id": "sieve-1",
@@ -27,8 +27,8 @@
       "seed": 20208327,
       "character": "METAL",
       "params": {
-        "focus": 0.4,
-        "width": 0.61
+        "focus": 0.5,
+        "width": 0.56
       }
     },
     {
@@ -39,8 +39,8 @@
       "seed": 20216246,
       "character": "METAL",
       "params": {
-        "wear": 0.56,
-        "echo": 0.55
+        "wear": 0.42,
+        "echo": 0.75
       }
     },
     {
@@ -51,7 +51,7 @@
       "seed": 20224165,
       "character": "METAL",
       "params": {
-        "spread": 0.34,
+        "spread": 0.18,
         "drift": 0.11
       }
     },
@@ -64,6 +64,30 @@
       "character": "METAL",
       "params": {
         "level": 0.74
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 192,
+      "y": 184,
+      "seed": 115829,
+      "character": "METAL",
+      "params": {
+        "change": 0.08,
+        "memory": 0.95
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 368,
+      "y": 184,
+      "seed": 20247922,
+      "character": "METAL",
+      "params": {
+        "rate": 0.16,
+        "irregular": 0.03
       }
     }
   ],
@@ -121,6 +145,28 @@
       "to": {
         "module": "drone-1",
         "port": "spread"
+      }
+    },
+    {
+      "id": "music-pulse-1-trigger-branch-1-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "music-branch-1-pitch-drone-1-pitch",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "drone-1",
+        "port": "pitch"
       }
     }
   ]

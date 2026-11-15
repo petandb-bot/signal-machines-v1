@@ -15,7 +15,7 @@
       "character": "METAL",
       "params": {
         "spread": 0.17,
-        "color": 0.3
+        "color": 0.38
       },
       "mode": "LIVING 110 Hz"
     },
@@ -40,7 +40,7 @@
       "seed": 20216239,
       "character": "METAL",
       "params": {
-        "level": 0.22,
+        "level": 0.38,
         "blend": 0
       }
     },
@@ -76,9 +76,10 @@
       "seed": 20239996,
       "character": "METAL",
       "params": {
-        "rise": 0.88,
-        "fall": 0.9
-      }
+        "rise": 0.6,
+        "fall": 0.65
+      },
+      "mode": "GLIDE"
     },
     {
       "id": "output-1",
@@ -89,6 +90,30 @@
       "character": "METAL",
       "params": {
         "level": 0.76
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 544,
+      "y": 184,
+      "seed": 85051,
+      "character": "METAL",
+      "params": {
+        "change": 0.08,
+        "memory": 0.95
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 352,
+      "seed": 20263753,
+      "character": "METAL",
+      "params": {
+        "rate": 0.16,
+        "irregular": 0
       }
     }
   ],
@@ -149,17 +174,6 @@
       }
     },
     {
-      "id": "74e0acbc-d3f6-4859-8317-5cf598e0e723",
-      "from": {
-        "module": "tide-1",
-        "port": "tide"
-      },
-      "to": {
-        "module": "slew-1",
-        "port": "cv"
-      }
-    },
-    {
       "id": "9865e66d-92b9-4c54-9bcc-2582db2a0579",
       "from": {
         "module": "slew-1",
@@ -179,6 +193,28 @@
       "to": {
         "module": "partial-1",
         "port": "mass"
+      }
+    },
+    {
+      "id": "music-pulse-1-trigger-branch-1-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "music-branch-1-pitch-slew-1-cv",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "slew-1",
+        "port": "cv"
       }
     }
   ]

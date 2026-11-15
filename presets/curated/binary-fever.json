@@ -14,7 +14,7 @@
       "seed": 2601,
       "character": "METAL",
       "params": {
-        "step": 0.2857142857142857,
+        "step": 0.5,
         "rate": 0.82
       },
       "mode": "AUDIO"
@@ -39,8 +39,8 @@
       "seed": 2603,
       "character": "METAL",
       "params": {
-        "tune": 0.48,
-        "chaos": 0.73
+        "tune": 0.65,
+        "chaos": 0.28
       }
     },
     {
@@ -51,7 +51,7 @@
       "seed": 2604,
       "character": "METAL",
       "params": {
-        "cutoff": 0.7,
+        "cutoff": 0.82,
         "resonance": 0.3
       }
     },
@@ -75,7 +75,57 @@
       "character": "METAL",
       "params": {
         "flow": 0.7,
-        "range": 0.8
+        "range": 0.16
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 368,
+      "y": 184,
+      "seed": 96034,
+      "character": "METAL",
+      "params": {
+        "change": 0.08,
+        "memory": 0.95
+      }
+    },
+    {
+      "id": "weft-1",
+      "type": "WEFT",
+      "x": 544,
+      "y": 184,
+      "seed": 147037,
+      "character": "METAL",
+      "params": {
+        "rate": 0.6666666666666666,
+        "fill": 0.58
+      },
+      "mode": "16"
+    },
+    {
+      "id": "osc-1",
+      "type": "OSC",
+      "x": 16,
+      "y": 352,
+      "seed": 154956,
+      "character": "METAL",
+      "params": {
+        "tune": 0.75,
+        "level": 0
+      },
+      "mode": "PULSE"
+    },
+    {
+      "id": "shape-1",
+      "type": "SHAPE",
+      "x": 192,
+      "y": 352,
+      "seed": 162875,
+      "character": "METAL",
+      "params": {
+        "rise": 0.02,
+        "fall": 0.55
       }
     }
   ],
@@ -166,6 +216,72 @@
       "to": {
         "module": "feral-1",
         "port": "chaos"
+      }
+    },
+    {
+      "id": "music-weft-1-a-branch-1-clock",
+      "from": {
+        "module": "weft-1",
+        "port": "a"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "music-branch-1-gate-shape-1-trigger",
+      "from": {
+        "module": "branch-1",
+        "port": "gate"
+      },
+      "to": {
+        "module": "shape-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "music-shape-1-control-osc-1-level",
+      "from": {
+        "module": "shape-1",
+        "port": "control"
+      },
+      "to": {
+        "module": "osc-1",
+        "port": "level"
+      }
+    },
+    {
+      "id": "music-branch-1-pitch-osc-1-pitch",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "osc-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "music-branch-1-pitch-feral-1-pitch",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "feral-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "music-osc-1-audio-count-1-audioClock",
+      "from": {
+        "module": "osc-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "count-1",
+        "port": "audioClock"
       }
     }
   ]

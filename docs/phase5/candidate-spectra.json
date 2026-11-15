@@ -1,0 +1,167 @@
+{
+  "label": "candidate",
+  "rate": 24000,
+  "method": "Mean stereo-channel power spectra, 4096 Hann window every8192frames; unlike Phase4 mono-sum spectrum, preserves side energy. A-weighted RMS uses the standard analogue A curve in a full-file FFT and is explicitly not LUFS or a perceived-loudness certification. 120\u20138000Hz band RMS is a spectral proxy, not a phone-speaker model. Sample peak only; true peak was not measured. Quiet/active spans use the same20ms1e\u22124 gate as raw metrics. PCM24 files introduce a quantization floor.",
+  "rows": [
+    {
+      "id": "still-almost-moving-ii",
+      "label": "candidate",
+      "spectralCentroidHz": 206.082670394412,
+      "bandPowerFraction": {
+        "sub40": 1.1856329262226069e-07,
+        "sub80": 8.650745796771591e-07,
+        "low": 0.9419089448683512,
+        "mid": 0.05750098017703661,
+        "high": 0.0005892098800329601
+      },
+      "aWeightedRms": 0.007843004494034488,
+      "rms120to8000Hz": 0.014160593866677193,
+      "medianActiveSpanSeconds": 60.0,
+      "medianGapSeconds": null
+    },
+    {
+      "id": "pixel-dust",
+      "label": "candidate",
+      "spectralCentroidHz": 669.9158643618457,
+      "bandPowerFraction": {
+        "sub40": 0.0001398413615715954,
+        "sub80": 0.0003476101338070921,
+        "low": 0.7112493172492844,
+        "mid": 0.2504276155609241,
+        "high": 0.037975457055984686
+      },
+      "aWeightedRms": 0.011598790618099314,
+      "rms120to8000Hz": 0.019181928544893957,
+      "medianActiveSpanSeconds": 60.0,
+      "medianGapSeconds": null
+    },
+    {
+      "id": "room-air",
+      "label": "candidate",
+      "spectralCentroidHz": 91.73537386865418,
+      "bandPowerFraction": {
+        "sub40": 0.09508805528593875,
+        "sub80": 0.8475892115564053,
+        "low": 0.1363731941749465,
+        "mid": 0.014215739703283773,
+        "high": 0.0018218545653644813
+      },
+      "aWeightedRms": 0.00039406477050280003,
+      "rms120to8000Hz": 0.0006650165606522291,
+      "medianActiveSpanSeconds": 60.0,
+      "medianGapSeconds": null
+    },
+    {
+      "id": "small-hours",
+      "label": "candidate",
+      "spectralCentroidHz": 2584.1447337951877,
+      "bandPowerFraction": {
+        "sub40": 0.024649719491402634,
+        "sub80": 0.06216671544526541,
+        "low": 0.06078178348302412,
+        "mid": 0.6496818613300295,
+        "high": 0.227369639741681
+      },
+      "aWeightedRms": 0.003557126980358545,
+      "rms120to8000Hz": 0.0032254407777807317,
+      "medianActiveSpanSeconds": 0.060000000000002274,
+      "medianGapSeconds": 0.03999999999999915
+    },
+    {
+      "id": "exchanging-bodies",
+      "label": "candidate",
+      "spectralCentroidHz": 316.1670870581426,
+      "bandPowerFraction": {
+        "sub40": 1.410478196295194e-06,
+        "sub80": 1.6381753654201168e-05,
+        "low": 0.9898506403635556,
+        "mid": 0.009831943246095572,
+        "high": 0.0003010346366943534
+      },
+      "aWeightedRms": 0.002772743929442694,
+      "rms120to8000Hz": 0.006035646730963377,
+      "medianActiveSpanSeconds": 1.759999999999998,
+      "medianGapSeconds": 1.6799999999999997
+    },
+    {
+      "id": "dissolving-metal",
+      "label": "candidate",
+      "spectralCentroidHz": 282.2409088142247,
+      "bandPowerFraction": {
+        "sub40": 0.0016596853058289283,
+        "sub80": 0.006712606534262484,
+        "low": 0.8675159767662406,
+        "mid": 0.12576218136800923,
+        "high": 9.2353314877084e-06
+      },
+      "aWeightedRms": 0.0038188265259150858,
+      "rms120to8000Hz": 0.008948531660106758,
+      "medianActiveSpanSeconds": 1.0800000000000054,
+      "medianGapSeconds": 0.6000000000000014
+    },
+    {
+      "id": "binary-fever",
+      "label": "candidate",
+      "spectralCentroidHz": 245.90821397124034,
+      "bandPowerFraction": {
+        "sub40": 0.02490511535351511,
+        "sub80": 0.05629856771736011,
+        "low": 0.8948430577510627,
+        "mid": 0.0487165427427307,
+        "high": 0.00014183178884637633
+      },
+      "aWeightedRms": 0.003561359663224311,
+      "rms120to8000Hz": 0.008892268522269797,
+      "medianActiveSpanSeconds": 0.35999999999999943,
+      "medianGapSeconds": 0.17999999999999988
+    },
+    {
+      "id": "tape-garden",
+      "label": "candidate",
+      "spectralCentroidHz": 303.8924980430583,
+      "bandPowerFraction": {
+        "sub40": 1.5999050997106948e-06,
+        "sub80": 5.33989696149659e-06,
+        "low": 0.9017468320748906,
+        "mid": 0.09824782493584114,
+        "high": 3.0923065935083753e-09
+      },
+      "aWeightedRms": 0.008066019541339172,
+      "rms120to8000Hz": 0.01789475622609044,
+      "medianActiveSpanSeconds": 60.0,
+      "medianGapSeconds": null
+    },
+    {
+      "id": "late-light",
+      "label": "candidate",
+      "spectralCentroidHz": 1391.2798908172504,
+      "bandPowerFraction": {
+        "sub40": 9.972770949588757e-05,
+        "sub80": 0.00017861726975524942,
+        "low": 0.16057250587360505,
+        "mid": 0.7363845619664208,
+        "high": 0.10286431489021908
+      },
+      "aWeightedRms": 0.008523332859400885,
+      "rms120to8000Hz": 0.009568390664232936,
+      "medianActiveSpanSeconds": 2.58,
+      "medianGapSeconds": 0.060000000000002274
+    },
+    {
+      "id": "off-grid",
+      "label": "candidate",
+      "spectralCentroidHz": 387.79774902354717,
+      "bandPowerFraction": {
+        "sub40": 1.8533548763704036e-06,
+        "sub80": 6.898439741489529e-06,
+        "low": 0.9003565146469477,
+        "mid": 0.09844737102690032,
+        "high": 0.001189215886410854
+      },
+      "aWeightedRms": 0.0038069546959353163,
+      "rms120to8000Hz": 0.006347859385532047,
+      "medianActiveSpanSeconds": 0.4399999999999995,
+      "medianGapSeconds": 0.6799999999999997
+    }
+  ]
+}

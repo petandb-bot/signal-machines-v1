@@ -1,0 +1,42 @@
+{
+  "status": "Separate optional JSON only, per explicit user decision; curated ROOM AIR is unchanged.",
+  "addedModule": {
+    "type": "FILTER",
+    "mode": "HIGH",
+    "cutoff": 0.16,
+    "approxHz": 60.39903440804032,
+    "resonance": 0
+  },
+  "topology": "FOUND -> FILTER -> original ORBIT/CHAMBER/OUTPUT; existing source, gain, motion and timing unchanged.",
+  "tradeoff": "Rejects low-frequency room weight and changes phase near cutoff. It does not raise the remaining air detail automatically. It is not a shared DSP change or a replacement in the ten-preset menu. Human listening required.",
+  "rows": [
+    {
+      "seconds": 60,
+      "rms": 0.001347884208125098,
+      "peak": 0.00594178494066,
+      "dc": [
+        4.13530740611023e-10,
+        -2.038786054390892e-8
+      ],
+      "stereoCorrelation": 0.7948337833236141,
+      "monoPowerRatio": 0.8970969476397653,
+      "maxStep": 0.0006702739192405716,
+      "activeWindowRms": 0.0013478842081248936,
+      "gain": 22.257104741760006
+    },
+    {
+      "seconds": 180,
+      "rms": 0.0013452570772740878,
+      "peak": 0.006582018453627825,
+      "dc": [
+        1.14486153252789e-8,
+        -1.1852262122217274e-9
+      ],
+      "stereoCorrelation": 0.7719786492263313,
+      "monoPowerRatio": 0.8858960405466297,
+      "maxStep": 0.0006702739192405716,
+      "activeWindowRms": 0.0013452570772737305,
+      "gain": 22.300570282668474
+    }
+  ]
+}

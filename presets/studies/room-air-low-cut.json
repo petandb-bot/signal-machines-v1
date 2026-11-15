@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "ROOM AIR / LOW CUT STUDY",
+  "bpm": 62,
+  "master": 0.65,
+  "seed": 20200403,
+  "modules": [
+    {
+      "id": "found-1",
+      "type": "FOUND",
+      "x": 16,
+      "y": 16,
+      "seed": 20200403,
+      "character": "METAL",
+      "params": {
+        "wander": 0.22,
+        "alter": 0.12
+      },
+      "sample": "builtin:room"
+    },
+    {
+      "id": "orbit-1",
+      "type": "ORBIT",
+      "x": 192,
+      "y": 16,
+      "seed": 20208322,
+      "character": "METAL",
+      "params": {
+        "rate": 0.12,
+        "depth": 0.36
+      }
+    },
+    {
+      "id": "chamber-1",
+      "type": "CHAMBER",
+      "x": 368,
+      "y": 16,
+      "seed": 20216241,
+      "character": "METAL",
+      "params": {
+        "size": 0.32,
+        "density": 0.29
+      }
+    },
+    {
+      "id": "tide-1",
+      "type": "TIDE",
+      "x": 544,
+      "y": 16,
+      "seed": 20224160,
+      "character": "METAL",
+      "params": {
+        "flow": 0.14,
+        "range": 0.2
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 16,
+      "y": 184,
+      "seed": 20232079,
+      "character": "METAL",
+      "params": {
+        "level": 0.78
+      }
+    },
+    {
+      "id": "room-low-cut",
+      "type": "FILTER",
+      "x": 192,
+      "y": 184,
+      "seed": 20200553,
+      "character": "METAL",
+      "params": {
+        "cutoff": 0.16,
+        "resonance": 0
+      },
+      "mode": "HIGH"
+    }
+  ],
+  "connections": [
+    {
+      "id": "13ad9c32-16f3-4a6d-bcf2-51dc88e53b86",
+      "from": {
+        "module": "orbit-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "chamber-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "c2c10027-28b0-4721-8510-9291a8ed52ca",
+      "from": {
+        "module": "chamber-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "9d9ffef0-2681-4b30-9c23-741ae0d99bf7",
+      "from": {
+        "module": "tide-1",
+        "port": "drift"
+      },
+      "to": {
+        "module": "found-1",
+        "port": "move"
+      }
+    },
+    {
+      "id": "study-found-1-audio-room-low-cut-audio",
+      "from": {
+        "module": "found-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "room-low-cut",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "study-room-low-cut-audio-orbit-1-audio",
+      "from": {
+        "module": "room-low-cut",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

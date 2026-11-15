@@ -10,3 +10,5 @@ release/
 public/listening/audio/
 public/presets/curated/
 public/listening/presets/
+public/listening/studies/
+public/listening/phase5-*.html
