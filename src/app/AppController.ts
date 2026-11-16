@@ -162,6 +162,10 @@ export class AppController {
         if(!sourceIsCurrent())throw Error('Patch changed during loop transfer.');
         const {audio,persisted}=await this.audio.foundLibrary.importLoop(clip,sourceIsCurrent);
         if(!sourceIsCurrent())throw Error('Patch changed during loop transfer.');
+        // Another user action may have added modules while storage was pending.
+        if(this.store.patch.modules.length>=48)throw Error('This patch has reached the 48 module limit.');
+        if(this.store.patch.modules.filter(m=>isSampleType(m.type)).length>=MAX_FOUND)
+          throw Error('This patch already has 2 FOUND/CUTS modules.');
         const type=action==='send-found'?'FOUND':'CUTS',position=this.workspace.vacantPosition();
         const created=createModule(type,position.x,position.y,(this.store.patch.seed+this.store.patch.modules.length*7919+1)>>>0);
         created.sample=audio.id;

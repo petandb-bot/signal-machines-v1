@@ -19,10 +19,9 @@ describe('LOOP to independent FOUND/CUTS sampling, with unchanged original sound
   it('copies PCM without touching the LOOP, restores the exact stored PCM16 sample after cache eviction',async()=>{
     const db=new Map<string,{id:string;name:string;blob:Blob}>();
     const storage={get:async(id:string)=>db.get(id),put:async(r:{id:string;name:string;blob:Blob})=>{db.set(r.id,r);}};
-    // A browser-free decoder matches the persisted WAV's PCM16 quantization exactly.
-    const decode=vi.fn(async(blob:Blob,id:string,name:string):Promise<FoundAudio>=>{
-      const pcm=decodeWav(await blob.arrayBuffer(),24000);
-      return analyzeFound(id,name,pcm.left,pcm.right);
+    // Ordinary imports use this browser-specific decoder; LOOP copies must not.
+    const decode=vi.fn(async(_blob:Blob,_id:string,_name:string):Promise<FoundAudio>=>{
+      throw Error('Browser decoder unexpectedly used for a LOOP snapshot.');
     });
     const source=sample(),initial=source.left.slice(),initialRight=source.right.slice();
     const library=new FoundLibrary(storage,decode);
@@ -40,7 +39,7 @@ describe('LOOP to independent FOUND/CUTS sampling, with unchanged original sound
     expect(restored?.left).toEqual(result.audio.left);
     expect(restored?.right).toEqual(result.audio.right);
     expect(restored?.name).toBe(result.audio.name);
-    expect(decode).toHaveBeenCalledOnce();
+    expect(decode).not.toHaveBeenCalled();
   });
 
   it('falls back to bounded in-session audio when browser persistence fails',async()=>{
