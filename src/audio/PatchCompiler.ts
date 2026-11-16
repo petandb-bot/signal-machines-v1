@@ -52,7 +52,7 @@ import {Bounce} from './modules/Bounce';
 import {Feral} from './modules/Feral';
 import {Count} from './modules/Count';
 import {ByteMap} from './modules/Map';
-import {Quantize} from './modules/Quantize';
+import {PitchFieldQuantize as Quantize} from './modules/PitchFieldQuantize';
 import {Slew} from './modules/Slew';
 import {Formant} from './modules/Formant';
 import {Logic} from './modules/Logic';

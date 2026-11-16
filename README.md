@@ -57,6 +57,12 @@ Pull requests run tests, build and AudioWorklet verification without deploying. 
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
 
+## v0.27 — Shared pitch fields
+
+QUANTIZE now offers two optional pitch-collection modes: **FIELD** (0, 2, 3, 5, 7, 9, 10) and **FRICTION** (0, 1, 4, 6, 7, 10). The existing SHIFT CV serves as a common tonal root when multiple QUANTIZE modules use either of these modes. PULSE, BRANCH, CHANCE, WEFT and other machines still decide what happens and when; pitch alignment does not generate a melody, impose a beat, or tame the sound.
+
+Existing 12-TET, 19-TET and 13-TRIT modes, all original DSP source files and all 20 curated starting patches are preserved. [Phase 9 concept and example patches](docs/phase9/README.md). iPhone Safari real-device testing and subjective musical listening are still outstanding.
+
 ## v0.26.1 — English module HELP
 
 Open the **Patch menu (gear) → Module help** to explore all 68 module descriptions in English. Search by module name, category, behavior, or parameter. Expand an item for its two controls, available modes and input/output signals. The panel does not add music rules, quantization, voice processing or a new DSP feature. Keyboard navigation, Escape and narrow layouts are supported; physical mobile browsers remain to be tested.
