@@ -13,7 +13,7 @@ export const FIELD_INTERVALS={
 type FieldMode=keyof typeof FIELD_INTERVALS;
 
 /** Pitch and root are expressed in 12-TET semitones, 0 = C. */
-export function nearestFieldNote(pitch:number,root:number,mode:FieldMode):number{
+export function nearestFieldNote(pitch:number,root:number,mode:FieldMode,min=-Infinity,max=Infinity):number{
   if(!Number.isFinite(pitch)||!Number.isFinite(root))return 0;
   const intervals=FIELD_INTERVALS[mode];
   const octave=Math.floor((pitch-root)/12);
@@ -23,7 +23,9 @@ export function nearestFieldNote(pitch:number,root:number,mode:FieldMode):number
   for(let o=octave-1;o<=octave+1;o++){
     const offset=root+12*o;
     for(let i=0;i<intervals.length;i++){
-      const note=offset+intervals[i],delta=Math.abs(pitch-note);
+      const note=offset+intervals[i];
+      if(note<min||note>max)continue;
+      const delta=Math.abs(pitch-note);
       if(delta<distance-1e-10||(Math.abs(delta-distance)<1e-10&&note<nearest)){
         nearest=note;distance=delta;
       }
@@ -41,37 +43,69 @@ export function nearestFieldNote(pitch:number,root:number,mode:FieldMode):number
 export class PitchFieldQuantize extends Quantize {
   private fieldValue=0;
   private fieldGridValue=0;
-  private fieldClock=false;
   private fieldReady=false;
+  private gateWasHigh=false;
+  private lastFamily:'GRID'|'FIELD'|undefined;
+  private lastVisiblePitch=0;
+  private holdAcrossModeChange=false;
 
   override process(sample:number){
     const mode=this.selectedMode;
-    if(mode!=='FIELD'&&mode!=='FRICTION'){
-      super.process(sample);
-      return;
-    }
-    // The legacy grid mode source remains byte-for-byte unchanged.
-    const span=.25+this.control(0,2)*1.75;
-    const input=clamp(this.inputL[0]*span);
-    // An external common reference acts as the tonic for any number of
-    // independent QUANTIZE instances. Unconnected SHIFT means C (zero).
-    const root=Math.round(clamp(this.inputL[1])*24);
-    const snapped=clamp(nearestFieldNote(input*24,root,mode)/24);
+    const field=mode==='FIELD'||mode==='FRICTION';
+    const family=field?'FIELD':'GRID';
     const clock=this.inputL[3]>.5;
-    this.outputL[1]=this.outputR[1]=0;
-    if(!this.inputConnected[3]||(clock&&!this.fieldClock)){
-      this.fieldValue=input+(snapped-input)*this.parameters[1];
-      if(this.fieldReady&&Math.abs(snapped-this.fieldGridValue)>1e-9){
-        this.outputL[1]=this.outputR[1]=1;
-        this.envelope=1;
-        this.triggerSample=sample;
-      }
-      this.fieldGridValue=snapped;
-      this.fieldReady=true;
+    const rising=clock&&!this.gateWasHigh;
+    const hasClock=!!this.inputConnected[3];
+    if(this.lastFamily!==undefined&&family!==this.lastFamily){
+      // A mode change cannot act as a new CLOCK edge. Keep the audible note
+      // until the next real edge, just as classic-to-classic mode switches do.
+      this.holdAcrossModeChange=hasClock&&!rising;
     }
-    this.fieldClock=clock;
-    this.outputL[0]=this.outputR[0]=this.fieldValue;
-    this.a=input;this.b=this.fieldValue;this.phase=(root+24)/48;
-    this.envelope*=1-1/(this.sampleRate*.08);
+
+    if(!field){
+      // Sample-identical to the original path, including mode-to-mode changes
+      // within 12-TET / 19-TET / 13-TRIT.
+      super.process(sample);
+    }else{
+      // Run the legacy clock/held-note internals in parallel. Its signal is
+      // never exposed in field mode; this keeps its private clock state current
+      // for a return to a classic mode without altering Quantize.ts.
+      const beforeEnvelope=this.envelope,beforeTrigger=this.triggerSample;
+      super.process(sample);
+      this.envelope=beforeEnvelope;this.triggerSample=beforeTrigger;
+      const span=.25+this.control(0,2)*1.75;
+      const input=clamp(this.inputL[0]*span);
+      // Shared SHIFT is a tonic only in the optional field modes.
+      const root=Math.round(clamp(this.inputL[1])*24);
+      // Select an ACTUAL member of the field within CV [-1,1], rather
+      // than choosing an out-of-range note and clipping to a false pitch.
+      const snapped=nearestFieldNote(input*24,root,mode,-24,24)/24;
+      this.outputL[1]=this.outputR[1]=0;
+      if(!hasClock||rising){
+        this.fieldValue=input+(snapped-input)*this.parameters[1];
+        if(this.fieldReady&&Math.abs(snapped-this.fieldGridValue)>1e-9){
+          this.outputL[1]=this.outputR[1]=1;
+          this.envelope=1;
+          this.triggerSample=sample;
+        }
+        this.fieldGridValue=snapped;
+        this.fieldReady=true;
+      }
+      this.outputL[0]=this.outputR[0]=this.fieldValue;
+      this.a=input;this.b=this.fieldValue;this.phase=(root+24)/48;
+      this.envelope*=1-1/(this.sampleRate*.08);
+    }
+
+    if(!hasClock)this.holdAcrossModeChange=false;
+    if(this.holdAcrossModeChange){
+      if(rising)this.holdAcrossModeChange=false;
+      else{
+        this.outputL[0]=this.outputR[0]=this.lastVisiblePitch;
+        this.outputL[1]=this.outputR[1]=0;
+      }
+    }
+    this.gateWasHigh=clock;
+    this.lastFamily=family;
+    this.lastVisiblePitch=this.outputL[0];
   }
 }
