@@ -39,6 +39,15 @@ jobs:
           cp -R public/listening/audio/twenty dist/listening/audio/
           cp -R public/listening/presets/twenty dist/listening/presets/
           cp public/listening/twenty.html dist/listening/
+      - name: Render sonic refinement A/B
+        run: node scripts/render-sonic-refinement.mjs
+      - name: Upload sonic refinement A/B
+        uses: actions/upload-artifact@v5
+        with:
+          name: sonic-refinement-ab
+          path: artifacts/sonic-refinement/
+          if-no-files-found: error
+          retention-days: 14
       - name: Upload new preset listening review
         uses: actions/upload-artifact@v5
         with:
