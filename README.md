@@ -10,6 +10,12 @@ Connect little machines. Make strange sounds. See what happens.
 
 An old-computer face for a living sound circuit: green text, small pixel windows and a handful of signal colors.
 
+## English module help
+
+Open **gear (Patch menu) → Module help** for a searchable guide to all 68 modules. Each entry gives a short description, parameters, signal ports and available modes. The guide is read-only: it does not simplify timing, impose scales, or change the sound engine.
+
+A steady timebase or a small pitch vocabulary can coexist with unusual sounds. PULSE, BRANCH, QUANTIZE and LOGIC are useful starting points, but their relationships are yours to make.
+
 ## Play
 
 - Pick a preset and press **▶**.
@@ -50,6 +56,10 @@ npm run verify:build
 Pull requests run tests, build and AudioWorklet verification without deploying. The build is in `dist/`. [GitHub setup](docs/GITHUB.md) · [Full guide](docs/GUIDE.md) · [Verification](VERIFICATION.md)
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
+
+## v0.26.1 — English module HELP
+
+Open the **Patch menu (gear) → Module help** to explore all 68 module descriptions in English. Search by module name, category, behavior, or parameter. Expand an item for its two controls, available modes and input/output signals. The panel does not add music rules, quantization, voice processing or a new DSP feature. Keyboard navigation, Escape and narrow layouts are supported; physical mobile browsers remain to be tested.
 
 ## v0.26 — REUSE: LOOP becomes another instrument
 

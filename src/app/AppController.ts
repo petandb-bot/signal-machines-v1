@@ -19,6 +19,7 @@ import {readVisualMode,saveVisualMode} from '../visual/SignalMotion';
 import { PixelRenderer } from '../visual/PixelRenderer';
 import { Workspace } from '../ui/Workspace';
 import { ModuleEditor } from '../ui/ModuleEditor';
+import { ModuleHelpPanel } from '../ui/ModuleHelpPanel';
 import { SnapshotPanel } from '../ui/SnapshotPanel';
 import { button, element } from '../ui/Controls';
 
@@ -42,7 +43,7 @@ function gearIcon(){
   return svg;
 }
 export class AppController {
-  readonly store=new StateStore();readonly audio=new AudioEngine();readonly workspace=new Workspace(this.store);readonly editor=new ModuleEditor(this.store);readonly snapshots=new SnapshotPanel(()=>this.store.patch);
+  readonly store=new StateStore();readonly audio=new AudioEngine();readonly workspace=new Workspace(this.store);readonly editor=new ModuleEditor(this.store);readonly help=new ModuleHelpPanel();readonly snapshots=new SnapshotPanel(()=>this.store.patch);
   private foundImports=new Map<string,number>();private foundPending=new Set<string>();
   private runButton=button('▶','Run audio engine',()=>void this.toggleRun(),'run-button');
   private recButton=button('●','Record master output',()=>void this.toggleRecording(),'record-button');
@@ -55,6 +56,7 @@ export class AppController {
   private library=element('aside','library floating-panel');private menu=element('aside','patch-menu floating-panel');
   constructor(readonly root:HTMLElement){
     this.menuButton.append(gearIcon());
+    this.help.onClose=()=>this.closePanels();
     this.build();
     this.store.onChange=type=>{
       if(type!=='layout')this.audio.sync(this.store.patch,type==='routing'||type==='replace',type==='replace');
@@ -90,7 +92,10 @@ export class AppController {
     new PixelRenderer(this.store,this.root,()=>{this.workspace.updateActivity();this.meter.style.setProperty('--level',`${Math.min(100,(this.store.telemetry?.peak??0)*158)}%`);});
     document.addEventListener('keydown',event=>{
       if(event.key==='Escape'&&this.root.classList.contains('editor-visible')&&this.editor.cancelDelete()){event.preventDefault();return;}
-      if((event.target as Element).closest('input,textarea,select,button,a,[contenteditable]'))return;
+      if(event.key==='Escape'&&this.root.classList.contains('help-visible')){event.preventDefault();this.closePanels();this.menuButton.focus();return;}
+      // Help is a reference, never an audio transport or destructive keyboard surface.
+      if(this.root.classList.contains('help-visible'))return;
+      if((event.target as Element).closest('input,textarea,select,button,a,summary,details,[contenteditable]'))return;
       if(event.code==='Space'){event.preventDefault();void this.toggleRun();}
       else if(event.key==='Delete'||event.key==='Backspace'){event.preventDefault();this.deleteSelection();}
       else if(event.key==='Escape'){this.workspace.cancelDrag();this.closePanels();}
@@ -120,15 +125,15 @@ export class AppController {
     for(const group of MODULE_GROUPS){const section=element('section','library-section'),title=element('h3','library-heading',group.name),grid=element('div','module-grid');section.setAttribute('aria-label',group.name);
       for(const type of group.types){const definition=DEFINITIONS[type],add=button('',`Add ${type} module`,()=>this.addModule(type),'library-module');add.style.setProperty('--module-color',definition.color);add.append(element('span','library-icon',definition.symbol),element('strong','',type),element('span','library-subtitle',definition.subtitle));grid.append(add);}section.append(title,grid);this.library.append(section);}
     this.menu.setAttribute('aria-label','Patch menu');const menuTop=element('div','panel-top');menuTop.append(element('span','','Patch'),button('×','Close patch menu',()=>this.closePanels()));
-    this.menu.append(menuTop,button('Snapshots','Open snapshots',()=>{this.closePanels();this.snapshots.render();this.root.classList.add('snapshots-visible');}),button('Save JSON','Export patch as JSON',()=>{try{downloadPatch(this.store.patch);this.closePanels();this.notify('Patch saved');}catch(error){this.notify((error as Error).message,true);}}),button('Load JSON','Import a JSON patch',()=>{this.closePanels();this.loadInput.click();}),button('New patch','Create an empty patch',()=>this.store.replace(emptyPatch())),button('Arrange chips','Arrange modules compactly',()=>{this.closePanels();this.workspace.arrange();}),button('How to play','Show touch and patching instructions',()=>{this.closePanels();this.notify('Tap a chip to edit. Drag to move. Tap an output, then an input to connect; the editor has larger jacks. Pinch to zoom, drag the background to pan. To remove a wire: tap the cable → Disconnect, or use Unplug in a chip’s Connections.',false,10000);}));
+    this.menu.append(menuTop,button('Module help','Browse English descriptions of all modules',()=>{this.closePanels();this.root.classList.add('help-visible');this.help.focusSearch();}),button('Snapshots','Open snapshots',()=>{this.closePanels();this.snapshots.render();this.root.classList.add('snapshots-visible');}),button('Save JSON','Export patch as JSON',()=>{try{downloadPatch(this.store.patch);this.closePanels();this.notify('Patch saved');}catch(error){this.notify((error as Error).message,true);}}),button('Load JSON','Import a JSON patch',()=>{this.closePanels();this.loadInput.click();}),button('New patch','Create an empty patch',()=>this.store.replace(emptyPatch())),button('Arrange chips','Arrange modules compactly',()=>{this.closePanels();this.workspace.arrange();}),button('How to play','Show touch and patching instructions',()=>{this.closePanels();this.notify('Tap a chip to edit. Drag to move. Tap an output, then an input to connect; the editor has larger jacks. Pinch to zoom, drag the background to pan. To remove a wire: tap the cable → Disconnect, or use Unplug in a chip’s Connections.',false,10000);}));
     const visuals=button(`Visuals: ${this.root.dataset.visuals}`,'Toggle visual motion',()=>{const mode=this.root.dataset.visuals==='quiet'?'lively':'quiet';this.root.dataset.visuals=mode;saveVisualMode(mode);visuals.textContent=`Visuals: ${mode}`;visuals.setAttribute('aria-pressed',String(mode==='lively'));});visuals.setAttribute('aria-pressed',String(this.root.dataset.visuals==='lively'));this.menu.append(visuals);
     this.recordingFormat.setAttribute('aria-label','Recording format');for(const [value,label] of [['wav','WAV · 24-bit'],['aiff','AIFF · 24-bit'],['browser','Browser · compressed']]){const option=element('option','',label);option.value=value;this.recordingFormat.append(option);}const recordLabel=element('label','record-format-label','Record format');recordLabel.append(this.recordingFormat,element('span','record-format-note','WAV / AIFF: up to 3 min / 48 MB'));this.menu.append(recordLabel);
     const source=element('a','source-download','Source + guide ↗');source.download=`signal-machines-v${version}.zip`;source.href=`./downloads/${source.download}`;source.setAttribute('aria-label','Download project source, tests and guide');this.menu.append(source,this.status);
-    const main=element('main','main-layout');main.append(this.workspace.root,this.library,this.editor.root,this.menu,this.snapshots.root);
+    const main=element('main','main-layout');main.append(this.workspace.root,this.library,this.editor.root,this.menu,this.help.root,this.snapshots.root);
     this.loadInput.type='file';this.loadInput.accept='.json,application/json';this.loadInput.hidden=true;this.loadInput.addEventListener('change',()=>void this.loadPatch());this.toast.setAttribute('role','status');this.toast.setAttribute('aria-live','polite');this.root.append(header,main,this.loadInput,this.toast);
   }
   private togglePanel(panel:'library'|'menu'){const className=panel==='library'?'library-visible':'menu-visible',open=!this.root.classList.contains(className);this.closePanels();if(open)this.root.classList.add(className);this.addButton.setAttribute('aria-expanded',String(open&&panel==='library'));this.menuButton.setAttribute('aria-expanded',String(open&&panel==='menu'));}
-  private closePanels(){this.root.classList.remove('library-visible','menu-visible','editor-visible','snapshots-visible');this.addButton.setAttribute('aria-expanded','false');this.menuButton.setAttribute('aria-expanded','false');}
+  private closePanels(){this.root.classList.remove('library-visible','menu-visible','editor-visible','snapshots-visible','help-visible');this.addButton.setAttribute('aria-expanded','false');this.menuButton.setAttribute('aria-expanded','false');}
   private refreshProject(){this.tempo.value=String(this.store.patch.bpm);this.volume.value=String(this.store.patch.master);const preset=PRESETS.find(p=>p.name===this.store.patch.name);this.preset.value=preset?.id??'custom';}
   private parameter(module:ModuleState,id:string,value:number){module.params[id]=value;this.store.changed('parameters');this.editor.refresh(module);}
   private addModule(type:ModuleType){
