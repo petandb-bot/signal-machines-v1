@@ -33,6 +33,15 @@ export function resampleStereo(input:StereoPcm,targetRate:number):StereoPcm{
     }
     outL[i]=l;outR[i]=r;
   }
+  // Sinc interpolation may overshoot near discontinuities. Preserve stereo
+  // balance and transient shape rather than hard clipping invalid loop samples.
+  let peak=0;
+  for(let i=0;i<count;i++)peak=Math.max(peak,Math.abs(outL[i]),Math.abs(outR[i]));
+  if(!Number.isFinite(peak))throw Error('Resampled audio contains invalid samples.');
+  if(peak>1){
+    const gain=1/peak;
+    for(let i=0;i<count;i++){outL[i]*=gain;outR[i]*=gain;}
+  }
   return{sampleRate:targetRate,left:outL,right:outR};
 }
 

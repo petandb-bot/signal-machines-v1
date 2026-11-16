@@ -52,6 +52,14 @@ describe('common audio imports and source quality',()=>{
     expect(()=>decodeAiff(long)).toThrow('PCM16/24/32');
   });
 
+  it('normalizes only sinc overshoot, keeping valid square-wave imports below full scale',()=>{
+    const frames=48000,input=Float32Array.from({length:frames},(_,i)=>i%24<12?.95:-.95);
+    const result=resampleStereo({sampleRate:48000,left:input,right:input.slice()},44100);
+    const peak=Math.max(...result.left.slice(0,2000));
+    expect(result.left.every(v=>Number.isFinite(v)&&Math.abs(v)<=1)).toBe(true);
+    expect(result.right.every(v=>Number.isFinite(v)&&Math.abs(v)<=1)).toBe(true);
+    expect(peak).toBeLessThanOrEqual(1);
+  });
   it('preserves same-rate WAV samples and uses low-pass resampling for rate conversion',async()=>{
     const input={kind:'loopAudio' as const,sampleRate:48000,
       left:Float32Array.from({length:2000},(_,i)=>i%2?-.9:.9),
