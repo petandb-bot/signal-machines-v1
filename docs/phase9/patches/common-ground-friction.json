@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "COMMON GROUND — friction study",
+  "seed": 20200402,
+  "bpm": 96,
+  "master": 0.65,
+  "modules": [
+    {
+      "id": "pendulum-1",
+      "type": "PENDULUM",
+      "x": 16,
+      "y": 16,
+      "seed": 20200402,
+      "character": "METAL",
+      "params": {
+        "energy": 0.57,
+        "coupling": 0.38
+      }
+    },
+    {
+      "id": "chip-1",
+      "type": "CHIP",
+      "x": 192,
+      "y": 16,
+      "seed": 20208321,
+      "character": "METAL",
+      "params": {
+        "tune": 0.5,
+        "character": 0.34
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 368,
+      "y": 16,
+      "seed": 20216240,
+      "character": "METAL",
+      "params": {
+        "level": 0.4
+      }
+    },
+    {
+      "id": "branch-1",
+      "type": "BRANCH",
+      "x": 544,
+      "y": 16,
+      "seed": 17190,
+      "character": "METAL",
+      "params": {
+        "change": 0.08,
+        "memory": 0.95
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 16,
+      "y": 184,
+      "seed": 20232078,
+      "character": "METAL",
+      "params": {
+        "rate": 0.6666666666666666,
+        "irregular": 0
+      }
+    },
+    {
+      "id": "study-quantize-melody",
+      "type": "QUANTIZE",
+      "x": 192,
+      "y": 184,
+      "seed": 362197,
+      "character": "METAL",
+      "params": {
+        "span": 0.42857142857142855,
+        "pull": 1
+      },
+      "mode": "FIELD"
+    },
+    {
+      "id": "study-quantize-partner",
+      "type": "QUANTIZE",
+      "x": 368,
+      "y": 184,
+      "seed": 362200,
+      "character": "METAL",
+      "params": {
+        "span": 0.42857142857142855,
+        "pull": 0.9
+      },
+      "mode": "FRICTION"
+    },
+    {
+      "id": "study-operator",
+      "type": "OPERATOR",
+      "x": 544,
+      "y": 184,
+      "seed": 362211,
+      "character": "METAL",
+      "params": {
+        "tune": 0.48,
+        "depth": 0.08
+      }
+    },
+    {
+      "id": "study-tide",
+      "type": "TIDE",
+      "x": 16,
+      "y": 352,
+      "seed": 362229,
+      "character": "METAL",
+      "params": {
+        "flow": 0.24,
+        "range": 0.13
+      }
+    },
+    {
+      "id": "study-flock",
+      "type": "FLOCK",
+      "x": 192,
+      "y": 352,
+      "seed": 362257,
+      "character": "METAL",
+      "params": {
+        "spread": 0.58,
+        "drift": 0.17
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "b87e6da8-35fb-4091-a30f-29966b664d4e",
+      "from": {
+        "module": "pendulum-1",
+        "port": "b"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "character"
+      }
+    },
+    {
+      "id": "269f42cf-7044-4b5e-b647-58531cf61663",
+      "from": {
+        "module": "chip-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "music-pulse-1-trigger-branch-1-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "branch-1",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "music-branch-1-gate-chip-1-trigger",
+      "from": {
+        "module": "branch-1",
+        "port": "gate"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "trigger"
+      }
+    },
+    {
+      "id": "study-branch-1-pitch-study-quantize-melody-cv",
+      "from": {
+        "module": "branch-1",
+        "port": "pitch"
+      },
+      "to": {
+        "module": "study-quantize-melody",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "study-pulse-1-trigger-study-quantize-melody-clock",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "study-quantize-melody",
+        "port": "clock"
+      }
+    },
+    {
+      "id": "study-study-quantize-melody-cv-chip-1-pitch",
+      "from": {
+        "module": "study-quantize-melody",
+        "port": "cv"
+      },
+      "to": {
+        "module": "chip-1",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "study-study-flock-controlA-study-quantize-partner-cv",
+      "from": {
+        "module": "study-flock",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "study-quantize-partner",
+        "port": "cv"
+      }
+    },
+    {
+      "id": "study-study-tide-tide-study-quantize-melody-shift",
+      "from": {
+        "module": "study-tide",
+        "port": "tide"
+      },
+      "to": {
+        "module": "study-quantize-melody",
+        "port": "shift"
+      }
+    },
+    {
+      "id": "study-study-tide-tide-study-quantize-partner-shift",
+      "from": {
+        "module": "study-tide",
+        "port": "tide"
+      },
+      "to": {
+        "module": "study-quantize-partner",
+        "port": "shift"
+      }
+    },
+    {
+      "id": "study-study-quantize-partner-cv-study-operator-pitch",
+      "from": {
+        "module": "study-quantize-partner",
+        "port": "cv"
+      },
+      "to": {
+        "module": "study-operator",
+        "port": "pitch"
+      }
+    },
+    {
+      "id": "study-study-operator-audio-output-1-audio",
+      "from": {
+        "module": "study-operator",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}
