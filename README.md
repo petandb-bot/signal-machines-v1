@@ -51,6 +51,14 @@ Pull requests run tests, build and AudioWorklet verification without deploying. 
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
 
+## v0.26 — REUSE: LOOP becomes another instrument
+
+Inside a recorded or imported LOOP, use **→ FOUND** to copy the current take into an autonomous sample explorer, or **→ CUTS** to turn it into a short-event instrument. The original LOOP remains unchanged; the new sample module starts unconnected so that you choose its route and rhythm. No automatic quantization, leveling, or sound polishing is introduced.
+
+LOOP-derived samples are stored as PCM16 WAV in the local browser's sample library when possible, using the same deterministic decoder on recall. Browsers without usable persistent storage keep the snapshot for the current session and show a warning. Patch JSON contains a sample reference, not the audio itself; save the LOOP audio WAV separately for transferring projects between devices.
+
+The original 68 DSP modules, CLASSIC sound and 20 starting patches are unchanged. iPhone Safari real-device testing is not yet complete. [Concept, controls and limitations](docs/phase8/README.md).
+
 ## v0.25 — Audio integrity without losing character
 
 This update preserves the **original sound** and all 20 curated presets. It does not include the alternate CLEAN/FOCUS/CLEAR timbral refinement modes proposed in the unmerged sonic-refinement branch.
