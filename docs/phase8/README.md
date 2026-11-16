@@ -1,4 +1,4 @@
-# SIGNAL MACHINES — Phase 8: REUSE (development candidate)
+# SIGNAL MACHINES — v0.26 REUSE
 
 ## Working idea
 
@@ -27,6 +27,6 @@ The sound is not made cleaner. Its history changes, and its relationship to othe
 
 ### Rollout
 
-Do not merge this branch until CI passes. On a real browser, audition the two transfers, recording/reloading samples after refresh, patch-switch race behavior, Safari memory and permission behavior, and multiple saved patches. Retain the existing CLASSIC voice behavior.
+v0.26 is a public release after automated CI verification and code review. Real browser listening and physical iPhone Safari memory/performance remain to be verified. Keep the original CLASSIC voice behavior.
 
 The broader Phase 8 can later explore explicit resampling into LOOP from other modules, but should first establish that this small reuse gesture is musically useful.
