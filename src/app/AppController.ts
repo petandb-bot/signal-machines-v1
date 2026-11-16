@@ -78,7 +78,12 @@ export class AppController {
     this.editor.onAction=(module,action)=>void this.performModuleAction(module,action);this.editor.onImport=(module,file)=>void this.performModuleAction(module,'import',file);
     this.editor.onDelete=()=>this.deleteSelection();this.editor.onClose=()=>this.root.classList.remove('editor-visible');
     this.editor.onPort=(module,port)=>{this.root.classList.remove('editor-visible');this.workspace.armPort({module:module.id,port:port.id,direction:port.direction});};
-    this.audio.onTelemetry=data=>{this.store.telemetry=data;this.editor.updateTelemetry();if(data.faults>0&&this.audio.running){void this.audio.stop().then(()=>this.refreshTransport());this.notify('An invalid audio signal was stopped. Reload the patch before restarting.',true);}};
+    this.audio.onTelemetry=data=>{this.store.telemetry=data;this.editor.updateTelemetry();
+      if(data.integrity){
+        const d=data.integrity;
+        this.meter.title=`Output peak ${data.peak.toFixed(3)} / 0.630 · Drive peak ${d.masterDrivePeak.toFixed(2)} · Near ceiling ${(100*d.nearCeilingFraction).toFixed(1)}% · Max sample step ${d.largestSampleStep.toFixed(3)}. Deliberate digital edges are not considered defects.`;
+      }
+      if(data.faults>0&&this.audio.running){void this.audio.stop().then(()=>this.refreshTransport());this.notify('An invalid audio signal was stopped. Reload the patch before restarting.',true);}};
     this.audio.onRecordingReady=result=>{download(result.blob,`signal-machines-${Date.now()}.${result.extension}`);this.refreshTransport();this.notify('Recording downloaded');};
     this.audio.onError=message=>{this.refreshTransport();this.notify(message,true);};
     this.editor.render();this.refreshProject();

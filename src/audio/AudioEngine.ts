@@ -134,7 +134,7 @@ export class AudioEngine {
   private finishPcm(reason?:string){
     const pcm=this.pcm;if(!pcm)return;this.pcm=undefined;this.recording=false;
     const pending=this.stoppingPcm;this.stoppingPcm=undefined;if(pending)clearTimeout(pending.timer);
-    try{const result=pcm.finish();if(pending)pending.resolve(result);else this.onRecordingReady(result);}catch(error){if(pending)pending.reject(error as Error);else this.onError((error as Error).message);}
+    try{const result=pcm.finish({edgeFadeMs:3});if(pending)pending.resolve(result);else this.onRecordingReady(result);}catch(error){if(pending)pending.reject(error as Error);else this.onError((error as Error).message);}
     if(reason)this.onError(reason);
   }
 

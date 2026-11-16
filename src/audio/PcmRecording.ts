@@ -16,8 +16,41 @@ export class PcmRecording {
     }
     this.chunks.push(bytes);this.frames+=frames;
   }
-  finish(){
+  /**
+   * Optional file-boundary repair. The recording stream is unchanged until export:
+   * only the first and last few ms are tapered, leaving intentional inner clicks,
+   * clipped hits and quantized waveforms absolutely intact.
+   * Mutates at most 2*fadeFrames stereo PCM24 frames, in-place across chunks.
+   */
+  private taperEdges(milliseconds:number){
+    const length=Math.min(Math.floor(this.frames/2),Math.round(this.sampleRate*milliseconds/1000));
+    if(length<2)return;
+    let at=0;
+    for(const chunk of this.chunks){
+      const count=chunk.length/6;
+      if(at>=length&&at+count<=this.frames-length){at+=count;continue;}
+      for(let i=0;i<count;i++){
+        const distance=Math.min(at+i,this.frames-1-at-i);
+        if(distance>=length-1)continue;
+        const gain=.5-.5*Math.cos(Math.PI*distance/(length-1));
+        for(let channel=0;channel<2;channel++){
+          const p=i*6+channel*3;
+          const raw=this.format==='wav'
+            ?chunk[p]|(chunk[p+1]<<8)|(chunk[p+2]<<16)
+            :chunk[p+2]|(chunk[p+1]<<8)|(chunk[p]<<16);
+          const signed=(raw<<8)>>8,scaled=Math.round(signed*gain);
+          if(this.format==='wav'){chunk[p]=scaled;chunk[p+1]=scaled>>8;chunk[p+2]=scaled>>16;}
+          else{chunk[p]=scaled>>16;chunk[p+1]=scaled>>8;chunk[p+2]=scaled;}
+        }
+      }
+      at+=count;
+    }
+  }
+  finish(options?:{edgeFadeMs?:number}){
     if(!this.frames)throw new Error('No audio was recorded.');
+    const fade=options?.edgeFadeMs??0;
+    if(!Number.isFinite(fade)||fade<0||fade>25)throw new Error('Invalid recording edge fade.');
+    if(fade>0)this.taperEdges(fade);
     const data=this.frames*6,header=new ArrayBuffer(this.format==='wav'?44:54),v=new DataView(header);
     const tag=(p:number,s:string)=>{for(let i=0;i<s.length;i++)v.setUint8(p+i,s.charCodeAt(i));};
     if(this.format==='wav'){

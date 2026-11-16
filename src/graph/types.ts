@@ -27,5 +27,7 @@ export interface ModuleTelemetry {
 }
 export interface EngineTelemetry {
   modules: Record<string, ModuleTelemetry>; peak: number; rms: number; sample: number; faults: number;
+  /** Diagnostics only; do not gate, normalize or reshape intentional musical transients. */
+  integrity?:{masterDrivePeak:number;nearCeilingFraction:number;largestSampleStep:number};
 }
 export const SIGNAL_COLORS: Record<SignalType, string> = SIGNAL_INKS;
