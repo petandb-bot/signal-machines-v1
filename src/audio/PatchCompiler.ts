@@ -20,7 +20,7 @@ import { Pulse } from './modules/Pulse';
 import { Flock } from './modules/Flock';
 import { Alloy } from './modules/Alloy';
 import { Chamber } from './modules/Chamber';
-import { Output } from './modules/Output';
+import { CleanOutput as Output } from './modules/CleanOutput';
 import { Branch } from './modules/Branch';
 import { Reson } from './modules/Reson';
 import { Fracture } from './modules/Fracture';

@@ -6,7 +6,8 @@ import type {RecordingFormat} from '../audio/PcmRecording';
 import {MODULE_GROUPS} from '../graph/catalog';
 import {MAX_LOOPS} from '../audio/LoopAudio';
 import type {LoopAudio,LoopStatus} from '../audio/LoopAudio';
-import {encodeWav,decodeWav} from '../audio/Wav';
+import {encodeWav} from '../audio/Wav';
+import {decodeLoopFile} from '../audio/AudioFile';
 import { StateStore } from './StateStore';
 import { AudioEngine } from '../audio/AudioEngine';
 import { DEFINITIONS } from '../graph/definitions';
@@ -147,7 +148,7 @@ export class AppController {
     try{
       if(!this.audio.running)await this.audio.start(this.store.patch);
       let payload:LoopAudio|undefined;
-      if(action==='import'){if(!file)throw new Error('Choose a WAV file.');if(file.size>32_000_000)throw new Error('Use a WAV file smaller than 32 MB.');payload=decodeWav(await file.arrayBuffer(),this.audio.sampleRate);}
+      if(action==='import'){if(!file)throw new Error('Choose an audio file.');payload=await decodeLoopFile(file,this.audio.sampleRate);}
       const result=await this.audio.moduleAction(module.id,action,payload);
       if(action==='export'){download(encodeWav(result as LoopAudio),`signal-machines-loop-${Date.now()}.wav`);this.notify('Loop WAV exported');}
       else if(module.type==='LOOP')this.editor.setLoopStatus(module.id,result as LoopStatus);

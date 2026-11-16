@@ -6,7 +6,7 @@ A tiny modular playground for sound, chance and happy accidents.
 
 Connect little machines. Make strange sounds. See what happens.
 
-68 modules, 20 curated starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
+68 modules, 20 curated starting patches, snapshots and stereo WAV / AIFF recording. FOUND/CUTS and LOOP import WAV, PCM AIFF and browser-decodable audio including MP3 and M4A. OUTPUT offers an optional CLEAN 5 Hz DC filter; CLASSIC remains the unchanged default. Runs in your browser. No account or backend needed.
 
 An old-computer face for a living sound circuit: green text, small pixel windows and a handful of signal colors.
 
@@ -50,6 +50,12 @@ npm run verify:build
 Pull requests run tests, build and AudioWorklet verification without deploying. The build is in `dist/`. [GitHub setup](docs/GITHUB.md) · [Full guide](docs/GUIDE.md) · [Verification](VERIFICATION.md)
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
+
+## v0.24 — Audio import and output quality
+
+FOUND/CUTS accept WAV, uncompressed PCM AIFF/AIFC, and browser-decodable formats such as MP3 and M4A (60 s / 32 MB). LOOP now accepts the same formats for clips up to 16 seconds / 32 MB; the export remains WAV. Uncompressed AIFF is decoded in JavaScript, independent of browser AIFF codec support. WAV/AIFF sample-rate conversion uses a band-limited sinc filter with linked stereo peak protection rather than linear interpolation.
+
+OUTPUT has an optional CLEAN mode with sample-rate-invariant 5 Hz DC rejection. CLASSIC stays the default and the original DSP source and all 20 existing presets are preserved. Browser-supported compressed formats may vary by device; physical iPhone Safari listening is not independently tested.
 
 ## v0.23 — twenty starting worlds
 

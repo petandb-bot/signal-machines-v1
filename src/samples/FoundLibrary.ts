@@ -1,5 +1,7 @@
 import {analyzeFound,builtinFound,BUILTINS,FOUND_BYTES,FOUND_RATE,FOUND_SECONDS,foundRef} from './FoundData';
 import type {FoundAudio,Builtin} from './FoundData';
+import {decodeAiff,isAiff,preflightAudioDuration} from '../audio/AudioFile';
+import {resampleStereo} from '../audio/Resample';
 interface RecordAudio{id:string;name:string;blob:Blob}
 export interface FoundStorage{get(id:string):Promise<RecordAudio|undefined>;put(record:RecordAudio):Promise<void>}
 export class IndexedFoundStorage implements FoundStorage{
@@ -33,12 +35,24 @@ export class IndexedFoundStorage implements FoundStorage{
 }
 export async function decodeFound(blob:Blob,id:string,name:string):Promise<FoundAudio>{
   if(!blob.size||blob.size>FOUND_BYTES)throw Error('Use an audio file up to 32 MB and 60 seconds.');
-  // Ask the media decoder for duration before allocating decoded PCM, including compressed files.
-  await new Promise<void>((resolve,reject)=>{const el=document.createElement('audio'),url=URL.createObjectURL(blob);let done=false;const finish=(error?:Error)=>{if(done)return;done=true;clearTimeout(timer);el.onloadedmetadata=el.onerror=null;el.removeAttribute('src');el.load();URL.revokeObjectURL(url);error?reject(error):resolve();};const timer=setTimeout(()=>finish(Error('Could not read audio duration.')),15000);el.preload='metadata';el.onloadedmetadata=()=>finish(Number.isFinite(el.duration)&&el.duration>=.01&&el.duration<=FOUND_SECONDS?undefined:Error('Use audio between 0.01 and 60 seconds.'));el.onerror=()=>finish(Error('This audio format could not be read. Try WAV.'));el.src=url;});
-  const Context=window.OfflineAudioContext;if(!Context)throw Error('Audio file decoding is unavailable in this browser.');
-  const context=new Context(2,1,FOUND_RATE),decoded=await context.decodeAudioData(await blob.arrayBuffer());
-  if(decoded.duration>FOUND_SECONDS||decoded.duration<.01||decoded.numberOfChannels<1||decoded.numberOfChannels>2)throw Error('Use mono/stereo audio up to 60 seconds.');
-  return analyzeFound(id,name,decoded.getChannelData(0).slice(),decoded.getChannelData(decoded.numberOfChannels===1?0:1).slice());
+  // AIFF PCM is decoded locally rather than depending on a browser-specific codec.
+  if(isAiff(await blob.slice(0,12).arrayBuffer())){
+    const source=decodeAiff(await blob.arrayBuffer(),FOUND_SECONDS);
+    const audio=resampleStereo(source,FOUND_RATE);
+    return analyzeFound(id,name,audio.left,audio.right);
+  }
+  // Check duration before allocating decoded PCM for compressed/native formats.
+  await preflightAudioDuration(blob,FOUND_SECONDS);
+  const Context=window.OfflineAudioContext;
+  if(!Context)throw Error('Audio file decoding is unavailable in this browser.');
+  const context=new Context(2,1,FOUND_RATE);
+  let decoded:AudioBuffer;
+  try{decoded=await context.decodeAudioData(await blob.arrayBuffer());}
+  catch{throw Error('This browser cannot decode the audio format. Try WAV or uncompressed AIFF.');}
+  if(decoded.duration>FOUND_SECONDS||decoded.duration<.01||decoded.numberOfChannels<1||decoded.numberOfChannels>2)
+    throw Error('Use mono/stereo audio up to 60 seconds.');
+  return analyzeFound(id,name,decoded.getChannelData(0).slice(),
+    decoded.getChannelData(decoded.numberOfChannels===1?0:1).slice());
 }
 /** Keep only currently selected PCM in memory; originals live in IDB, with a bounded session fallback. */
 export class FoundLibrary{
