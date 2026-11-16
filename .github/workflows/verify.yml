@@ -48,6 +48,15 @@ jobs:
           path: artifacts/integrity/soak-report.json
           if-no-files-found: error
           retention-days: 14
+      - name: Render shared pitch-field A/B study
+        run: node scripts/render-pitch-field-study.mjs
+      - name: Upload shared pitch-field study
+        uses: actions/upload-artifact@v5
+        with:
+          name: pitch-field-audition
+          path: artifacts/pitch-field-study/
+          if-no-files-found: error
+          retention-days: 14
       - name: Upload new preset listening review
         uses: actions/upload-artifact@v5
         with:

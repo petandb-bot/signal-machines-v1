@@ -34,6 +34,12 @@ The following are deliberately **not added to the 20 main presets**. They are op
 
 Download either raw JSON file, open SIGNAL MACHINES, choose **gear → Load JSON**, and connect or disconnect cables freely. The studies are a way to hear the new pitch constraint in a musical context, not an A/B mastering claim.
 
+## Simple A/B audition
+
+On the pull request, open the successful GitHub Actions verification run and download the `pitch-field-audition` ZIP. Extract it and open `index.html`. There are exactly two 30-second WAVs, at the same playback gain, with identical patch structure and only the partner voice's pitch field changed. Listen for relationships and continuity rather than an obvious new melody. The `metrics.json` file is only a technical check.
+
+The live website runs the stable release and **does not include the new field modes until release**. Loading these example JSONs into the stable version is not a valid A/B test.
+
 ## Acceptance and limitations
 
 - All original module types, default modes, audio cores and existing 20 presets remain untouched.
