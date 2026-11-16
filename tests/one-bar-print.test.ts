@@ -44,6 +44,8 @@ describe('ONE BAR PRINT — post-master capture into existing LOOP memory',()=>{
    g.process(l,r);reference.process(rl,rr);
    recordedExpectedL.set(rl,offset);recordedExpectedR.set(rr,offset);offset+=size;
   }
+  // Commit the finished capture at the next render quantum, not mid-sample.
+  g.process(new Float32Array(1),new Float32Array(1));
   const loop=g.modules.get('loop') as Loop;
   expect(loop.telemetry().loop).toEqual({mode:'playing',frames:bars,sampleRate:rate});
   const stored=exportLoop(g);
@@ -66,6 +68,7 @@ describe('ONE BAR PRINT — post-master capture into existing LOOP memory',()=>{
    const n=Math.min(128,target-offset),l=new Float32Array(n),r=new Float32Array(n),reference=new Float32Array(n),refR=new Float32Array(n);
    g.process(l,r);baseline.process(reference,refR);expected.set(reference,offset);offset+=n;
   }
+  g.process(new Float32Array(1),new Float32Array(1));
   const recorded=exportLoop(g);
   expect(recorded.left).toEqual(expected);
   expect(g.faults).toBe(0);
