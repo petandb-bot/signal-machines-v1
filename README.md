@@ -57,6 +57,10 @@ Pull requests run tests, build and AudioWorklet verification without deploying. 
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
 
+## v0.26.1 — English module HELP
+
+Open the **Patch menu (gear) → Module help** to explore all 68 module descriptions in English. Search by module name, category, behavior, or parameter. Expand an item for its two controls, available modes and input/output signals. The panel does not add music rules, quantization, voice processing or a new DSP feature. Keyboard navigation, Escape and narrow layouts are supported; physical mobile browsers remain to be tested.
+
 ## v0.26 — REUSE: LOOP becomes another instrument
 
 Inside a recorded or imported LOOP, use **→ FOUND** to copy the current take into an autonomous sample explorer, or **→ CUTS** to turn it into a short-event instrument. The original LOOP remains unchanged; the new sample module starts unconnected so that you choose its route and rhythm. No automatic quantization, leveling, or sound polishing is introduced.
