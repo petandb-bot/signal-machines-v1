@@ -7,6 +7,8 @@ import { DSPModule, clamp } from './DSPModule';
 import { compilePatch } from './PatchCompiler';
 import type { CompiledModule } from './PatchCompiler';
 import { processModule } from './SignalRouter';
+// Near the existing 0.63 ceiling: 95% of the tanh output is diagnostic only.
+const NEAR_SATURATION_DRIVE=.63*Math.atanh(.95);
 export class DSPGraph {
   private foundAssets=new Map<string,FoundAudio>();
   setFoundAssets(values:FoundAudio[],retain?:string[]){
@@ -22,6 +24,8 @@ export class DSPGraph {
   private pending: Patch | null = null; private pendingReset = false; private fading = false; private fade = 0;
   private bpm = 76; private master = .65; private targetMaster = .65;
   private peak = 0; private energy = 0; private measured = 0;
+  private masterDrivePeak=0;private saturatedFrames=0;private largestStep=0;
+  private previousSampleL=0;private previousSampleR=0;
   sample = 0; faults = 0;
   constructor(readonly sampleRate: number) {}
   setPatch(patch: Patch, reset = false, preserveLoops = false) {
@@ -65,8 +69,13 @@ export class DSPGraph {
       for (let i = 0; i < this.outputs.length; i++) { l += this.outputs[i].outputL[0]; r += this.outputs[i].outputR[0]; }
       this.master += (this.targetMaster - this.master) * .001;
       // Smooth saturation with 4 dB of peak headroom, including summed OUTPUT instances.
-      l = .63 * Math.tanh(l * this.master * this.fade / .63); r = .63 * Math.tanh(r * this.master * this.fade / .63);
+      const driveL=l*this.master*this.fade,driveR=r*this.master*this.fade;
+      this.masterDrivePeak=Math.max(this.masterDrivePeak,Math.abs(driveL),Math.abs(driveR));
+      if(Math.abs(driveL)>=NEAR_SATURATION_DRIVE||Math.abs(driveR)>=NEAR_SATURATION_DRIVE)this.saturatedFrames++;
+      l = .63 * Math.tanh(driveL / .63); r = .63 * Math.tanh(driveR / .63);
       left[frame] = Number.isFinite(l) ? l : 0; right[frame] = Number.isFinite(r) ? r : 0;
+      this.largestStep=Math.max(this.largestStep,Math.abs(left[frame]-this.previousSampleL),Math.abs(right[frame]-this.previousSampleR));
+      this.previousSampleL=left[frame];this.previousSampleR=right[frame];
       this.peak = Math.max(this.peak, Math.abs(left[frame]), Math.abs(right[frame]));
       this.energy += (left[frame] ** 2 + right[frame] ** 2) * .5; this.measured++; this.sample++;
     }
@@ -76,7 +85,8 @@ export class DSPGraph {
     if (this.fading && this.fade === 0 && this.pending) { this.commit(this.pending,this.pendingReset,this.preserveLoops); this.pending = null; this.pendingReset = false;this.preserveLoops=false; this.fading = false; }
   }
   telemetry(): EngineTelemetry {
-    const telemetry: EngineTelemetry = {modules:Object.fromEntries(Array.from(this.modules, ([id,dsp])=>[id,dsp.telemetry()])),peak:this.peak,rms:Math.sqrt(this.energy / Math.max(1,this.measured)),sample:this.sample,faults:this.faults};
-    this.peak = this.energy = this.measured = 0; return telemetry;
+    const telemetry: EngineTelemetry = {modules:Object.fromEntries(Array.from(this.modules, ([id,dsp])=>[id,dsp.telemetry()])),peak:this.peak,rms:Math.sqrt(this.energy / Math.max(1,this.measured)),sample:this.sample,faults:this.faults,
+      integrity:{masterDrivePeak:this.masterDrivePeak,nearCeilingFraction:this.saturatedFrames/Math.max(1,this.measured),largestSampleStep:this.largestStep}};
+    this.peak = this.energy = this.measured = this.masterDrivePeak = this.saturatedFrames = this.largestStep = 0; return telemetry;
   }
 }

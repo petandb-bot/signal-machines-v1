@@ -39,6 +39,15 @@ jobs:
           cp -R public/listening/audio/twenty dist/listening/audio/
           cp -R public/listening/presets/twenty dist/listening/presets/
           cp public/listening/twenty.html dist/listening/
+      - name: Soak-test audio integrity and time stability
+        run: node scripts/stress-integrity.mjs
+      - name: Upload integrity report
+        uses: actions/upload-artifact@v5
+        with:
+          name: integrity-soak
+          path: artifacts/integrity/soak-report.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Upload new preset listening review
         uses: actions/upload-artifact@v5
         with:
