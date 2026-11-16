@@ -83,6 +83,21 @@ describe('read-only English help for all modules',()=>{
     expect(document.querySelector('.module-help-intro')!.textContent).toContain('not a fixed musical outcome');
     expect(app.store.patch).toEqual(old);
   });
+  it('does not trigger transport or patch deletion shortcuts while browsing summary entries',()=>{
+    open();
+    const selected=app.store.patch.modules[0];
+    app.store.selectedModule=selected.id;
+    const before=structuredClone(app.store.patch);
+    const summary=document.querySelector<HTMLElement>('[data-module="PULSE"] summary')!;
+    const space=new KeyboardEvent('keydown',{key:' ',code:'Space',bubbles:true,cancelable:true});
+    summary.dispatchEvent(space);
+    expect(space.defaultPrevented).toBe(false);
+    const deletion=new KeyboardEvent('keydown',{key:'Delete',bubbles:true,cancelable:true});
+    summary.dispatchEvent(deletion);
+    expect(deletion.defaultPrevented).toBe(false);
+    expect(app.store.patch).toEqual(before);
+    expect(app.audio.running).toBe(false);
+  });
   it('closes with Escape even when the help search has keyboard focus',()=>{
     open();
     const search=document.querySelector<HTMLInputElement>('.module-help-search')!;

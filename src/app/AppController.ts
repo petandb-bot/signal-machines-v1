@@ -93,7 +93,9 @@ export class AppController {
     document.addEventListener('keydown',event=>{
       if(event.key==='Escape'&&this.root.classList.contains('editor-visible')&&this.editor.cancelDelete()){event.preventDefault();return;}
       if(event.key==='Escape'&&this.root.classList.contains('help-visible')){event.preventDefault();this.closePanels();this.menuButton.focus();return;}
-      if((event.target as Element).closest('input,textarea,select,button,a,[contenteditable]'))return;
+      // Help is a reference, never an audio transport or destructive keyboard surface.
+      if(this.root.classList.contains('help-visible'))return;
+      if((event.target as Element).closest('input,textarea,select,button,a,summary,details,[contenteditable]'))return;
       if(event.code==='Space'){event.preventDefault();void this.toggleRun();}
       else if(event.key==='Delete'||event.key==='Backspace'){event.preventDefault();this.deleteSelection();}
       else if(event.key==='Escape'){this.workspace.cancelDrag();this.closePanels();}
