@@ -6,7 +6,7 @@ import {decodeFound} from '../src/samples/FoundLibrary';
 import {PcmRecording} from '../src/audio/PcmRecording';
 import {decodeWav,encodeWav} from '../src/audio/Wav';
 import {createModule} from '../src/graph/PatchGraph';
-import {Output} from '../src/audio/modules/Output';
+import {CleanOutput as Output} from '../src/audio/modules/CleanOutput';
 afterEach(()=>{vi.restoreAllMocks();vi.unstubAllGlobals();});
 
 describe('common audio imports and source quality',()=>{
