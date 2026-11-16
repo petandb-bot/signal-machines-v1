@@ -2,6 +2,9 @@ import {analyzeFound,builtinFound,BUILTINS,FOUND_BYTES,FOUND_RATE,FOUND_SECONDS,
 import type {FoundAudio,Builtin} from './FoundData';
 import {decodeAiff,isAiff,preflightAudioDuration} from '../audio/AudioFile';
 import {resampleStereo} from '../audio/Resample';
+import {encodeWav,decodeWav} from '../audio/Wav';
+import type {LoopAudio} from '../audio/LoopAudio';
+import {validateLoopAudio} from '../audio/LoopAudio';
 interface RecordAudio{id:string;name:string;blob:Blob}
 export interface FoundStorage{get(id:string):Promise<RecordAudio|undefined>;put(record:RecordAudio):Promise<void>}
 export class IndexedFoundStorage implements FoundStorage{
@@ -64,6 +67,35 @@ export class FoundLibrary{
     const task=(async()=>{if(!current())return undefined;let audio:FoundAudio|undefined;const kind=id.slice(8) as Builtin;if(id.startsWith('builtin:')&&BUILTINS.includes(kind))audio=builtinFound(kind);else{let stored=this.session.get(id);if(!stored)try{stored=await this.storage.get(id);}catch{this.warning='Sample storage is unavailable.';}if(stored)audio=await this.decodeOne(stored.blob,id,stored.name,current);}if(audio)this.cache.set(id,audio);return audio;})();this.pending.set(id,task);try{return await task;}finally{this.pending.delete(id);}}
   sessionOnly(id:string){return this.session.has(id);}
   retain(ids:string[]){for(const id of this.cache.keys())if(!ids.includes(id))this.cache.delete(id);}
+  /**
+   * Snapshot a LOOP's existing PCM into a reusable FOUND/CUTS asset.
+   * The WAV bytes are also the persistence source: a page reload will produce
+   * the same PCM16-quantized material (no browser audio codec required).
+   * Does not modify the original LOOP buffer or current routing.
+   */
+  async importLoop(clip:LoopAudio,current=()=>true){
+    validateLoopAudio(clip,clip.sampleRate);
+    if(!current())throw Error('Patch changed before the loop could be copied.');
+    const blob=encodeWav(clip);
+    if(blob.size>FOUND_BYTES)throw Error('Loop snapshot is too large.');
+    const id='local:'+crypto.randomUUID();
+    const name='Loop capture '+new Date().toISOString().slice(0,19).replace('T',' ')+'.wav';
+    // Decode from the same stored PCM16 container that future sessions will use.
+    const pcm=decodeWav(await blob.arrayBuffer(),FOUND_RATE);
+    const audio=analyzeFound(id,name,pcm.left,pcm.right);
+    if(!current())throw Error('Patch changed before the loop could be copied.');
+    let persisted=true;
+    try{await this.storage.put({id,name,blob});}
+    catch{
+      persisted=false;
+      if([...this.session.values()].reduce((n,r)=>n+r.blob.size,0)+blob.size>FOUND_BYTES*2)
+        throw Error('Session sample memory is full; free browser storage before sending another loop.');
+      this.session.set(id,{id,name,blob});
+    }
+    if(!current())throw Error('Patch changed while the loop snapshot was saved.');
+    this.cache.set(id,audio);
+    return{audio,persisted};
+  }
   async import(file:File,current=()=>true){if(!file.size||file.size>FOUND_BYTES)throw Error('Use an audio file up to 32 MB and 60 seconds.');const id='local:'+crypto.randomUUID(),name=file.name.slice(0,160),audio=await this.decodeOne(file,id,name,current);if(!current())throw Error('Sample load superseded.');let persisted=true;
     try{await this.storage.put({id,name,blob:file});}catch{persisted=false;if([...this.session.values()].reduce((n,r)=>n+r.blob.size,0)+file.size>FOUND_BYTES*2)throw Error('Session sample memory is full; free browser storage before loading another file.');this.session.set(id,{id,name,blob:file});}
     this.cache.set(id,audio);return{audio,persisted};

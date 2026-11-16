@@ -151,6 +151,26 @@ export class AppController {
   private async performModuleAction(module:ModuleState,action:string,file?:File){
     if(this.busy)return;this.busy=true;this.editor.setLoopBusy(module.id,true);
     try{
+      if(action==='send-found'||action==='send-cuts'){
+        if(module.type!=='LOOP'||!this.audio.running)throw Error('Start and record a loop before sending its audio.');
+        if(this.store.patch.modules.length>=48)throw Error('This patch has reached the 48 module limit.');
+        if(this.store.patch.modules.filter(m=>isSampleType(m.type)).length>=MAX_FOUND)
+          throw Error('This patch already has 2 FOUND/CUTS modules.');
+        const sourcePatch=this.store.patch;
+        const sourceIsCurrent=()=>this.store.patch===sourcePatch&&sourcePatch.modules.includes(module);
+        const clip=await this.audio.moduleAction(module.id,'export') as LoopAudio;
+        if(!sourceIsCurrent())throw Error('Patch changed during loop transfer.');
+        const {audio,persisted}=await this.audio.foundLibrary.importLoop(clip,sourceIsCurrent);
+        if(!sourceIsCurrent())throw Error('Patch changed during loop transfer.');
+        const type=action==='send-found'?'FOUND':'CUTS',position=this.workspace.vacantPosition();
+        const created=createModule(type,position.x,position.y,(this.store.patch.seed+this.store.patch.modules.length*7919+1)>>>0);
+        created.sample=audio.id;
+        this.store.patch.modules.push(created);
+        this.store.selectedModule=created.id;this.store.selectedCable=null;
+        this.closePanels();this.store.changed('routing');this.workspace.reveal(created.id,0);
+        this.notify(`LOOP copied to ${type}. Connect its AUDIO output to hear the new voice.${persisted?'':' Sample available only for this session.'}`,!persisted,8000);
+        return;
+      }
       if(!this.audio.running)await this.audio.start(this.store.patch);
       let payload:LoopAudio|undefined;
       if(action==='import'){if(!file)throw new Error('Choose an audio file.');payload=await decodeLoopFile(file,this.audio.sampleRate);}
