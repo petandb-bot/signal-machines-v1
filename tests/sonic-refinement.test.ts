@@ -99,8 +99,8 @@ describe('Phase 7 opt-in sonic refinement',()=>{
   },15000);
 
   it.each([
-    {name:'CHAMBER',Legacy:Chamber,Revised:RefinedChamber,cleanMode:'CLEAR ROOM',dryFactor:(density:number)=>1-(.26+density*.48)*.45},
-    {name:'PLATE',Legacy:Plate,Revised:RefinedPlate,cleanMode:'CLEAR',dryFactor:(_density:number)=>.72},
+    {name:'CHAMBER',Legacy:Chamber,Revised:RefinedChamber,cleanMode:'CLEAR ROOM',dryFactor:(density:number):number=>1-(.26+density*.48)*.45},
+    {name:'PLATE',Legacy:Plate,Revised:RefinedPlate,cleanMode:'CLEAR',dryFactor:(_density:number):number=>.72},
   ])('$name removes low-frequency energy from the wet tail without touching the dry path',({name,Legacy,Revised,cleanMode,dryFactor})=>{
     const s=createModule(name as 'CHAMBER'|'PLATE',0,0,67);
     const old=new Legacy(s,RATE,9),now=new Revised(s,RATE,9);
@@ -110,7 +110,7 @@ describe('Phase 7 opt-in sonic refinement',()=>{
     for(let i=0;i<RATE*2;i++){
       const source=i<RATE*1.7?.15*Math.sin(2*Math.PI*115*i/RATE):0;
       old.inputL[0]=now.inputL[0]=source;old.inputR[0]=now.inputR[0]=source*.7;
-      old.process(i,120);now.process(i,120);
+      old.process();now.process();
       expect(Number.isFinite(now.outputL[0])).toBe(true);
       if(i>RATE*.6&&i<RATE*1.7){
         wetA+=(old.outputL[0]-source*factor)**2;
