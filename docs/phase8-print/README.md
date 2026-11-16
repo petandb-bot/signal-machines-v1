@@ -10,7 +10,7 @@ A **PRINT** button is added to the existing LOOP module. It captures **the full 
 
 - Length: exactly 4 beats at the current BPM, beginning **after a short ~8 ms transition** from the destination LOOP's prior playback; not snapped to a global downbeat. At 20–300 BPM this is 12–0.8 seconds, within the existing 16s LOOP memory.
 - Captured material: the audible master after the current gain and the existing soft ceiling; not the direct LOOP input. Other generators, FX, chance, timing and other LOOP layers are preserved in the captured sound.
-- To prevent copying the target LOOP back onto itself, **the destination LOOP's previous playback is muted during PRINT**. Its live input still passes through while printing, so existing paths through the module remain audible.
+- To prevent direct recapture, **the destination LOOP's previous playback is muted during PRINT**. Its live input still passes through while printing, so existing paths through the module remain audible.
 - At the end of one bar, the destination LOOP automatically enters **Playing**; the existing SPEED and MIX controls immediately turn the printed memory into a playable layer. Negative speed, frozen motion and repeated tempo changes remain legitimate.
 - PRINT can be canceled by **Clear**; transport stop finalizes a partial take. A second PRINT is rejected while one is already running.
 - For best results route a generator to OUTPUT and route LOOP AUDIO to OUTPUT or an intermediate module to listen to its captured material. No automatic cabling, hidden pattern generators or new DSP modules.
@@ -18,6 +18,7 @@ A **PRINT** button is added to the existing LOOP module. It captures **the full 
 ## Intentional artistic properties
 
 - The player controls *when* the instrument remembers something. The feature does not quantize event onset to a common metronome.
+- Previous signals can remain in downstream filters and reverbs; these audible tails are part of the master and intentionally remain in the printed memory. Direct old LOOP playback and its short transition are excluded from the new capture.
 - A captured fragment may have material discontinuities inside it; they are kept. The existing LOOP edge window and short transition handle the playback boundary.
 - LOOP is a memory and transformation stage, not an automatic mastering effect.
 - Source sound and past presets remain untouched.

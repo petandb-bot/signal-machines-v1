@@ -53,31 +53,38 @@ describe('ONE BAR PRINT — post-master capture into existing LOOP memory',()=>{
   expect(stored.right).toEqual(recordedExpectedR);
   expect(g.faults).toBe(0);
  },30000);
- it('does not re-record a previously audible LOOP tail into a fresh PRINT',()=>{
-  const rate=8000,p=makePatch(300,true),baseline=new DSPGraph(rate),g=new DSPGraph(rate);
-  g.setPatch(p);baseline.setPatch(p);
+ it('mutes the old LOOP direct output while preserving legitimate downstream memory',()=>{
+  const rate=8000,p=makePatch(300,true),g=new DSPGraph(rate);
+  g.setPatch(p);
   const previous={kind:'loopAudio' as const,sampleRate:rate,left:new Float32Array(rate).fill(.7),right:new Float32Array(rate).fill(-.5)};
   g.modules.get('loop')!.command('import',previous);
-  // Play old audio first: the output fade truly contains the old sound.
-  for(let i=0;i<10;i++){
-    g.process(new Float32Array(128),new Float32Array(128));
-    baseline.process(new Float32Array(128),new Float32Array(128));
-  }
-  const bars=Math.round(rate*240/300),settle=Math.ceil(rate*.008)+1,expected=new Float32Array(bars);
-  let at=0,state:unknown,err='';
+  // Render the previous loop first so its audible direct output is nonzero.
+  for(let i=0;i<10;i++)g.process(new Float32Array(128),new Float32Array(128));
+  expect(Math.abs(g.modules.get('loop')!.outputL[0])).toBeGreaterThan(.1);
+  const bars=Math.round(rate*240/300),settle=Math.ceil(rate*.008)+1,
+    expected=new Float32Array(bars),expectedR=new Float32Array(bars);
+  let at=0,state:unknown,err='',maximumDirectAfterSettle=0;
   g.requestAction('loop','print',undefined,(v,e)=>{state=v;err=e??'';});
   while(at<settle+bars){
-    const n=Math.min(128,settle+bars-at),l=new Float32Array(n),r=new Float32Array(n),
-      reference=new Float32Array(n),refR=new Float32Array(n);
-    g.process(l,r);baseline.process(reference,refR);
-    for(let i=0;i<n;i++)if(at+i>=settle)expected[at+i-settle]=reference[i];
+    const n=Math.min(128,settle+bars-at),l=new Float32Array(n),r=new Float32Array(n);
+    g.process(l,r);
+    for(let i=0;i<n;i++)if(at+i>=settle){
+      const pos=at+i-settle;expected[pos]=l[i];expectedR[pos]=r[i];
+    }
+    if(at+n>settle+128){
+      maximumDirectAfterSettle=Math.max(maximumDirectAfterSettle,Math.abs(g.modules.get('loop')!.outputL[0]));
+    }
     at+=n;
   }
   expect(err).toBe('');
   expect((state as {mode:string}).mode).toBe('printing');
+  // Master effects may still carry audible memory. The source LOOP itself
+  // must stop replaying its previous clip after the 8ms boundary transition.
+  expect(maximumDirectAfterSettle).toBeLessThan(1e-10);
   g.process(new Float32Array(1),new Float32Array(1));
   const recorded=exportLoop(g);
   expect(recorded.left).toEqual(expected);
+  expect(recorded.right).toEqual(expectedR);
   expect(g.faults).toBe(0);
  },15000);
  it('allows cancel and avoids dangling targets when the LOOP is removed',()=>{
