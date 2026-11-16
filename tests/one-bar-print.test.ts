@@ -1,0 +1,126 @@
+import {describe,expect,it} from 'vitest';
+import {createModule,connect,removeModule} from '../src/graph/PatchGraph';
+import {emptyPatch} from '../src/state/presets';
+import {DSPGraph} from '../src/audio/DSPGraph';
+import {Loop} from '../src/audio/modules/Loop';
+import type {LoopAudio} from '../src/audio/LoopAudio';
+
+function makePatch(bpm=120,routeLoop=false){
+ const p=emptyPatch();p.name='One-bar print test';p.master=.7;p.bpm=bpm;
+ const chip=createModule('CHIP',0,0,11,'chip');chip.params.tune=.59;chip.params.character=.31;
+ const out=createModule('OUTPUT',120,0,12,'out');
+ const loop=createModule('LOOP',240,0,13,'loop');
+ p.modules=[chip,out,loop];
+ connect(p,{module:'chip',port:'audio'},{module:'out',port:'audio'});
+ if(routeLoop)connect(p,{module:'loop',port:'audio'},{module:'out',port:'audio'});
+ return p;
+}
+function print(g:DSPGraph,loop='loop'){
+ let state:unknown,error:unknown;
+ g.requestAction(loop,'print',undefined,(v,e)=>{state=v;error=e;});
+ g.process(new Float32Array(128),new Float32Array(128));
+ if(error)throw Error(String(error));
+ return state as {mode:string;frames:number;printTargetFrames:number};
+}
+function exportLoop(g:DSPGraph){return g.modules.get('loop')!.command('export') as LoopAudio;}
+describe('ONE BAR PRINT — post-master capture into existing LOOP memory',()=>{
+ it.each([8000,44100,48000])('captures a 4/4 bar exactly, after the LOOP playback transition, at %i Hz',rate=>{
+  const p=makePatch(120),g=new DSPGraph(rate),reference=new DSPGraph(rate);
+  g.setPatch(p);reference.setPatch(p);
+  const bars=Math.round(rate*240/p.bpm),settle=Math.ceil(rate*.008)+1;
+  const recordedExpectedL=new Float32Array(bars),recordedExpectedR=new Float32Array(bars);
+  let state:unknown,error='',at=0;
+  g.requestAction('loop','print',undefined,(v,e)=>{state=v;error=e??'';});
+  while(at<settle+bars){
+   const size=Math.min(128,settle+bars-at),l=new Float32Array(size),r=new Float32Array(size),
+         rl=new Float32Array(size),rr=new Float32Array(size);
+   g.process(l,r);reference.process(rl,rr);
+   for(let i=0;i<size;i++)if(at+i>=settle){
+     const pos=at+i-settle;
+     recordedExpectedL[pos]=rl[i];recordedExpectedR[pos]=rr[i];
+   }
+   at+=size;
+  }
+  expect(error).toBe('');
+  expect((state as {mode:string;printTargetFrames:number}).mode).toBe('printing');
+  expect((state as {printTargetFrames:number}).printTargetFrames).toBe(bars);
+  // Finish at the next quantum boundary; never validate/import a new take mid-sample.
+  g.process(new Float32Array(1),new Float32Array(1));
+  const loop=g.modules.get('loop') as Loop;
+  expect(loop.telemetry().loop).toEqual({mode:'playing',frames:bars,sampleRate:rate});
+  const stored=exportLoop(g);
+  expect(stored.left).toEqual(recordedExpectedL);
+  expect(stored.right).toEqual(recordedExpectedR);
+  expect(g.faults).toBe(0);
+ },30000);
+ it('mutes the old LOOP direct output while preserving legitimate downstream memory',()=>{
+  const rate=8000,p=makePatch(300,true),g=new DSPGraph(rate);
+  g.setPatch(p);
+  const previous={kind:'loopAudio' as const,sampleRate:rate,left:new Float32Array(rate).fill(.7),right:new Float32Array(rate).fill(-.5)};
+  g.modules.get('loop')!.command('import',previous);
+  // Render the previous loop first so its audible direct output is nonzero.
+  for(let i=0;i<10;i++)g.process(new Float32Array(128),new Float32Array(128));
+  expect(Math.abs(g.modules.get('loop')!.outputL[0])).toBeGreaterThan(.1);
+  const bars=Math.round(rate*240/300),settle=Math.ceil(rate*.008)+1,
+    expected=new Float32Array(bars),expectedR=new Float32Array(bars);
+  let at=0,state:unknown,err='',maximumDirectAfterSettle=0;
+  g.requestAction('loop','print',undefined,(v,e)=>{state=v;err=e??'';});
+  while(at<settle+bars){
+    const n=Math.min(128,settle+bars-at),l=new Float32Array(n),r=new Float32Array(n);
+    g.process(l,r);
+    for(let i=0;i<n;i++)if(at+i>=settle){
+      const pos=at+i-settle;expected[pos]=l[i];expectedR[pos]=r[i];
+    }
+    if(at+n>settle+128){
+      maximumDirectAfterSettle=Math.max(maximumDirectAfterSettle,Math.abs(g.modules.get('loop')!.outputL[0]));
+    }
+    at+=n;
+  }
+  expect(err).toBe('');
+  expect((state as {mode:string}).mode).toBe('printing');
+  // Master effects may still carry audible memory. The source LOOP itself
+  // must stop replaying its previous clip after the 8ms boundary transition.
+  expect(maximumDirectAfterSettle).toBeLessThan(1e-10);
+  g.process(new Float32Array(1),new Float32Array(1));
+  const recorded=exportLoop(g);
+  expect(recorded.left).toEqual(expected);
+  expect(recorded.right).toEqual(expectedR);
+  expect(g.faults).toBe(0);
+ },15000);
+ it('allows cancel and avoids dangling targets when the LOOP is removed',()=>{
+  const rate=8000,p=makePatch(40),g=new DSPGraph(rate);g.setPatch(p);
+  expect(print(g).mode).toBe('printing');
+  g.modules.get('loop')!.command('clear');
+  g.process(new Float32Array(128),new Float32Array(128));
+  expect(g.modules.get('loop')!.telemetry().loop?.mode).toBe('empty');
+  expect(print(g).mode).toBe('printing');
+  removeModule(p,'loop');g.setPatch(p);
+  for(let i=0;i<5;i++)g.process(new Float32Array(128),new Float32Array(128));
+  expect(g.modules.has('loop')).toBe(false);
+  expect(g.faults).toBe(0);
+ },12000);
+ it('finishes a partial PRINT cleanly on transportStop while retaining material for restart',()=>{
+  const rate=8000,p=makePatch(20),g=new DSPGraph(rate);g.setPatch(p);
+  print(g);
+  for(let i=0;i<24;i++)g.process(new Float32Array(128),new Float32Array(128));
+  g.finishLoops();
+  const before=g.modules.get('loop')!.telemetry().loop;
+  expect(before?.mode).toBe('playing');expect(before!.frames).toBeGreaterThan(3000);
+  g.setPatch(p,true,true);
+  for(let i=0;i<8;i++)g.process(new Float32Array(128),new Float32Array(128));
+  expect(g.modules.get('loop')!.telemetry().loop?.frames).toBe(before!.frames);
+ },12000);
+ it('rejects invalid print lengths and simultaneous PRINT requests without overwriting the first',()=>{
+  const rate=8000,p=makePatch(120);p.modules.push(createModule('LOOP',300,0,25,'loop2'));
+  const g=new DSPGraph(rate);g.setPatch(p);
+  const loop=g.modules.get('loop') as Loop;
+  for(const frames of [-1,0,NaN,rate*17,1.5]){
+   expect(()=>loop.command('print',{frames})).toThrow('Invalid PRINT length');
+  }
+  expect(print(g).mode).toBe('printing');
+  let error='';g.requestAction('loop2','print',undefined,(_,e)=>error=e??'');
+  g.process(new Float32Array(128),new Float32Array(128));
+  expect(error).toContain('one LOOP');
+  expect(loop.telemetry().loop?.mode).toBe('printing');
+ },12000);
+});

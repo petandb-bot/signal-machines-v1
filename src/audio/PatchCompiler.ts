@@ -34,7 +34,7 @@ import { Parasite } from './modules/Parasite';
 import {Vca} from './modules/Vca';
 import {Shape} from './modules/Shape';
 import {Switch} from './modules/Switch';
-import {Loop} from './modules/Loop';
+import {PrintedLoop as Loop} from './modules/PrintedLoop';
 import {Chorus} from './modules/Chorus';
 import {Cloud} from './modules/Cloud';
 import {Osc} from './modules/Osc';
