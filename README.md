@@ -51,6 +51,16 @@ Pull requests run tests, build and AudioWorklet verification without deploying. 
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
 
+## v0.25 — Audio integrity without losing character
+
+This update preserves the **original sound** and all 20 curated presets. It does not include the alternate CLEAN/FOCUS/CLEAR timbral refinement modes proposed in the unmerged sonic-refinement branch.
+
+- Exported WAV and AIFF recordings get a short (~3ms) fade at their file boundaries to avoid hard starts/ends. No processing is applied inside the take or to live synthesis; browser-compressed recordings are unchanged.
+- Hover over the master level meter to inspect pre-saturation drive peak, the proportion of frames near the existing soft ceiling and the maximum one-sample difference. These **diagnostics do not change the sound** or mistake every deliberate digital step for a defect.
+- The CI suite includes long offline patches with routing changes, 44.1/48kHz output verification and a separate six-hour sample-clock probe. No multi-hour physical iPhone test is claimed.
+
+[Implementation and test methodology](docs/integrity/README.md).
+
 ## v0.24 — Audio import and output quality
 
 FOUND/CUTS accept WAV, uncompressed PCM AIFF/AIFC, and browser-decodable formats such as MP3 and M4A (60 s / 32 MB). LOOP now accepts the same formats for clips up to 16 seconds / 32 MB; the export remains WAV. Uncompressed AIFF is decoded in JavaScript, independent of browser AIFF codec support. WAV/AIFF sample-rate conversion uses a band-limited sinc filter with linked stereo peak protection rather than linear interpolation.
