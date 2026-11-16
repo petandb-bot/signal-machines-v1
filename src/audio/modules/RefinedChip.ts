@@ -2,6 +2,7 @@ import {Chip} from './Chip';
 import {clamp} from '../DSPModule';
 import {polyBlep} from '../ToneMath';
 import {approach,refinementSlew} from './RefinementFilters';
+const DUTIES=[.125,.25,.5,.75] as const;
 
 /**
  * Timer-step and 7-bit quantization deliberately remain. PolyBLEP attenuates
@@ -13,6 +14,7 @@ export class RefinedChip extends Chip {
   private readonly mixSlew=refinementSlew(this.sampleRate);
   private readonly dcPole=Math.exp(-Math.PI/this.sampleRate);
   private readonly releaseScale=1/this.sampleRate;
+  private releaseCoefficient=1;private releaseCounter=0;
   private refinedDuty=.5;private refinedMix=0;private triangleMix=0;private triangleTarget=0;
   private refinedOld=0;private refinedDc=0;
   private refinedGate=false;private refinedAmplitude=0;
@@ -33,12 +35,15 @@ export class RefinedChip extends Chip {
     if(trigger&&!this.refinedGate)this.refinedAmplitude=1;
     this.refinedGate=trigger;
     if(this.inputConnected[1]){
-      this.refinedAmplitude*=Math.exp(-this.releaseScale/(.05+character*character*1.5));
+      if((this.releaseCounter++&31)===0){
+        this.releaseCoefficient=Math.exp(-this.releaseScale/(.05+character*character*1.5));
+      }
+      this.refinedAmplitude*=this.releaseCoefficient;
     }else this.refinedAmplitude=1;
 
     if(!active&&this.refinedMix===0)return;
     const step=(this.phase-phaseBefore+1)%1;
-    const targetDuty=[.125,.25,.5,.75][Math.min(3,Math.floor(character*4))];
+    const targetDuty=DUTIES[Math.min(3,Math.floor(character*4))];
     this.refinedDuty+=(targetDuty-this.refinedDuty)*this.edgeSlew;
     // A second short crossfade prevents a discontinuity when selecting
     // PULSE CLEAN <-> TRIANGLE CLEAN while the first CLEAN mode is active.
