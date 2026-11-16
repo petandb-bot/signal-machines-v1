@@ -1,5 +1,6 @@
 import {LOOP_SECONDS} from './LoopAudio';
 import type {LoopAudio} from './LoopAudio';
+import {resampleStereo} from './Resample';
 export function encodeWav(clip:LoopAudio):Blob{
   const frames=clip.left.length;if(!frames||frames!==clip.right.length)throw new Error('Invalid stereo loop.');
   const bytes=new ArrayBuffer(44+frames*4),view=new DataView(bytes);const text=(p:number,s:string)=>{for(let i=0;i<s.length;i++)view.setUint8(p+i,s.charCodeAt(i));};
@@ -20,7 +21,9 @@ export function decodeWav(bytes:ArrayBuffer,targetRate:number):LoopAudio{
   if(!((format===1&&(bits===16||bits===24))||(format===3&&bits===32))||channels<1||channels>2||rate<8000||rate>192000||alignment!==channels*bits/8||data<0||size%alignment)throw new Error('Use mono/stereo PCM16/24 or float32 WAV audio.');
   const frames=size/alignment;if(frames<2||frames/rate>LOOP_SECONDS||!Number.isFinite(targetRate)||!Number.isInteger(targetRate)||targetRate<8000||targetRate>192000)throw new Error('WAV recordings must be between two frames and 16 seconds.');
   const read=(i:number,c:number)=>{const p=data+i*alignment+Math.min(c,channels-1)*bits/8;const n=format===1?(bits===16?view.getInt16(p,true)/32768:(view.getUint8(p)|(view.getUint8(p+1)<<8)|(view.getInt8(p+2)<<16))/8388608):view.getFloat32(p,true);if(!Number.isFinite(n))throw new Error('WAV contains invalid samples.');return Math.max(-1,Math.min(1,n));};
-  const count=Math.max(2,Math.round(frames/rate*targetRate)),left=new Float32Array(count),right=new Float32Array(count);
-  for(let i=0;i<count;i++){const p=Math.min(frames-1,i*rate/targetRate),index=Math.floor(p),next=Math.min(frames-1,index+1),f=p-index;left[i]=read(index,0)*(1-f)+read(next,0)*f;right[i]=read(index,1)*(1-f)+read(next,1)*f;}
-  return{kind:'loopAudio',sampleRate:targetRate,left,right};
+  // Decode source PCM exactly, then perform band-limited conversion only when needed.
+  // Same-rate WAV imports retain their historical sample values.
+  const left=new Float32Array(frames),right=new Float32Array(frames);
+  for(let i=0;i<frames;i++){left[i]=read(i,0);right[i]=read(i,1);}
+  return{kind:'loopAudio',...resampleStereo({sampleRate:rate,left,right},targetRate)};
 }
