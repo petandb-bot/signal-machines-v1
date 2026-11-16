@@ -1,4 +1,5 @@
 import {Cuts} from './modules/Cuts';
+import {Loop} from './modules/Loop';
 import {Found} from './modules/Found';
 import {validateFoundAudio,MAX_FOUND,validFoundRef} from '../samples/FoundData';
 import type {FoundAudio} from '../samples/FoundData';
@@ -20,6 +21,7 @@ export class DSPGraph {
   }
   modules = new Map<string, DSPModule>();
   private ordered: CompiledModule[] = []; private outputs: DSPModule[] = [];
+  private printLoop?:Loop;
   private actions:Array<{id:string;action:string;payload:unknown;reply:(result:unknown,error?:string)=>void}>=[];private preserveLoops=false;
   private pending: Patch | null = null; private pendingReset = false; private fading = false; private fade = 0;
   private bpm = 76; private master = .65; private targetMaster = .65;
@@ -39,6 +41,10 @@ export class DSPGraph {
     if(reset&&preserveLoops)for(const dsp of compiled.modules.values())if(dsp.state.type==='LOOP')dsp.command('restart');
     for(const dsp of compiled.modules.values())if(dsp instanceof Found||dsp instanceof Cuts)dsp.attach(this.foundAssets.get(dsp.reference));
     this.modules = compiled.modules; this.ordered = compiled.ordered; this.outputs = compiled.outputs;
+    // A cable edit may preserve the instance; removing/resetting it must not
+    // leave an old PRINT target writing outside the compiled patch.
+    if(this.printLoop&&(![...compiled.modules.values()].includes(this.printLoop)||!this.printLoop.isPrinting()))
+      this.printLoop=undefined;
     this.bpm = patch.bpm; this.targetMaster = patch.master;
     if (reset) { this.sample = 0; this.faults = 0; }
   }
@@ -50,9 +56,18 @@ export class DSPGraph {
     if (this.pending) { this.pending.bpm = patch.bpm; this.pending.master = patch.master; }
   }
   requestAction(id:string,action:string,payload:unknown,reply:(result:unknown,error?:string)=>void){this.actions.push({id,action,payload,reply});}
-  finishLoops(){for(const dsp of this.modules.values())if(dsp.state.type==='LOOP')dsp.command('finish');}
+  finishLoops(){for(const dsp of this.modules.values())if(dsp.state.type==='LOOP')dsp.command('finish');this.printLoop=undefined;}
   process(left: Float32Array, right: Float32Array) {
-    if(!this.pending&&!this.fading&&this.actions.length){const actions=this.actions;this.actions=[];for(const request of actions){try{const dsp=this.modules.get(request.id);if(!dsp)throw new Error('Module no longer exists.');request.reply(dsp.command(request.action,request.payload));}catch(error){request.reply(undefined,(error as Error).message);}}}
+    if(!this.pending&&!this.fading&&this.actions.length){const actions=this.actions;this.actions=[];for(const request of actions){try{const dsp=this.modules.get(request.id);if(!dsp)throw new Error('Module no longer exists.');
+      if(request.action==='print'){
+        if(!(dsp instanceof Loop))throw new Error('PRINT requires a LOOP module.');
+        if(this.printLoop?.isPrinting())throw new Error('Only one LOOP may PRINT at a time.');
+        // One bar in 4/4 from the moment PRINT is pressed; BPM 20..300
+        // yields 0.8..12 seconds, safely within the existing 16s memory.
+        const frames=Math.min(Math.floor(this.sampleRate*16),Math.round(this.sampleRate*240/this.bpm));
+        const status=dsp.command('print',{frames});
+        this.printLoop=dsp;request.reply(status);
+      }else request.reply(dsp.command(request.action,request.payload));}catch(error){request.reply(undefined,(error as Error).message);}}}
     for (let frame = 0; frame < left.length; frame++) {
       if (this.fading) { this.fade = Math.max(0, this.fade - 1 / (this.sampleRate * .008)); }
       else this.fade = Math.min(1, this.fade + 1 / (this.sampleRate * .014));
@@ -76,6 +91,9 @@ export class DSPGraph {
       left[frame] = Number.isFinite(l) ? l : 0; right[frame] = Number.isFinite(r) ? r : 0;
       this.largestStep=Math.max(this.largestStep,Math.abs(left[frame]-this.previousSampleL),Math.abs(right[frame]-this.previousSampleR));
       this.previousSampleL=left[frame];this.previousSampleR=right[frame];
+      // PRINT records exactly the audible, post-master stereo mix.
+      // The destination LOOP bypasses its old playback while recording.
+      if(this.printLoop&&!this.printLoop.captureMasterFrame(left[frame],right[frame]))this.printLoop=undefined;
       this.peak = Math.max(this.peak, Math.abs(left[frame]), Math.abs(right[frame]));
       this.energy += (left[frame] ** 2 + right[frame] ** 2) * .5; this.measured++; this.sample++;
     }

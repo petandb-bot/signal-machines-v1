@@ -1,6 +1,6 @@
 export const LOOP_SECONDS=16;
 export const MAX_LOOPS=4;
-export interface LoopStatus {mode:'empty'|'recording'|'playing'|'paused'|'overdub';frames:number;sampleRate:number}
+export interface LoopStatus {mode:'empty'|'recording'|'playing'|'paused'|'overdub'|'printing';frames:number;sampleRate:number;printTargetFrames?:number}
 export interface LoopAudio {kind:'loopAudio';sampleRate:number;left:Float32Array;right:Float32Array}
 export function validateLoopAudio(value:unknown,sampleRate:number):LoopAudio{
   const v=value as LoopAudio;
