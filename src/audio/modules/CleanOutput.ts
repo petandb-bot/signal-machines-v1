@@ -6,7 +6,7 @@ import {Output} from './Output';
  */
 export class CleanOutput extends Output {
   private readonly cleanPole=Math.exp(-2*Math.PI*5/this.sampleRate);
-  private oldL=0;private oldR=0;private filteredL=0;private filteredR=0;
+  private cleanOldL=0;private cleanOldR=0;private filteredL=0;private filteredR=0;
   private blend=0;
   private readonly slew=1-Math.exp(-1/(this.sampleRate*.02));
   override process(){
@@ -15,9 +15,9 @@ export class CleanOutput extends Output {
     const clean=this.selectedMode==='CLEAN';
     if(!clean&&this.blend===0)return;
     const l=this.inputL[0],r=this.inputR[0];
-    this.filteredL=l-this.oldL+this.cleanPole*this.filteredL;
-    this.filteredR=r-this.oldR+this.cleanPole*this.filteredR;
-    this.oldL=l;this.oldR=r;
+    this.filteredL=l-this.cleanOldL+this.cleanPole*this.filteredL;
+    this.filteredR=r-this.cleanOldR+this.cleanPole*this.filteredR;
+    this.cleanOldL=l;this.cleanOldR=r;
     this.blend+=(Number(clean)-this.blend)*this.slew;
     if(this.blend<1e-9)this.blend=0;
     const classicL=this.outputL[0],classicR=this.outputR[0],mix=this.blend;
