@@ -1,4 +1,4 @@
-# Phase 9 — Shared Pitch Fields (listening candidate)
+# Phase 9 — Shared Pitch Fields (v0.27)
 
 ## Decision
 
@@ -38,7 +38,7 @@ Download either raw JSON file, open SIGNAL MACHINES, choose **gear → Load JSON
 
 On the pull request, open the successful GitHub Actions verification run and download the `pitch-field-audition` ZIP. Extract it and open `index.html`. There are exactly two 30-second WAVs, at the same playback gain, with identical patch structure and only the partner voice's pitch field changed. Listen for relationships and continuity rather than an obvious new melody. The `metrics.json` file is only a technical check.
 
-The live website runs the stable release and **does not include the new field modes until release**. Loading these example JSONs into the stable version is not a valid A/B test.
+The live website at v0.27 includes the FIELD and FRICTION modes. You can now import the study JSONs with **gear → Load JSON** as well as listening to the offline CI comparisons.
 
 ## Acceptance and limitations
 
@@ -46,8 +46,8 @@ The live website runs the stable release and **does not include the new field mo
 - Legacy QUANTIZE modes must be sample-for-sample identical with the prior class.
 - Shared root, scale mapping (including negative pitches), partially pulled notes, clock hold and change events have direct regression tests.
 - Test sketches must validate and produce finite audio without DSP faults.
-- Automated measurements cannot prove the interval sets are musically better. Review by ear before a release.
+- Automated measurements cannot prove the interval sets are musically better. Review by ear during everyday patching.
 - The extra mode adds CPU work only to QUANTIZE instances that explicitly select FIELD or FRICTION; no memory allocation should occur in their sample callback.
 - No UI overhaul and no new module palette entry. The English Module HELP reflects the two modes automatically.
 
-Physical iPhone Safari performance and human listening have not been independently verified. Do not deploy this candidate until the two sketches have been auditioned.
+Released in v0.27 after successful CI and resolved code review. Physical iPhone Safari performance and human listening have not been independently verified.
