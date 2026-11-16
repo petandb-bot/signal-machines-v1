@@ -64,6 +64,48 @@ describe('Phase 7 opt-in sonic refinement',()=>{
     expect(results[1]).toBeLessThan(results[0]*.65);
   },18000);
 
+  it('suppresses folded pulse harmonics across multiple timer pitches and pulse widths',()=>{
+    for(const tune of [.91,.92,.93])for(const character of [.15,.3,.55,.85]){
+      const original=createModule('CHIP',0,0,71);
+      original.mode='PULSE';original.wide=true;
+      original.params.tune=tune;original.params.character=character;
+      const cleanState={...original,params:{...original.params},mode:'PULSE CLEAN'};
+      const raw=new Chip(original,RATE,9),clean=new RefinedChip(cleanState,RATE,9);
+      const requested=tunedHz(tune,0,true);
+      const frequency=111860/Math.round(111860/requested);
+      const alias=Math.abs(RATE-3*frequency);
+      let rcos=0,rsin=0,ccos=0,csin=0;
+      for(let i=0;i<RATE*1.2;i++){
+        raw.process(i);clean.process(i);
+        if(i>RATE*.3){
+          const phase=2*Math.PI*alias*i/RATE;
+          const co=Math.cos(phase),si=Math.sin(phase);
+          rcos+=raw.outputL[0]*co;rsin+=raw.outputL[0]*si;
+          ccos+=clean.outputL[0]*co;csin+=clean.outputL[0]*si;
+        }
+      }
+      const originalAlias=Math.hypot(rcos,rsin),refinedAlias=Math.hypot(ccos,csin);
+      expect(originalAlias,tune+'/'+character).toBeGreaterThan(.02);
+      expect(refinedAlias,tune+'/'+character).toBeLessThan(originalAlias*.7);
+    }
+  },30000);
+
+  it('smooths a direct switch between CLEAN pulse and CLEAN triangle',()=>{
+    const state=createModule('CHIP',0,0,42);
+    state.mode='PULSE CLEAN';state.params.tune=.6;state.params.character=.28;
+    const a=new RefinedChip(state,RATE,12),b=new RefinedChip(state,RATE,12);
+    const switchAt=48160;
+    let switchDifference=0,lateDifference=0;
+    for(let i=0;i<60000;i++){
+      if(i===switchAt)a.selectedMode='TRIANGLE CLEAN';
+      a.process(i);b.process(i);
+      if(i===switchAt)switchDifference=Math.abs(a.outputL[0]-b.outputL[0]);
+      if(i>switchAt+RATE*.03)lateDifference=Math.max(lateDifference,Math.abs(a.outputL[0]-b.outputL[0]));
+    }
+    expect(switchDifference).toBeLessThan(.008);
+    expect(lateDifference).toBeGreaterThan(.015);
+  },15000);
+
   it.each(['PULSE CLEAN','TRIANGLE CLEAN'])('%s remains bounded and transitions without output discontinuities',mode=>{
     const s=createModule('CHIP',0,0,77);s.mode='PULSE';
     s.params.character=.28;s.params.tune=.6;
