@@ -15,6 +15,11 @@ export class StereoWetFocus {
     this.bassR+=(right-this.bassR)*this.highpass;
     this.airL+=(left-this.bassL-this.airL)*this.lowpass;
     this.airR+=(right-this.bassR-this.airR)*this.lowpass;
+    // Prevent denormal tails from retaining CPU-heavy subnormal states.
+    if(Math.abs(this.bassL)<1e-25)this.bassL=0;
+    if(Math.abs(this.bassR)<1e-25)this.bassR=0;
+    if(Math.abs(this.airL)<1e-25)this.airL=0;
+    if(Math.abs(this.airR)<1e-25)this.airR=0;
     this.left=this.airL;this.right=this.airR;
   }
 }

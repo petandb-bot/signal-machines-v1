@@ -1,4 +1,5 @@
 import {Plate} from './Plate';
+import {finiteAudio} from './MachineSafety';
 import {StereoWetFocus,approach,refinementSlew} from './RefinementFilters';
 
 /** Low-frequency and extreme-high cleanup of the wet tail, without altering the tank. */
@@ -10,7 +11,7 @@ export class RefinedPlate extends Plate {
     super.process();
     const active=this.selectedMode==='CLEAR';
     if(!active&&this.focusMix===0)return;
-    const dryL=this.inputL[0]*.72,dryR=this.inputR[0]*.72;
+    const dryL=finiteAudio(this.inputL[0])*.72,dryR=finiteAudio(this.inputR[0])*.72;
     const rawL=this.outputL[0],rawR=this.outputR[0];
     this.filter.process(rawL-dryL,rawR-dryR);
     this.focusMix=approach(this.focusMix,Number(active),this.mixSlew);

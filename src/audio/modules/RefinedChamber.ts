@@ -9,7 +9,12 @@ export class RefinedChamber extends Chamber {
   override process(){
     const selected=this.selectedMode;
     const active=selected==='CLEAR ROOM'||selected==='CLEAR WEAVE';
-    if(active)this.selectedMode=selected==='CLEAR WEAVE'?'WEAVE':'ROOM';
+    if(active){
+      // Optional clear modes reject invalid excitation before it reaches the delay tank.
+      if(!Number.isFinite(this.inputL[0]))this.inputL[0]=0;
+      if(!Number.isFinite(this.inputR[0]))this.inputR[0]=0;
+      this.selectedMode=selected==='CLEAR WEAVE'?'WEAVE':'ROOM';
+    }
     super.process();
     if(active)this.selectedMode=selected;
     if(!active&&this.focusMix===0)return;
