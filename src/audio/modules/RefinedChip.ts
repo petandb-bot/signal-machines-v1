@@ -13,7 +13,7 @@ export class RefinedChip extends Chip {
   private readonly mixSlew=refinementSlew(this.sampleRate);
   private readonly dcPole=Math.exp(-Math.PI/this.sampleRate);
   private readonly releaseScale=1/this.sampleRate;
-  private refinedDuty=.5;private refinedMix=0;
+  private refinedDuty=.5;private refinedMix=0;private lastCleanPulse=true;
   private refinedOld=0;private refinedDc=0;
   private refinedGate=false;private refinedAmplitude=0;
 
@@ -22,6 +22,7 @@ export class RefinedChip extends Chip {
     const pulseClean=requestedMode==='PULSE CLEAN';
     const triangleClean=requestedMode==='TRIANGLE CLEAN';
     const active=pulseClean||triangleClean;
+    if(active)this.lastCleanPulse=pulseClean;
     const phaseBefore=this.phase;
     // Keep all original oscillator, trigger, noise and telemetry states running.
     if(active)this.selectedMode=pulseClean?'PULSE':'TRIANGLE';
@@ -40,7 +41,7 @@ export class RefinedChip extends Chip {
     const targetDuty=[.125,.25,.5,.75][Math.min(3,Math.floor(character*4))];
     this.refinedDuty+=(targetDuty-this.refinedDuty)*this.edgeSlew;
     let signal:number;
-    if(pulseClean||!triangleClean&&this.refinedMix>0){
+    if(this.lastCleanPulse){
       const t=phaseBefore,d=this.refinedDuty;
       const bandlimited=(t<d?1:-1)+2*polyBlep(t,step)-2*polyBlep((t-d+1)%1,step);
       signal=clamp(bandlimited);
