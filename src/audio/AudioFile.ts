@@ -5,10 +5,11 @@
 import type {LoopAudio} from './LoopAudio';
 import {LOOP_SECONDS} from './LoopAudio';
 import {decodeWav} from './Wav';
+import {resampleStereo} from './Resample';
+import type {StereoPcm} from './Resample';
 
 const MAX_FILE_BYTES=32_000_000;
 
-export interface StereoPcm {sampleRate:number;left:Float32Array;right:Float32Array}
 
 function tag(view:DataView,at:number):string{
   return String.fromCharCode(view.getUint8(at),view.getUint8(at+1),view.getUint8(at+2),view.getUint8(at+3));
@@ -75,41 +76,6 @@ export function decodeAiff(bytes:ArrayBuffer,maxSeconds=60):StereoPcm{
     left[i]=Math.max(-1,Math.min(1,l));right[i]=Math.max(-1,Math.min(1,r));
   }
   return{sampleRate:rate,left,right};
-}
-
-/** Windowed-sinc conversion with a low-pass cutoff for downsampling. No DSP callback allocation. */
-export function resampleStereo(input:StereoPcm,targetRate:number):StereoPcm{
-  const {left,right,sampleRate}=input;
-  if(!Number.isInteger(targetRate)||targetRate<8000||targetRate>192000||
-    !Number.isInteger(sampleRate)||sampleRate<8000||sampleRate>192000||
-    left.length!==right.length||left.length<2)throw Error('Invalid sample rate or stereo audio.');
-  if(sampleRate===targetRate)return input;
-  const count=Math.max(2,Math.round(left.length*targetRate/sampleRate));
-  const outL=new Float32Array(count),outR=new Float32Array(count);
-  const cutoff=Math.min(1,targetRate/sampleRate)*.96;
-  const radius=Math.min(64,Math.max(16,Math.ceil(10/cutoff)));
-  const width=radius*2,phases=512,kernels=new Float64Array(width*phases);
-  for(let phase=0;phase<phases;phase++){
-    let sum=0;const fraction=phase/phases,offset=phase*width;
-    for(let t=0;t<width;t++){
-      const x=t-radius+1-fraction,argument=Math.PI*cutoff*x;
-      const sinc=Math.abs(argument)<1e-12?1:Math.sin(argument)/argument;
-      const window=Math.abs(x)<radius?.5+.5*Math.cos(Math.PI*x/radius):0;
-      const weight=cutoff*sinc*window;kernels[offset+t]=weight;sum+=weight;
-    }
-    for(let t=0;t<width;t++)kernels[offset+t]/=sum;
-  }
-  for(let i=0;i<count;i++){
-    const p=i*sampleRate/targetRate,anchor=Math.floor(p);
-    const phase=Math.min(phases-1,Math.round((p-anchor)*(phases-1)));
-    const offset=phase*width;let l=0,r=0;
-    for(let t=0;t<width;t++){
-      const index=Math.max(0,Math.min(left.length-1,anchor+t-radius+1));
-      const weight=kernels[offset+t];l+=left[index]*weight;r+=right[index]*weight;
-    }
-    outL[i]=l;outR[i]=r;
-  }
-  return{sampleRate:targetRate,left:outL,right:outR};
 }
 
 /** Compressed formats are decoded by the browser; no extra codec download is required. */
