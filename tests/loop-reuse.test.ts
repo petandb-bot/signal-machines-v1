@@ -1,8 +1,6 @@
 // @vitest-environment happy-dom
 import {afterEach,describe,expect,it,vi} from 'vitest';
 import {FoundLibrary} from '../src/samples/FoundLibrary';
-import {decodeWav} from '../src/audio/Wav';
-import {analyzeFound} from '../src/samples/FoundData';
 import type {FoundAudio} from '../src/samples/FoundData';
 import type {LoopAudio} from '../src/audio/LoopAudio';
 import {LoopControls} from '../src/ui/LoopControls';
