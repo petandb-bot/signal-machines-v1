@@ -24,27 +24,27 @@ function print(g:DSPGraph,loop='loop'){
 }
 function exportLoop(g:DSPGraph){return g.modules.get('loop')!.command('export') as LoopAudio;}
 describe('ONE BAR PRINT — post-master capture into existing LOOP memory',()=>{
- it.each([8000,44100,48000])('captures a 4/4 bar exactly, including the final master audio at %i Hz',rate=>{
+ it.each([8000,44100,48000])('captures a 4/4 bar exactly, after the LOOP playback transition, at %i Hz',rate=>{
   const p=makePatch(120),g=new DSPGraph(rate),reference=new DSPGraph(rate);
   g.setPatch(p);reference.setPatch(p);
-  const bars=Math.round(rate*240/p.bpm);
-  const start=print(g);expect(start.mode).toBe('printing');expect(start.printTargetFrames).toBe(bars);
-  // The PRINT action starts on the first rendered quantum. Compare that quantum
-  // with a separately seeded reference graph, then compare exported PCM directly.
-  const firstL=new Float32Array(128),firstR=new Float32Array(128);
-  // After one quantum, replay from the exported input by running reference with
-  // its first 128 frames and matching the subsequent sequence separately.
-  reference.process(firstL,firstR);
+  const bars=Math.round(rate*240/p.bpm),settle=Math.ceil(rate*.008)+1;
   const recordedExpectedL=new Float32Array(bars),recordedExpectedR=new Float32Array(bars);
-  recordedExpectedL.set(firstL);recordedExpectedR.set(firstR);
-  let offset=128;
-  while(offset<bars){
-   const size=Math.min(128,bars-offset),l=new Float32Array(size),r=new Float32Array(size),
+  let state:unknown,error='',at=0;
+  g.requestAction('loop','print',undefined,(v,e)=>{state=v;error=e??'';});
+  while(at<settle+bars){
+   const size=Math.min(128,settle+bars-at),l=new Float32Array(size),r=new Float32Array(size),
          rl=new Float32Array(size),rr=new Float32Array(size);
    g.process(l,r);reference.process(rl,rr);
-   recordedExpectedL.set(rl,offset);recordedExpectedR.set(rr,offset);offset+=size;
+   for(let i=0;i<size;i++)if(at+i>=settle){
+     const pos=at+i-settle;
+     recordedExpectedL[pos]=rl[i];recordedExpectedR[pos]=rr[i];
+   }
+   at+=size;
   }
-  // Commit the finished capture at the next render quantum, not mid-sample.
+  expect(error).toBe('');
+  expect((state as {mode:string;printTargetFrames:number}).mode).toBe('printing');
+  expect((state as {printTargetFrames:number}).printTargetFrames).toBe(bars);
+  // Finish at the next quantum boundary; never validate/import a new take mid-sample.
   g.process(new Float32Array(1),new Float32Array(1));
   const loop=g.modules.get('loop') as Loop;
   expect(loop.telemetry().loop).toEqual({mode:'playing',frames:bars,sampleRate:rate});
@@ -53,21 +53,28 @@ describe('ONE BAR PRINT — post-master capture into existing LOOP memory',()=>{
   expect(stored.right).toEqual(recordedExpectedR);
   expect(g.faults).toBe(0);
  },30000);
- it('does not re-record the destination LOOP old playback; it monitors only new dry input during PRINT',()=>{
+ it('does not re-record a previously audible LOOP tail into a fresh PRINT',()=>{
   const rate=8000,p=makePatch(300,true),baseline=new DSPGraph(rate),g=new DSPGraph(rate);
   g.setPatch(p);baseline.setPatch(p);
   const previous={kind:'loopAudio' as const,sampleRate:rate,left:new Float32Array(rate).fill(.7),right:new Float32Array(rate).fill(-.5)};
   g.modules.get('loop')!.command('import',previous);
-  const state=print(g);expect(state.mode).toBe('printing');
-  // The LOOP channel is routed to OUTPUT but its prior memory must be muted.
-  const first=new Float32Array(128),firstR=new Float32Array(128);
-  baseline.process(first,firstR);
-  let offset=128;const target=Math.round(rate*240/300);
-  const expected=new Float32Array(target);expected.set(first);
-  while(offset<target){
-   const n=Math.min(128,target-offset),l=new Float32Array(n),r=new Float32Array(n),reference=new Float32Array(n),refR=new Float32Array(n);
-   g.process(l,r);baseline.process(reference,refR);expected.set(reference,offset);offset+=n;
+  // Play old audio first: the output fade truly contains the old sound.
+  for(let i=0;i<10;i++){
+    g.process(new Float32Array(128),new Float32Array(128));
+    baseline.process(new Float32Array(128),new Float32Array(128));
   }
+  const bars=Math.round(rate*240/300),settle=Math.ceil(rate*.008)+1,expected=new Float32Array(bars);
+  let at=0,state:unknown,err='';
+  g.requestAction('loop','print',undefined,(v,e)=>{state=v;err=e??'';});
+  while(at<settle+bars){
+    const n=Math.min(128,settle+bars-at),l=new Float32Array(n),r=new Float32Array(n),
+      reference=new Float32Array(n),refR=new Float32Array(n);
+    g.process(l,r);baseline.process(reference,refR);
+    for(let i=0;i<n;i++)if(at+i>=settle)expected[at+i-settle]=reference[i];
+    at+=n;
+  }
+  expect(err).toBe('');
+  expect((state as {mode:string}).mode).toBe('printing');
   g.process(new Float32Array(1),new Float32Array(1));
   const recorded=exportLoop(g);
   expect(recorded.left).toEqual(expected);

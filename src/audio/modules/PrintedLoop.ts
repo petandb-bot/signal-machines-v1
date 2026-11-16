@@ -10,9 +10,13 @@ export class PrintedLoop extends Loop {
   private printing=false;
   private targetFrames=0;
   private capturedFrames=0;
+  // The parent LOOP crossfades its previous memory for 8ms. PRINT starts
+  // capturing after that fade, otherwise it would reprint the old tail.
+  private settleFrames=0;
   private suppressTriggerUntilLow=false;
 
   isPrinting(){return this.printing;}
+  isCaptureReady(){return this.printing&&this.settleFrames===0;}
   advancePrint(frames:number){
     if(this.printing){
       this.capturedFrames=frames;
@@ -31,6 +35,7 @@ export class PrintedLoop extends Loop {
       this.printing=true;
       this.targetFrames=frames;
       this.capturedFrames=0;
+      this.settleFrames=Math.ceil(this.sampleRate*.008)+2;
       return this.telemetry().loop;
     }
     if(this.printing){
@@ -39,6 +44,7 @@ export class PrintedLoop extends Loop {
         this.printing=false;
         this.targetFrames=0;
         this.capturedFrames=0;
+        this.settleFrames=0;
         this.suppressTriggerUntilLow=true;
         return result;
       }
@@ -56,7 +62,10 @@ export class PrintedLoop extends Loop {
       this.inputL[1]=0;
     }
     super.process();
-    if(this.printing)this.phase=this.targetFrames?this.capturedFrames/this.targetFrames:0;
+    if(this.printing){
+      if(this.settleFrames>0)this.settleFrames--;
+      this.phase=this.targetFrames?this.capturedFrames/this.targetFrames:0;
+    }
   }
   override telemetry(){
     const previous=super.telemetry();

@@ -127,7 +127,7 @@ export class DSPGraph {
       this.previousSampleL=left[frame];this.previousSampleR=right[frame];
       // PRINT records exactly the audible, post-master stereo mix.
       // The destination LOOP bypasses its old playback while recording.
-      if(this.printLoop&&!this.printComplete&&this.printLoop.isPrinting()){
+      if(this.printLoop&&!this.printComplete&&this.printLoop.isCaptureReady()){
         const at=this.printWritten++;
         this.printLeft![at]=left[frame];this.printRight![at]=right[frame];
         this.printLoop.advancePrint(this.printWritten);
