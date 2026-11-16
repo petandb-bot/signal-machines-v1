@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync,mkdirSync,copyFileSync} from 'node:fs';import {api,metrics,wav,attachSamples,typedBytes} from './lib/phase4-audio.mjs';
-const a=await api(),rate=24000,dir='public/listening/audio/phase4/',guides=JSON.parse(readFileSync('docs/phase4/preset-guide.json','utf8')),rows=[],files=[],interactions=[];mkdirSync(dir,{recursive:true});mkdirSync('public/listening/presets/curated',{recursive:true});
-const frozenPresets=a.PRESETS.map(p=>({...p,create:()=>JSON.parse(readFileSync('docs/phase5/baseline/presets/'+p.id+'.json','utf8'))}));
+const a=await api(),historicIds=Object.keys(JSON.parse(readFileSync('docs/phase6/baseline/manifest.json','utf8')).jsonHashes),historicPresets=a.PRESETS.filter(p=>historicIds.includes(p.id)),rate=24000,dir='public/listening/audio/phase4/',guides=JSON.parse(readFileSync('docs/phase4/preset-guide.json','utf8')),rows=[],files=[],interactions=[];mkdirSync(dir,{recursive:true});mkdirSync('public/listening/presets/curated',{recursive:true});
+const frozenPresets=historicPresets.map(p=>({...p,create:()=>JSON.parse(readFileSync('docs/phase5/baseline/presets/'+p.id+'.json','utf8'))}));
 function render(p,seconds,observe=true){const g=new a.DSPGraph(rate);attachSamples(a,g,p);g.setPatch(p);const before=typedBytes(g),l=new Float32Array(rate*seconds),r=new Float32Array(l.length),blocks=[],timeline=[];let quiet=0,onsets=0,lastRms=0;
  for(let at=0;at<l.length;at+=128){const start=performance.now();g.process(l.subarray(at,at+128),r.subarray(at,at+128));if(observe)blocks.push(performance.now()-start);}
  if(g.faults)throw Error('Preset fault '+p.name);if(typedBytes(g)!==before)throw Error('Buffer growth '+p.name);

@@ -1,0 +1,412 @@
+{
+  "rate": 24000,
+  "method": "180s finite/stability renders,60s PCM24 preview WAVs. RAW retains patch output. MATCHED is one fixed gain toward .03 active20ms RMS (180s gate), capped at .8 preview sample peak. Spectral values are Welch proxies; no human listening/physical iPhone guarantee. Events are block-observed internal state events, not a perceived onset detector.",
+  "rows": [
+    {
+      "id": "soft-circuit",
+      "name": "SOFT CIRCUIT",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "dd5224889ad6ebb57a330e226d6df3613bedc66a5d2a68e5fefb9d9c6a14ec73",
+      "rms": 0.02280499747968817,
+      "peak": 0.03953540325164795,
+      "dc": [
+        -1.8239642869544735e-7,
+        -1.760156716561831e-7
+      ],
+      "stereoCorrelation": 0.9965214764270581,
+      "monoPowerRatio": 0.9982597851438809,
+      "maxStep": 0.0054310005107254256,
+      "activeRms": 0.02280499747968208,
+      "quietFraction": 0,
+      "longestQuietSeconds": 0,
+      "firstActiveSecond": 0,
+      "matchedGain": 1.3155011320096943,
+      "spectrum": {
+        "centroidHz": 268.8434455395261,
+        "powerFractions": [
+          2.1811558746686834e-7,
+          0.9004243853938549,
+          0.0003907249414070196,
+          0.099184664597913,
+          6.950866638316245e-9,
+          3.712962909085159e-13
+        ],
+        "aWeightedWelchRms": 0.009502098185795867,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {},
+      "typedBytes": 18554,
+      "bufferGrowth": 0
+    },
+    {
+      "id": "paper-windows",
+      "name": "PAPER WINDOWS",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "a2f4d958196e06e0f20a9f41476a690b4bf2e4c4f448ee461363355e0fda47e4",
+      "rms": 0.001303798989367758,
+      "peak": 0.0658249706029892,
+      "dc": [
+        2.586168554185983e-9,
+        5.634397093111397e-9
+      ],
+      "stereoCorrelation": 0.7700780593045483,
+      "monoPowerRatio": 0.8850333299510805,
+      "maxStep": 0.0670230807736516,
+      "activeRms": 0.002749102685447667,
+      "quietFraction": 0.7751111111111111,
+      "longestQuietSeconds": 1.720000000000001,
+      "firstActiveSecond": 0,
+      "matchedGain": 10.912651665870664,
+      "spectrum": {
+        "centroidHz": 1473.2420044863331,
+        "powerFractions": [
+          0.10754917578528105,
+          0.0019117273921498523,
+          0.19011502780670897,
+          0.5491259299359121,
+          0.14394667979886597,
+          0.0073514592810816105
+        ],
+        "aWeightedWelchRms": 0.0011280615180697257,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {
+        "weft-1": 130,
+        "lpg-1": 115,
+        "comb-1": 38
+      },
+      "typedBytes": 49512,
+      "bufferGrowth": 0
+    },
+    {
+      "id": "borrowed-light",
+      "name": "BORROWED LIGHT",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "bdcbc7209b9d1f6d035f09b9f82cae5e83a5359a5cbc6d3e5667e93dcbc97322",
+      "rms": 0.0064540086102567165,
+      "peak": 0.025607189163565636,
+      "dc": [
+        -5.339434371261238e-8,
+        -4.413412854558842e-8
+      ],
+      "stereoCorrelation": 0.9683886381666014,
+      "monoPowerRatio": 0.984192796090795,
+      "maxStep": 0.0226589385420084,
+      "activeRms": 0.006455443312642473,
+      "quietFraction": 0.00044444444444444447,
+      "longestQuietSeconds": 0.08,
+      "firstActiveSecond": 0.08,
+      "matchedGain": 4.6472408705452315,
+      "spectrum": {
+        "centroidHz": 2758.117028187524,
+        "powerFractions": [
+          9.395403346529992e-9,
+          3.477541695791377e-8,
+          0.059704830096793345,
+          0.3797492077538208,
+          0.5605457797043621,
+          1.3827420544110256e-7
+        ],
+        "aWeightedWelchRms": 0.006743923940137832,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {
+        "pulse-1": 46,
+        "friction-1": 18125,
+        "prism-1": 46
+      },
+      "typedBytes": 4635,
+      "bufferGrowth": 0
+    },
+    {
+      "id": "velvet-engine",
+      "name": "VELVET ENGINE",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "2b18cc24ce7f42da27b636775a5bd76761fb845d37c425c5620fad2e62892cd5",
+      "rms": 0.00520568590399265,
+      "peak": 0.03808063268661499,
+      "dc": [
+        -1.4304013417514151e-8,
+        -1.4304013417514151e-8
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.010438368190079927,
+      "activeRms": 0.008375186805007852,
+      "quietFraction": 0.6136666666666667,
+      "longestQuietSeconds": 0.4400000000000001,
+      "firstActiveSecond": 0,
+      "matchedGain": 3.582009655242773,
+      "spectrum": {
+        "centroidHz": 373.4822154020751,
+        "powerFractions": [
+          0.00045903919925020505,
+          0.010746988214697552,
+          0.9117859734611683,
+          0.07679486949269464,
+          0.00021306141018172042,
+          6.822200834078616e-8
+        ],
+        "aWeightedWelchRms": 0.0028130177990273865,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {
+        "weft-1": 412,
+        "shape-1": 386,
+        "duck-1": 129
+      },
+      "typedBytes": 3615,
+      "bufferGrowth": 0
+    },
+    {
+      "id": "deferred-signal",
+      "name": "DEFERRED SIGNAL",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "d54d395638826b92d5d22e48822ee1a9463d4a046853b603e4a68c99742e5824",
+      "rms": 0.003895304920547638,
+      "peak": 0.08049691468477249,
+      "dc": [
+        -8.644272088667736e-11,
+        -3.112608220645732e-11
+      ],
+      "stereoCorrelation": 0.9755915868251781,
+      "monoPowerRatio": 0.9877847801654248,
+      "maxStep": 0.06851044110953808,
+      "activeRms": 0.005211961788034402,
+      "quietFraction": 0.4414444444444444,
+      "longestQuietSeconds": 2.680000000000002,
+      "firstActiveSecond": 1.2,
+      "matchedGain": 5.755990012987789,
+      "spectrum": {
+        "centroidHz": 2735.5610752342727,
+        "powerFractions": [
+          0.006224975315123136,
+          0.013549233140968231,
+          0.16314287145279296,
+          0.34066633716855954,
+          0.47630611456918087,
+          0.00011046835337332611
+        ],
+        "aWeightedWelchRms": 0.003515844819705249,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {
+        "pulse-1": 310,
+        "chance-1": 310,
+        "unspent-1": 162,
+        "reson-1": 162
+      },
+      "typedBytes": 2894,
+      "bufferGrowth": 0
+    },
+    {
+      "id": "threads-cross",
+      "name": "THREADS CROSS",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "340ebe01f144dae0d38ef4b7e2345914ecd97288fe68bd33f7c6adf6dba7d67a",
+      "rms": 0.022049416475859153,
+      "peak": 0.04129811003804207,
+      "dc": [
+        -1.2620079491158678e-7,
+        -1.2747647830297853e-7
+      ],
+      "stereoCorrelation": 0.99956935197422,
+      "monoPowerRatio": 0.999782617732889,
+      "maxStep": 0.004503482559812255,
+      "activeRms": 0.022049416475853827,
+      "quietFraction": 0,
+      "longestQuietSeconds": 0,
+      "firstActiveSecond": 0,
+      "matchedGain": 1.3605802236468618,
+      "spectrum": {
+        "centroidHz": 383.69162531344534,
+        "powerFractions": [
+          2.1334949951469044e-7,
+          0.000046650099150856324,
+          0.9981813253760256,
+          0.0017718111737821483,
+          1.4142331820994997e-12,
+          1.282661697613504e-13
+        ],
+        "aWeightedWelchRms": 0.012286380471409866,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {
+        "swarm-1": 629
+      },
+      "typedBytes": 3239,
+      "bufferGrowth": 0
+    },
+    {
+      "id": "shattered-clock",
+      "name": "SHATTERED CLOCK",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "35f7c89a809889d629b46c8ba2549b06b8a282bf9e117db0c6dfdec2f080b4c6",
+      "rms": 0.006612265254632903,
+      "peak": 0.08364612609148026,
+      "dc": [
+        -9.56769276716222e-7,
+        -9.56769276716222e-7
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.09539946913719177,
+      "activeRms": 0.007853460020895008,
+      "quietFraction": 0.2911111111111111,
+      "longestQuietSeconds": 2.980000000000002,
+      "firstActiveSecond": 0,
+      "matchedGain": 3.8199723332367705,
+      "spectrum": {
+        "centroidHz": 1224.7683480500395,
+        "powerFractions": [
+          0.001388981299719869,
+          0.005631625996824016,
+          0.2734509691750534,
+          0.6293081485303083,
+          0.07052665122309415,
+          0.01969362377499965
+        ],
+        "aWeightedWelchRms": 0.005390799500762885,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {
+        "pulse-1": 127,
+        "chip-1": 127,
+        "edge-1": 127,
+        "fracture-1": 400
+      },
+      "typedBytes": 569303,
+      "bufferGrowth": 0
+    },
+    {
+      "id": "dissent-in-glass",
+      "name": "DISSENT IN GLASS",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "73f9d7558cfe0666e87b06f5d6d61c678348585e71a51d151bd163d0d88c4518",
+      "rms": 0.011739368212368827,
+      "peak": 0.02528393268585205,
+      "dc": [
+        -4.429462392452282e-8,
+        -4.429462392452282e-8
+      ],
+      "stereoCorrelation": 1,
+      "monoPowerRatio": 1,
+      "maxStep": 0.00490160845220089,
+      "activeRms": 0.01173936821236558,
+      "quietFraction": 0,
+      "longestQuietSeconds": 0,
+      "firstActiveSecond": 0,
+      "matchedGain": 2.555503793500549,
+      "spectrum": {
+        "centroidHz": 525.728214751878,
+        "powerFractions": [
+          0.0000025071275135736512,
+          0.0397132529317596,
+          0.7162026221914507,
+          0.24336535749613433,
+          0.0007031736029459398,
+          0.000013086650197271283
+        ],
+        "aWeightedWelchRms": 0.008294341929858675,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {
+        "quorum-1": 36,
+        "bounce-1": 171,
+        "switch-1": 18
+      },
+      "typedBytes": 3844,
+      "bufferGrowth": 0
+    },
+    {
+      "id": "broken-radio",
+      "name": "BROKEN RADIO",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "8b298f6a4b6cc8772a8f9c84eae9ebf678367d20d554a174b79f21dec72183f8",
+      "rms": 0.0029211739334093017,
+      "peak": 0.0315023735165596,
+      "dc": [
+        1.0781411435801276e-8,
+        1.0509904295411097e-8
+      ],
+      "stereoCorrelation": -0.0031239594043570205,
+      "monoPowerRatio": 0.49843802268894355,
+      "maxStep": 0.022224285639822483,
+      "activeRms": 0.0033075775375776607,
+      "quietFraction": 0.22,
+      "longestQuietSeconds": 0.9600000000000005,
+      "firstActiveSecond": 0.24,
+      "matchedGain": 9.070082155041728,
+      "spectrum": {
+        "centroidHz": 2698.8225834455343,
+        "powerFractions": [
+          0.00012829346971832966,
+          0.004443156669922996,
+          0.024438904461669766,
+          0.6238536586182418,
+          0.3344747489260149,
+          0.012661237854431504
+        ],
+        "aWeightedWelchRms": 0.003286559235779652,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {
+        "snap-1": 86,
+        "weft-1": 33
+      },
+      "typedBytes": 3281,
+      "bufferGrowth": 0
+    },
+    {
+      "id": "passing-shadows",
+      "name": "PASSING SHADOWS",
+      "seconds": 180,
+      "previewSeconds": 60,
+      "pcm180": "1b894098355c3bedd3281de6f2eb75f845a211f74b689aa5900d307b7c36c8df",
+      "rms": 0.0033265437250661546,
+      "peak": 0.049275677651166916,
+      "dc": [
+        -1.7258092765288465e-8,
+        -1.4086808594252446e-8
+      ],
+      "stereoCorrelation": 0.019903039814628563,
+      "monoPowerRatio": 0.5099270735673721,
+      "maxStep": 0.03158235875889659,
+      "activeRms": 0.003326543725065381,
+      "quietFraction": 0,
+      "longestQuietSeconds": 0,
+      "firstActiveSecond": 0,
+      "matchedGain": 9.018369358548073,
+      "spectrum": {
+        "centroidHz": 195.5286140393375,
+        "powerFractions": [
+          0.03984764733448484,
+          0.7388888704642027,
+          0.13930020249932512,
+          0.0803867366019119,
+          0.0010378198978632479,
+          0.0005387232022119142
+        ],
+        "aWeightedWelchRms": 0.001090422454711516,
+        "method": "2048 Hann,8192 stride, stereo channel powers summed; Welch A-weighted RMS is an approximation, not LUFS or the Phase5 full-file FFT proxy."
+      },
+      "events": {
+        "pulse-1": 27,
+        "found-1": 53,
+        "bounce-1": 141,
+        "switch-1": 141
+      },
+      "typedBytes": 2729126,
+      "bufferGrowth": 0
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "BORROWED LIGHT",
+  "bpm": 67,
+  "master": 0.55,
+  "seed": 230003,
+  "modules": [
+    {
+      "id": "friction-1",
+      "type": "FRICTION",
+      "x": 16,
+      "y": 16,
+      "seed": 230003,
+      "character": "METAL",
+      "params": {
+        "pressure": 0.5,
+        "speed": 0.29
+      }
+    },
+    {
+      "id": "prism-1",
+      "type": "PRISM",
+      "x": 192,
+      "y": 16,
+      "seed": 237922,
+      "character": "METAL",
+      "params": {
+        "tune": 0.65,
+        "memory": 0.68
+      },
+      "mode": "HOLD"
+    },
+    {
+      "id": "flock-1",
+      "type": "FLOCK",
+      "x": 368,
+      "y": 16,
+      "seed": 245841,
+      "character": "METAL",
+      "params": {
+        "spread": 0.15,
+        "drift": 0.045
+      }
+    },
+    {
+      "id": "pulse-1",
+      "type": "PULSE",
+      "x": 544,
+      "y": 16,
+      "seed": 253760,
+      "character": "METAL",
+      "params": {
+        "rate": 0.16,
+        "irregular": 0.28
+      }
+    },
+    {
+      "id": "shift-1",
+      "type": "SHIFT",
+      "x": 16,
+      "y": 184,
+      "seed": 261679,
+      "character": "METAL",
+      "params": {
+        "shift": 0.61,
+        "mix": 0.48
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 192,
+      "y": 184,
+      "seed": 269598,
+      "character": "METAL",
+      "params": {
+        "level": 0.78
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "new-flock-1-controlA-friction-1-pressure",
+      "from": {
+        "module": "flock-1",
+        "port": "controlA"
+      },
+      "to": {
+        "module": "friction-1",
+        "port": "pressure"
+      }
+    },
+    {
+      "id": "new-friction-1-audio-prism-1-audio",
+      "from": {
+        "module": "friction-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "prism-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-pulse-1-trigger-prism-1-capture",
+      "from": {
+        "module": "pulse-1",
+        "port": "trigger"
+      },
+      "to": {
+        "module": "prism-1",
+        "port": "capture"
+      }
+    },
+    {
+      "id": "new-prism-1-audio-shift-1-audio",
+      "from": {
+        "module": "prism-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "shift-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-shift-1-audio-output-1-audio",
+      "from": {
+        "module": "shift-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

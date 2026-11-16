@@ -1,0 +1,1763 @@
+{
+  "engine": "Linux Chromium156 with emulated CSS/touch viewports; not physical iPhone Safari. First display before manual FIT and after FIT.",
+  "results": [
+    {
+      "width": 390,
+      "height": 844,
+      "id": "still-almost-moving-ii",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "pixel-dust",
+      "initial": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "room-air",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "small-hours",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "exchanging-bodies",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "dissolving-metal",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "binary-fever",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "tape-garden",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "late-light",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "off-grid",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "soft-circuit",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "paper-windows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "borrowed-light",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "velvet-engine",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "deferred-signal",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "threads-cross",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "shattered-clock",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "dissent-in-glass",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "broken-radio",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "id": "passing-shadows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "touch": true,
+      "cancel": true,
+      "remove": true
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "still-almost-moving-ii",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "pixel-dust",
+      "initial": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "room-air",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "small-hours",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "exchanging-bodies",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "dissolving-metal",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "binary-fever",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "tape-garden",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "late-light",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "off-grid",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "soft-circuit",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "paper-windows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "borrowed-light",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "velvet-engine",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "deferred-signal",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "threads-cross",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "shattered-clock",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "dissent-in-glass",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "broken-radio",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 402,
+      "height": 874,
+      "id": "passing-shadows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "still-almost-moving-ii",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "pixel-dust",
+      "initial": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "room-air",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "small-hours",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "exchanging-bodies",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "dissolving-metal",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "binary-fever",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "tape-garden",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "late-light",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "off-grid",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "soft-circuit",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "paper-windows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "borrowed-light",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "velvet-engine",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "deferred-signal",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "threads-cross",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "shattered-clock",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "dissent-in-glass",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "broken-radio",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "id": "passing-shadows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "still-almost-moving-ii",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "pixel-dust",
+      "initial": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "room-air",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "small-hours",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "exchanging-bodies",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "dissolving-metal",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "binary-fever",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "tape-garden",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "late-light",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "off-grid",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "soft-circuit",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "paper-windows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "borrowed-light",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "velvet-engine",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "deferred-signal",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "threads-cross",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "shattered-clock",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "dissent-in-glass",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "broken-radio",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "id": "passing-shadows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "still-almost-moving-ii",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "pixel-dust",
+      "initial": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 5,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "room-air",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "small-hours",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "exchanging-bodies",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "dissolving-metal",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "binary-fever",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "tape-garden",
+      "initial": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 9,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "late-light",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "off-grid",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "soft-circuit",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "paper-windows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "borrowed-light",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "velvet-engine",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "deferred-signal",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "threads-cross",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "shattered-clock",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "dissent-in-glass",
+      "initial": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 8,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "broken-radio",
+      "initial": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 7,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "id": "passing-shadows",
+      "initial": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      },
+      "fit": {
+        "chips": 6,
+        "clipped": [],
+        "overflow": false,
+        "overlapping": []
+      }
+    }
+  ],
+  "shots": [
+    "screenshots/threads-cross.png",
+    "screenshots/borrowed-light.png"
+  ],
+  "live": [
+    {
+      "id": "threads-cross",
+      "state": "running",
+      "rate": 48000,
+      "seconds": 2.066666666666667,
+      "faults": 0,
+      "peak": 0.03478497266769409,
+      "swarmDots": 4,
+      "errors": []
+    },
+    {
+      "id": "borrowed-light",
+      "state": "running",
+      "rate": 48000,
+      "seconds": 4.1146666666666665,
+      "faults": 0,
+      "peak": 0.012820182368159294,
+      "prismBands": 16,
+      "errors": []
+    },
+    {
+      "id": "dissent-in-glass",
+      "state": "running",
+      "rate": 48000,
+      "seconds": 6.16,
+      "faults": 0,
+      "peak": 0.019083840772509575,
+      "errors": []
+    },
+    {
+      "id": "shattered-clock",
+      "state": "running",
+      "rate": 48000,
+      "seconds": 8.106666666666667,
+      "faults": 0,
+      "peak": 0.0011278657475486398,
+      "errors": []
+    }
+  ],
+  "listening": {
+    "choices": 10,
+    "overflow": false,
+    "seconds": 60,
+    "channels": 2,
+    "nonzero": true
+  },
+  "liveExceptions": [],
+  "visualReview": "Stopped and live representative screenshots visually inspected. No chip clipping/overlap or horizontal overflow in100 initial/FIT cases. Synthetic touch passed; native48kHz AudioWorklet observed0 faults in four new circuits. Not physical Safari or human listening."
+}

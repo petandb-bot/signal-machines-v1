@@ -32,34 +32,20 @@ jobs:
         run: node scripts/verify-sympathy-worklet.mjs
       - name: Validate Phase 1 audio architecture
         run: node scripts/render-sound-architecture.mjs 60
-      - name: Verify frozen v0.21 references and render Phase 6
+      - name: Render and stress-test the ten additional worlds
         run: |
-          npm run render:phase6
+          npm run render:twenty
           mkdir -p dist/listening/audio dist/listening/presets
-          cp -R public/listening/audio/phase6 dist/listening/audio/
-          cp -R public/listening/presets/phase6 public/listening/presets/v021 dist/listening/presets/
-          cp public/listening/phase6-*.html dist/listening/
-      - name: Upload short musical A/B review
+          cp -R public/listening/audio/twenty dist/listening/audio/
+          cp -R public/listening/presets/twenty dist/listening/presets/
+          cp public/listening/twenty.html dist/listening/
+      - name: Upload new preset listening review
         uses: actions/upload-artifact@v5
         with:
-          name: phase6-short-ab
+          name: twenty-presets-listening
           path: |
-            dist/listening/phase6-short.html
-            dist/listening/audio/phase6/*-60s-*.wav
-            dist/listening/audio/phase6/*-report.json
-            dist/listening/presets/phase6/
-            dist/listening/presets/v021/
-          if-no-files-found: error
-          retention-days: 14
-      - name: Upload long musical A/B review
-        uses: actions/upload-artifact@v5
-        with:
-          name: phase6-long-ab
-          path: |
-            dist/listening/phase6-long.html
-            dist/listening/audio/phase6/*-180s-*.wav
-            dist/listening/audio/phase6/*-300s-*.wav
-            dist/listening/presets/phase6/
-            dist/listening/presets/v021/
+            dist/listening/twenty.html
+            dist/listening/audio/twenty/
+            dist/listening/presets/twenty/
           if-no-files-found: error
           retention-days: 14

@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "layout": 2,
+  "name": "THREADS CROSS",
+  "bpm": 83,
+  "master": 0.55,
+  "seed": 230006,
+  "modules": [
+    {
+      "id": "operator-1",
+      "type": "OPERATOR",
+      "x": 16,
+      "y": 16,
+      "seed": 230006,
+      "character": "METAL",
+      "params": {
+        "tune": 0.7,
+        "depth": 0.15
+      }
+    },
+    {
+      "id": "swarm-1",
+      "type": "SWARM",
+      "x": 192,
+      "y": 16,
+      "seed": 237925,
+      "character": "METAL",
+      "params": {
+        "energy": 0.4,
+        "sympathy": 0.58
+      }
+    },
+    {
+      "id": "mesh-1",
+      "type": "MESH",
+      "x": 368,
+      "y": 16,
+      "seed": 245844,
+      "character": "METAL",
+      "params": {
+        "transfer": 0.68,
+        "memory": 0.56
+      }
+    },
+    {
+      "id": "ring-1",
+      "type": "RING",
+      "x": 544,
+      "y": 16,
+      "seed": 253763,
+      "character": "METAL",
+      "params": {
+        "rate": 0.5,
+        "mix": 0.18
+      }
+    },
+    {
+      "id": "orbit-1",
+      "type": "ORBIT",
+      "x": 16,
+      "y": 184,
+      "seed": 261682,
+      "character": "METAL",
+      "params": {
+        "rate": 0.1,
+        "depth": 0.65
+      }
+    },
+    {
+      "id": "output-1",
+      "type": "OUTPUT",
+      "x": 192,
+      "y": 184,
+      "seed": 269601,
+      "character": "METAL",
+      "params": {
+        "level": 0.39
+      }
+    }
+  ],
+  "connections": [
+    {
+      "id": "new-operator-1-audio-mesh-1-a",
+      "from": {
+        "module": "operator-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mesh-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "new-swarm-1-audio-mesh-1-b",
+      "from": {
+        "module": "swarm-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "mesh-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "new-mesh-1-audio-ring-1-a",
+      "from": {
+        "module": "mesh-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "ring-1",
+        "port": "a"
+      }
+    },
+    {
+      "id": "new-swarm-1-audio-ring-1-b",
+      "from": {
+        "module": "swarm-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "ring-1",
+        "port": "b"
+      }
+    },
+    {
+      "id": "new-swarm-1-centre-orbit-1-position",
+      "from": {
+        "module": "swarm-1",
+        "port": "centre"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "position"
+      }
+    },
+    {
+      "id": "new-ring-1-audio-orbit-1-audio",
+      "from": {
+        "module": "ring-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "orbit-1",
+        "port": "audio"
+      }
+    },
+    {
+      "id": "new-orbit-1-audio-output-1-audio",
+      "from": {
+        "module": "orbit-1",
+        "port": "audio"
+      },
+      "to": {
+        "module": "output-1",
+        "port": "audio"
+      }
+    }
+  ]
+}

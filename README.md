@@ -6,7 +6,7 @@ A tiny modular playground for sound, chance and happy accidents.
 
 Connect little machines. Make strange sounds. See what happens.
 
-68 modules, 10 curated starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
+68 modules, 20 curated starting patches, snapshots and stereo WAV / AIFF recording. Runs in your browser. No account or backend needed.
 
 An old-computer face for a living sound circuit: green text, small pixel windows and a handful of signal colors.
 
@@ -51,8 +51,8 @@ Pull requests run tests, build and AudioWorklet verification without deploying. 
 
 MIT licensed. [Third-party notices](THIRD_PARTY_NOTICES.md)
 
-## v0.22.0 — Phase 6: Musical Diversity
+## v0.23 — twenty starting worlds
 
-Ten starting worlds now use different musical languages: melody, sustained partials, material responses, machine rhythm, physical pitch and audio memory. PIXEL DUST stays familiar; the existing68 sound engines stay unchanged.
+Ten more patches explore phase modulation, noise resonance, spectral memory, fuzz, delayed events, swarms, digital fractures and signal consensus. The original ten stay unchanged. All68 sound machines keep their existing behavior.
 
-[Phase 6: musical audit, exact changes and before/after review](docs/phase6/README.md). Phase 6 is publicly released as v0.22.0. Human listening and physical iPhone Safari performance remain to be verified. [Phase 5 WALLS and references](docs/phase5/README.md) remain available.
+[New worlds, useful controls and verification](docs/twenty/README.md). LOOP stays available for hands-on recording; every other module appears in a ready-to-play patch. [Earlier musical architecture and references](docs/phase6/README.md).

@@ -86,8 +86,8 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     expect(document.querySelector('#app')!.classList.contains('editor-visible')).toBe(false);
 
   });
-  it('exposes 68 grouped modules, ten curated presets and no large title',()=>{
-    expect(document.querySelectorAll('.library-module')).toHaveLength(68);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(11);
+  it('exposes 68 grouped modules, twenty curated presets and no large title',()=>{
+    expect(document.querySelectorAll('.library-module')).toHaveLength(68);expect(document.querySelector('.brand-name')).toBeNull();expect(document.querySelectorAll('.preset-select option')).toHaveLength(21);
     const selector=document.querySelector<HTMLSelectElement>('.preset-select')!;
     for(const entry of PRESETS){selector.value=entry.id;selector.dispatchEvent(new Event('change'));expect(app.store.patch).toEqual(entry.create());}
   });
