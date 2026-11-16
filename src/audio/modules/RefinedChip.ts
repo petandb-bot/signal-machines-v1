@@ -44,7 +44,7 @@ export class RefinedChip extends Chip {
     // PULSE CLEAN <-> TRIANGLE CLEAN while the first CLEAN mode is active.
     this.triangleMix=approach(this.triangleMix,this.triangleTarget,this.mixSlew);
     const t=phaseBefore,d=this.refinedDuty;
-    const pulse=clamp((t<d?1:-1)+2*polyBlep(t,step)-2*polyBlep((t-d+1)%1,step));
+    const pulse=clamp((t<d?1:-1)+polyBlep(t,step)-polyBlep((t-d+1)%1,step));
     const triangle=1-4*Math.abs(t-.5);
     let signal=pulse*(1-this.triangleMix)+triangle*this.triangleMix;
     // Retain the deliberately coarse 7-bit characteristic.
