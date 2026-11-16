@@ -47,6 +47,48 @@ describe('optional shared pitch-field QUANTIZE, not an arpeggiator',()=>{
     expect(nearestFieldNote(4.2,0,'FRICTION')).toBe(4);
     expect(nearestFieldNote(4.2,1,'FIELD')).toBe(4);
   });
+  it('never clips a full-pull snapped note into a pitch outside its field',()=>{
+    for(const mode of ['FIELD','FRICTION'] as const){
+      for(let root=-24;root<=24;root+=3){
+        for(let pitch=-24;pitch<=24;pitch+=.4){
+          const mapped=nearestFieldNote(pitch,root,mode,-24,24);
+          expect(mapped).toBeGreaterThanOrEqual(-24);
+          expect(mapped).toBeLessThanOrEqual(24);
+          const relative=((mapped-root)%12+12)%12;
+          expect(FIELD_INTERVALS[mode]).toContain(relative);
+        }
+      }
+    }
+    expect(nearestFieldNote(24,3,'FRICTION',-24,24)).toBe(22);
+    const q=unit('FRICTION');
+    q.inputL[0]=1;
+    q.inputL[1]=3/24;
+    q.process(0);
+    expect(q.outputL[0]).toBeCloseTo(22/24,10);
+  });
+
+  it('holds the current audible note across classic/field family changes until the next CLOCK',()=>{
+    const q=unit('12-TET');
+    q.inputConnected[3]=1;
+    q.inputL[0]=7/24;
+    q.inputL[3]=1;q.process(0);
+    const old=q.outputL[0];
+    expect(old).toBeCloseTo(7/24,9);
+    q.inputL[3]=0;q.process(1);
+    q.selectedMode='FIELD';
+    q.inputL[0]=4.2/24;
+    q.process(2);
+    expect(q.outputL[0]).toBe(old);
+    expect(q.outputL[1]).toBe(0);
+    q.inputL[3]=1;q.process(3);
+    expect(q.outputL[0]).toBeCloseTo(5/24,9);
+    q.inputL[3]=0;q.process(4);
+    q.selectedMode='19-TET';q.process(5);
+    expect(q.outputL[0]).toBeCloseTo(5/24,9);
+    q.inputL[3]=1;q.process(6);
+    expect(q.outputL[0]).not.toBeCloseTo(5/24,6);
+  });
+
   it('supports a coherent shared root without requiring a central module or new controls',()=>{
     const a=unit('FIELD'),b=unit('FIELD');
     const cv=4.2/24,root=1/24;
