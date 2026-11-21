@@ -3,6 +3,7 @@ import {FoundControls} from './FoundControls';
 import {foundRef} from '../samples/FoundData';
 import type {FoundAudio} from '../samples/FoundData';
 import {TouchControls} from './TouchControls';
+import {MusicalControls} from './MusicalControls';
 import {LoopControls} from './LoopControls';
 import type {LoopStatus} from '../audio/LoopAudio';
 import {VISUAL_WIDTH,VISUAL_HEIGHT} from '../visual/SignalMotion';
@@ -44,6 +45,7 @@ export class ModuleEditor {
     if(choices){const modes=element('div','mode-options');modes.setAttribute('aria-label',`${module.type} mode`);for(const mode of choices){const option=button(mode,`${module.type} ${mode} mode`,()=>{module.mode=mode;this.store.changed('parameters');this.refresh(module);modes.querySelectorAll('button').forEach(b=>{b.classList.toggle('active',b===option);b.setAttribute('aria-pressed',String(b===option));});});option.classList.toggle('active',(module.mode??choices[0])===mode);option.setAttribute('aria-pressed',String((module.mode??choices[0])===mode));modes.append(option);}this.root.append(modes);}
     if(WIDE_TYPES.includes(module.type)){const ranges=element('div','mode-options');for(const wide of [false,true]){const option=button(wide?'WIDE':'STANDARD',`${module.type} ${wide?'WIDE':'STANDARD'} frequency range`,()=>{if(wide)module.wide=true;else delete module.wide;this.store.changed('parameters');this.refresh(module);ranges.querySelectorAll('button').forEach(b=>{b.setAttribute('aria-pressed',String(b===option));b.classList.toggle('active',b===option);});});option.classList.toggle('active',!!module.wide===wide);option.setAttribute('aria-pressed',String(!!module.wide===wide));ranges.append(option);}this.root.append(ranges);}
     if(module.type==='TOUCH')this.root.append(new TouchControls(module,()=>this.store.changed('parameters')).root);
+    if(module.type==='CURVE'||module.type==='PHRASE'||module.type==='HARMONY')this.root.append(new MusicalControls(module,()=>this.store.changed('parameters')).root);
     if(BYPASS_TYPES.includes(module.type)){const toggle=button(module.bypass?'Bypassed':'Effect on',`${module.type} bypass`,()=>{if(module.bypass)delete module.bypass;else module.bypass=true;this.store.changed('parameters');toggle.textContent=module.bypass?'Bypassed':'Effect on';toggle.setAttribute('aria-pressed',String(!!module.bypass));},'bypass-button');toggle.setAttribute('aria-pressed',String(!!module.bypass));this.root.append(toggle);}
     if(module.type==='PENDULUM')this.root.append(button('Kick','Kick the pendulums',()=>this.onAction(module,'kick'),'impulse-button'));
     if(module.type==='BOUNCE')this.root.append(button('Kick','Kick the marble',()=>this.onAction(module,'kick'),'impulse-button'));

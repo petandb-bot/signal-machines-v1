@@ -473,3 +473,20 @@ input[type=range]::-moz-range-thumb {
   .module-help { left: var(--safe-left); right: var(--safe-right); width: auto; top: 6px; max-height: calc(100% - 12px); }
   .module-help-intro { margin-top: 8px; }
 }
+
+/* Compact, scroll-friendly musical editors. Controls remain legible on phones. */
+.musical-controls {margin:14px 0; border-top:1px solid var(--line); padding-top:12px;}
+.musical-heading {font-size:12px;color:var(--cyan);margin:0;letter-spacing:.6px;font-weight:600;}
+.curve-pad {border:1px solid var(--line);background:var(--display);height:164px;touch-action:none;}
+.curve-pad svg {display:block;width:100%;height:100%;touch-action:none;cursor:crosshair;}
+.musical-actions {display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 14px;}
+.musical-actions button,.musical-reset {font-size:10px;padding:7px 9px;min-height:36px;border:1px solid var(--line);}
+.musical-count {font-size:10px;color:var(--muted);}
+.musical-score {border:1px solid var(--line);margin:8px 0;max-height:360px;overflow-y:auto;}
+.musical-score-row {display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1fr) 44px;align-items:center;gap:5px;padding:4px 6px;min-height:34px;font-size:11px;border-bottom:1px solid var(--grid);}
+.musical-score-row input[type=number],.musical-score-row select {width:100%;min-width:0;box-sizing:border-box;color:var(--ink);background:var(--display);border:1px solid var(--line);font:inherit;padding:4px 5px;min-height:28px;}
+.musical-score-row input[type=checkbox] {justify-self:center;accent-color:var(--cyan);width:18px;height:18px;}
+.musical-score-header {color:var(--muted);font-size:9px;letter-spacing:.4px;position:sticky;top:0;background:var(--surface);z-index:1;}
+
+.musical-score-row:has(input[type=checkbox]){grid-template-columns:28px minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 28px;gap:3px;padding:4px;}
+.musical-score-row.musical-score-header:has(+ .musical-score-row input[type=checkbox]){grid-template-columns:28px minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 28px;gap:3px;padding:4px;}

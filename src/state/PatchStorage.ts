@@ -1,4 +1,5 @@
 import {isSampleType} from '../samples/FoundData';
+import {parseCurve,parsePhrase,parseHarmony,defaultCurve,defaultPhrase,defaultHarmony} from '../graph/MusicalData';
 import {validFoundRef,MAX_FOUND} from '../samples/FoundData';
 import {MAX_LOOPS} from '../audio/LoopAudio';
 import { DEFINITIONS,MODE_OPTIONS,WIDE_TYPES,BYPASS_TYPES } from '../graph/definitions';
@@ -36,8 +37,12 @@ export function parsePatch(text: string): Patch {
       let previous=-1;const points=g.points.map(p=>{if(!p||!finite(p.x,-1,1)||!finite(p.y,-1,1)||!finite(p.t,0,g.duration)||p.t<=previous)throw new Error('Invalid TOUCH gesture point.');previous=p.t;return{x:p.x,y:p.y,t:p.t};});
       if(points[0].t!==0||points.at(-1)!.t!==g.duration)throw new Error('TOUCH gesture timing must cover its duration.');gesture={duration:g.duration,points};
     }
+    if((m.curve!==undefined&&type!=='CURVE')||(m.phrase!==undefined&&type!=='PHRASE')||(m.harmony!==undefined&&type!=='HARMONY'))throw new Error('Musical data attached to wrong module.');
+    const curve=type==='CURVE'?parseCurve(m.curve??defaultCurve()):undefined;
+    const phrase=type==='PHRASE'?parsePhrase(m.phrase??defaultPhrase()):undefined;
+    const harmony=type==='HARMONY'?parseHarmony(m.harmony??defaultHarmony()):undefined;
     ids.add(m.id);
-    return { id: m.id, type, x: v.layout === 2 ? m.x : Math.round(m.x / 16) * 8, y: v.layout === 2 ? m.y : Math.round(m.y / 16) * 8, seed: m.seed, character: m.character, params,...(m.mode===undefined?{}:{mode:m.mode}),...(m.wide===undefined?{}:{wide:m.wide}),...(m.bypass===undefined?{}:{bypass:m.bypass}),...(gesture?{gesture}:{}),...(m.sample===undefined?{}:{sample:m.sample}) };
+    return { id: m.id, type, x: v.layout === 2 ? m.x : Math.round(m.x / 16) * 8, y: v.layout === 2 ? m.y : Math.round(m.y / 16) * 8, seed: m.seed, character: m.character, params,...(m.mode===undefined?{}:{mode:m.mode}),...(m.wide===undefined?{}:{wide:m.wide}),...(m.bypass===undefined?{}:{bypass:m.bypass}),...(gesture?{gesture}:{}),...(m.sample===undefined?{}:{sample:m.sample}),...(curve?{curve}:{}),...(phrase?{phrase}:{}),...(harmony?{harmony}:{}) };
   });
   if(modules.filter(m=>isSampleType(m.type)).length>MAX_FOUND)throw new Error('A patch can contain at most 2 FOUND/CUTS sample modules.');
   if(modules.filter(m=>m.type==='LOOP').length>MAX_LOOPS)throw new Error('A patch can contain at most 4 LOOP modules.');
