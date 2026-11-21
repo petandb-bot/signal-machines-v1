@@ -487,3 +487,6 @@ input[type=range]::-moz-range-thumb {
 .musical-score-row input[type=number],.musical-score-row select {width:100%;min-width:0;box-sizing:border-box;color:var(--ink);background:var(--display);border:1px solid var(--line);font:inherit;padding:4px 5px;min-height:28px;}
 .musical-score-row input[type=checkbox] {justify-self:center;accent-color:var(--cyan);width:18px;height:18px;}
 .musical-score-header {color:var(--muted);font-size:9px;letter-spacing:.4px;position:sticky;top:0;background:var(--surface);z-index:1;}
+
+.musical-score-row:has(input[type=checkbox]){grid-template-columns:28px minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 28px;gap:3px;padding:4px;}
+.musical-score-row.musical-score-header:has(+ .musical-score-row input[type=checkbox]){grid-template-columns:28px minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) 28px;gap:3px;padding:4px;}

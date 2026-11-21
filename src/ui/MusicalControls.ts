@@ -91,7 +91,7 @@ export class MusicalControls{
     this.heading('MELODY','16 editable note steps. PITCH is semitones relative to the voice. REST silences the step; LENGTH is its duration.');
     const grid=element('div','musical-score');
     const hdr=element('div','musical-score-row musical-score-header');
-    for(const x of ['STEP','PITCH','LENGTH','REST'])hdr.append(element('span','',x));grid.append(hdr);
+    for(const x of ['STEP','PITCH','LENGTH','VEL','REST'])hdr.append(element('span','',x));grid.append(hdr);
     score.steps.forEach((step,i)=>{
       const row=element('div','musical-score-row');
       row.append(element('span','',String(i+1).padStart(2,'0')));
@@ -101,9 +101,13 @@ export class MusicalControls{
       for(const n of [.25,.5,.75,1]){const option=element('option','',Math.round(n*100)+'%');option.value=String(n);length.append(option);}
       length.value=String([.25,.5,.75,1].reduce((a,b)=>Math.abs(b-step.length)<Math.abs(a-step.length)?b:a));
       length.addEventListener('change',()=>{step.length=Number(length.value);this.changed();});
+      const velocity=element('select');velocity.setAttribute('aria-label',`Step ${i+1} velocity`);
+      for(const n of [.25,.5,.75,1]){const option=element('option','',Math.round(n*100)+'%');option.value=String(n);velocity.append(option);}
+      velocity.value=String([.25,.5,.75,1].reduce((a,b)=>Math.abs(b-step.velocity)<Math.abs(a-step.velocity)?b:a));
+      velocity.addEventListener('change',()=>{step.velocity=Number(velocity.value);this.changed();});
       const rest=element('input');rest.type='checkbox';rest.checked=step.rest;rest.setAttribute('aria-label',`Step ${i+1} rest`);
       rest.addEventListener('change',()=>{step.rest=rest.checked;this.changed();});
-      row.append(pitch,length,rest);grid.append(row);
+      row.append(pitch,length,velocity,rest);grid.append(row);
     });
     this.root.append(grid);
     this.root.append(button('RESET PHRASE','Restore example melody',()=>{this.module.phrase=defaultPhrase();this.changed();this.root.replaceChildren();this.phrase();},'musical-reset'));
