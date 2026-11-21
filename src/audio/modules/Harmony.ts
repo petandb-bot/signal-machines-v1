@@ -30,12 +30,12 @@ export class Harmony extends DSPModule{
     if(fire){
       if(this.inputConnected[0]){if(this.lastTick>=0)this.period=Math.max(1,sample-this.lastTick);}
       else{const n=Math.min(6,Math.round(this.parameters[0]*6));this.period=this.sampleRate*60/Math.max(20,bpm)/CLOCK_RATIOS[n];this.remaining+=this.period;}
-      this.lastTick=sample;this.step=(this.step+1)%(this.selectedMode==='8'?8:4);
+      this.lastTick=sample;this.step=(this.step+1)%(this.selectedMode==='4'?4:8);
       const chord=this.data.chords[this.step],intervals=CHORD_INTERVALS[chord.quality];this.previous.set(this.target);this.chooseVoices(chord.root,intervals);
       if(!this.ready){this.current.set(this.target);this.previous.set(this.target);this.ready=true;}
       this.heldVoice=-1;
       if(this.parameters[1]>0&&this.random.next()<this.parameters[1]*.6){this.heldVoice=1+Math.floor(this.random.next()*3);this.holdUntil=sample+Math.round(this.period*.33);}
-      this.outputL[4]=this.outputR[4]=1;this.triggerSample=sample;this.envelope=1;this.phase=this.step/(this.selectedMode==='8'?8:4);
+      this.outputL[4]=this.outputR[4]=1;this.triggerSample=sample;this.envelope=1;this.phase=this.step/(this.selectedMode==='4'?4:8);
     }
     if(!this.inputConnected[0])this.remaining--;
     const shift=clamp(this.inputL[1],-1,1)*12;
@@ -44,7 +44,6 @@ export class Harmony extends DSPModule{
       this.current[i]+=(target-this.current[i])*this.slew;
       this.outputL[i]=this.outputR[i]=clamp((this.current[i]+shift)/24,-1,1);
     }
-    this.outputL[5]=this.outputR[5]=this.phase;
     this.envelope*=1-1/(this.sampleRate*.18);this.a=this.current[0]/24;this.b=this.current[3]/24;
   }
   override capture(){this.wave[this.waveIndex]=this.outputL[0];this.waveIndex=(this.waveIndex+1)%64;}

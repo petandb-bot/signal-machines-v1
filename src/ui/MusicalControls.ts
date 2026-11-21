@@ -1,6 +1,6 @@
 import {button,element} from './Controls';
 import {defaultCurve,defaultPhrase,defaultHarmony,CHORD_QUALITIES,ROOT_NAMES} from '../graph/MusicalData';
-import type {CurveData,CurvePoint,ModuleState} from '../graph/types';
+import type {ModuleState} from '../graph/types';
 
 /** Editing stays outside the DSP thread. Changes are saved as typed v1 patch fields. */
 export class MusicalControls{
