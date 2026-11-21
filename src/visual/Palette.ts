@@ -44,6 +44,7 @@ export const MODULE_COLORS = {
   LPG: PALETTE.limeSoft, OPERATOR: PALETTE.blue, EDGE: PALETTE.lime,
   MESH: PALETTE.greenSoft, ORBIT: PALETTE.purpleSoft,
   CHAMBER: PALETTE.purple, OUTPUT: PALETTE.green,
+  CURVE: PALETTE.cyanSoft, PHRASE: PALETTE.limeSoft, HARMONY: PALETTE.purpleSoft,
 } as const;
 
 export const SIGNAL_INKS = {audio: PALETTE.amber, control: PALETTE.cyan, trigger: PALETTE.green};
