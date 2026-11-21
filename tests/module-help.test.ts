@@ -43,7 +43,7 @@ describe('read-only English help for all modules',()=>{
     open();
     const types=MODULE_GROUPS.flatMap(g=>g.types);
     expect(types).toHaveLength(71);
-    expect(new Set(types).size).toBe(68);
+    expect(new Set(types).size).toBe(71);
     expect(document.querySelectorAll('.module-help-item')).toHaveLength(71);
     expect(document.querySelectorAll('.module-help-group')).toHaveLength(MODULE_GROUPS.length);
     for(const type of types){
