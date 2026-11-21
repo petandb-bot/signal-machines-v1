@@ -30,7 +30,7 @@ describe('authorable time, phrase and harmonic fields',()=>{
     expect(()=>parsePatch(JSON.stringify(bad2))).toThrow();
   });
   it('CURVE wraps and plays lanes deterministically and resets on external trigger',()=>{
-    const m=createModule('CURVE',0,0,1),a=new Curve(m,sr,2),b=new Curve(m,sr,2);
+    const m=createModule('CURVE',0,0,1);m.params.duration=0;m.params.sync=0;const a=new Curve(m,sr,2),b=new Curve(m,sr,2);
     let wraps=0;for(let i=0;i<sr*3;i++){a.process(i,120);b.process(i,120);wraps+=a.outputL[2];
       expect(a.outputL[0]).toBe(b.outputL[0]);
       expect(Math.abs(a.outputL[0])).toBeLessThanOrEqual(1);
