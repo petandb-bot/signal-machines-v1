@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import {afterEach,describe,expect,it,vi} from 'vitest';
 import {decodeFound,FoundLibrary,snapshotPickedAudio} from '../src/samples/FoundLibrary';
-import {preflightAudioDuration} from '../src/audio/AudioFile';
+import {preflightAudioDuration,CLOUD_METADATA_TIMEOUT_MS} from '../src/audio/AudioFile';
 import {decodeLoopFile} from '../src/audio/AudioFile';
 import {encodeWav} from '../src/audio/Wav';
 import type {FoundAudio} from '../src/samples/FoundData';
@@ -83,6 +83,33 @@ describe('Files / Box sample import resilience',()=>{
    expect(found.right).toHaveLength(frames);
    await expect(decodeLoopFile(new File([blob],'long.wav'),24000)).rejects.toThrow('16 seconds');
  },15000);
+ it('allows cloud media metadata beyond 15 seconds with a 40-second safety window',async()=>{
+   expect(CLOUD_METADATA_TIMEOUT_MS).toBe(40000);
+   vi.useFakeTimers();
+   try{
+     vi.spyOn(URL,'createObjectURL').mockReturnValue('blob:slow-metadata');
+     vi.spyOn(URL,'revokeObjectURL').mockImplementation(()=>{});
+     const native=document.createElement.bind(document);
+     let media:HTMLAudioElement|undefined;
+     vi.spyOn(document,'createElement').mockImplementation(((tag:string)=>{
+       const el=native(tag);
+       if(tag==='audio'){
+         media=el as HTMLAudioElement;
+         Object.defineProperty(el,'duration',{get:()=>25});
+       }
+       return el;
+     }) as typeof document.createElement);
+     let result='pending';
+     const pending=preflightAudioDuration(new Blob(['data']),60).then(()=>{result='resolved';});
+     await vi.advanceTimersByTimeAsync(35000);
+     expect(result).toBe('pending'); // Old 15-second timeout would have failed here.
+     media!.dispatchEvent(new Event('loadedmetadata'));
+     await pending;
+     expect(result).toBe('resolved');
+   }finally{
+     vi.useRealTimers();
+   }
+ });
  it('falls back from unavailable native duration metadata without treating a known over-limit duration as valid',async()=>{
    vi.spyOn(URL,'createObjectURL').mockReturnValue('blob:metadata');
    vi.spyOn(URL,'revokeObjectURL').mockImplementation(()=>{});
