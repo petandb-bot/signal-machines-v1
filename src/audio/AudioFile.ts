@@ -97,7 +97,7 @@ export async function preflightAudioDuration(blob:Blob,maxSeconds:number,options
     el.src=url;
   });
 }
-export async function decodeLoopFile(file:File,targetRate:number):Promise<LoopAudio>{
+export async function decodeLoopFile(file:Blob,targetRate:number):Promise<LoopAudio>{
   if(!file.size||file.size>MAX_FILE_BYTES)throw Error('Use an audio file smaller than 32 MB.');
   if(!Number.isInteger(targetRate)||targetRate<8000||targetRate>192000)throw Error('Invalid recording sample rate.');
   const header=await file.slice(0,12).arrayBuffer();
