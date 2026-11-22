@@ -16,7 +16,7 @@ export class ModuleEditor {
   readonly root=element('aside','editor');
   onParameter:(module:ModuleState,id:string,value:number)=>void=()=>{};onDelete:()=>void=()=>{};onClose:()=>void=()=>{};
   private foundControls?:FoundControls;
-  onFoundChoose:(module:ModuleState,ref:string)=>void=()=>{};onFoundFile:(module:ModuleState,file:File)=>void=()=>{};onFoundInspect:(module:ModuleState)=>void=()=>{};
+  onFoundChoose:(module:ModuleState,ref:string)=>void=()=>{};onFoundFile:(module:ModuleState,file:File)=>void|Promise<void>=()=>{};onFoundInspect:(module:ModuleState)=>void=()=>{};
   setFoundStatus(id:string,audio?:FoundAudio,message?:string,busy=false){if(this.foundControls?.id===id){this.foundControls.update(audio,message);this.foundControls.busy(busy);}}
   private loopControls?:LoopControls;
   private deleteConfirmation?:HTMLElement;private deleteTrigger?:HTMLButtonElement;

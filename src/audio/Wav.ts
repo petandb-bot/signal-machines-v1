@@ -8,8 +8,8 @@ export function encodeWav(clip:LoopAudio):Blob{
   for(let i=0;i<frames;i++)for(let c=0;c<2;c++){const n=c===0?clip.left[i]:clip.right[i];if(!Number.isFinite(n))throw new Error('Invalid audio sample.');view.setInt16(44+(i*2+c)*2,Math.round(Math.max(-1,Math.min(1,n))*(n<0?32768:32767)),true);}
   return new Blob([bytes],{type:'audio/wav'});
 }
-export function decodeWav(bytes:ArrayBuffer,targetRate:number):LoopAudio{
-  if(bytes.byteLength<44||bytes.byteLength>32_000_000)throw new Error('Use a WAV file up to 16 seconds and 32 MB.');
+export function decodeWav(bytes:ArrayBuffer,targetRate:number,maxSeconds=LOOP_SECONDS):LoopAudio{
+  if(bytes.byteLength<44||bytes.byteLength>32_000_000)throw new Error('Use a WAV file up to '+maxSeconds+' seconds and 32 MB.');
   const view=new DataView(bytes),tag=(p:number)=>String.fromCharCode(view.getUint8(p),view.getUint8(p+1),view.getUint8(p+2),view.getUint8(p+3));
   if(tag(0)!=='RIFF'||tag(8)!=='WAVE')throw new Error('Use an uncompressed PCM16/24 or float32 WAV file.');
   let format=0,channels=0,rate=0,bits=0,alignment=0,data=-1,size=0;
@@ -19,7 +19,8 @@ export function decodeWav(bytes:ArrayBuffer,targetRate:number):LoopAudio{
     p=end+(length%2);
   }
   if(!((format===1&&(bits===16||bits===24))||(format===3&&bits===32))||channels<1||channels>2||rate<8000||rate>192000||alignment!==channels*bits/8||data<0||size%alignment)throw new Error('Use mono/stereo PCM16/24 or float32 WAV audio.');
-  const frames=size/alignment;if(frames<2||frames/rate>LOOP_SECONDS||!Number.isFinite(targetRate)||!Number.isInteger(targetRate)||targetRate<8000||targetRate>192000)throw new Error('WAV recordings must be between two frames and 16 seconds.');
+  const frames=size/alignment;if(data+size>bytes.byteLength)throw new Error('Truncated WAV audio data.');
+  if(frames<2||frames/rate>maxSeconds||!Number.isFinite(targetRate)||!Number.isInteger(targetRate)||targetRate<8000||targetRate>192000)throw new Error('WAV recordings must be between two frames and '+maxSeconds+' seconds.');
   const read=(i:number,c:number)=>{const p=data+i*alignment+Math.min(c,channels-1)*bits/8;const n=format===1?(bits===16?view.getInt16(p,true)/32768:(view.getUint8(p)|(view.getUint8(p+1)<<8)|(view.getInt8(p+2)<<16))/8388608):view.getFloat32(p,true);if(!Number.isFinite(n))throw new Error('WAV contains invalid samples.');return Math.max(-1,Math.min(1,n));};
   // Decode source PCM exactly, then perform band-limited conversion only when needed.
   // Same-rate WAV imports retain their historical sample values.

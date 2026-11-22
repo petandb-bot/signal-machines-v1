@@ -79,7 +79,7 @@ export function decodeAiff(bytes:ArrayBuffer,maxSeconds=60):StereoPcm{
 }
 
 /** Compressed formats are decoded by the browser; no extra codec download is required. */
-export async function preflightAudioDuration(blob:Blob,maxSeconds:number):Promise<void>{
+export async function preflightAudioDuration(blob:Blob,maxSeconds:number,options:{allowUnknown?:boolean;timeoutMs?:number}={}):Promise<void>{
   await new Promise<void>((resolve,reject)=>{
     const el=document.createElement('audio'),url=URL.createObjectURL(blob);
     let done=false;
@@ -88,11 +88,12 @@ export async function preflightAudioDuration(blob:Blob,maxSeconds:number):Promis
       el.onloadedmetadata=el.onerror=null;el.removeAttribute('src');el.load();
       URL.revokeObjectURL(url);error?reject(error):resolve();
     };
-    const timer=setTimeout(()=>finish(Error('Could not read audio duration.')),15000);
+    const timer=setTimeout(()=>finish(options.allowUnknown?undefined:Error('Could not read audio duration.')),options.timeoutMs??15000);
     el.preload='metadata';
-    el.onloadedmetadata=()=>finish(Number.isFinite(el.duration)&&el.duration>=.01&&el.duration<=maxSeconds
+    el.onloadedmetadata=()=>finish(!Number.isFinite(el.duration)&&options.allowUnknown
+      ?undefined:Number.isFinite(el.duration)&&el.duration>=.01&&el.duration<=maxSeconds
       ?undefined:Error('Use audio between 0.01 and '+maxSeconds+' seconds.'));
-    el.onerror=()=>finish(Error('This browser cannot read the audio format. Try WAV or uncompressed AIFF.'));
+    el.onerror=()=>finish(options.allowUnknown?undefined:Error('This browser cannot read the audio format. Try WAV or uncompressed AIFF.'));
     el.src=url;
   });
 }
