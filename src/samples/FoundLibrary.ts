@@ -143,7 +143,8 @@ export class FoundLibrary{
     return{audio,persisted};
   }
   async import(file:File,current=()=>true,onStage:(message:string)=>void=()=>{}){
-    const id='local:'+crypto.randomUUID(),name=file.name.slice(0,160);
+    if(file.size>FOUND_BYTES)throw Error('Use an audio file up to 32 MB and 60 seconds.');
+    const id='local:'+crypto.randomUUID(),name=typeof file.name==='string'?file.name.slice(0,160):'sample';
     onStage('Reading selected audio from Files / Box…');
     const blob=await snapshotPickedAudio(file,current);
     if(!current())throw Error('Sample load superseded.');
