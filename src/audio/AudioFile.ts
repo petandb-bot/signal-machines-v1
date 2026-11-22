@@ -108,7 +108,9 @@ export async function decodeLoopFile(file:File,targetRate:number):Promise<LoopAu
   if(header.byteLength>=12&&tag(new DataView(header),0)==='RIFF'&&tag(new DataView(header),8)==='WAVE'){
     return decodeWav(await file.arrayBuffer(),targetRate);
   }
-  await preflightAudioDuration(file,LOOP_SECONDS);
+  // Small compressed clips may decode even when iOS fails the separate metadata probe.
+  const small=file.size<=4_000_000;
+  await preflightAudioDuration(file,LOOP_SECONDS,{allowUnknown:small,timeoutMs:small?8000:15000});
   if(typeof OfflineAudioContext==='undefined')throw Error('Audio decoding is unavailable in this browser.');
   const ctx=new OfflineAudioContext(2,1,targetRate);
   let audio:AudioBuffer;

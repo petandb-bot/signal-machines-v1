@@ -62,6 +62,19 @@ describe('Files / Box sample import resilience',()=>{
    await expect(library.import(file,()=>active)).rejects.toThrow('superseded');
    expect(decode).not.toHaveBeenCalled();
  });
+ it('LOOP can decode a detached cloud file after its original File handle is invalidated',async()=>{
+   const rate=24000,wave=Float32Array.from({length:rate},(_,i)=>Math.sin(i*2*Math.PI*211/rate)*.1);
+   const wav=encodeWav({kind:'loopAudio',sampleRate:rate,left:wave,right:wave.slice()});
+   const bytes=await wav.arrayBuffer();
+   const file=new File([bytes],'loop.wav',{type:'audio/wav'});
+   const provider=vi.fn().mockResolvedValueOnce(bytes).mockRejectedValue(new DOMException('unmounted','NotReadableError'));
+   Object.defineProperty(file,'arrayBuffer',{value:provider});
+   const detached=await snapshotPickedAudio(file);
+   const decoded=await decodeLoopFile(detached,rate);
+   expect(decoded.left).toHaveLength(rate);
+   expect(decoded.left[100]).toBeCloseTo(wave[100],3);
+   expect(provider).toHaveBeenCalledOnce();
+ });
  it('allows a 20-second PCM WAV in FOUND but preserves the 16-second LOOP cap',async()=>{
    const rate=24000,frames=20*rate,wave=Float32Array.from({length:frames},(_,i)=>Math.sin(i*2*Math.PI*130/rate)*.08);
    const blob=encodeWav({kind:'loopAudio',sampleRate:rate,left:wave,right:wave.slice()});
