@@ -42,17 +42,58 @@ export async function decodeLoopFound(blob:Blob,id:string,name:string):Promise<F
   const pcm=decodeWav(await blob.arrayBuffer(),FOUND_RATE);
   return analyzeFound(id,name,pcm.left,pcm.right);
 }
+/**
+ * iOS document providers can expose a File before the cloud download is fully readable.
+ * Read it once, while the picker still retains the selection, and detach every subsequent
+ * operation (metadata, decode, IndexedDB) from the original cloud-backed File handle.
+ */
+export async function snapshotPickedAudio(file:File,current=()=>true):Promise<Blob>{
+  if(!file.size)throw Error('The selected file is empty or not downloaded. In Files, copy it from Box to On My iPhone and select the copy.');
+  if(file.size>FOUND_BYTES)throw Error('Use an audio file up to 32 MB and 60 seconds.');
+  for(let attempt=0;attempt<3;attempt++){
+    if(!current())throw Error('Sample load superseded.');
+    let timer:ReturnType<typeof setTimeout>|undefined;
+    try{
+      const bytes=await Promise.race<ArrayBuffer>([
+        file.arrayBuffer(),
+        new Promise<ArrayBuffer>((_,reject)=>{
+          timer=setTimeout(()=>reject(Error('Cloud file read timed out. Download the file in Box, then copy it to On My iPhone and retry.')),45000);
+        }),
+      ]);
+      if(!current())throw Error('Sample load superseded.');
+      if(bytes.byteLength!==file.size)throw Error('The file provider returned an incomplete copy.');
+      return new Blob([bytes],{type:file.type||'application/octet-stream'});
+    }catch(error){
+      if(!current())throw Error('Sample load superseded.');
+      if(error instanceof Error&&/timed out/.test(error.message))throw error;
+      if(attempt===2)throw Error('Could not read the file from Box/Files. Copy it to On My iPhone and retry. ('+(error instanceof Error?error.name:'read error')+')');
+      await new Promise(resolve=>setTimeout(resolve,300*(attempt+1)));
+    }finally{if(timer!==undefined)clearTimeout(timer);}
+  }
+  throw Error('Could not read the selected file.');
+}
 export async function decodeFound(blob:Blob,id:string,name:string):Promise<FoundAudio>{
   if(!blob.size||blob.size>FOUND_BYTES)throw Error('Use an audio file up to 32 MB and 60 seconds.');
-  // AIFF PCM is decoded locally rather than depending on a browser-specific codec.
-  if(isAiff(await blob.slice(0,12).arrayBuffer())){
+  const header=await blob.slice(0,12).arrayBuffer();
+  // WAV and PCM AIFF bypass Safari's sometimes unreliable media-element metadata probe.
+  if(isAiff(header)){
     const source=decodeAiff(await blob.arrayBuffer(),FOUND_SECONDS);
     const audio=resampleStereo(source,FOUND_RATE);
     return analyzeFound(id,name,audio.left,audio.right);
   }
-  // Check duration before allocating decoded PCM for compressed/native formats.
-  await preflightAudioDuration(blob,FOUND_SECONDS);
-  const Context=window.OfflineAudioContext;
+  const view=new DataView(header);
+  if(header.byteLength>=12&&
+    String.fromCharCode(view.getUint8(0),view.getUint8(1),view.getUint8(2),view.getUint8(3))==='RIFF'&&
+    String.fromCharCode(view.getUint8(8),view.getUint8(9),view.getUint8(10),view.getUint8(11))==='WAVE'){
+    const pcm=decodeWav(await blob.arrayBuffer(),FOUND_RATE,FOUND_SECONDS);
+    return analyzeFound(id,name,pcm.left,pcm.right);
+  }
+  // Native codecs need a duration guard. A small local copy may be decoded even if
+  // iOS fails to supply media metadata; duration is validated again after decoding.
+  const small=blob.size<=4_000_000;
+  await preflightAudioDuration(blob,FOUND_SECONDS,{allowUnknown:small,timeoutMs:small?8000:15000});
+  const Context=window.OfflineAudioContext||
+    (window as Window & {webkitOfflineAudioContext?:typeof OfflineAudioContext}).webkitOfflineAudioContext;
   if(!Context)throw Error('Audio file decoding is unavailable in this browser.');
   const context=new Context(2,1,FOUND_RATE);
   let decoded:AudioBuffer;
@@ -101,8 +142,26 @@ export class FoundLibrary{
     this.cache.set(id,audio);
     return{audio,persisted};
   }
-  async import(file:File,current=()=>true){if(!file.size||file.size>FOUND_BYTES)throw Error('Use an audio file up to 32 MB and 60 seconds.');const id='local:'+crypto.randomUUID(),name=file.name.slice(0,160),audio=await this.decodeOne(file,id,name,current);if(!current())throw Error('Sample load superseded.');let persisted=true;
-    try{await this.storage.put({id,name,blob:file});}catch{persisted=false;if([...this.session.values()].reduce((n,r)=>n+r.blob.size,0)+file.size>FOUND_BYTES*2)throw Error('Session sample memory is full; free browser storage before loading another file.');this.session.set(id,{id,name,blob:file});}
+  async import(file:File,current=()=>true,onStage:(message:string)=>void=()=>{}){
+    if(file.size>FOUND_BYTES)throw Error('Use an audio file up to 32 MB and 60 seconds.');
+    const id='local:'+crypto.randomUUID(),name=typeof file.name==='string'?file.name.slice(0,160):'sample';
+    onStage('Reading selected audio from Files / Box…');
+    const blob=await snapshotPickedAudio(file,current);
+    if(!current())throw Error('Sample load superseded.');
+    onStage('Decoding and analyzing audio…');
+    const audio=await this.decodeOne(blob,id,name,current);
+    if(!current())throw Error('Sample load superseded.');
+    onStage('Saving the sample on this device…');
+    let persisted=true;
+    // Persist the detached Blob, never the cloud-backed File provider handle.
+    try{await this.storage.put({id,name,blob});}
+    catch{
+      persisted=false;
+      if([...this.session.values()].reduce((n,r)=>n+r.blob.size,0)+blob.size>FOUND_BYTES*2)
+        throw Error('Session sample memory is full; free browser storage before loading another file.');
+      this.session.set(id,{id,name,blob});
+    }
+    if(!current())throw Error('Sample load superseded.');
     this.cache.set(id,audio);return{audio,persisted};
   }
 }

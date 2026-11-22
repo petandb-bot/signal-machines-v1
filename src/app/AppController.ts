@@ -8,6 +8,7 @@ import {MAX_LOOPS} from '../audio/LoopAudio';
 import type {LoopAudio,LoopStatus} from '../audio/LoopAudio';
 import {encodeWav} from '../audio/Wav';
 import {decodeLoopFile} from '../audio/AudioFile';
+import {snapshotPickedAudio} from '../samples/FoundLibrary';
 import { StateStore } from './StateStore';
 import { AudioEngine } from '../audio/AudioEngine';
 import { DEFINITIONS } from '../graph/definitions';
@@ -66,7 +67,7 @@ export class AppController {
     this.store.onStorageError=message=>{if(!this.saveWarningShown){this.notify(message,true);this.saveWarningShown=true;}};
     this.editor.onFoundInspect=module=>{if(this.foundPending.has(module.id)){this.editor.setFoundStatus(module.id,undefined,'Loading and analyzing…',true);return;}const reference=foundRef(module.sample);void this.audio.foundLibrary.get(reference,()=>this.store.patch.modules.some(m=>isSampleType(m.type)&&foundRef(m.sample)===reference)).then(audio=>{if(this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference)this.editor.setFoundStatus(module.id,audio,this.audio.foundLibrary.sessionOnly(reference)?audio?.name+' · session only':undefined);}).catch(error=>{if(this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference)this.editor.setFoundStatus(module.id,undefined,error.message);}).finally(()=>this.audio.foundLibrary.retain(this.store.patch.modules.filter(m=>isSampleType(m.type)).map(m=>foundRef(m.sample))));};
     this.editor.onFoundChoose=(module,ref)=>{module.sample=ref;this.store.changed('routing');};
-    this.editor.onFoundFile=(module,file)=>void this.importFound(module,file);
+    this.editor.onFoundFile=(module,file)=>this.importFound(module,file);
     this.editor.onParameter=(module,id,value)=>this.parameter(module,id,value);
     this.workspace.onSelect=()=>{
       this.closePanels();this.editor.render();
@@ -77,7 +78,7 @@ export class AppController {
     this.workspace.onViewportChange=()=>{if(this.root.classList.contains('editor-visible'))this.revealSelection();};
     this.workspace.onError=message=>this.notify(message,true);this.workspace.onAdd=()=>this.togglePanel('library');
     this.snapshots.onRecall=patch=>{this.store.replace(patch);this.notify('Snapshot recalled. Sound restarted.');};this.snapshots.onClose=()=>this.closePanels();this.snapshots.onNotice=(message,error)=>this.notify(message,error);
-    this.editor.onAction=(module,action)=>void this.performModuleAction(module,action);this.editor.onImport=(module,file)=>void this.performModuleAction(module,'import',file);
+    this.editor.onAction=(module,action)=>void this.performModuleAction(module,action);this.editor.onImport=(module,file)=>this.performModuleAction(module,'import',file);
     this.editor.onDelete=()=>this.deleteSelection();this.editor.onClose=()=>this.root.classList.remove('editor-visible');
     this.editor.onPort=(module,port)=>{this.root.classList.remove('editor-visible');this.workspace.armPort({module:module.id,port:port.id,direction:port.direction});};
     this.audio.onTelemetry=data=>{this.store.telemetry=data;this.editor.updateTelemetry();
@@ -144,8 +145,8 @@ export class AppController {
     this.store.patch.modules.push(module);this.store.selectedModule=module.id;this.store.selectedCable=null;this.closePanels();this.store.changed('routing');this.workspace.reveal(module.id,0);this.notify(`${type} added`);
   }
   private async importFound(module:ModuleState,file:File){
-    const sequence=(this.foundImports.get(module.id)??0)+1;this.foundImports.set(module.id,sequence);this.foundPending.add(module.id);const reference=foundRef(module.sample);this.editor.setFoundStatus(module.id,undefined,'Loading and analyzing…',true);
-    try{const {audio,persisted}=await this.audio.foundLibrary.import(file,()=>this.foundImports.get(module.id)===sequence&&this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference);if(this.foundImports.get(module.id)===sequence&&this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference){module.sample=audio.id;this.store.changed('routing');this.editor.setFoundStatus(module.id,audio,persisted?undefined:audio.name+' · session only; browser storage failed.');if(!persisted)this.notify('Sample is usable this session, but browser storage failed.',true);}}
+    const sequence=(this.foundImports.get(module.id)??0)+1;this.foundImports.set(module.id,sequence);this.foundPending.add(module.id);const reference=foundRef(module.sample);this.editor.setFoundStatus(module.id,undefined,'Reading from Files / Box…',true);
+    try{const {audio,persisted}=await this.audio.foundLibrary.import(file,()=>this.foundImports.get(module.id)===sequence&&this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference,message=>{if(this.foundImports.get(module.id)===sequence)this.editor.setFoundStatus(module.id,undefined,message,true);});if(this.foundImports.get(module.id)===sequence&&this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference){module.sample=audio.id;this.store.changed('routing');this.editor.setFoundStatus(module.id,audio,persisted?undefined:audio.name+' · session only; browser storage failed.');if(!persisted)this.notify('Sample is usable this session, but browser storage failed.',true);}}
     catch(error){if(this.foundImports.get(module.id)===sequence&&this.store.patch.modules.includes(module)&&foundRef(module.sample)===reference){this.editor.setFoundStatus(module.id,undefined,(error as Error).message);this.notify((error as Error).message,true);}}
     finally{if(this.foundImports.get(module.id)===sequence)this.foundPending.delete(module.id);this.audio.foundLibrary.retain(this.store.patch.modules.filter(m=>isSampleType(m.type)).map(m=>foundRef(m.sample)));}
   }
@@ -180,9 +181,14 @@ export class AppController {
         this.notify(`LOOP copied to ${type}. Connect its AUDIO output to hear the new voice.${persisted?'':' Sample available only for this session.'}`,!persisted,8000);
         return;
       }
-      if(!this.audio.running)await this.audio.start(this.store.patch);
       let payload:LoopAudio|undefined;
-      if(action==='import'){if(!file)throw new Error('Choose an audio file.');payload=await decodeLoopFile(file,this.audio.sampleRate);}
+      if(action==='import'){
+        if(!file)throw new Error('Choose an audio file.');
+        // Snapshot before starting the engine: iOS Files/Box may revoke the provider handle.
+        const local=await snapshotPickedAudio(file);
+        payload=await decodeLoopFile(local,this.audio.sampleRate);
+      }
+      if(!this.audio.running)await this.audio.start(this.store.patch);
       const result=await this.audio.moduleAction(module.id,action,payload);
       if(action==='export'){download(encodeWav(result as LoopAudio),`signal-machines-loop-${Date.now()}.wav`);this.notify('Loop WAV exported');}
       else if(module.type==='LOOP')this.editor.setLoopStatus(module.id,result as LoopStatus);

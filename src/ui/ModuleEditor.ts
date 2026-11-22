@@ -16,11 +16,11 @@ export class ModuleEditor {
   readonly root=element('aside','editor');
   onParameter:(module:ModuleState,id:string,value:number)=>void=()=>{};onDelete:()=>void=()=>{};onClose:()=>void=()=>{};
   private foundControls?:FoundControls;
-  onFoundChoose:(module:ModuleState,ref:string)=>void=()=>{};onFoundFile:(module:ModuleState,file:File)=>void=()=>{};onFoundInspect:(module:ModuleState)=>void=()=>{};
+  onFoundChoose:(module:ModuleState,ref:string)=>void=()=>{};onFoundFile:(module:ModuleState,file:File)=>void|Promise<void>=()=>{};onFoundInspect:(module:ModuleState)=>void=()=>{};
   setFoundStatus(id:string,audio?:FoundAudio,message?:string,busy=false){if(this.foundControls?.id===id){this.foundControls.update(audio,message);this.foundControls.busy(busy);}}
   private loopControls?:LoopControls;
   private deleteConfirmation?:HTMLElement;private deleteTrigger?:HTMLButtonElement;
-  onAction:(module:ModuleState,action:string)=>void=()=>{};onImport:(module:ModuleState,file:File)=>void=()=>{};
+  onAction:(module:ModuleState,action:string)=>void=()=>{};onImport:(module:ModuleState,file:File)=>void|Promise<void>=()=>{};
   onPort:(module:ModuleState,port:PortDefinition)=>void=()=>{};
   constructor(readonly store:StateStore){this.root.setAttribute('aria-label','Module editor');}
   render(){
