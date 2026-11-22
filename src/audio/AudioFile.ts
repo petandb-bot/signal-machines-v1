@@ -9,6 +9,8 @@ import {resampleStereo} from './Resample';
 import type {StereoPcm} from './Resample';
 
 const MAX_FILE_BYTES=32_000_000;
+// Generous deadline for iPhone Files/Box-backed media metadata, distinct from the file-copy timeout.
+export const CLOUD_METADATA_TIMEOUT_MS=40_000;
 
 
 function tag(view:DataView,at:number):string{
@@ -88,7 +90,7 @@ export async function preflightAudioDuration(blob:Blob,maxSeconds:number,options
       el.onloadedmetadata=el.onerror=null;el.removeAttribute('src');el.load();
       URL.revokeObjectURL(url);error?reject(error):resolve();
     };
-    const timer=setTimeout(()=>finish(options.allowUnknown?undefined:Error('Could not read audio duration.')),options.timeoutMs??15000);
+    const timer=setTimeout(()=>finish(options.allowUnknown?undefined:Error('Could not read audio duration.')),options.timeoutMs??CLOUD_METADATA_TIMEOUT_MS);
     el.preload='metadata';
     el.onloadedmetadata=()=>finish(!Number.isFinite(el.duration)&&options.allowUnknown
       ?undefined:Number.isFinite(el.duration)&&el.duration>=.01&&el.duration<=maxSeconds
@@ -110,7 +112,7 @@ export async function decodeLoopFile(file:Blob,targetRate:number):Promise<LoopAu
   }
   // Small compressed clips may decode even when iOS fails the separate metadata probe.
   const small=file.size<=4_000_000;
-  await preflightAudioDuration(file,LOOP_SECONDS,{allowUnknown:small,timeoutMs:small?8000:15000});
+  await preflightAudioDuration(file,LOOP_SECONDS,{allowUnknown:small,timeoutMs:small?8000:CLOUD_METADATA_TIMEOUT_MS});
   if(typeof OfflineAudioContext==='undefined')throw Error('Audio decoding is unavailable in this browser.');
   const ctx=new OfflineAudioContext(2,1,targetRate);
   let audio:AudioBuffer;

@@ -1,6 +1,6 @@
 import {analyzeFound,builtinFound,BUILTINS,FOUND_BYTES,FOUND_RATE,FOUND_SECONDS,foundRef} from './FoundData';
 import type {FoundAudio,Builtin} from './FoundData';
-import {decodeAiff,isAiff,preflightAudioDuration} from '../audio/AudioFile';
+import {decodeAiff,isAiff,preflightAudioDuration,CLOUD_METADATA_TIMEOUT_MS} from '../audio/AudioFile';
 import {resampleStereo} from '../audio/Resample';
 import {encodeWav,decodeWav} from '../audio/Wav';
 import type {LoopAudio} from '../audio/LoopAudio';
@@ -91,7 +91,7 @@ export async function decodeFound(blob:Blob,id:string,name:string):Promise<Found
   // Native codecs need a duration guard. A small local copy may be decoded even if
   // iOS fails to supply media metadata; duration is validated again after decoding.
   const small=blob.size<=4_000_000;
-  await preflightAudioDuration(blob,FOUND_SECONDS,{allowUnknown:small,timeoutMs:small?8000:15000});
+  await preflightAudioDuration(blob,FOUND_SECONDS,{allowUnknown:small,timeoutMs:small?8000:CLOUD_METADATA_TIMEOUT_MS});
   const Context=window.OfflineAudioContext||
     (window as Window & {webkitOfflineAudioContext?:typeof OfflineAudioContext}).webkitOfflineAudioContext;
   if(!Context)throw Error('Audio file decoding is unavailable in this browser.');
