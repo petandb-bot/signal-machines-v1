@@ -6,12 +6,11 @@ import {Plate} from './modules/Plate';
 import {Sympathy} from './modules/Sympathy';
 import {Nerve} from './modules/Nerve';
 import {Cuts} from './modules/Cuts';
-import {isSampleType} from '../samples/FoundData';
 import {Loss} from './modules/Loss';
 import {Mirage} from './modules/Mirage';
 import {Level} from './modules/Level';
 import {Found} from './modules/Found';
-import {MAX_FOUND} from '../samples/FoundData';
+import {sampleModuleLimitError} from '../samples/FoundData';
 import {Smear} from './modules/Smear';
 import {Friction} from './modules/Friction';
 import {MAX_LOOPS} from './LoopAudio';
@@ -80,7 +79,7 @@ const CLASSES = { CURVE:Curve, PHRASE:Phrase, HARMONY:Harmony, WALLS:Walls, PLAT
 export interface Route { source: DSPModule; output: number; input: number; signal: SignalType; delayed:boolean }
 export interface CompiledModule { dsp: DSPModule; incoming: Route[] }
 export function compilePatch(patch: Patch, sampleRate: number, existing = new Map<string, DSPModule>()) {
-  if(patch.modules.filter(m=>isSampleType(m.type)).length>MAX_FOUND)throw new Error('A patch can contain at most 2 FOUND/CUTS sample modules.');
+  const sampleError=sampleModuleLimitError(patch.modules);if(sampleError)throw new Error(sampleError);
   if(patch.modules.filter(m=>m.type==='LOOP').length>MAX_LOOPS)throw new Error('A patch can contain at most 4 LOOP modules.');
   const modules = new Map<string, DSPModule>();
   for (const state of patch.modules) {

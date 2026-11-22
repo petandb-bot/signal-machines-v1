@@ -17,7 +17,7 @@ export class FoundControls{
         .finally(()=>{file.value='';});
     });this.load=button('LOAD FILE','Load '+type+' audio file',()=>file.click(),'impulse-button');this.status.setAttribute('role','status');this.status.textContent='Loading sample…';
     const preview=document.createElementNS('http://www.w3.org/2000/svg','svg');preview.setAttribute('viewBox','0 0 208 32');preview.classList.add('found-preview');preview.setAttribute('role','img');preview.setAttribute('aria-label','Loaded sample waveform');preview.append(this.path);
-    this.root.append(label,this.load,file,this.status,preview,element('p','loop-note','WAV / PCM AIFF / MP3 / M4A and browser-supported audio · 60 s / 32 MB max. Two FOUND/CUTS per patch. Files stay on this device; JSON does not carry audio. Box/iCloud: if import fails, save a copy in Files → On My iPhone and select that copy.'));
+    this.root.append(label,this.load,file,this.status,preview,element('p','loop-note','WAV / PCM AIFF / MP3 / M4A and browser-supported audio · 60 s / 32 MB max. Up to 2 FOUND + 2 CUTS per patch. Files stay on this device; JSON does not carry audio. Box/iCloud: if import fails, save a copy in Files → On My iPhone and select that copy.'));
   }
   update(audio?:FoundAudio,message?:string){if(audio)this.path.setAttribute('d',audio.peaks.map((peak,i)=>`M${i*2+1} ${16-peak*15}v${peak*30}`).join(' '));this.status.textContent=message??(audio?`${audio.name} · ${(audio.left.length/audio.sampleRate).toFixed(1)} s`:'Sample missing — load the original file again.');}
   busy(value:boolean){this.select.disabled=this.load.disabled=value;}

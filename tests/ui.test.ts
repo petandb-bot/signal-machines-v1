@@ -302,8 +302,16 @@ describe('v0.18 library and shared sample UI',()=>{
     if(type==='CUTS'){await vi.waitFor(()=>expect(document.querySelector('.found-preview path')!.getAttribute('d')!.length).toBeGreaterThan(20));const source=document.querySelector<HTMLSelectElement>('[aria-label="CUTS source"]')!;source.value='builtin:machine';source.dispatchEvent(new Event('change'));expect(app.store.patch.modules.find(m=>m.id===id)!.sample).toBe('builtin:machine');expect(document.querySelector('[aria-label="Load CUTS audio file"]')).not.toBeNull();}
     const p=structuredClone(app.store.patch),snapshot=app.snapshots.storage.capture(p,type);app.store.replace(app.snapshots.storage.recall(snapshot,p));expect(app.store.patch).toEqual(p);expect(start).not.toHaveBeenCalled();
   });
-  it('caps FOUND and CUTS together before allocating another source',()=>{
-    for(const type of ['FOUND','CUTS','CUTS'])document.querySelector<HTMLButtonElement>(`[aria-label="Add ${type} module"]`)!.click();expect(app.store.patch.modules.filter(m=>m.type==='FOUND'||m.type==='CUTS')).toHaveLength(2);expect(document.querySelector('.toast')!.textContent).toContain('at most 2 FOUND/CUTS');
+  it('allows 2 FOUND + 2 CUTS and rejects a third of either type',()=>{
+    for(const type of ['FOUND','CUTS','FOUND','CUTS'] as const)
+      document.querySelector<HTMLButtonElement>(`[aria-label="Add ${type} module"]`)!.click();
+    expect(app.store.patch.modules.filter(m=>m.type==='FOUND')).toHaveLength(2);
+    expect(app.store.patch.modules.filter(m=>m.type==='CUTS')).toHaveLength(2);
+    document.querySelector<HTMLButtonElement>('[aria-label="Add CUTS module"]')!.click();
+    expect(document.querySelector('.toast')!.textContent).toContain('at most 2 CUTS');
+    document.querySelector<HTMLButtonElement>('[aria-label="Add FOUND module"]')!.click();
+    expect(document.querySelector('.toast')!.textContent).toContain('at most 2 FOUND');
+    expect(app.store.patch.modules.filter(m=>m.type==='FOUND'||m.type==='CUTS')).toHaveLength(4);
   });
 });
 

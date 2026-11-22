@@ -1,6 +1,6 @@
 import {isSampleType} from '../samples/FoundData';
 import {version} from '../../package.json';
-import {MAX_FOUND,foundRef} from '../samples/FoundData';
+import {sampleModuleLimitError,foundRef} from '../samples/FoundData';
 import {installPalette} from '../visual/Palette';
 import type {RecordingFormat} from '../audio/PcmRecording';
 import {MODULE_GROUPS} from '../graph/catalog';
@@ -139,7 +139,7 @@ export class AppController {
   private parameter(module:ModuleState,id:string,value:number){module.params[id]=value;this.store.changed('parameters');this.editor.refresh(module);}
   private addModule(type:ModuleType){
     if(this.store.patch.modules.length>=48){this.notify('This patch has reached the 48 module limit.',true);return;}
-    if(isSampleType(type)&&this.store.patch.modules.filter(m=>isSampleType(m.type)).length>=MAX_FOUND){this.notify('A patch can contain at most 2 FOUND/CUTS sample modules.',true);return;}
+    if(isSampleType(type)){const limit=sampleModuleLimitError([...this.store.patch.modules,{type}]);if(limit){this.notify(limit,true);return;}}
     if(type==='LOOP'&&this.store.patch.modules.filter(m=>m.type==='LOOP').length>=MAX_LOOPS){this.notify('A patch can contain at most 4 LOOP modules.',true);return;}
     const position=this.workspace.vacantPosition(),module=createModule(type,position.x,position.y,(this.store.patch.seed+this.store.patch.modules.length*7919+1)>>>0);
     this.store.patch.modules.push(module);this.store.selectedModule=module.id;this.store.selectedCable=null;this.closePanels();this.store.changed('routing');this.workspace.reveal(module.id,0);this.notify(`${type} added`);
@@ -160,8 +160,8 @@ export class AppController {
       if(action==='send-found'||action==='send-cuts'){
         if(module.type!=='LOOP'||!this.audio.running)throw Error('Start and record a loop before sending its audio.');
         if(this.store.patch.modules.length>=48)throw Error('This patch has reached the 48 module limit.');
-        if(this.store.patch.modules.filter(m=>isSampleType(m.type)).length>=MAX_FOUND)
-          throw Error('This patch already has 2 FOUND/CUTS modules.');
+        const initialSampleLimit=sampleModuleLimitError([...this.store.patch.modules,{type:action==='send-found'?'FOUND':'CUTS'}]);
+        if(initialSampleLimit)throw Error(initialSampleLimit);
         const sourcePatch=this.store.patch;
         const sourceIsCurrent=()=>this.store.patch===sourcePatch&&sourcePatch.modules.includes(module);
         const clip=await this.audio.moduleAction(module.id,'export') as LoopAudio;
@@ -170,8 +170,8 @@ export class AppController {
         if(!sourceIsCurrent())throw Error('Patch changed during loop transfer.');
         // Another user action may have added modules while storage was pending.
         if(this.store.patch.modules.length>=48)throw Error('This patch has reached the 48 module limit.');
-        if(this.store.patch.modules.filter(m=>isSampleType(m.type)).length>=MAX_FOUND)
-          throw Error('This patch already has 2 FOUND/CUTS modules.');
+        const finalSampleLimit=sampleModuleLimitError([...this.store.patch.modules,{type:action==='send-found'?'FOUND':'CUTS'}]);
+        if(finalSampleLimit)throw Error(finalSampleLimit);
         const type=action==='send-found'?'FOUND':'CUTS',position=this.workspace.vacantPosition();
         const created=createModule(type,position.x,position.y,(this.store.patch.seed+this.store.patch.modules.length*7919+1)>>>0);
         created.sample=audio.id;

@@ -1,6 +1,6 @@
 import {isSampleType} from '../samples/FoundData';
 import {parseCurve,parsePhrase,parseHarmony,defaultCurve,defaultPhrase,defaultHarmony} from '../graph/MusicalData';
-import {validFoundRef,MAX_FOUND} from '../samples/FoundData';
+import {validFoundRef,sampleModuleLimitError} from '../samples/FoundData';
 import {MAX_LOOPS} from '../audio/LoopAudio';
 import { DEFINITIONS,MODE_OPTIONS,WIDE_TYPES,BYPASS_TYPES } from '../graph/definitions';
 import { validateConnection } from '../graph/GraphValidator';
@@ -44,7 +44,7 @@ export function parsePatch(text: string): Patch {
     ids.add(m.id);
     return { id: m.id, type, x: v.layout === 2 ? m.x : Math.round(m.x / 16) * 8, y: v.layout === 2 ? m.y : Math.round(m.y / 16) * 8, seed: m.seed, character: m.character, params,...(m.mode===undefined?{}:{mode:m.mode}),...(m.wide===undefined?{}:{wide:m.wide}),...(m.bypass===undefined?{}:{bypass:m.bypass}),...(gesture?{gesture}:{}),...(m.sample===undefined?{}:{sample:m.sample}),...(curve?{curve}:{}),...(phrase?{phrase}:{}),...(harmony?{harmony}:{}) };
   });
-  if(modules.filter(m=>isSampleType(m.type)).length>MAX_FOUND)throw new Error('A patch can contain at most 2 FOUND/CUTS sample modules.');
+  const sampleError=sampleModuleLimitError(modules);if(sampleError)throw new Error(sampleError);
   if(modules.filter(m=>m.type==='LOOP').length>MAX_LOOPS)throw new Error('A patch can contain at most 4 LOOP modules.');
   const patch: Patch = { version: 1, layout: 2, name: v.name, bpm: v.bpm, master: v.master, seed: v.seed, modules, connections: [] };
   const edgeIds = new Set<string>();

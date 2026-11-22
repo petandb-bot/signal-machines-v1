@@ -1,6 +1,6 @@
 import {Cuts} from './modules/Cuts';
 import {Found} from './modules/Found';
-import {validateFoundAudio,MAX_FOUND,validFoundRef} from '../samples/FoundData';
+import {validateFoundAudio,MAX_SAMPLE_ASSETS,validFoundRef} from '../samples/FoundData';
 import type {FoundAudio} from '../samples/FoundData';
 import type { EngineTelemetry, Patch } from '../graph/types';
 import { DSPModule, clamp } from './DSPModule';
@@ -12,10 +12,10 @@ const NEAR_SATURATION_DRIVE=.63*Math.atanh(.95);
 export class DSPGraph {
   private foundAssets=new Map<string,FoundAudio>();
   setFoundAssets(values:FoundAudio[],retain?:string[]){
-    if(!Array.isArray(values)||values.length>MAX_FOUND||retain!==undefined&&(!Array.isArray(retain)||retain.length>MAX_FOUND||!retain.every(validFoundRef)))throw Error('Invalid FOUND assets.');
+    if(!Array.isArray(values)||values.length>MAX_SAMPLE_ASSETS||retain!==undefined&&(!Array.isArray(retain)||retain.length>MAX_SAMPLE_ASSETS||!retain.every(validFoundRef)))throw Error('Invalid FOUND assets.');
     const updates=values.map(validateFoundAudio),next=new Map<string,FoundAudio>();
     if(retain)for(const id of retain){const old=this.foundAssets.get(id);if(old)next.set(id,old);}
-    for(const a of updates)next.set(a.id,a);if(next.size>MAX_FOUND)throw Error('Too many FOUND assets.');this.foundAssets=next;
+    for(const a of updates)next.set(a.id,a);if(next.size>MAX_SAMPLE_ASSETS)throw Error('Too many FOUND assets.');this.foundAssets=next;
     // Bind only at the subsequent muted patch commit, never in the asset message handler.
   }
   modules = new Map<string, DSPModule>();
