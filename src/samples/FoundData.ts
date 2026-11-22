@@ -1,6 +1,16 @@
 import {analyzeCuts} from './CutsAnalysis';
 import type {CutEvent} from './CutsAnalysis';
-export const FOUND_RATE=24000,FOUND_SECONDS=60,FOUND_BYTES=32_000_000,MAX_FOUND=2;
+export const FOUND_RATE=24000,FOUND_SECONDS=60,FOUND_BYTES=32_000_000;
+export const MAX_FOUND=2,MAX_CUTS=2,MAX_SAMPLE_ASSETS=MAX_FOUND+MAX_CUTS;
+/** One shared capacity check for patch import, graph compile, editor and LOOP copies. */
+export function sampleModuleLimitError(modules:readonly {type:string}[]):string|null{
+  let found=0,cuts=0;
+  for(const module of modules){
+    if(module.type==='FOUND'&&++found>MAX_FOUND)return 'A patch can contain at most 2 FOUND modules.';
+    if(module.type==='CUTS'&&++cuts>MAX_CUTS)return 'A patch can contain at most 2 CUTS modules.';
+  }
+  return null;
+}
 export const BUILTINS=['room','rain','machine','wire','glass','tape'] as const;
 export type Builtin=typeof BUILTINS[number];
 export interface FoundRegion{start:number;energy:number;change:number}
