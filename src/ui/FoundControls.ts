@@ -1,10 +1,11 @@
 import {button,element} from './Controls';
+import {BUILTINS} from '../samples/FoundData';
 import type {FoundAudio} from '../samples/FoundData';
 export class FoundControls{
   readonly root=element('div','found-controls');readonly select=element('select','record-format');private path=document.createElementNS('http://www.w3.org/2000/svg','path');private status=element('p','loop-status');private load:HTMLButtonElement;
   constructor(readonly id:string,reference:string,onChoose:(ref:string)=>void,onFile:(file:File)=>void,type='FOUND'){
     const label=element('label','record-format-label','SOURCE');this.select.setAttribute('aria-label',type+' source');
-    for(const name of ['room','rain','machine']){const o=element('option','',name.toUpperCase()+' · synthetic');o.value='builtin:'+name;this.select.append(o);}
+    for(const name of BUILTINS){const o=element('option','',name.toUpperCase()+' · synthetic');o.value='builtin:'+name;this.select.append(o);}
     if(reference.startsWith('local:')){const o=element('option','','Local file');o.value=reference;this.select.append(o);}this.select.value=reference;this.select.addEventListener('change',()=>onChoose(this.select.value));label.append(this.select);
     const file=element('input');file.type='file';file.accept='audio/*,.wav,.aif,.aiff,.aifc,.mp3,.m4a,.aac,.ogg,.flac';file.hidden=true;file.setAttribute('aria-label',type+' audio file');file.addEventListener('change',()=>{const f=file.files?.[0];if(f)onFile(f);file.value='';});this.load=button('LOAD FILE','Load '+type+' audio file',()=>file.click(),'impulse-button');this.status.setAttribute('role','status');this.status.textContent='Loading sample…';
     const preview=document.createElementNS('http://www.w3.org/2000/svg','svg');preview.setAttribute('viewBox','0 0 208 32');preview.classList.add('found-preview');preview.setAttribute('role','img');preview.setAttribute('aria-label','Loaded sample waveform');preview.append(this.path);
