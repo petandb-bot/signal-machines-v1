@@ -1,12 +1,17 @@
+import {crc32Parts} from './ZipArchive';
 export type RecordingFormat='browser'|'wav'|'aiff';
-export const PCM_BYTES_LIMIT=48*1024*1024;
-export const recordingFrames=(rate:number)=>Math.min(Math.floor(rate*180),Math.floor(PCM_BYTES_LIMIT/6));
+export const MAX_RECORD_SECONDS=600,PCM_BYTES_LIMIT=128*1024*1024,STEM_BYTES_LIMIT=160*1024*1024,MAX_STEM_OUTPUTS=4;
+export type CaptureMode='master'|'stems';
+export function recordingFrames(rate:number,tracks=1,mode:CaptureMode='master'){
+  if(!Number.isInteger(tracks)||tracks<1||tracks>MAX_STEM_OUTPUTS||!Number.isFinite(rate)||rate<=0)throw Error('Invalid recording track count or sample rate.');
+  return Math.min(Math.floor(rate*MAX_RECORD_SECONDS),Math.floor((mode==='stems'?STEM_BYTES_LIMIT:PCM_BYTES_LIMIT)/(tracks*6)));
+}
 /** Interleaved signed PCM24; chunks avoid copying a whole performance at finish. */
 export class PcmRecording {
   private chunks:Uint8Array<ArrayBuffer>[]=[];frames=0;
-  constructor(readonly sampleRate:number,readonly format:'wav'|'aiff'){if(!Number.isInteger(sampleRate)||sampleRate<8000||sampleRate>192000)throw new Error('Invalid recording sample rate.');}
+  constructor(readonly sampleRate:number,readonly format:'wav'|'aiff',readonly maxFrames=recordingFrames(sampleRate)){if(!Number.isInteger(sampleRate)||sampleRate<8000||sampleRate>192000||!Number.isInteger(maxFrames)||maxFrames<1||maxFrames>sampleRate*MAX_RECORD_SECONDS||maxFrames*6>STEM_BYTES_LIMIT)throw new Error('Invalid recording sample rate or length.');}
   append(left:Float32Array,right:Float32Array,frames:number){
-    if(!Number.isInteger(frames)||frames<0||frames>left.length||frames>right.length||this.frames+frames>recordingFrames(this.sampleRate))throw new Error('Invalid recording block.');
+    if(!Number.isInteger(frames)||frames<0||frames>left.length||frames>right.length||this.frames+frames>this.maxFrames)throw new Error('Invalid recording block.');
     const bytes=new Uint8Array(frames*6);let p=0;
     for(let i=0;i<frames;i++)for(let c=0;c<2;c++){
       const value=c?right[i]:left[i];if(!Number.isFinite(value))throw new Error('Invalid recorded sample.');
@@ -46,7 +51,7 @@ export class PcmRecording {
       at+=count;
     }
   }
-  finish(options?:{edgeFadeMs?:number}){
+  finish(options?:{edgeFadeMs?:number;withChecksum?:boolean}){
     if(!this.frames)throw new Error('No audio was recorded.');
     const fade=options?.edgeFadeMs??0;
     if(!Number.isFinite(fade)||fade<0||fade>25)throw new Error('Invalid recording edge fade.');
@@ -60,7 +65,8 @@ export class PcmRecording {
       const exponent=Math.floor(Math.log2(this.sampleRate));v.setUint16(28,16383+exponent);v.setBigUint64(30,BigInt(this.sampleRate)*2n**BigInt(63-exponent));
       tag(38,'SSND');v.setUint32(42,data+8);v.setUint32(46,0);v.setUint32(50,0);
     }
+    const checksum=options?.withChecksum?crc32Parts([new Uint8Array(header),...this.chunks]):undefined;
     const blob=new Blob([header,...this.chunks],{type:this.format==='wav'?'audio/wav':'audio/aiff'});this.chunks=[];
-    return{blob,extension:this.format};
+    return{blob,extension:this.format,checksum,frames:this.frames};
   }
 }

@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest';
-import {PcmRecording,recordingFrames} from '../src/audio/PcmRecording';
+import {PcmRecording,recordingFrames,PCM_BYTES_LIMIT,STEM_BYTES_LIMIT,MAX_RECORD_SECONDS} from '../src/audio/PcmRecording';
 import {MasterCapture} from '../src/audio/MasterCapture';
 import {decodeWav} from '../src/audio/Wav';
 describe('lossless master file encoding and bounded capture',()=>{
@@ -18,7 +18,7 @@ describe('lossless master file encoding and bounded capture',()=>{
     expect(Array.from(new Uint8Array(bytes,54,6))).toEqual([128,0,0,64,0,0]);expect(result.blob.type).toBe('audio/aiff');expect(result.extension).toBe('aiff');
   });
   it('rejects empty, invalid or oversize material without accepting a corrupt chunk',()=>{
-    const recording=new PcmRecording(48000,'wav');expect(()=>recording.finish()).toThrow('No audio');expect(()=>recording.append(Float32Array.of(NaN),Float32Array.of(0),1)).toThrow('sample');expect(recording.frames).toBe(0);expect(()=>recording.append(new Float32Array(1),new Float32Array(1),2)).toThrow('block');expect(()=>new PcmRecording(0,'wav')).toThrow('rate');expect(recordingFrames(48000)).toBeLessThanOrEqual(48000*180);expect(recordingFrames(192000)*6).toBeLessThanOrEqual(48*1024*1024);
+    const recording=new PcmRecording(48000,'wav');expect(()=>recording.finish()).toThrow('No audio');expect(()=>recording.append(Float32Array.of(NaN),Float32Array.of(0),1)).toThrow('sample');expect(recording.frames).toBe(0);expect(()=>recording.append(new Float32Array(1),new Float32Array(1),2)).toThrow('block');expect(()=>new PcmRecording(0,'wav')).toThrow('rate');expect(recordingFrames(48000)).toBeGreaterThan(48000*180);expect(recordingFrames(48000)).toBeLessThanOrEqual(48000*MAX_RECORD_SECONDS);expect(recordingFrames(192000)*6).toBeLessThanOrEqual(PCM_BYTES_LIMIT);expect(recordingFrames(48000,4,'stems')*6*4).toBeLessThanOrEqual(STEM_BYTES_LIMIT);
   });
   it('captures exact variable-block samples and flushes the partial last block before end',()=>{
     const events:Array<{type:string;left?:Float32Array;right?:Float32Array;frames?:number}>=[],capture=new MasterCapture(data=>events.push(data as typeof events[number]));capture.start(1,48000);
@@ -32,6 +32,6 @@ describe('lossless master file encoding and bounded capture',()=>{
     const events:unknown[]=[],stalled=new MasterCapture(data=>events.push(data));stalled.start(8,48000);for(let i=0;i<10;i++)stalled.push(new Float32Array(8192),new Float32Array(8192));expect(stalled.active).toBe(false);expect((events.at(-1) as {reason:string}).reason).toContain('keep up');expect(events.filter(e=>(e as {type:string}).type==='recordData')).toHaveLength(8);
   });
   it('finishes automatically at its duration limit',()=>{
-    let capture:MasterCapture,last='';capture=new MasterCapture(data=>{const event=data as {type:string;id:number;left:Float32Array<ArrayBuffer>;right:Float32Array<ArrayBuffer>;reason:string};if(event.type==='recordData')capture.recycle(event.id,event.left,event.right);else last=event.reason;});capture.start(3,8000);const zero=new Float32Array(8192);for(let i=0;i<180;i++)capture.push(zero,zero);expect(capture.active).toBe(false);expect(last).toContain('limit');
+    let capture:MasterCapture,last='';capture=new MasterCapture(data=>{const event=data as {type:string;id:number;left:Float32Array<ArrayBuffer>;right:Float32Array<ArrayBuffer>;reason:string};if(event.type==='recordData')capture.recycle(event.id,event.left,event.right);else last=event.reason;});capture.start(3,8000);const zero=new Float32Array(8192);for(let i=0;i<MAX_RECORD_SECONDS;i++)capture.push(zero,zero);expect(capture.active).toBe(false);expect(last).toContain('limit');
   });
 });

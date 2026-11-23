@@ -6,7 +6,7 @@ A tiny modular playground for sound, chance and happy accidents.
 
 Connect little machines. Make strange sounds. See what happens.
 
-68 modules, 20 curated starting patches, snapshots and stereo WAV / AIFF recording. FOUND/CUTS and LOOP import WAV, PCM AIFF and browser-decodable audio including MP3 and M4A. OUTPUT offers an optional CLEAN 5 Hz DC filter; CLASSIC remains the unchanged default. Runs in your browser. No account or backend needed.
+71 modules, 20 curated starting patches, snapshots and stereo WAV / AIFF recording. FOUND/CUTS and LOOP import WAV, PCM AIFF and browser-decodable audio including MP3 and M4A. OUTPUT offers an optional CLEAN 5 Hz DC filter; CLASSIC remains the unchanged default. Runs in your browser. No account or backend needed.
 
 An old-computer face for a living sound circuit: green text, small pixel windows and a handful of signal colors.
 
@@ -66,6 +66,16 @@ Existing 12-TET, 19-TET and 13-TRIT modes, all original DSP source files and all
 ## v0.26.1 — English module HELP
 
 Open the **Patch menu (gear) → Module help** to explore all 68 module descriptions in English. Search by module name, category, behavior, or parameter. Expand an item for its two controls, available modes and input/output signals. The panel does not add music rules, quantization, voice processing or a new DSP feature. Keyboard navigation, Escape and narrow layouts are supported; physical mobile browsers remain to be tested.
+
+## Stem export and long recordings
+
+SIGNAL MACHINES records its existing two-channel stereo master as **24-bit WAV / AIFF**, or as browser-compressed audio. Open the Patch menu and choose **Record target: MASTER · long** and **WAV · 24-bit** for a DAW-ready take. The long PCM recorder captures up to 10 minutes *subject to a fixed 128 MiB PCM budget*: at 48 kHz, the storage budget is reached after about 7 minutes 46 seconds. At higher sample rates the available time is shorter. A stalled consumer ends the take safely and saves captured audio; Safari/iPhone backgrounding can still interrupt audio and download behavior.
+
+**Record target: STEMS · OUTPUT tracks** captures 2–4 OUTPUT modules *simultaneously in one live pass*, preserving their common origin, modulation timing and seeded stochastic decisions. Connect each desired audio chain to its own OUTPUT (you may add additional OUTPUT modules). The result is one **ZIP** with stereo 24-bit WAV files of equal length and a README. It is not a separate solo render and it does not split arbitrary effects inside one OUTPUT chain. Imported WAVs should all be placed at 0:00 in the DAW; do not time-stretch or auto-warp them unless intended.
+
+Stem WAVs are tapped **before the final global soft-saturation stage**, but after each OUTPUT module and its effects; master volume and the startup fade are included. The stem sum may not null against the live saturated master. Use DAW gain staging when combining them. The stem recording is limited to **160 MiB of total PCM across tracks** (up to 10 minutes, shorter with more OUTPUTs / higher sample rates). For example, four tracks at 48 kHz fit approximately 2 minutes 25 seconds. Uncompressed ZIP packaging avoids making an additional contiguous copy of all audio. On iPhone, RAM exhaustion remains possible with very long takes, particularly while saving or extracting a ZIP; begin with short recordings.
+
+All existing master playback, patch JSON v1, LOOP imports/exports and the saved stable v0.27 archive remain unchanged. Stem files do not embed externally imported sample content or effects on routes not connected to an OUTPUT.
 
 ## v0.26 — REUSE: LOOP becomes another instrument
 

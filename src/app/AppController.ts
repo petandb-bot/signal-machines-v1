@@ -3,6 +3,7 @@ import {version} from '../../package.json';
 import {sampleModuleLimitError,foundRef} from '../samples/FoundData';
 import {installPalette} from '../visual/Palette';
 import type {RecordingFormat} from '../audio/PcmRecording';
+import type {RecordingTarget} from '../audio/AudioEngine';
 import {MODULE_GROUPS} from '../graph/catalog';
 import {MAX_LOOPS} from '../audio/LoopAudio';
 import type {LoopAudio,LoopStatus} from '../audio/LoopAudio';
@@ -51,7 +52,7 @@ export class AppController {
   private addButton=button('+','Add a module',()=>this.togglePanel('library'),'add-button');
   private menuButton=button('','Patch menu',()=>this.togglePanel('menu'),'menu-button');
   private tempo=element('input','tempo-input');private volume=element('input','master-range');private preset=element('select','preset-select');
-  private recordingFormat=element('select','record-format');
+  private recordingFormat=element('select','record-format');private recordingTarget=element('select','record-target');
   private meter=element('span','master-meter');private status=element('span','engine-status','Stopped');
   private toast=element('div','toast');private toastTimer?:ReturnType<typeof setTimeout>;private loadInput=element('input');private busy=false;private saveWarningShown=false;
   private library=element('aside','library floating-panel');private menu=element('aside','patch-menu floating-panel');
@@ -87,7 +88,7 @@ export class AppController {
         this.meter.title=`Output peak ${data.peak.toFixed(3)} / 0.630 · Drive peak ${d.masterDrivePeak.toFixed(2)} · Near ceiling ${(100*d.nearCeilingFraction).toFixed(1)}% · Max sample step ${d.largestSampleStep.toFixed(3)}. Deliberate digital edges are not considered defects.`;
       }
       if(data.faults>0&&this.audio.running){void this.audio.stop().then(()=>this.refreshTransport());this.notify('An invalid audio signal was stopped. Reload the patch before restarting.',true);}};
-    this.audio.onRecordingReady=result=>{download(result.blob,`signal-machines-${Date.now()}.${result.extension}`);this.refreshTransport();this.notify('Recording downloaded');};
+    this.audio.onRecordingReady=result=>{download(result.blob,`signal-machines-${result.extension==='zip'?'stems-':''}${Date.now()}.${result.extension}`);this.refreshTransport();this.notify('Recording downloaded');};
     this.audio.onError=message=>{this.refreshTransport();this.notify(message,true);};
     this.editor.render();this.refreshProject();
     new PixelRenderer(this.store,this.root,()=>{this.workspace.updateActivity();this.meter.style.setProperty('--level',`${Math.min(100,(this.store.telemetry?.peak??0)*158)}%`);});
@@ -128,7 +129,18 @@ export class AppController {
     this.menu.setAttribute('aria-label','Patch menu');const menuTop=element('div','panel-top');menuTop.append(element('span','','Patch'),button('×','Close patch menu',()=>this.closePanels()));
     this.menu.append(menuTop,button('Module help','Browse English descriptions of all modules',()=>{this.closePanels();this.root.classList.add('help-visible');this.help.focusSearch();}),button('Snapshots','Open snapshots',()=>{this.closePanels();this.snapshots.render();this.root.classList.add('snapshots-visible');}),button('Save JSON','Export patch as JSON',()=>{try{downloadPatch(this.store.patch);this.closePanels();this.notify('Patch saved');}catch(error){this.notify((error as Error).message,true);}}),button('Load JSON','Import a JSON patch',()=>{this.closePanels();this.loadInput.click();}),button('New patch','Create an empty patch',()=>this.store.replace(emptyPatch())),button('Arrange chips','Arrange modules compactly',()=>{this.closePanels();this.workspace.arrange();}),button('How to play','Show touch and patching instructions',()=>{this.closePanels();this.notify('Tap a chip to edit. Drag to move. Tap an output, then an input to connect; the editor has larger jacks. Pinch to zoom, drag the background to pan. To remove a wire: tap the cable → Disconnect, or use Unplug in a chip’s Connections.',false,10000);}));
     const visuals=button(`Visuals: ${this.root.dataset.visuals}`,'Toggle visual motion',()=>{const mode=this.root.dataset.visuals==='quiet'?'lively':'quiet';this.root.dataset.visuals=mode;saveVisualMode(mode);visuals.textContent=`Visuals: ${mode}`;visuals.setAttribute('aria-pressed',String(mode==='lively'));});visuals.setAttribute('aria-pressed',String(this.root.dataset.visuals==='lively'));this.menu.append(visuals);
-    this.recordingFormat.setAttribute('aria-label','Recording format');for(const [value,label] of [['wav','WAV · 24-bit'],['aiff','AIFF · 24-bit'],['browser','Browser · compressed']]){const option=element('option','',label);option.value=value;this.recordingFormat.append(option);}const recordLabel=element('label','record-format-label','Record format');recordLabel.append(this.recordingFormat,element('span','record-format-note','WAV / AIFF: up to 3 min / 48 MB'));this.menu.append(recordLabel);
+    this.recordingFormat.setAttribute('aria-label','Recording format');for(const [value,label] of [['wav','WAV · 24-bit'],['aiff','AIFF · 24-bit'],['browser','Browser · compressed']]){const option=element('option','',label);option.value=value;this.recordingFormat.append(option);}const recordLabel=element('label','record-format-label','Record format');recordLabel.append(this.recordingFormat,element('span','record-format-note','WAV / AIFF: up to 10 min, 128 MiB; length depends on sample rate. Stems: 160 MiB total.'));this.menu.append(recordLabel);
+    this.recordingTarget.setAttribute('aria-label','Record target');
+    for(const [value,label] of [['master','MASTER · long'],['stems','STEMS · OUTPUT tracks']]){
+      const option=element('option','',label);option.value=value;this.recordingTarget.append(option);
+    }
+    this.recordingTarget.addEventListener('change',()=>{
+      if(this.recordingTarget.value==='stems')this.recordingFormat.value='wav';
+      this.refreshTransport();
+    });
+    const targetLabel=element('label','record-format-label','Record target');
+    targetLabel.append(this.recordingTarget,element('span','record-format-note','MASTER: long stereo WAV/AIFF; STEMS: simultaneous OUTPUT tracks in a ZIP.'));
+    this.menu.append(targetLabel,element('p','record-format-note','STEMS requires 2–4 OUTPUT modules. Route each independent audio chain to its own OUTPUT. WAV tracks share sample zero; final master saturation is not applied to each stem. Capture has fixed memory limits.'));
     const source=element('a','source-download','Source + guide ↗');source.download=`signal-machines-v${version}.zip`;source.href=`./downloads/${source.download}`;source.setAttribute('aria-label','Download project source, tests and guide');this.menu.append(source,this.status);
     const main=element('main','main-layout');main.append(this.workspace.root,this.library,this.editor.root,this.menu,this.help.root,this.snapshots.root);
     this.loadInput.type='file';this.loadInput.accept='.json,application/json';this.loadInput.hidden=true;this.loadInput.addEventListener('change',()=>void this.loadPatch());this.toast.setAttribute('role','status');this.toast.setAttribute('aria-live','polite');this.root.append(header,main,this.loadInput,this.toast);
@@ -201,12 +213,12 @@ export class AppController {
   }
   private refreshTransport(){
     this.runButton.textContent=this.audio.running?'■':'▶';this.runButton.setAttribute('aria-label',this.audio.running?'Stop audio engine':'Run audio engine');this.runButton.classList.toggle('running',this.audio.running);
-    this.status.textContent=this.audio.running?'Playing':'Stopped';this.root.classList.toggle('is-running',this.audio.running);this.recButton.classList.toggle('recording',this.audio.recording);this.recordingFormat.disabled=this.audio.recording;this.recButton.setAttribute('aria-label',this.audio.recording?'Stop recording and download':'Record master output');if(!this.audio.running)this.store.telemetry=undefined;
+    this.status.textContent=this.audio.running?'Playing':'Stopped';this.root.classList.toggle('is-running',this.audio.running);this.recButton.classList.toggle('recording',this.audio.recording);this.recordingTarget.disabled=this.audio.recording;this.recordingFormat.disabled=this.audio.recording||this.recordingTarget.value==='stems';this.recButton.setAttribute('aria-label',this.audio.recording?'Stop recording and download':this.recordingTarget.value==='stems'?'Record synchronized OUTPUT stems':'Record master output');if(!this.audio.running)this.store.telemetry=undefined;
   }
   private async toggleRecording(){
-    if(this.busy)return;this.busy=true;this.recButton.disabled=true;try{if(this.audio.recording)await this.finishRecording();else{await this.audio.startRecording(this.store.patch,this.recordingFormat.value as RecordingFormat);this.notify('Recording master output');}}catch(error){this.notify((error as Error).message,true);}finally{this.busy=false;this.recButton.disabled=false;this.refreshTransport();}
+    if(this.busy)return;this.busy=true;this.recButton.disabled=true;try{if(this.audio.recording)await this.finishRecording();else{await this.audio.startRecording(this.store.patch,this.recordingFormat.value as RecordingFormat,this.recordingTarget.value as RecordingTarget);this.notify('Recording master output');}}catch(error){this.notify((error as Error).message,true);}finally{this.busy=false;this.recButton.disabled=false;this.refreshTransport();}
   }
-  private async finishRecording(){const result=await this.audio.stopRecording();download(result.blob,`signal-machines-${Date.now()}.${result.extension}`);this.notify('Recording downloaded');}
+  private async finishRecording(){const result=await this.audio.stopRecording();download(result.blob,`signal-machines-${result.extension==='zip'?'stems-':''}${Date.now()}.${result.extension}`);this.notify('Recording downloaded');}
   private async loadPatch(){const file=this.loadInput.files?.[0];if(!file)return;try{if(file.size>1_000_000)throw new Error('Patch files must be smaller than 1 MB.');this.store.replace(parsePatch(await file.text()));this.notify('Patch loaded');}catch(error){this.notify(`Import failed: ${(error as Error).message}`,true);}finally{this.loadInput.value='';}}
   private notify(message:string,error=false,duration=3000){this.toast.textContent=message;this.toast.classList.toggle('error',error);this.toast.classList.add('visible');clearTimeout(this.toastTimer);this.toastTimer=setTimeout(()=>this.toast.classList.remove('visible'),error?8000:duration);}
 }
