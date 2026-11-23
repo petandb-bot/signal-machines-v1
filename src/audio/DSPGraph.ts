@@ -4,6 +4,7 @@ import {validateFoundAudio,MAX_SAMPLE_ASSETS,validFoundRef} from '../samples/Fou
 import type {FoundAudio} from '../samples/FoundData';
 import type { EngineTelemetry, Patch } from '../graph/types';
 import { DSPModule, clamp } from './DSPModule';
+import {MAX_STEM_OUTPUTS} from './PcmRecording';
 import { compilePatch } from './PatchCompiler';
 import type { CompiledModule } from './PatchCompiler';
 import { processModule } from './SignalRouter';
@@ -22,6 +23,20 @@ export class DSPGraph {
   private ordered: CompiledModule[] = []; private outputs: DSPModule[] = [];
   private actions:Array<{id:string;action:string;payload:unknown;reply:(result:unknown,error?:string)=>void}>=[];private preserveLoops=false;
   private pending: Patch | null = null; private pendingReset = false; private fading = false; private fade = 0;
+  private stemTaps:Array<{id:string;source?:DSPModule;left:Float32Array;right:Float32Array}>=[];
+  private stemFault:string|null=null;
+  /** One simultaneous output tap per OUTPUT module; the main DSP graph runs just once. */
+  activateStemTaps(ids:readonly string[],frames=128){
+    if(ids.length<2||ids.length>MAX_STEM_OUTPUTS||new Set(ids).size!==ids.length)throw Error('Stem recording requires 2–4 OUTPUT modules.');
+    const outputMap=new Map(this.outputs.map(dsp=>[dsp.state.id,dsp]));
+    if(ids.some(id=>!outputMap.has(id)))throw Error('OUTPUT routing changed before stem recording started. Try again.');
+    this.stemTaps=ids.map(id=>({id,source:outputMap.get(id),left:new Float32Array(Math.max(frames,128)),right:new Float32Array(Math.max(frames,128))}));
+    this.stemFault=null;
+  }
+  deactivateStemTaps(){this.stemTaps=[];this.stemFault=null;}
+  getStemTaps(){return this.stemTaps;}
+  getStemFault(){return this.stemFault;}
+
   private bpm = 76; private master = .65; private targetMaster = .65;
   private peak = 0; private energy = 0; private measured = 0;
   private masterDrivePeak=0;private saturatedFrames=0;private largestStep=0;
@@ -39,6 +54,13 @@ export class DSPGraph {
     if(reset&&preserveLoops)for(const dsp of compiled.modules.values())if(dsp.state.type==='LOOP')dsp.command('restart');
     for(const dsp of compiled.modules.values())if(dsp instanceof Found||dsp instanceof Cuts)dsp.attach(this.foundAssets.get(dsp.reference));
     this.modules = compiled.modules; this.ordered = compiled.ordered; this.outputs = compiled.outputs;
+    if(this.stemTaps.length){
+      const byId=new Map(this.outputs.map(dsp=>[dsp.state.id,dsp]));
+      for(const tap of this.stemTaps){
+        tap.source=byId.get(tap.id);
+        if(!tap.source)this.stemFault='A recorded OUTPUT was removed or changed. The partial stem take was saved.';
+      }
+    }
     this.bpm = patch.bpm; this.targetMaster = patch.master;
     if (reset) { this.sample = 0; this.faults = 0; }
   }
@@ -52,6 +74,9 @@ export class DSPGraph {
   requestAction(id:string,action:string,payload:unknown,reply:(result:unknown,error?:string)=>void){this.actions.push({id,action,payload,reply});}
   finishLoops(){for(const dsp of this.modules.values())if(dsp.state.type==='LOOP')dsp.command('finish');}
   process(left: Float32Array, right: Float32Array) {
+    for(const tap of this.stemTaps)if(tap.left.length!==left.length){
+      tap.left=new Float32Array(left.length);tap.right=new Float32Array(right.length);
+    }
     if(!this.pending&&!this.fading&&this.actions.length){const actions=this.actions;this.actions=[];for(const request of actions){try{const dsp=this.modules.get(request.id);if(!dsp)throw new Error('Module no longer exists.');request.reply(dsp.command(request.action,request.payload));}catch(error){request.reply(undefined,(error as Error).message);}}}
     for (let frame = 0; frame < left.length; frame++) {
       if (this.fading) { this.fade = Math.max(0, this.fade - 1 / (this.sampleRate * .008)); }
@@ -70,6 +95,13 @@ export class DSPGraph {
       this.master += (this.targetMaster - this.master) * .001;
       // Smooth saturation with 4 dB of peak headroom, including summed OUTPUT instances.
       const driveL=l*this.master*this.fade,driveR=r*this.master*this.fade;
+      // Per-OUTPUT taps use the same clock, master level and startup fade, pre soft ceiling.
+      const gain=this.master*this.fade;
+      for(let t=0;t<this.stemTaps.length;t++){
+        const tap=this.stemTaps[t],source=tap.source;
+        tap.left[frame]=source?clamp(source.outputL[0]*gain,-1,1):0;
+        tap.right[frame]=source?clamp(source.outputR[0]*gain,-1,1):0;
+      }
       this.masterDrivePeak=Math.max(this.masterDrivePeak,Math.abs(driveL),Math.abs(driveR));
       if(Math.abs(driveL)>=NEAR_SATURATION_DRIVE||Math.abs(driveR)>=NEAR_SATURATION_DRIVE)this.saturatedFrames++;
       l = .63 * Math.tanh(driveL / .63); r = .63 * Math.tanh(driveR / .63);
