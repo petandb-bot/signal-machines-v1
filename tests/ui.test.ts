@@ -171,8 +171,21 @@ describe('DOM patch interactions (not browser/audio integration)',()=>{
     const start=vi.spyOn(app.audio,'startRecording').mockImplementation(async()=>{app.audio.recording=true;});
     const stop=vi.spyOn(app.audio,'stopRecording').mockImplementation(async()=>{app.audio.recording=false;return{blob:new Blob(['FORM']),extension:'aiff'};});
     vi.spyOn(URL,'createObjectURL').mockReturnValue('blob:test');const click=vi.spyOn(HTMLAnchorElement.prototype,'click').mockImplementation(()=>{});
-    document.querySelector<HTMLButtonElement>('[aria-label="Record master output"]')!.click();await vi.waitFor(()=>expect(format.disabled).toBe(true));expect(start).toHaveBeenCalledWith(app.store.patch,'aiff');
+    document.querySelector<HTMLButtonElement>('[aria-label="Record master output"]')!.click();await vi.waitFor(()=>expect(format.disabled).toBe(true));expect(start).toHaveBeenCalledWith(app.store.patch,'aiff','master');
     document.querySelector<HTMLButtonElement>('[aria-label="Stop recording and download"]')!.click();await vi.waitFor(()=>expect(click).toHaveBeenCalled());expect(stop).toHaveBeenCalledOnce();expect((click.mock.contexts[0] as unknown as HTMLAnchorElement).download).toMatch(/\.aiff$/);expect(format.disabled).toBe(false);
+  });
+
+  it('selects synchronized WAV stems without changing the existing master path',async()=>{
+    const target=document.querySelector<HTMLSelectElement>('[aria-label="Record target"]')!;
+    const format=document.querySelector<HTMLSelectElement>('[aria-label="Recording format"]')!;
+    expect(target.value).toBe('master');
+    format.value='aiff';target.value='stems';target.dispatchEvent(new Event('change'));
+    expect(format.value).toBe('wav');expect(format.disabled).toBe(true);
+    const start=vi.spyOn(app.audio,'startRecording').mockImplementation(async()=>{app.audio.recording=true;});
+    const record=document.querySelector<HTMLButtonElement>('[aria-label="Record synchronized OUTPUT stems"]')!;
+    record.click();await vi.waitFor(()=>expect(start).toHaveBeenCalledOnce());
+    expect(start).toHaveBeenCalledWith(app.store.patch,'wav','stems');
+    expect(target.disabled).toBe(true);
   });
 
   it('groups every library choice exactly once without adding search or favourites',()=>{
