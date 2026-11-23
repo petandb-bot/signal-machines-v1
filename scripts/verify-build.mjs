@@ -40,6 +40,35 @@ for(let i=0;i<40;i++){const n=i%2?511:193,l=new Float32Array(n),r=new Float32Arr
 master.port.onmessage({data:{type:'recordStop'}});const masterMessages=messages.slice(masterBefore);let cursor=0;
 for(const message of masterMessages.filter(m=>m.type==='recordData'&&m.id===501))for(let i=0;i<message.frames;i++,cursor++){assert.equal(message.left[i],expectedL[cursor]);assert.equal(message.right[i],expectedR[cursor]);}
 assert.equal(cursor,expectedL.length);assert(expectedL.some(n=>n!==0));assert(masterMessages.some(m=>m.type==='recordEnd'&&m.id===501));
+// Verify two synchronized stems from the emitted AudioWorklet, not just DSP unit mocks.
+const split=JSON.parse(readFileSync(new URL('../presets/colony-cracks.json',import.meta.url),'utf8'));
+const firstOutput=split.modules.find(m=>m.type==='OUTPUT');
+assert(firstOutput,'Recording fixture requires an OUTPUT.');
+const firstWire=split.connections.find(e=>e.to.module===firstOutput.id);
+assert(firstWire,'Recording fixture requires a wired OUTPUT.');
+const secondOutput={...structuredClone(firstOutput),id:'capture-b',x:firstOutput.x+160};
+split.modules.push(secondOutput);
+split.connections.push({id:'capture-b-edge',from:{...firstWire.from},to:{module:secondOutput.id,port:firstWire.to.port}});
+const stemProcessor=new Processor(),stemBefore=messages.length;
+stemProcessor.port.onmessage({data:{type:'patch',patch:split,reset:true}});
+stemProcessor.port.onmessage({data:{type:'recordStart',id:502,mode:'stems',trackIds:[firstOutput.id,secondOutput.id]}});
+let stemFrames=0;
+for(let i=0;i<70;i++){const length=i%2?193:257,left=new Float32Array(length),right=new Float32Array(length);
+  assert(stemProcessor.process([],[ [left,right] ]));stemFrames+=length;
+}
+stemProcessor.port.onmessage({data:{type:'recordStop'}});
+const stemMessages=messages.slice(stemBefore),ids=[firstOutput.id,secondOutput.id],recorded=new Map();
+for(const id of ids){
+  const blocks=stemMessages.filter(m=>m.type==='recordData'&&m.id===502&&m.trackId===id);
+  const total=blocks.reduce((n,m)=>n+m.frames,0);
+  assert.equal(total,stemFrames,'Stem tracks must have identical sample counts.');
+  assert(stemMessages.some(m=>m.type==='recordEnd'&&m.id===502&&m.trackId===id));
+  recorded.set(id,blocks.flatMap(m=>Array.from(m.left.slice(0,m.frames))));
+}
+const stemA=recorded.get(ids[0]),stemB=recorded.get(ids[1]);
+assert(stemA.some(n=>n!==0));assert.deepEqual(stemA,stemB,'Identical routes must record sample-identical stems.');
+assert(!stemMessages.some(m=>m.type==='error'||m.type==='telemetry'&&m.data?.faults>0));
+
 // New registered roles also execute in the emitted bundle without a new preset.
 const pmPatch={version:1,layout:2,name:'PM LPG acceptance',seed:13,bpm:100,master:.5,modules:[
 {id:'a',type:'OPERATOR',x:0,y:0,seed:1,character:'METAL',params:{tune:.5,depth:.3}},

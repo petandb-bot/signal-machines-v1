@@ -55,6 +55,8 @@ export class DSPGraph {
     for(const dsp of compiled.modules.values())if(dsp instanceof Found||dsp instanceof Cuts)dsp.attach(this.foundAssets.get(dsp.reference));
     this.modules = compiled.modules; this.ordered = compiled.ordered; this.outputs = compiled.outputs;
     if(this.stemTaps.length){
+      if(this.outputs.length!==this.stemTaps.length)
+        this.stemFault='OUTPUT count changed during stem recording. The partial stem take was saved.';
       const byId=new Map(this.outputs.map(dsp=>[dsp.state.id,dsp]));
       for(const tap of this.stemTaps){
         tap.source=byId.get(tap.id);
