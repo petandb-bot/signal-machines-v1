@@ -31,7 +31,7 @@ describe('read-only English help for all modules',()=>{
     open();
     expect(document.querySelector('#app')!.classList.contains('help-visible')).toBe(true);
     expect(document.querySelector('.module-help')).not.toBeNull();
-    expect(document.querySelector('.module-help .module-help-count')!.textContent).toBe('71 / 71');
+    expect(document.querySelector('.module-help .module-help-count')!.textContent).toBe('73 / 73');
     expect(document.querySelector('.topbar')!.childElementCount).toBe(toolbar);
     expect(app.store.patch).toEqual(saved);
     expect(document.querySelector('#app')!.classList.contains('menu-visible')).toBe(false);
@@ -42,9 +42,9 @@ describe('read-only English help for all modules',()=>{
   it('covers every module definition exactly once, in the existing library categories',()=>{
     open();
     const types=MODULE_GROUPS.flatMap(g=>g.types);
-    expect(types).toHaveLength(71);
-    expect(new Set(types).size).toBe(71);
-    expect(document.querySelectorAll('.module-help-item')).toHaveLength(71);
+    expect(types).toHaveLength(73);
+    expect(new Set(types).size).toBe(73);
+    expect(document.querySelectorAll('.module-help-item')).toHaveLength(73);
     expect(document.querySelectorAll('.module-help-group')).toHaveLength(MODULE_GROUPS.length);
     for(const type of types){
       const item=document.querySelector<HTMLDetailsElement>(`.module-help-item[data-module="${type}"]`)!;
@@ -68,7 +68,7 @@ describe('read-only English help for all modules',()=>{
     expect(document.querySelector('.module-help-empty')!.hasAttribute('hidden')).toBe(false);
     search.value='';
     search.dispatchEvent(new Event('input',{bubbles:true}));
-    expect(document.querySelectorAll('.module-help-item:not([hidden])')).toHaveLength(71);
+    expect(document.querySelectorAll('.module-help-item:not([hidden])')).toHaveLength(73);
   });
   it('shows the nuanced timing/pitch foundation without changing its generators',()=>{
     const old=structuredClone(app.store.patch);

@@ -47,6 +47,8 @@ export class ModuleEditor {
     if(module.type==='TOUCH')this.root.append(new TouchControls(module,()=>this.store.changed('parameters')).root);
     if(module.type==='CURVE'||module.type==='PHRASE'||module.type==='HARMONY')this.root.append(new MusicalControls(module,()=>this.store.changed('parameters')).root);
     if(BYPASS_TYPES.includes(module.type)){const toggle=button(module.bypass?'Bypassed':'Effect on',`${module.type} bypass`,()=>{if(module.bypass)delete module.bypass;else module.bypass=true;this.store.changed('parameters');toggle.textContent=module.bypass?'Bypassed':'Effect on';toggle.setAttribute('aria-pressed',String(!!module.bypass));},'bypass-button');toggle.setAttribute('aria-pressed',String(!!module.bypass));this.root.append(toggle);}
+    if(module.type==='REVERSE')this.root.append(button('Flip','Toggle reverse direction (FLIP mode)',()=>this.onAction(module,'flip'),'impulse-button'));
+    if(module.type==='JUMP')this.root.append(button('Jump now','Generate an immediate JUMP event',()=>this.onAction(module,'jump'),'impulse-button'));
     if(module.type==='PENDULUM')this.root.append(button('Kick','Kick the pendulums',()=>this.onAction(module,'kick'),'impulse-button'));
     if(module.type==='BOUNCE')this.root.append(button('Kick','Kick the marble',()=>this.onAction(module,'kick'),'impulse-button'));
     const ports=element('div','editor-ports');
