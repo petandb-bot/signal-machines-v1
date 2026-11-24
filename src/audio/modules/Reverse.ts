@@ -30,8 +30,10 @@ export class Reverse extends DSPModule {
       return{reverse:this.latched};
     }
     if(action==='reset'){
-      this.written=this.readFrames=0;
+      this.written=this.readFrames=this.windowFrames=0;
+      this.writeBank=0;this.readBank=1;
       this.readCursor=0;
+      this.gate=false;this.energy=0;
       this.latched=false;
       this.wet=0;
       // Do not clear large buffers on the audio callback; validity is tracked by readFrames.

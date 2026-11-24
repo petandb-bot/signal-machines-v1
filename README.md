@@ -31,7 +31,7 @@ controls the short fade at slice boundaries. Modes:
 
 The **SEAM** trigger marks the end of a capture slice; the reverse stream has a
 one-slice startup latency. Buffer allocation is fixed: four stereo-channel
-Float32 arrays across two bounded capture/playback banks (~2.3 MB at 48 kHz
+Float32 arrays across two bounded capture/playback banks (~1.9 MB at 48 kHz
 per REVERSE module). No file access, memory allocation or full buffer clearing
 is performed on the audio callback.
 
