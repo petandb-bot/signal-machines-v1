@@ -45,6 +45,7 @@ export const MODULE_COLORS = {
   MESH: PALETTE.greenSoft, ORBIT: PALETTE.purpleSoft,
   CHAMBER: PALETTE.purple, OUTPUT: PALETTE.green,
   CURVE: PALETTE.cyanSoft, PHRASE: PALETTE.limeSoft, HARMONY: PALETTE.purpleSoft,
+  REVERSE: PALETTE.blueBright, JUMP: PALETTE.redBright,
 } as const;
 
 export const SIGNAL_INKS = {audio: PALETTE.amber, control: PALETTE.cyan, trigger: PALETTE.green};

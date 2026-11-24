@@ -6,15 +6,48 @@ A tiny modular playground for sound, chance and happy accidents.
 
 Connect little machines. Make strange sounds. See what happens.
 
-71 modules, 20 curated starting patches, snapshots and stereo WAV / AIFF recording. FOUND/CUTS and LOOP import WAV, PCM AIFF and browser-decodable audio including MP3 and M4A. OUTPUT offers an optional CLEAN 5 Hz DC filter; CLASSIC remains the unchanged default. Runs in your browser. No account or backend needed.
+73 modules, 20 curated starting patches, snapshots and stereo WAV / AIFF recording. FOUND/CUTS and LOOP import WAV, PCM AIFF and browser-decodable audio including MP3 and M4A. OUTPUT offers an optional CLEAN 5 Hz DC filter; CLASSIC remains the unchanged default. Runs in your browser. No account or backend needed.
 
 An old-computer face for a living sound circuit: green text, small pixel windows and a handful of signal colors.
 
 ## English module help
 
-Open **gear (Patch menu) → Module help** for a searchable guide to all 68 modules. Each entry gives a short description, parameters, signal ports and available modes. The guide is read-only: it does not simplify timing, impose scales, or change the sound engine.
+Open **gear (Patch menu) → Module help** for a searchable guide to the installed modules. Each entry gives a short description, parameters, signal ports and available modes. The guide is read-only: it does not simplify timing, impose scales, or change the sound engine.
 
 A steady timebase or a small pitch vocabulary can coexist with unusual sounds. PULSE, BRANCH, QUANTIZE and LOGIC are useful starting points, but their relationships are yours to make.
+
+## Reverse audio and abrupt structural changes
+
+**REVERSE** is a bounded stereo reverse-slice recorder, not a pitch inversion or a
+zero-latency reversal of live sound. Connect a source to **AUDIO** and connect
+the module to an OUTPUT or another effect. It records 50 ms–2.45 s slices and
+plays the last completed slice backward. The first slice passes through dry
+while memory fills. **SPAN** selects the slice duration; **SPEED** runs
+0.25×–4× backward, **MIX** selects the reversed proportion, and **EDGE**
+controls the short fade at slice boundaries. Modes:
+- **REVERSE** (default): continuous reverse-slice playback
+- **FLIP**: a rising FLIP TRIG or the editor's **Flip** button toggles forward/reverse
+- **GATE**: reverse whenever SELECT CV is positive enough (greater than 0.5)
+
+The **SEAM** trigger marks the end of a capture slice; the reverse stream has a
+one-slice startup latency. Buffer allocation is fixed: four stereo-channel
+Float32 arrays across two bounded capture/playback banks (~2.3 MB at 48 kHz
+per REVERSE module). No file access, memory allocation or full buffer clearing
+is performed on the audio callback.
+
+**JUMP** makes sudden, held bipolar control changes. Set **EDGE** to 0 for
+an immediate step, or increase it to smooth the transition. **FLIP** mode
+alternates between ±DEPTH on every TRIG; **RANDOM** chooses a seeded
+bipolar state; **SAMPLE** captures SOURCE CV on TRIG. The editor's
+**Jump now** button sends an event manually. Use JUMP **VALUE** → SWITCH
+**SELECT** with a short SWITCH FADE for an audible A/B scene cut.
+Alternatively, send VALUE to FILTER CUTOFF, REVERSE SPAN, or other control
+ports. Connect JUMP EVENT to a second module's trigger for simultaneous
+structural changes. The short crossfade at an audio switch is preferable to
+a completely unguarded waveform discontinuity when exporting usable audio.
+
+Existing patches, recording and stem export modes remain compatible.
+The new modules are opt-in and do not alter the signal of legacy patches.
 
 ## Play
 
