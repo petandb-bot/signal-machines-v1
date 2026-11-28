@@ -1,13 +1,20 @@
 import {PcmRecording,recordingFrames,MAX_STEM_OUTPUTS} from './PcmRecording';
 import {crc32Parts,zipBlobs} from './ZipArchive';
 
+/** A readable, portable filename; snapshot the name at recording start. */
+export function stemBaseName(name:string){
+  return Array.from(name.normalize('NFC').replace(/[<>:"/\\|?*\u0000-\u001f\u007f]/g,'-').trim().replace(/\s+/g,'-').replace(/-+/g,'-').replace(/^[.\-]+|[.\-]+$/g,'')).slice(0,50).join('')||'patch';
+}
+
 /** Simultaneous PCM takes from OUTPUT modules, rather than re-rendering random sources. */
 export class StemRecording{
   readonly ids:readonly string[];
   readonly maxFrames:number;
+  readonly baseName:string;
   private readonly recorders=new Map<string,PcmRecording>();
   private readonly ended=new Set<string>();
-  constructor(readonly sampleRate:number,ids:readonly string[]){
+  constructor(readonly sampleRate:number,ids:readonly string[],patchName='patch'){
+    this.baseName=stemBaseName(patchName);
     if(ids.length<2||ids.length>MAX_STEM_OUTPUTS||new Set(ids).size!==ids.length||
        !ids.every(id=>/^[a-zA-Z0-9_-]{1,80}$/.test(id)))throw Error('Stem recording needs 2–4 distinct OUTPUT modules.');
     this.ids=[...ids];this.maxFrames=recordingFrames(sampleRate,ids.length,'stems');
@@ -38,7 +45,7 @@ export class StemRecording{
         pcm.append(silence,silence,missing);
       }
       const audio=pcm.finish({edgeFadeMs:3,withChecksum:true});
-      entries.push({name:`${String(index+1).padStart(2,'0')}_${id}.wav`,blob:audio.blob,checksum:audio.checksum!});
+      entries.push({name:`${this.baseName}-${String(index+1).padStart(2,'0')}.wav`,blob:audio.blob,checksum:audio.checksum!});
     }
     const seconds=(longest/this.sampleRate).toFixed(3);
     const guide=[
@@ -53,13 +60,13 @@ export class StemRecording{
       'To isolate tracks, connect separate sound chains to separate OUTPUT modules.',
       'Locally imported sample files are not embedded in patch JSON; back them up separately.',
       'Tracks:',
-      ...entries.map(e=>'  '+e.name),
+      ...entries.map((e,i)=>'  '+e.name+' — OUTPUT '+this.ids[i]),
       ''
     ].join('\n');
     const guideBytes=new TextEncoder().encode(guide);
     entries.push({name:'STEMS_README.txt',blob:new Blob([guideBytes],{type:'text/plain'}),checksum:crc32Parts([guideBytes])});
     const blob=zipBlobs(entries);
     this.recorders.clear();
-    return{blob,extension:'zip',frames:longest};
+    return{blob,extension:'zip',frames:longest,filename:`${this.baseName}-stems.zip`};
   }
 }

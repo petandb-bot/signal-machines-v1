@@ -1,10 +1,10 @@
 import {crc32Parts} from './ZipArchive';
 export type RecordingFormat='browser'|'wav'|'aiff';
-export const MAX_RECORD_SECONDS=600,PCM_BYTES_LIMIT=128*1024*1024,STEM_BYTES_LIMIT=160*1024*1024,MAX_STEM_OUTPUTS=4;
+export const MAX_RECORD_SECONDS=600,MAX_STEM_SECONDS=300,PCM_BYTES_LIMIT=128*1024*1024,STEM_BYTES_LIMIT=384*1024*1024,MAX_STEM_OUTPUTS=4;
 export type CaptureMode='master'|'stems';
 export function recordingFrames(rate:number,tracks=1,mode:CaptureMode='master'){
   if(!Number.isInteger(tracks)||tracks<1||tracks>MAX_STEM_OUTPUTS||!Number.isFinite(rate)||rate<=0)throw Error('Invalid recording track count or sample rate.');
-  return Math.min(Math.floor(rate*MAX_RECORD_SECONDS),Math.floor((mode==='stems'?STEM_BYTES_LIMIT:PCM_BYTES_LIMIT)/(tracks*6)));
+  return Math.min(Math.floor(rate*(mode==='stems'?MAX_STEM_SECONDS:MAX_RECORD_SECONDS)),Math.floor((mode==='stems'?STEM_BYTES_LIMIT:PCM_BYTES_LIMIT)/(tracks*6)));
 }
 /** Interleaved signed PCM24; chunks avoid copying a whole performance at finish. */
 export class PcmRecording {
