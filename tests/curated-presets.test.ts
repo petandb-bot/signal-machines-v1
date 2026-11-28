@@ -1,11 +1,12 @@
 // @vitest-environment happy-dom
 import {describe,it,expect,beforeEach,vi} from 'vitest';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
+import {calibratePreset} from '../src/state/presetLevels';
 import {PRESETS,LEGACY_PRESETS,metalDrift} from '../src/state/presets';import {DEFAULT_PRESET_ID} from '../src/state/curatedPresets';import {StateStore} from '../src/app/StateStore';import {parsePatch} from '../src/state/PatchStorage';import {DSPGraph} from '../src/audio/DSPGraph';import {builtinFound} from '../src/samples/FoundData';
 beforeEach(()=>localStorage.clear());
 describe('twenty musical environments and preserved archives',()=>{
- it('has twenty stable identities, independent patch objects and matching standalone JSON',()=>{
+ it('has twenty stable identities, independent calibrated patch objects and exportable JSON',()=>{
   expect(PRESETS).toHaveLength(20);expect(new Set(PRESETS.map(p=>p.id)).size).toBe(20);expect(LEGACY_PRESETS).toHaveLength(42);
-  for(const preset of PRESETS){const p=preset.create();expect(p).toEqual(parsePatch(readFileSync('presets/curated/'+preset.id+'.json','utf8')));expect(p.name).toBe(preset.name);p.modules[0].params={};expect(preset.create().modules[0].params).not.toEqual({});}
+  for(const preset of PRESETS){const p=preset.create();expect(p).toEqual(calibratePreset(preset.id,parsePatch(readFileSync('presets/curated/'+preset.id+'.json','utf8'))));expect(parsePatch(JSON.stringify(p))).toEqual(p);expect(p.name).toBe(preset.name);p.modules[0].params={};expect(preset.create().modules[0].params).not.toEqual({});}
  });
  it('protects every legacy DSP source and JSON fixture byte for byte',()=>{const baseline=JSON.parse(readFileSync('docs/phase4/legacy-v019.json','utf8'));for(const [path,hash]of Object.entries(baseline.hashes))expect(createHash('sha256').update(readFileSync(path)).digest('hex'),path).toBe(hash);});
  it('uses a representative startup patch and gives saved user patches absolute priority',()=>{expect(new StateStore().patch.name).toBe(PRESETS.find(p=>p.id===DEFAULT_PRESET_ID)!.name);const saved=metalDrift();saved.name='My old circuit';saved.modules[0].params.rate=.13;localStorage.setItem('signal-machines.patch.v1',JSON.stringify(saved));expect(new StateStore().patch).toEqual(saved);});

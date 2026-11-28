@@ -1,7 +1,7 @@
 import {describe,it,expect} from 'vitest';
 import {unzipSync} from 'fflate';
 import {StemRecording} from '../src/audio/StemRecording';
-import {recordingFrames,PCM_BYTES_LIMIT,STEM_BYTES_LIMIT,MAX_RECORD_SECONDS} from '../src/audio/PcmRecording';
+import {recordingFrames,PCM_BYTES_LIMIT,STEM_BYTES_LIMIT,MAX_RECORD_SECONDS,MAX_STEM_SECONDS} from '../src/audio/PcmRecording';
 import {crc32Parts,zipBlobs} from '../src/audio/ZipArchive';
 import {MasterCapture} from '../src/audio/MasterCapture';
 import {DSPGraph} from '../src/audio/DSPGraph';
@@ -10,7 +10,7 @@ import {emptyPatch} from '../src/state/presets';
 import {decodeWav} from '../src/audio/Wav';
 
 describe('synchronized stem recording and long master takes',()=>{
- it('makes 10-minute maximum and bounded per-output track budgets at 44.1, 48, 96k',()=>{
+ it('keeps the master limit and enables five-minute stems at standard sample rates',()=>{
    for(const rate of [44100,48000,96000]){
      const master=recordingFrames(rate);
      expect(master).toBeGreaterThan(rate*180);
@@ -19,13 +19,14 @@ describe('synchronized stem recording and long master takes',()=>{
      for(let count=2;count<=4;count++){
        const each=recordingFrames(rate,count,'stems');
        expect(each).toBeGreaterThan(0);
-       expect(each).toBeLessThanOrEqual(rate*MAX_RECORD_SECONDS);
+       expect(each).toBeLessThanOrEqual(rate*MAX_STEM_SECONDS);
+       if(rate<=48000)expect(each).toBe(rate*300);
        expect(each*6*count).toBeLessThanOrEqual(STEM_BYTES_LIMIT);
      }
    }
  });
  it('exports two time-aligned stereo 24-bit WAVs in a readable ZIP without duplicate streams',async()=>{
-   const stems=new StemRecording(48000,['lead-out','rhythm-out']);
+   const stems=new StemRecording(48000,['lead-out','rhythm-out'],'小さな ROOM / AIR');
    const l=Float32Array.of(.12,-.33,.25,.5,.08),r=Float32Array.of(-.1,.4,-.2,.03,0);
    stems.append('lead-out',l,r,5);
    stems.append('rhythm-out',r,l,3);
@@ -35,8 +36,9 @@ describe('synchronized stem recording and long master takes',()=>{
    expect(result.extension).toBe('zip');
    const buffer=new Uint8Array(await result.blob.arrayBuffer());
    const files=unzipSync(buffer);
-   expect(Object.keys(files).sort()).toEqual(['01_lead-out.wav','02_rhythm-out.wav','STEMS_README.txt']);
-   const a=files['01_lead-out.wav'],b=files['02_rhythm-out.wav'];
+   expect(Object.keys(files).sort()).toEqual(['STEMS_README.txt','小さな-ROOM-AIR-01.wav','小さな-ROOM-AIR-02.wav']);
+   expect(result.filename).toBe('小さな-ROOM-AIR-stems.zip');
+   const a=files['小さな-ROOM-AIR-01.wav'],b=files['小さな-ROOM-AIR-02.wav'];
    expect(new DataView(a.buffer,a.byteOffset).getUint16(22,true)).toBe(2);
    expect(new DataView(a.buffer,a.byteOffset).getUint16(34,true)).toBe(24);
    expect(a.length).toBe(b.length);
@@ -45,6 +47,7 @@ describe('synchronized stem recording and long master takes',()=>{
    expect(left.left).toHaveLength(5);expect(right.left).toHaveLength(5);
    expect(right.left[3]).toBe(0);expect(right.left[4]).toBe(0);
    expect(new TextDecoder().decode(files['STEMS_README.txt'])).toContain('before the final global master');
+   expect(new TextDecoder().decode(files['STEMS_README.txt'])).toContain('小さな-ROOM-AIR-01.wav — OUTPUT lead-out');
  });
  it('rejects more than four stem outputs and malformed names',()=>{
    expect(()=>new StemRecording(48000,['a'])).toThrow('2–4');

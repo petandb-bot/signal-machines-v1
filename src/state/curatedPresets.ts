@@ -1,4 +1,5 @@
 import {parsePatch} from './PatchStorage';
+import {calibratePreset} from './presetLevels';
 import type {Patch} from '../graph/types';
 import still from '../../presets/curated/still-almost-moving-ii.json';
 import pixel from '../../presets/curated/pixel-dust.json';
@@ -21,7 +22,7 @@ import extra7 from '../../presets/curated/dissent-in-glass.json';
 import extra8 from '../../presets/curated/broken-radio.json';
 import extra9 from '../../presets/curated/passing-shadows.json';
 export interface CuratedPreset {id:string;name:string;description:string;create:()=>Patch}
-function preset(id:string,data:{name:string},description:string):CuratedPreset{return{id,name:data.name,description,create:()=>parsePatch(JSON.stringify(data))};}
+function preset(id:string,data:{name:string},description:string):CuratedPreset{return{id,name:data.name,description,create:()=>calibratePreset(id,parsePatch(JSON.stringify(data)))};}
 /** The visible collection. Legacy generators and their registry stay in presets.ts. */
 export const CURATED_PRESETS:readonly CuratedPreset[]=[
   preset('still-almost-moving-ii',still,'Fixed harmonic layers slowly change their inner relationships.'),

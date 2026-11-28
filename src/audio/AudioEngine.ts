@@ -7,15 +7,15 @@ import {StemRecording} from './StemRecording';
 import type {RecordingFormat} from './PcmRecording';
 import processorURL from './worklets/processor.ts?worker&url';
 import type { EngineTelemetry, Patch } from '../graph/types';
-type RecordedAudio={blob:Blob;extension:string};
+type RecordedAudio={blob:Blob;extension:string;filename?:string};
 export type RecordingTarget='master'|'stems';
 export class AudioEngine {
   readonly foundLibrary=new FoundLibrary();private foundGeneration=0;private transportGeneration=0;private desiredFoundRefs:string[]=[];private sentFound=new Map<string,FoundAudio>();
   async foundAudio(patch:Patch){const ids=[...new Set(patch.modules.filter(m=>isSampleType(m.type)).map(m=>foundRef(m.sample)))];const assets:FoundAudio[]=[];for(const id of ids){if(!this.desiredFoundRefs.includes(id))continue;try{const audio=await this.foundLibrary.get(id,()=>this.desiredFoundRefs.includes(id));if(audio)assets.push(audio);else if(this.desiredFoundRefs.includes(id))this.onError('Sample missing on this browser. Load the original file again.');}catch{if(this.desiredFoundRefs.includes(id))this.onError('Sample could not be restored. Load the original file again.');}}this.foundLibrary.retain(this.desiredFoundRefs);return assets;}
   private sendFound(assets:FoundAudio[]){if(!this.node)return;const same=assets.length===this.sentFound.size&&assets.every(a=>this.sentFound.get(a.id)===a);if(same)return;const transfer:ArrayBuffer[]=[],copies=assets.filter(a=>this.sentFound.get(a.id)!==a).map(a=>{const left=a.left.slice(),right=a.right.slice();transfer.push(left.buffer,right.buffer);return{...a,left,right};});this.node.port.postMessage({type:'foundAssets',assets:copies,retain:assets.map(a=>a.id)},transfer);this.sentFound=new Map(assets.map(a=>[a.id,a]));this.foundLibrary.retain(assets.map(a=>a.id));}
 
-  private pcm?:PcmRecording;private stems?:StemRecording;private recordId=0;private stoppingPcm?:{resolve:(result:{blob:Blob;extension:string})=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
-  onRecordingReady:(result:{blob:Blob;extension:string})=>void=()=>{};
+  private pcm?:PcmRecording;private stems?:StemRecording;private recordId=0;private stoppingPcm?:{resolve:(result:RecordedAudio)=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>};
+  onRecordingReady:(result:RecordedAudio)=>void=()=>{};
   private actionSequence=0;private requests=new Map<number,{resolve:(value:unknown)=>void;reject:(error:Error)=>void;timer:ReturnType<typeof setTimeout>}>();
   private context?: AudioContext; private node?: AudioWorkletNode; private gain?: GainNode;
   private browserTake?:{recorder:MediaRecorder;done:Promise<RecordedAudio>;stopRequested:boolean};
@@ -108,7 +108,7 @@ export class AudioEngine {
       if(ids.length<2||ids.length>4)throw new Error('STEMS needs 2–4 OUTPUT modules. Route each sound group to a separate OUTPUT, then record.');
       if(!this.running)await this.start(patch);
       if(this.recording||this.stoppingPcm||this.browserTake)throw new Error('Recording is already active.');
-      this.stems=new StemRecording(this.sampleRate,ids);
+      this.stems=new StemRecording(this.sampleRate,ids,patch.name);
       this.recording=true;
       this.node!.port.postMessage({type:'recordStart',id:++this.recordId,mode:'stems',trackIds:ids});
       return;
@@ -135,7 +135,7 @@ export class AudioEngine {
     recorder.onerror=()=>{this.recording=false;this.onError('The browser could not record the master output.');};
     try{recorder.start(1000);this.recording=true;}catch(error){this.browserTake=undefined;throw error;}
   }
-  stopRecording(): Promise<{blob:Blob;extension:string}> {
+  stopRecording(): Promise<RecordedAudio> {
     if(this.pcm||this.stems){if(this.stoppingPcm)return Promise.reject(new Error('Recording is already finishing.'));this.recording=false;return new Promise((resolve,reject)=>{const timer=setTimeout(()=>this.finishPcm('Audio paused; the received recording blocks were saved.'),1500);this.stoppingPcm={resolve,reject,timer};this.node!.port.postMessage({type:'recordStop'});});}
     const take=this.browserTake;
     if(!take)return Promise.reject(new Error('There is no active recording.'));
